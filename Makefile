@@ -5,29 +5,28 @@ VERSION=$(strip $(shell cat version))
 
 build:
 	@echo "Building the software..."
+	@./gradlew jar
 
-init: install dep
+
+init: dep
 	@echo "Initializing the repo..."
+	@./gradlew build
 
 travis-init:
 	@echo "Initialize software required for travis (normally ubuntu software)"
 
-install:
-	@echo "Install software required for this repo..."
 
 dep:
 	@echo "Install dependencies required for this repo..."
+	@./gradlew buildDependents
 
-pre-build: install dep
-	@echo "Running scripts before the build..."
 
-post-build:
-	@echo "Running scripts after the build is done..."
-
-all: pre-build build post-build
+all: build
 
 test:
 	@echo "Running test suites..."
+	@./gradlew test
+	@./gradlew jacocoTestReport
 
 lint:
 	@echo "Linting the software..."
@@ -39,8 +38,9 @@ precommit: dep lint doc build test
 
 travis: precommit
 
-travis-deploy: release
+travis-deploy:
 	@echo "Deploy the software by travis"
+	@./gradlew publish
 
 clean:
 	@echo "Cleaning the build..."
@@ -55,4 +55,4 @@ run:
 
 include .makefiles/*.mk
 
-.PHONY: build init travis-init install dep pre-build post-build all test doc precommit travis clean watch run bump-version create-pr
+.PHONY: build init travis-init install dep all test doc precommit travis clean watch run bump-version create-pr

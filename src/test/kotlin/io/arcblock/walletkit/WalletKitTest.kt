@@ -18,7 +18,7 @@ class WalletKitTest {
   fun genMnimonics() {
     val wk = WalletKit.newInstance()
     val eckey = wk.createWallet("acb","ccd")
-    Assert.assertTrue(wk.genMnimonics().size  == 12)
+    Assert.assertTrue(wk.genMnimonics().size  == 24)
   }
 
   @Test
