@@ -25,7 +25,10 @@ sourceCompatibility = 1.8
 sourceSets {
   main {
     kotlin { srcDir "src/main/kotlin" }
-    java { srcDir "src/main/java" }
+    java { srcDirs ("src/main/java",
+      "build/classes/java/main"
+    )
+    }
   }
   test {
     kotlin { srcDir "src/test/kotlin" }
@@ -42,6 +45,28 @@ compileTestKotlin {
 }
 
 
+protobuf {
+  protoc {
+    artifact = "com.google.protobuf:protoc:3.2.0"
+  }
+  plugins {
+    grpc {
+      artifact = 'io.grpc:protoc-gen-grpc-java:1.4.0'
+    }
+  }
+  generatedFilesBaseDir = "src"
+
+  generateProtoTasks {
+    all()*.plugins {
+      grpc {
+        outputSubDir = "java"
+      }
+    }
+  }
+}
+
+
+
 repositories {
     mavenCentral()
 }
@@ -55,6 +80,9 @@ dependencies {
     exclude module: 'jackson-annotations'
     exclude module: 'jackson-databind'
   }
+  implementation 'io.grpc:grpc-netty:1.4.0'
+  implementation 'io.grpc:grpc-protobuf:1.4.0'
+  implementation 'io.grpc:grpc-stub:1.4.0'
   implementation ('com.google.code.gson:gson:2.8.2')
 //  implementation rootProject.ext.dependencies["utilcode"]
   implementation ('com.google.crypto.tink:tink-android:1.2.2'){
@@ -90,4 +118,8 @@ publishing {
   }
 
 }
+
+apply from: rootProject.file('./forgeServer.gradle')
+
+
 
