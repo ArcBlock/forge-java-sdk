@@ -28,15 +28,25 @@ test:
 	@./gradlew test
 	@./gradlew jacocoTestReport
 
+
+
 lint:
 	@echo "Linting the software..."
 
+download-proto:
+	@echo "downloading proto files"
+	@echo $(shell ./download_proto.sh )
+
+
+
 doc:
 	@echo "Building the documenation..."
+	@./gradlew dokka
 
 precommit: dep lint doc build test
 
 travis: precommit
+
 
 travis-deploy:
 	@echo "Deploy the software by travis"
@@ -53,6 +63,7 @@ watch:
 run:
 	@echo "Running the software..."
 
+
 include .makefiles/*.mk
 
-.PHONY: build init travis-init install dep all test doc precommit travis clean watch run bump-version create-pr
+.PHONY: build init travis-init install dep all test doc precommit travis clean watch run bump-version create-pr download-proto

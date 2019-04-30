@@ -20,26 +20,40 @@ import java.io.IOException
 import org.spongycastle.crypto.params.ECPublicKeyParameters
 
 /**
+ *  Singer help you to Sign any binary ,such as a Transaction.
+ *  and help you to verify if the signature is correct
  * Author       :paperhuang
  * Time         :2019/2/19
- * Edited By    :
- * Edited Time  :
  **/
 object Signer {
-  val CURVE_PARAMS = CustomNamedCurves.getByName("secp256k1")
-  val curve = ECDomainParameters(
-  CURVE_PARAMS.curve, CURVE_PARAMS.g, CURVE_PARAMS.n, CURVE_PARAMS.h)
+
+  /**
+   * signature a binary
+   * @param keyType privateKey Type ED25519 or SECP256K1
+   * @param content what you want to signature
+   * @param sk your wallet private key
+   * @return signature out put
+   *
+   */
   fun sign(keyType: KeyType,content:ByteArray,sk: ByteArray):ByteArray{
     return when(keyType){
       ED25519 -> {
-        return Ed25519Sign(sk.sliceArray(0..31)).sign(content)
+        Ed25519Sign(sk.sliceArray(0..31)).sign(content)
       }
       SECP256K1 -> {
-        return ECKeyPair.create(sk).sign(content).encodeToDER()
+        ECKeyPair.create(sk).sign(content).encodeToDER()
       }
     }
   }
 
+  /**
+   * verify a signature is correct
+   * @param keyType privateKey Type ED25519 or SECP256K1
+   * @param content what you want to signature
+   * @param pk your wallet public key
+   * @param signature signature binary
+   * @return is Correct
+   */
   fun verify(keyType: KeyType,content:ByteArray,pk: ByteArray,signature: ByteArray):Boolean{
     try {
        return when(keyType){

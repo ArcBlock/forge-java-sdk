@@ -121,6 +121,113 @@ public final class TraceType {
     // @@protoc_insertion_point(enum_scope:forge_abi.Direction)
   }
 
+  /**
+   * Protobuf enum {@code forge_abi.Validity}
+   */
+  public enum Validity
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>both = 0;</code>
+     */
+    both(0),
+    /**
+     * <code>valid = 1;</code>
+     */
+    valid(1),
+    /**
+     * <code>invalid = 2;</code>
+     */
+    invalid(2),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <code>both = 0;</code>
+     */
+    public static final int both_VALUE = 0;
+    /**
+     * <code>valid = 1;</code>
+     */
+    public static final int valid_VALUE = 1;
+    /**
+     * <code>invalid = 2;</code>
+     */
+    public static final int invalid_VALUE = 2;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static Validity valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static Validity forNumber(int value) {
+      switch (value) {
+        case 0: return both;
+        case 1: return valid;
+        case 2: return invalid;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<Validity>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        Validity> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<Validity>() {
+            public Validity findValueByNumber(int number) {
+              return Validity.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return forge_abi.TraceType.getDescriptor().getEnumTypes().get(1);
+    }
+
+    private static final Validity[] VALUES = values();
+
+    public static Validity valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private Validity(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:forge_abi.Validity)
+  }
+
   public interface PageOrderOrBuilder extends
       // @@protoc_insertion_point(interface_extends:forge_abi.PageOrder)
       com.google.protobuf.MessageOrBuilder {
@@ -4326,51 +4433,18 @@ public final class TraceType {
     forge_abi.Type.TransactionOrBuilder getTxOrBuilder();
 
     /**
-     * <code>.forge_abi.IndexedConsumeAsset consume_asset = 7;</code>
+     * <code>bool valid = 20;</code>
      */
-    forge_abi.TraceType.IndexedConsumeAsset getConsumeAsset();
-    /**
-     * <code>.forge_abi.IndexedConsumeAsset consume_asset = 7;</code>
-     */
-    forge_abi.TraceType.IndexedConsumeAssetOrBuilder getConsumeAssetOrBuilder();
+    boolean getValid();
 
     /**
-     * <code>.forge_abi.IndexedCreateAsset create_asset = 8;</code>
+     * <code>.forge_abi.StatusCode code = 21;</code>
      */
-    forge_abi.TraceType.IndexedCreateAsset getCreateAsset();
+    int getCodeValue();
     /**
-     * <code>.forge_abi.IndexedCreateAsset create_asset = 8;</code>
+     * <code>.forge_abi.StatusCode code = 21;</code>
      */
-    forge_abi.TraceType.IndexedCreateAssetOrBuilder getCreateAssetOrBuilder();
-
-    /**
-     * <code>.forge_abi.IndexedExchange exchange = 9;</code>
-     */
-    forge_abi.TraceType.IndexedExchange getExchange();
-    /**
-     * <code>.forge_abi.IndexedExchange exchange = 9;</code>
-     */
-    forge_abi.TraceType.IndexedExchangeOrBuilder getExchangeOrBuilder();
-
-    /**
-     * <code>.forge_abi.IndexedTransfer transfer = 10;</code>
-     */
-    forge_abi.TraceType.IndexedTransfer getTransfer();
-    /**
-     * <code>.forge_abi.IndexedTransfer transfer = 10;</code>
-     */
-    forge_abi.TraceType.IndexedTransferOrBuilder getTransferOrBuilder();
-
-    /**
-     * <code>.forge_abi.IndexedUpdateAsset update_asset = 11;</code>
-     */
-    forge_abi.TraceType.IndexedUpdateAsset getUpdateAsset();
-    /**
-     * <code>.forge_abi.IndexedUpdateAsset update_asset = 11;</code>
-     */
-    forge_abi.TraceType.IndexedUpdateAssetOrBuilder getUpdateAssetOrBuilder();
-
-    public forge_abi.TraceType.IndexedTransaction.ValueCase getValueCase();
+    forge_abi.Enum.StatusCode getCode();
   }
   /**
    * Protobuf type {@code forge_abi.IndexedTransaction}
@@ -4389,6 +4463,8 @@ public final class TraceType {
       receiver_ = "";
       time_ = "";
       type_ = "";
+      valid_ = false;
+      code_ = 0;
     }
 
     @java.lang.Override
@@ -4459,74 +4535,15 @@ public final class TraceType {
 
               break;
             }
-            case 58: {
-              forge_abi.TraceType.IndexedConsumeAsset.Builder subBuilder = null;
-              if (valueCase_ == 7) {
-                subBuilder = ((forge_abi.TraceType.IndexedConsumeAsset) value_).toBuilder();
-              }
-              value_ =
-                  input.readMessage(forge_abi.TraceType.IndexedConsumeAsset.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom((forge_abi.TraceType.IndexedConsumeAsset) value_);
-                value_ = subBuilder.buildPartial();
-              }
-              valueCase_ = 7;
+            case 160: {
+
+              valid_ = input.readBool();
               break;
             }
-            case 66: {
-              forge_abi.TraceType.IndexedCreateAsset.Builder subBuilder = null;
-              if (valueCase_ == 8) {
-                subBuilder = ((forge_abi.TraceType.IndexedCreateAsset) value_).toBuilder();
-              }
-              value_ =
-                  input.readMessage(forge_abi.TraceType.IndexedCreateAsset.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom((forge_abi.TraceType.IndexedCreateAsset) value_);
-                value_ = subBuilder.buildPartial();
-              }
-              valueCase_ = 8;
-              break;
-            }
-            case 74: {
-              forge_abi.TraceType.IndexedExchange.Builder subBuilder = null;
-              if (valueCase_ == 9) {
-                subBuilder = ((forge_abi.TraceType.IndexedExchange) value_).toBuilder();
-              }
-              value_ =
-                  input.readMessage(forge_abi.TraceType.IndexedExchange.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom((forge_abi.TraceType.IndexedExchange) value_);
-                value_ = subBuilder.buildPartial();
-              }
-              valueCase_ = 9;
-              break;
-            }
-            case 82: {
-              forge_abi.TraceType.IndexedTransfer.Builder subBuilder = null;
-              if (valueCase_ == 10) {
-                subBuilder = ((forge_abi.TraceType.IndexedTransfer) value_).toBuilder();
-              }
-              value_ =
-                  input.readMessage(forge_abi.TraceType.IndexedTransfer.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom((forge_abi.TraceType.IndexedTransfer) value_);
-                value_ = subBuilder.buildPartial();
-              }
-              valueCase_ = 10;
-              break;
-            }
-            case 90: {
-              forge_abi.TraceType.IndexedUpdateAsset.Builder subBuilder = null;
-              if (valueCase_ == 11) {
-                subBuilder = ((forge_abi.TraceType.IndexedUpdateAsset) value_).toBuilder();
-              }
-              value_ =
-                  input.readMessage(forge_abi.TraceType.IndexedUpdateAsset.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom((forge_abi.TraceType.IndexedUpdateAsset) value_);
-                value_ = subBuilder.buildPartial();
-              }
-              valueCase_ = 11;
+            case 168: {
+              int rawValue = input.readEnum();
+
+              code_ = rawValue;
               break;
             }
           }
@@ -4550,50 +4567,6 @@ public final class TraceType {
       return forge_abi.TraceType.internal_static_forge_abi_IndexedTransaction_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               forge_abi.TraceType.IndexedTransaction.class, forge_abi.TraceType.IndexedTransaction.Builder.class);
-    }
-
-    private int valueCase_ = 0;
-    private java.lang.Object value_;
-    public enum ValueCase
-        implements com.google.protobuf.Internal.EnumLite {
-      CONSUME_ASSET(7),
-      CREATE_ASSET(8),
-      EXCHANGE(9),
-      TRANSFER(10),
-      UPDATE_ASSET(11),
-      VALUE_NOT_SET(0);
-      private final int value;
-      private ValueCase(int value) {
-        this.value = value;
-      }
-      /**
-       * @deprecated Use {@link #forNumber(int)} instead.
-       */
-      @java.lang.Deprecated
-      public static ValueCase valueOf(int value) {
-        return forNumber(value);
-      }
-
-      public static ValueCase forNumber(int value) {
-        switch (value) {
-          case 7: return CONSUME_ASSET;
-          case 8: return CREATE_ASSET;
-          case 9: return EXCHANGE;
-          case 10: return TRANSFER;
-          case 11: return UPDATE_ASSET;
-          case 0: return VALUE_NOT_SET;
-          default: return null;
-        }
-      }
-      public int getNumber() {
-        return this.value;
-      }
-    };
-
-    public ValueCase
-    getValueCase() {
-      return ValueCase.forNumber(
-          valueCase_);
     }
 
     public static final int HASH_FIELD_NUMBER = 1;
@@ -4787,104 +4760,29 @@ public final class TraceType {
       return getTx();
     }
 
-    public static final int CONSUME_ASSET_FIELD_NUMBER = 7;
+    public static final int VALID_FIELD_NUMBER = 20;
+    private boolean valid_;
     /**
-     * <code>.forge_abi.IndexedConsumeAsset consume_asset = 7;</code>
+     * <code>bool valid = 20;</code>
      */
-    public forge_abi.TraceType.IndexedConsumeAsset getConsumeAsset() {
-      if (valueCase_ == 7) {
-         return (forge_abi.TraceType.IndexedConsumeAsset) value_;
-      }
-      return forge_abi.TraceType.IndexedConsumeAsset.getDefaultInstance();
-    }
-    /**
-     * <code>.forge_abi.IndexedConsumeAsset consume_asset = 7;</code>
-     */
-    public forge_abi.TraceType.IndexedConsumeAssetOrBuilder getConsumeAssetOrBuilder() {
-      if (valueCase_ == 7) {
-         return (forge_abi.TraceType.IndexedConsumeAsset) value_;
-      }
-      return forge_abi.TraceType.IndexedConsumeAsset.getDefaultInstance();
+    public boolean getValid() {
+      return valid_;
     }
 
-    public static final int CREATE_ASSET_FIELD_NUMBER = 8;
+    public static final int CODE_FIELD_NUMBER = 21;
+    private int code_;
     /**
-     * <code>.forge_abi.IndexedCreateAsset create_asset = 8;</code>
+     * <code>.forge_abi.StatusCode code = 21;</code>
      */
-    public forge_abi.TraceType.IndexedCreateAsset getCreateAsset() {
-      if (valueCase_ == 8) {
-         return (forge_abi.TraceType.IndexedCreateAsset) value_;
-      }
-      return forge_abi.TraceType.IndexedCreateAsset.getDefaultInstance();
+    public int getCodeValue() {
+      return code_;
     }
     /**
-     * <code>.forge_abi.IndexedCreateAsset create_asset = 8;</code>
+     * <code>.forge_abi.StatusCode code = 21;</code>
      */
-    public forge_abi.TraceType.IndexedCreateAssetOrBuilder getCreateAssetOrBuilder() {
-      if (valueCase_ == 8) {
-         return (forge_abi.TraceType.IndexedCreateAsset) value_;
-      }
-      return forge_abi.TraceType.IndexedCreateAsset.getDefaultInstance();
-    }
-
-    public static final int EXCHANGE_FIELD_NUMBER = 9;
-    /**
-     * <code>.forge_abi.IndexedExchange exchange = 9;</code>
-     */
-    public forge_abi.TraceType.IndexedExchange getExchange() {
-      if (valueCase_ == 9) {
-         return (forge_abi.TraceType.IndexedExchange) value_;
-      }
-      return forge_abi.TraceType.IndexedExchange.getDefaultInstance();
-    }
-    /**
-     * <code>.forge_abi.IndexedExchange exchange = 9;</code>
-     */
-    public forge_abi.TraceType.IndexedExchangeOrBuilder getExchangeOrBuilder() {
-      if (valueCase_ == 9) {
-         return (forge_abi.TraceType.IndexedExchange) value_;
-      }
-      return forge_abi.TraceType.IndexedExchange.getDefaultInstance();
-    }
-
-    public static final int TRANSFER_FIELD_NUMBER = 10;
-    /**
-     * <code>.forge_abi.IndexedTransfer transfer = 10;</code>
-     */
-    public forge_abi.TraceType.IndexedTransfer getTransfer() {
-      if (valueCase_ == 10) {
-         return (forge_abi.TraceType.IndexedTransfer) value_;
-      }
-      return forge_abi.TraceType.IndexedTransfer.getDefaultInstance();
-    }
-    /**
-     * <code>.forge_abi.IndexedTransfer transfer = 10;</code>
-     */
-    public forge_abi.TraceType.IndexedTransferOrBuilder getTransferOrBuilder() {
-      if (valueCase_ == 10) {
-         return (forge_abi.TraceType.IndexedTransfer) value_;
-      }
-      return forge_abi.TraceType.IndexedTransfer.getDefaultInstance();
-    }
-
-    public static final int UPDATE_ASSET_FIELD_NUMBER = 11;
-    /**
-     * <code>.forge_abi.IndexedUpdateAsset update_asset = 11;</code>
-     */
-    public forge_abi.TraceType.IndexedUpdateAsset getUpdateAsset() {
-      if (valueCase_ == 11) {
-         return (forge_abi.TraceType.IndexedUpdateAsset) value_;
-      }
-      return forge_abi.TraceType.IndexedUpdateAsset.getDefaultInstance();
-    }
-    /**
-     * <code>.forge_abi.IndexedUpdateAsset update_asset = 11;</code>
-     */
-    public forge_abi.TraceType.IndexedUpdateAssetOrBuilder getUpdateAssetOrBuilder() {
-      if (valueCase_ == 11) {
-         return (forge_abi.TraceType.IndexedUpdateAsset) value_;
-      }
-      return forge_abi.TraceType.IndexedUpdateAsset.getDefaultInstance();
+    public forge_abi.Enum.StatusCode getCode() {
+      forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
+      return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -4917,20 +4815,11 @@ public final class TraceType {
       if (tx_ != null) {
         output.writeMessage(6, getTx());
       }
-      if (valueCase_ == 7) {
-        output.writeMessage(7, (forge_abi.TraceType.IndexedConsumeAsset) value_);
+      if (valid_ != false) {
+        output.writeBool(20, valid_);
       }
-      if (valueCase_ == 8) {
-        output.writeMessage(8, (forge_abi.TraceType.IndexedCreateAsset) value_);
-      }
-      if (valueCase_ == 9) {
-        output.writeMessage(9, (forge_abi.TraceType.IndexedExchange) value_);
-      }
-      if (valueCase_ == 10) {
-        output.writeMessage(10, (forge_abi.TraceType.IndexedTransfer) value_);
-      }
-      if (valueCase_ == 11) {
-        output.writeMessage(11, (forge_abi.TraceType.IndexedUpdateAsset) value_);
+      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
+        output.writeEnum(21, code_);
       }
     }
 
@@ -4958,25 +4847,13 @@ public final class TraceType {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, getTx());
       }
-      if (valueCase_ == 7) {
+      if (valid_ != false) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, (forge_abi.TraceType.IndexedConsumeAsset) value_);
+          .computeBoolSize(20, valid_);
       }
-      if (valueCase_ == 8) {
+      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, (forge_abi.TraceType.IndexedCreateAsset) value_);
-      }
-      if (valueCase_ == 9) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(9, (forge_abi.TraceType.IndexedExchange) value_);
-      }
-      if (valueCase_ == 10) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(10, (forge_abi.TraceType.IndexedTransfer) value_);
-      }
-      if (valueCase_ == 11) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(11, (forge_abi.TraceType.IndexedUpdateAsset) value_);
+          .computeEnumSize(21, code_);
       }
       memoizedSize = size;
       return size;
@@ -5009,33 +4886,9 @@ public final class TraceType {
         result = result && getTx()
             .equals(other.getTx());
       }
-      result = result && getValueCase().equals(
-          other.getValueCase());
-      if (!result) return false;
-      switch (valueCase_) {
-        case 7:
-          result = result && getConsumeAsset()
-              .equals(other.getConsumeAsset());
-          break;
-        case 8:
-          result = result && getCreateAsset()
-              .equals(other.getCreateAsset());
-          break;
-        case 9:
-          result = result && getExchange()
-              .equals(other.getExchange());
-          break;
-        case 10:
-          result = result && getTransfer()
-              .equals(other.getTransfer());
-          break;
-        case 11:
-          result = result && getUpdateAsset()
-              .equals(other.getUpdateAsset());
-          break;
-        case 0:
-        default:
-      }
+      result = result && (getValid()
+          == other.getValid());
+      result = result && code_ == other.code_;
       return result;
     }
 
@@ -5060,30 +4913,11 @@ public final class TraceType {
         hash = (37 * hash) + TX_FIELD_NUMBER;
         hash = (53 * hash) + getTx().hashCode();
       }
-      switch (valueCase_) {
-        case 7:
-          hash = (37 * hash) + CONSUME_ASSET_FIELD_NUMBER;
-          hash = (53 * hash) + getConsumeAsset().hashCode();
-          break;
-        case 8:
-          hash = (37 * hash) + CREATE_ASSET_FIELD_NUMBER;
-          hash = (53 * hash) + getCreateAsset().hashCode();
-          break;
-        case 9:
-          hash = (37 * hash) + EXCHANGE_FIELD_NUMBER;
-          hash = (53 * hash) + getExchange().hashCode();
-          break;
-        case 10:
-          hash = (37 * hash) + TRANSFER_FIELD_NUMBER;
-          hash = (53 * hash) + getTransfer().hashCode();
-          break;
-        case 11:
-          hash = (37 * hash) + UPDATE_ASSET_FIELD_NUMBER;
-          hash = (53 * hash) + getUpdateAsset().hashCode();
-          break;
-        case 0:
-        default:
-      }
+      hash = (37 * hash) + VALID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getValid());
+      hash = (37 * hash) + CODE_FIELD_NUMBER;
+      hash = (53 * hash) + code_;
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -5218,8 +5052,10 @@ public final class TraceType {
           tx_ = null;
           txBuilder_ = null;
         }
-        valueCase_ = 0;
-        value_ = null;
+        valid_ = false;
+
+        code_ = 0;
+
         return this;
       }
 
@@ -5252,42 +5088,8 @@ public final class TraceType {
         } else {
           result.tx_ = txBuilder_.build();
         }
-        if (valueCase_ == 7) {
-          if (consumeAssetBuilder_ == null) {
-            result.value_ = value_;
-          } else {
-            result.value_ = consumeAssetBuilder_.build();
-          }
-        }
-        if (valueCase_ == 8) {
-          if (createAssetBuilder_ == null) {
-            result.value_ = value_;
-          } else {
-            result.value_ = createAssetBuilder_.build();
-          }
-        }
-        if (valueCase_ == 9) {
-          if (exchangeBuilder_ == null) {
-            result.value_ = value_;
-          } else {
-            result.value_ = exchangeBuilder_.build();
-          }
-        }
-        if (valueCase_ == 10) {
-          if (transferBuilder_ == null) {
-            result.value_ = value_;
-          } else {
-            result.value_ = transferBuilder_.build();
-          }
-        }
-        if (valueCase_ == 11) {
-          if (updateAssetBuilder_ == null) {
-            result.value_ = value_;
-          } else {
-            result.value_ = updateAssetBuilder_.build();
-          }
-        }
-        result.valueCase_ = valueCase_;
+        result.valid_ = valid_;
+        result.code_ = code_;
         onBuilt();
         return result;
       }
@@ -5352,30 +5154,11 @@ public final class TraceType {
         if (other.hasTx()) {
           mergeTx(other.getTx());
         }
-        switch (other.getValueCase()) {
-          case CONSUME_ASSET: {
-            mergeConsumeAsset(other.getConsumeAsset());
-            break;
-          }
-          case CREATE_ASSET: {
-            mergeCreateAsset(other.getCreateAsset());
-            break;
-          }
-          case EXCHANGE: {
-            mergeExchange(other.getExchange());
-            break;
-          }
-          case TRANSFER: {
-            mergeTransfer(other.getTransfer());
-            break;
-          }
-          case UPDATE_ASSET: {
-            mergeUpdateAsset(other.getUpdateAsset());
-            break;
-          }
-          case VALUE_NOT_SET: {
-            break;
-          }
+        if (other.getValid() != false) {
+          setValid(other.getValid());
+        }
+        if (other.code_ != 0) {
+          setCodeValue(other.getCodeValue());
         }
         onChanged();
         return this;
@@ -5402,21 +5185,6 @@ public final class TraceType {
         }
         return this;
       }
-      private int valueCase_ = 0;
-      private java.lang.Object value_;
-      public ValueCase
-          getValueCase() {
-        return ValueCase.forNumber(
-            valueCase_);
-      }
-
-      public Builder clearValue() {
-        valueCase_ = 0;
-        value_ = null;
-        onChanged();
-        return this;
-      }
-
 
       private java.lang.Object hash_ = "";
       /**
@@ -5880,654 +5648,74 @@ public final class TraceType {
         return txBuilder_;
       }
 
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.IndexedConsumeAsset, forge_abi.TraceType.IndexedConsumeAsset.Builder, forge_abi.TraceType.IndexedConsumeAssetOrBuilder> consumeAssetBuilder_;
+      private boolean valid_ ;
       /**
-       * <code>.forge_abi.IndexedConsumeAsset consume_asset = 7;</code>
+       * <code>bool valid = 20;</code>
        */
-      public forge_abi.TraceType.IndexedConsumeAsset getConsumeAsset() {
-        if (consumeAssetBuilder_ == null) {
-          if (valueCase_ == 7) {
-            return (forge_abi.TraceType.IndexedConsumeAsset) value_;
-          }
-          return forge_abi.TraceType.IndexedConsumeAsset.getDefaultInstance();
-        } else {
-          if (valueCase_ == 7) {
-            return consumeAssetBuilder_.getMessage();
-          }
-          return forge_abi.TraceType.IndexedConsumeAsset.getDefaultInstance();
-        }
+      public boolean getValid() {
+        return valid_;
       }
       /**
-       * <code>.forge_abi.IndexedConsumeAsset consume_asset = 7;</code>
+       * <code>bool valid = 20;</code>
        */
-      public Builder setConsumeAsset(forge_abi.TraceType.IndexedConsumeAsset value) {
-        if (consumeAssetBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          value_ = value;
-          onChanged();
-        } else {
-          consumeAssetBuilder_.setMessage(value);
-        }
-        valueCase_ = 7;
+      public Builder setValid(boolean value) {
+        
+        valid_ = value;
+        onChanged();
         return this;
       }
       /**
-       * <code>.forge_abi.IndexedConsumeAsset consume_asset = 7;</code>
+       * <code>bool valid = 20;</code>
        */
-      public Builder setConsumeAsset(
-          forge_abi.TraceType.IndexedConsumeAsset.Builder builderForValue) {
-        if (consumeAssetBuilder_ == null) {
-          value_ = builderForValue.build();
-          onChanged();
-        } else {
-          consumeAssetBuilder_.setMessage(builderForValue.build());
-        }
-        valueCase_ = 7;
+      public Builder clearValid() {
+        
+        valid_ = false;
+        onChanged();
         return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedConsumeAsset consume_asset = 7;</code>
-       */
-      public Builder mergeConsumeAsset(forge_abi.TraceType.IndexedConsumeAsset value) {
-        if (consumeAssetBuilder_ == null) {
-          if (valueCase_ == 7 &&
-              value_ != forge_abi.TraceType.IndexedConsumeAsset.getDefaultInstance()) {
-            value_ = forge_abi.TraceType.IndexedConsumeAsset.newBuilder((forge_abi.TraceType.IndexedConsumeAsset) value_)
-                .mergeFrom(value).buildPartial();
-          } else {
-            value_ = value;
-          }
-          onChanged();
-        } else {
-          if (valueCase_ == 7) {
-            consumeAssetBuilder_.mergeFrom(value);
-          }
-          consumeAssetBuilder_.setMessage(value);
-        }
-        valueCase_ = 7;
-        return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedConsumeAsset consume_asset = 7;</code>
-       */
-      public Builder clearConsumeAsset() {
-        if (consumeAssetBuilder_ == null) {
-          if (valueCase_ == 7) {
-            valueCase_ = 0;
-            value_ = null;
-            onChanged();
-          }
-        } else {
-          if (valueCase_ == 7) {
-            valueCase_ = 0;
-            value_ = null;
-          }
-          consumeAssetBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedConsumeAsset consume_asset = 7;</code>
-       */
-      public forge_abi.TraceType.IndexedConsumeAsset.Builder getConsumeAssetBuilder() {
-        return getConsumeAssetFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.forge_abi.IndexedConsumeAsset consume_asset = 7;</code>
-       */
-      public forge_abi.TraceType.IndexedConsumeAssetOrBuilder getConsumeAssetOrBuilder() {
-        if ((valueCase_ == 7) && (consumeAssetBuilder_ != null)) {
-          return consumeAssetBuilder_.getMessageOrBuilder();
-        } else {
-          if (valueCase_ == 7) {
-            return (forge_abi.TraceType.IndexedConsumeAsset) value_;
-          }
-          return forge_abi.TraceType.IndexedConsumeAsset.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>.forge_abi.IndexedConsumeAsset consume_asset = 7;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.IndexedConsumeAsset, forge_abi.TraceType.IndexedConsumeAsset.Builder, forge_abi.TraceType.IndexedConsumeAssetOrBuilder> 
-          getConsumeAssetFieldBuilder() {
-        if (consumeAssetBuilder_ == null) {
-          if (!(valueCase_ == 7)) {
-            value_ = forge_abi.TraceType.IndexedConsumeAsset.getDefaultInstance();
-          }
-          consumeAssetBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.TraceType.IndexedConsumeAsset, forge_abi.TraceType.IndexedConsumeAsset.Builder, forge_abi.TraceType.IndexedConsumeAssetOrBuilder>(
-                  (forge_abi.TraceType.IndexedConsumeAsset) value_,
-                  getParentForChildren(),
-                  isClean());
-          value_ = null;
-        }
-        valueCase_ = 7;
-        onChanged();;
-        return consumeAssetBuilder_;
       }
 
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.IndexedCreateAsset, forge_abi.TraceType.IndexedCreateAsset.Builder, forge_abi.TraceType.IndexedCreateAssetOrBuilder> createAssetBuilder_;
+      private int code_ = 0;
       /**
-       * <code>.forge_abi.IndexedCreateAsset create_asset = 8;</code>
+       * <code>.forge_abi.StatusCode code = 21;</code>
        */
-      public forge_abi.TraceType.IndexedCreateAsset getCreateAsset() {
-        if (createAssetBuilder_ == null) {
-          if (valueCase_ == 8) {
-            return (forge_abi.TraceType.IndexedCreateAsset) value_;
-          }
-          return forge_abi.TraceType.IndexedCreateAsset.getDefaultInstance();
-        } else {
-          if (valueCase_ == 8) {
-            return createAssetBuilder_.getMessage();
-          }
-          return forge_abi.TraceType.IndexedCreateAsset.getDefaultInstance();
-        }
+      public int getCodeValue() {
+        return code_;
       }
       /**
-       * <code>.forge_abi.IndexedCreateAsset create_asset = 8;</code>
+       * <code>.forge_abi.StatusCode code = 21;</code>
        */
-      public Builder setCreateAsset(forge_abi.TraceType.IndexedCreateAsset value) {
-        if (createAssetBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          value_ = value;
-          onChanged();
-        } else {
-          createAssetBuilder_.setMessage(value);
-        }
-        valueCase_ = 8;
+      public Builder setCodeValue(int value) {
+        code_ = value;
+        onChanged();
         return this;
       }
       /**
-       * <code>.forge_abi.IndexedCreateAsset create_asset = 8;</code>
+       * <code>.forge_abi.StatusCode code = 21;</code>
        */
-      public Builder setCreateAsset(
-          forge_abi.TraceType.IndexedCreateAsset.Builder builderForValue) {
-        if (createAssetBuilder_ == null) {
-          value_ = builderForValue.build();
-          onChanged();
-        } else {
-          createAssetBuilder_.setMessage(builderForValue.build());
+      public forge_abi.Enum.StatusCode getCode() {
+        forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
+        return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.forge_abi.StatusCode code = 21;</code>
+       */
+      public Builder setCode(forge_abi.Enum.StatusCode value) {
+        if (value == null) {
+          throw new NullPointerException();
         }
-        valueCase_ = 8;
+        
+        code_ = value.getNumber();
+        onChanged();
         return this;
       }
       /**
-       * <code>.forge_abi.IndexedCreateAsset create_asset = 8;</code>
+       * <code>.forge_abi.StatusCode code = 21;</code>
        */
-      public Builder mergeCreateAsset(forge_abi.TraceType.IndexedCreateAsset value) {
-        if (createAssetBuilder_ == null) {
-          if (valueCase_ == 8 &&
-              value_ != forge_abi.TraceType.IndexedCreateAsset.getDefaultInstance()) {
-            value_ = forge_abi.TraceType.IndexedCreateAsset.newBuilder((forge_abi.TraceType.IndexedCreateAsset) value_)
-                .mergeFrom(value).buildPartial();
-          } else {
-            value_ = value;
-          }
-          onChanged();
-        } else {
-          if (valueCase_ == 8) {
-            createAssetBuilder_.mergeFrom(value);
-          }
-          createAssetBuilder_.setMessage(value);
-        }
-        valueCase_ = 8;
+      public Builder clearCode() {
+        
+        code_ = 0;
+        onChanged();
         return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedCreateAsset create_asset = 8;</code>
-       */
-      public Builder clearCreateAsset() {
-        if (createAssetBuilder_ == null) {
-          if (valueCase_ == 8) {
-            valueCase_ = 0;
-            value_ = null;
-            onChanged();
-          }
-        } else {
-          if (valueCase_ == 8) {
-            valueCase_ = 0;
-            value_ = null;
-          }
-          createAssetBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedCreateAsset create_asset = 8;</code>
-       */
-      public forge_abi.TraceType.IndexedCreateAsset.Builder getCreateAssetBuilder() {
-        return getCreateAssetFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.forge_abi.IndexedCreateAsset create_asset = 8;</code>
-       */
-      public forge_abi.TraceType.IndexedCreateAssetOrBuilder getCreateAssetOrBuilder() {
-        if ((valueCase_ == 8) && (createAssetBuilder_ != null)) {
-          return createAssetBuilder_.getMessageOrBuilder();
-        } else {
-          if (valueCase_ == 8) {
-            return (forge_abi.TraceType.IndexedCreateAsset) value_;
-          }
-          return forge_abi.TraceType.IndexedCreateAsset.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>.forge_abi.IndexedCreateAsset create_asset = 8;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.IndexedCreateAsset, forge_abi.TraceType.IndexedCreateAsset.Builder, forge_abi.TraceType.IndexedCreateAssetOrBuilder> 
-          getCreateAssetFieldBuilder() {
-        if (createAssetBuilder_ == null) {
-          if (!(valueCase_ == 8)) {
-            value_ = forge_abi.TraceType.IndexedCreateAsset.getDefaultInstance();
-          }
-          createAssetBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.TraceType.IndexedCreateAsset, forge_abi.TraceType.IndexedCreateAsset.Builder, forge_abi.TraceType.IndexedCreateAssetOrBuilder>(
-                  (forge_abi.TraceType.IndexedCreateAsset) value_,
-                  getParentForChildren(),
-                  isClean());
-          value_ = null;
-        }
-        valueCase_ = 8;
-        onChanged();;
-        return createAssetBuilder_;
-      }
-
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.IndexedExchange, forge_abi.TraceType.IndexedExchange.Builder, forge_abi.TraceType.IndexedExchangeOrBuilder> exchangeBuilder_;
-      /**
-       * <code>.forge_abi.IndexedExchange exchange = 9;</code>
-       */
-      public forge_abi.TraceType.IndexedExchange getExchange() {
-        if (exchangeBuilder_ == null) {
-          if (valueCase_ == 9) {
-            return (forge_abi.TraceType.IndexedExchange) value_;
-          }
-          return forge_abi.TraceType.IndexedExchange.getDefaultInstance();
-        } else {
-          if (valueCase_ == 9) {
-            return exchangeBuilder_.getMessage();
-          }
-          return forge_abi.TraceType.IndexedExchange.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>.forge_abi.IndexedExchange exchange = 9;</code>
-       */
-      public Builder setExchange(forge_abi.TraceType.IndexedExchange value) {
-        if (exchangeBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          value_ = value;
-          onChanged();
-        } else {
-          exchangeBuilder_.setMessage(value);
-        }
-        valueCase_ = 9;
-        return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedExchange exchange = 9;</code>
-       */
-      public Builder setExchange(
-          forge_abi.TraceType.IndexedExchange.Builder builderForValue) {
-        if (exchangeBuilder_ == null) {
-          value_ = builderForValue.build();
-          onChanged();
-        } else {
-          exchangeBuilder_.setMessage(builderForValue.build());
-        }
-        valueCase_ = 9;
-        return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedExchange exchange = 9;</code>
-       */
-      public Builder mergeExchange(forge_abi.TraceType.IndexedExchange value) {
-        if (exchangeBuilder_ == null) {
-          if (valueCase_ == 9 &&
-              value_ != forge_abi.TraceType.IndexedExchange.getDefaultInstance()) {
-            value_ = forge_abi.TraceType.IndexedExchange.newBuilder((forge_abi.TraceType.IndexedExchange) value_)
-                .mergeFrom(value).buildPartial();
-          } else {
-            value_ = value;
-          }
-          onChanged();
-        } else {
-          if (valueCase_ == 9) {
-            exchangeBuilder_.mergeFrom(value);
-          }
-          exchangeBuilder_.setMessage(value);
-        }
-        valueCase_ = 9;
-        return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedExchange exchange = 9;</code>
-       */
-      public Builder clearExchange() {
-        if (exchangeBuilder_ == null) {
-          if (valueCase_ == 9) {
-            valueCase_ = 0;
-            value_ = null;
-            onChanged();
-          }
-        } else {
-          if (valueCase_ == 9) {
-            valueCase_ = 0;
-            value_ = null;
-          }
-          exchangeBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedExchange exchange = 9;</code>
-       */
-      public forge_abi.TraceType.IndexedExchange.Builder getExchangeBuilder() {
-        return getExchangeFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.forge_abi.IndexedExchange exchange = 9;</code>
-       */
-      public forge_abi.TraceType.IndexedExchangeOrBuilder getExchangeOrBuilder() {
-        if ((valueCase_ == 9) && (exchangeBuilder_ != null)) {
-          return exchangeBuilder_.getMessageOrBuilder();
-        } else {
-          if (valueCase_ == 9) {
-            return (forge_abi.TraceType.IndexedExchange) value_;
-          }
-          return forge_abi.TraceType.IndexedExchange.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>.forge_abi.IndexedExchange exchange = 9;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.IndexedExchange, forge_abi.TraceType.IndexedExchange.Builder, forge_abi.TraceType.IndexedExchangeOrBuilder> 
-          getExchangeFieldBuilder() {
-        if (exchangeBuilder_ == null) {
-          if (!(valueCase_ == 9)) {
-            value_ = forge_abi.TraceType.IndexedExchange.getDefaultInstance();
-          }
-          exchangeBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.TraceType.IndexedExchange, forge_abi.TraceType.IndexedExchange.Builder, forge_abi.TraceType.IndexedExchangeOrBuilder>(
-                  (forge_abi.TraceType.IndexedExchange) value_,
-                  getParentForChildren(),
-                  isClean());
-          value_ = null;
-        }
-        valueCase_ = 9;
-        onChanged();;
-        return exchangeBuilder_;
-      }
-
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.IndexedTransfer, forge_abi.TraceType.IndexedTransfer.Builder, forge_abi.TraceType.IndexedTransferOrBuilder> transferBuilder_;
-      /**
-       * <code>.forge_abi.IndexedTransfer transfer = 10;</code>
-       */
-      public forge_abi.TraceType.IndexedTransfer getTransfer() {
-        if (transferBuilder_ == null) {
-          if (valueCase_ == 10) {
-            return (forge_abi.TraceType.IndexedTransfer) value_;
-          }
-          return forge_abi.TraceType.IndexedTransfer.getDefaultInstance();
-        } else {
-          if (valueCase_ == 10) {
-            return transferBuilder_.getMessage();
-          }
-          return forge_abi.TraceType.IndexedTransfer.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>.forge_abi.IndexedTransfer transfer = 10;</code>
-       */
-      public Builder setTransfer(forge_abi.TraceType.IndexedTransfer value) {
-        if (transferBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          value_ = value;
-          onChanged();
-        } else {
-          transferBuilder_.setMessage(value);
-        }
-        valueCase_ = 10;
-        return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedTransfer transfer = 10;</code>
-       */
-      public Builder setTransfer(
-          forge_abi.TraceType.IndexedTransfer.Builder builderForValue) {
-        if (transferBuilder_ == null) {
-          value_ = builderForValue.build();
-          onChanged();
-        } else {
-          transferBuilder_.setMessage(builderForValue.build());
-        }
-        valueCase_ = 10;
-        return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedTransfer transfer = 10;</code>
-       */
-      public Builder mergeTransfer(forge_abi.TraceType.IndexedTransfer value) {
-        if (transferBuilder_ == null) {
-          if (valueCase_ == 10 &&
-              value_ != forge_abi.TraceType.IndexedTransfer.getDefaultInstance()) {
-            value_ = forge_abi.TraceType.IndexedTransfer.newBuilder((forge_abi.TraceType.IndexedTransfer) value_)
-                .mergeFrom(value).buildPartial();
-          } else {
-            value_ = value;
-          }
-          onChanged();
-        } else {
-          if (valueCase_ == 10) {
-            transferBuilder_.mergeFrom(value);
-          }
-          transferBuilder_.setMessage(value);
-        }
-        valueCase_ = 10;
-        return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedTransfer transfer = 10;</code>
-       */
-      public Builder clearTransfer() {
-        if (transferBuilder_ == null) {
-          if (valueCase_ == 10) {
-            valueCase_ = 0;
-            value_ = null;
-            onChanged();
-          }
-        } else {
-          if (valueCase_ == 10) {
-            valueCase_ = 0;
-            value_ = null;
-          }
-          transferBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedTransfer transfer = 10;</code>
-       */
-      public forge_abi.TraceType.IndexedTransfer.Builder getTransferBuilder() {
-        return getTransferFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.forge_abi.IndexedTransfer transfer = 10;</code>
-       */
-      public forge_abi.TraceType.IndexedTransferOrBuilder getTransferOrBuilder() {
-        if ((valueCase_ == 10) && (transferBuilder_ != null)) {
-          return transferBuilder_.getMessageOrBuilder();
-        } else {
-          if (valueCase_ == 10) {
-            return (forge_abi.TraceType.IndexedTransfer) value_;
-          }
-          return forge_abi.TraceType.IndexedTransfer.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>.forge_abi.IndexedTransfer transfer = 10;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.IndexedTransfer, forge_abi.TraceType.IndexedTransfer.Builder, forge_abi.TraceType.IndexedTransferOrBuilder> 
-          getTransferFieldBuilder() {
-        if (transferBuilder_ == null) {
-          if (!(valueCase_ == 10)) {
-            value_ = forge_abi.TraceType.IndexedTransfer.getDefaultInstance();
-          }
-          transferBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.TraceType.IndexedTransfer, forge_abi.TraceType.IndexedTransfer.Builder, forge_abi.TraceType.IndexedTransferOrBuilder>(
-                  (forge_abi.TraceType.IndexedTransfer) value_,
-                  getParentForChildren(),
-                  isClean());
-          value_ = null;
-        }
-        valueCase_ = 10;
-        onChanged();;
-        return transferBuilder_;
-      }
-
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.IndexedUpdateAsset, forge_abi.TraceType.IndexedUpdateAsset.Builder, forge_abi.TraceType.IndexedUpdateAssetOrBuilder> updateAssetBuilder_;
-      /**
-       * <code>.forge_abi.IndexedUpdateAsset update_asset = 11;</code>
-       */
-      public forge_abi.TraceType.IndexedUpdateAsset getUpdateAsset() {
-        if (updateAssetBuilder_ == null) {
-          if (valueCase_ == 11) {
-            return (forge_abi.TraceType.IndexedUpdateAsset) value_;
-          }
-          return forge_abi.TraceType.IndexedUpdateAsset.getDefaultInstance();
-        } else {
-          if (valueCase_ == 11) {
-            return updateAssetBuilder_.getMessage();
-          }
-          return forge_abi.TraceType.IndexedUpdateAsset.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>.forge_abi.IndexedUpdateAsset update_asset = 11;</code>
-       */
-      public Builder setUpdateAsset(forge_abi.TraceType.IndexedUpdateAsset value) {
-        if (updateAssetBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          value_ = value;
-          onChanged();
-        } else {
-          updateAssetBuilder_.setMessage(value);
-        }
-        valueCase_ = 11;
-        return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedUpdateAsset update_asset = 11;</code>
-       */
-      public Builder setUpdateAsset(
-          forge_abi.TraceType.IndexedUpdateAsset.Builder builderForValue) {
-        if (updateAssetBuilder_ == null) {
-          value_ = builderForValue.build();
-          onChanged();
-        } else {
-          updateAssetBuilder_.setMessage(builderForValue.build());
-        }
-        valueCase_ = 11;
-        return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedUpdateAsset update_asset = 11;</code>
-       */
-      public Builder mergeUpdateAsset(forge_abi.TraceType.IndexedUpdateAsset value) {
-        if (updateAssetBuilder_ == null) {
-          if (valueCase_ == 11 &&
-              value_ != forge_abi.TraceType.IndexedUpdateAsset.getDefaultInstance()) {
-            value_ = forge_abi.TraceType.IndexedUpdateAsset.newBuilder((forge_abi.TraceType.IndexedUpdateAsset) value_)
-                .mergeFrom(value).buildPartial();
-          } else {
-            value_ = value;
-          }
-          onChanged();
-        } else {
-          if (valueCase_ == 11) {
-            updateAssetBuilder_.mergeFrom(value);
-          }
-          updateAssetBuilder_.setMessage(value);
-        }
-        valueCase_ = 11;
-        return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedUpdateAsset update_asset = 11;</code>
-       */
-      public Builder clearUpdateAsset() {
-        if (updateAssetBuilder_ == null) {
-          if (valueCase_ == 11) {
-            valueCase_ = 0;
-            value_ = null;
-            onChanged();
-          }
-        } else {
-          if (valueCase_ == 11) {
-            valueCase_ = 0;
-            value_ = null;
-          }
-          updateAssetBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedUpdateAsset update_asset = 11;</code>
-       */
-      public forge_abi.TraceType.IndexedUpdateAsset.Builder getUpdateAssetBuilder() {
-        return getUpdateAssetFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.forge_abi.IndexedUpdateAsset update_asset = 11;</code>
-       */
-      public forge_abi.TraceType.IndexedUpdateAssetOrBuilder getUpdateAssetOrBuilder() {
-        if ((valueCase_ == 11) && (updateAssetBuilder_ != null)) {
-          return updateAssetBuilder_.getMessageOrBuilder();
-        } else {
-          if (valueCase_ == 11) {
-            return (forge_abi.TraceType.IndexedUpdateAsset) value_;
-          }
-          return forge_abi.TraceType.IndexedUpdateAsset.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>.forge_abi.IndexedUpdateAsset update_asset = 11;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.IndexedUpdateAsset, forge_abi.TraceType.IndexedUpdateAsset.Builder, forge_abi.TraceType.IndexedUpdateAssetOrBuilder> 
-          getUpdateAssetFieldBuilder() {
-        if (updateAssetBuilder_ == null) {
-          if (!(valueCase_ == 11)) {
-            value_ = forge_abi.TraceType.IndexedUpdateAsset.getDefaultInstance();
-          }
-          updateAssetBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.TraceType.IndexedUpdateAsset, forge_abi.TraceType.IndexedUpdateAsset.Builder, forge_abi.TraceType.IndexedUpdateAssetOrBuilder>(
-                  (forge_abi.TraceType.IndexedUpdateAsset) value_,
-                  getParentForChildren(),
-                  isClean());
-          value_ = null;
-        }
-        valueCase_ = 11;
-        onChanged();;
-        return updateAssetBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -11466,4300 +10654,6 @@ public final class TraceType {
     }
 
     public forge_abi.TraceType.IndexedStakeState getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface IndexedConsumeAssetOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.IndexedConsumeAsset)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>string asset = 1;</code>
-     */
-    java.lang.String getAsset();
-    /**
-     * <code>string asset = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getAssetBytes();
-  }
-  /**
-   * Protobuf type {@code forge_abi.IndexedConsumeAsset}
-   */
-  public  static final class IndexedConsumeAsset extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.IndexedConsumeAsset)
-      IndexedConsumeAssetOrBuilder {
-    // Use IndexedConsumeAsset.newBuilder() to construct.
-    private IndexedConsumeAsset(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private IndexedConsumeAsset() {
-      asset_ = "";
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private IndexedConsumeAsset(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              asset_ = s;
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.TraceType.internal_static_forge_abi_IndexedConsumeAsset_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.TraceType.internal_static_forge_abi_IndexedConsumeAsset_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.TraceType.IndexedConsumeAsset.class, forge_abi.TraceType.IndexedConsumeAsset.Builder.class);
-    }
-
-    public static final int ASSET_FIELD_NUMBER = 1;
-    private volatile java.lang.Object asset_;
-    /**
-     * <code>string asset = 1;</code>
-     */
-    public java.lang.String getAsset() {
-      java.lang.Object ref = asset_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        asset_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string asset = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getAssetBytes() {
-      java.lang.Object ref = asset_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        asset_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getAssetBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, asset_);
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getAssetBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, asset_);
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.TraceType.IndexedConsumeAsset)) {
-        return super.equals(obj);
-      }
-      forge_abi.TraceType.IndexedConsumeAsset other = (forge_abi.TraceType.IndexedConsumeAsset) obj;
-
-      boolean result = true;
-      result = result && getAsset()
-          .equals(other.getAsset());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ASSET_FIELD_NUMBER;
-      hash = (53 * hash) + getAsset().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.TraceType.IndexedConsumeAsset parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.TraceType.IndexedConsumeAsset parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.TraceType.IndexedConsumeAsset parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.TraceType.IndexedConsumeAsset parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.TraceType.IndexedConsumeAsset parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.IndexedConsumeAsset parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.TraceType.IndexedConsumeAsset parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.IndexedConsumeAsset parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.TraceType.IndexedConsumeAsset parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.IndexedConsumeAsset parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.TraceType.IndexedConsumeAsset prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code forge_abi.IndexedConsumeAsset}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.IndexedConsumeAsset)
-        forge_abi.TraceType.IndexedConsumeAssetOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.TraceType.internal_static_forge_abi_IndexedConsumeAsset_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.TraceType.internal_static_forge_abi_IndexedConsumeAsset_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.TraceType.IndexedConsumeAsset.class, forge_abi.TraceType.IndexedConsumeAsset.Builder.class);
-      }
-
-      // Construct using forge_abi.TraceType.IndexedConsumeAsset.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        asset_ = "";
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.TraceType.internal_static_forge_abi_IndexedConsumeAsset_descriptor;
-      }
-
-      public forge_abi.TraceType.IndexedConsumeAsset getDefaultInstanceForType() {
-        return forge_abi.TraceType.IndexedConsumeAsset.getDefaultInstance();
-      }
-
-      public forge_abi.TraceType.IndexedConsumeAsset build() {
-        forge_abi.TraceType.IndexedConsumeAsset result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.TraceType.IndexedConsumeAsset buildPartial() {
-        forge_abi.TraceType.IndexedConsumeAsset result = new forge_abi.TraceType.IndexedConsumeAsset(this);
-        result.asset_ = asset_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.TraceType.IndexedConsumeAsset) {
-          return mergeFrom((forge_abi.TraceType.IndexedConsumeAsset)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.TraceType.IndexedConsumeAsset other) {
-        if (other == forge_abi.TraceType.IndexedConsumeAsset.getDefaultInstance()) return this;
-        if (!other.getAsset().isEmpty()) {
-          asset_ = other.asset_;
-          onChanged();
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.TraceType.IndexedConsumeAsset parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.TraceType.IndexedConsumeAsset) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object asset_ = "";
-      /**
-       * <code>string asset = 1;</code>
-       */
-      public java.lang.String getAsset() {
-        java.lang.Object ref = asset_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          asset_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string asset = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getAssetBytes() {
-        java.lang.Object ref = asset_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          asset_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string asset = 1;</code>
-       */
-      public Builder setAsset(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        asset_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string asset = 1;</code>
-       */
-      public Builder clearAsset() {
-        
-        asset_ = getDefaultInstance().getAsset();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string asset = 1;</code>
-       */
-      public Builder setAssetBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        asset_ = value;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.IndexedConsumeAsset)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.IndexedConsumeAsset)
-    private static final forge_abi.TraceType.IndexedConsumeAsset DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.TraceType.IndexedConsumeAsset();
-    }
-
-    public static forge_abi.TraceType.IndexedConsumeAsset getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<IndexedConsumeAsset>
-        PARSER = new com.google.protobuf.AbstractParser<IndexedConsumeAsset>() {
-      public IndexedConsumeAsset parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new IndexedConsumeAsset(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<IndexedConsumeAsset> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<IndexedConsumeAsset> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.TraceType.IndexedConsumeAsset getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface IndexedCreateAssetOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.IndexedCreateAsset)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>string asset = 1;</code>
-     */
-    java.lang.String getAsset();
-    /**
-     * <code>string asset = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getAssetBytes();
-  }
-  /**
-   * Protobuf type {@code forge_abi.IndexedCreateAsset}
-   */
-  public  static final class IndexedCreateAsset extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.IndexedCreateAsset)
-      IndexedCreateAssetOrBuilder {
-    // Use IndexedCreateAsset.newBuilder() to construct.
-    private IndexedCreateAsset(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private IndexedCreateAsset() {
-      asset_ = "";
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private IndexedCreateAsset(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              asset_ = s;
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.TraceType.internal_static_forge_abi_IndexedCreateAsset_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.TraceType.internal_static_forge_abi_IndexedCreateAsset_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.TraceType.IndexedCreateAsset.class, forge_abi.TraceType.IndexedCreateAsset.Builder.class);
-    }
-
-    public static final int ASSET_FIELD_NUMBER = 1;
-    private volatile java.lang.Object asset_;
-    /**
-     * <code>string asset = 1;</code>
-     */
-    public java.lang.String getAsset() {
-      java.lang.Object ref = asset_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        asset_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string asset = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getAssetBytes() {
-      java.lang.Object ref = asset_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        asset_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getAssetBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, asset_);
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getAssetBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, asset_);
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.TraceType.IndexedCreateAsset)) {
-        return super.equals(obj);
-      }
-      forge_abi.TraceType.IndexedCreateAsset other = (forge_abi.TraceType.IndexedCreateAsset) obj;
-
-      boolean result = true;
-      result = result && getAsset()
-          .equals(other.getAsset());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ASSET_FIELD_NUMBER;
-      hash = (53 * hash) + getAsset().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.TraceType.IndexedCreateAsset parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.TraceType.IndexedCreateAsset parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.TraceType.IndexedCreateAsset parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.TraceType.IndexedCreateAsset parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.TraceType.IndexedCreateAsset parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.IndexedCreateAsset parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.TraceType.IndexedCreateAsset parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.IndexedCreateAsset parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.TraceType.IndexedCreateAsset parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.IndexedCreateAsset parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.TraceType.IndexedCreateAsset prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code forge_abi.IndexedCreateAsset}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.IndexedCreateAsset)
-        forge_abi.TraceType.IndexedCreateAssetOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.TraceType.internal_static_forge_abi_IndexedCreateAsset_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.TraceType.internal_static_forge_abi_IndexedCreateAsset_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.TraceType.IndexedCreateAsset.class, forge_abi.TraceType.IndexedCreateAsset.Builder.class);
-      }
-
-      // Construct using forge_abi.TraceType.IndexedCreateAsset.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        asset_ = "";
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.TraceType.internal_static_forge_abi_IndexedCreateAsset_descriptor;
-      }
-
-      public forge_abi.TraceType.IndexedCreateAsset getDefaultInstanceForType() {
-        return forge_abi.TraceType.IndexedCreateAsset.getDefaultInstance();
-      }
-
-      public forge_abi.TraceType.IndexedCreateAsset build() {
-        forge_abi.TraceType.IndexedCreateAsset result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.TraceType.IndexedCreateAsset buildPartial() {
-        forge_abi.TraceType.IndexedCreateAsset result = new forge_abi.TraceType.IndexedCreateAsset(this);
-        result.asset_ = asset_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.TraceType.IndexedCreateAsset) {
-          return mergeFrom((forge_abi.TraceType.IndexedCreateAsset)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.TraceType.IndexedCreateAsset other) {
-        if (other == forge_abi.TraceType.IndexedCreateAsset.getDefaultInstance()) return this;
-        if (!other.getAsset().isEmpty()) {
-          asset_ = other.asset_;
-          onChanged();
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.TraceType.IndexedCreateAsset parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.TraceType.IndexedCreateAsset) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object asset_ = "";
-      /**
-       * <code>string asset = 1;</code>
-       */
-      public java.lang.String getAsset() {
-        java.lang.Object ref = asset_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          asset_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string asset = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getAssetBytes() {
-        java.lang.Object ref = asset_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          asset_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string asset = 1;</code>
-       */
-      public Builder setAsset(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        asset_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string asset = 1;</code>
-       */
-      public Builder clearAsset() {
-        
-        asset_ = getDefaultInstance().getAsset();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string asset = 1;</code>
-       */
-      public Builder setAssetBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        asset_ = value;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.IndexedCreateAsset)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.IndexedCreateAsset)
-    private static final forge_abi.TraceType.IndexedCreateAsset DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.TraceType.IndexedCreateAsset();
-    }
-
-    public static forge_abi.TraceType.IndexedCreateAsset getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<IndexedCreateAsset>
-        PARSER = new com.google.protobuf.AbstractParser<IndexedCreateAsset>() {
-      public IndexedCreateAsset parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new IndexedCreateAsset(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<IndexedCreateAsset> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<IndexedCreateAsset> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.TraceType.IndexedCreateAsset getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface IndexedExchangeOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.IndexedExchange)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>repeated string sender_assets = 1;</code>
-     */
-    java.util.List<java.lang.String>
-        getSenderAssetsList();
-    /**
-     * <code>repeated string sender_assets = 1;</code>
-     */
-    int getSenderAssetsCount();
-    /**
-     * <code>repeated string sender_assets = 1;</code>
-     */
-    java.lang.String getSenderAssets(int index);
-    /**
-     * <code>repeated string sender_assets = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getSenderAssetsBytes(int index);
-
-    /**
-     * <code>repeated string receiver_assets = 2;</code>
-     */
-    java.util.List<java.lang.String>
-        getReceiverAssetsList();
-    /**
-     * <code>repeated string receiver_assets = 2;</code>
-     */
-    int getReceiverAssetsCount();
-    /**
-     * <code>repeated string receiver_assets = 2;</code>
-     */
-    java.lang.String getReceiverAssets(int index);
-    /**
-     * <code>repeated string receiver_assets = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getReceiverAssetsBytes(int index);
-  }
-  /**
-   * Protobuf type {@code forge_abi.IndexedExchange}
-   */
-  public  static final class IndexedExchange extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.IndexedExchange)
-      IndexedExchangeOrBuilder {
-    // Use IndexedExchange.newBuilder() to construct.
-    private IndexedExchange(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private IndexedExchange() {
-      senderAssets_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      receiverAssets_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private IndexedExchange(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                senderAssets_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              senderAssets_.add(s);
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                receiverAssets_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              receiverAssets_.add(s);
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-          senderAssets_ = senderAssets_.getUnmodifiableView();
-        }
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          receiverAssets_ = receiverAssets_.getUnmodifiableView();
-        }
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.TraceType.internal_static_forge_abi_IndexedExchange_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.TraceType.internal_static_forge_abi_IndexedExchange_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.TraceType.IndexedExchange.class, forge_abi.TraceType.IndexedExchange.Builder.class);
-    }
-
-    public static final int SENDER_ASSETS_FIELD_NUMBER = 1;
-    private com.google.protobuf.LazyStringList senderAssets_;
-    /**
-     * <code>repeated string sender_assets = 1;</code>
-     */
-    public com.google.protobuf.ProtocolStringList
-        getSenderAssetsList() {
-      return senderAssets_;
-    }
-    /**
-     * <code>repeated string sender_assets = 1;</code>
-     */
-    public int getSenderAssetsCount() {
-      return senderAssets_.size();
-    }
-    /**
-     * <code>repeated string sender_assets = 1;</code>
-     */
-    public java.lang.String getSenderAssets(int index) {
-      return senderAssets_.get(index);
-    }
-    /**
-     * <code>repeated string sender_assets = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getSenderAssetsBytes(int index) {
-      return senderAssets_.getByteString(index);
-    }
-
-    public static final int RECEIVER_ASSETS_FIELD_NUMBER = 2;
-    private com.google.protobuf.LazyStringList receiverAssets_;
-    /**
-     * <code>repeated string receiver_assets = 2;</code>
-     */
-    public com.google.protobuf.ProtocolStringList
-        getReceiverAssetsList() {
-      return receiverAssets_;
-    }
-    /**
-     * <code>repeated string receiver_assets = 2;</code>
-     */
-    public int getReceiverAssetsCount() {
-      return receiverAssets_.size();
-    }
-    /**
-     * <code>repeated string receiver_assets = 2;</code>
-     */
-    public java.lang.String getReceiverAssets(int index) {
-      return receiverAssets_.get(index);
-    }
-    /**
-     * <code>repeated string receiver_assets = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getReceiverAssetsBytes(int index) {
-      return receiverAssets_.getByteString(index);
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      for (int i = 0; i < senderAssets_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, senderAssets_.getRaw(i));
-      }
-      for (int i = 0; i < receiverAssets_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, receiverAssets_.getRaw(i));
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      {
-        int dataSize = 0;
-        for (int i = 0; i < senderAssets_.size(); i++) {
-          dataSize += computeStringSizeNoTag(senderAssets_.getRaw(i));
-        }
-        size += dataSize;
-        size += 1 * getSenderAssetsList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < receiverAssets_.size(); i++) {
-          dataSize += computeStringSizeNoTag(receiverAssets_.getRaw(i));
-        }
-        size += dataSize;
-        size += 1 * getReceiverAssetsList().size();
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.TraceType.IndexedExchange)) {
-        return super.equals(obj);
-      }
-      forge_abi.TraceType.IndexedExchange other = (forge_abi.TraceType.IndexedExchange) obj;
-
-      boolean result = true;
-      result = result && getSenderAssetsList()
-          .equals(other.getSenderAssetsList());
-      result = result && getReceiverAssetsList()
-          .equals(other.getReceiverAssetsList());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (getSenderAssetsCount() > 0) {
-        hash = (37 * hash) + SENDER_ASSETS_FIELD_NUMBER;
-        hash = (53 * hash) + getSenderAssetsList().hashCode();
-      }
-      if (getReceiverAssetsCount() > 0) {
-        hash = (37 * hash) + RECEIVER_ASSETS_FIELD_NUMBER;
-        hash = (53 * hash) + getReceiverAssetsList().hashCode();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.TraceType.IndexedExchange parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.TraceType.IndexedExchange parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.TraceType.IndexedExchange parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.TraceType.IndexedExchange parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.TraceType.IndexedExchange parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.IndexedExchange parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.TraceType.IndexedExchange parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.IndexedExchange parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.TraceType.IndexedExchange parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.IndexedExchange parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.TraceType.IndexedExchange prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code forge_abi.IndexedExchange}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.IndexedExchange)
-        forge_abi.TraceType.IndexedExchangeOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.TraceType.internal_static_forge_abi_IndexedExchange_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.TraceType.internal_static_forge_abi_IndexedExchange_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.TraceType.IndexedExchange.class, forge_abi.TraceType.IndexedExchange.Builder.class);
-      }
-
-      // Construct using forge_abi.TraceType.IndexedExchange.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        senderAssets_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        receiverAssets_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.TraceType.internal_static_forge_abi_IndexedExchange_descriptor;
-      }
-
-      public forge_abi.TraceType.IndexedExchange getDefaultInstanceForType() {
-        return forge_abi.TraceType.IndexedExchange.getDefaultInstance();
-      }
-
-      public forge_abi.TraceType.IndexedExchange build() {
-        forge_abi.TraceType.IndexedExchange result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.TraceType.IndexedExchange buildPartial() {
-        forge_abi.TraceType.IndexedExchange result = new forge_abi.TraceType.IndexedExchange(this);
-        int from_bitField0_ = bitField0_;
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          senderAssets_ = senderAssets_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000001);
-        }
-        result.senderAssets_ = senderAssets_;
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          receiverAssets_ = receiverAssets_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000002);
-        }
-        result.receiverAssets_ = receiverAssets_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.TraceType.IndexedExchange) {
-          return mergeFrom((forge_abi.TraceType.IndexedExchange)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.TraceType.IndexedExchange other) {
-        if (other == forge_abi.TraceType.IndexedExchange.getDefaultInstance()) return this;
-        if (!other.senderAssets_.isEmpty()) {
-          if (senderAssets_.isEmpty()) {
-            senderAssets_ = other.senderAssets_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-          } else {
-            ensureSenderAssetsIsMutable();
-            senderAssets_.addAll(other.senderAssets_);
-          }
-          onChanged();
-        }
-        if (!other.receiverAssets_.isEmpty()) {
-          if (receiverAssets_.isEmpty()) {
-            receiverAssets_ = other.receiverAssets_;
-            bitField0_ = (bitField0_ & ~0x00000002);
-          } else {
-            ensureReceiverAssetsIsMutable();
-            receiverAssets_.addAll(other.receiverAssets_);
-          }
-          onChanged();
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.TraceType.IndexedExchange parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.TraceType.IndexedExchange) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private com.google.protobuf.LazyStringList senderAssets_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureSenderAssetsIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          senderAssets_ = new com.google.protobuf.LazyStringArrayList(senderAssets_);
-          bitField0_ |= 0x00000001;
-         }
-      }
-      /**
-       * <code>repeated string sender_assets = 1;</code>
-       */
-      public com.google.protobuf.ProtocolStringList
-          getSenderAssetsList() {
-        return senderAssets_.getUnmodifiableView();
-      }
-      /**
-       * <code>repeated string sender_assets = 1;</code>
-       */
-      public int getSenderAssetsCount() {
-        return senderAssets_.size();
-      }
-      /**
-       * <code>repeated string sender_assets = 1;</code>
-       */
-      public java.lang.String getSenderAssets(int index) {
-        return senderAssets_.get(index);
-      }
-      /**
-       * <code>repeated string sender_assets = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getSenderAssetsBytes(int index) {
-        return senderAssets_.getByteString(index);
-      }
-      /**
-       * <code>repeated string sender_assets = 1;</code>
-       */
-      public Builder setSenderAssets(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureSenderAssetsIsMutable();
-        senderAssets_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string sender_assets = 1;</code>
-       */
-      public Builder addSenderAssets(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureSenderAssetsIsMutable();
-        senderAssets_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string sender_assets = 1;</code>
-       */
-      public Builder addAllSenderAssets(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureSenderAssetsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, senderAssets_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string sender_assets = 1;</code>
-       */
-      public Builder clearSenderAssets() {
-        senderAssets_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string sender_assets = 1;</code>
-       */
-      public Builder addSenderAssetsBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        ensureSenderAssetsIsMutable();
-        senderAssets_.add(value);
-        onChanged();
-        return this;
-      }
-
-      private com.google.protobuf.LazyStringList receiverAssets_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureReceiverAssetsIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          receiverAssets_ = new com.google.protobuf.LazyStringArrayList(receiverAssets_);
-          bitField0_ |= 0x00000002;
-         }
-      }
-      /**
-       * <code>repeated string receiver_assets = 2;</code>
-       */
-      public com.google.protobuf.ProtocolStringList
-          getReceiverAssetsList() {
-        return receiverAssets_.getUnmodifiableView();
-      }
-      /**
-       * <code>repeated string receiver_assets = 2;</code>
-       */
-      public int getReceiverAssetsCount() {
-        return receiverAssets_.size();
-      }
-      /**
-       * <code>repeated string receiver_assets = 2;</code>
-       */
-      public java.lang.String getReceiverAssets(int index) {
-        return receiverAssets_.get(index);
-      }
-      /**
-       * <code>repeated string receiver_assets = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getReceiverAssetsBytes(int index) {
-        return receiverAssets_.getByteString(index);
-      }
-      /**
-       * <code>repeated string receiver_assets = 2;</code>
-       */
-      public Builder setReceiverAssets(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureReceiverAssetsIsMutable();
-        receiverAssets_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string receiver_assets = 2;</code>
-       */
-      public Builder addReceiverAssets(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureReceiverAssetsIsMutable();
-        receiverAssets_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string receiver_assets = 2;</code>
-       */
-      public Builder addAllReceiverAssets(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureReceiverAssetsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, receiverAssets_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string receiver_assets = 2;</code>
-       */
-      public Builder clearReceiverAssets() {
-        receiverAssets_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string receiver_assets = 2;</code>
-       */
-      public Builder addReceiverAssetsBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        ensureReceiverAssetsIsMutable();
-        receiverAssets_.add(value);
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.IndexedExchange)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.IndexedExchange)
-    private static final forge_abi.TraceType.IndexedExchange DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.TraceType.IndexedExchange();
-    }
-
-    public static forge_abi.TraceType.IndexedExchange getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<IndexedExchange>
-        PARSER = new com.google.protobuf.AbstractParser<IndexedExchange>() {
-      public IndexedExchange parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new IndexedExchange(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<IndexedExchange> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<IndexedExchange> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.TraceType.IndexedExchange getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface IndexedTransferOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.IndexedTransfer)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>repeated string assets = 1;</code>
-     */
-    java.util.List<java.lang.String>
-        getAssetsList();
-    /**
-     * <code>repeated string assets = 1;</code>
-     */
-    int getAssetsCount();
-    /**
-     * <code>repeated string assets = 1;</code>
-     */
-    java.lang.String getAssets(int index);
-    /**
-     * <code>repeated string assets = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getAssetsBytes(int index);
-  }
-  /**
-   * Protobuf type {@code forge_abi.IndexedTransfer}
-   */
-  public  static final class IndexedTransfer extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.IndexedTransfer)
-      IndexedTransferOrBuilder {
-    // Use IndexedTransfer.newBuilder() to construct.
-    private IndexedTransfer(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private IndexedTransfer() {
-      assets_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private IndexedTransfer(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                assets_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              assets_.add(s);
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-          assets_ = assets_.getUnmodifiableView();
-        }
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.TraceType.internal_static_forge_abi_IndexedTransfer_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.TraceType.internal_static_forge_abi_IndexedTransfer_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.TraceType.IndexedTransfer.class, forge_abi.TraceType.IndexedTransfer.Builder.class);
-    }
-
-    public static final int ASSETS_FIELD_NUMBER = 1;
-    private com.google.protobuf.LazyStringList assets_;
-    /**
-     * <code>repeated string assets = 1;</code>
-     */
-    public com.google.protobuf.ProtocolStringList
-        getAssetsList() {
-      return assets_;
-    }
-    /**
-     * <code>repeated string assets = 1;</code>
-     */
-    public int getAssetsCount() {
-      return assets_.size();
-    }
-    /**
-     * <code>repeated string assets = 1;</code>
-     */
-    public java.lang.String getAssets(int index) {
-      return assets_.get(index);
-    }
-    /**
-     * <code>repeated string assets = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getAssetsBytes(int index) {
-      return assets_.getByteString(index);
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      for (int i = 0; i < assets_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, assets_.getRaw(i));
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      {
-        int dataSize = 0;
-        for (int i = 0; i < assets_.size(); i++) {
-          dataSize += computeStringSizeNoTag(assets_.getRaw(i));
-        }
-        size += dataSize;
-        size += 1 * getAssetsList().size();
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.TraceType.IndexedTransfer)) {
-        return super.equals(obj);
-      }
-      forge_abi.TraceType.IndexedTransfer other = (forge_abi.TraceType.IndexedTransfer) obj;
-
-      boolean result = true;
-      result = result && getAssetsList()
-          .equals(other.getAssetsList());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (getAssetsCount() > 0) {
-        hash = (37 * hash) + ASSETS_FIELD_NUMBER;
-        hash = (53 * hash) + getAssetsList().hashCode();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.TraceType.IndexedTransfer parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.TraceType.IndexedTransfer parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.TraceType.IndexedTransfer parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.TraceType.IndexedTransfer parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.TraceType.IndexedTransfer parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.IndexedTransfer parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.TraceType.IndexedTransfer parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.IndexedTransfer parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.TraceType.IndexedTransfer parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.IndexedTransfer parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.TraceType.IndexedTransfer prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code forge_abi.IndexedTransfer}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.IndexedTransfer)
-        forge_abi.TraceType.IndexedTransferOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.TraceType.internal_static_forge_abi_IndexedTransfer_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.TraceType.internal_static_forge_abi_IndexedTransfer_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.TraceType.IndexedTransfer.class, forge_abi.TraceType.IndexedTransfer.Builder.class);
-      }
-
-      // Construct using forge_abi.TraceType.IndexedTransfer.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        assets_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.TraceType.internal_static_forge_abi_IndexedTransfer_descriptor;
-      }
-
-      public forge_abi.TraceType.IndexedTransfer getDefaultInstanceForType() {
-        return forge_abi.TraceType.IndexedTransfer.getDefaultInstance();
-      }
-
-      public forge_abi.TraceType.IndexedTransfer build() {
-        forge_abi.TraceType.IndexedTransfer result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.TraceType.IndexedTransfer buildPartial() {
-        forge_abi.TraceType.IndexedTransfer result = new forge_abi.TraceType.IndexedTransfer(this);
-        int from_bitField0_ = bitField0_;
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          assets_ = assets_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000001);
-        }
-        result.assets_ = assets_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.TraceType.IndexedTransfer) {
-          return mergeFrom((forge_abi.TraceType.IndexedTransfer)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.TraceType.IndexedTransfer other) {
-        if (other == forge_abi.TraceType.IndexedTransfer.getDefaultInstance()) return this;
-        if (!other.assets_.isEmpty()) {
-          if (assets_.isEmpty()) {
-            assets_ = other.assets_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-          } else {
-            ensureAssetsIsMutable();
-            assets_.addAll(other.assets_);
-          }
-          onChanged();
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.TraceType.IndexedTransfer parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.TraceType.IndexedTransfer) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private com.google.protobuf.LazyStringList assets_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureAssetsIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          assets_ = new com.google.protobuf.LazyStringArrayList(assets_);
-          bitField0_ |= 0x00000001;
-         }
-      }
-      /**
-       * <code>repeated string assets = 1;</code>
-       */
-      public com.google.protobuf.ProtocolStringList
-          getAssetsList() {
-        return assets_.getUnmodifiableView();
-      }
-      /**
-       * <code>repeated string assets = 1;</code>
-       */
-      public int getAssetsCount() {
-        return assets_.size();
-      }
-      /**
-       * <code>repeated string assets = 1;</code>
-       */
-      public java.lang.String getAssets(int index) {
-        return assets_.get(index);
-      }
-      /**
-       * <code>repeated string assets = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getAssetsBytes(int index) {
-        return assets_.getByteString(index);
-      }
-      /**
-       * <code>repeated string assets = 1;</code>
-       */
-      public Builder setAssets(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureAssetsIsMutable();
-        assets_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string assets = 1;</code>
-       */
-      public Builder addAssets(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureAssetsIsMutable();
-        assets_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string assets = 1;</code>
-       */
-      public Builder addAllAssets(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureAssetsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, assets_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string assets = 1;</code>
-       */
-      public Builder clearAssets() {
-        assets_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string assets = 1;</code>
-       */
-      public Builder addAssetsBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        ensureAssetsIsMutable();
-        assets_.add(value);
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.IndexedTransfer)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.IndexedTransfer)
-    private static final forge_abi.TraceType.IndexedTransfer DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.TraceType.IndexedTransfer();
-    }
-
-    public static forge_abi.TraceType.IndexedTransfer getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<IndexedTransfer>
-        PARSER = new com.google.protobuf.AbstractParser<IndexedTransfer>() {
-      public IndexedTransfer parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new IndexedTransfer(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<IndexedTransfer> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<IndexedTransfer> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.TraceType.IndexedTransfer getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface IndexedUpdateAssetOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.IndexedUpdateAsset)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>string asset = 1;</code>
-     */
-    java.lang.String getAsset();
-    /**
-     * <code>string asset = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getAssetBytes();
-  }
-  /**
-   * Protobuf type {@code forge_abi.IndexedUpdateAsset}
-   */
-  public  static final class IndexedUpdateAsset extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.IndexedUpdateAsset)
-      IndexedUpdateAssetOrBuilder {
-    // Use IndexedUpdateAsset.newBuilder() to construct.
-    private IndexedUpdateAsset(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private IndexedUpdateAsset() {
-      asset_ = "";
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private IndexedUpdateAsset(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              asset_ = s;
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.TraceType.internal_static_forge_abi_IndexedUpdateAsset_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.TraceType.internal_static_forge_abi_IndexedUpdateAsset_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.TraceType.IndexedUpdateAsset.class, forge_abi.TraceType.IndexedUpdateAsset.Builder.class);
-    }
-
-    public static final int ASSET_FIELD_NUMBER = 1;
-    private volatile java.lang.Object asset_;
-    /**
-     * <code>string asset = 1;</code>
-     */
-    public java.lang.String getAsset() {
-      java.lang.Object ref = asset_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        asset_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string asset = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getAssetBytes() {
-      java.lang.Object ref = asset_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        asset_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getAssetBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, asset_);
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getAssetBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, asset_);
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.TraceType.IndexedUpdateAsset)) {
-        return super.equals(obj);
-      }
-      forge_abi.TraceType.IndexedUpdateAsset other = (forge_abi.TraceType.IndexedUpdateAsset) obj;
-
-      boolean result = true;
-      result = result && getAsset()
-          .equals(other.getAsset());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ASSET_FIELD_NUMBER;
-      hash = (53 * hash) + getAsset().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.TraceType.IndexedUpdateAsset parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.TraceType.IndexedUpdateAsset parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.TraceType.IndexedUpdateAsset parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.TraceType.IndexedUpdateAsset parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.TraceType.IndexedUpdateAsset parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.IndexedUpdateAsset parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.TraceType.IndexedUpdateAsset parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.IndexedUpdateAsset parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.TraceType.IndexedUpdateAsset parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.IndexedUpdateAsset parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.TraceType.IndexedUpdateAsset prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code forge_abi.IndexedUpdateAsset}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.IndexedUpdateAsset)
-        forge_abi.TraceType.IndexedUpdateAssetOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.TraceType.internal_static_forge_abi_IndexedUpdateAsset_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.TraceType.internal_static_forge_abi_IndexedUpdateAsset_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.TraceType.IndexedUpdateAsset.class, forge_abi.TraceType.IndexedUpdateAsset.Builder.class);
-      }
-
-      // Construct using forge_abi.TraceType.IndexedUpdateAsset.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        asset_ = "";
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.TraceType.internal_static_forge_abi_IndexedUpdateAsset_descriptor;
-      }
-
-      public forge_abi.TraceType.IndexedUpdateAsset getDefaultInstanceForType() {
-        return forge_abi.TraceType.IndexedUpdateAsset.getDefaultInstance();
-      }
-
-      public forge_abi.TraceType.IndexedUpdateAsset build() {
-        forge_abi.TraceType.IndexedUpdateAsset result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.TraceType.IndexedUpdateAsset buildPartial() {
-        forge_abi.TraceType.IndexedUpdateAsset result = new forge_abi.TraceType.IndexedUpdateAsset(this);
-        result.asset_ = asset_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.TraceType.IndexedUpdateAsset) {
-          return mergeFrom((forge_abi.TraceType.IndexedUpdateAsset)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.TraceType.IndexedUpdateAsset other) {
-        if (other == forge_abi.TraceType.IndexedUpdateAsset.getDefaultInstance()) return this;
-        if (!other.getAsset().isEmpty()) {
-          asset_ = other.asset_;
-          onChanged();
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.TraceType.IndexedUpdateAsset parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.TraceType.IndexedUpdateAsset) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object asset_ = "";
-      /**
-       * <code>string asset = 1;</code>
-       */
-      public java.lang.String getAsset() {
-        java.lang.Object ref = asset_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          asset_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string asset = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getAssetBytes() {
-        java.lang.Object ref = asset_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          asset_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string asset = 1;</code>
-       */
-      public Builder setAsset(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        asset_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string asset = 1;</code>
-       */
-      public Builder clearAsset() {
-        
-        asset_ = getDefaultInstance().getAsset();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string asset = 1;</code>
-       */
-      public Builder setAssetBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        asset_ = value;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.IndexedUpdateAsset)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.IndexedUpdateAsset)
-    private static final forge_abi.TraceType.IndexedUpdateAsset DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.TraceType.IndexedUpdateAsset();
-    }
-
-    public static forge_abi.TraceType.IndexedUpdateAsset getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<IndexedUpdateAsset>
-        PARSER = new com.google.protobuf.AbstractParser<IndexedUpdateAsset>() {
-      public IndexedUpdateAsset parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new IndexedUpdateAsset(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<IndexedUpdateAsset> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<IndexedUpdateAsset> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.TraceType.IndexedUpdateAsset getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface HeightFilterOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.HeightFilter)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>uint64 from_height = 1;</code>
-     */
-    long getFromHeight();
-
-    /**
-     * <code>uint64 to_height = 2;</code>
-     */
-    long getToHeight();
-  }
-  /**
-   * Protobuf type {@code forge_abi.HeightFilter}
-   */
-  public  static final class HeightFilter extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.HeightFilter)
-      HeightFilterOrBuilder {
-    // Use HeightFilter.newBuilder() to construct.
-    private HeightFilter(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private HeightFilter() {
-      fromHeight_ = 0L;
-      toHeight_ = 0L;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private HeightFilter(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-
-              fromHeight_ = input.readUInt64();
-              break;
-            }
-            case 16: {
-
-              toHeight_ = input.readUInt64();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.TraceType.internal_static_forge_abi_HeightFilter_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.TraceType.internal_static_forge_abi_HeightFilter_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.TraceType.HeightFilter.class, forge_abi.TraceType.HeightFilter.Builder.class);
-    }
-
-    public static final int FROM_HEIGHT_FIELD_NUMBER = 1;
-    private long fromHeight_;
-    /**
-     * <code>uint64 from_height = 1;</code>
-     */
-    public long getFromHeight() {
-      return fromHeight_;
-    }
-
-    public static final int TO_HEIGHT_FIELD_NUMBER = 2;
-    private long toHeight_;
-    /**
-     * <code>uint64 to_height = 2;</code>
-     */
-    public long getToHeight() {
-      return toHeight_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (fromHeight_ != 0L) {
-        output.writeUInt64(1, fromHeight_);
-      }
-      if (toHeight_ != 0L) {
-        output.writeUInt64(2, toHeight_);
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (fromHeight_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(1, fromHeight_);
-      }
-      if (toHeight_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(2, toHeight_);
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.TraceType.HeightFilter)) {
-        return super.equals(obj);
-      }
-      forge_abi.TraceType.HeightFilter other = (forge_abi.TraceType.HeightFilter) obj;
-
-      boolean result = true;
-      result = result && (getFromHeight()
-          == other.getFromHeight());
-      result = result && (getToHeight()
-          == other.getToHeight());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + FROM_HEIGHT_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getFromHeight());
-      hash = (37 * hash) + TO_HEIGHT_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getToHeight());
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.TraceType.HeightFilter parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.TraceType.HeightFilter parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.TraceType.HeightFilter parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.TraceType.HeightFilter parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.TraceType.HeightFilter parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.HeightFilter parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.TraceType.HeightFilter parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.HeightFilter parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.TraceType.HeightFilter parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.HeightFilter parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.TraceType.HeightFilter prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code forge_abi.HeightFilter}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.HeightFilter)
-        forge_abi.TraceType.HeightFilterOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.TraceType.internal_static_forge_abi_HeightFilter_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.TraceType.internal_static_forge_abi_HeightFilter_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.TraceType.HeightFilter.class, forge_abi.TraceType.HeightFilter.Builder.class);
-      }
-
-      // Construct using forge_abi.TraceType.HeightFilter.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        fromHeight_ = 0L;
-
-        toHeight_ = 0L;
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.TraceType.internal_static_forge_abi_HeightFilter_descriptor;
-      }
-
-      public forge_abi.TraceType.HeightFilter getDefaultInstanceForType() {
-        return forge_abi.TraceType.HeightFilter.getDefaultInstance();
-      }
-
-      public forge_abi.TraceType.HeightFilter build() {
-        forge_abi.TraceType.HeightFilter result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.TraceType.HeightFilter buildPartial() {
-        forge_abi.TraceType.HeightFilter result = new forge_abi.TraceType.HeightFilter(this);
-        result.fromHeight_ = fromHeight_;
-        result.toHeight_ = toHeight_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.TraceType.HeightFilter) {
-          return mergeFrom((forge_abi.TraceType.HeightFilter)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.TraceType.HeightFilter other) {
-        if (other == forge_abi.TraceType.HeightFilter.getDefaultInstance()) return this;
-        if (other.getFromHeight() != 0L) {
-          setFromHeight(other.getFromHeight());
-        }
-        if (other.getToHeight() != 0L) {
-          setToHeight(other.getToHeight());
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.TraceType.HeightFilter parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.TraceType.HeightFilter) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private long fromHeight_ ;
-      /**
-       * <code>uint64 from_height = 1;</code>
-       */
-      public long getFromHeight() {
-        return fromHeight_;
-      }
-      /**
-       * <code>uint64 from_height = 1;</code>
-       */
-      public Builder setFromHeight(long value) {
-        
-        fromHeight_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint64 from_height = 1;</code>
-       */
-      public Builder clearFromHeight() {
-        
-        fromHeight_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private long toHeight_ ;
-      /**
-       * <code>uint64 to_height = 2;</code>
-       */
-      public long getToHeight() {
-        return toHeight_;
-      }
-      /**
-       * <code>uint64 to_height = 2;</code>
-       */
-      public Builder setToHeight(long value) {
-        
-        toHeight_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint64 to_height = 2;</code>
-       */
-      public Builder clearToHeight() {
-        
-        toHeight_ = 0L;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.HeightFilter)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.HeightFilter)
-    private static final forge_abi.TraceType.HeightFilter DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.TraceType.HeightFilter();
-    }
-
-    public static forge_abi.TraceType.HeightFilter getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<HeightFilter>
-        PARSER = new com.google.protobuf.AbstractParser<HeightFilter>() {
-      public HeightFilter parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new HeightFilter(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<HeightFilter> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<HeightFilter> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.TraceType.HeightFilter getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface NumTxsFilterOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.NumTxsFilter)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>uint64 min_num_txs = 1;</code>
-     */
-    long getMinNumTxs();
-
-    /**
-     * <code>uint64 max_num_txs = 2;</code>
-     */
-    long getMaxNumTxs();
-  }
-  /**
-   * Protobuf type {@code forge_abi.NumTxsFilter}
-   */
-  public  static final class NumTxsFilter extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.NumTxsFilter)
-      NumTxsFilterOrBuilder {
-    // Use NumTxsFilter.newBuilder() to construct.
-    private NumTxsFilter(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private NumTxsFilter() {
-      minNumTxs_ = 0L;
-      maxNumTxs_ = 0L;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private NumTxsFilter(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-
-              minNumTxs_ = input.readUInt64();
-              break;
-            }
-            case 16: {
-
-              maxNumTxs_ = input.readUInt64();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.TraceType.internal_static_forge_abi_NumTxsFilter_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.TraceType.internal_static_forge_abi_NumTxsFilter_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.TraceType.NumTxsFilter.class, forge_abi.TraceType.NumTxsFilter.Builder.class);
-    }
-
-    public static final int MIN_NUM_TXS_FIELD_NUMBER = 1;
-    private long minNumTxs_;
-    /**
-     * <code>uint64 min_num_txs = 1;</code>
-     */
-    public long getMinNumTxs() {
-      return minNumTxs_;
-    }
-
-    public static final int MAX_NUM_TXS_FIELD_NUMBER = 2;
-    private long maxNumTxs_;
-    /**
-     * <code>uint64 max_num_txs = 2;</code>
-     */
-    public long getMaxNumTxs() {
-      return maxNumTxs_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (minNumTxs_ != 0L) {
-        output.writeUInt64(1, minNumTxs_);
-      }
-      if (maxNumTxs_ != 0L) {
-        output.writeUInt64(2, maxNumTxs_);
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (minNumTxs_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(1, minNumTxs_);
-      }
-      if (maxNumTxs_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(2, maxNumTxs_);
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.TraceType.NumTxsFilter)) {
-        return super.equals(obj);
-      }
-      forge_abi.TraceType.NumTxsFilter other = (forge_abi.TraceType.NumTxsFilter) obj;
-
-      boolean result = true;
-      result = result && (getMinNumTxs()
-          == other.getMinNumTxs());
-      result = result && (getMaxNumTxs()
-          == other.getMaxNumTxs());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + MIN_NUM_TXS_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getMinNumTxs());
-      hash = (37 * hash) + MAX_NUM_TXS_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getMaxNumTxs());
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.TraceType.NumTxsFilter parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.TraceType.NumTxsFilter parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.TraceType.NumTxsFilter parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.TraceType.NumTxsFilter parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.TraceType.NumTxsFilter parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.NumTxsFilter parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.TraceType.NumTxsFilter parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.NumTxsFilter parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.TraceType.NumTxsFilter parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.NumTxsFilter parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.TraceType.NumTxsFilter prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code forge_abi.NumTxsFilter}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.NumTxsFilter)
-        forge_abi.TraceType.NumTxsFilterOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.TraceType.internal_static_forge_abi_NumTxsFilter_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.TraceType.internal_static_forge_abi_NumTxsFilter_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.TraceType.NumTxsFilter.class, forge_abi.TraceType.NumTxsFilter.Builder.class);
-      }
-
-      // Construct using forge_abi.TraceType.NumTxsFilter.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        minNumTxs_ = 0L;
-
-        maxNumTxs_ = 0L;
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.TraceType.internal_static_forge_abi_NumTxsFilter_descriptor;
-      }
-
-      public forge_abi.TraceType.NumTxsFilter getDefaultInstanceForType() {
-        return forge_abi.TraceType.NumTxsFilter.getDefaultInstance();
-      }
-
-      public forge_abi.TraceType.NumTxsFilter build() {
-        forge_abi.TraceType.NumTxsFilter result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.TraceType.NumTxsFilter buildPartial() {
-        forge_abi.TraceType.NumTxsFilter result = new forge_abi.TraceType.NumTxsFilter(this);
-        result.minNumTxs_ = minNumTxs_;
-        result.maxNumTxs_ = maxNumTxs_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.TraceType.NumTxsFilter) {
-          return mergeFrom((forge_abi.TraceType.NumTxsFilter)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.TraceType.NumTxsFilter other) {
-        if (other == forge_abi.TraceType.NumTxsFilter.getDefaultInstance()) return this;
-        if (other.getMinNumTxs() != 0L) {
-          setMinNumTxs(other.getMinNumTxs());
-        }
-        if (other.getMaxNumTxs() != 0L) {
-          setMaxNumTxs(other.getMaxNumTxs());
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.TraceType.NumTxsFilter parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.TraceType.NumTxsFilter) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private long minNumTxs_ ;
-      /**
-       * <code>uint64 min_num_txs = 1;</code>
-       */
-      public long getMinNumTxs() {
-        return minNumTxs_;
-      }
-      /**
-       * <code>uint64 min_num_txs = 1;</code>
-       */
-      public Builder setMinNumTxs(long value) {
-        
-        minNumTxs_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint64 min_num_txs = 1;</code>
-       */
-      public Builder clearMinNumTxs() {
-        
-        minNumTxs_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private long maxNumTxs_ ;
-      /**
-       * <code>uint64 max_num_txs = 2;</code>
-       */
-      public long getMaxNumTxs() {
-        return maxNumTxs_;
-      }
-      /**
-       * <code>uint64 max_num_txs = 2;</code>
-       */
-      public Builder setMaxNumTxs(long value) {
-        
-        maxNumTxs_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint64 max_num_txs = 2;</code>
-       */
-      public Builder clearMaxNumTxs() {
-        
-        maxNumTxs_ = 0L;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.NumTxsFilter)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.NumTxsFilter)
-    private static final forge_abi.TraceType.NumTxsFilter DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.TraceType.NumTxsFilter();
-    }
-
-    public static forge_abi.TraceType.NumTxsFilter getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<NumTxsFilter>
-        PARSER = new com.google.protobuf.AbstractParser<NumTxsFilter>() {
-      public NumTxsFilter parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new NumTxsFilter(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<NumTxsFilter> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<NumTxsFilter> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.TraceType.NumTxsFilter getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface NumInvalidTxsFilterOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.NumInvalidTxsFilter)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>uint64 min_num_invalid_txs = 1;</code>
-     */
-    long getMinNumInvalidTxs();
-
-    /**
-     * <code>uint64 max_num_invalid_txs = 2;</code>
-     */
-    long getMaxNumInvalidTxs();
-  }
-  /**
-   * Protobuf type {@code forge_abi.NumInvalidTxsFilter}
-   */
-  public  static final class NumInvalidTxsFilter extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.NumInvalidTxsFilter)
-      NumInvalidTxsFilterOrBuilder {
-    // Use NumInvalidTxsFilter.newBuilder() to construct.
-    private NumInvalidTxsFilter(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private NumInvalidTxsFilter() {
-      minNumInvalidTxs_ = 0L;
-      maxNumInvalidTxs_ = 0L;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private NumInvalidTxsFilter(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-
-              minNumInvalidTxs_ = input.readUInt64();
-              break;
-            }
-            case 16: {
-
-              maxNumInvalidTxs_ = input.readUInt64();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.TraceType.internal_static_forge_abi_NumInvalidTxsFilter_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.TraceType.internal_static_forge_abi_NumInvalidTxsFilter_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.TraceType.NumInvalidTxsFilter.class, forge_abi.TraceType.NumInvalidTxsFilter.Builder.class);
-    }
-
-    public static final int MIN_NUM_INVALID_TXS_FIELD_NUMBER = 1;
-    private long minNumInvalidTxs_;
-    /**
-     * <code>uint64 min_num_invalid_txs = 1;</code>
-     */
-    public long getMinNumInvalidTxs() {
-      return minNumInvalidTxs_;
-    }
-
-    public static final int MAX_NUM_INVALID_TXS_FIELD_NUMBER = 2;
-    private long maxNumInvalidTxs_;
-    /**
-     * <code>uint64 max_num_invalid_txs = 2;</code>
-     */
-    public long getMaxNumInvalidTxs() {
-      return maxNumInvalidTxs_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (minNumInvalidTxs_ != 0L) {
-        output.writeUInt64(1, minNumInvalidTxs_);
-      }
-      if (maxNumInvalidTxs_ != 0L) {
-        output.writeUInt64(2, maxNumInvalidTxs_);
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (minNumInvalidTxs_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(1, minNumInvalidTxs_);
-      }
-      if (maxNumInvalidTxs_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(2, maxNumInvalidTxs_);
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.TraceType.NumInvalidTxsFilter)) {
-        return super.equals(obj);
-      }
-      forge_abi.TraceType.NumInvalidTxsFilter other = (forge_abi.TraceType.NumInvalidTxsFilter) obj;
-
-      boolean result = true;
-      result = result && (getMinNumInvalidTxs()
-          == other.getMinNumInvalidTxs());
-      result = result && (getMaxNumInvalidTxs()
-          == other.getMaxNumInvalidTxs());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + MIN_NUM_INVALID_TXS_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getMinNumInvalidTxs());
-      hash = (37 * hash) + MAX_NUM_INVALID_TXS_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getMaxNumInvalidTxs());
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.TraceType.NumInvalidTxsFilter parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.TraceType.NumInvalidTxsFilter parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.TraceType.NumInvalidTxsFilter parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.TraceType.NumInvalidTxsFilter parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.TraceType.NumInvalidTxsFilter parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.NumInvalidTxsFilter parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.TraceType.NumInvalidTxsFilter parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.NumInvalidTxsFilter parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.TraceType.NumInvalidTxsFilter parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.TraceType.NumInvalidTxsFilter parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.TraceType.NumInvalidTxsFilter prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code forge_abi.NumInvalidTxsFilter}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.NumInvalidTxsFilter)
-        forge_abi.TraceType.NumInvalidTxsFilterOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.TraceType.internal_static_forge_abi_NumInvalidTxsFilter_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.TraceType.internal_static_forge_abi_NumInvalidTxsFilter_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.TraceType.NumInvalidTxsFilter.class, forge_abi.TraceType.NumInvalidTxsFilter.Builder.class);
-      }
-
-      // Construct using forge_abi.TraceType.NumInvalidTxsFilter.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        minNumInvalidTxs_ = 0L;
-
-        maxNumInvalidTxs_ = 0L;
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.TraceType.internal_static_forge_abi_NumInvalidTxsFilter_descriptor;
-      }
-
-      public forge_abi.TraceType.NumInvalidTxsFilter getDefaultInstanceForType() {
-        return forge_abi.TraceType.NumInvalidTxsFilter.getDefaultInstance();
-      }
-
-      public forge_abi.TraceType.NumInvalidTxsFilter build() {
-        forge_abi.TraceType.NumInvalidTxsFilter result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.TraceType.NumInvalidTxsFilter buildPartial() {
-        forge_abi.TraceType.NumInvalidTxsFilter result = new forge_abi.TraceType.NumInvalidTxsFilter(this);
-        result.minNumInvalidTxs_ = minNumInvalidTxs_;
-        result.maxNumInvalidTxs_ = maxNumInvalidTxs_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.TraceType.NumInvalidTxsFilter) {
-          return mergeFrom((forge_abi.TraceType.NumInvalidTxsFilter)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.TraceType.NumInvalidTxsFilter other) {
-        if (other == forge_abi.TraceType.NumInvalidTxsFilter.getDefaultInstance()) return this;
-        if (other.getMinNumInvalidTxs() != 0L) {
-          setMinNumInvalidTxs(other.getMinNumInvalidTxs());
-        }
-        if (other.getMaxNumInvalidTxs() != 0L) {
-          setMaxNumInvalidTxs(other.getMaxNumInvalidTxs());
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.TraceType.NumInvalidTxsFilter parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.TraceType.NumInvalidTxsFilter) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private long minNumInvalidTxs_ ;
-      /**
-       * <code>uint64 min_num_invalid_txs = 1;</code>
-       */
-      public long getMinNumInvalidTxs() {
-        return minNumInvalidTxs_;
-      }
-      /**
-       * <code>uint64 min_num_invalid_txs = 1;</code>
-       */
-      public Builder setMinNumInvalidTxs(long value) {
-        
-        minNumInvalidTxs_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint64 min_num_invalid_txs = 1;</code>
-       */
-      public Builder clearMinNumInvalidTxs() {
-        
-        minNumInvalidTxs_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private long maxNumInvalidTxs_ ;
-      /**
-       * <code>uint64 max_num_invalid_txs = 2;</code>
-       */
-      public long getMaxNumInvalidTxs() {
-        return maxNumInvalidTxs_;
-      }
-      /**
-       * <code>uint64 max_num_invalid_txs = 2;</code>
-       */
-      public Builder setMaxNumInvalidTxs(long value) {
-        
-        maxNumInvalidTxs_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint64 max_num_invalid_txs = 2;</code>
-       */
-      public Builder clearMaxNumInvalidTxs() {
-        
-        maxNumInvalidTxs_ = 0L;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.NumInvalidTxsFilter)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.NumInvalidTxsFilter)
-    private static final forge_abi.TraceType.NumInvalidTxsFilter DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.TraceType.NumInvalidTxsFilter();
-    }
-
-    public static forge_abi.TraceType.NumInvalidTxsFilter getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<NumInvalidTxsFilter>
-        PARSER = new com.google.protobuf.AbstractParser<NumInvalidTxsFilter>() {
-      public NumInvalidTxsFilter parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new NumInvalidTxsFilter(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<NumInvalidTxsFilter> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<NumInvalidTxsFilter> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.TraceType.NumInvalidTxsFilter getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -21866,6 +16760,958 @@ public final class TraceType {
 
   }
 
+  public interface ValidityFilterOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.ValidityFilter)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.forge_abi.Validity validity = 1;</code>
+     */
+    int getValidityValue();
+    /**
+     * <code>.forge_abi.Validity validity = 1;</code>
+     */
+    forge_abi.TraceType.Validity getValidity();
+  }
+  /**
+   * Protobuf type {@code forge_abi.ValidityFilter}
+   */
+  public  static final class ValidityFilter extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:forge_abi.ValidityFilter)
+      ValidityFilterOrBuilder {
+    // Use ValidityFilter.newBuilder() to construct.
+    private ValidityFilter(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ValidityFilter() {
+      validity_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private ValidityFilter(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+
+              validity_ = rawValue;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return forge_abi.TraceType.internal_static_forge_abi_ValidityFilter_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return forge_abi.TraceType.internal_static_forge_abi_ValidityFilter_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              forge_abi.TraceType.ValidityFilter.class, forge_abi.TraceType.ValidityFilter.Builder.class);
+    }
+
+    public static final int VALIDITY_FIELD_NUMBER = 1;
+    private int validity_;
+    /**
+     * <code>.forge_abi.Validity validity = 1;</code>
+     */
+    public int getValidityValue() {
+      return validity_;
+    }
+    /**
+     * <code>.forge_abi.Validity validity = 1;</code>
+     */
+    public forge_abi.TraceType.Validity getValidity() {
+      forge_abi.TraceType.Validity result = forge_abi.TraceType.Validity.valueOf(validity_);
+      return result == null ? forge_abi.TraceType.Validity.UNRECOGNIZED : result;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (validity_ != forge_abi.TraceType.Validity.both.getNumber()) {
+        output.writeEnum(1, validity_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (validity_ != forge_abi.TraceType.Validity.both.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, validity_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof forge_abi.TraceType.ValidityFilter)) {
+        return super.equals(obj);
+      }
+      forge_abi.TraceType.ValidityFilter other = (forge_abi.TraceType.ValidityFilter) obj;
+
+      boolean result = true;
+      result = result && validity_ == other.validity_;
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + VALIDITY_FIELD_NUMBER;
+      hash = (53 * hash) + validity_;
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static forge_abi.TraceType.ValidityFilter parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.TraceType.ValidityFilter parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.TraceType.ValidityFilter parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.TraceType.ValidityFilter parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.TraceType.ValidityFilter parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.TraceType.ValidityFilter parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.TraceType.ValidityFilter parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static forge_abi.TraceType.ValidityFilter parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.TraceType.ValidityFilter parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.TraceType.ValidityFilter parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(forge_abi.TraceType.ValidityFilter prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code forge_abi.ValidityFilter}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:forge_abi.ValidityFilter)
+        forge_abi.TraceType.ValidityFilterOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return forge_abi.TraceType.internal_static_forge_abi_ValidityFilter_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return forge_abi.TraceType.internal_static_forge_abi_ValidityFilter_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                forge_abi.TraceType.ValidityFilter.class, forge_abi.TraceType.ValidityFilter.Builder.class);
+      }
+
+      // Construct using forge_abi.TraceType.ValidityFilter.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        validity_ = 0;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return forge_abi.TraceType.internal_static_forge_abi_ValidityFilter_descriptor;
+      }
+
+      public forge_abi.TraceType.ValidityFilter getDefaultInstanceForType() {
+        return forge_abi.TraceType.ValidityFilter.getDefaultInstance();
+      }
+
+      public forge_abi.TraceType.ValidityFilter build() {
+        forge_abi.TraceType.ValidityFilter result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public forge_abi.TraceType.ValidityFilter buildPartial() {
+        forge_abi.TraceType.ValidityFilter result = new forge_abi.TraceType.ValidityFilter(this);
+        result.validity_ = validity_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof forge_abi.TraceType.ValidityFilter) {
+          return mergeFrom((forge_abi.TraceType.ValidityFilter)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(forge_abi.TraceType.ValidityFilter other) {
+        if (other == forge_abi.TraceType.ValidityFilter.getDefaultInstance()) return this;
+        if (other.validity_ != 0) {
+          setValidityValue(other.getValidityValue());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        forge_abi.TraceType.ValidityFilter parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (forge_abi.TraceType.ValidityFilter) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int validity_ = 0;
+      /**
+       * <code>.forge_abi.Validity validity = 1;</code>
+       */
+      public int getValidityValue() {
+        return validity_;
+      }
+      /**
+       * <code>.forge_abi.Validity validity = 1;</code>
+       */
+      public Builder setValidityValue(int value) {
+        validity_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Validity validity = 1;</code>
+       */
+      public forge_abi.TraceType.Validity getValidity() {
+        forge_abi.TraceType.Validity result = forge_abi.TraceType.Validity.valueOf(validity_);
+        return result == null ? forge_abi.TraceType.Validity.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.forge_abi.Validity validity = 1;</code>
+       */
+      public Builder setValidity(forge_abi.TraceType.Validity value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        validity_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Validity validity = 1;</code>
+       */
+      public Builder clearValidity() {
+        
+        validity_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:forge_abi.ValidityFilter)
+    }
+
+    // @@protoc_insertion_point(class_scope:forge_abi.ValidityFilter)
+    private static final forge_abi.TraceType.ValidityFilter DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new forge_abi.TraceType.ValidityFilter();
+    }
+
+    public static forge_abi.TraceType.ValidityFilter getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ValidityFilter>
+        PARSER = new com.google.protobuf.AbstractParser<ValidityFilter>() {
+      public ValidityFilter parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new ValidityFilter(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ValidityFilter> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ValidityFilter> getParserForType() {
+      return PARSER;
+    }
+
+    public forge_abi.TraceType.ValidityFilter getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface RangeFilterOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.RangeFilter)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>uint64 from = 1;</code>
+     */
+    long getFrom();
+
+    /**
+     * <code>uint64 to = 2;</code>
+     */
+    long getTo();
+  }
+  /**
+   * Protobuf type {@code forge_abi.RangeFilter}
+   */
+  public  static final class RangeFilter extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:forge_abi.RangeFilter)
+      RangeFilterOrBuilder {
+    // Use RangeFilter.newBuilder() to construct.
+    private RangeFilter(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private RangeFilter() {
+      from_ = 0L;
+      to_ = 0L;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private RangeFilter(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              from_ = input.readUInt64();
+              break;
+            }
+            case 16: {
+
+              to_ = input.readUInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return forge_abi.TraceType.internal_static_forge_abi_RangeFilter_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return forge_abi.TraceType.internal_static_forge_abi_RangeFilter_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              forge_abi.TraceType.RangeFilter.class, forge_abi.TraceType.RangeFilter.Builder.class);
+    }
+
+    public static final int FROM_FIELD_NUMBER = 1;
+    private long from_;
+    /**
+     * <code>uint64 from = 1;</code>
+     */
+    public long getFrom() {
+      return from_;
+    }
+
+    public static final int TO_FIELD_NUMBER = 2;
+    private long to_;
+    /**
+     * <code>uint64 to = 2;</code>
+     */
+    public long getTo() {
+      return to_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (from_ != 0L) {
+        output.writeUInt64(1, from_);
+      }
+      if (to_ != 0L) {
+        output.writeUInt64(2, to_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (from_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(1, from_);
+      }
+      if (to_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(2, to_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof forge_abi.TraceType.RangeFilter)) {
+        return super.equals(obj);
+      }
+      forge_abi.TraceType.RangeFilter other = (forge_abi.TraceType.RangeFilter) obj;
+
+      boolean result = true;
+      result = result && (getFrom()
+          == other.getFrom());
+      result = result && (getTo()
+          == other.getTo());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + FROM_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getFrom());
+      hash = (37 * hash) + TO_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getTo());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static forge_abi.TraceType.RangeFilter parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.TraceType.RangeFilter parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.TraceType.RangeFilter parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.TraceType.RangeFilter parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.TraceType.RangeFilter parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.TraceType.RangeFilter parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.TraceType.RangeFilter parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static forge_abi.TraceType.RangeFilter parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.TraceType.RangeFilter parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.TraceType.RangeFilter parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(forge_abi.TraceType.RangeFilter prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code forge_abi.RangeFilter}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:forge_abi.RangeFilter)
+        forge_abi.TraceType.RangeFilterOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return forge_abi.TraceType.internal_static_forge_abi_RangeFilter_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return forge_abi.TraceType.internal_static_forge_abi_RangeFilter_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                forge_abi.TraceType.RangeFilter.class, forge_abi.TraceType.RangeFilter.Builder.class);
+      }
+
+      // Construct using forge_abi.TraceType.RangeFilter.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        from_ = 0L;
+
+        to_ = 0L;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return forge_abi.TraceType.internal_static_forge_abi_RangeFilter_descriptor;
+      }
+
+      public forge_abi.TraceType.RangeFilter getDefaultInstanceForType() {
+        return forge_abi.TraceType.RangeFilter.getDefaultInstance();
+      }
+
+      public forge_abi.TraceType.RangeFilter build() {
+        forge_abi.TraceType.RangeFilter result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public forge_abi.TraceType.RangeFilter buildPartial() {
+        forge_abi.TraceType.RangeFilter result = new forge_abi.TraceType.RangeFilter(this);
+        result.from_ = from_;
+        result.to_ = to_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof forge_abi.TraceType.RangeFilter) {
+          return mergeFrom((forge_abi.TraceType.RangeFilter)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(forge_abi.TraceType.RangeFilter other) {
+        if (other == forge_abi.TraceType.RangeFilter.getDefaultInstance()) return this;
+        if (other.getFrom() != 0L) {
+          setFrom(other.getFrom());
+        }
+        if (other.getTo() != 0L) {
+          setTo(other.getTo());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        forge_abi.TraceType.RangeFilter parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (forge_abi.TraceType.RangeFilter) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private long from_ ;
+      /**
+       * <code>uint64 from = 1;</code>
+       */
+      public long getFrom() {
+        return from_;
+      }
+      /**
+       * <code>uint64 from = 1;</code>
+       */
+      public Builder setFrom(long value) {
+        
+        from_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint64 from = 1;</code>
+       */
+      public Builder clearFrom() {
+        
+        from_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long to_ ;
+      /**
+       * <code>uint64 to = 2;</code>
+       */
+      public long getTo() {
+        return to_;
+      }
+      /**
+       * <code>uint64 to = 2;</code>
+       */
+      public Builder setTo(long value) {
+        
+        to_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint64 to = 2;</code>
+       */
+      public Builder clearTo() {
+        
+        to_ = 0L;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:forge_abi.RangeFilter)
+    }
+
+    // @@protoc_insertion_point(class_scope:forge_abi.RangeFilter)
+    private static final forge_abi.TraceType.RangeFilter DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new forge_abi.TraceType.RangeFilter();
+    }
+
+    public static forge_abi.TraceType.RangeFilter getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<RangeFilter>
+        PARSER = new com.google.protobuf.AbstractParser<RangeFilter>() {
+      public RangeFilter parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new RangeFilter(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<RangeFilter> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RangeFilter> getParserForType() {
+      return PARSER;
+    }
+
+    public forge_abi.TraceType.RangeFilter getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_forge_abi_PageOrder_descriptor;
   private static final 
@@ -21917,46 +17763,6 @@ public final class TraceType {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_forge_abi_IndexedStakeState_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_IndexedConsumeAsset_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_IndexedConsumeAsset_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_IndexedCreateAsset_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_IndexedCreateAsset_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_IndexedExchange_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_IndexedExchange_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_IndexedTransfer_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_IndexedTransfer_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_IndexedUpdateAsset_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_IndexedUpdateAsset_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_HeightFilter_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_HeightFilter_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_NumTxsFilter_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_NumTxsFilter_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_NumInvalidTxsFilter_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_NumInvalidTxsFilter_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_forge_abi_IndexedBlock_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -21996,6 +17802,16 @@ public final class TraceType {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_forge_abi_AbciServerStatus_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_forge_abi_ValidityFilter_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_forge_abi_ValidityFilter_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_forge_abi_RangeFilter_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_forge_abi_RangeFilter_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -22006,75 +17822,63 @@ public final class TraceType {
   static {
     java.lang.String[] descriptorData = {
       "\n\020trace_type.proto\022\tforge_abi\032\ntype.prot" +
-      "o\"(\n\tPageOrder\022\r\n\005field\030\001 \001(\t\022\014\n\004type\030\002 " +
-      "\001(\t\"N\n\tPageInput\022\016\n\006cursor\030\001 \001(\t\022\014\n\004size" +
-      "\030\002 \001(\r\022#\n\005order\030\003 \003(\0132\024.forge_abi.PageOr" +
-      "der\"\033\n\nTypeFilter\022\r\n\005types\030\001 \003(\t\"<\n\nTime" +
-      "Filter\022\027\n\017start_date_time\030\001 \001(\t\022\025\n\rend_d" +
-      "ate_time\030\002 \001(\t\"Z\n\rAddressFilter\022\016\n\006sende" +
-      "r\030\001 \001(\t\022\020\n\010receiver\030\002 \001(\t\022\'\n\tdirection\030\003" +
-      " \001(\0162\024.forge_abi.Direction\"7\n\010PageInfo\022\016" +
-      "\n\006cursor\030\001 \001(\t\022\014\n\004next\030\002 \001(\010\022\r\n\005total\030\003 ",
-      "\001(\r\"\224\003\n\022IndexedTransaction\022\014\n\004hash\030\001 \001(\t" +
-      "\022\016\n\006sender\030\002 \001(\t\022\020\n\010receiver\030\003 \001(\t\022\014\n\004ti" +
-      "me\030\004 \001(\t\022\014\n\004type\030\005 \001(\t\022\"\n\002tx\030\006 \001(\0132\026.for" +
-      "ge_abi.Transaction\0227\n\rconsume_asset\030\007 \001(" +
-      "\0132\036.forge_abi.IndexedConsumeAssetH\000\0225\n\014c" +
-      "reate_asset\030\010 \001(\0132\035.forge_abi.IndexedCre" +
-      "ateAssetH\000\022.\n\010exchange\030\t \001(\0132\032.forge_abi" +
-      ".IndexedExchangeH\000\022.\n\010transfer\030\n \001(\0132\032.f" +
-      "orge_abi.IndexedTransferH\000\0225\n\014update_ass" +
-      "et\030\013 \001(\0132\035.forge_abi.IndexedUpdateAssetH",
-      "\000B\007\n\005value\"\215\003\n\023IndexedAccountState\022\017\n\007ad" +
-      "dress\030\001 \001(\t\022#\n\007balance\030\002 \001(\0132\022.forge_abi" +
-      ".BigUint\022\022\n\nnum_assets\030\003 \001(\004\022\017\n\007num_txs\030" +
-      "\004 \001(\004\022\r\n\005nonce\030\005 \001(\004\022\024\n\014genesis_time\030\006 \001" +
-      "(\t\022\030\n\020renaissance_time\030\007 \001(\t\022\017\n\007moniker\030" +
-      "\010 \001(\t\022\025\n\rmigrated_from\030\t \001(\t\022\023\n\013migrated" +
-      "_to\030\n \001(\t\0221\n\025total_received_stakes\030\013 \001(\013" +
-      "2\022.forge_abi.BigUint\022(\n\014total_stakes\030\014 \001" +
-      "(\0132\022.forge_abi.BigUint\022*\n\016total_unstakes" +
-      "\030\r \001(\0132\022.forge_abi.BigUint\022\026\n\016recent_num",
-      "_txs\030\016 \003(\004\"\206\001\n\021IndexedAssetState\022\017\n\007addr" +
-      "ess\030\001 \001(\t\022\r\n\005owner\030\002 \001(\t\022\024\n\014genesis_time" +
-      "\030\003 \001(\t\022\030\n\020renaissance_time\030\004 \001(\t\022\017\n\007moni" +
-      "ker\030\005 \001(\t\022\020\n\010readonly\030\006 \001(\010\"\272\001\n\021IndexedS" +
-      "takeState\022\017\n\007address\030\001 \001(\t\022#\n\007balance\030\002 " +
-      "\001(\0132\022.forge_abi.BigUint\022\016\n\006sender\030\003 \001(\t\022" +
-      "\020\n\010receiver\030\004 \001(\t\022\024\n\014genesis_time\030\005 \001(\t\022" +
-      "\030\n\020renaissance_time\030\006 \001(\t\022\017\n\007message\030\007 \001" +
-      "(\t\022\014\n\004type\030\010 \001(\r\"$\n\023IndexedConsumeAsset\022" +
-      "\r\n\005asset\030\001 \001(\t\"#\n\022IndexedCreateAsset\022\r\n\005",
-      "asset\030\001 \001(\t\"A\n\017IndexedExchange\022\025\n\rsender" +
-      "_assets\030\001 \003(\t\022\027\n\017receiver_assets\030\002 \003(\t\"!" +
-      "\n\017IndexedTransfer\022\016\n\006assets\030\001 \003(\t\"#\n\022Ind" +
-      "exedUpdateAsset\022\r\n\005asset\030\001 \001(\t\"6\n\014Height" +
-      "Filter\022\023\n\013from_height\030\001 \001(\004\022\021\n\tto_height" +
-      "\030\002 \001(\004\"8\n\014NumTxsFilter\022\023\n\013min_num_txs\030\001 " +
-      "\001(\004\022\023\n\013max_num_txs\030\002 \001(\004\"O\n\023NumInvalidTx" +
-      "sFilter\022\033\n\023min_num_invalid_txs\030\001 \001(\004\022\033\n\023" +
-      "max_num_invalid_txs\030\002 \001(\004\"h\n\014IndexedBloc" +
-      "k\022\016\n\006height\030\001 \001(\004\022\014\n\004time\030\002 \001(\t\022\020\n\010propo",
-      "ser\030\003 \001(\t\022\017\n\007num_txs\030\004 \001(\004\022\027\n\017num_invali" +
-      "d_txs\030\005 \001(\004\"\272\001\n\014HealthStatus\022-\n\tconsensu" +
-      "s\030\001 \001(\0132\032.forge_abi.ConsensusStatus\022)\n\007n" +
-      "etwork\030\002 \001(\0132\030.forge_abi.NetworkStatus\022)" +
-      "\n\007storage\030\003 \001(\0132\030.forge_abi.StorageStatu" +
-      "s\022%\n\005forge\030\004 \001(\0132\026.forge_abi.ForgeStatus" +
-      "\"G\n\017ConsensusStatus\022\016\n\006health\030\001 \001(\010\022\016\n\006s" +
-      "ynced\030\002 \001(\010\022\024\n\014block_height\030\003 \001(\004\"2\n\rNet" +
-      "workStatus\022\016\n\006health\030\001 \001(\010\022\021\n\tnum_peers\030" +
-      "\002 \001(\r\"y\n\rStorageStatus\022\016\n\006health\030\001 \001(\010\022\026",
-      "\n\016indexer_server\030\002 \001(\t\022\020\n\010state_db\030\003 \001(\t" +
-      "\022.\n\ndisk_space\030\004 \001(\0132\032.forge_abi.DiskSpa" +
-      "ceStatus\"5\n\017DiskSpaceStatus\022\023\n\013forge_usa" +
-      "ge\030\001 \001(\t\022\r\n\005total\030\002 \001(\t\"v\n\013ForgeStatus\022\016" +
-      "\n\006health\030\001 \001(\010\022\022\n\nabi_server\030\002 \001(\t\022\021\n\tfo" +
-      "rge_web\030\003 \001(\t\0220\n\013abci_server\030\004 \001(\0132\033.for" +
-      "ge_abi.AbciServerStatus\"=\n\020AbciServerSta" +
-      "tus\022\026\n\016abci_consensus\030\001 \001(\t\022\021\n\tabci_info" +
-      "\030\002 \001(\t*/\n\tDirection\022\n\n\006mutual\020\000\022\013\n\007one_w" +
-      "ay\020\001\022\t\n\005union\020\002b\006proto3"
+      "o\032\nenum.proto\"(\n\tPageOrder\022\r\n\005field\030\001 \001(" +
+      "\t\022\014\n\004type\030\002 \001(\t\"N\n\tPageInput\022\016\n\006cursor\030\001" +
+      " \001(\t\022\014\n\004size\030\002 \001(\r\022#\n\005order\030\003 \003(\0132\024.forg" +
+      "e_abi.PageOrder\"\033\n\nTypeFilter\022\r\n\005types\030\001" +
+      " \003(\t\"<\n\nTimeFilter\022\027\n\017start_date_time\030\001 " +
+      "\001(\t\022\025\n\rend_date_time\030\002 \001(\t\"Z\n\rAddressFil" +
+      "ter\022\016\n\006sender\030\001 \001(\t\022\020\n\010receiver\030\002 \001(\t\022\'\n" +
+      "\tdirection\030\003 \001(\0162\024.forge_abi.Direction\"7" +
+      "\n\010PageInfo\022\016\n\006cursor\030\001 \001(\t\022\014\n\004next\030\002 \001(\010",
+      "\022\r\n\005total\030\003 \001(\r\"\270\001\n\022IndexedTransaction\022\014" +
+      "\n\004hash\030\001 \001(\t\022\016\n\006sender\030\002 \001(\t\022\020\n\010receiver" +
+      "\030\003 \001(\t\022\014\n\004time\030\004 \001(\t\022\014\n\004type\030\005 \001(\t\022\"\n\002tx" +
+      "\030\006 \001(\0132\026.forge_abi.Transaction\022\r\n\005valid\030" +
+      "\024 \001(\010\022#\n\004code\030\025 \001(\0162\025.forge_abi.StatusCo" +
+      "de\"\215\003\n\023IndexedAccountState\022\017\n\007address\030\001 " +
+      "\001(\t\022#\n\007balance\030\002 \001(\0132\022.forge_abi.BigUint" +
+      "\022\022\n\nnum_assets\030\003 \001(\004\022\017\n\007num_txs\030\004 \001(\004\022\r\n" +
+      "\005nonce\030\005 \001(\004\022\024\n\014genesis_time\030\006 \001(\t\022\030\n\020re" +
+      "naissance_time\030\007 \001(\t\022\017\n\007moniker\030\010 \001(\t\022\025\n",
+      "\rmigrated_from\030\t \001(\t\022\023\n\013migrated_to\030\n \001(" +
+      "\t\0221\n\025total_received_stakes\030\013 \001(\0132\022.forge" +
+      "_abi.BigUint\022(\n\014total_stakes\030\014 \001(\0132\022.for" +
+      "ge_abi.BigUint\022*\n\016total_unstakes\030\r \001(\0132\022" +
+      ".forge_abi.BigUint\022\026\n\016recent_num_txs\030\016 \003" +
+      "(\004\"\206\001\n\021IndexedAssetState\022\017\n\007address\030\001 \001(" +
+      "\t\022\r\n\005owner\030\002 \001(\t\022\024\n\014genesis_time\030\003 \001(\t\022\030" +
+      "\n\020renaissance_time\030\004 \001(\t\022\017\n\007moniker\030\005 \001(" +
+      "\t\022\020\n\010readonly\030\006 \001(\010\"\272\001\n\021IndexedStakeStat" +
+      "e\022\017\n\007address\030\001 \001(\t\022#\n\007balance\030\002 \001(\0132\022.fo",
+      "rge_abi.BigUint\022\016\n\006sender\030\003 \001(\t\022\020\n\010recei" +
+      "ver\030\004 \001(\t\022\024\n\014genesis_time\030\005 \001(\t\022\030\n\020renai" +
+      "ssance_time\030\006 \001(\t\022\017\n\007message\030\007 \001(\t\022\014\n\004ty" +
+      "pe\030\010 \001(\r\"h\n\014IndexedBlock\022\016\n\006height\030\001 \001(\004" +
+      "\022\014\n\004time\030\002 \001(\t\022\020\n\010proposer\030\003 \001(\t\022\017\n\007num_" +
+      "txs\030\004 \001(\004\022\027\n\017num_invalid_txs\030\005 \001(\004\"\272\001\n\014H" +
+      "ealthStatus\022-\n\tconsensus\030\001 \001(\0132\032.forge_a" +
+      "bi.ConsensusStatus\022)\n\007network\030\002 \001(\0132\030.fo" +
+      "rge_abi.NetworkStatus\022)\n\007storage\030\003 \001(\0132\030" +
+      ".forge_abi.StorageStatus\022%\n\005forge\030\004 \001(\0132",
+      "\026.forge_abi.ForgeStatus\"G\n\017ConsensusStat" +
+      "us\022\016\n\006health\030\001 \001(\010\022\016\n\006synced\030\002 \001(\010\022\024\n\014bl" +
+      "ock_height\030\003 \001(\004\"2\n\rNetworkStatus\022\016\n\006hea" +
+      "lth\030\001 \001(\010\022\021\n\tnum_peers\030\002 \001(\r\"y\n\rStorageS" +
+      "tatus\022\016\n\006health\030\001 \001(\010\022\026\n\016indexer_server\030" +
+      "\002 \001(\t\022\020\n\010state_db\030\003 \001(\t\022.\n\ndisk_space\030\004 " +
+      "\001(\0132\032.forge_abi.DiskSpaceStatus\"5\n\017DiskS" +
+      "paceStatus\022\023\n\013forge_usage\030\001 \001(\t\022\r\n\005total" +
+      "\030\002 \001(\t\"v\n\013ForgeStatus\022\016\n\006health\030\001 \001(\010\022\022\n" +
+      "\nabi_server\030\002 \001(\t\022\021\n\tforge_web\030\003 \001(\t\0220\n\013",
+      "abci_server\030\004 \001(\0132\033.forge_abi.AbciServer" +
+      "Status\"=\n\020AbciServerStatus\022\026\n\016abci_conse" +
+      "nsus\030\001 \001(\t\022\021\n\tabci_info\030\002 \001(\t\"7\n\016Validit" +
+      "yFilter\022%\n\010validity\030\001 \001(\0162\023.forge_abi.Va" +
+      "lidity\"\'\n\013RangeFilter\022\014\n\004from\030\001 \001(\004\022\n\n\002t" +
+      "o\030\002 \001(\004*/\n\tDirection\022\n\n\006mutual\020\000\022\013\n\007one_" +
+      "way\020\001\022\t\n\005union\020\002*,\n\010Validity\022\010\n\004both\020\000\022\t" +
+      "\n\005valid\020\001\022\013\n\007invalid\020\002b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -22088,6 +17892,7 @@ public final class TraceType {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           forge_abi.Type.getDescriptor(),
+          forge_abi.Enum.getDescriptor(),
         }, assigner);
     internal_static_forge_abi_PageOrder_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -22130,7 +17935,7 @@ public final class TraceType {
     internal_static_forge_abi_IndexedTransaction_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_IndexedTransaction_descriptor,
-        new java.lang.String[] { "Hash", "Sender", "Receiver", "Time", "Type", "Tx", "ConsumeAsset", "CreateAsset", "Exchange", "Transfer", "UpdateAsset", "Value", });
+        new java.lang.String[] { "Hash", "Sender", "Receiver", "Time", "Type", "Tx", "Valid", "Code", });
     internal_static_forge_abi_IndexedAccountState_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_forge_abi_IndexedAccountState_fieldAccessorTable = new
@@ -22149,103 +17954,68 @@ public final class TraceType {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_IndexedStakeState_descriptor,
         new java.lang.String[] { "Address", "Balance", "Sender", "Receiver", "GenesisTime", "RenaissanceTime", "Message", "Type", });
-    internal_static_forge_abi_IndexedConsumeAsset_descriptor =
-      getDescriptor().getMessageTypes().get(10);
-    internal_static_forge_abi_IndexedConsumeAsset_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_IndexedConsumeAsset_descriptor,
-        new java.lang.String[] { "Asset", });
-    internal_static_forge_abi_IndexedCreateAsset_descriptor =
-      getDescriptor().getMessageTypes().get(11);
-    internal_static_forge_abi_IndexedCreateAsset_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_IndexedCreateAsset_descriptor,
-        new java.lang.String[] { "Asset", });
-    internal_static_forge_abi_IndexedExchange_descriptor =
-      getDescriptor().getMessageTypes().get(12);
-    internal_static_forge_abi_IndexedExchange_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_IndexedExchange_descriptor,
-        new java.lang.String[] { "SenderAssets", "ReceiverAssets", });
-    internal_static_forge_abi_IndexedTransfer_descriptor =
-      getDescriptor().getMessageTypes().get(13);
-    internal_static_forge_abi_IndexedTransfer_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_IndexedTransfer_descriptor,
-        new java.lang.String[] { "Assets", });
-    internal_static_forge_abi_IndexedUpdateAsset_descriptor =
-      getDescriptor().getMessageTypes().get(14);
-    internal_static_forge_abi_IndexedUpdateAsset_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_IndexedUpdateAsset_descriptor,
-        new java.lang.String[] { "Asset", });
-    internal_static_forge_abi_HeightFilter_descriptor =
-      getDescriptor().getMessageTypes().get(15);
-    internal_static_forge_abi_HeightFilter_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_HeightFilter_descriptor,
-        new java.lang.String[] { "FromHeight", "ToHeight", });
-    internal_static_forge_abi_NumTxsFilter_descriptor =
-      getDescriptor().getMessageTypes().get(16);
-    internal_static_forge_abi_NumTxsFilter_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_NumTxsFilter_descriptor,
-        new java.lang.String[] { "MinNumTxs", "MaxNumTxs", });
-    internal_static_forge_abi_NumInvalidTxsFilter_descriptor =
-      getDescriptor().getMessageTypes().get(17);
-    internal_static_forge_abi_NumInvalidTxsFilter_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_NumInvalidTxsFilter_descriptor,
-        new java.lang.String[] { "MinNumInvalidTxs", "MaxNumInvalidTxs", });
     internal_static_forge_abi_IndexedBlock_descriptor =
-      getDescriptor().getMessageTypes().get(18);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_forge_abi_IndexedBlock_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_IndexedBlock_descriptor,
         new java.lang.String[] { "Height", "Time", "Proposer", "NumTxs", "NumInvalidTxs", });
     internal_static_forge_abi_HealthStatus_descriptor =
-      getDescriptor().getMessageTypes().get(19);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_forge_abi_HealthStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_HealthStatus_descriptor,
         new java.lang.String[] { "Consensus", "Network", "Storage", "Forge", });
     internal_static_forge_abi_ConsensusStatus_descriptor =
-      getDescriptor().getMessageTypes().get(20);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_forge_abi_ConsensusStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ConsensusStatus_descriptor,
         new java.lang.String[] { "Health", "Synced", "BlockHeight", });
     internal_static_forge_abi_NetworkStatus_descriptor =
-      getDescriptor().getMessageTypes().get(21);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_forge_abi_NetworkStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_NetworkStatus_descriptor,
         new java.lang.String[] { "Health", "NumPeers", });
     internal_static_forge_abi_StorageStatus_descriptor =
-      getDescriptor().getMessageTypes().get(22);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_forge_abi_StorageStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_StorageStatus_descriptor,
         new java.lang.String[] { "Health", "IndexerServer", "StateDb", "DiskSpace", });
     internal_static_forge_abi_DiskSpaceStatus_descriptor =
-      getDescriptor().getMessageTypes().get(23);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_forge_abi_DiskSpaceStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_DiskSpaceStatus_descriptor,
         new java.lang.String[] { "ForgeUsage", "Total", });
     internal_static_forge_abi_ForgeStatus_descriptor =
-      getDescriptor().getMessageTypes().get(24);
+      getDescriptor().getMessageTypes().get(16);
     internal_static_forge_abi_ForgeStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ForgeStatus_descriptor,
         new java.lang.String[] { "Health", "AbiServer", "ForgeWeb", "AbciServer", });
     internal_static_forge_abi_AbciServerStatus_descriptor =
-      getDescriptor().getMessageTypes().get(25);
+      getDescriptor().getMessageTypes().get(17);
     internal_static_forge_abi_AbciServerStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_AbciServerStatus_descriptor,
         new java.lang.String[] { "AbciConsensus", "AbciInfo", });
+    internal_static_forge_abi_ValidityFilter_descriptor =
+      getDescriptor().getMessageTypes().get(18);
+    internal_static_forge_abi_ValidityFilter_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_ValidityFilter_descriptor,
+        new java.lang.String[] { "Validity", });
+    internal_static_forge_abi_RangeFilter_descriptor =
+      getDescriptor().getMessageTypes().get(19);
+    internal_static_forge_abi_RangeFilter_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_RangeFilter_descriptor,
+        new java.lang.String[] { "From", "To", });
     forge_abi.Type.getDescriptor();
+    forge_abi.Enum.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

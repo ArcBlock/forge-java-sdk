@@ -1,11 +1,12 @@
 package io.arcblock.forge.did
 
 import com.google.crypto.tink.subtle.Ed25519Sign
+import forge_abi.*
+import io.arcblock.forge.*
 import io.arcblock.forge.did.HashType.SHA3
 import io.arcblock.forge.did.KeyType.ED25519
 import io.arcblock.forge.did.KeyType.SECP256K1
-import io.arcblock.forge.did.RoleType.ACCOUNT
-import io.arcblock.forge.getPK
+import io.arcblock.forge.did.RoleType.*
 import io.arcblock.forge.hash.ArcSha3Hasher
 import org.bitcoinj.core.Base58
 import org.bitcoinj.crypto.ChildNumber
@@ -14,12 +15,13 @@ import org.web3j.crypto.ECKeyPair
 import java.math.BigInteger
 
 /**
- * Author       :paperhuang
- * Time         :2019/2/14
- * Edited By    :
- * Edited Time  :
+ *  @see <a href="https://github.com/ArcBlock/ABT-DID-Protocol">link</a>
+ *
+ * This util help you to generate all kinds of DID, it like everything's ID card.
+ * it will generate different DID for different Application
+ *
  **/
-object IdGenerator {
+object DIDGenerator {
 
   /**
    * @see <a href="https://github.com/ArcBlock/ABT-DID-Protocol">link</a>
@@ -34,9 +36,18 @@ object IdGenerator {
    */
   fun genAppDid(didKeyPair: DidKeyPair):String {
       // Convert the HD secret key to user_did by using the rules described in DID section.
-    return IdGenerator.sk2did(didKeyPair.privateKey)
+    return DIDGenerator.sk2did(didKeyPair.privateKey)
   }
 
+
+  /**
+   * generate HD key pair for one Application
+   * @param appid Application ID
+   * @param index ID wallet index
+   * @param seed user master seed
+   * @param keyType ED25519 or SECP256K1
+   * @return  HD key pair
+   */
   fun genAppKeyPair(appid: String, index: Int, seed: ByteArray,keyType: KeyType):DidKeyPair{
     // Apply sha3 to the app_did
     val sha3out=  ArcSha3Hasher.sha256(appid.toByteArray(),1)
@@ -67,9 +78,16 @@ object IdGenerator {
   }
 
 
+  /**
+   * generate DID by user secret Key.
+   * and use default Wallet type: ACCOUNT ED25519 SHA3
+   */
+  fun sk2did( sk: ByteArray):String {
+    return DIDGenerator.sk2did(ACCOUNT,ED25519,SHA3,sk)
+  }
 
   /**
-   *
+   * generate DID by user secret Key.
   Step 1: Choose the RoleType, KeyType and Hash from above, let's use application, ed25519 and sha3 in this example.
   Step 2: Choose a secret key randomly, e.g.
   D67C071B6F51D2B61180B9B1AA9BE0DD0704619F0E30453AB4A592B036EDE644E4852B7091317E3622068E62A5127D1FB0D4AE2FC50213295E10652D2F0ABFC7
@@ -92,22 +110,43 @@ object IdGenerator {
   Step 11: Assemble the parts and get the full DID
   did:abt:zNKtCNqYWLYWYW3gWRA1vnRykfCBZYHZvzKr
    */
-  fun sk2did( sk: ByteArray):String {
-    return IdGenerator.sk2did(ACCOUNT,ED25519,SHA3,sk)
-  }
-
   fun sk2did(roleType: RoleType, keyType: KeyType, hashType: HashType, sk: ByteArray):String {
-    val pk = sk2pk(keyType,sk)
+    val pk = WalletKit.sk2pk(keyType,sk)
     return pk2did(roleType,keyType,hashType,pk)
   }
 
+
+  /**
+   * Generate Asset Address for CreateAssetTX
+   * @param senderAddress Assert Creator 's address ,like :z1cserc3KL1cL..
+   * @param itx CreateAssetTx encode with Asset_address is empty
+   * @return Asset address
+   */
+  fun genAssetDid(senderAddress: String, itx: ByteArray): String{
+    val hashType = Util.decodeDidHashType(senderAddress)
+    val keyType  = Util.decodeDidSignType(senderAddress)
+    val itxNoAddress= CreateAsset.CreateAssetTx.newBuilder().mergeFrom(itx).clearAddress().build().toByteArray()
+    return pk2did(ASSET,keyType,hashType,senderAddress.toByteArray()+ArcSha3Hasher.sha(itxNoAddress))
+  }
+
+
+  /**
+   * Generate DID by user publicKey
+   * @param roleType  use enum RoleType, such as ACCOUNT or APPLICATION
+   * @param keyType publicKey type ED25519 or SECP256K1
+   * @param hashType enum HashType, such as SHA3 or KECCAK
+   */
   fun pk2did(roleType: RoleType, keyType: KeyType, hashType: HashType, pk: ByteArray):String {
-    val pkHash = hash(hashType,pk).sliceArray(0..19)
+
+    val pkHash = Hasher.hash(hashType,pk).sliceArray(0..19)
     val appendPk = preAppend(roleType,keyType,hashType)+pkHash
-    val suffix =appendPk+  hash(hashType,appendPk).sliceArray(0..3)
+    val suffix =appendPk+  Hasher.hash(hashType,appendPk).sliceArray(0..3)
     return "did:abt:z".plus( Base58.encode(suffix))
   }
 
+  /**
+   * generate prefix of did
+   */
   fun preAppend(roleType: RoleType, keyType: KeyType, hashType: HashType):ByteArray{
     val append =(roleType.ordinal.shl(10).and(0b1111110000000000)).or(keyType.ordinal.shl(5).and(0b1111100000)).or(hashType.ordinal.and(0b11111))
     var ret =ByteArray(2)
@@ -116,29 +155,5 @@ object IdGenerator {
     return ret
   }
 
-  fun hash(hashType: HashType, pk: ByteArray): ByteArray {
-    return when (hashType) {
-      SHA3 -> {
-        ArcSha3Hasher.sha256(pk,1)
-      }
-      else -> {
-        HashUtils.sha3(pk)
-      }
-    }
-  }
 
-  fun sk2pk(keyType: KeyType, sk: ByteArray): ByteArray {
-
-    return when (keyType) {
-      ED25519 -> {
-        val signer = Ed25519Sign(sk.sliceArray(0..31))
-        val pkField = signer.javaClass.getDeclaredField("publicKey")
-        pkField.isAccessible = true
-        pkField.get(signer) as ByteArray
-      }
-      SECP256K1 -> {
-        ECKeyPair.create(sk).getPK()
-      }
-    }
-  }
 }

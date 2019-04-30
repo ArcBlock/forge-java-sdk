@@ -73,6 +73,10 @@ public final class Enum {
      */
     too_many_txs(11),
     /**
+     * <code>invalid_lock_status = 12;</code>
+     */
+    invalid_lock_status(12),
+    /**
      * <pre>
      * 16 - 2047 various errors
      * </pre>
@@ -165,6 +169,14 @@ public final class Enum {
      */
     consumed_asset(42),
     /**
+     * <code>invalid_deposit_value = 43;</code>
+     */
+    invalid_deposit_value(43),
+    /**
+     * <code>exceed_deposit_cap = 44;</code>
+     */
+    exceed_deposit_cap(44),
+    /**
      * <code>forbidden = 403;</code>
      */
     forbidden(403),
@@ -232,6 +244,10 @@ public final class Enum {
      * <code>too_many_txs = 11;</code>
      */
     public static final int too_many_txs_VALUE = 11;
+    /**
+     * <code>invalid_lock_status = 12;</code>
+     */
+    public static final int invalid_lock_status_VALUE = 12;
     /**
      * <pre>
      * 16 - 2047 various errors
@@ -325,6 +341,14 @@ public final class Enum {
      */
     public static final int consumed_asset_VALUE = 42;
     /**
+     * <code>invalid_deposit_value = 43;</code>
+     */
+    public static final int invalid_deposit_value_VALUE = 43;
+    /**
+     * <code>exceed_deposit_cap = 44;</code>
+     */
+    public static final int exceed_deposit_cap_VALUE = 44;
+    /**
      * <code>forbidden = 403;</code>
      */
     public static final int forbidden_VALUE = 403;
@@ -368,6 +392,7 @@ public final class Enum {
         case 9: return unsupported_tx;
         case 10: return expired_tx;
         case 11: return too_many_txs;
+        case 12: return invalid_lock_status;
         case 16: return invalid_moniker;
         case 17: return invalid_passphrase;
         case 20: return invalid_multisig;
@@ -390,6 +415,8 @@ public final class Enum {
         case 40: return untransferrable_asset;
         case 41: return readonly_asset;
         case 42: return consumed_asset;
+        case 43: return invalid_deposit_value;
+        case 44: return exceed_deposit_cap;
         case 403: return forbidden;
         case 500: return internal;
         case 504: return timeout;
@@ -542,6 +569,10 @@ public final class Enum {
      * <code>stake_state = 132;</code>
      */
     stake_state(132),
+    /**
+     * <code>protocol_state = 133;</code>
+     */
+    protocol_state(133),
     UNRECOGNIZED(-1),
     ;
 
@@ -633,6 +664,10 @@ public final class Enum {
      * <code>stake_state = 132;</code>
      */
     public static final int stake_state_VALUE = 132;
+    /**
+     * <code>protocol_state = 133;</code>
+     */
+    public static final int protocol_state_VALUE = 133;
 
 
     public final int getNumber() {
@@ -672,6 +707,7 @@ public final class Enum {
         case 130: return asset_state;
         case 131: return forge_state;
         case 132: return stake_state;
+        case 133: return protocol_state;
         default: return null;
       }
     }
@@ -1104,6 +1140,18 @@ public final class Enum {
      * <code>role_validator = 8;</code>
      */
     role_validator(8),
+    /**
+     * <code>role_group = 9;</code>
+     */
+    role_group(9),
+    /**
+     * <code>role_tx = 10;</code>
+     */
+    role_tx(10),
+    /**
+     * <code>role_any = 63;</code>
+     */
+    role_any(63),
     UNRECOGNIZED(-1),
     ;
 
@@ -1143,6 +1191,18 @@ public final class Enum {
      * <code>role_validator = 8;</code>
      */
     public static final int role_validator_VALUE = 8;
+    /**
+     * <code>role_group = 9;</code>
+     */
+    public static final int role_group_VALUE = 9;
+    /**
+     * <code>role_tx = 10;</code>
+     */
+    public static final int role_tx_VALUE = 10;
+    /**
+     * <code>role_any = 63;</code>
+     */
+    public static final int role_any_VALUE = 63;
 
 
     public final int getNumber() {
@@ -1172,6 +1232,9 @@ public final class Enum {
         case 6: return role_asset;
         case 7: return role_stake;
         case 8: return role_validator;
+        case 9: return role_group;
+        case 10: return role_tx;
+        case 63: return role_any;
         default: return null;
       }
     }
@@ -1873,6 +1936,113 @@ public final class Enum {
     // @@protoc_insertion_point(enum_scope:forge_abi.StakeType)
   }
 
+  /**
+   * Protobuf enum {@code forge_abi.ProtocolStatus}
+   */
+  public enum ProtocolStatus
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>running = 0;</code>
+     */
+    running(0),
+    /**
+     * <code>paused = 1;</code>
+     */
+    paused(1),
+    /**
+     * <code>terminated = 2;</code>
+     */
+    terminated(2),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <code>running = 0;</code>
+     */
+    public static final int running_VALUE = 0;
+    /**
+     * <code>paused = 1;</code>
+     */
+    public static final int paused_VALUE = 1;
+    /**
+     * <code>terminated = 2;</code>
+     */
+    public static final int terminated_VALUE = 2;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static ProtocolStatus valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static ProtocolStatus forNumber(int value) {
+      switch (value) {
+        case 0: return running;
+        case 1: return paused;
+        case 2: return terminated;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<ProtocolStatus>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        ProtocolStatus> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<ProtocolStatus>() {
+            public ProtocolStatus findValueByNumber(int number) {
+              return ProtocolStatus.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return forge_abi.Enum.getDescriptor().getEnumTypes().get(10);
+    }
+
+    private static final ProtocolStatus[] VALUES = values();
+
+    public static ProtocolStatus valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private ProtocolStatus(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:forge_abi.ProtocolStatus)
+  }
+
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1882,59 +2052,64 @@ public final class Enum {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nenum.proto\022\tforge_abi*\215\006\n\nStatusCode\022\006" +
+      "\n\nenum.proto\022\tforge_abi*\331\006\n\nStatusCode\022\006" +
       "\n\002ok\020\000\022\021\n\rinvalid_nonce\020\001\022\025\n\021invalid_sig" +
       "nature\020\002\022\030\n\024invalid_sender_state\020\003\022\032\n\026in" +
       "valid_receiver_state\020\004\022\025\n\021insufficient_d" +
       "ata\020\005\022\025\n\021insufficient_fund\020\006\022\021\n\rinvalid_" +
       "owner\020\007\022\016\n\ninvalid_tx\020\010\022\022\n\016unsupported_t" +
-      "x\020\t\022\016\n\nexpired_tx\020\n\022\020\n\014too_many_txs\020\013\022\023\n" +
-      "\017invalid_moniker\020\020\022\026\n\022invalid_passphrase" +
-      "\020\021\022\024\n\020invalid_multisig\020\024\022\022\n\016invalid_wall" +
-      "et\020\025\022\024\n\020invalid_chain_id\020\026\022\027\n\023consensus_",
-      "rpc_error\020\030\022\025\n\021storage_rpc_error\020\031\022\t\n\005no" +
-      "ent\020\032\022\024\n\020account_migrated\020\033\022\025\n\021unsupport" +
-      "ed_stake\020\036\022\026\n\022insufficient_stake\020\037\022\027\n\023in" +
-      "valid_stake_state\020 \022\030\n\024expired_wallet_to" +
-      "ken\020!\022\022\n\016banned_unstake\020\"\022\021\n\rinvalid_ass" +
-      "et\020#\022\023\n\017invalid_tx_size\020$\022\030\n\024invalid_sig" +
-      "ner_state\020%\022\027\n\023invalid_forge_state\020&\022\021\n\r" +
-      "expired_asset\020\'\022\031\n\025untransferrable_asset" +
-      "\020(\022\022\n\016readonly_asset\020)\022\022\n\016consumed_asset" +
-      "\020*\022\016\n\tforbidden\020\223\003\022\r\n\010internal\020\364\003\022\014\n\007tim",
-      "eout\020\370\003*\312\002\n\tTopicType\022\014\n\010transfer\020\000\022\014\n\010e" +
-      "xchange\020\001\022\013\n\007declare\020\002\022\020\n\014create_asset\020\003" +
-      "\022\020\n\014update_asset\020\004\022\t\n\005stake\020\005\022\023\n\017account" +
-      "_migrate\020\006\022\017\n\013begin_block\020\020\022\r\n\tend_block" +
-      "\020\021\022\025\n\021consensus_upgrade\020\025\022\020\n\014declare_fil" +
-      "e\020\026\022\017\n\013sys_upgrade\020\027\022\017\n\013application\020\030\022\021\n" +
-      "\rconsume_asset\020\031\022\010\n\004poke\020\032\022\022\n\raccount_st" +
-      "ate\020\201\001\022\020\n\013asset_state\020\202\001\022\020\n\013forge_state\020" +
-      "\203\001\022\020\n\013stake_state\020\204\001*%\n\007KeyType\022\013\n\007ed255" +
-      "19\020\000\022\r\n\tsecp256k1\020\001*f\n\010HashType\022\n\n\006kecca",
-      "k\020\000\022\010\n\004sha3\020\001\022\010\n\004sha2\020\002\022\016\n\nkeccak_384\020\006\022" +
-      "\014\n\010sha3_384\020\007\022\016\n\nkeccak_512\020\r\022\014\n\010sha3_51" +
-      "2\020\016*&\n\014EncodingType\022\n\n\006base16\020\000\022\n\n\006base5" +
-      "8\020\001*\255\001\n\010RoleType\022\020\n\014role_account\020\000\022\r\n\tro" +
-      "le_node\020\001\022\017\n\013role_device\020\002\022\024\n\020role_appli" +
-      "cation\020\003\022\027\n\023role_smart_contract\020\004\022\014\n\010rol" +
-      "e_bot\020\005\022\016\n\nrole_asset\020\006\022\016\n\nrole_stake\020\007\022" +
-      "\022\n\016role_validator\020\010*\256\001\n\013UpgradeType\022\016\n\nc" +
-      "onfig_app\020\000\022\020\n\014config_forge\020\001\022\016\n\nconfig_" +
-      "dfs\020\002\022\024\n\020config_consensus\020\003\022\016\n\nconfig_p2",
-      "p\020\004\022\013\n\007exe_app\020\n\022\r\n\texe_forge\020\013\022\013\n\007exe_d" +
-      "fs\020\014\022\021\n\rexe_consensus\020\r\022\013\n\007exe_p2p\020\016*\352\001\n" +
-      "\rUpgradeAction\022\n\n\006verify\020\000\022\n\n\006backup\020\001\022\013" +
-      "\n\007replace\020\002\022\017\n\013restart_app\020\n\022\017\n\013restart_" +
-      "dfs\020\013\022\025\n\021restart_consensus\020\014\022\017\n\013restart_" +
-      "p2p\020\r\022\021\n\rrestart_forge\020\016\022\024\n\020rollback_if_" +
-      "fail\020\036\022\027\n\023restart_all_if_fail\020\037\022\021\n\rcrash" +
-      "_if_fail\020!\022\025\n\021drop_address_book\0202*d\n\tSta" +
-      "teType\022\021\n\rstate_account\020\000\022\017\n\013state_asset" +
-      "\020\001\022\021\n\rstate_channel\020\002\022\017\n\013state_forge\020\003\022\017",
-      "\n\013state_stake\020\004*M\n\tStakeType\022\016\n\nstake_no" +
-      "de\020\000\022\016\n\nstake_user\020\001\022\017\n\013stake_asset\020\002\022\017\n" +
-      "\013stake_chain\020\003b\006proto3"
+      "x\020\t\022\016\n\nexpired_tx\020\n\022\020\n\014too_many_txs\020\013\022\027\n" +
+      "\023invalid_lock_status\020\014\022\023\n\017invalid_monike" +
+      "r\020\020\022\026\n\022invalid_passphrase\020\021\022\024\n\020invalid_m" +
+      "ultisig\020\024\022\022\n\016invalid_wallet\020\025\022\024\n\020invalid",
+      "_chain_id\020\026\022\027\n\023consensus_rpc_error\020\030\022\025\n\021" +
+      "storage_rpc_error\020\031\022\t\n\005noent\020\032\022\024\n\020accoun" +
+      "t_migrated\020\033\022\025\n\021unsupported_stake\020\036\022\026\n\022i" +
+      "nsufficient_stake\020\037\022\027\n\023invalid_stake_sta" +
+      "te\020 \022\030\n\024expired_wallet_token\020!\022\022\n\016banned" +
+      "_unstake\020\"\022\021\n\rinvalid_asset\020#\022\023\n\017invalid" +
+      "_tx_size\020$\022\030\n\024invalid_signer_state\020%\022\027\n\023" +
+      "invalid_forge_state\020&\022\021\n\rexpired_asset\020\'" +
+      "\022\031\n\025untransferrable_asset\020(\022\022\n\016readonly_" +
+      "asset\020)\022\022\n\016consumed_asset\020*\022\031\n\025invalid_d",
+      "eposit_value\020+\022\026\n\022exceed_deposit_cap\020,\022\016" +
+      "\n\tforbidden\020\223\003\022\r\n\010internal\020\364\003\022\014\n\007timeout" +
+      "\020\370\003*\337\002\n\tTopicType\022\014\n\010transfer\020\000\022\014\n\010excha" +
+      "nge\020\001\022\013\n\007declare\020\002\022\020\n\014create_asset\020\003\022\020\n\014" +
+      "update_asset\020\004\022\t\n\005stake\020\005\022\023\n\017account_mig" +
+      "rate\020\006\022\017\n\013begin_block\020\020\022\r\n\tend_block\020\021\022\025" +
+      "\n\021consensus_upgrade\020\025\022\020\n\014declare_file\020\026\022" +
+      "\017\n\013sys_upgrade\020\027\022\017\n\013application\020\030\022\021\n\rcon" +
+      "sume_asset\020\031\022\010\n\004poke\020\032\022\022\n\raccount_state\020" +
+      "\201\001\022\020\n\013asset_state\020\202\001\022\020\n\013forge_state\020\203\001\022\020",
+      "\n\013stake_state\020\204\001\022\023\n\016protocol_state\020\205\001*%\n" +
+      "\007KeyType\022\013\n\007ed25519\020\000\022\r\n\tsecp256k1\020\001*f\n\010" +
+      "HashType\022\n\n\006keccak\020\000\022\010\n\004sha3\020\001\022\010\n\004sha2\020\002" +
+      "\022\016\n\nkeccak_384\020\006\022\014\n\010sha3_384\020\007\022\016\n\nkeccak" +
+      "_512\020\r\022\014\n\010sha3_512\020\016*&\n\014EncodingType\022\n\n\006" +
+      "base16\020\000\022\n\n\006base58\020\001*\330\001\n\010RoleType\022\020\n\014rol" +
+      "e_account\020\000\022\r\n\trole_node\020\001\022\017\n\013role_devic" +
+      "e\020\002\022\024\n\020role_application\020\003\022\027\n\023role_smart_" +
+      "contract\020\004\022\014\n\010role_bot\020\005\022\016\n\nrole_asset\020\006" +
+      "\022\016\n\nrole_stake\020\007\022\022\n\016role_validator\020\010\022\016\n\n",
+      "role_group\020\t\022\013\n\007role_tx\020\n\022\014\n\010role_any\020?*" +
+      "\256\001\n\013UpgradeType\022\016\n\nconfig_app\020\000\022\020\n\014confi" +
+      "g_forge\020\001\022\016\n\nconfig_dfs\020\002\022\024\n\020config_cons" +
+      "ensus\020\003\022\016\n\nconfig_p2p\020\004\022\013\n\007exe_app\020\n\022\r\n\t" +
+      "exe_forge\020\013\022\013\n\007exe_dfs\020\014\022\021\n\rexe_consensu" +
+      "s\020\r\022\013\n\007exe_p2p\020\016*\352\001\n\rUpgradeAction\022\n\n\006ve" +
+      "rify\020\000\022\n\n\006backup\020\001\022\013\n\007replace\020\002\022\017\n\013resta" +
+      "rt_app\020\n\022\017\n\013restart_dfs\020\013\022\025\n\021restart_con" +
+      "sensus\020\014\022\017\n\013restart_p2p\020\r\022\021\n\rrestart_for" +
+      "ge\020\016\022\024\n\020rollback_if_fail\020\036\022\027\n\023restart_al",
+      "l_if_fail\020\037\022\021\n\rcrash_if_fail\020!\022\025\n\021drop_a" +
+      "ddress_book\0202*d\n\tStateType\022\021\n\rstate_acco" +
+      "unt\020\000\022\017\n\013state_asset\020\001\022\021\n\rstate_channel\020" +
+      "\002\022\017\n\013state_forge\020\003\022\017\n\013state_stake\020\004*M\n\tS" +
+      "takeType\022\016\n\nstake_node\020\000\022\016\n\nstake_user\020\001" +
+      "\022\017\n\013stake_asset\020\002\022\017\n\013stake_chain\020\003*9\n\016Pr" +
+      "otocolStatus\022\013\n\007running\020\000\022\n\n\006paused\020\001\022\016\n" +
+      "\nterminated\020\002b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

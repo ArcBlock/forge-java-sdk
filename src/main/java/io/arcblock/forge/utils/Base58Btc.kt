@@ -3,16 +3,24 @@ package io.arcblock.forge.utils
 import org.bitcoinj.core.Base58
 
 /**
- * Author       :paperhuang
- * Time         :2019/3/5
- * Edited By    :
- * Edited Time  :
+ * Base58 Btc Util
+ *
  **/
 object Base58Btc {
+  /**
+   * decode Any Base58 string
+   * @param data base58 string
+   * @return binary
+   */
   fun decode(data: String):ByteArray{
     return Base58.decode(data.removePrefix("z"))
   }
 
+  /**
+   * encode binary to base58 BTC string, and with prefix 'z'
+   * @param data binary
+   * @return base58 string
+   */
   fun encode(data: ByteArray):String{
     return "z".plus(Base58.encode(data))
   }

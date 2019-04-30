@@ -52,6 +52,30 @@ public final class StateRpcGrpc {
               forge_abi.Rpc.ResponseGetAssetState.getDefaultInstance()))
           .build();
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestGetForgeState,
+      forge_abi.Rpc.ResponseGetForgeState> METHOD_GET_FORGE_STATE =
+      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestGetForgeState, forge_abi.Rpc.ResponseGetForgeState>newBuilder()
+          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName(generateFullMethodName(
+              "forge_abi.StateRpc", "get_forge_state"))
+          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              forge_abi.Rpc.RequestGetForgeState.getDefaultInstance()))
+          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              forge_abi.Rpc.ResponseGetForgeState.getDefaultInstance()))
+          .build();
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestGetProtocolState,
+      forge_abi.Rpc.ResponseGetProtocolState> METHOD_GET_PROTOCOL_STATE =
+      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestGetProtocolState, forge_abi.Rpc.ResponseGetProtocolState>newBuilder()
+          .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+          .setFullMethodName(generateFullMethodName(
+              "forge_abi.StateRpc", "get_protocol_state"))
+          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              forge_abi.Rpc.RequestGetProtocolState.getDefaultInstance()))
+          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              forge_abi.Rpc.ResponseGetProtocolState.getDefaultInstance()))
+          .build();
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestGetStakeState,
       forge_abi.Rpc.ResponseGetStakeState> METHOD_GET_STAKE_STATE =
       io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestGetStakeState, forge_abi.Rpc.ResponseGetStakeState>newBuilder()
@@ -64,16 +88,16 @@ public final class StateRpcGrpc {
               forge_abi.Rpc.ResponseGetStakeState.getDefaultInstance()))
           .build();
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestGetForgeState,
-      forge_abi.Rpc.ResponseGetForgeState> METHOD_GET_FORGE_STATE =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestGetForgeState, forge_abi.Rpc.ResponseGetForgeState>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestGetTetherInfo,
+      forge_abi.Rpc.ResponseGetTetherInfo> METHOD_GET_TETHER_INFO =
+      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestGetTetherInfo, forge_abi.Rpc.ResponseGetTetherInfo>newBuilder()
+          .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
           .setFullMethodName(generateFullMethodName(
-              "forge_abi.StateRpc", "get_forge_state"))
+              "forge_abi.StateRpc", "get_tether_info"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestGetForgeState.getDefaultInstance()))
+              forge_abi.Rpc.RequestGetTetherInfo.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseGetForgeState.getDefaultInstance()))
+              forge_abi.Rpc.ResponseGetTetherInfo.getDefaultInstance()))
           .build();
 
   /**
@@ -122,6 +146,20 @@ public final class StateRpcGrpc {
 
     /**
      */
+    public void getForgeState(forge_abi.Rpc.RequestGetForgeState request,
+        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetForgeState> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_GET_FORGE_STATE, responseObserver);
+    }
+
+    /**
+     */
+    public io.grpc.stub.StreamObserver<forge_abi.Rpc.RequestGetProtocolState> getProtocolState(
+        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetProtocolState> responseObserver) {
+      return asyncUnimplementedStreamingCall(METHOD_GET_PROTOCOL_STATE, responseObserver);
+    }
+
+    /**
+     */
     public io.grpc.stub.StreamObserver<forge_abi.Rpc.RequestGetStakeState> getStakeState(
         io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetStakeState> responseObserver) {
       return asyncUnimplementedStreamingCall(METHOD_GET_STAKE_STATE, responseObserver);
@@ -129,9 +167,9 @@ public final class StateRpcGrpc {
 
     /**
      */
-    public void getForgeState(forge_abi.Rpc.RequestGetForgeState request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetForgeState> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_GET_FORGE_STATE, responseObserver);
+    public io.grpc.stub.StreamObserver<forge_abi.Rpc.RequestGetTetherInfo> getTetherInfo(
+        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetTetherInfo> responseObserver) {
+      return asyncUnimplementedStreamingCall(METHOD_GET_TETHER_INFO, responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
@@ -151,6 +189,20 @@ public final class StateRpcGrpc {
                 forge_abi.Rpc.ResponseGetAssetState>(
                   this, METHODID_GET_ASSET_STATE)))
           .addMethod(
+            METHOD_GET_FORGE_STATE,
+            asyncUnaryCall(
+              new MethodHandlers<
+                forge_abi.Rpc.RequestGetForgeState,
+                forge_abi.Rpc.ResponseGetForgeState>(
+                  this, METHODID_GET_FORGE_STATE)))
+          .addMethod(
+            METHOD_GET_PROTOCOL_STATE,
+            asyncBidiStreamingCall(
+              new MethodHandlers<
+                forge_abi.Rpc.RequestGetProtocolState,
+                forge_abi.Rpc.ResponseGetProtocolState>(
+                  this, METHODID_GET_PROTOCOL_STATE)))
+          .addMethod(
             METHOD_GET_STAKE_STATE,
             asyncBidiStreamingCall(
               new MethodHandlers<
@@ -158,12 +210,12 @@ public final class StateRpcGrpc {
                 forge_abi.Rpc.ResponseGetStakeState>(
                   this, METHODID_GET_STAKE_STATE)))
           .addMethod(
-            METHOD_GET_FORGE_STATE,
-            asyncUnaryCall(
+            METHOD_GET_TETHER_INFO,
+            asyncBidiStreamingCall(
               new MethodHandlers<
-                forge_abi.Rpc.RequestGetForgeState,
-                forge_abi.Rpc.ResponseGetForgeState>(
-                  this, METHODID_GET_FORGE_STATE)))
+                forge_abi.Rpc.RequestGetTetherInfo,
+                forge_abi.Rpc.ResponseGetTetherInfo>(
+                  this, METHODID_GET_TETHER_INFO)))
           .build();
     }
   }
@@ -207,6 +259,22 @@ public final class StateRpcGrpc {
 
     /**
      */
+    public void getForgeState(forge_abi.Rpc.RequestGetForgeState request,
+        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetForgeState> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_GET_FORGE_STATE, getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public io.grpc.stub.StreamObserver<forge_abi.Rpc.RequestGetProtocolState> getProtocolState(
+        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetProtocolState> responseObserver) {
+      return asyncBidiStreamingCall(
+          getChannel().newCall(METHOD_GET_PROTOCOL_STATE, getCallOptions()), responseObserver);
+    }
+
+    /**
+     */
     public io.grpc.stub.StreamObserver<forge_abi.Rpc.RequestGetStakeState> getStakeState(
         io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetStakeState> responseObserver) {
       return asyncBidiStreamingCall(
@@ -215,10 +283,10 @@ public final class StateRpcGrpc {
 
     /**
      */
-    public void getForgeState(forge_abi.Rpc.RequestGetForgeState request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetForgeState> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_GET_FORGE_STATE, getCallOptions()), request, responseObserver);
+    public io.grpc.stub.StreamObserver<forge_abi.Rpc.RequestGetTetherInfo> getTetherInfo(
+        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetTetherInfo> responseObserver) {
+      return asyncBidiStreamingCall(
+          getChannel().newCall(METHOD_GET_TETHER_INFO, getCallOptions()), responseObserver);
     }
   }
 
@@ -278,7 +346,9 @@ public final class StateRpcGrpc {
   private static final int METHODID_GET_FORGE_STATE = 0;
   private static final int METHODID_GET_ACCOUNT_STATE = 1;
   private static final int METHODID_GET_ASSET_STATE = 2;
-  private static final int METHODID_GET_STAKE_STATE = 3;
+  private static final int METHODID_GET_PROTOCOL_STATE = 3;
+  private static final int METHODID_GET_STAKE_STATE = 4;
+  private static final int METHODID_GET_TETHER_INFO = 5;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -317,9 +387,15 @@ public final class StateRpcGrpc {
         case METHODID_GET_ASSET_STATE:
           return (io.grpc.stub.StreamObserver<Req>) serviceImpl.getAssetState(
               (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetAssetState>) responseObserver);
+        case METHODID_GET_PROTOCOL_STATE:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.getProtocolState(
+              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetProtocolState>) responseObserver);
         case METHODID_GET_STAKE_STATE:
           return (io.grpc.stub.StreamObserver<Req>) serviceImpl.getStakeState(
               (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetStakeState>) responseObserver);
+        case METHODID_GET_TETHER_INFO:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.getTetherInfo(
+              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetTetherInfo>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -345,8 +421,10 @@ public final class StateRpcGrpc {
               .setSchemaDescriptor(new StateRpcDescriptorSupplier())
               .addMethod(METHOD_GET_ACCOUNT_STATE)
               .addMethod(METHOD_GET_ASSET_STATE)
-              .addMethod(METHOD_GET_STAKE_STATE)
               .addMethod(METHOD_GET_FORGE_STATE)
+              .addMethod(METHOD_GET_PROTOCOL_STATE)
+              .addMethod(METHOD_GET_STAKE_STATE)
+              .addMethod(METHOD_GET_TETHER_INFO)
               .build();
         }
       }

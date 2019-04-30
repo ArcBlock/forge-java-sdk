@@ -183,66 +183,6 @@ public final class ChainRpcGrpc {
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               forge_abi.Rpc.ResponseGetConfig.getDefaultInstance()))
           .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestGetAssetAddress,
-      forge_abi.Rpc.ResponseGetAssetAddress> METHOD_GET_ASSET_ADDRESS =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestGetAssetAddress, forge_abi.Rpc.ResponseGetAssetAddress>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName(generateFullMethodName(
-              "forge_abi.ChainRpc", "get_asset_address"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestGetAssetAddress.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseGetAssetAddress.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestSignData,
-      forge_abi.Rpc.ResponseSignData> METHOD_SIGN_DATA =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestSignData, forge_abi.Rpc.ResponseSignData>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName(generateFullMethodName(
-              "forge_abi.ChainRpc", "sign_data"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestSignData.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseSignData.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestStartSimulator,
-      forge_abi.Rpc.ResponseStartSimulator> METHOD_START_SIMULATOR =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestStartSimulator, forge_abi.Rpc.ResponseStartSimulator>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName(generateFullMethodName(
-              "forge_abi.ChainRpc", "start_simulator"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestStartSimulator.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseStartSimulator.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestStopSimulator,
-      forge_abi.Rpc.ResponseStopSimulator> METHOD_STOP_SIMULATOR =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestStopSimulator, forge_abi.Rpc.ResponseStopSimulator>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName(generateFullMethodName(
-              "forge_abi.ChainRpc", "stop_simulator"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestStopSimulator.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseStopSimulator.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestGetSimulatorStatus,
-      forge_abi.Rpc.ResponseGetSimulatorStatus> METHOD_GET_SIMULATOR_STATUS =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestGetSimulatorStatus, forge_abi.Rpc.ResponseGetSimulatorStatus>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName(generateFullMethodName(
-              "forge_abi.ChainRpc", "get_simulator_status"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestGetSimulatorStatus.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseGetSimulatorStatus.getDefaultInstance()))
-          .build();
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -368,41 +308,6 @@ public final class ChainRpcGrpc {
       asyncUnimplementedUnaryCall(METHOD_GET_CONFIG, responseObserver);
     }
 
-    /**
-     */
-    public void getAssetAddress(forge_abi.Rpc.RequestGetAssetAddress request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetAssetAddress> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_GET_ASSET_ADDRESS, responseObserver);
-    }
-
-    /**
-     */
-    public void signData(forge_abi.Rpc.RequestSignData request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseSignData> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_SIGN_DATA, responseObserver);
-    }
-
-    /**
-     */
-    public void startSimulator(forge_abi.Rpc.RequestStartSimulator request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseStartSimulator> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_START_SIMULATOR, responseObserver);
-    }
-
-    /**
-     */
-    public void stopSimulator(forge_abi.Rpc.RequestStopSimulator request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseStopSimulator> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_STOP_SIMULATOR, responseObserver);
-    }
-
-    /**
-     */
-    public void getSimulatorStatus(forge_abi.Rpc.RequestGetSimulatorStatus request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetSimulatorStatus> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_GET_SIMULATOR_STATUS, responseObserver);
-    }
-
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -496,41 +401,6 @@ public final class ChainRpcGrpc {
                 forge_abi.Rpc.RequestGetConfig,
                 forge_abi.Rpc.ResponseGetConfig>(
                   this, METHODID_GET_CONFIG)))
-          .addMethod(
-            METHOD_GET_ASSET_ADDRESS,
-            asyncUnaryCall(
-              new MethodHandlers<
-                forge_abi.Rpc.RequestGetAssetAddress,
-                forge_abi.Rpc.ResponseGetAssetAddress>(
-                  this, METHODID_GET_ASSET_ADDRESS)))
-          .addMethod(
-            METHOD_SIGN_DATA,
-            asyncUnaryCall(
-              new MethodHandlers<
-                forge_abi.Rpc.RequestSignData,
-                forge_abi.Rpc.ResponseSignData>(
-                  this, METHODID_SIGN_DATA)))
-          .addMethod(
-            METHOD_START_SIMULATOR,
-            asyncUnaryCall(
-              new MethodHandlers<
-                forge_abi.Rpc.RequestStartSimulator,
-                forge_abi.Rpc.ResponseStartSimulator>(
-                  this, METHODID_START_SIMULATOR)))
-          .addMethod(
-            METHOD_STOP_SIMULATOR,
-            asyncUnaryCall(
-              new MethodHandlers<
-                forge_abi.Rpc.RequestStopSimulator,
-                forge_abi.Rpc.ResponseStopSimulator>(
-                  this, METHODID_STOP_SIMULATOR)))
-          .addMethod(
-            METHOD_GET_SIMULATOR_STATUS,
-            asyncUnaryCall(
-              new MethodHandlers<
-                forge_abi.Rpc.RequestGetSimulatorStatus,
-                forge_abi.Rpc.ResponseGetSimulatorStatus>(
-                  this, METHODID_GET_SIMULATOR_STATUS)))
           .build();
     }
   }
@@ -662,46 +532,6 @@ public final class ChainRpcGrpc {
       asyncUnaryCall(
           getChannel().newCall(METHOD_GET_CONFIG, getCallOptions()), request, responseObserver);
     }
-
-    /**
-     */
-    public void getAssetAddress(forge_abi.Rpc.RequestGetAssetAddress request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetAssetAddress> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_GET_ASSET_ADDRESS, getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void signData(forge_abi.Rpc.RequestSignData request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseSignData> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_SIGN_DATA, getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void startSimulator(forge_abi.Rpc.RequestStartSimulator request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseStartSimulator> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_START_SIMULATOR, getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void stopSimulator(forge_abi.Rpc.RequestStopSimulator request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseStopSimulator> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_STOP_SIMULATOR, getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void getSimulatorStatus(forge_abi.Rpc.RequestGetSimulatorStatus request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetSimulatorStatus> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_GET_SIMULATOR_STATUS, getCallOptions()), request, responseObserver);
-    }
   }
 
   /**
@@ -803,41 +633,6 @@ public final class ChainRpcGrpc {
     public forge_abi.Rpc.ResponseGetConfig getConfig(forge_abi.Rpc.RequestGetConfig request) {
       return blockingUnaryCall(
           getChannel(), METHOD_GET_CONFIG, getCallOptions(), request);
-    }
-
-    /**
-     */
-    public forge_abi.Rpc.ResponseGetAssetAddress getAssetAddress(forge_abi.Rpc.RequestGetAssetAddress request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_GET_ASSET_ADDRESS, getCallOptions(), request);
-    }
-
-    /**
-     */
-    public forge_abi.Rpc.ResponseSignData signData(forge_abi.Rpc.RequestSignData request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_SIGN_DATA, getCallOptions(), request);
-    }
-
-    /**
-     */
-    public forge_abi.Rpc.ResponseStartSimulator startSimulator(forge_abi.Rpc.RequestStartSimulator request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_START_SIMULATOR, getCallOptions(), request);
-    }
-
-    /**
-     */
-    public forge_abi.Rpc.ResponseStopSimulator stopSimulator(forge_abi.Rpc.RequestStopSimulator request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_STOP_SIMULATOR, getCallOptions(), request);
-    }
-
-    /**
-     */
-    public forge_abi.Rpc.ResponseGetSimulatorStatus getSimulatorStatus(forge_abi.Rpc.RequestGetSimulatorStatus request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_GET_SIMULATOR_STATUS, getCallOptions(), request);
     }
   }
 
@@ -952,46 +747,6 @@ public final class ChainRpcGrpc {
       return futureUnaryCall(
           getChannel().newCall(METHOD_GET_CONFIG, getCallOptions()), request);
     }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseGetAssetAddress> getAssetAddress(
-        forge_abi.Rpc.RequestGetAssetAddress request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_GET_ASSET_ADDRESS, getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseSignData> signData(
-        forge_abi.Rpc.RequestSignData request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_SIGN_DATA, getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseStartSimulator> startSimulator(
-        forge_abi.Rpc.RequestStartSimulator request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_START_SIMULATOR, getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseStopSimulator> stopSimulator(
-        forge_abi.Rpc.RequestStopSimulator request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_STOP_SIMULATOR, getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseGetSimulatorStatus> getSimulatorStatus(
-        forge_abi.Rpc.RequestGetSimulatorStatus request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_GET_SIMULATOR_STATUS, getCallOptions()), request);
-    }
   }
 
   private static final int METHODID_CREATE_TX = 0;
@@ -1005,13 +760,8 @@ public final class ChainRpcGrpc {
   private static final int METHODID_GET_NET_INFO = 8;
   private static final int METHODID_GET_VALIDATORS_INFO = 9;
   private static final int METHODID_GET_CONFIG = 10;
-  private static final int METHODID_GET_ASSET_ADDRESS = 11;
-  private static final int METHODID_SIGN_DATA = 12;
-  private static final int METHODID_START_SIMULATOR = 13;
-  private static final int METHODID_STOP_SIMULATOR = 14;
-  private static final int METHODID_GET_SIMULATOR_STATUS = 15;
-  private static final int METHODID_GET_TX = 16;
-  private static final int METHODID_GET_BLOCK = 17;
+  private static final int METHODID_GET_TX = 11;
+  private static final int METHODID_GET_BLOCK = 12;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1074,26 +824,6 @@ public final class ChainRpcGrpc {
           serviceImpl.getConfig((forge_abi.Rpc.RequestGetConfig) request,
               (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetConfig>) responseObserver);
           break;
-        case METHODID_GET_ASSET_ADDRESS:
-          serviceImpl.getAssetAddress((forge_abi.Rpc.RequestGetAssetAddress) request,
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetAssetAddress>) responseObserver);
-          break;
-        case METHODID_SIGN_DATA:
-          serviceImpl.signData((forge_abi.Rpc.RequestSignData) request,
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseSignData>) responseObserver);
-          break;
-        case METHODID_START_SIMULATOR:
-          serviceImpl.startSimulator((forge_abi.Rpc.RequestStartSimulator) request,
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseStartSimulator>) responseObserver);
-          break;
-        case METHODID_STOP_SIMULATOR:
-          serviceImpl.stopSimulator((forge_abi.Rpc.RequestStopSimulator) request,
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseStopSimulator>) responseObserver);
-          break;
-        case METHODID_GET_SIMULATOR_STATUS:
-          serviceImpl.getSimulatorStatus((forge_abi.Rpc.RequestGetSimulatorStatus) request,
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetSimulatorStatus>) responseObserver);
-          break;
         default:
           throw new AssertionError();
       }
@@ -1146,11 +876,6 @@ public final class ChainRpcGrpc {
               .addMethod(METHOD_GET_NET_INFO)
               .addMethod(METHOD_GET_VALIDATORS_INFO)
               .addMethod(METHOD_GET_CONFIG)
-              .addMethod(METHOD_GET_ASSET_ADDRESS)
-              .addMethod(METHOD_SIGN_DATA)
-              .addMethod(METHOD_START_SIMULATOR)
-              .addMethod(METHOD_STOP_SIMULATOR)
-              .addMethod(METHOD_GET_SIMULATOR_STATUS)
               .build();
         }
       }

@@ -18,28 +18,28 @@ import forge_abi.Rpc.RequestCreateTx;
 import forge_abi.Rpc.RequestCreateWallet;
 import forge_abi.Rpc.RequestDeclareNode;
 import forge_abi.Rpc.RequestGetAccountState;
-import forge_abi.Rpc.RequestGetAssetAddress;
 import forge_abi.Rpc.RequestGetAssetState;
-import forge_abi.Rpc.RequestGetAssets;
 import forge_abi.Rpc.RequestGetBlock;
 import forge_abi.Rpc.RequestGetBlocks;
 import forge_abi.Rpc.RequestGetChainInfo;
 import forge_abi.Rpc.RequestGetConfig;
 import forge_abi.Rpc.RequestGetForgeState;
-import forge_abi.Rpc.RequestGetForgeStatistics;
+import forge_abi.Rpc.RequestGetForgeStats;
 import forge_abi.Rpc.RequestGetHealthStatus;
 import forge_abi.Rpc.RequestGetNetInfo;
 import forge_abi.Rpc.RequestGetNodeInfo;
-import forge_abi.Rpc.RequestGetSimulatorStatus;
+import forge_abi.Rpc.RequestGetProtocolState;
 import forge_abi.Rpc.RequestGetStakeState;
-import forge_abi.Rpc.RequestGetStakes;
-import forge_abi.Rpc.RequestGetTopAccounts;
+import forge_abi.Rpc.RequestGetTetherInfo;
 import forge_abi.Rpc.RequestGetTx;
 import forge_abi.Rpc.RequestGetUnconfirmedTxs;
 import forge_abi.Rpc.RequestGetValidatorsInfo;
+import forge_abi.Rpc.RequestListAccount;
 import forge_abi.Rpc.RequestListAssetTransactions;
 import forge_abi.Rpc.RequestListAssets;
 import forge_abi.Rpc.RequestListBlocks;
+import forge_abi.Rpc.RequestListStakes;
+import forge_abi.Rpc.RequestListTopAccounts;
 import forge_abi.Rpc.RequestListTransactions;
 import forge_abi.Rpc.RequestListWallet;
 import forge_abi.Rpc.RequestLoadFile;
@@ -50,9 +50,6 @@ import forge_abi.Rpc.RequestRecoverWallet;
 import forge_abi.Rpc.RequestRemoveWallet;
 import forge_abi.Rpc.RequestSearch;
 import forge_abi.Rpc.RequestSendTx;
-import forge_abi.Rpc.RequestSignData;
-import forge_abi.Rpc.RequestStartSimulator;
-import forge_abi.Rpc.RequestStopSimulator;
 import forge_abi.Rpc.RequestStoreFile;
 import forge_abi.Rpc.RequestSubscribe;
 import forge_abi.Rpc.RequestUnsubscribe;
@@ -60,28 +57,28 @@ import forge_abi.Rpc.ResponseCreateTx;
 import forge_abi.Rpc.ResponseCreateWallet;
 import forge_abi.Rpc.ResponseDeclareNode;
 import forge_abi.Rpc.ResponseGetAccountState;
-import forge_abi.Rpc.ResponseGetAssetAddress;
 import forge_abi.Rpc.ResponseGetAssetState;
-import forge_abi.Rpc.ResponseGetAssets;
 import forge_abi.Rpc.ResponseGetBlock;
 import forge_abi.Rpc.ResponseGetBlocks;
 import forge_abi.Rpc.ResponseGetChainInfo;
 import forge_abi.Rpc.ResponseGetConfig;
 import forge_abi.Rpc.ResponseGetForgeState;
-import forge_abi.Rpc.ResponseGetForgeStatistics;
+import forge_abi.Rpc.ResponseGetForgeStats;
 import forge_abi.Rpc.ResponseGetHealthStatus;
 import forge_abi.Rpc.ResponseGetNetInfo;
 import forge_abi.Rpc.ResponseGetNodeInfo;
-import forge_abi.Rpc.ResponseGetSimulatorStatus;
+import forge_abi.Rpc.ResponseGetProtocolState;
 import forge_abi.Rpc.ResponseGetStakeState;
-import forge_abi.Rpc.ResponseGetStakes;
-import forge_abi.Rpc.ResponseGetTopAccounts;
+import forge_abi.Rpc.ResponseGetTetherInfo;
 import forge_abi.Rpc.ResponseGetTx;
 import forge_abi.Rpc.ResponseGetUnconfirmedTxs;
 import forge_abi.Rpc.ResponseGetValidatorsInfo;
+import forge_abi.Rpc.ResponseListAccount;
 import forge_abi.Rpc.ResponseListAssetTransactions;
 import forge_abi.Rpc.ResponseListAssets;
 import forge_abi.Rpc.ResponseListBlocks;
+import forge_abi.Rpc.ResponseListStakes;
+import forge_abi.Rpc.ResponseListTopAccounts;
 import forge_abi.Rpc.ResponseListTransactions;
 import forge_abi.Rpc.ResponseListWallet;
 import forge_abi.Rpc.ResponseLoadFile;
@@ -92,9 +89,6 @@ import forge_abi.Rpc.ResponseRecoverWallet;
 import forge_abi.Rpc.ResponseRemoveWallet;
 import forge_abi.Rpc.ResponseSearch;
 import forge_abi.Rpc.ResponseSendTx;
-import forge_abi.Rpc.ResponseSignData;
-import forge_abi.Rpc.ResponseStartSimulator;
-import forge_abi.Rpc.ResponseStopSimulator;
 import forge_abi.Rpc.ResponseStoreFile;
 import forge_abi.Rpc.ResponseSubscribe;
 import forge_abi.Rpc.ResponseUnsubscribe;
@@ -102,10 +96,10 @@ import forge_abi.StateRpcGrpc;
 import forge_abi.StateRpcGrpc.StateRpcBlockingStub;
 import forge_abi.StateRpcGrpc.StateRpcFutureStub;
 import forge_abi.StateRpcGrpc.StateRpcStub;
-import forge_abi.StatisticRpcGrpc;
-import forge_abi.StatisticRpcGrpc.StatisticRpcBlockingStub;
-import forge_abi.StatisticRpcGrpc.StatisticRpcFutureStub;
-import forge_abi.StatisticRpcGrpc.StatisticRpcStub;
+import forge_abi.StatsRpcGrpc;
+import forge_abi.StatsRpcGrpc.StatsRpcBlockingStub;
+import forge_abi.StatsRpcGrpc.StatsRpcFutureStub;
+import forge_abi.StatsRpcGrpc.StatsRpcStub;
 import forge_abi.WalletRpcGrpc;
 import forge_abi.WalletRpcGrpc.WalletRpcBlockingStub;
 import forge_abi.WalletRpcGrpc.WalletRpcFutureStub;
@@ -127,6 +121,12 @@ public final class ForgeSDK {
 
   private ChainRpcFutureStub chainRpcFutureStub;
 
+  private StatsRpcBlockingStub statsRpcBlockingStub;
+
+  private StatsRpcStub statsRpcStub;
+
+  private StatsRpcFutureStub statsRpcFutureStub;
+
   private EventRpcBlockingStub eventRpcBlockingStub;
 
   private EventRpcStub eventRpcStub;
@@ -145,12 +145,6 @@ public final class ForgeSDK {
 
   private WalletRpcFutureStub walletRpcFutureStub;
 
-  private StatisticRpcBlockingStub statisticRpcBlockingStub;
-
-  private StatisticRpcStub statisticRpcStub;
-
-  private StatisticRpcFutureStub statisticRpcFutureStub;
-
   private FileRpcBlockingStub fileRpcBlockingStub;
 
   private FileRpcStub fileRpcStub;
@@ -161,11 +155,11 @@ public final class ForgeSDK {
     return chainRpcBlockingStub.createTx(request);
   }
 
-  public ListenableFuture<ResponseCreateTx> asyncCreatetx(RequestCreateTx request) {
+  public ListenableFuture<ResponseCreateTx> asyncCreateTx(RequestCreateTx request) {
     return chainRpcFutureStub.createTx(request);
   }
 
-  public void rxCreatetx(RequestCreateTx request, StreamObserver<ResponseCreateTx> observer) {
+  public void rxCreateTx(RequestCreateTx request, StreamObserver<ResponseCreateTx> observer) {
     chainRpcStub.createTx(request, observer);
   }
 
@@ -185,11 +179,11 @@ public final class ForgeSDK {
     return chainRpcBlockingStub.sendTx(request);
   }
 
-  public ListenableFuture<ResponseSendTx> asyncSendtx(RequestSendTx request) {
+  public ListenableFuture<ResponseSendTx> asyncSendTx(RequestSendTx request) {
     return chainRpcFutureStub.sendTx(request);
   }
 
-  public void rxSendtx(RequestSendTx request, StreamObserver<ResponseSendTx> observer) {
+  public void rxSendTx(RequestSendTx request, StreamObserver<ResponseSendTx> observer) {
     chainRpcStub.sendTx(request, observer);
   }
 
@@ -205,11 +199,11 @@ public final class ForgeSDK {
     return chainRpcBlockingStub.getBlocks(request);
   }
 
-  public ListenableFuture<ResponseGetBlocks> asyncGetblocks(RequestGetBlocks request) {
+  public ListenableFuture<ResponseGetBlocks> asyncGetBlocks(RequestGetBlocks request) {
     return chainRpcFutureStub.getBlocks(request);
   }
 
-  public void rxGetblocks(RequestGetBlocks request, StreamObserver<ResponseGetBlocks> observer) {
+  public void rxGetBlocks(RequestGetBlocks request, StreamObserver<ResponseGetBlocks> observer) {
     chainRpcStub.getBlocks(request, observer);
   }
 
@@ -217,12 +211,12 @@ public final class ForgeSDK {
     return chainRpcBlockingStub.getUnconfirmedTxs(request);
   }
 
-  public ListenableFuture<ResponseGetUnconfirmedTxs> asyncGetunconfirmedtxs(
+  public ListenableFuture<ResponseGetUnconfirmedTxs> asyncGetUnconfirmedTxs(
       RequestGetUnconfirmedTxs request) {
     return chainRpcFutureStub.getUnconfirmedTxs(request);
   }
 
-  public void rxGetunconfirmedtxs(RequestGetUnconfirmedTxs request,
+  public void rxGetUnconfirmedTxs(RequestGetUnconfirmedTxs request,
       StreamObserver<ResponseGetUnconfirmedTxs> observer) {
     chainRpcStub.getUnconfirmedTxs(request, observer);
   }
@@ -231,11 +225,11 @@ public final class ForgeSDK {
     return chainRpcBlockingStub.getChainInfo(request);
   }
 
-  public ListenableFuture<ResponseGetChainInfo> asyncGetchaininfo(RequestGetChainInfo request) {
+  public ListenableFuture<ResponseGetChainInfo> asyncGetChainInfo(RequestGetChainInfo request) {
     return chainRpcFutureStub.getChainInfo(request);
   }
 
-  public void rxGetchaininfo(RequestGetChainInfo request,
+  public void rxGetChainInfo(RequestGetChainInfo request,
       StreamObserver<ResponseGetChainInfo> observer) {
     chainRpcStub.getChainInfo(request, observer);
   }
@@ -244,11 +238,11 @@ public final class ForgeSDK {
     return chainRpcBlockingStub.getNodeInfo(request);
   }
 
-  public ListenableFuture<ResponseGetNodeInfo> asyncGetnodeinfo(RequestGetNodeInfo request) {
+  public ListenableFuture<ResponseGetNodeInfo> asyncGetNodeInfo(RequestGetNodeInfo request) {
     return chainRpcFutureStub.getNodeInfo(request);
   }
 
-  public void rxGetnodeinfo(RequestGetNodeInfo request,
+  public void rxGetNodeInfo(RequestGetNodeInfo request,
       StreamObserver<ResponseGetNodeInfo> observer) {
     chainRpcStub.getNodeInfo(request, observer);
   }
@@ -269,11 +263,11 @@ public final class ForgeSDK {
     return chainRpcBlockingStub.getNetInfo(request);
   }
 
-  public ListenableFuture<ResponseGetNetInfo> asyncGetnetinfo(RequestGetNetInfo request) {
+  public ListenableFuture<ResponseGetNetInfo> asyncGetNetInfo(RequestGetNetInfo request) {
     return chainRpcFutureStub.getNetInfo(request);
   }
 
-  public void rxGetnetinfo(RequestGetNetInfo request, StreamObserver<ResponseGetNetInfo> observer) {
+  public void rxGetNetInfo(RequestGetNetInfo request, StreamObserver<ResponseGetNetInfo> observer) {
     chainRpcStub.getNetInfo(request, observer);
   }
 
@@ -281,12 +275,12 @@ public final class ForgeSDK {
     return chainRpcBlockingStub.getValidatorsInfo(request);
   }
 
-  public ListenableFuture<ResponseGetValidatorsInfo> asyncGetvalidatorsinfo(
+  public ListenableFuture<ResponseGetValidatorsInfo> asyncGetValidatorsInfo(
       RequestGetValidatorsInfo request) {
     return chainRpcFutureStub.getValidatorsInfo(request);
   }
 
-  public void rxGetvalidatorsinfo(RequestGetValidatorsInfo request,
+  public void rxGetValidatorsInfo(RequestGetValidatorsInfo request,
       StreamObserver<ResponseGetValidatorsInfo> observer) {
     chainRpcStub.getValidatorsInfo(request, observer);
   }
@@ -295,79 +289,130 @@ public final class ForgeSDK {
     return chainRpcBlockingStub.getConfig(request);
   }
 
-  public ListenableFuture<ResponseGetConfig> asyncGetconfig(RequestGetConfig request) {
+  public ListenableFuture<ResponseGetConfig> asyncGetConfig(RequestGetConfig request) {
     return chainRpcFutureStub.getConfig(request);
   }
 
-  public void rxGetconfig(RequestGetConfig request, StreamObserver<ResponseGetConfig> observer) {
+  public void rxGetConfig(RequestGetConfig request, StreamObserver<ResponseGetConfig> observer) {
     chainRpcStub.getConfig(request, observer);
   }
 
-  public ResponseGetAssetAddress getAssetAddress(RequestGetAssetAddress request) {
-    return chainRpcBlockingStub.getAssetAddress(request);
+  public ResponseGetForgeStats getForgeStats(RequestGetForgeStats request) {
+    return statsRpcBlockingStub.getForgeStats(request);
   }
 
-  public ListenableFuture<ResponseGetAssetAddress> asyncGetassetaddress(
-      RequestGetAssetAddress request) {
-    return chainRpcFutureStub.getAssetAddress(request);
+  public ListenableFuture<ResponseGetForgeStats> asyncGetForgeStats(RequestGetForgeStats request) {
+    return statsRpcFutureStub.getForgeStats(request);
   }
 
-  public void rxGetassetaddress(RequestGetAssetAddress request,
-      StreamObserver<ResponseGetAssetAddress> observer) {
-    chainRpcStub.getAssetAddress(request, observer);
+  public void rxGetForgeStats(RequestGetForgeStats request,
+      StreamObserver<ResponseGetForgeStats> observer) {
+    statsRpcStub.getForgeStats(request, observer);
   }
 
-  public ResponseSignData signData(RequestSignData request) {
-    return chainRpcBlockingStub.signData(request);
+  public ResponseListTransactions listTransactions(RequestListTransactions request) {
+    return statsRpcBlockingStub.listTransactions(request);
   }
 
-  public ListenableFuture<ResponseSignData> asyncSigndata(RequestSignData request) {
-    return chainRpcFutureStub.signData(request);
+  public ListenableFuture<ResponseListTransactions> asyncListTransactions(
+      RequestListTransactions request) {
+    return statsRpcFutureStub.listTransactions(request);
   }
 
-  public void rxSigndata(RequestSignData request, StreamObserver<ResponseSignData> observer) {
-    chainRpcStub.signData(request, observer);
+  public void rxListTransactions(RequestListTransactions request,
+      StreamObserver<ResponseListTransactions> observer) {
+    statsRpcStub.listTransactions(request, observer);
   }
 
-  public ResponseStartSimulator startSimulator(RequestStartSimulator request) {
-    return chainRpcBlockingStub.startSimulator(request);
+  public ResponseListAssets listAssets(RequestListAssets request) {
+    return statsRpcBlockingStub.listAssets(request);
   }
 
-  public ListenableFuture<ResponseStartSimulator> asyncStartsimulator(
-      RequestStartSimulator request) {
-    return chainRpcFutureStub.startSimulator(request);
+  public ListenableFuture<ResponseListAssets> asyncListAssets(RequestListAssets request) {
+    return statsRpcFutureStub.listAssets(request);
   }
 
-  public void rxStartsimulator(RequestStartSimulator request,
-      StreamObserver<ResponseStartSimulator> observer) {
-    chainRpcStub.startSimulator(request, observer);
+  public void rxListAssets(RequestListAssets request, StreamObserver<ResponseListAssets> observer) {
+    statsRpcStub.listAssets(request, observer);
   }
 
-  public ResponseStopSimulator stopSimulator(RequestStopSimulator request) {
-    return chainRpcBlockingStub.stopSimulator(request);
+  public ResponseListStakes listStakes(RequestListStakes request) {
+    return statsRpcBlockingStub.listStakes(request);
   }
 
-  public ListenableFuture<ResponseStopSimulator> asyncStopsimulator(RequestStopSimulator request) {
-    return chainRpcFutureStub.stopSimulator(request);
+  public ListenableFuture<ResponseListStakes> asyncListStakes(RequestListStakes request) {
+    return statsRpcFutureStub.listStakes(request);
   }
 
-  public void rxStopsimulator(RequestStopSimulator request,
-      StreamObserver<ResponseStopSimulator> observer) {
-    chainRpcStub.stopSimulator(request, observer);
+  public void rxListStakes(RequestListStakes request, StreamObserver<ResponseListStakes> observer) {
+    statsRpcStub.listStakes(request, observer);
   }
 
-  public ResponseGetSimulatorStatus getSimulatorStatus(RequestGetSimulatorStatus request) {
-    return chainRpcBlockingStub.getSimulatorStatus(request);
+  public ResponseListAccount listAccount(RequestListAccount request) {
+    return statsRpcBlockingStub.listAccount(request);
   }
 
-  public ListenableFuture<ResponseGetSimulatorStatus> asyncGetsimulatorstatus(
-      RequestGetSimulatorStatus request) {
-    return chainRpcFutureStub.getSimulatorStatus(request);
+  public ListenableFuture<ResponseListAccount> asyncListAccount(RequestListAccount request) {
+    return statsRpcFutureStub.listAccount(request);
   }
 
-  public void rxGetsimulatorstatus(RequestGetSimulatorStatus request,
-      StreamObserver<ResponseGetSimulatorStatus> observer) {
-    chainRpcStub.getSimulatorStatus(request, observer);
+  public void rxListAccount(RequestListAccount request,
+      StreamObserver<ResponseListAccount> observer) {
+    statsRpcStub.listAccount(request, observer);
+  }
+
+  public ResponseListTopAccounts listTopAccounts(RequestListTopAccounts request) {
+    return statsRpcBlockingStub.listTopAccounts(request);
+  }
+
+  public ListenableFuture<ResponseListTopAccounts> asyncListTopAccounts(
+      RequestListTopAccounts request) {
+    return statsRpcFutureStub.listTopAccounts(request);
+  }
+
+  public void rxListTopAccounts(RequestListTopAccounts request,
+      StreamObserver<ResponseListTopAccounts> observer) {
+    statsRpcStub.listTopAccounts(request, observer);
+  }
+
+  public ResponseListAssetTransactions listAssetTransactions(RequestListAssetTransactions request) {
+    return statsRpcBlockingStub.listAssetTransactions(request);
+  }
+
+  public ListenableFuture<ResponseListAssetTransactions> asyncListAssetTransactions(
+      RequestListAssetTransactions request) {
+    return statsRpcFutureStub.listAssetTransactions(request);
+  }
+
+  public void rxListAssetTransactions(RequestListAssetTransactions request,
+      StreamObserver<ResponseListAssetTransactions> observer) {
+    statsRpcStub.listAssetTransactions(request, observer);
+  }
+
+  public ResponseListBlocks listBlocks(RequestListBlocks request) {
+    return statsRpcBlockingStub.listBlocks(request);
+  }
+
+  public ListenableFuture<ResponseListBlocks> asyncListBlocks(RequestListBlocks request) {
+    return statsRpcFutureStub.listBlocks(request);
+  }
+
+  public void rxListBlocks(RequestListBlocks request, StreamObserver<ResponseListBlocks> observer) {
+    statsRpcStub.listBlocks(request, observer);
+  }
+
+  public ResponseGetHealthStatus getHealthStatus(RequestGetHealthStatus request) {
+    return statsRpcBlockingStub.getHealthStatus(request);
+  }
+
+  public ListenableFuture<ResponseGetHealthStatus> asyncGetHealthStatus(
+      RequestGetHealthStatus request) {
+    return statsRpcFutureStub.getHealthStatus(request);
+  }
+
+  public void rxGetHealthStatus(RequestGetHealthStatus request,
+      StreamObserver<ResponseGetHealthStatus> observer) {
+    statsRpcStub.getHealthStatus(request, observer);
   }
 
   public void subscribe(RequestSubscribe request, StreamObserver<ResponseSubscribe> observer) {
@@ -397,33 +442,43 @@ public final class ForgeSDK {
     return stateRpcStub.getAssetState(observer);
   }
 
+  public ResponseGetForgeState getForgeState(RequestGetForgeState request) {
+    return stateRpcBlockingStub.getForgeState(request);
+  }
+
+  public ListenableFuture<ResponseGetForgeState> asyncGetForgeState(RequestGetForgeState request) {
+    return stateRpcFutureStub.getForgeState(request);
+  }
+
+  public void rxGetForgeState(RequestGetForgeState request,
+      StreamObserver<ResponseGetForgeState> observer) {
+    stateRpcStub.getForgeState(request, observer);
+  }
+
+  public StreamObserver<RequestGetProtocolState> getProtocolState(
+      StreamObserver<ResponseGetProtocolState> observer) {
+    return stateRpcStub.getProtocolState(observer);
+  }
+
   public StreamObserver<RequestGetStakeState> getStakeState(
       StreamObserver<ResponseGetStakeState> observer) {
     return stateRpcStub.getStakeState(observer);
   }
 
-  public ResponseGetForgeState getForgeState(RequestGetForgeState request) {
-    return stateRpcBlockingStub.getForgeState(request);
-  }
-
-  public ListenableFuture<ResponseGetForgeState> asyncGetforgestate(RequestGetForgeState request) {
-    return stateRpcFutureStub.getForgeState(request);
-  }
-
-  public void rxGetforgestate(RequestGetForgeState request,
-      StreamObserver<ResponseGetForgeState> observer) {
-    stateRpcStub.getForgeState(request, observer);
+  public StreamObserver<RequestGetTetherInfo> getTetherInfo(
+      StreamObserver<ResponseGetTetherInfo> observer) {
+    return stateRpcStub.getTetherInfo(observer);
   }
 
   public ResponseCreateWallet createWallet(RequestCreateWallet request) {
     return walletRpcBlockingStub.createWallet(request);
   }
 
-  public ListenableFuture<ResponseCreateWallet> asyncCreatewallet(RequestCreateWallet request) {
+  public ListenableFuture<ResponseCreateWallet> asyncCreateWallet(RequestCreateWallet request) {
     return walletRpcFutureStub.createWallet(request);
   }
 
-  public void rxCreatewallet(RequestCreateWallet request,
+  public void rxCreateWallet(RequestCreateWallet request,
       StreamObserver<ResponseCreateWallet> observer) {
     walletRpcStub.createWallet(request, observer);
   }
@@ -432,11 +487,11 @@ public final class ForgeSDK {
     return walletRpcBlockingStub.loadWallet(request);
   }
 
-  public ListenableFuture<ResponseLoadWallet> asyncLoadwallet(RequestLoadWallet request) {
+  public ListenableFuture<ResponseLoadWallet> asyncLoadWallet(RequestLoadWallet request) {
     return walletRpcFutureStub.loadWallet(request);
   }
 
-  public void rxLoadwallet(RequestLoadWallet request, StreamObserver<ResponseLoadWallet> observer) {
+  public void rxLoadWallet(RequestLoadWallet request, StreamObserver<ResponseLoadWallet> observer) {
     walletRpcStub.loadWallet(request, observer);
   }
 
@@ -444,11 +499,11 @@ public final class ForgeSDK {
     return walletRpcBlockingStub.recoverWallet(request);
   }
 
-  public ListenableFuture<ResponseRecoverWallet> asyncRecoverwallet(RequestRecoverWallet request) {
+  public ListenableFuture<ResponseRecoverWallet> asyncRecoverWallet(RequestRecoverWallet request) {
     return walletRpcFutureStub.recoverWallet(request);
   }
 
-  public void rxRecoverwallet(RequestRecoverWallet request,
+  public void rxRecoverWallet(RequestRecoverWallet request,
       StreamObserver<ResponseRecoverWallet> observer) {
     walletRpcStub.recoverWallet(request, observer);
   }
@@ -461,11 +516,11 @@ public final class ForgeSDK {
     return walletRpcBlockingStub.removeWallet(request);
   }
 
-  public ListenableFuture<ResponseRemoveWallet> asyncRemovewallet(RequestRemoveWallet request) {
+  public ListenableFuture<ResponseRemoveWallet> asyncRemoveWallet(RequestRemoveWallet request) {
     return walletRpcFutureStub.removeWallet(request);
   }
 
-  public void rxRemovewallet(RequestRemoveWallet request,
+  public void rxRemoveWallet(RequestRemoveWallet request,
       StreamObserver<ResponseRemoveWallet> observer) {
     walletRpcStub.removeWallet(request, observer);
   }
@@ -474,131 +529,13 @@ public final class ForgeSDK {
     return walletRpcBlockingStub.declareNode(request);
   }
 
-  public ListenableFuture<ResponseDeclareNode> asyncDeclarenode(RequestDeclareNode request) {
+  public ListenableFuture<ResponseDeclareNode> asyncDeclareNode(RequestDeclareNode request) {
     return walletRpcFutureStub.declareNode(request);
   }
 
-  public void rxDeclarenode(RequestDeclareNode request,
+  public void rxDeclareNode(RequestDeclareNode request,
       StreamObserver<ResponseDeclareNode> observer) {
     walletRpcStub.declareNode(request, observer);
-  }
-
-  public ResponseGetForgeStatistics getForgeStatistics(RequestGetForgeStatistics request) {
-    return statisticRpcBlockingStub.getForgeStatistics(request);
-  }
-
-  public ListenableFuture<ResponseGetForgeStatistics> asyncGetforgestatistics(
-      RequestGetForgeStatistics request) {
-    return statisticRpcFutureStub.getForgeStatistics(request);
-  }
-
-  public void rxGetforgestatistics(RequestGetForgeStatistics request,
-      StreamObserver<ResponseGetForgeStatistics> observer) {
-    statisticRpcStub.getForgeStatistics(request, observer);
-  }
-
-  public ResponseListTransactions listTransactions(RequestListTransactions request) {
-    return statisticRpcBlockingStub.listTransactions(request);
-  }
-
-  public ListenableFuture<ResponseListTransactions> asyncListtransactions(
-      RequestListTransactions request) {
-    return statisticRpcFutureStub.listTransactions(request);
-  }
-
-  public void rxListtransactions(RequestListTransactions request,
-      StreamObserver<ResponseListTransactions> observer) {
-    statisticRpcStub.listTransactions(request, observer);
-  }
-
-  public ResponseGetAssets getAssets(RequestGetAssets request) {
-    return statisticRpcBlockingStub.getAssets(request);
-  }
-
-  public ListenableFuture<ResponseGetAssets> asyncGetassets(RequestGetAssets request) {
-    return statisticRpcFutureStub.getAssets(request);
-  }
-
-  public void rxGetassets(RequestGetAssets request, StreamObserver<ResponseGetAssets> observer) {
-    statisticRpcStub.getAssets(request, observer);
-  }
-
-  public ResponseGetStakes getStakes(RequestGetStakes request) {
-    return statisticRpcBlockingStub.getStakes(request);
-  }
-
-  public ListenableFuture<ResponseGetStakes> asyncGetstakes(RequestGetStakes request) {
-    return statisticRpcFutureStub.getStakes(request);
-  }
-
-  public void rxGetstakes(RequestGetStakes request, StreamObserver<ResponseGetStakes> observer) {
-    statisticRpcStub.getStakes(request, observer);
-  }
-
-  public ResponseGetTopAccounts getTopAccounts(RequestGetTopAccounts request) {
-    return statisticRpcBlockingStub.getTopAccounts(request);
-  }
-
-  public ListenableFuture<ResponseGetTopAccounts> asyncGettopaccounts(
-      RequestGetTopAccounts request) {
-    return statisticRpcFutureStub.getTopAccounts(request);
-  }
-
-  public void rxGettopaccounts(RequestGetTopAccounts request,
-      StreamObserver<ResponseGetTopAccounts> observer) {
-    statisticRpcStub.getTopAccounts(request, observer);
-  }
-
-  public ResponseListAssetTransactions listAssetTransactions(RequestListAssetTransactions request) {
-    return statisticRpcBlockingStub.listAssetTransactions(request);
-  }
-
-  public ListenableFuture<ResponseListAssetTransactions> asyncListassettransactions(
-      RequestListAssetTransactions request) {
-    return statisticRpcFutureStub.listAssetTransactions(request);
-  }
-
-  public void rxListassettransactions(RequestListAssetTransactions request,
-      StreamObserver<ResponseListAssetTransactions> observer) {
-    statisticRpcStub.listAssetTransactions(request, observer);
-  }
-
-  public ResponseListBlocks listBlocks(RequestListBlocks request) {
-    return statisticRpcBlockingStub.listBlocks(request);
-  }
-
-  public ListenableFuture<ResponseListBlocks> asyncListblocks(RequestListBlocks request) {
-    return statisticRpcFutureStub.listBlocks(request);
-  }
-
-  public void rxListblocks(RequestListBlocks request, StreamObserver<ResponseListBlocks> observer) {
-    statisticRpcStub.listBlocks(request, observer);
-  }
-
-  public ResponseListAssets listAssets(RequestListAssets request) {
-    return statisticRpcBlockingStub.listAssets(request);
-  }
-
-  public ListenableFuture<ResponseListAssets> asyncListassets(RequestListAssets request) {
-    return statisticRpcFutureStub.listAssets(request);
-  }
-
-  public void rxListassets(RequestListAssets request, StreamObserver<ResponseListAssets> observer) {
-    statisticRpcStub.listAssets(request, observer);
-  }
-
-  public ResponseGetHealthStatus getHealthStatus(RequestGetHealthStatus request) {
-    return statisticRpcBlockingStub.getHealthStatus(request);
-  }
-
-  public ListenableFuture<ResponseGetHealthStatus> asyncGethealthstatus(
-      RequestGetHealthStatus request) {
-    return statisticRpcFutureStub.getHealthStatus(request);
-  }
-
-  public void rxGethealthstatus(RequestGetHealthStatus request,
-      StreamObserver<ResponseGetHealthStatus> observer) {
-    statisticRpcStub.getHealthStatus(request, observer);
   }
 
   public StreamObserver<RequestStoreFile> storeFile(StreamObserver<ResponseStoreFile> observer) {
@@ -613,11 +550,11 @@ public final class ForgeSDK {
     return fileRpcBlockingStub.pinFile(request);
   }
 
-  public ListenableFuture<ResponsePinFile> asyncPinfile(RequestPinFile request) {
+  public ListenableFuture<ResponsePinFile> asyncPinFile(RequestPinFile request) {
     return fileRpcFutureStub.pinFile(request);
   }
 
-  public void rxPinfile(RequestPinFile request, StreamObserver<ResponsePinFile> observer) {
+  public void rxPinFile(RequestPinFile request, StreamObserver<ResponsePinFile> observer) {
     fileRpcStub.pinFile(request, observer);
   }
 
@@ -625,6 +562,9 @@ public final class ForgeSDK {
     channel =  builder.build();chainRpcBlockingStub = ChainRpcGrpc.newBlockingStub(channel);
     chainRpcStub = ChainRpcGrpc.newStub(channel);
     chainRpcFutureStub = ChainRpcGrpc.newFutureStub(channel);
+    statsRpcBlockingStub = StatsRpcGrpc.newBlockingStub(channel);
+    statsRpcStub = StatsRpcGrpc.newStub(channel);
+    statsRpcFutureStub = StatsRpcGrpc.newFutureStub(channel);
     eventRpcBlockingStub = EventRpcGrpc.newBlockingStub(channel);
     eventRpcStub = EventRpcGrpc.newStub(channel);
     eventRpcFutureStub = EventRpcGrpc.newFutureStub(channel);
@@ -634,9 +574,6 @@ public final class ForgeSDK {
     walletRpcBlockingStub = WalletRpcGrpc.newBlockingStub(channel);
     walletRpcStub = WalletRpcGrpc.newStub(channel);
     walletRpcFutureStub = WalletRpcGrpc.newFutureStub(channel);
-    statisticRpcBlockingStub = StatisticRpcGrpc.newBlockingStub(channel);
-    statisticRpcStub = StatisticRpcGrpc.newStub(channel);
-    statisticRpcFutureStub = StatisticRpcGrpc.newFutureStub(channel);
     fileRpcBlockingStub = FileRpcGrpc.newBlockingStub(channel);
     fileRpcStub = FileRpcGrpc.newStub(channel);
     fileRpcFutureStub = FileRpcGrpc.newFutureStub(channel);

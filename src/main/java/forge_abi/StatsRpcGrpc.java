@@ -20,24 +20,24 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.4.0)",
     comments = "Source: service.proto")
-public final class StatisticRpcGrpc {
+public final class StatsRpcGrpc {
 
-  private StatisticRpcGrpc() {}
+  private StatsRpcGrpc() {}
 
-  public static final String SERVICE_NAME = "forge_abi.StatisticRpc";
+  public static final String SERVICE_NAME = "forge_abi.StatsRpc";
 
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestGetForgeStatistics,
-      forge_abi.Rpc.ResponseGetForgeStatistics> METHOD_GET_FORGE_STATISTICS =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestGetForgeStatistics, forge_abi.Rpc.ResponseGetForgeStatistics>newBuilder()
+  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestGetForgeStats,
+      forge_abi.Rpc.ResponseGetForgeStats> METHOD_GET_FORGE_STATS =
+      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestGetForgeStats, forge_abi.Rpc.ResponseGetForgeStats>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "forge_abi.StatisticRpc", "get_forge_statistics"))
+              "forge_abi.StatsRpc", "get_forge_stats"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestGetForgeStatistics.getDefaultInstance()))
+              forge_abi.Rpc.RequestGetForgeStats.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseGetForgeStatistics.getDefaultInstance()))
+              forge_abi.Rpc.ResponseGetForgeStats.getDefaultInstance()))
           .build();
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestListTransactions,
@@ -45,47 +45,59 @@ public final class StatisticRpcGrpc {
       io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestListTransactions, forge_abi.Rpc.ResponseListTransactions>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "forge_abi.StatisticRpc", "list_transactions"))
+              "forge_abi.StatsRpc", "list_transactions"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               forge_abi.Rpc.RequestListTransactions.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               forge_abi.Rpc.ResponseListTransactions.getDefaultInstance()))
           .build();
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestGetAssets,
-      forge_abi.Rpc.ResponseGetAssets> METHOD_GET_ASSETS =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestGetAssets, forge_abi.Rpc.ResponseGetAssets>newBuilder()
+  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestListAssets,
+      forge_abi.Rpc.ResponseListAssets> METHOD_LIST_ASSETS =
+      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestListAssets, forge_abi.Rpc.ResponseListAssets>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "forge_abi.StatisticRpc", "get_assets"))
+              "forge_abi.StatsRpc", "list_assets"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestGetAssets.getDefaultInstance()))
+              forge_abi.Rpc.RequestListAssets.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseGetAssets.getDefaultInstance()))
+              forge_abi.Rpc.ResponseListAssets.getDefaultInstance()))
           .build();
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestGetStakes,
-      forge_abi.Rpc.ResponseGetStakes> METHOD_GET_STAKES =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestGetStakes, forge_abi.Rpc.ResponseGetStakes>newBuilder()
+  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestListStakes,
+      forge_abi.Rpc.ResponseListStakes> METHOD_LIST_STAKES =
+      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestListStakes, forge_abi.Rpc.ResponseListStakes>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "forge_abi.StatisticRpc", "get_stakes"))
+              "forge_abi.StatsRpc", "list_stakes"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestGetStakes.getDefaultInstance()))
+              forge_abi.Rpc.RequestListStakes.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseGetStakes.getDefaultInstance()))
+              forge_abi.Rpc.ResponseListStakes.getDefaultInstance()))
           .build();
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestGetTopAccounts,
-      forge_abi.Rpc.ResponseGetTopAccounts> METHOD_GET_TOP_ACCOUNTS =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestGetTopAccounts, forge_abi.Rpc.ResponseGetTopAccounts>newBuilder()
+  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestListAccount,
+      forge_abi.Rpc.ResponseListAccount> METHOD_LIST_ACCOUNT =
+      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestListAccount, forge_abi.Rpc.ResponseListAccount>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "forge_abi.StatisticRpc", "get_top_accounts"))
+              "forge_abi.StatsRpc", "list_account"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestGetTopAccounts.getDefaultInstance()))
+              forge_abi.Rpc.RequestListAccount.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseGetTopAccounts.getDefaultInstance()))
+              forge_abi.Rpc.ResponseListAccount.getDefaultInstance()))
+          .build();
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestListTopAccounts,
+      forge_abi.Rpc.ResponseListTopAccounts> METHOD_LIST_TOP_ACCOUNTS =
+      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestListTopAccounts, forge_abi.Rpc.ResponseListTopAccounts>newBuilder()
+          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName(generateFullMethodName(
+              "forge_abi.StatsRpc", "list_top_accounts"))
+          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              forge_abi.Rpc.RequestListTopAccounts.getDefaultInstance()))
+          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              forge_abi.Rpc.ResponseListTopAccounts.getDefaultInstance()))
           .build();
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestListAssetTransactions,
@@ -93,7 +105,7 @@ public final class StatisticRpcGrpc {
       io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestListAssetTransactions, forge_abi.Rpc.ResponseListAssetTransactions>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "forge_abi.StatisticRpc", "list_asset_transactions"))
+              "forge_abi.StatsRpc", "list_asset_transactions"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               forge_abi.Rpc.RequestListAssetTransactions.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -105,23 +117,11 @@ public final class StatisticRpcGrpc {
       io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestListBlocks, forge_abi.Rpc.ResponseListBlocks>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "forge_abi.StatisticRpc", "list_blocks"))
+              "forge_abi.StatsRpc", "list_blocks"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               forge_abi.Rpc.RequestListBlocks.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               forge_abi.Rpc.ResponseListBlocks.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestListAssets,
-      forge_abi.Rpc.ResponseListAssets> METHOD_LIST_ASSETS =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestListAssets, forge_abi.Rpc.ResponseListAssets>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName(generateFullMethodName(
-              "forge_abi.StatisticRpc", "list_assets"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestListAssets.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseListAssets.getDefaultInstance()))
           .build();
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestGetHealthStatus,
@@ -129,7 +129,7 @@ public final class StatisticRpcGrpc {
       io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestGetHealthStatus, forge_abi.Rpc.ResponseGetHealthStatus>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "forge_abi.StatisticRpc", "get_health_status"))
+              "forge_abi.StatsRpc", "get_health_status"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               forge_abi.Rpc.RequestGetHealthStatus.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -139,35 +139,35 @@ public final class StatisticRpcGrpc {
   /**
    * Creates a new async stub that supports all call types for the service
    */
-  public static StatisticRpcStub newStub(io.grpc.Channel channel) {
-    return new StatisticRpcStub(channel);
+  public static StatsRpcStub newStub(io.grpc.Channel channel) {
+    return new StatsRpcStub(channel);
   }
 
   /**
    * Creates a new blocking-style stub that supports unary and streaming output calls on the service
    */
-  public static StatisticRpcBlockingStub newBlockingStub(
+  public static StatsRpcBlockingStub newBlockingStub(
       io.grpc.Channel channel) {
-    return new StatisticRpcBlockingStub(channel);
+    return new StatsRpcBlockingStub(channel);
   }
 
   /**
    * Creates a new ListenableFuture-style stub that supports unary calls on the service
    */
-  public static StatisticRpcFutureStub newFutureStub(
+  public static StatsRpcFutureStub newFutureStub(
       io.grpc.Channel channel) {
-    return new StatisticRpcFutureStub(channel);
+    return new StatsRpcFutureStub(channel);
   }
 
   /**
    */
-  public static abstract class StatisticRpcImplBase implements io.grpc.BindableService {
+  public static abstract class StatsRpcImplBase implements io.grpc.BindableService {
 
     /**
      */
-    public void getForgeStatistics(forge_abi.Rpc.RequestGetForgeStatistics request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetForgeStatistics> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_GET_FORGE_STATISTICS, responseObserver);
+    public void getForgeStats(forge_abi.Rpc.RequestGetForgeStats request,
+        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetForgeStats> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_GET_FORGE_STATS, responseObserver);
     }
 
     /**
@@ -179,23 +179,30 @@ public final class StatisticRpcGrpc {
 
     /**
      */
-    public void getAssets(forge_abi.Rpc.RequestGetAssets request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetAssets> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_GET_ASSETS, responseObserver);
+    public void listAssets(forge_abi.Rpc.RequestListAssets request,
+        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListAssets> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_LIST_ASSETS, responseObserver);
     }
 
     /**
      */
-    public void getStakes(forge_abi.Rpc.RequestGetStakes request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetStakes> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_GET_STAKES, responseObserver);
+    public void listStakes(forge_abi.Rpc.RequestListStakes request,
+        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListStakes> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_LIST_STAKES, responseObserver);
     }
 
     /**
      */
-    public void getTopAccounts(forge_abi.Rpc.RequestGetTopAccounts request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetTopAccounts> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_GET_TOP_ACCOUNTS, responseObserver);
+    public void listAccount(forge_abi.Rpc.RequestListAccount request,
+        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListAccount> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_LIST_ACCOUNT, responseObserver);
+    }
+
+    /**
+     */
+    public void listTopAccounts(forge_abi.Rpc.RequestListTopAccounts request,
+        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListTopAccounts> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_LIST_TOP_ACCOUNTS, responseObserver);
     }
 
     /**
@@ -214,13 +221,6 @@ public final class StatisticRpcGrpc {
 
     /**
      */
-    public void listAssets(forge_abi.Rpc.RequestListAssets request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListAssets> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_LIST_ASSETS, responseObserver);
-    }
-
-    /**
-     */
     public void getHealthStatus(forge_abi.Rpc.RequestGetHealthStatus request,
         io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetHealthStatus> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_GET_HEALTH_STATUS, responseObserver);
@@ -229,12 +229,12 @@ public final class StatisticRpcGrpc {
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            METHOD_GET_FORGE_STATISTICS,
+            METHOD_GET_FORGE_STATS,
             asyncUnaryCall(
               new MethodHandlers<
-                forge_abi.Rpc.RequestGetForgeStatistics,
-                forge_abi.Rpc.ResponseGetForgeStatistics>(
-                  this, METHODID_GET_FORGE_STATISTICS)))
+                forge_abi.Rpc.RequestGetForgeStats,
+                forge_abi.Rpc.ResponseGetForgeStats>(
+                  this, METHODID_GET_FORGE_STATS)))
           .addMethod(
             METHOD_LIST_TRANSACTIONS,
             asyncUnaryCall(
@@ -243,26 +243,33 @@ public final class StatisticRpcGrpc {
                 forge_abi.Rpc.ResponseListTransactions>(
                   this, METHODID_LIST_TRANSACTIONS)))
           .addMethod(
-            METHOD_GET_ASSETS,
+            METHOD_LIST_ASSETS,
             asyncUnaryCall(
               new MethodHandlers<
-                forge_abi.Rpc.RequestGetAssets,
-                forge_abi.Rpc.ResponseGetAssets>(
-                  this, METHODID_GET_ASSETS)))
+                forge_abi.Rpc.RequestListAssets,
+                forge_abi.Rpc.ResponseListAssets>(
+                  this, METHODID_LIST_ASSETS)))
           .addMethod(
-            METHOD_GET_STAKES,
+            METHOD_LIST_STAKES,
             asyncUnaryCall(
               new MethodHandlers<
-                forge_abi.Rpc.RequestGetStakes,
-                forge_abi.Rpc.ResponseGetStakes>(
-                  this, METHODID_GET_STAKES)))
+                forge_abi.Rpc.RequestListStakes,
+                forge_abi.Rpc.ResponseListStakes>(
+                  this, METHODID_LIST_STAKES)))
           .addMethod(
-            METHOD_GET_TOP_ACCOUNTS,
+            METHOD_LIST_ACCOUNT,
             asyncUnaryCall(
               new MethodHandlers<
-                forge_abi.Rpc.RequestGetTopAccounts,
-                forge_abi.Rpc.ResponseGetTopAccounts>(
-                  this, METHODID_GET_TOP_ACCOUNTS)))
+                forge_abi.Rpc.RequestListAccount,
+                forge_abi.Rpc.ResponseListAccount>(
+                  this, METHODID_LIST_ACCOUNT)))
+          .addMethod(
+            METHOD_LIST_TOP_ACCOUNTS,
+            asyncUnaryCall(
+              new MethodHandlers<
+                forge_abi.Rpc.RequestListTopAccounts,
+                forge_abi.Rpc.ResponseListTopAccounts>(
+                  this, METHODID_LIST_TOP_ACCOUNTS)))
           .addMethod(
             METHOD_LIST_ASSET_TRANSACTIONS,
             asyncUnaryCall(
@@ -278,13 +285,6 @@ public final class StatisticRpcGrpc {
                 forge_abi.Rpc.ResponseListBlocks>(
                   this, METHODID_LIST_BLOCKS)))
           .addMethod(
-            METHOD_LIST_ASSETS,
-            asyncUnaryCall(
-              new MethodHandlers<
-                forge_abi.Rpc.RequestListAssets,
-                forge_abi.Rpc.ResponseListAssets>(
-                  this, METHODID_LIST_ASSETS)))
-          .addMethod(
             METHOD_GET_HEALTH_STATUS,
             asyncUnaryCall(
               new MethodHandlers<
@@ -297,28 +297,28 @@ public final class StatisticRpcGrpc {
 
   /**
    */
-  public static final class StatisticRpcStub extends io.grpc.stub.AbstractStub<StatisticRpcStub> {
-    private StatisticRpcStub(io.grpc.Channel channel) {
+  public static final class StatsRpcStub extends io.grpc.stub.AbstractStub<StatsRpcStub> {
+    private StatsRpcStub(io.grpc.Channel channel) {
       super(channel);
     }
 
-    private StatisticRpcStub(io.grpc.Channel channel,
+    private StatsRpcStub(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected StatisticRpcStub build(io.grpc.Channel channel,
+    protected StatsRpcStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
-      return new StatisticRpcStub(channel, callOptions);
+      return new StatsRpcStub(channel, callOptions);
     }
 
     /**
      */
-    public void getForgeStatistics(forge_abi.Rpc.RequestGetForgeStatistics request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetForgeStatistics> responseObserver) {
+    public void getForgeStats(forge_abi.Rpc.RequestGetForgeStats request,
+        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetForgeStats> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(METHOD_GET_FORGE_STATISTICS, getCallOptions()), request, responseObserver);
+          getChannel().newCall(METHOD_GET_FORGE_STATS, getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -331,26 +331,34 @@ public final class StatisticRpcGrpc {
 
     /**
      */
-    public void getAssets(forge_abi.Rpc.RequestGetAssets request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetAssets> responseObserver) {
+    public void listAssets(forge_abi.Rpc.RequestListAssets request,
+        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListAssets> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(METHOD_GET_ASSETS, getCallOptions()), request, responseObserver);
+          getChannel().newCall(METHOD_LIST_ASSETS, getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void getStakes(forge_abi.Rpc.RequestGetStakes request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetStakes> responseObserver) {
+    public void listStakes(forge_abi.Rpc.RequestListStakes request,
+        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListStakes> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(METHOD_GET_STAKES, getCallOptions()), request, responseObserver);
+          getChannel().newCall(METHOD_LIST_STAKES, getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void getTopAccounts(forge_abi.Rpc.RequestGetTopAccounts request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetTopAccounts> responseObserver) {
+    public void listAccount(forge_abi.Rpc.RequestListAccount request,
+        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListAccount> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(METHOD_GET_TOP_ACCOUNTS, getCallOptions()), request, responseObserver);
+          getChannel().newCall(METHOD_LIST_ACCOUNT, getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void listTopAccounts(forge_abi.Rpc.RequestListTopAccounts request,
+        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListTopAccounts> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_LIST_TOP_ACCOUNTS, getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -371,14 +379,6 @@ public final class StatisticRpcGrpc {
 
     /**
      */
-    public void listAssets(forge_abi.Rpc.RequestListAssets request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListAssets> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_LIST_ASSETS, getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
     public void getHealthStatus(forge_abi.Rpc.RequestGetHealthStatus request,
         io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetHealthStatus> responseObserver) {
       asyncUnaryCall(
@@ -388,27 +388,27 @@ public final class StatisticRpcGrpc {
 
   /**
    */
-  public static final class StatisticRpcBlockingStub extends io.grpc.stub.AbstractStub<StatisticRpcBlockingStub> {
-    private StatisticRpcBlockingStub(io.grpc.Channel channel) {
+  public static final class StatsRpcBlockingStub extends io.grpc.stub.AbstractStub<StatsRpcBlockingStub> {
+    private StatsRpcBlockingStub(io.grpc.Channel channel) {
       super(channel);
     }
 
-    private StatisticRpcBlockingStub(io.grpc.Channel channel,
+    private StatsRpcBlockingStub(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected StatisticRpcBlockingStub build(io.grpc.Channel channel,
+    protected StatsRpcBlockingStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
-      return new StatisticRpcBlockingStub(channel, callOptions);
+      return new StatsRpcBlockingStub(channel, callOptions);
     }
 
     /**
      */
-    public forge_abi.Rpc.ResponseGetForgeStatistics getForgeStatistics(forge_abi.Rpc.RequestGetForgeStatistics request) {
+    public forge_abi.Rpc.ResponseGetForgeStats getForgeStats(forge_abi.Rpc.RequestGetForgeStats request) {
       return blockingUnaryCall(
-          getChannel(), METHOD_GET_FORGE_STATISTICS, getCallOptions(), request);
+          getChannel(), METHOD_GET_FORGE_STATS, getCallOptions(), request);
     }
 
     /**
@@ -420,23 +420,30 @@ public final class StatisticRpcGrpc {
 
     /**
      */
-    public forge_abi.Rpc.ResponseGetAssets getAssets(forge_abi.Rpc.RequestGetAssets request) {
+    public forge_abi.Rpc.ResponseListAssets listAssets(forge_abi.Rpc.RequestListAssets request) {
       return blockingUnaryCall(
-          getChannel(), METHOD_GET_ASSETS, getCallOptions(), request);
+          getChannel(), METHOD_LIST_ASSETS, getCallOptions(), request);
     }
 
     /**
      */
-    public forge_abi.Rpc.ResponseGetStakes getStakes(forge_abi.Rpc.RequestGetStakes request) {
+    public forge_abi.Rpc.ResponseListStakes listStakes(forge_abi.Rpc.RequestListStakes request) {
       return blockingUnaryCall(
-          getChannel(), METHOD_GET_STAKES, getCallOptions(), request);
+          getChannel(), METHOD_LIST_STAKES, getCallOptions(), request);
     }
 
     /**
      */
-    public forge_abi.Rpc.ResponseGetTopAccounts getTopAccounts(forge_abi.Rpc.RequestGetTopAccounts request) {
+    public forge_abi.Rpc.ResponseListAccount listAccount(forge_abi.Rpc.RequestListAccount request) {
       return blockingUnaryCall(
-          getChannel(), METHOD_GET_TOP_ACCOUNTS, getCallOptions(), request);
+          getChannel(), METHOD_LIST_ACCOUNT, getCallOptions(), request);
+    }
+
+    /**
+     */
+    public forge_abi.Rpc.ResponseListTopAccounts listTopAccounts(forge_abi.Rpc.RequestListTopAccounts request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_LIST_TOP_ACCOUNTS, getCallOptions(), request);
     }
 
     /**
@@ -455,13 +462,6 @@ public final class StatisticRpcGrpc {
 
     /**
      */
-    public forge_abi.Rpc.ResponseListAssets listAssets(forge_abi.Rpc.RequestListAssets request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_LIST_ASSETS, getCallOptions(), request);
-    }
-
-    /**
-     */
     public forge_abi.Rpc.ResponseGetHealthStatus getHealthStatus(forge_abi.Rpc.RequestGetHealthStatus request) {
       return blockingUnaryCall(
           getChannel(), METHOD_GET_HEALTH_STATUS, getCallOptions(), request);
@@ -470,28 +470,28 @@ public final class StatisticRpcGrpc {
 
   /**
    */
-  public static final class StatisticRpcFutureStub extends io.grpc.stub.AbstractStub<StatisticRpcFutureStub> {
-    private StatisticRpcFutureStub(io.grpc.Channel channel) {
+  public static final class StatsRpcFutureStub extends io.grpc.stub.AbstractStub<StatsRpcFutureStub> {
+    private StatsRpcFutureStub(io.grpc.Channel channel) {
       super(channel);
     }
 
-    private StatisticRpcFutureStub(io.grpc.Channel channel,
+    private StatsRpcFutureStub(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected StatisticRpcFutureStub build(io.grpc.Channel channel,
+    protected StatsRpcFutureStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
-      return new StatisticRpcFutureStub(channel, callOptions);
+      return new StatsRpcFutureStub(channel, callOptions);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseGetForgeStatistics> getForgeStatistics(
-        forge_abi.Rpc.RequestGetForgeStatistics request) {
+    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseGetForgeStats> getForgeStats(
+        forge_abi.Rpc.RequestGetForgeStats request) {
       return futureUnaryCall(
-          getChannel().newCall(METHOD_GET_FORGE_STATISTICS, getCallOptions()), request);
+          getChannel().newCall(METHOD_GET_FORGE_STATS, getCallOptions()), request);
     }
 
     /**
@@ -504,26 +504,34 @@ public final class StatisticRpcGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseGetAssets> getAssets(
-        forge_abi.Rpc.RequestGetAssets request) {
+    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseListAssets> listAssets(
+        forge_abi.Rpc.RequestListAssets request) {
       return futureUnaryCall(
-          getChannel().newCall(METHOD_GET_ASSETS, getCallOptions()), request);
+          getChannel().newCall(METHOD_LIST_ASSETS, getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseGetStakes> getStakes(
-        forge_abi.Rpc.RequestGetStakes request) {
+    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseListStakes> listStakes(
+        forge_abi.Rpc.RequestListStakes request) {
       return futureUnaryCall(
-          getChannel().newCall(METHOD_GET_STAKES, getCallOptions()), request);
+          getChannel().newCall(METHOD_LIST_STAKES, getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseGetTopAccounts> getTopAccounts(
-        forge_abi.Rpc.RequestGetTopAccounts request) {
+    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseListAccount> listAccount(
+        forge_abi.Rpc.RequestListAccount request) {
       return futureUnaryCall(
-          getChannel().newCall(METHOD_GET_TOP_ACCOUNTS, getCallOptions()), request);
+          getChannel().newCall(METHOD_LIST_ACCOUNT, getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseListTopAccounts> listTopAccounts(
+        forge_abi.Rpc.RequestListTopAccounts request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_LIST_TOP_ACCOUNTS, getCallOptions()), request);
     }
 
     /**
@@ -544,14 +552,6 @@ public final class StatisticRpcGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseListAssets> listAssets(
-        forge_abi.Rpc.RequestListAssets request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_LIST_ASSETS, getCallOptions()), request);
-    }
-
-    /**
-     */
     public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseGetHealthStatus> getHealthStatus(
         forge_abi.Rpc.RequestGetHealthStatus request) {
       return futureUnaryCall(
@@ -559,14 +559,14 @@ public final class StatisticRpcGrpc {
     }
   }
 
-  private static final int METHODID_GET_FORGE_STATISTICS = 0;
+  private static final int METHODID_GET_FORGE_STATS = 0;
   private static final int METHODID_LIST_TRANSACTIONS = 1;
-  private static final int METHODID_GET_ASSETS = 2;
-  private static final int METHODID_GET_STAKES = 3;
-  private static final int METHODID_GET_TOP_ACCOUNTS = 4;
-  private static final int METHODID_LIST_ASSET_TRANSACTIONS = 5;
-  private static final int METHODID_LIST_BLOCKS = 6;
-  private static final int METHODID_LIST_ASSETS = 7;
+  private static final int METHODID_LIST_ASSETS = 2;
+  private static final int METHODID_LIST_STAKES = 3;
+  private static final int METHODID_LIST_ACCOUNT = 4;
+  private static final int METHODID_LIST_TOP_ACCOUNTS = 5;
+  private static final int METHODID_LIST_ASSET_TRANSACTIONS = 6;
+  private static final int METHODID_LIST_BLOCKS = 7;
   private static final int METHODID_GET_HEALTH_STATUS = 8;
 
   private static final class MethodHandlers<Req, Resp> implements
@@ -574,10 +574,10 @@ public final class StatisticRpcGrpc {
       io.grpc.stub.ServerCalls.ServerStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.ClientStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.BidiStreamingMethod<Req, Resp> {
-    private final StatisticRpcImplBase serviceImpl;
+    private final StatsRpcImplBase serviceImpl;
     private final int methodId;
 
-    MethodHandlers(StatisticRpcImplBase serviceImpl, int methodId) {
+    MethodHandlers(StatsRpcImplBase serviceImpl, int methodId) {
       this.serviceImpl = serviceImpl;
       this.methodId = methodId;
     }
@@ -586,25 +586,29 @@ public final class StatisticRpcGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_GET_FORGE_STATISTICS:
-          serviceImpl.getForgeStatistics((forge_abi.Rpc.RequestGetForgeStatistics) request,
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetForgeStatistics>) responseObserver);
+        case METHODID_GET_FORGE_STATS:
+          serviceImpl.getForgeStats((forge_abi.Rpc.RequestGetForgeStats) request,
+              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetForgeStats>) responseObserver);
           break;
         case METHODID_LIST_TRANSACTIONS:
           serviceImpl.listTransactions((forge_abi.Rpc.RequestListTransactions) request,
               (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListTransactions>) responseObserver);
           break;
-        case METHODID_GET_ASSETS:
-          serviceImpl.getAssets((forge_abi.Rpc.RequestGetAssets) request,
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetAssets>) responseObserver);
+        case METHODID_LIST_ASSETS:
+          serviceImpl.listAssets((forge_abi.Rpc.RequestListAssets) request,
+              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListAssets>) responseObserver);
           break;
-        case METHODID_GET_STAKES:
-          serviceImpl.getStakes((forge_abi.Rpc.RequestGetStakes) request,
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetStakes>) responseObserver);
+        case METHODID_LIST_STAKES:
+          serviceImpl.listStakes((forge_abi.Rpc.RequestListStakes) request,
+              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListStakes>) responseObserver);
           break;
-        case METHODID_GET_TOP_ACCOUNTS:
-          serviceImpl.getTopAccounts((forge_abi.Rpc.RequestGetTopAccounts) request,
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetTopAccounts>) responseObserver);
+        case METHODID_LIST_ACCOUNT:
+          serviceImpl.listAccount((forge_abi.Rpc.RequestListAccount) request,
+              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListAccount>) responseObserver);
+          break;
+        case METHODID_LIST_TOP_ACCOUNTS:
+          serviceImpl.listTopAccounts((forge_abi.Rpc.RequestListTopAccounts) request,
+              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListTopAccounts>) responseObserver);
           break;
         case METHODID_LIST_ASSET_TRANSACTIONS:
           serviceImpl.listAssetTransactions((forge_abi.Rpc.RequestListAssetTransactions) request,
@@ -613,10 +617,6 @@ public final class StatisticRpcGrpc {
         case METHODID_LIST_BLOCKS:
           serviceImpl.listBlocks((forge_abi.Rpc.RequestListBlocks) request,
               (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListBlocks>) responseObserver);
-          break;
-        case METHODID_LIST_ASSETS:
-          serviceImpl.listAssets((forge_abi.Rpc.RequestListAssets) request,
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListAssets>) responseObserver);
           break;
         case METHODID_GET_HEALTH_STATUS:
           serviceImpl.getHealthStatus((forge_abi.Rpc.RequestGetHealthStatus) request,
@@ -638,7 +638,7 @@ public final class StatisticRpcGrpc {
     }
   }
 
-  private static final class StatisticRpcDescriptorSupplier implements io.grpc.protobuf.ProtoFileDescriptorSupplier {
+  private static final class StatsRpcDescriptorSupplier implements io.grpc.protobuf.ProtoFileDescriptorSupplier {
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
       return forge_abi.Service.getDescriptor();
@@ -650,19 +650,19 @@ public final class StatisticRpcGrpc {
   public static io.grpc.ServiceDescriptor getServiceDescriptor() {
     io.grpc.ServiceDescriptor result = serviceDescriptor;
     if (result == null) {
-      synchronized (StatisticRpcGrpc.class) {
+      synchronized (StatsRpcGrpc.class) {
         result = serviceDescriptor;
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
-              .setSchemaDescriptor(new StatisticRpcDescriptorSupplier())
-              .addMethod(METHOD_GET_FORGE_STATISTICS)
+              .setSchemaDescriptor(new StatsRpcDescriptorSupplier())
+              .addMethod(METHOD_GET_FORGE_STATS)
               .addMethod(METHOD_LIST_TRANSACTIONS)
-              .addMethod(METHOD_GET_ASSETS)
-              .addMethod(METHOD_GET_STAKES)
-              .addMethod(METHOD_GET_TOP_ACCOUNTS)
+              .addMethod(METHOD_LIST_ASSETS)
+              .addMethod(METHOD_LIST_STAKES)
+              .addMethod(METHOD_LIST_ACCOUNT)
+              .addMethod(METHOD_LIST_TOP_ACCOUNTS)
               .addMethod(METHOD_LIST_ASSET_TRANSACTIONS)
               .addMethod(METHOD_LIST_BLOCKS)
-              .addMethod(METHOD_LIST_ASSETS)
               .addMethod(METHOD_GET_HEALTH_STATUS)
               .build();
         }

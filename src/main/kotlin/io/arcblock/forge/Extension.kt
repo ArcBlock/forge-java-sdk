@@ -13,13 +13,20 @@ import org.spongycastle.crypto.ec.CustomNamedCurves
 private val CURVE_PARAMS = CustomNamedCurves.getByName("secp256k1")
 val CURVE = ECDomainParameters(CURVE_PARAMS.curve, CURVE_PARAMS.g, CURVE_PARAMS.n, CURVE_PARAMS.h)
 
-
+/**
+ * binary to hex string
+ */
 fun ByteArray.toHexString() = asUByteArray().joinToString("") { it.toString(16).padStart(2, '0') }
 
+/**
+ * base16 string to binary
+ */
 fun String.deBase16() = BaseEncoding.base16().decode(this)
 
 
-
+/**
+ * ECDSAs signature to DER
+ */
 fun ECDSASignature.encodeToDER(): ByteArray {
   val bos = ByteArrayOutputStream(72)
   val seq = DERSequenceGenerator(bos)
@@ -29,9 +36,11 @@ fun ECDSASignature.encodeToDER(): ByteArray {
   return bos.toByteArray()
 }
 
-//compress 66 uncompressed 130
+/**
+ * compress 66 uncompressed 130
+ * append 04 in ECKey public key.
+ */
 fun ECKeyPair.getPK(): ByteArray {
-//  return publicKey.toByteArray()
   var ret = publicKey.toByteArray()
   if (ret[0].toInt() == 0)
     ret = ret.sliceArray(1 until ret.size)

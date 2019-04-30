@@ -14,10 +14,7 @@ import org.bitcoinj.wallet.DeterministicSeed;
 import org.web3j.crypto.ECKeyPair;
 
 /**
- * Author       :paperhuang
- * Time         :2019/1/3
- * Edited By    :
- * Edited Time  :
+ *  Utils to generate BIP44 Wallet
  **/
 public class Bip44Utils {
 

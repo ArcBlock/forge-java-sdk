@@ -1,11 +1,15 @@
 package io.arcblock.forge.did
 
+import io.arcblock.forge.*
 import io.arcblock.forge.did.KeyType.ED25519
 import io.arcblock.forge.did.KeyType.SECP256K1
-import org.web3j.crypto.ECKeyPair
+import org.web3j.crypto.*
 
 /**
- * Author       :paperhuang
+ * Generate KeyPair for Forge
+ * There are two types:  ED25519 and SECP256K1
+ * You have to provide master Seed
+ * Author       :paperHuang
  * Time         :2019/2/19
  * Edited By    :
  * Edited Time  :
@@ -19,7 +23,7 @@ class DidKeyPair( keyType: KeyType,seed:ByteArray) {
     when(keyType){
       ED25519 ->{
 
-        publicKey = IdGenerator.sk2pk(keyType,seed)
+        publicKey = WalletKit.sk2pk(keyType,seed)
         privateKey = seed+publicKey
       }
       SECP256K1 -> {

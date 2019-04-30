@@ -42,7 +42,7 @@ message ChainInfo {
   uint64 voting_power = 11; // the voting power of the node, in integer.
   uint64 total_txs = 12;    // total number of txs up to the latest block
   string version = 13;      // current forge version
-  string data_version = 14; // current data version
+  //  string data_version = 14;  current data version deprecated
   map<string, string> forge_apps_version = 15;
   repeated string supported_txs = 16;
 }
@@ -61,7 +61,7 @@ message NodeInfo {
   uint64 voting_power = 11; // the voting power of the node, in integer.
   uint64 total_txs = 12;    // total number of txs up to the latest block
   string version = 13;      // current forge version
-  string data_version = 14; // current data version
+  // string data_version = 14;  current data version deprecated
   map<string, string> forge_apps_version = 15;
   repeated string supported_txs = 16;
   string ip = 17;          // self node ip
@@ -152,10 +152,6 @@ message TransactionInfo {
   repeated abci_vendor.KVPair tags = 5;
   StatusCode code = 6;
   google.protobuf.Timestamp time = 7;
-  oneof extra_meta {
-    ExtraCreateAsset create_asset = 8;
-    ExtraAccountMigrate account_migrate = 9;
-  }
 }
 
 message TransactionConfig {
@@ -185,6 +181,26 @@ message BlockInfo {
   bytes validators_hash = 17;
   abci_vendor.Version version = 18;
   abci_vendor.BlockID last_block_id = 19;
+}
+
+message BlockInfoSimple {
+  uint64 height = 1;
+  uint32 num_txs = 2;
+  google.protobuf.Timestamp time = 3;
+  bytes app_hash = 4;
+  bytes proposer = 5;
+  uint64 total_txs = 6;
+  repeated string txs_hashes = 7;
+  repeated string invalid_txs_hashes = 8;
+  bytes consensus_hash = 9;
+  bytes data_hash = 10;
+  bytes evidence_hash = 11;
+  bytes last_commit_hash = 12;
+  bytes last_results_hash = 13;
+  bytes next_validators_hash = 14;
+  bytes validators_hash = 15;
+  abci_vendor.Version version = 16;
+  abci_vendor.BlockID last_block_id = 17;
 }
 
 message TxStatus {
@@ -290,7 +306,7 @@ message GenesisInfo {
   string app_hash = 5;
 }
 
-message ForgeStatistics {
+message ForgeStats {
   repeated uint64 num_blocks = 1;
   repeated uint64 num_txs = 2;
   repeated BigUint num_stakes = 3;
@@ -308,8 +324,9 @@ message ForgeStatistics {
   repeated uint64 num_consume_asset_txs = 15;
   repeated uint64 num_poke_txs = 16;
   repeated uint32 tps = 17;
-  uint32 max_tps = 18;
-  uint32 avg_tps = 19;
+  uint32 max_tps = 18;       // maximum tps in given time range
+  uint32 avg_tps = 19;       // average tps in given time range
+  float avg_block_time = 20; // average blocks in given time range
 }
 
 message TxStatistics {
@@ -352,6 +369,7 @@ message PokeConfig {
   uint64 amount = 4;
 }
 
-message ExtraCreateAsset { string asset = 1; }
-
-message ExtraAccountMigrate { string address = 1; }
+message UpgradeInfo {
+  uint64 height = 1;
+  string version = 2;
+}

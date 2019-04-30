@@ -7400,17 +7400,20 @@ public final class Rpc {
     forge_abi.TraceType.PageInputOrBuilder getPagingOrBuilder();
 
     /**
-     * <code>uint64 min_height = 2;</code>
+     * <code>.forge_abi.RangeFilter height_filter = 2;</code>
      */
-    long getMinHeight();
+    boolean hasHeightFilter();
+    /**
+     * <code>.forge_abi.RangeFilter height_filter = 2;</code>
+     */
+    forge_abi.TraceType.RangeFilter getHeightFilter();
+    /**
+     * <code>.forge_abi.RangeFilter height_filter = 2;</code>
+     */
+    forge_abi.TraceType.RangeFilterOrBuilder getHeightFilterOrBuilder();
 
     /**
-     * <code>uint64 max_height = 3;</code>
-     */
-    long getMaxHeight();
-
-    /**
-     * <code>bool empty_excluded = 4;</code>
+     * <code>bool empty_excluded = 3;</code>
      */
     boolean getEmptyExcluded();
   }
@@ -7426,8 +7429,6 @@ public final class Rpc {
       super(builder);
     }
     private RequestGetBlocks() {
-      minHeight_ = 0L;
-      maxHeight_ = 0L;
       emptyExcluded_ = false;
     }
 
@@ -7469,17 +7470,20 @@ public final class Rpc {
 
               break;
             }
-            case 16: {
+            case 18: {
+              forge_abi.TraceType.RangeFilter.Builder subBuilder = null;
+              if (heightFilter_ != null) {
+                subBuilder = heightFilter_.toBuilder();
+              }
+              heightFilter_ = input.readMessage(forge_abi.TraceType.RangeFilter.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(heightFilter_);
+                heightFilter_ = subBuilder.buildPartial();
+              }
 
-              minHeight_ = input.readUInt64();
               break;
             }
             case 24: {
-
-              maxHeight_ = input.readUInt64();
-              break;
-            }
-            case 32: {
 
               emptyExcluded_ = input.readBool();
               break;
@@ -7528,28 +7532,31 @@ public final class Rpc {
       return getPaging();
     }
 
-    public static final int MIN_HEIGHT_FIELD_NUMBER = 2;
-    private long minHeight_;
+    public static final int HEIGHT_FILTER_FIELD_NUMBER = 2;
+    private forge_abi.TraceType.RangeFilter heightFilter_;
     /**
-     * <code>uint64 min_height = 2;</code>
+     * <code>.forge_abi.RangeFilter height_filter = 2;</code>
      */
-    public long getMinHeight() {
-      return minHeight_;
+    public boolean hasHeightFilter() {
+      return heightFilter_ != null;
+    }
+    /**
+     * <code>.forge_abi.RangeFilter height_filter = 2;</code>
+     */
+    public forge_abi.TraceType.RangeFilter getHeightFilter() {
+      return heightFilter_ == null ? forge_abi.TraceType.RangeFilter.getDefaultInstance() : heightFilter_;
+    }
+    /**
+     * <code>.forge_abi.RangeFilter height_filter = 2;</code>
+     */
+    public forge_abi.TraceType.RangeFilterOrBuilder getHeightFilterOrBuilder() {
+      return getHeightFilter();
     }
 
-    public static final int MAX_HEIGHT_FIELD_NUMBER = 3;
-    private long maxHeight_;
-    /**
-     * <code>uint64 max_height = 3;</code>
-     */
-    public long getMaxHeight() {
-      return maxHeight_;
-    }
-
-    public static final int EMPTY_EXCLUDED_FIELD_NUMBER = 4;
+    public static final int EMPTY_EXCLUDED_FIELD_NUMBER = 3;
     private boolean emptyExcluded_;
     /**
-     * <code>bool empty_excluded = 4;</code>
+     * <code>bool empty_excluded = 3;</code>
      */
     public boolean getEmptyExcluded() {
       return emptyExcluded_;
@@ -7570,14 +7577,11 @@ public final class Rpc {
       if (paging_ != null) {
         output.writeMessage(1, getPaging());
       }
-      if (minHeight_ != 0L) {
-        output.writeUInt64(2, minHeight_);
-      }
-      if (maxHeight_ != 0L) {
-        output.writeUInt64(3, maxHeight_);
+      if (heightFilter_ != null) {
+        output.writeMessage(2, getHeightFilter());
       }
       if (emptyExcluded_ != false) {
-        output.writeBool(4, emptyExcluded_);
+        output.writeBool(3, emptyExcluded_);
       }
     }
 
@@ -7590,17 +7594,13 @@ public final class Rpc {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getPaging());
       }
-      if (minHeight_ != 0L) {
+      if (heightFilter_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(2, minHeight_);
-      }
-      if (maxHeight_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(3, maxHeight_);
+          .computeMessageSize(2, getHeightFilter());
       }
       if (emptyExcluded_ != false) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(4, emptyExcluded_);
+          .computeBoolSize(3, emptyExcluded_);
       }
       memoizedSize = size;
       return size;
@@ -7623,10 +7623,11 @@ public final class Rpc {
         result = result && getPaging()
             .equals(other.getPaging());
       }
-      result = result && (getMinHeight()
-          == other.getMinHeight());
-      result = result && (getMaxHeight()
-          == other.getMaxHeight());
+      result = result && (hasHeightFilter() == other.hasHeightFilter());
+      if (hasHeightFilter()) {
+        result = result && getHeightFilter()
+            .equals(other.getHeightFilter());
+      }
       result = result && (getEmptyExcluded()
           == other.getEmptyExcluded());
       return result;
@@ -7643,12 +7644,10 @@ public final class Rpc {
         hash = (37 * hash) + PAGING_FIELD_NUMBER;
         hash = (53 * hash) + getPaging().hashCode();
       }
-      hash = (37 * hash) + MIN_HEIGHT_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getMinHeight());
-      hash = (37 * hash) + MAX_HEIGHT_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getMaxHeight());
+      if (hasHeightFilter()) {
+        hash = (37 * hash) + HEIGHT_FILTER_FIELD_NUMBER;
+        hash = (53 * hash) + getHeightFilter().hashCode();
+      }
       hash = (37 * hash) + EMPTY_EXCLUDED_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getEmptyExcluded());
@@ -7776,10 +7775,12 @@ public final class Rpc {
           paging_ = null;
           pagingBuilder_ = null;
         }
-        minHeight_ = 0L;
-
-        maxHeight_ = 0L;
-
+        if (heightFilterBuilder_ == null) {
+          heightFilter_ = null;
+        } else {
+          heightFilter_ = null;
+          heightFilterBuilder_ = null;
+        }
         emptyExcluded_ = false;
 
         return this;
@@ -7809,8 +7810,11 @@ public final class Rpc {
         } else {
           result.paging_ = pagingBuilder_.build();
         }
-        result.minHeight_ = minHeight_;
-        result.maxHeight_ = maxHeight_;
+        if (heightFilterBuilder_ == null) {
+          result.heightFilter_ = heightFilter_;
+        } else {
+          result.heightFilter_ = heightFilterBuilder_.build();
+        }
         result.emptyExcluded_ = emptyExcluded_;
         onBuilt();
         return result;
@@ -7856,11 +7860,8 @@ public final class Rpc {
         if (other.hasPaging()) {
           mergePaging(other.getPaging());
         }
-        if (other.getMinHeight() != 0L) {
-          setMinHeight(other.getMinHeight());
-        }
-        if (other.getMaxHeight() != 0L) {
-          setMaxHeight(other.getMaxHeight());
+        if (other.hasHeightFilter()) {
+          mergeHeightFilter(other.getHeightFilter());
         }
         if (other.getEmptyExcluded() != false) {
           setEmptyExcluded(other.getEmptyExcluded());
@@ -8008,67 +8009,132 @@ public final class Rpc {
         return pagingBuilder_;
       }
 
-      private long minHeight_ ;
+      private forge_abi.TraceType.RangeFilter heightFilter_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.TraceType.RangeFilter, forge_abi.TraceType.RangeFilter.Builder, forge_abi.TraceType.RangeFilterOrBuilder> heightFilterBuilder_;
       /**
-       * <code>uint64 min_height = 2;</code>
+       * <code>.forge_abi.RangeFilter height_filter = 2;</code>
        */
-      public long getMinHeight() {
-        return minHeight_;
+      public boolean hasHeightFilter() {
+        return heightFilterBuilder_ != null || heightFilter_ != null;
       }
       /**
-       * <code>uint64 min_height = 2;</code>
+       * <code>.forge_abi.RangeFilter height_filter = 2;</code>
        */
-      public Builder setMinHeight(long value) {
-        
-        minHeight_ = value;
-        onChanged();
-        return this;
+      public forge_abi.TraceType.RangeFilter getHeightFilter() {
+        if (heightFilterBuilder_ == null) {
+          return heightFilter_ == null ? forge_abi.TraceType.RangeFilter.getDefaultInstance() : heightFilter_;
+        } else {
+          return heightFilterBuilder_.getMessage();
+        }
       }
       /**
-       * <code>uint64 min_height = 2;</code>
+       * <code>.forge_abi.RangeFilter height_filter = 2;</code>
        */
-      public Builder clearMinHeight() {
-        
-        minHeight_ = 0L;
-        onChanged();
-        return this;
-      }
+      public Builder setHeightFilter(forge_abi.TraceType.RangeFilter value) {
+        if (heightFilterBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          heightFilter_ = value;
+          onChanged();
+        } else {
+          heightFilterBuilder_.setMessage(value);
+        }
 
-      private long maxHeight_ ;
-      /**
-       * <code>uint64 max_height = 3;</code>
-       */
-      public long getMaxHeight() {
-        return maxHeight_;
-      }
-      /**
-       * <code>uint64 max_height = 3;</code>
-       */
-      public Builder setMaxHeight(long value) {
-        
-        maxHeight_ = value;
-        onChanged();
         return this;
       }
       /**
-       * <code>uint64 max_height = 3;</code>
+       * <code>.forge_abi.RangeFilter height_filter = 2;</code>
        */
-      public Builder clearMaxHeight() {
-        
-        maxHeight_ = 0L;
-        onChanged();
+      public Builder setHeightFilter(
+          forge_abi.TraceType.RangeFilter.Builder builderForValue) {
+        if (heightFilterBuilder_ == null) {
+          heightFilter_ = builderForValue.build();
+          onChanged();
+        } else {
+          heightFilterBuilder_.setMessage(builderForValue.build());
+        }
+
         return this;
+      }
+      /**
+       * <code>.forge_abi.RangeFilter height_filter = 2;</code>
+       */
+      public Builder mergeHeightFilter(forge_abi.TraceType.RangeFilter value) {
+        if (heightFilterBuilder_ == null) {
+          if (heightFilter_ != null) {
+            heightFilter_ =
+              forge_abi.TraceType.RangeFilter.newBuilder(heightFilter_).mergeFrom(value).buildPartial();
+          } else {
+            heightFilter_ = value;
+          }
+          onChanged();
+        } else {
+          heightFilterBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.RangeFilter height_filter = 2;</code>
+       */
+      public Builder clearHeightFilter() {
+        if (heightFilterBuilder_ == null) {
+          heightFilter_ = null;
+          onChanged();
+        } else {
+          heightFilter_ = null;
+          heightFilterBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.RangeFilter height_filter = 2;</code>
+       */
+      public forge_abi.TraceType.RangeFilter.Builder getHeightFilterBuilder() {
+        
+        onChanged();
+        return getHeightFilterFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.RangeFilter height_filter = 2;</code>
+       */
+      public forge_abi.TraceType.RangeFilterOrBuilder getHeightFilterOrBuilder() {
+        if (heightFilterBuilder_ != null) {
+          return heightFilterBuilder_.getMessageOrBuilder();
+        } else {
+          return heightFilter_ == null ?
+              forge_abi.TraceType.RangeFilter.getDefaultInstance() : heightFilter_;
+        }
+      }
+      /**
+       * <code>.forge_abi.RangeFilter height_filter = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.TraceType.RangeFilter, forge_abi.TraceType.RangeFilter.Builder, forge_abi.TraceType.RangeFilterOrBuilder> 
+          getHeightFilterFieldBuilder() {
+        if (heightFilterBuilder_ == null) {
+          heightFilterBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.TraceType.RangeFilter, forge_abi.TraceType.RangeFilter.Builder, forge_abi.TraceType.RangeFilterOrBuilder>(
+                  getHeightFilter(),
+                  getParentForChildren(),
+                  isClean());
+          heightFilter_ = null;
+        }
+        return heightFilterBuilder_;
       }
 
       private boolean emptyExcluded_ ;
       /**
-       * <code>bool empty_excluded = 4;</code>
+       * <code>bool empty_excluded = 3;</code>
        */
       public boolean getEmptyExcluded() {
         return emptyExcluded_;
       }
       /**
-       * <code>bool empty_excluded = 4;</code>
+       * <code>bool empty_excluded = 3;</code>
        */
       public Builder setEmptyExcluded(boolean value) {
         
@@ -8077,7 +8143,7 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>bool empty_excluded = 4;</code>
+       * <code>bool empty_excluded = 3;</code>
        */
       public Builder clearEmptyExcluded() {
         
@@ -8161,27 +8227,27 @@ public final class Rpc {
     forge_abi.TraceType.PageInfoOrBuilder getPageOrBuilder();
 
     /**
-     * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+     * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
      */
-    java.util.List<forge_abi.Type.BlockInfo> 
+    java.util.List<forge_abi.Type.BlockInfoSimple> 
         getBlocksList();
     /**
-     * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+     * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
      */
-    forge_abi.Type.BlockInfo getBlocks(int index);
+    forge_abi.Type.BlockInfoSimple getBlocks(int index);
     /**
-     * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+     * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
      */
     int getBlocksCount();
     /**
-     * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+     * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
      */
-    java.util.List<? extends forge_abi.Type.BlockInfoOrBuilder> 
+    java.util.List<? extends forge_abi.Type.BlockInfoSimpleOrBuilder> 
         getBlocksOrBuilderList();
     /**
-     * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+     * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
      */
-    forge_abi.Type.BlockInfoOrBuilder getBlocksOrBuilder(
+    forge_abi.Type.BlockInfoSimpleOrBuilder getBlocksOrBuilder(
         int index);
   }
   /**
@@ -8246,11 +8312,11 @@ public final class Rpc {
             }
             case 26: {
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                blocks_ = new java.util.ArrayList<forge_abi.Type.BlockInfo>();
+                blocks_ = new java.util.ArrayList<forge_abi.Type.BlockInfoSimple>();
                 mutable_bitField0_ |= 0x00000004;
               }
               blocks_.add(
-                  input.readMessage(forge_abi.Type.BlockInfo.parser(), extensionRegistry));
+                  input.readMessage(forge_abi.Type.BlockInfoSimple.parser(), extensionRegistry));
               break;
             }
           }
@@ -8318,36 +8384,36 @@ public final class Rpc {
     }
 
     public static final int BLOCKS_FIELD_NUMBER = 3;
-    private java.util.List<forge_abi.Type.BlockInfo> blocks_;
+    private java.util.List<forge_abi.Type.BlockInfoSimple> blocks_;
     /**
-     * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+     * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
      */
-    public java.util.List<forge_abi.Type.BlockInfo> getBlocksList() {
+    public java.util.List<forge_abi.Type.BlockInfoSimple> getBlocksList() {
       return blocks_;
     }
     /**
-     * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+     * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
      */
-    public java.util.List<? extends forge_abi.Type.BlockInfoOrBuilder> 
+    public java.util.List<? extends forge_abi.Type.BlockInfoSimpleOrBuilder> 
         getBlocksOrBuilderList() {
       return blocks_;
     }
     /**
-     * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+     * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
      */
     public int getBlocksCount() {
       return blocks_.size();
     }
     /**
-     * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+     * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
      */
-    public forge_abi.Type.BlockInfo getBlocks(int index) {
+    public forge_abi.Type.BlockInfoSimple getBlocks(int index) {
       return blocks_.get(index);
     }
     /**
-     * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+     * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
      */
-    public forge_abi.Type.BlockInfoOrBuilder getBlocksOrBuilder(
+    public forge_abi.Type.BlockInfoSimpleOrBuilder getBlocksOrBuilder(
         int index) {
       return blocks_.get(index);
     }
@@ -8870,22 +8936,22 @@ public final class Rpc {
         return pageBuilder_;
       }
 
-      private java.util.List<forge_abi.Type.BlockInfo> blocks_ =
+      private java.util.List<forge_abi.Type.BlockInfoSimple> blocks_ =
         java.util.Collections.emptyList();
       private void ensureBlocksIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          blocks_ = new java.util.ArrayList<forge_abi.Type.BlockInfo>(blocks_);
+          blocks_ = new java.util.ArrayList<forge_abi.Type.BlockInfoSimple>(blocks_);
           bitField0_ |= 0x00000004;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          forge_abi.Type.BlockInfo, forge_abi.Type.BlockInfo.Builder, forge_abi.Type.BlockInfoOrBuilder> blocksBuilder_;
+          forge_abi.Type.BlockInfoSimple, forge_abi.Type.BlockInfoSimple.Builder, forge_abi.Type.BlockInfoSimpleOrBuilder> blocksBuilder_;
 
       /**
-       * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+       * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
        */
-      public java.util.List<forge_abi.Type.BlockInfo> getBlocksList() {
+      public java.util.List<forge_abi.Type.BlockInfoSimple> getBlocksList() {
         if (blocksBuilder_ == null) {
           return java.util.Collections.unmodifiableList(blocks_);
         } else {
@@ -8893,7 +8959,7 @@ public final class Rpc {
         }
       }
       /**
-       * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+       * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
        */
       public int getBlocksCount() {
         if (blocksBuilder_ == null) {
@@ -8903,9 +8969,9 @@ public final class Rpc {
         }
       }
       /**
-       * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+       * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
        */
-      public forge_abi.Type.BlockInfo getBlocks(int index) {
+      public forge_abi.Type.BlockInfoSimple getBlocks(int index) {
         if (blocksBuilder_ == null) {
           return blocks_.get(index);
         } else {
@@ -8913,10 +8979,10 @@ public final class Rpc {
         }
       }
       /**
-       * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+       * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
        */
       public Builder setBlocks(
-          int index, forge_abi.Type.BlockInfo value) {
+          int index, forge_abi.Type.BlockInfoSimple value) {
         if (blocksBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -8930,10 +8996,10 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+       * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
        */
       public Builder setBlocks(
-          int index, forge_abi.Type.BlockInfo.Builder builderForValue) {
+          int index, forge_abi.Type.BlockInfoSimple.Builder builderForValue) {
         if (blocksBuilder_ == null) {
           ensureBlocksIsMutable();
           blocks_.set(index, builderForValue.build());
@@ -8944,9 +9010,9 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+       * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
        */
-      public Builder addBlocks(forge_abi.Type.BlockInfo value) {
+      public Builder addBlocks(forge_abi.Type.BlockInfoSimple value) {
         if (blocksBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -8960,10 +9026,10 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+       * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
        */
       public Builder addBlocks(
-          int index, forge_abi.Type.BlockInfo value) {
+          int index, forge_abi.Type.BlockInfoSimple value) {
         if (blocksBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -8977,10 +9043,10 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+       * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
        */
       public Builder addBlocks(
-          forge_abi.Type.BlockInfo.Builder builderForValue) {
+          forge_abi.Type.BlockInfoSimple.Builder builderForValue) {
         if (blocksBuilder_ == null) {
           ensureBlocksIsMutable();
           blocks_.add(builderForValue.build());
@@ -8991,10 +9057,10 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+       * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
        */
       public Builder addBlocks(
-          int index, forge_abi.Type.BlockInfo.Builder builderForValue) {
+          int index, forge_abi.Type.BlockInfoSimple.Builder builderForValue) {
         if (blocksBuilder_ == null) {
           ensureBlocksIsMutable();
           blocks_.add(index, builderForValue.build());
@@ -9005,10 +9071,10 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+       * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
        */
       public Builder addAllBlocks(
-          java.lang.Iterable<? extends forge_abi.Type.BlockInfo> values) {
+          java.lang.Iterable<? extends forge_abi.Type.BlockInfoSimple> values) {
         if (blocksBuilder_ == null) {
           ensureBlocksIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -9020,7 +9086,7 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+       * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
        */
       public Builder clearBlocks() {
         if (blocksBuilder_ == null) {
@@ -9033,7 +9099,7 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+       * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
        */
       public Builder removeBlocks(int index) {
         if (blocksBuilder_ == null) {
@@ -9046,16 +9112,16 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+       * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
        */
-      public forge_abi.Type.BlockInfo.Builder getBlocksBuilder(
+      public forge_abi.Type.BlockInfoSimple.Builder getBlocksBuilder(
           int index) {
         return getBlocksFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+       * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
        */
-      public forge_abi.Type.BlockInfoOrBuilder getBlocksOrBuilder(
+      public forge_abi.Type.BlockInfoSimpleOrBuilder getBlocksOrBuilder(
           int index) {
         if (blocksBuilder_ == null) {
           return blocks_.get(index);  } else {
@@ -9063,9 +9129,9 @@ public final class Rpc {
         }
       }
       /**
-       * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+       * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
        */
-      public java.util.List<? extends forge_abi.Type.BlockInfoOrBuilder> 
+      public java.util.List<? extends forge_abi.Type.BlockInfoSimpleOrBuilder> 
            getBlocksOrBuilderList() {
         if (blocksBuilder_ != null) {
           return blocksBuilder_.getMessageOrBuilderList();
@@ -9074,33 +9140,33 @@ public final class Rpc {
         }
       }
       /**
-       * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+       * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
        */
-      public forge_abi.Type.BlockInfo.Builder addBlocksBuilder() {
+      public forge_abi.Type.BlockInfoSimple.Builder addBlocksBuilder() {
         return getBlocksFieldBuilder().addBuilder(
-            forge_abi.Type.BlockInfo.getDefaultInstance());
+            forge_abi.Type.BlockInfoSimple.getDefaultInstance());
       }
       /**
-       * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+       * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
        */
-      public forge_abi.Type.BlockInfo.Builder addBlocksBuilder(
+      public forge_abi.Type.BlockInfoSimple.Builder addBlocksBuilder(
           int index) {
         return getBlocksFieldBuilder().addBuilder(
-            index, forge_abi.Type.BlockInfo.getDefaultInstance());
+            index, forge_abi.Type.BlockInfoSimple.getDefaultInstance());
       }
       /**
-       * <code>repeated .forge_abi.BlockInfo blocks = 3;</code>
+       * <code>repeated .forge_abi.BlockInfoSimple blocks = 3;</code>
        */
-      public java.util.List<forge_abi.Type.BlockInfo.Builder> 
+      public java.util.List<forge_abi.Type.BlockInfoSimple.Builder> 
            getBlocksBuilderList() {
         return getBlocksFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          forge_abi.Type.BlockInfo, forge_abi.Type.BlockInfo.Builder, forge_abi.Type.BlockInfoOrBuilder> 
+          forge_abi.Type.BlockInfoSimple, forge_abi.Type.BlockInfoSimple.Builder, forge_abi.Type.BlockInfoSimpleOrBuilder> 
           getBlocksFieldBuilder() {
         if (blocksBuilder_ == null) {
           blocksBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              forge_abi.Type.BlockInfo, forge_abi.Type.BlockInfo.Builder, forge_abi.Type.BlockInfoOrBuilder>(
+              forge_abi.Type.BlockInfoSimple, forge_abi.Type.BlockInfoSimple.Builder, forge_abi.Type.BlockInfoSimpleOrBuilder>(
                   blocks_,
                   ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
@@ -19784,6 +19850,1419 @@ public final class Rpc {
 
   }
 
+  public interface RequestGetProtocolStateOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.RequestGetProtocolState)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string address = 1;</code>
+     */
+    java.lang.String getAddress();
+    /**
+     * <code>string address = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getAddressBytes();
+
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    java.util.List<java.lang.String>
+        getKeysList();
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    int getKeysCount();
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    java.lang.String getKeys(int index);
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getKeysBytes(int index);
+
+    /**
+     * <code>uint64 height = 3;</code>
+     */
+    long getHeight();
+  }
+  /**
+   * Protobuf type {@code forge_abi.RequestGetProtocolState}
+   */
+  public  static final class RequestGetProtocolState extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:forge_abi.RequestGetProtocolState)
+      RequestGetProtocolStateOrBuilder {
+    // Use RequestGetProtocolState.newBuilder() to construct.
+    private RequestGetProtocolState(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private RequestGetProtocolState() {
+      address_ = "";
+      keys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      height_ = 0L;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private RequestGetProtocolState(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              address_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                keys_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              keys_.add(s);
+              break;
+            }
+            case 24: {
+
+              height_ = input.readUInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          keys_ = keys_.getUnmodifiableView();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return forge_abi.Rpc.internal_static_forge_abi_RequestGetProtocolState_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return forge_abi.Rpc.internal_static_forge_abi_RequestGetProtocolState_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              forge_abi.Rpc.RequestGetProtocolState.class, forge_abi.Rpc.RequestGetProtocolState.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int ADDRESS_FIELD_NUMBER = 1;
+    private volatile java.lang.Object address_;
+    /**
+     * <code>string address = 1;</code>
+     */
+    public java.lang.String getAddress() {
+      java.lang.Object ref = address_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        address_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string address = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAddressBytes() {
+      java.lang.Object ref = address_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        address_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int KEYS_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList keys_;
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getKeysList() {
+      return keys_;
+    }
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    public int getKeysCount() {
+      return keys_.size();
+    }
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    public java.lang.String getKeys(int index) {
+      return keys_.get(index);
+    }
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getKeysBytes(int index) {
+      return keys_.getByteString(index);
+    }
+
+    public static final int HEIGHT_FIELD_NUMBER = 3;
+    private long height_;
+    /**
+     * <code>uint64 height = 3;</code>
+     */
+    public long getHeight() {
+      return height_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getAddressBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, address_);
+      }
+      for (int i = 0; i < keys_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, keys_.getRaw(i));
+      }
+      if (height_ != 0L) {
+        output.writeUInt64(3, height_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getAddressBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, address_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < keys_.size(); i++) {
+          dataSize += computeStringSizeNoTag(keys_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getKeysList().size();
+      }
+      if (height_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(3, height_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof forge_abi.Rpc.RequestGetProtocolState)) {
+        return super.equals(obj);
+      }
+      forge_abi.Rpc.RequestGetProtocolState other = (forge_abi.Rpc.RequestGetProtocolState) obj;
+
+      boolean result = true;
+      result = result && getAddress()
+          .equals(other.getAddress());
+      result = result && getKeysList()
+          .equals(other.getKeysList());
+      result = result && (getHeight()
+          == other.getHeight());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ADDRESS_FIELD_NUMBER;
+      hash = (53 * hash) + getAddress().hashCode();
+      if (getKeysCount() > 0) {
+        hash = (37 * hash) + KEYS_FIELD_NUMBER;
+        hash = (53 * hash) + getKeysList().hashCode();
+      }
+      hash = (37 * hash) + HEIGHT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getHeight());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static forge_abi.Rpc.RequestGetProtocolState parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.Rpc.RequestGetProtocolState parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.Rpc.RequestGetProtocolState parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.Rpc.RequestGetProtocolState parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.Rpc.RequestGetProtocolState parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.RequestGetProtocolState parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.Rpc.RequestGetProtocolState parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.RequestGetProtocolState parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.Rpc.RequestGetProtocolState parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.RequestGetProtocolState parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(forge_abi.Rpc.RequestGetProtocolState prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code forge_abi.RequestGetProtocolState}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:forge_abi.RequestGetProtocolState)
+        forge_abi.Rpc.RequestGetProtocolStateOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return forge_abi.Rpc.internal_static_forge_abi_RequestGetProtocolState_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return forge_abi.Rpc.internal_static_forge_abi_RequestGetProtocolState_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                forge_abi.Rpc.RequestGetProtocolState.class, forge_abi.Rpc.RequestGetProtocolState.Builder.class);
+      }
+
+      // Construct using forge_abi.Rpc.RequestGetProtocolState.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        address_ = "";
+
+        keys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        height_ = 0L;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return forge_abi.Rpc.internal_static_forge_abi_RequestGetProtocolState_descriptor;
+      }
+
+      public forge_abi.Rpc.RequestGetProtocolState getDefaultInstanceForType() {
+        return forge_abi.Rpc.RequestGetProtocolState.getDefaultInstance();
+      }
+
+      public forge_abi.Rpc.RequestGetProtocolState build() {
+        forge_abi.Rpc.RequestGetProtocolState result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public forge_abi.Rpc.RequestGetProtocolState buildPartial() {
+        forge_abi.Rpc.RequestGetProtocolState result = new forge_abi.Rpc.RequestGetProtocolState(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.address_ = address_;
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          keys_ = keys_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.keys_ = keys_;
+        result.height_ = height_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof forge_abi.Rpc.RequestGetProtocolState) {
+          return mergeFrom((forge_abi.Rpc.RequestGetProtocolState)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(forge_abi.Rpc.RequestGetProtocolState other) {
+        if (other == forge_abi.Rpc.RequestGetProtocolState.getDefaultInstance()) return this;
+        if (!other.getAddress().isEmpty()) {
+          address_ = other.address_;
+          onChanged();
+        }
+        if (!other.keys_.isEmpty()) {
+          if (keys_.isEmpty()) {
+            keys_ = other.keys_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureKeysIsMutable();
+            keys_.addAll(other.keys_);
+          }
+          onChanged();
+        }
+        if (other.getHeight() != 0L) {
+          setHeight(other.getHeight());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        forge_abi.Rpc.RequestGetProtocolState parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (forge_abi.Rpc.RequestGetProtocolState) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object address_ = "";
+      /**
+       * <code>string address = 1;</code>
+       */
+      public java.lang.String getAddress() {
+        java.lang.Object ref = address_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          address_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string address = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAddressBytes() {
+        java.lang.Object ref = address_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          address_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string address = 1;</code>
+       */
+      public Builder setAddress(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        address_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string address = 1;</code>
+       */
+      public Builder clearAddress() {
+        
+        address_ = getDefaultInstance().getAddress();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string address = 1;</code>
+       */
+      public Builder setAddressBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        address_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList keys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureKeysIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          keys_ = new com.google.protobuf.LazyStringArrayList(keys_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getKeysList() {
+        return keys_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public int getKeysCount() {
+        return keys_.size();
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public java.lang.String getKeys(int index) {
+        return keys_.get(index);
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getKeysBytes(int index) {
+        return keys_.getByteString(index);
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public Builder setKeys(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureKeysIsMutable();
+        keys_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public Builder addKeys(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureKeysIsMutable();
+        keys_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public Builder addAllKeys(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureKeysIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, keys_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public Builder clearKeys() {
+        keys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public Builder addKeysBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureKeysIsMutable();
+        keys_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private long height_ ;
+      /**
+       * <code>uint64 height = 3;</code>
+       */
+      public long getHeight() {
+        return height_;
+      }
+      /**
+       * <code>uint64 height = 3;</code>
+       */
+      public Builder setHeight(long value) {
+        
+        height_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint64 height = 3;</code>
+       */
+      public Builder clearHeight() {
+        
+        height_ = 0L;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:forge_abi.RequestGetProtocolState)
+    }
+
+    // @@protoc_insertion_point(class_scope:forge_abi.RequestGetProtocolState)
+    private static final forge_abi.Rpc.RequestGetProtocolState DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new forge_abi.Rpc.RequestGetProtocolState();
+    }
+
+    public static forge_abi.Rpc.RequestGetProtocolState getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<RequestGetProtocolState>
+        PARSER = new com.google.protobuf.AbstractParser<RequestGetProtocolState>() {
+      public RequestGetProtocolState parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new RequestGetProtocolState(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<RequestGetProtocolState> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RequestGetProtocolState> getParserForType() {
+      return PARSER;
+    }
+
+    public forge_abi.Rpc.RequestGetProtocolState getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ResponseGetProtocolStateOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.ResponseGetProtocolState)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.forge_abi.StatusCode code = 1;</code>
+     */
+    int getCodeValue();
+    /**
+     * <code>.forge_abi.StatusCode code = 1;</code>
+     */
+    forge_abi.Enum.StatusCode getCode();
+
+    /**
+     * <code>.forge_abi.ProtocolState state = 2;</code>
+     */
+    boolean hasState();
+    /**
+     * <code>.forge_abi.ProtocolState state = 2;</code>
+     */
+    forge_abi.State.ProtocolState getState();
+    /**
+     * <code>.forge_abi.ProtocolState state = 2;</code>
+     */
+    forge_abi.State.ProtocolStateOrBuilder getStateOrBuilder();
+  }
+  /**
+   * Protobuf type {@code forge_abi.ResponseGetProtocolState}
+   */
+  public  static final class ResponseGetProtocolState extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:forge_abi.ResponseGetProtocolState)
+      ResponseGetProtocolStateOrBuilder {
+    // Use ResponseGetProtocolState.newBuilder() to construct.
+    private ResponseGetProtocolState(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ResponseGetProtocolState() {
+      code_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private ResponseGetProtocolState(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+
+              code_ = rawValue;
+              break;
+            }
+            case 18: {
+              forge_abi.State.ProtocolState.Builder subBuilder = null;
+              if (state_ != null) {
+                subBuilder = state_.toBuilder();
+              }
+              state_ = input.readMessage(forge_abi.State.ProtocolState.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(state_);
+                state_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return forge_abi.Rpc.internal_static_forge_abi_ResponseGetProtocolState_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return forge_abi.Rpc.internal_static_forge_abi_ResponseGetProtocolState_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              forge_abi.Rpc.ResponseGetProtocolState.class, forge_abi.Rpc.ResponseGetProtocolState.Builder.class);
+    }
+
+    public static final int CODE_FIELD_NUMBER = 1;
+    private int code_;
+    /**
+     * <code>.forge_abi.StatusCode code = 1;</code>
+     */
+    public int getCodeValue() {
+      return code_;
+    }
+    /**
+     * <code>.forge_abi.StatusCode code = 1;</code>
+     */
+    public forge_abi.Enum.StatusCode getCode() {
+      forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
+      return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
+    }
+
+    public static final int STATE_FIELD_NUMBER = 2;
+    private forge_abi.State.ProtocolState state_;
+    /**
+     * <code>.forge_abi.ProtocolState state = 2;</code>
+     */
+    public boolean hasState() {
+      return state_ != null;
+    }
+    /**
+     * <code>.forge_abi.ProtocolState state = 2;</code>
+     */
+    public forge_abi.State.ProtocolState getState() {
+      return state_ == null ? forge_abi.State.ProtocolState.getDefaultInstance() : state_;
+    }
+    /**
+     * <code>.forge_abi.ProtocolState state = 2;</code>
+     */
+    public forge_abi.State.ProtocolStateOrBuilder getStateOrBuilder() {
+      return getState();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
+        output.writeEnum(1, code_);
+      }
+      if (state_ != null) {
+        output.writeMessage(2, getState());
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, code_);
+      }
+      if (state_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getState());
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof forge_abi.Rpc.ResponseGetProtocolState)) {
+        return super.equals(obj);
+      }
+      forge_abi.Rpc.ResponseGetProtocolState other = (forge_abi.Rpc.ResponseGetProtocolState) obj;
+
+      boolean result = true;
+      result = result && code_ == other.code_;
+      result = result && (hasState() == other.hasState());
+      if (hasState()) {
+        result = result && getState()
+            .equals(other.getState());
+      }
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + CODE_FIELD_NUMBER;
+      hash = (53 * hash) + code_;
+      if (hasState()) {
+        hash = (37 * hash) + STATE_FIELD_NUMBER;
+        hash = (53 * hash) + getState().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static forge_abi.Rpc.ResponseGetProtocolState parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.Rpc.ResponseGetProtocolState parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.Rpc.ResponseGetProtocolState parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.Rpc.ResponseGetProtocolState parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.Rpc.ResponseGetProtocolState parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.ResponseGetProtocolState parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.Rpc.ResponseGetProtocolState parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.ResponseGetProtocolState parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.Rpc.ResponseGetProtocolState parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.ResponseGetProtocolState parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(forge_abi.Rpc.ResponseGetProtocolState prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code forge_abi.ResponseGetProtocolState}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:forge_abi.ResponseGetProtocolState)
+        forge_abi.Rpc.ResponseGetProtocolStateOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetProtocolState_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetProtocolState_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                forge_abi.Rpc.ResponseGetProtocolState.class, forge_abi.Rpc.ResponseGetProtocolState.Builder.class);
+      }
+
+      // Construct using forge_abi.Rpc.ResponseGetProtocolState.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        code_ = 0;
+
+        if (stateBuilder_ == null) {
+          state_ = null;
+        } else {
+          state_ = null;
+          stateBuilder_ = null;
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetProtocolState_descriptor;
+      }
+
+      public forge_abi.Rpc.ResponseGetProtocolState getDefaultInstanceForType() {
+        return forge_abi.Rpc.ResponseGetProtocolState.getDefaultInstance();
+      }
+
+      public forge_abi.Rpc.ResponseGetProtocolState build() {
+        forge_abi.Rpc.ResponseGetProtocolState result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public forge_abi.Rpc.ResponseGetProtocolState buildPartial() {
+        forge_abi.Rpc.ResponseGetProtocolState result = new forge_abi.Rpc.ResponseGetProtocolState(this);
+        result.code_ = code_;
+        if (stateBuilder_ == null) {
+          result.state_ = state_;
+        } else {
+          result.state_ = stateBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof forge_abi.Rpc.ResponseGetProtocolState) {
+          return mergeFrom((forge_abi.Rpc.ResponseGetProtocolState)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(forge_abi.Rpc.ResponseGetProtocolState other) {
+        if (other == forge_abi.Rpc.ResponseGetProtocolState.getDefaultInstance()) return this;
+        if (other.code_ != 0) {
+          setCodeValue(other.getCodeValue());
+        }
+        if (other.hasState()) {
+          mergeState(other.getState());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        forge_abi.Rpc.ResponseGetProtocolState parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (forge_abi.Rpc.ResponseGetProtocolState) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int code_ = 0;
+      /**
+       * <code>.forge_abi.StatusCode code = 1;</code>
+       */
+      public int getCodeValue() {
+        return code_;
+      }
+      /**
+       * <code>.forge_abi.StatusCode code = 1;</code>
+       */
+      public Builder setCodeValue(int value) {
+        code_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.forge_abi.StatusCode code = 1;</code>
+       */
+      public forge_abi.Enum.StatusCode getCode() {
+        forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
+        return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.forge_abi.StatusCode code = 1;</code>
+       */
+      public Builder setCode(forge_abi.Enum.StatusCode value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        code_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.forge_abi.StatusCode code = 1;</code>
+       */
+      public Builder clearCode() {
+        
+        code_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private forge_abi.State.ProtocolState state_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.State.ProtocolState, forge_abi.State.ProtocolState.Builder, forge_abi.State.ProtocolStateOrBuilder> stateBuilder_;
+      /**
+       * <code>.forge_abi.ProtocolState state = 2;</code>
+       */
+      public boolean hasState() {
+        return stateBuilder_ != null || state_ != null;
+      }
+      /**
+       * <code>.forge_abi.ProtocolState state = 2;</code>
+       */
+      public forge_abi.State.ProtocolState getState() {
+        if (stateBuilder_ == null) {
+          return state_ == null ? forge_abi.State.ProtocolState.getDefaultInstance() : state_;
+        } else {
+          return stateBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.forge_abi.ProtocolState state = 2;</code>
+       */
+      public Builder setState(forge_abi.State.ProtocolState value) {
+        if (stateBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          state_ = value;
+          onChanged();
+        } else {
+          stateBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.ProtocolState state = 2;</code>
+       */
+      public Builder setState(
+          forge_abi.State.ProtocolState.Builder builderForValue) {
+        if (stateBuilder_ == null) {
+          state_ = builderForValue.build();
+          onChanged();
+        } else {
+          stateBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.ProtocolState state = 2;</code>
+       */
+      public Builder mergeState(forge_abi.State.ProtocolState value) {
+        if (stateBuilder_ == null) {
+          if (state_ != null) {
+            state_ =
+              forge_abi.State.ProtocolState.newBuilder(state_).mergeFrom(value).buildPartial();
+          } else {
+            state_ = value;
+          }
+          onChanged();
+        } else {
+          stateBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.ProtocolState state = 2;</code>
+       */
+      public Builder clearState() {
+        if (stateBuilder_ == null) {
+          state_ = null;
+          onChanged();
+        } else {
+          state_ = null;
+          stateBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.ProtocolState state = 2;</code>
+       */
+      public forge_abi.State.ProtocolState.Builder getStateBuilder() {
+        
+        onChanged();
+        return getStateFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.ProtocolState state = 2;</code>
+       */
+      public forge_abi.State.ProtocolStateOrBuilder getStateOrBuilder() {
+        if (stateBuilder_ != null) {
+          return stateBuilder_.getMessageOrBuilder();
+        } else {
+          return state_ == null ?
+              forge_abi.State.ProtocolState.getDefaultInstance() : state_;
+        }
+      }
+      /**
+       * <code>.forge_abi.ProtocolState state = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.State.ProtocolState, forge_abi.State.ProtocolState.Builder, forge_abi.State.ProtocolStateOrBuilder> 
+          getStateFieldBuilder() {
+        if (stateBuilder_ == null) {
+          stateBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.State.ProtocolState, forge_abi.State.ProtocolState.Builder, forge_abi.State.ProtocolStateOrBuilder>(
+                  getState(),
+                  getParentForChildren(),
+                  isClean());
+          state_ = null;
+        }
+        return stateBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:forge_abi.ResponseGetProtocolState)
+    }
+
+    // @@protoc_insertion_point(class_scope:forge_abi.ResponseGetProtocolState)
+    private static final forge_abi.Rpc.ResponseGetProtocolState DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new forge_abi.Rpc.ResponseGetProtocolState();
+    }
+
+    public static forge_abi.Rpc.ResponseGetProtocolState getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ResponseGetProtocolState>
+        PARSER = new com.google.protobuf.AbstractParser<ResponseGetProtocolState>() {
+      public ResponseGetProtocolState parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new ResponseGetProtocolState(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ResponseGetProtocolState> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ResponseGetProtocolState> getParserForType() {
+      return PARSER;
+    }
+
+    public forge_abi.Rpc.ResponseGetProtocolState getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface RequestGetStakeStateOrBuilder extends
       // @@protoc_insertion_point(interface_extends:forge_abi.RequestGetStakeState)
       com.google.protobuf.MessageOrBuilder {
@@ -22478,6 +23957,1419 @@ public final class Rpc {
     }
 
     public forge_abi.Rpc.ResponseGetForgeState getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface RequestGetTetherInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.RequestGetTetherInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string hash = 1;</code>
+     */
+    java.lang.String getHash();
+    /**
+     * <code>string hash = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getHashBytes();
+
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    java.util.List<java.lang.String>
+        getKeysList();
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    int getKeysCount();
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    java.lang.String getKeys(int index);
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getKeysBytes(int index);
+
+    /**
+     * <code>uint64 height = 3;</code>
+     */
+    long getHeight();
+  }
+  /**
+   * Protobuf type {@code forge_abi.RequestGetTetherInfo}
+   */
+  public  static final class RequestGetTetherInfo extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:forge_abi.RequestGetTetherInfo)
+      RequestGetTetherInfoOrBuilder {
+    // Use RequestGetTetherInfo.newBuilder() to construct.
+    private RequestGetTetherInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private RequestGetTetherInfo() {
+      hash_ = "";
+      keys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      height_ = 0L;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private RequestGetTetherInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              hash_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                keys_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              keys_.add(s);
+              break;
+            }
+            case 24: {
+
+              height_ = input.readUInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          keys_ = keys_.getUnmodifiableView();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return forge_abi.Rpc.internal_static_forge_abi_RequestGetTetherInfo_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return forge_abi.Rpc.internal_static_forge_abi_RequestGetTetherInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              forge_abi.Rpc.RequestGetTetherInfo.class, forge_abi.Rpc.RequestGetTetherInfo.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int HASH_FIELD_NUMBER = 1;
+    private volatile java.lang.Object hash_;
+    /**
+     * <code>string hash = 1;</code>
+     */
+    public java.lang.String getHash() {
+      java.lang.Object ref = hash_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        hash_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string hash = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getHashBytes() {
+      java.lang.Object ref = hash_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        hash_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int KEYS_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList keys_;
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getKeysList() {
+      return keys_;
+    }
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    public int getKeysCount() {
+      return keys_.size();
+    }
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    public java.lang.String getKeys(int index) {
+      return keys_.get(index);
+    }
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getKeysBytes(int index) {
+      return keys_.getByteString(index);
+    }
+
+    public static final int HEIGHT_FIELD_NUMBER = 3;
+    private long height_;
+    /**
+     * <code>uint64 height = 3;</code>
+     */
+    public long getHeight() {
+      return height_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getHashBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, hash_);
+      }
+      for (int i = 0; i < keys_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, keys_.getRaw(i));
+      }
+      if (height_ != 0L) {
+        output.writeUInt64(3, height_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getHashBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, hash_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < keys_.size(); i++) {
+          dataSize += computeStringSizeNoTag(keys_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getKeysList().size();
+      }
+      if (height_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(3, height_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof forge_abi.Rpc.RequestGetTetherInfo)) {
+        return super.equals(obj);
+      }
+      forge_abi.Rpc.RequestGetTetherInfo other = (forge_abi.Rpc.RequestGetTetherInfo) obj;
+
+      boolean result = true;
+      result = result && getHash()
+          .equals(other.getHash());
+      result = result && getKeysList()
+          .equals(other.getKeysList());
+      result = result && (getHeight()
+          == other.getHeight());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + HASH_FIELD_NUMBER;
+      hash = (53 * hash) + getHash().hashCode();
+      if (getKeysCount() > 0) {
+        hash = (37 * hash) + KEYS_FIELD_NUMBER;
+        hash = (53 * hash) + getKeysList().hashCode();
+      }
+      hash = (37 * hash) + HEIGHT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getHeight());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static forge_abi.Rpc.RequestGetTetherInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.Rpc.RequestGetTetherInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.Rpc.RequestGetTetherInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.Rpc.RequestGetTetherInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.Rpc.RequestGetTetherInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.RequestGetTetherInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.Rpc.RequestGetTetherInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.RequestGetTetherInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.Rpc.RequestGetTetherInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.RequestGetTetherInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(forge_abi.Rpc.RequestGetTetherInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code forge_abi.RequestGetTetherInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:forge_abi.RequestGetTetherInfo)
+        forge_abi.Rpc.RequestGetTetherInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return forge_abi.Rpc.internal_static_forge_abi_RequestGetTetherInfo_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return forge_abi.Rpc.internal_static_forge_abi_RequestGetTetherInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                forge_abi.Rpc.RequestGetTetherInfo.class, forge_abi.Rpc.RequestGetTetherInfo.Builder.class);
+      }
+
+      // Construct using forge_abi.Rpc.RequestGetTetherInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        hash_ = "";
+
+        keys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        height_ = 0L;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return forge_abi.Rpc.internal_static_forge_abi_RequestGetTetherInfo_descriptor;
+      }
+
+      public forge_abi.Rpc.RequestGetTetherInfo getDefaultInstanceForType() {
+        return forge_abi.Rpc.RequestGetTetherInfo.getDefaultInstance();
+      }
+
+      public forge_abi.Rpc.RequestGetTetherInfo build() {
+        forge_abi.Rpc.RequestGetTetherInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public forge_abi.Rpc.RequestGetTetherInfo buildPartial() {
+        forge_abi.Rpc.RequestGetTetherInfo result = new forge_abi.Rpc.RequestGetTetherInfo(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.hash_ = hash_;
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          keys_ = keys_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.keys_ = keys_;
+        result.height_ = height_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof forge_abi.Rpc.RequestGetTetherInfo) {
+          return mergeFrom((forge_abi.Rpc.RequestGetTetherInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(forge_abi.Rpc.RequestGetTetherInfo other) {
+        if (other == forge_abi.Rpc.RequestGetTetherInfo.getDefaultInstance()) return this;
+        if (!other.getHash().isEmpty()) {
+          hash_ = other.hash_;
+          onChanged();
+        }
+        if (!other.keys_.isEmpty()) {
+          if (keys_.isEmpty()) {
+            keys_ = other.keys_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureKeysIsMutable();
+            keys_.addAll(other.keys_);
+          }
+          onChanged();
+        }
+        if (other.getHeight() != 0L) {
+          setHeight(other.getHeight());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        forge_abi.Rpc.RequestGetTetherInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (forge_abi.Rpc.RequestGetTetherInfo) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object hash_ = "";
+      /**
+       * <code>string hash = 1;</code>
+       */
+      public java.lang.String getHash() {
+        java.lang.Object ref = hash_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          hash_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string hash = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getHashBytes() {
+        java.lang.Object ref = hash_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          hash_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string hash = 1;</code>
+       */
+      public Builder setHash(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        hash_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string hash = 1;</code>
+       */
+      public Builder clearHash() {
+        
+        hash_ = getDefaultInstance().getHash();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string hash = 1;</code>
+       */
+      public Builder setHashBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        hash_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList keys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureKeysIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          keys_ = new com.google.protobuf.LazyStringArrayList(keys_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getKeysList() {
+        return keys_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public int getKeysCount() {
+        return keys_.size();
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public java.lang.String getKeys(int index) {
+        return keys_.get(index);
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getKeysBytes(int index) {
+        return keys_.getByteString(index);
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public Builder setKeys(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureKeysIsMutable();
+        keys_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public Builder addKeys(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureKeysIsMutable();
+        keys_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public Builder addAllKeys(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureKeysIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, keys_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public Builder clearKeys() {
+        keys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public Builder addKeysBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureKeysIsMutable();
+        keys_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private long height_ ;
+      /**
+       * <code>uint64 height = 3;</code>
+       */
+      public long getHeight() {
+        return height_;
+      }
+      /**
+       * <code>uint64 height = 3;</code>
+       */
+      public Builder setHeight(long value) {
+        
+        height_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint64 height = 3;</code>
+       */
+      public Builder clearHeight() {
+        
+        height_ = 0L;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:forge_abi.RequestGetTetherInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:forge_abi.RequestGetTetherInfo)
+    private static final forge_abi.Rpc.RequestGetTetherInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new forge_abi.Rpc.RequestGetTetherInfo();
+    }
+
+    public static forge_abi.Rpc.RequestGetTetherInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<RequestGetTetherInfo>
+        PARSER = new com.google.protobuf.AbstractParser<RequestGetTetherInfo>() {
+      public RequestGetTetherInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new RequestGetTetherInfo(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<RequestGetTetherInfo> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RequestGetTetherInfo> getParserForType() {
+      return PARSER;
+    }
+
+    public forge_abi.Rpc.RequestGetTetherInfo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ResponseGetTetherInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.ResponseGetTetherInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.forge_abi.StatusCode code = 1;</code>
+     */
+    int getCodeValue();
+    /**
+     * <code>.forge_abi.StatusCode code = 1;</code>
+     */
+    forge_abi.Enum.StatusCode getCode();
+
+    /**
+     * <code>.forge_abi.TetherInfo info = 2;</code>
+     */
+    boolean hasInfo();
+    /**
+     * <code>.forge_abi.TetherInfo info = 2;</code>
+     */
+    forge_abi.State.TetherInfo getInfo();
+    /**
+     * <code>.forge_abi.TetherInfo info = 2;</code>
+     */
+    forge_abi.State.TetherInfoOrBuilder getInfoOrBuilder();
+  }
+  /**
+   * Protobuf type {@code forge_abi.ResponseGetTetherInfo}
+   */
+  public  static final class ResponseGetTetherInfo extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:forge_abi.ResponseGetTetherInfo)
+      ResponseGetTetherInfoOrBuilder {
+    // Use ResponseGetTetherInfo.newBuilder() to construct.
+    private ResponseGetTetherInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ResponseGetTetherInfo() {
+      code_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private ResponseGetTetherInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+
+              code_ = rawValue;
+              break;
+            }
+            case 18: {
+              forge_abi.State.TetherInfo.Builder subBuilder = null;
+              if (info_ != null) {
+                subBuilder = info_.toBuilder();
+              }
+              info_ = input.readMessage(forge_abi.State.TetherInfo.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(info_);
+                info_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return forge_abi.Rpc.internal_static_forge_abi_ResponseGetTetherInfo_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return forge_abi.Rpc.internal_static_forge_abi_ResponseGetTetherInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              forge_abi.Rpc.ResponseGetTetherInfo.class, forge_abi.Rpc.ResponseGetTetherInfo.Builder.class);
+    }
+
+    public static final int CODE_FIELD_NUMBER = 1;
+    private int code_;
+    /**
+     * <code>.forge_abi.StatusCode code = 1;</code>
+     */
+    public int getCodeValue() {
+      return code_;
+    }
+    /**
+     * <code>.forge_abi.StatusCode code = 1;</code>
+     */
+    public forge_abi.Enum.StatusCode getCode() {
+      forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
+      return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
+    }
+
+    public static final int INFO_FIELD_NUMBER = 2;
+    private forge_abi.State.TetherInfo info_;
+    /**
+     * <code>.forge_abi.TetherInfo info = 2;</code>
+     */
+    public boolean hasInfo() {
+      return info_ != null;
+    }
+    /**
+     * <code>.forge_abi.TetherInfo info = 2;</code>
+     */
+    public forge_abi.State.TetherInfo getInfo() {
+      return info_ == null ? forge_abi.State.TetherInfo.getDefaultInstance() : info_;
+    }
+    /**
+     * <code>.forge_abi.TetherInfo info = 2;</code>
+     */
+    public forge_abi.State.TetherInfoOrBuilder getInfoOrBuilder() {
+      return getInfo();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
+        output.writeEnum(1, code_);
+      }
+      if (info_ != null) {
+        output.writeMessage(2, getInfo());
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, code_);
+      }
+      if (info_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getInfo());
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof forge_abi.Rpc.ResponseGetTetherInfo)) {
+        return super.equals(obj);
+      }
+      forge_abi.Rpc.ResponseGetTetherInfo other = (forge_abi.Rpc.ResponseGetTetherInfo) obj;
+
+      boolean result = true;
+      result = result && code_ == other.code_;
+      result = result && (hasInfo() == other.hasInfo());
+      if (hasInfo()) {
+        result = result && getInfo()
+            .equals(other.getInfo());
+      }
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + CODE_FIELD_NUMBER;
+      hash = (53 * hash) + code_;
+      if (hasInfo()) {
+        hash = (37 * hash) + INFO_FIELD_NUMBER;
+        hash = (53 * hash) + getInfo().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static forge_abi.Rpc.ResponseGetTetherInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.Rpc.ResponseGetTetherInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.Rpc.ResponseGetTetherInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.Rpc.ResponseGetTetherInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.Rpc.ResponseGetTetherInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.ResponseGetTetherInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.Rpc.ResponseGetTetherInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.ResponseGetTetherInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.Rpc.ResponseGetTetherInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.ResponseGetTetherInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(forge_abi.Rpc.ResponseGetTetherInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code forge_abi.ResponseGetTetherInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:forge_abi.ResponseGetTetherInfo)
+        forge_abi.Rpc.ResponseGetTetherInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetTetherInfo_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetTetherInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                forge_abi.Rpc.ResponseGetTetherInfo.class, forge_abi.Rpc.ResponseGetTetherInfo.Builder.class);
+      }
+
+      // Construct using forge_abi.Rpc.ResponseGetTetherInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        code_ = 0;
+
+        if (infoBuilder_ == null) {
+          info_ = null;
+        } else {
+          info_ = null;
+          infoBuilder_ = null;
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetTetherInfo_descriptor;
+      }
+
+      public forge_abi.Rpc.ResponseGetTetherInfo getDefaultInstanceForType() {
+        return forge_abi.Rpc.ResponseGetTetherInfo.getDefaultInstance();
+      }
+
+      public forge_abi.Rpc.ResponseGetTetherInfo build() {
+        forge_abi.Rpc.ResponseGetTetherInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public forge_abi.Rpc.ResponseGetTetherInfo buildPartial() {
+        forge_abi.Rpc.ResponseGetTetherInfo result = new forge_abi.Rpc.ResponseGetTetherInfo(this);
+        result.code_ = code_;
+        if (infoBuilder_ == null) {
+          result.info_ = info_;
+        } else {
+          result.info_ = infoBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof forge_abi.Rpc.ResponseGetTetherInfo) {
+          return mergeFrom((forge_abi.Rpc.ResponseGetTetherInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(forge_abi.Rpc.ResponseGetTetherInfo other) {
+        if (other == forge_abi.Rpc.ResponseGetTetherInfo.getDefaultInstance()) return this;
+        if (other.code_ != 0) {
+          setCodeValue(other.getCodeValue());
+        }
+        if (other.hasInfo()) {
+          mergeInfo(other.getInfo());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        forge_abi.Rpc.ResponseGetTetherInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (forge_abi.Rpc.ResponseGetTetherInfo) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int code_ = 0;
+      /**
+       * <code>.forge_abi.StatusCode code = 1;</code>
+       */
+      public int getCodeValue() {
+        return code_;
+      }
+      /**
+       * <code>.forge_abi.StatusCode code = 1;</code>
+       */
+      public Builder setCodeValue(int value) {
+        code_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.forge_abi.StatusCode code = 1;</code>
+       */
+      public forge_abi.Enum.StatusCode getCode() {
+        forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
+        return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.forge_abi.StatusCode code = 1;</code>
+       */
+      public Builder setCode(forge_abi.Enum.StatusCode value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        code_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.forge_abi.StatusCode code = 1;</code>
+       */
+      public Builder clearCode() {
+        
+        code_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private forge_abi.State.TetherInfo info_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.State.TetherInfo, forge_abi.State.TetherInfo.Builder, forge_abi.State.TetherInfoOrBuilder> infoBuilder_;
+      /**
+       * <code>.forge_abi.TetherInfo info = 2;</code>
+       */
+      public boolean hasInfo() {
+        return infoBuilder_ != null || info_ != null;
+      }
+      /**
+       * <code>.forge_abi.TetherInfo info = 2;</code>
+       */
+      public forge_abi.State.TetherInfo getInfo() {
+        if (infoBuilder_ == null) {
+          return info_ == null ? forge_abi.State.TetherInfo.getDefaultInstance() : info_;
+        } else {
+          return infoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.forge_abi.TetherInfo info = 2;</code>
+       */
+      public Builder setInfo(forge_abi.State.TetherInfo value) {
+        if (infoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          info_ = value;
+          onChanged();
+        } else {
+          infoBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.TetherInfo info = 2;</code>
+       */
+      public Builder setInfo(
+          forge_abi.State.TetherInfo.Builder builderForValue) {
+        if (infoBuilder_ == null) {
+          info_ = builderForValue.build();
+          onChanged();
+        } else {
+          infoBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.TetherInfo info = 2;</code>
+       */
+      public Builder mergeInfo(forge_abi.State.TetherInfo value) {
+        if (infoBuilder_ == null) {
+          if (info_ != null) {
+            info_ =
+              forge_abi.State.TetherInfo.newBuilder(info_).mergeFrom(value).buildPartial();
+          } else {
+            info_ = value;
+          }
+          onChanged();
+        } else {
+          infoBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.TetherInfo info = 2;</code>
+       */
+      public Builder clearInfo() {
+        if (infoBuilder_ == null) {
+          info_ = null;
+          onChanged();
+        } else {
+          info_ = null;
+          infoBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.TetherInfo info = 2;</code>
+       */
+      public forge_abi.State.TetherInfo.Builder getInfoBuilder() {
+        
+        onChanged();
+        return getInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.TetherInfo info = 2;</code>
+       */
+      public forge_abi.State.TetherInfoOrBuilder getInfoOrBuilder() {
+        if (infoBuilder_ != null) {
+          return infoBuilder_.getMessageOrBuilder();
+        } else {
+          return info_ == null ?
+              forge_abi.State.TetherInfo.getDefaultInstance() : info_;
+        }
+      }
+      /**
+       * <code>.forge_abi.TetherInfo info = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.State.TetherInfo, forge_abi.State.TetherInfo.Builder, forge_abi.State.TetherInfoOrBuilder> 
+          getInfoFieldBuilder() {
+        if (infoBuilder_ == null) {
+          infoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.State.TetherInfo, forge_abi.State.TetherInfo.Builder, forge_abi.State.TetherInfoOrBuilder>(
+                  getInfo(),
+                  getParentForChildren(),
+                  isClean());
+          info_ = null;
+        }
+        return infoBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:forge_abi.ResponseGetTetherInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:forge_abi.ResponseGetTetherInfo)
+    private static final forge_abi.Rpc.ResponseGetTetherInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new forge_abi.Rpc.ResponseGetTetherInfo();
+    }
+
+    public static forge_abi.Rpc.ResponseGetTetherInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ResponseGetTetherInfo>
+        PARSER = new com.google.protobuf.AbstractParser<ResponseGetTetherInfo>() {
+      public ResponseGetTetherInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new ResponseGetTetherInfo(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ResponseGetTetherInfo> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ResponseGetTetherInfo> getParserForType() {
+      return PARSER;
+    }
+
+    public forge_abi.Rpc.ResponseGetTetherInfo getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -29055,9 +31947,17 @@ public final class Rpc {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 limit = 1;</code>
+     * <code>.forge_abi.PageInput paging = 1;</code>
      */
-    int getLimit();
+    boolean hasPaging();
+    /**
+     * <code>.forge_abi.PageInput paging = 1;</code>
+     */
+    forge_abi.TraceType.PageInput getPaging();
+    /**
+     * <code>.forge_abi.PageInput paging = 1;</code>
+     */
+    forge_abi.TraceType.PageInputOrBuilder getPagingOrBuilder();
   }
   /**
    * Protobuf type {@code forge_abi.RequestGetUnconfirmedTxs}
@@ -29071,7 +31971,6 @@ public final class Rpc {
       super(builder);
     }
     private RequestGetUnconfirmedTxs() {
-      limit_ = 0;
     }
 
     @java.lang.Override
@@ -29099,9 +31998,17 @@ public final class Rpc {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              forge_abi.TraceType.PageInput.Builder subBuilder = null;
+              if (paging_ != null) {
+                subBuilder = paging_.toBuilder();
+              }
+              paging_ = input.readMessage(forge_abi.TraceType.PageInput.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(paging_);
+                paging_ = subBuilder.buildPartial();
+              }
 
-              limit_ = input.readUInt32();
               break;
             }
           }
@@ -29127,13 +32034,25 @@ public final class Rpc {
               forge_abi.Rpc.RequestGetUnconfirmedTxs.class, forge_abi.Rpc.RequestGetUnconfirmedTxs.Builder.class);
     }
 
-    public static final int LIMIT_FIELD_NUMBER = 1;
-    private int limit_;
+    public static final int PAGING_FIELD_NUMBER = 1;
+    private forge_abi.TraceType.PageInput paging_;
     /**
-     * <code>uint32 limit = 1;</code>
+     * <code>.forge_abi.PageInput paging = 1;</code>
      */
-    public int getLimit() {
-      return limit_;
+    public boolean hasPaging() {
+      return paging_ != null;
+    }
+    /**
+     * <code>.forge_abi.PageInput paging = 1;</code>
+     */
+    public forge_abi.TraceType.PageInput getPaging() {
+      return paging_ == null ? forge_abi.TraceType.PageInput.getDefaultInstance() : paging_;
+    }
+    /**
+     * <code>.forge_abi.PageInput paging = 1;</code>
+     */
+    public forge_abi.TraceType.PageInputOrBuilder getPagingOrBuilder() {
+      return getPaging();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -29148,8 +32067,8 @@ public final class Rpc {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (limit_ != 0) {
-        output.writeUInt32(1, limit_);
+      if (paging_ != null) {
+        output.writeMessage(1, getPaging());
       }
     }
 
@@ -29158,9 +32077,9 @@ public final class Rpc {
       if (size != -1) return size;
 
       size = 0;
-      if (limit_ != 0) {
+      if (paging_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, limit_);
+          .computeMessageSize(1, getPaging());
       }
       memoizedSize = size;
       return size;
@@ -29178,8 +32097,11 @@ public final class Rpc {
       forge_abi.Rpc.RequestGetUnconfirmedTxs other = (forge_abi.Rpc.RequestGetUnconfirmedTxs) obj;
 
       boolean result = true;
-      result = result && (getLimit()
-          == other.getLimit());
+      result = result && (hasPaging() == other.hasPaging());
+      if (hasPaging()) {
+        result = result && getPaging()
+            .equals(other.getPaging());
+      }
       return result;
     }
 
@@ -29190,8 +32112,10 @@ public final class Rpc {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + LIMIT_FIELD_NUMBER;
-      hash = (53 * hash) + getLimit();
+      if (hasPaging()) {
+        hash = (37 * hash) + PAGING_FIELD_NUMBER;
+        hash = (53 * hash) + getPaging().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -29310,8 +32234,12 @@ public final class Rpc {
       }
       public Builder clear() {
         super.clear();
-        limit_ = 0;
-
+        if (pagingBuilder_ == null) {
+          paging_ = null;
+        } else {
+          paging_ = null;
+          pagingBuilder_ = null;
+        }
         return this;
       }
 
@@ -29334,7 +32262,11 @@ public final class Rpc {
 
       public forge_abi.Rpc.RequestGetUnconfirmedTxs buildPartial() {
         forge_abi.Rpc.RequestGetUnconfirmedTxs result = new forge_abi.Rpc.RequestGetUnconfirmedTxs(this);
-        result.limit_ = limit_;
+        if (pagingBuilder_ == null) {
+          result.paging_ = paging_;
+        } else {
+          result.paging_ = pagingBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -29376,8 +32308,8 @@ public final class Rpc {
 
       public Builder mergeFrom(forge_abi.Rpc.RequestGetUnconfirmedTxs other) {
         if (other == forge_abi.Rpc.RequestGetUnconfirmedTxs.getDefaultInstance()) return this;
-        if (other.getLimit() != 0) {
-          setLimit(other.getLimit());
+        if (other.hasPaging()) {
+          mergePaging(other.getPaging());
         }
         onChanged();
         return this;
@@ -29405,30 +32337,121 @@ public final class Rpc {
         return this;
       }
 
-      private int limit_ ;
+      private forge_abi.TraceType.PageInput paging_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.TraceType.PageInput, forge_abi.TraceType.PageInput.Builder, forge_abi.TraceType.PageInputOrBuilder> pagingBuilder_;
       /**
-       * <code>uint32 limit = 1;</code>
+       * <code>.forge_abi.PageInput paging = 1;</code>
        */
-      public int getLimit() {
-        return limit_;
+      public boolean hasPaging() {
+        return pagingBuilder_ != null || paging_ != null;
       }
       /**
-       * <code>uint32 limit = 1;</code>
+       * <code>.forge_abi.PageInput paging = 1;</code>
        */
-      public Builder setLimit(int value) {
-        
-        limit_ = value;
-        onChanged();
+      public forge_abi.TraceType.PageInput getPaging() {
+        if (pagingBuilder_ == null) {
+          return paging_ == null ? forge_abi.TraceType.PageInput.getDefaultInstance() : paging_;
+        } else {
+          return pagingBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.forge_abi.PageInput paging = 1;</code>
+       */
+      public Builder setPaging(forge_abi.TraceType.PageInput value) {
+        if (pagingBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          paging_ = value;
+          onChanged();
+        } else {
+          pagingBuilder_.setMessage(value);
+        }
+
         return this;
       }
       /**
-       * <code>uint32 limit = 1;</code>
+       * <code>.forge_abi.PageInput paging = 1;</code>
        */
-      public Builder clearLimit() {
-        
-        limit_ = 0;
-        onChanged();
+      public Builder setPaging(
+          forge_abi.TraceType.PageInput.Builder builderForValue) {
+        if (pagingBuilder_ == null) {
+          paging_ = builderForValue.build();
+          onChanged();
+        } else {
+          pagingBuilder_.setMessage(builderForValue.build());
+        }
+
         return this;
+      }
+      /**
+       * <code>.forge_abi.PageInput paging = 1;</code>
+       */
+      public Builder mergePaging(forge_abi.TraceType.PageInput value) {
+        if (pagingBuilder_ == null) {
+          if (paging_ != null) {
+            paging_ =
+              forge_abi.TraceType.PageInput.newBuilder(paging_).mergeFrom(value).buildPartial();
+          } else {
+            paging_ = value;
+          }
+          onChanged();
+        } else {
+          pagingBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.PageInput paging = 1;</code>
+       */
+      public Builder clearPaging() {
+        if (pagingBuilder_ == null) {
+          paging_ = null;
+          onChanged();
+        } else {
+          paging_ = null;
+          pagingBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.PageInput paging = 1;</code>
+       */
+      public forge_abi.TraceType.PageInput.Builder getPagingBuilder() {
+        
+        onChanged();
+        return getPagingFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.PageInput paging = 1;</code>
+       */
+      public forge_abi.TraceType.PageInputOrBuilder getPagingOrBuilder() {
+        if (pagingBuilder_ != null) {
+          return pagingBuilder_.getMessageOrBuilder();
+        } else {
+          return paging_ == null ?
+              forge_abi.TraceType.PageInput.getDefaultInstance() : paging_;
+        }
+      }
+      /**
+       * <code>.forge_abi.PageInput paging = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.TraceType.PageInput, forge_abi.TraceType.PageInput.Builder, forge_abi.TraceType.PageInputOrBuilder> 
+          getPagingFieldBuilder() {
+        if (pagingBuilder_ == null) {
+          pagingBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.TraceType.PageInput, forge_abi.TraceType.PageInput.Builder, forge_abi.TraceType.PageInputOrBuilder>(
+                  getPaging(),
+                  getParentForChildren(),
+                  isClean());
+          paging_ = null;
+        }
+        return pagingBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -29493,15 +32516,28 @@ public final class Rpc {
     forge_abi.Enum.StatusCode getCode();
 
     /**
-     * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 2;</code>
+     * <code>.forge_abi.PageInfo page = 2;</code>
+     */
+    boolean hasPage();
+    /**
+     * <code>.forge_abi.PageInfo page = 2;</code>
+     */
+    forge_abi.TraceType.PageInfo getPage();
+    /**
+     * <code>.forge_abi.PageInfo page = 2;</code>
+     */
+    forge_abi.TraceType.PageInfoOrBuilder getPageOrBuilder();
+
+    /**
+     * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 3;</code>
      */
     boolean hasUnconfirmedTxs();
     /**
-     * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 2;</code>
+     * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 3;</code>
      */
     forge_abi.Type.UnconfirmedTxs getUnconfirmedTxs();
     /**
-     * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 2;</code>
+     * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 3;</code>
      */
     forge_abi.Type.UnconfirmedTxsOrBuilder getUnconfirmedTxsOrBuilder();
   }
@@ -29552,6 +32588,19 @@ public final class Rpc {
               break;
             }
             case 18: {
+              forge_abi.TraceType.PageInfo.Builder subBuilder = null;
+              if (page_ != null) {
+                subBuilder = page_.toBuilder();
+              }
+              page_ = input.readMessage(forge_abi.TraceType.PageInfo.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(page_);
+                page_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 26: {
               forge_abi.Type.UnconfirmedTxs.Builder subBuilder = null;
               if (unconfirmedTxs_ != null) {
                 subBuilder = unconfirmedTxs_.toBuilder();
@@ -29603,22 +32652,43 @@ public final class Rpc {
       return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
     }
 
-    public static final int UNCONFIRMED_TXS_FIELD_NUMBER = 2;
+    public static final int PAGE_FIELD_NUMBER = 2;
+    private forge_abi.TraceType.PageInfo page_;
+    /**
+     * <code>.forge_abi.PageInfo page = 2;</code>
+     */
+    public boolean hasPage() {
+      return page_ != null;
+    }
+    /**
+     * <code>.forge_abi.PageInfo page = 2;</code>
+     */
+    public forge_abi.TraceType.PageInfo getPage() {
+      return page_ == null ? forge_abi.TraceType.PageInfo.getDefaultInstance() : page_;
+    }
+    /**
+     * <code>.forge_abi.PageInfo page = 2;</code>
+     */
+    public forge_abi.TraceType.PageInfoOrBuilder getPageOrBuilder() {
+      return getPage();
+    }
+
+    public static final int UNCONFIRMED_TXS_FIELD_NUMBER = 3;
     private forge_abi.Type.UnconfirmedTxs unconfirmedTxs_;
     /**
-     * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 2;</code>
+     * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 3;</code>
      */
     public boolean hasUnconfirmedTxs() {
       return unconfirmedTxs_ != null;
     }
     /**
-     * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 2;</code>
+     * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 3;</code>
      */
     public forge_abi.Type.UnconfirmedTxs getUnconfirmedTxs() {
       return unconfirmedTxs_ == null ? forge_abi.Type.UnconfirmedTxs.getDefaultInstance() : unconfirmedTxs_;
     }
     /**
-     * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 2;</code>
+     * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 3;</code>
      */
     public forge_abi.Type.UnconfirmedTxsOrBuilder getUnconfirmedTxsOrBuilder() {
       return getUnconfirmedTxs();
@@ -29639,8 +32709,11 @@ public final class Rpc {
       if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
         output.writeEnum(1, code_);
       }
+      if (page_ != null) {
+        output.writeMessage(2, getPage());
+      }
       if (unconfirmedTxs_ != null) {
-        output.writeMessage(2, getUnconfirmedTxs());
+        output.writeMessage(3, getUnconfirmedTxs());
       }
     }
 
@@ -29653,9 +32726,13 @@ public final class Rpc {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, code_);
       }
+      if (page_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getPage());
+      }
       if (unconfirmedTxs_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getUnconfirmedTxs());
+          .computeMessageSize(3, getUnconfirmedTxs());
       }
       memoizedSize = size;
       return size;
@@ -29674,6 +32751,11 @@ public final class Rpc {
 
       boolean result = true;
       result = result && code_ == other.code_;
+      result = result && (hasPage() == other.hasPage());
+      if (hasPage()) {
+        result = result && getPage()
+            .equals(other.getPage());
+      }
       result = result && (hasUnconfirmedTxs() == other.hasUnconfirmedTxs());
       if (hasUnconfirmedTxs()) {
         result = result && getUnconfirmedTxs()
@@ -29691,6 +32773,10 @@ public final class Rpc {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + CODE_FIELD_NUMBER;
       hash = (53 * hash) + code_;
+      if (hasPage()) {
+        hash = (37 * hash) + PAGE_FIELD_NUMBER;
+        hash = (53 * hash) + getPage().hashCode();
+      }
       if (hasUnconfirmedTxs()) {
         hash = (37 * hash) + UNCONFIRMED_TXS_FIELD_NUMBER;
         hash = (53 * hash) + getUnconfirmedTxs().hashCode();
@@ -29815,6 +32901,12 @@ public final class Rpc {
         super.clear();
         code_ = 0;
 
+        if (pageBuilder_ == null) {
+          page_ = null;
+        } else {
+          page_ = null;
+          pageBuilder_ = null;
+        }
         if (unconfirmedTxsBuilder_ == null) {
           unconfirmedTxs_ = null;
         } else {
@@ -29844,6 +32936,11 @@ public final class Rpc {
       public forge_abi.Rpc.ResponseGetUnconfirmedTxs buildPartial() {
         forge_abi.Rpc.ResponseGetUnconfirmedTxs result = new forge_abi.Rpc.ResponseGetUnconfirmedTxs(this);
         result.code_ = code_;
+        if (pageBuilder_ == null) {
+          result.page_ = page_;
+        } else {
+          result.page_ = pageBuilder_.build();
+        }
         if (unconfirmedTxsBuilder_ == null) {
           result.unconfirmedTxs_ = unconfirmedTxs_;
         } else {
@@ -29892,6 +32989,9 @@ public final class Rpc {
         if (other == forge_abi.Rpc.ResponseGetUnconfirmedTxs.getDefaultInstance()) return this;
         if (other.code_ != 0) {
           setCodeValue(other.getCodeValue());
+        }
+        if (other.hasPage()) {
+          mergePage(other.getPage());
         }
         if (other.hasUnconfirmedTxs()) {
           mergeUnconfirmedTxs(other.getUnconfirmedTxs());
@@ -29966,17 +33066,134 @@ public final class Rpc {
         return this;
       }
 
+      private forge_abi.TraceType.PageInfo page_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.TraceType.PageInfo, forge_abi.TraceType.PageInfo.Builder, forge_abi.TraceType.PageInfoOrBuilder> pageBuilder_;
+      /**
+       * <code>.forge_abi.PageInfo page = 2;</code>
+       */
+      public boolean hasPage() {
+        return pageBuilder_ != null || page_ != null;
+      }
+      /**
+       * <code>.forge_abi.PageInfo page = 2;</code>
+       */
+      public forge_abi.TraceType.PageInfo getPage() {
+        if (pageBuilder_ == null) {
+          return page_ == null ? forge_abi.TraceType.PageInfo.getDefaultInstance() : page_;
+        } else {
+          return pageBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.forge_abi.PageInfo page = 2;</code>
+       */
+      public Builder setPage(forge_abi.TraceType.PageInfo value) {
+        if (pageBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          page_ = value;
+          onChanged();
+        } else {
+          pageBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.PageInfo page = 2;</code>
+       */
+      public Builder setPage(
+          forge_abi.TraceType.PageInfo.Builder builderForValue) {
+        if (pageBuilder_ == null) {
+          page_ = builderForValue.build();
+          onChanged();
+        } else {
+          pageBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.PageInfo page = 2;</code>
+       */
+      public Builder mergePage(forge_abi.TraceType.PageInfo value) {
+        if (pageBuilder_ == null) {
+          if (page_ != null) {
+            page_ =
+              forge_abi.TraceType.PageInfo.newBuilder(page_).mergeFrom(value).buildPartial();
+          } else {
+            page_ = value;
+          }
+          onChanged();
+        } else {
+          pageBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.PageInfo page = 2;</code>
+       */
+      public Builder clearPage() {
+        if (pageBuilder_ == null) {
+          page_ = null;
+          onChanged();
+        } else {
+          page_ = null;
+          pageBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.PageInfo page = 2;</code>
+       */
+      public forge_abi.TraceType.PageInfo.Builder getPageBuilder() {
+        
+        onChanged();
+        return getPageFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.PageInfo page = 2;</code>
+       */
+      public forge_abi.TraceType.PageInfoOrBuilder getPageOrBuilder() {
+        if (pageBuilder_ != null) {
+          return pageBuilder_.getMessageOrBuilder();
+        } else {
+          return page_ == null ?
+              forge_abi.TraceType.PageInfo.getDefaultInstance() : page_;
+        }
+      }
+      /**
+       * <code>.forge_abi.PageInfo page = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.TraceType.PageInfo, forge_abi.TraceType.PageInfo.Builder, forge_abi.TraceType.PageInfoOrBuilder> 
+          getPageFieldBuilder() {
+        if (pageBuilder_ == null) {
+          pageBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.TraceType.PageInfo, forge_abi.TraceType.PageInfo.Builder, forge_abi.TraceType.PageInfoOrBuilder>(
+                  getPage(),
+                  getParentForChildren(),
+                  isClean());
+          page_ = null;
+        }
+        return pageBuilder_;
+      }
+
       private forge_abi.Type.UnconfirmedTxs unconfirmedTxs_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
           forge_abi.Type.UnconfirmedTxs, forge_abi.Type.UnconfirmedTxs.Builder, forge_abi.Type.UnconfirmedTxsOrBuilder> unconfirmedTxsBuilder_;
       /**
-       * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 2;</code>
+       * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 3;</code>
        */
       public boolean hasUnconfirmedTxs() {
         return unconfirmedTxsBuilder_ != null || unconfirmedTxs_ != null;
       }
       /**
-       * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 2;</code>
+       * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 3;</code>
        */
       public forge_abi.Type.UnconfirmedTxs getUnconfirmedTxs() {
         if (unconfirmedTxsBuilder_ == null) {
@@ -29986,7 +33203,7 @@ public final class Rpc {
         }
       }
       /**
-       * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 2;</code>
+       * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 3;</code>
        */
       public Builder setUnconfirmedTxs(forge_abi.Type.UnconfirmedTxs value) {
         if (unconfirmedTxsBuilder_ == null) {
@@ -30002,7 +33219,7 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 2;</code>
+       * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 3;</code>
        */
       public Builder setUnconfirmedTxs(
           forge_abi.Type.UnconfirmedTxs.Builder builderForValue) {
@@ -30016,7 +33233,7 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 2;</code>
+       * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 3;</code>
        */
       public Builder mergeUnconfirmedTxs(forge_abi.Type.UnconfirmedTxs value) {
         if (unconfirmedTxsBuilder_ == null) {
@@ -30034,7 +33251,7 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 2;</code>
+       * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 3;</code>
        */
       public Builder clearUnconfirmedTxs() {
         if (unconfirmedTxsBuilder_ == null) {
@@ -30048,7 +33265,7 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 2;</code>
+       * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 3;</code>
        */
       public forge_abi.Type.UnconfirmedTxs.Builder getUnconfirmedTxsBuilder() {
         
@@ -30056,7 +33273,7 @@ public final class Rpc {
         return getUnconfirmedTxsFieldBuilder().getBuilder();
       }
       /**
-       * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 2;</code>
+       * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 3;</code>
        */
       public forge_abi.Type.UnconfirmedTxsOrBuilder getUnconfirmedTxsOrBuilder() {
         if (unconfirmedTxsBuilder_ != null) {
@@ -30067,7 +33284,7 @@ public final class Rpc {
         }
       }
       /**
-       * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 2;</code>
+       * <code>.forge_abi.UnconfirmedTxs unconfirmed_txs = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           forge_abi.Type.UnconfirmedTxs, forge_abi.Type.UnconfirmedTxs.Builder, forge_abi.Type.UnconfirmedTxsOrBuilder> 
@@ -32170,13 +35387,14 @@ public final class Rpc {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.forge_abi.TopicType type = 1;</code>
+     * <code>string topic = 1;</code>
      */
-    int getTypeValue();
+    java.lang.String getTopic();
     /**
-     * <code>.forge_abi.TopicType type = 1;</code>
+     * <code>string topic = 1;</code>
      */
-    forge_abi.Enum.TopicType getType();
+    com.google.protobuf.ByteString
+        getTopicBytes();
 
     /**
      * <code>string filter = 2;</code>
@@ -32205,7 +35423,7 @@ public final class Rpc {
       super(builder);
     }
     private RequestSubscribe() {
-      type_ = 0;
+      topic_ = "";
       filter_ = "";
     }
 
@@ -32234,10 +35452,10 @@ public final class Rpc {
               }
               break;
             }
-            case 8: {
-              int rawValue = input.readEnum();
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
 
-              type_ = rawValue;
+              topic_ = s;
               break;
             }
             case 18: {
@@ -32269,20 +35487,38 @@ public final class Rpc {
               forge_abi.Rpc.RequestSubscribe.class, forge_abi.Rpc.RequestSubscribe.Builder.class);
     }
 
-    public static final int TYPE_FIELD_NUMBER = 1;
-    private int type_;
+    public static final int TOPIC_FIELD_NUMBER = 1;
+    private volatile java.lang.Object topic_;
     /**
-     * <code>.forge_abi.TopicType type = 1;</code>
+     * <code>string topic = 1;</code>
      */
-    public int getTypeValue() {
-      return type_;
+    public java.lang.String getTopic() {
+      java.lang.Object ref = topic_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        topic_ = s;
+        return s;
+      }
     }
     /**
-     * <code>.forge_abi.TopicType type = 1;</code>
+     * <code>string topic = 1;</code>
      */
-    public forge_abi.Enum.TopicType getType() {
-      forge_abi.Enum.TopicType result = forge_abi.Enum.TopicType.valueOf(type_);
-      return result == null ? forge_abi.Enum.TopicType.UNRECOGNIZED : result;
+    public com.google.protobuf.ByteString
+        getTopicBytes() {
+      java.lang.Object ref = topic_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        topic_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int FILTER_FIELD_NUMBER = 2;
@@ -32331,8 +35567,8 @@ public final class Rpc {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (type_ != forge_abi.Enum.TopicType.transfer.getNumber()) {
-        output.writeEnum(1, type_);
+      if (!getTopicBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, topic_);
       }
       if (!getFilterBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, filter_);
@@ -32344,9 +35580,8 @@ public final class Rpc {
       if (size != -1) return size;
 
       size = 0;
-      if (type_ != forge_abi.Enum.TopicType.transfer.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, type_);
+      if (!getTopicBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, topic_);
       }
       if (!getFilterBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, filter_);
@@ -32367,7 +35602,8 @@ public final class Rpc {
       forge_abi.Rpc.RequestSubscribe other = (forge_abi.Rpc.RequestSubscribe) obj;
 
       boolean result = true;
-      result = result && type_ == other.type_;
+      result = result && getTopic()
+          .equals(other.getTopic());
       result = result && getFilter()
           .equals(other.getFilter());
       return result;
@@ -32380,8 +35616,8 @@ public final class Rpc {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + TYPE_FIELD_NUMBER;
-      hash = (53 * hash) + type_;
+      hash = (37 * hash) + TOPIC_FIELD_NUMBER;
+      hash = (53 * hash) + getTopic().hashCode();
       hash = (37 * hash) + FILTER_FIELD_NUMBER;
       hash = (53 * hash) + getFilter().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
@@ -32507,7 +35743,7 @@ public final class Rpc {
       }
       public Builder clear() {
         super.clear();
-        type_ = 0;
+        topic_ = "";
 
         filter_ = "";
 
@@ -32533,7 +35769,7 @@ public final class Rpc {
 
       public forge_abi.Rpc.RequestSubscribe buildPartial() {
         forge_abi.Rpc.RequestSubscribe result = new forge_abi.Rpc.RequestSubscribe(this);
-        result.type_ = type_;
+        result.topic_ = topic_;
         result.filter_ = filter_;
         onBuilt();
         return result;
@@ -32576,8 +35812,9 @@ public final class Rpc {
 
       public Builder mergeFrom(forge_abi.Rpc.RequestSubscribe other) {
         if (other == forge_abi.Rpc.RequestSubscribe.getDefaultInstance()) return this;
-        if (other.type_ != 0) {
-          setTypeValue(other.getTypeValue());
+        if (!other.getTopic().isEmpty()) {
+          topic_ = other.topic_;
+          onChanged();
         }
         if (!other.getFilter().isEmpty()) {
           filter_ = other.filter_;
@@ -32609,46 +35846,71 @@ public final class Rpc {
         return this;
       }
 
-      private int type_ = 0;
+      private java.lang.Object topic_ = "";
       /**
-       * <code>.forge_abi.TopicType type = 1;</code>
+       * <code>string topic = 1;</code>
        */
-      public int getTypeValue() {
-        return type_;
-      }
-      /**
-       * <code>.forge_abi.TopicType type = 1;</code>
-       */
-      public Builder setTypeValue(int value) {
-        type_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.forge_abi.TopicType type = 1;</code>
-       */
-      public forge_abi.Enum.TopicType getType() {
-        forge_abi.Enum.TopicType result = forge_abi.Enum.TopicType.valueOf(type_);
-        return result == null ? forge_abi.Enum.TopicType.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.forge_abi.TopicType type = 1;</code>
-       */
-      public Builder setType(forge_abi.Enum.TopicType value) {
-        if (value == null) {
-          throw new NullPointerException();
+      public java.lang.String getTopic() {
+        java.lang.Object ref = topic_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          topic_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
         }
-        
-        type_ = value.getNumber();
+      }
+      /**
+       * <code>string topic = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTopicBytes() {
+        java.lang.Object ref = topic_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          topic_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string topic = 1;</code>
+       */
+      public Builder setTopic(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        topic_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>.forge_abi.TopicType type = 1;</code>
+       * <code>string topic = 1;</code>
        */
-      public Builder clearType() {
+      public Builder clearTopic() {
         
-        type_ = 0;
+        topic_ = getDefaultInstance().getTopic();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string topic = 1;</code>
+       */
+      public Builder setTopicBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        topic_ = value;
         onChanged();
         return this;
       }
@@ -32920,40 +36182,49 @@ public final class Rpc {
     forge_abi.Type.TransactionOrBuilder getStakeOrBuilder();
 
     /**
-     * <code>.forge_abi.Transaction account_state = 129;</code>
+     * <code>.forge_abi.AccountState account_state = 129;</code>
      */
-    forge_abi.Type.Transaction getAccountState();
+    forge_abi.State.AccountState getAccountState();
     /**
-     * <code>.forge_abi.Transaction account_state = 129;</code>
+     * <code>.forge_abi.AccountState account_state = 129;</code>
      */
-    forge_abi.Type.TransactionOrBuilder getAccountStateOrBuilder();
+    forge_abi.State.AccountStateOrBuilder getAccountStateOrBuilder();
 
     /**
-     * <code>.forge_abi.Transaction asset_state = 130;</code>
+     * <code>.forge_abi.AssetState asset_state = 130;</code>
      */
-    forge_abi.Type.Transaction getAssetState();
+    forge_abi.State.AssetState getAssetState();
     /**
-     * <code>.forge_abi.Transaction asset_state = 130;</code>
+     * <code>.forge_abi.AssetState asset_state = 130;</code>
      */
-    forge_abi.Type.TransactionOrBuilder getAssetStateOrBuilder();
+    forge_abi.State.AssetStateOrBuilder getAssetStateOrBuilder();
 
     /**
-     * <code>.forge_abi.Transaction forge_state = 131;</code>
+     * <code>.forge_abi.ForgeState forge_state = 131;</code>
      */
-    forge_abi.Type.Transaction getForgeState();
+    forge_abi.State.ForgeState getForgeState();
     /**
-     * <code>.forge_abi.Transaction forge_state = 131;</code>
+     * <code>.forge_abi.ForgeState forge_state = 131;</code>
      */
-    forge_abi.Type.TransactionOrBuilder getForgeStateOrBuilder();
+    forge_abi.State.ForgeStateOrBuilder getForgeStateOrBuilder();
 
     /**
-     * <code>.forge_abi.Transaction stake_state = 132;</code>
+     * <code>.forge_abi.StakeState stake_state = 132;</code>
      */
-    forge_abi.Type.Transaction getStakeState();
+    forge_abi.State.StakeState getStakeState();
     /**
-     * <code>.forge_abi.Transaction stake_state = 132;</code>
+     * <code>.forge_abi.StakeState stake_state = 132;</code>
      */
-    forge_abi.Type.TransactionOrBuilder getStakeStateOrBuilder();
+    forge_abi.State.StakeStateOrBuilder getStakeStateOrBuilder();
+
+    /**
+     * <code>.forge_abi.ProtocolState protocol_state = 133;</code>
+     */
+    forge_abi.State.ProtocolState getProtocolState();
+    /**
+     * <code>.forge_abi.ProtocolState protocol_state = 133;</code>
+     */
+    forge_abi.State.ProtocolStateOrBuilder getProtocolStateOrBuilder();
 
     public forge_abi.Rpc.ResponseSubscribe.ValueCase getValueCase();
   }
@@ -33206,59 +36477,73 @@ public final class Rpc {
               break;
             }
             case 1034: {
-              forge_abi.Type.Transaction.Builder subBuilder = null;
+              forge_abi.State.AccountState.Builder subBuilder = null;
               if (valueCase_ == 129) {
-                subBuilder = ((forge_abi.Type.Transaction) value_).toBuilder();
+                subBuilder = ((forge_abi.State.AccountState) value_).toBuilder();
               }
               value_ =
-                  input.readMessage(forge_abi.Type.Transaction.parser(), extensionRegistry);
+                  input.readMessage(forge_abi.State.AccountState.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom((forge_abi.Type.Transaction) value_);
+                subBuilder.mergeFrom((forge_abi.State.AccountState) value_);
                 value_ = subBuilder.buildPartial();
               }
               valueCase_ = 129;
               break;
             }
             case 1042: {
-              forge_abi.Type.Transaction.Builder subBuilder = null;
+              forge_abi.State.AssetState.Builder subBuilder = null;
               if (valueCase_ == 130) {
-                subBuilder = ((forge_abi.Type.Transaction) value_).toBuilder();
+                subBuilder = ((forge_abi.State.AssetState) value_).toBuilder();
               }
               value_ =
-                  input.readMessage(forge_abi.Type.Transaction.parser(), extensionRegistry);
+                  input.readMessage(forge_abi.State.AssetState.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom((forge_abi.Type.Transaction) value_);
+                subBuilder.mergeFrom((forge_abi.State.AssetState) value_);
                 value_ = subBuilder.buildPartial();
               }
               valueCase_ = 130;
               break;
             }
             case 1050: {
-              forge_abi.Type.Transaction.Builder subBuilder = null;
+              forge_abi.State.ForgeState.Builder subBuilder = null;
               if (valueCase_ == 131) {
-                subBuilder = ((forge_abi.Type.Transaction) value_).toBuilder();
+                subBuilder = ((forge_abi.State.ForgeState) value_).toBuilder();
               }
               value_ =
-                  input.readMessage(forge_abi.Type.Transaction.parser(), extensionRegistry);
+                  input.readMessage(forge_abi.State.ForgeState.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom((forge_abi.Type.Transaction) value_);
+                subBuilder.mergeFrom((forge_abi.State.ForgeState) value_);
                 value_ = subBuilder.buildPartial();
               }
               valueCase_ = 131;
               break;
             }
             case 1058: {
-              forge_abi.Type.Transaction.Builder subBuilder = null;
+              forge_abi.State.StakeState.Builder subBuilder = null;
               if (valueCase_ == 132) {
-                subBuilder = ((forge_abi.Type.Transaction) value_).toBuilder();
+                subBuilder = ((forge_abi.State.StakeState) value_).toBuilder();
               }
               value_ =
-                  input.readMessage(forge_abi.Type.Transaction.parser(), extensionRegistry);
+                  input.readMessage(forge_abi.State.StakeState.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom((forge_abi.Type.Transaction) value_);
+                subBuilder.mergeFrom((forge_abi.State.StakeState) value_);
                 value_ = subBuilder.buildPartial();
               }
               valueCase_ = 132;
+              break;
+            }
+            case 1066: {
+              forge_abi.State.ProtocolState.Builder subBuilder = null;
+              if (valueCase_ == 133) {
+                subBuilder = ((forge_abi.State.ProtocolState) value_).toBuilder();
+              }
+              value_ =
+                  input.readMessage(forge_abi.State.ProtocolState.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((forge_abi.State.ProtocolState) value_);
+                value_ = subBuilder.buildPartial();
+              }
+              valueCase_ = 133;
               break;
             }
           }
@@ -33307,6 +36592,7 @@ public final class Rpc {
       ASSET_STATE(130),
       FORGE_STATE(131),
       STAKE_STATE(132),
+      PROTOCOL_STATE(133),
       VALUE_NOT_SET(0);
       private final int value;
       private ValueCase(int value) {
@@ -33341,6 +36627,7 @@ public final class Rpc {
           case 130: return ASSET_STATE;
           case 131: return FORGE_STATE;
           case 132: return STAKE_STATE;
+          case 133: return PROTOCOL_STATE;
           case 0: return VALUE_NOT_SET;
           default: return null;
         }
@@ -33697,82 +36984,102 @@ public final class Rpc {
 
     public static final int ACCOUNT_STATE_FIELD_NUMBER = 129;
     /**
-     * <code>.forge_abi.Transaction account_state = 129;</code>
+     * <code>.forge_abi.AccountState account_state = 129;</code>
      */
-    public forge_abi.Type.Transaction getAccountState() {
+    public forge_abi.State.AccountState getAccountState() {
       if (valueCase_ == 129) {
-         return (forge_abi.Type.Transaction) value_;
+         return (forge_abi.State.AccountState) value_;
       }
-      return forge_abi.Type.Transaction.getDefaultInstance();
+      return forge_abi.State.AccountState.getDefaultInstance();
     }
     /**
-     * <code>.forge_abi.Transaction account_state = 129;</code>
+     * <code>.forge_abi.AccountState account_state = 129;</code>
      */
-    public forge_abi.Type.TransactionOrBuilder getAccountStateOrBuilder() {
+    public forge_abi.State.AccountStateOrBuilder getAccountStateOrBuilder() {
       if (valueCase_ == 129) {
-         return (forge_abi.Type.Transaction) value_;
+         return (forge_abi.State.AccountState) value_;
       }
-      return forge_abi.Type.Transaction.getDefaultInstance();
+      return forge_abi.State.AccountState.getDefaultInstance();
     }
 
     public static final int ASSET_STATE_FIELD_NUMBER = 130;
     /**
-     * <code>.forge_abi.Transaction asset_state = 130;</code>
+     * <code>.forge_abi.AssetState asset_state = 130;</code>
      */
-    public forge_abi.Type.Transaction getAssetState() {
+    public forge_abi.State.AssetState getAssetState() {
       if (valueCase_ == 130) {
-         return (forge_abi.Type.Transaction) value_;
+         return (forge_abi.State.AssetState) value_;
       }
-      return forge_abi.Type.Transaction.getDefaultInstance();
+      return forge_abi.State.AssetState.getDefaultInstance();
     }
     /**
-     * <code>.forge_abi.Transaction asset_state = 130;</code>
+     * <code>.forge_abi.AssetState asset_state = 130;</code>
      */
-    public forge_abi.Type.TransactionOrBuilder getAssetStateOrBuilder() {
+    public forge_abi.State.AssetStateOrBuilder getAssetStateOrBuilder() {
       if (valueCase_ == 130) {
-         return (forge_abi.Type.Transaction) value_;
+         return (forge_abi.State.AssetState) value_;
       }
-      return forge_abi.Type.Transaction.getDefaultInstance();
+      return forge_abi.State.AssetState.getDefaultInstance();
     }
 
     public static final int FORGE_STATE_FIELD_NUMBER = 131;
     /**
-     * <code>.forge_abi.Transaction forge_state = 131;</code>
+     * <code>.forge_abi.ForgeState forge_state = 131;</code>
      */
-    public forge_abi.Type.Transaction getForgeState() {
+    public forge_abi.State.ForgeState getForgeState() {
       if (valueCase_ == 131) {
-         return (forge_abi.Type.Transaction) value_;
+         return (forge_abi.State.ForgeState) value_;
       }
-      return forge_abi.Type.Transaction.getDefaultInstance();
+      return forge_abi.State.ForgeState.getDefaultInstance();
     }
     /**
-     * <code>.forge_abi.Transaction forge_state = 131;</code>
+     * <code>.forge_abi.ForgeState forge_state = 131;</code>
      */
-    public forge_abi.Type.TransactionOrBuilder getForgeStateOrBuilder() {
+    public forge_abi.State.ForgeStateOrBuilder getForgeStateOrBuilder() {
       if (valueCase_ == 131) {
-         return (forge_abi.Type.Transaction) value_;
+         return (forge_abi.State.ForgeState) value_;
       }
-      return forge_abi.Type.Transaction.getDefaultInstance();
+      return forge_abi.State.ForgeState.getDefaultInstance();
     }
 
     public static final int STAKE_STATE_FIELD_NUMBER = 132;
     /**
-     * <code>.forge_abi.Transaction stake_state = 132;</code>
+     * <code>.forge_abi.StakeState stake_state = 132;</code>
      */
-    public forge_abi.Type.Transaction getStakeState() {
+    public forge_abi.State.StakeState getStakeState() {
       if (valueCase_ == 132) {
-         return (forge_abi.Type.Transaction) value_;
+         return (forge_abi.State.StakeState) value_;
       }
-      return forge_abi.Type.Transaction.getDefaultInstance();
+      return forge_abi.State.StakeState.getDefaultInstance();
     }
     /**
-     * <code>.forge_abi.Transaction stake_state = 132;</code>
+     * <code>.forge_abi.StakeState stake_state = 132;</code>
      */
-    public forge_abi.Type.TransactionOrBuilder getStakeStateOrBuilder() {
+    public forge_abi.State.StakeStateOrBuilder getStakeStateOrBuilder() {
       if (valueCase_ == 132) {
-         return (forge_abi.Type.Transaction) value_;
+         return (forge_abi.State.StakeState) value_;
       }
-      return forge_abi.Type.Transaction.getDefaultInstance();
+      return forge_abi.State.StakeState.getDefaultInstance();
+    }
+
+    public static final int PROTOCOL_STATE_FIELD_NUMBER = 133;
+    /**
+     * <code>.forge_abi.ProtocolState protocol_state = 133;</code>
+     */
+    public forge_abi.State.ProtocolState getProtocolState() {
+      if (valueCase_ == 133) {
+         return (forge_abi.State.ProtocolState) value_;
+      }
+      return forge_abi.State.ProtocolState.getDefaultInstance();
+    }
+    /**
+     * <code>.forge_abi.ProtocolState protocol_state = 133;</code>
+     */
+    public forge_abi.State.ProtocolStateOrBuilder getProtocolStateOrBuilder() {
+      if (valueCase_ == 133) {
+         return (forge_abi.State.ProtocolState) value_;
+      }
+      return forge_abi.State.ProtocolState.getDefaultInstance();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -33836,16 +37143,19 @@ public final class Rpc {
         output.writeMessage(24, (forge_abi.Type.Transaction) value_);
       }
       if (valueCase_ == 129) {
-        output.writeMessage(129, (forge_abi.Type.Transaction) value_);
+        output.writeMessage(129, (forge_abi.State.AccountState) value_);
       }
       if (valueCase_ == 130) {
-        output.writeMessage(130, (forge_abi.Type.Transaction) value_);
+        output.writeMessage(130, (forge_abi.State.AssetState) value_);
       }
       if (valueCase_ == 131) {
-        output.writeMessage(131, (forge_abi.Type.Transaction) value_);
+        output.writeMessage(131, (forge_abi.State.ForgeState) value_);
       }
       if (valueCase_ == 132) {
-        output.writeMessage(132, (forge_abi.Type.Transaction) value_);
+        output.writeMessage(132, (forge_abi.State.StakeState) value_);
+      }
+      if (valueCase_ == 133) {
+        output.writeMessage(133, (forge_abi.State.ProtocolState) value_);
       }
     }
 
@@ -33919,19 +37229,23 @@ public final class Rpc {
       }
       if (valueCase_ == 129) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(129, (forge_abi.Type.Transaction) value_);
+          .computeMessageSize(129, (forge_abi.State.AccountState) value_);
       }
       if (valueCase_ == 130) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(130, (forge_abi.Type.Transaction) value_);
+          .computeMessageSize(130, (forge_abi.State.AssetState) value_);
       }
       if (valueCase_ == 131) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(131, (forge_abi.Type.Transaction) value_);
+          .computeMessageSize(131, (forge_abi.State.ForgeState) value_);
       }
       if (valueCase_ == 132) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(132, (forge_abi.Type.Transaction) value_);
+          .computeMessageSize(132, (forge_abi.State.StakeState) value_);
+      }
+      if (valueCase_ == 133) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(133, (forge_abi.State.ProtocolState) value_);
       }
       memoizedSize = size;
       return size;
@@ -34030,6 +37344,10 @@ public final class Rpc {
           result = result && getStakeState()
               .equals(other.getStakeState());
           break;
+        case 133:
+          result = result && getProtocolState()
+              .equals(other.getProtocolState());
+          break;
         case 0:
         default:
       }
@@ -34121,6 +37439,10 @@ public final class Rpc {
         case 132:
           hash = (37 * hash) + STAKE_STATE_FIELD_NUMBER;
           hash = (53 * hash) + getStakeState().hashCode();
+          break;
+        case 133:
+          hash = (37 * hash) + PROTOCOL_STATE_FIELD_NUMBER;
+          hash = (53 * hash) + getProtocolState().hashCode();
           break;
         case 0:
         default:
@@ -34399,6 +37721,13 @@ public final class Rpc {
             result.value_ = stakeStateBuilder_.build();
           }
         }
+        if (valueCase_ == 133) {
+          if (protocolStateBuilder_ == null) {
+            result.value_ = value_;
+          } else {
+            result.value_ = protocolStateBuilder_.build();
+          }
+        }
         result.valueCase_ = valueCase_;
         onBuilt();
         return result;
@@ -34521,6 +37850,10 @@ public final class Rpc {
           }
           case STAKE_STATE: {
             mergeStakeState(other.getStakeState());
+            break;
+          }
+          case PROTOCOL_STATE: {
+            mergeProtocolState(other.getProtocolState());
             break;
           }
           case VALUE_NOT_SET: {
@@ -36513,27 +39846,27 @@ public final class Rpc {
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> accountStateBuilder_;
+          forge_abi.State.AccountState, forge_abi.State.AccountState.Builder, forge_abi.State.AccountStateOrBuilder> accountStateBuilder_;
       /**
-       * <code>.forge_abi.Transaction account_state = 129;</code>
+       * <code>.forge_abi.AccountState account_state = 129;</code>
        */
-      public forge_abi.Type.Transaction getAccountState() {
+      public forge_abi.State.AccountState getAccountState() {
         if (accountStateBuilder_ == null) {
           if (valueCase_ == 129) {
-            return (forge_abi.Type.Transaction) value_;
+            return (forge_abi.State.AccountState) value_;
           }
-          return forge_abi.Type.Transaction.getDefaultInstance();
+          return forge_abi.State.AccountState.getDefaultInstance();
         } else {
           if (valueCase_ == 129) {
             return accountStateBuilder_.getMessage();
           }
-          return forge_abi.Type.Transaction.getDefaultInstance();
+          return forge_abi.State.AccountState.getDefaultInstance();
         }
       }
       /**
-       * <code>.forge_abi.Transaction account_state = 129;</code>
+       * <code>.forge_abi.AccountState account_state = 129;</code>
        */
-      public Builder setAccountState(forge_abi.Type.Transaction value) {
+      public Builder setAccountState(forge_abi.State.AccountState value) {
         if (accountStateBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -36547,10 +39880,10 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.Transaction account_state = 129;</code>
+       * <code>.forge_abi.AccountState account_state = 129;</code>
        */
       public Builder setAccountState(
-          forge_abi.Type.Transaction.Builder builderForValue) {
+          forge_abi.State.AccountState.Builder builderForValue) {
         if (accountStateBuilder_ == null) {
           value_ = builderForValue.build();
           onChanged();
@@ -36561,13 +39894,13 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.Transaction account_state = 129;</code>
+       * <code>.forge_abi.AccountState account_state = 129;</code>
        */
-      public Builder mergeAccountState(forge_abi.Type.Transaction value) {
+      public Builder mergeAccountState(forge_abi.State.AccountState value) {
         if (accountStateBuilder_ == null) {
           if (valueCase_ == 129 &&
-              value_ != forge_abi.Type.Transaction.getDefaultInstance()) {
-            value_ = forge_abi.Type.Transaction.newBuilder((forge_abi.Type.Transaction) value_)
+              value_ != forge_abi.State.AccountState.getDefaultInstance()) {
+            value_ = forge_abi.State.AccountState.newBuilder((forge_abi.State.AccountState) value_)
                 .mergeFrom(value).buildPartial();
           } else {
             value_ = value;
@@ -36583,7 +39916,7 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.Transaction account_state = 129;</code>
+       * <code>.forge_abi.AccountState account_state = 129;</code>
        */
       public Builder clearAccountState() {
         if (accountStateBuilder_ == null) {
@@ -36602,37 +39935,37 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.Transaction account_state = 129;</code>
+       * <code>.forge_abi.AccountState account_state = 129;</code>
        */
-      public forge_abi.Type.Transaction.Builder getAccountStateBuilder() {
+      public forge_abi.State.AccountState.Builder getAccountStateBuilder() {
         return getAccountStateFieldBuilder().getBuilder();
       }
       /**
-       * <code>.forge_abi.Transaction account_state = 129;</code>
+       * <code>.forge_abi.AccountState account_state = 129;</code>
        */
-      public forge_abi.Type.TransactionOrBuilder getAccountStateOrBuilder() {
+      public forge_abi.State.AccountStateOrBuilder getAccountStateOrBuilder() {
         if ((valueCase_ == 129) && (accountStateBuilder_ != null)) {
           return accountStateBuilder_.getMessageOrBuilder();
         } else {
           if (valueCase_ == 129) {
-            return (forge_abi.Type.Transaction) value_;
+            return (forge_abi.State.AccountState) value_;
           }
-          return forge_abi.Type.Transaction.getDefaultInstance();
+          return forge_abi.State.AccountState.getDefaultInstance();
         }
       }
       /**
-       * <code>.forge_abi.Transaction account_state = 129;</code>
+       * <code>.forge_abi.AccountState account_state = 129;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> 
+          forge_abi.State.AccountState, forge_abi.State.AccountState.Builder, forge_abi.State.AccountStateOrBuilder> 
           getAccountStateFieldBuilder() {
         if (accountStateBuilder_ == null) {
           if (!(valueCase_ == 129)) {
-            value_ = forge_abi.Type.Transaction.getDefaultInstance();
+            value_ = forge_abi.State.AccountState.getDefaultInstance();
           }
           accountStateBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder>(
-                  (forge_abi.Type.Transaction) value_,
+              forge_abi.State.AccountState, forge_abi.State.AccountState.Builder, forge_abi.State.AccountStateOrBuilder>(
+                  (forge_abi.State.AccountState) value_,
                   getParentForChildren(),
                   isClean());
           value_ = null;
@@ -36643,27 +39976,27 @@ public final class Rpc {
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> assetStateBuilder_;
+          forge_abi.State.AssetState, forge_abi.State.AssetState.Builder, forge_abi.State.AssetStateOrBuilder> assetStateBuilder_;
       /**
-       * <code>.forge_abi.Transaction asset_state = 130;</code>
+       * <code>.forge_abi.AssetState asset_state = 130;</code>
        */
-      public forge_abi.Type.Transaction getAssetState() {
+      public forge_abi.State.AssetState getAssetState() {
         if (assetStateBuilder_ == null) {
           if (valueCase_ == 130) {
-            return (forge_abi.Type.Transaction) value_;
+            return (forge_abi.State.AssetState) value_;
           }
-          return forge_abi.Type.Transaction.getDefaultInstance();
+          return forge_abi.State.AssetState.getDefaultInstance();
         } else {
           if (valueCase_ == 130) {
             return assetStateBuilder_.getMessage();
           }
-          return forge_abi.Type.Transaction.getDefaultInstance();
+          return forge_abi.State.AssetState.getDefaultInstance();
         }
       }
       /**
-       * <code>.forge_abi.Transaction asset_state = 130;</code>
+       * <code>.forge_abi.AssetState asset_state = 130;</code>
        */
-      public Builder setAssetState(forge_abi.Type.Transaction value) {
+      public Builder setAssetState(forge_abi.State.AssetState value) {
         if (assetStateBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -36677,10 +40010,10 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.Transaction asset_state = 130;</code>
+       * <code>.forge_abi.AssetState asset_state = 130;</code>
        */
       public Builder setAssetState(
-          forge_abi.Type.Transaction.Builder builderForValue) {
+          forge_abi.State.AssetState.Builder builderForValue) {
         if (assetStateBuilder_ == null) {
           value_ = builderForValue.build();
           onChanged();
@@ -36691,13 +40024,13 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.Transaction asset_state = 130;</code>
+       * <code>.forge_abi.AssetState asset_state = 130;</code>
        */
-      public Builder mergeAssetState(forge_abi.Type.Transaction value) {
+      public Builder mergeAssetState(forge_abi.State.AssetState value) {
         if (assetStateBuilder_ == null) {
           if (valueCase_ == 130 &&
-              value_ != forge_abi.Type.Transaction.getDefaultInstance()) {
-            value_ = forge_abi.Type.Transaction.newBuilder((forge_abi.Type.Transaction) value_)
+              value_ != forge_abi.State.AssetState.getDefaultInstance()) {
+            value_ = forge_abi.State.AssetState.newBuilder((forge_abi.State.AssetState) value_)
                 .mergeFrom(value).buildPartial();
           } else {
             value_ = value;
@@ -36713,7 +40046,7 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.Transaction asset_state = 130;</code>
+       * <code>.forge_abi.AssetState asset_state = 130;</code>
        */
       public Builder clearAssetState() {
         if (assetStateBuilder_ == null) {
@@ -36732,37 +40065,37 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.Transaction asset_state = 130;</code>
+       * <code>.forge_abi.AssetState asset_state = 130;</code>
        */
-      public forge_abi.Type.Transaction.Builder getAssetStateBuilder() {
+      public forge_abi.State.AssetState.Builder getAssetStateBuilder() {
         return getAssetStateFieldBuilder().getBuilder();
       }
       /**
-       * <code>.forge_abi.Transaction asset_state = 130;</code>
+       * <code>.forge_abi.AssetState asset_state = 130;</code>
        */
-      public forge_abi.Type.TransactionOrBuilder getAssetStateOrBuilder() {
+      public forge_abi.State.AssetStateOrBuilder getAssetStateOrBuilder() {
         if ((valueCase_ == 130) && (assetStateBuilder_ != null)) {
           return assetStateBuilder_.getMessageOrBuilder();
         } else {
           if (valueCase_ == 130) {
-            return (forge_abi.Type.Transaction) value_;
+            return (forge_abi.State.AssetState) value_;
           }
-          return forge_abi.Type.Transaction.getDefaultInstance();
+          return forge_abi.State.AssetState.getDefaultInstance();
         }
       }
       /**
-       * <code>.forge_abi.Transaction asset_state = 130;</code>
+       * <code>.forge_abi.AssetState asset_state = 130;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> 
+          forge_abi.State.AssetState, forge_abi.State.AssetState.Builder, forge_abi.State.AssetStateOrBuilder> 
           getAssetStateFieldBuilder() {
         if (assetStateBuilder_ == null) {
           if (!(valueCase_ == 130)) {
-            value_ = forge_abi.Type.Transaction.getDefaultInstance();
+            value_ = forge_abi.State.AssetState.getDefaultInstance();
           }
           assetStateBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder>(
-                  (forge_abi.Type.Transaction) value_,
+              forge_abi.State.AssetState, forge_abi.State.AssetState.Builder, forge_abi.State.AssetStateOrBuilder>(
+                  (forge_abi.State.AssetState) value_,
                   getParentForChildren(),
                   isClean());
           value_ = null;
@@ -36773,27 +40106,27 @@ public final class Rpc {
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> forgeStateBuilder_;
+          forge_abi.State.ForgeState, forge_abi.State.ForgeState.Builder, forge_abi.State.ForgeStateOrBuilder> forgeStateBuilder_;
       /**
-       * <code>.forge_abi.Transaction forge_state = 131;</code>
+       * <code>.forge_abi.ForgeState forge_state = 131;</code>
        */
-      public forge_abi.Type.Transaction getForgeState() {
+      public forge_abi.State.ForgeState getForgeState() {
         if (forgeStateBuilder_ == null) {
           if (valueCase_ == 131) {
-            return (forge_abi.Type.Transaction) value_;
+            return (forge_abi.State.ForgeState) value_;
           }
-          return forge_abi.Type.Transaction.getDefaultInstance();
+          return forge_abi.State.ForgeState.getDefaultInstance();
         } else {
           if (valueCase_ == 131) {
             return forgeStateBuilder_.getMessage();
           }
-          return forge_abi.Type.Transaction.getDefaultInstance();
+          return forge_abi.State.ForgeState.getDefaultInstance();
         }
       }
       /**
-       * <code>.forge_abi.Transaction forge_state = 131;</code>
+       * <code>.forge_abi.ForgeState forge_state = 131;</code>
        */
-      public Builder setForgeState(forge_abi.Type.Transaction value) {
+      public Builder setForgeState(forge_abi.State.ForgeState value) {
         if (forgeStateBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -36807,10 +40140,10 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.Transaction forge_state = 131;</code>
+       * <code>.forge_abi.ForgeState forge_state = 131;</code>
        */
       public Builder setForgeState(
-          forge_abi.Type.Transaction.Builder builderForValue) {
+          forge_abi.State.ForgeState.Builder builderForValue) {
         if (forgeStateBuilder_ == null) {
           value_ = builderForValue.build();
           onChanged();
@@ -36821,13 +40154,13 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.Transaction forge_state = 131;</code>
+       * <code>.forge_abi.ForgeState forge_state = 131;</code>
        */
-      public Builder mergeForgeState(forge_abi.Type.Transaction value) {
+      public Builder mergeForgeState(forge_abi.State.ForgeState value) {
         if (forgeStateBuilder_ == null) {
           if (valueCase_ == 131 &&
-              value_ != forge_abi.Type.Transaction.getDefaultInstance()) {
-            value_ = forge_abi.Type.Transaction.newBuilder((forge_abi.Type.Transaction) value_)
+              value_ != forge_abi.State.ForgeState.getDefaultInstance()) {
+            value_ = forge_abi.State.ForgeState.newBuilder((forge_abi.State.ForgeState) value_)
                 .mergeFrom(value).buildPartial();
           } else {
             value_ = value;
@@ -36843,7 +40176,7 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.Transaction forge_state = 131;</code>
+       * <code>.forge_abi.ForgeState forge_state = 131;</code>
        */
       public Builder clearForgeState() {
         if (forgeStateBuilder_ == null) {
@@ -36862,37 +40195,37 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.Transaction forge_state = 131;</code>
+       * <code>.forge_abi.ForgeState forge_state = 131;</code>
        */
-      public forge_abi.Type.Transaction.Builder getForgeStateBuilder() {
+      public forge_abi.State.ForgeState.Builder getForgeStateBuilder() {
         return getForgeStateFieldBuilder().getBuilder();
       }
       /**
-       * <code>.forge_abi.Transaction forge_state = 131;</code>
+       * <code>.forge_abi.ForgeState forge_state = 131;</code>
        */
-      public forge_abi.Type.TransactionOrBuilder getForgeStateOrBuilder() {
+      public forge_abi.State.ForgeStateOrBuilder getForgeStateOrBuilder() {
         if ((valueCase_ == 131) && (forgeStateBuilder_ != null)) {
           return forgeStateBuilder_.getMessageOrBuilder();
         } else {
           if (valueCase_ == 131) {
-            return (forge_abi.Type.Transaction) value_;
+            return (forge_abi.State.ForgeState) value_;
           }
-          return forge_abi.Type.Transaction.getDefaultInstance();
+          return forge_abi.State.ForgeState.getDefaultInstance();
         }
       }
       /**
-       * <code>.forge_abi.Transaction forge_state = 131;</code>
+       * <code>.forge_abi.ForgeState forge_state = 131;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> 
+          forge_abi.State.ForgeState, forge_abi.State.ForgeState.Builder, forge_abi.State.ForgeStateOrBuilder> 
           getForgeStateFieldBuilder() {
         if (forgeStateBuilder_ == null) {
           if (!(valueCase_ == 131)) {
-            value_ = forge_abi.Type.Transaction.getDefaultInstance();
+            value_ = forge_abi.State.ForgeState.getDefaultInstance();
           }
           forgeStateBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder>(
-                  (forge_abi.Type.Transaction) value_,
+              forge_abi.State.ForgeState, forge_abi.State.ForgeState.Builder, forge_abi.State.ForgeStateOrBuilder>(
+                  (forge_abi.State.ForgeState) value_,
                   getParentForChildren(),
                   isClean());
           value_ = null;
@@ -36903,27 +40236,27 @@ public final class Rpc {
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> stakeStateBuilder_;
+          forge_abi.State.StakeState, forge_abi.State.StakeState.Builder, forge_abi.State.StakeStateOrBuilder> stakeStateBuilder_;
       /**
-       * <code>.forge_abi.Transaction stake_state = 132;</code>
+       * <code>.forge_abi.StakeState stake_state = 132;</code>
        */
-      public forge_abi.Type.Transaction getStakeState() {
+      public forge_abi.State.StakeState getStakeState() {
         if (stakeStateBuilder_ == null) {
           if (valueCase_ == 132) {
-            return (forge_abi.Type.Transaction) value_;
+            return (forge_abi.State.StakeState) value_;
           }
-          return forge_abi.Type.Transaction.getDefaultInstance();
+          return forge_abi.State.StakeState.getDefaultInstance();
         } else {
           if (valueCase_ == 132) {
             return stakeStateBuilder_.getMessage();
           }
-          return forge_abi.Type.Transaction.getDefaultInstance();
+          return forge_abi.State.StakeState.getDefaultInstance();
         }
       }
       /**
-       * <code>.forge_abi.Transaction stake_state = 132;</code>
+       * <code>.forge_abi.StakeState stake_state = 132;</code>
        */
-      public Builder setStakeState(forge_abi.Type.Transaction value) {
+      public Builder setStakeState(forge_abi.State.StakeState value) {
         if (stakeStateBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -36937,10 +40270,10 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.Transaction stake_state = 132;</code>
+       * <code>.forge_abi.StakeState stake_state = 132;</code>
        */
       public Builder setStakeState(
-          forge_abi.Type.Transaction.Builder builderForValue) {
+          forge_abi.State.StakeState.Builder builderForValue) {
         if (stakeStateBuilder_ == null) {
           value_ = builderForValue.build();
           onChanged();
@@ -36951,13 +40284,13 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.Transaction stake_state = 132;</code>
+       * <code>.forge_abi.StakeState stake_state = 132;</code>
        */
-      public Builder mergeStakeState(forge_abi.Type.Transaction value) {
+      public Builder mergeStakeState(forge_abi.State.StakeState value) {
         if (stakeStateBuilder_ == null) {
           if (valueCase_ == 132 &&
-              value_ != forge_abi.Type.Transaction.getDefaultInstance()) {
-            value_ = forge_abi.Type.Transaction.newBuilder((forge_abi.Type.Transaction) value_)
+              value_ != forge_abi.State.StakeState.getDefaultInstance()) {
+            value_ = forge_abi.State.StakeState.newBuilder((forge_abi.State.StakeState) value_)
                 .mergeFrom(value).buildPartial();
           } else {
             value_ = value;
@@ -36973,7 +40306,7 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.Transaction stake_state = 132;</code>
+       * <code>.forge_abi.StakeState stake_state = 132;</code>
        */
       public Builder clearStakeState() {
         if (stakeStateBuilder_ == null) {
@@ -36992,37 +40325,37 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.Transaction stake_state = 132;</code>
+       * <code>.forge_abi.StakeState stake_state = 132;</code>
        */
-      public forge_abi.Type.Transaction.Builder getStakeStateBuilder() {
+      public forge_abi.State.StakeState.Builder getStakeStateBuilder() {
         return getStakeStateFieldBuilder().getBuilder();
       }
       /**
-       * <code>.forge_abi.Transaction stake_state = 132;</code>
+       * <code>.forge_abi.StakeState stake_state = 132;</code>
        */
-      public forge_abi.Type.TransactionOrBuilder getStakeStateOrBuilder() {
+      public forge_abi.State.StakeStateOrBuilder getStakeStateOrBuilder() {
         if ((valueCase_ == 132) && (stakeStateBuilder_ != null)) {
           return stakeStateBuilder_.getMessageOrBuilder();
         } else {
           if (valueCase_ == 132) {
-            return (forge_abi.Type.Transaction) value_;
+            return (forge_abi.State.StakeState) value_;
           }
-          return forge_abi.Type.Transaction.getDefaultInstance();
+          return forge_abi.State.StakeState.getDefaultInstance();
         }
       }
       /**
-       * <code>.forge_abi.Transaction stake_state = 132;</code>
+       * <code>.forge_abi.StakeState stake_state = 132;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> 
+          forge_abi.State.StakeState, forge_abi.State.StakeState.Builder, forge_abi.State.StakeStateOrBuilder> 
           getStakeStateFieldBuilder() {
         if (stakeStateBuilder_ == null) {
           if (!(valueCase_ == 132)) {
-            value_ = forge_abi.Type.Transaction.getDefaultInstance();
+            value_ = forge_abi.State.StakeState.getDefaultInstance();
           }
           stakeStateBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder>(
-                  (forge_abi.Type.Transaction) value_,
+              forge_abi.State.StakeState, forge_abi.State.StakeState.Builder, forge_abi.State.StakeStateOrBuilder>(
+                  (forge_abi.State.StakeState) value_,
                   getParentForChildren(),
                   isClean());
           value_ = null;
@@ -37030,6 +40363,136 @@ public final class Rpc {
         valueCase_ = 132;
         onChanged();;
         return stakeStateBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.State.ProtocolState, forge_abi.State.ProtocolState.Builder, forge_abi.State.ProtocolStateOrBuilder> protocolStateBuilder_;
+      /**
+       * <code>.forge_abi.ProtocolState protocol_state = 133;</code>
+       */
+      public forge_abi.State.ProtocolState getProtocolState() {
+        if (protocolStateBuilder_ == null) {
+          if (valueCase_ == 133) {
+            return (forge_abi.State.ProtocolState) value_;
+          }
+          return forge_abi.State.ProtocolState.getDefaultInstance();
+        } else {
+          if (valueCase_ == 133) {
+            return protocolStateBuilder_.getMessage();
+          }
+          return forge_abi.State.ProtocolState.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.forge_abi.ProtocolState protocol_state = 133;</code>
+       */
+      public Builder setProtocolState(forge_abi.State.ProtocolState value) {
+        if (protocolStateBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          value_ = value;
+          onChanged();
+        } else {
+          protocolStateBuilder_.setMessage(value);
+        }
+        valueCase_ = 133;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.ProtocolState protocol_state = 133;</code>
+       */
+      public Builder setProtocolState(
+          forge_abi.State.ProtocolState.Builder builderForValue) {
+        if (protocolStateBuilder_ == null) {
+          value_ = builderForValue.build();
+          onChanged();
+        } else {
+          protocolStateBuilder_.setMessage(builderForValue.build());
+        }
+        valueCase_ = 133;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.ProtocolState protocol_state = 133;</code>
+       */
+      public Builder mergeProtocolState(forge_abi.State.ProtocolState value) {
+        if (protocolStateBuilder_ == null) {
+          if (valueCase_ == 133 &&
+              value_ != forge_abi.State.ProtocolState.getDefaultInstance()) {
+            value_ = forge_abi.State.ProtocolState.newBuilder((forge_abi.State.ProtocolState) value_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            value_ = value;
+          }
+          onChanged();
+        } else {
+          if (valueCase_ == 133) {
+            protocolStateBuilder_.mergeFrom(value);
+          }
+          protocolStateBuilder_.setMessage(value);
+        }
+        valueCase_ = 133;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.ProtocolState protocol_state = 133;</code>
+       */
+      public Builder clearProtocolState() {
+        if (protocolStateBuilder_ == null) {
+          if (valueCase_ == 133) {
+            valueCase_ = 0;
+            value_ = null;
+            onChanged();
+          }
+        } else {
+          if (valueCase_ == 133) {
+            valueCase_ = 0;
+            value_ = null;
+          }
+          protocolStateBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.forge_abi.ProtocolState protocol_state = 133;</code>
+       */
+      public forge_abi.State.ProtocolState.Builder getProtocolStateBuilder() {
+        return getProtocolStateFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.ProtocolState protocol_state = 133;</code>
+       */
+      public forge_abi.State.ProtocolStateOrBuilder getProtocolStateOrBuilder() {
+        if ((valueCase_ == 133) && (protocolStateBuilder_ != null)) {
+          return protocolStateBuilder_.getMessageOrBuilder();
+        } else {
+          if (valueCase_ == 133) {
+            return (forge_abi.State.ProtocolState) value_;
+          }
+          return forge_abi.State.ProtocolState.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.forge_abi.ProtocolState protocol_state = 133;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.State.ProtocolState, forge_abi.State.ProtocolState.Builder, forge_abi.State.ProtocolStateOrBuilder> 
+          getProtocolStateFieldBuilder() {
+        if (protocolStateBuilder_ == null) {
+          if (!(valueCase_ == 133)) {
+            value_ = forge_abi.State.ProtocolState.getDefaultInstance();
+          }
+          protocolStateBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.State.ProtocolState, forge_abi.State.ProtocolState.Builder, forge_abi.State.ProtocolStateOrBuilder>(
+                  (forge_abi.State.ProtocolState) value_,
+                  getParentForChildren(),
+                  isClean());
+          value_ = null;
+        }
+        valueCase_ = 133;
+        onChanged();;
+        return protocolStateBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -40152,8 +43615,8 @@ public final class Rpc {
 
   }
 
-  public interface RequestGetForgeStatisticsOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.RequestGetForgeStatistics)
+  public interface RequestGetForgeStatsOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.RequestGetForgeStats)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -40174,20 +43637,20 @@ public final class Rpc {
      */
     forge_abi.Rpc.ByHourOrBuilder getDateOrBuilder();
 
-    public forge_abi.Rpc.RequestGetForgeStatistics.ValueCase getValueCase();
+    public forge_abi.Rpc.RequestGetForgeStats.ValueCase getValueCase();
   }
   /**
-   * Protobuf type {@code forge_abi.RequestGetForgeStatistics}
+   * Protobuf type {@code forge_abi.RequestGetForgeStats}
    */
-  public  static final class RequestGetForgeStatistics extends
+  public  static final class RequestGetForgeStats extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.RequestGetForgeStatistics)
-      RequestGetForgeStatisticsOrBuilder {
-    // Use RequestGetForgeStatistics.newBuilder() to construct.
-    private RequestGetForgeStatistics(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:forge_abi.RequestGetForgeStats)
+      RequestGetForgeStatsOrBuilder {
+    // Use RequestGetForgeStats.newBuilder() to construct.
+    private RequestGetForgeStats(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private RequestGetForgeStatistics() {
+    private RequestGetForgeStats() {
     }
 
     @java.lang.Override
@@ -40195,7 +43658,7 @@ public final class Rpc {
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
-    private RequestGetForgeStatistics(
+    private RequestGetForgeStats(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -40256,14 +43719,14 @@ public final class Rpc {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return forge_abi.Rpc.internal_static_forge_abi_RequestGetForgeStatistics_descriptor;
+      return forge_abi.Rpc.internal_static_forge_abi_RequestGetForgeStats_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return forge_abi.Rpc.internal_static_forge_abi_RequestGetForgeStatistics_fieldAccessorTable
+      return forge_abi.Rpc.internal_static_forge_abi_RequestGetForgeStats_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              forge_abi.Rpc.RequestGetForgeStatistics.class, forge_abi.Rpc.RequestGetForgeStatistics.Builder.class);
+              forge_abi.Rpc.RequestGetForgeStats.class, forge_abi.Rpc.RequestGetForgeStats.Builder.class);
     }
 
     private int valueCase_ = 0;
@@ -40387,10 +43850,10 @@ public final class Rpc {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof forge_abi.Rpc.RequestGetForgeStatistics)) {
+      if (!(obj instanceof forge_abi.Rpc.RequestGetForgeStats)) {
         return super.equals(obj);
       }
-      forge_abi.Rpc.RequestGetForgeStatistics other = (forge_abi.Rpc.RequestGetForgeStatistics) obj;
+      forge_abi.Rpc.RequestGetForgeStats other = (forge_abi.Rpc.RequestGetForgeStats) obj;
 
       boolean result = true;
       result = result && getValueCase().equals(
@@ -40435,58 +43898,58 @@ public final class Rpc {
       return hash;
     }
 
-    public static forge_abi.Rpc.RequestGetForgeStatistics parseFrom(
+    public static forge_abi.Rpc.RequestGetForgeStats parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static forge_abi.Rpc.RequestGetForgeStatistics parseFrom(
+    public static forge_abi.Rpc.RequestGetForgeStats parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static forge_abi.Rpc.RequestGetForgeStatistics parseFrom(byte[] data)
+    public static forge_abi.Rpc.RequestGetForgeStats parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static forge_abi.Rpc.RequestGetForgeStatistics parseFrom(
+    public static forge_abi.Rpc.RequestGetForgeStats parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static forge_abi.Rpc.RequestGetForgeStatistics parseFrom(java.io.InputStream input)
+    public static forge_abi.Rpc.RequestGetForgeStats parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.RequestGetForgeStatistics parseFrom(
+    public static forge_abi.Rpc.RequestGetForgeStats parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static forge_abi.Rpc.RequestGetForgeStatistics parseDelimitedFrom(java.io.InputStream input)
+    public static forge_abi.Rpc.RequestGetForgeStats parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.RequestGetForgeStatistics parseDelimitedFrom(
+    public static forge_abi.Rpc.RequestGetForgeStats parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static forge_abi.Rpc.RequestGetForgeStatistics parseFrom(
+    public static forge_abi.Rpc.RequestGetForgeStats parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.RequestGetForgeStatistics parseFrom(
+    public static forge_abi.Rpc.RequestGetForgeStats parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -40498,7 +43961,7 @@ public final class Rpc {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(forge_abi.Rpc.RequestGetForgeStatistics prototype) {
+    public static Builder newBuilder(forge_abi.Rpc.RequestGetForgeStats prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -40513,25 +43976,25 @@ public final class Rpc {
       return builder;
     }
     /**
-     * Protobuf type {@code forge_abi.RequestGetForgeStatistics}
+     * Protobuf type {@code forge_abi.RequestGetForgeStats}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.RequestGetForgeStatistics)
-        forge_abi.Rpc.RequestGetForgeStatisticsOrBuilder {
+        // @@protoc_insertion_point(builder_implements:forge_abi.RequestGetForgeStats)
+        forge_abi.Rpc.RequestGetForgeStatsOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestGetForgeStatistics_descriptor;
+        return forge_abi.Rpc.internal_static_forge_abi_RequestGetForgeStats_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestGetForgeStatistics_fieldAccessorTable
+        return forge_abi.Rpc.internal_static_forge_abi_RequestGetForgeStats_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                forge_abi.Rpc.RequestGetForgeStatistics.class, forge_abi.Rpc.RequestGetForgeStatistics.Builder.class);
+                forge_abi.Rpc.RequestGetForgeStats.class, forge_abi.Rpc.RequestGetForgeStats.Builder.class);
       }
 
-      // Construct using forge_abi.Rpc.RequestGetForgeStatistics.newBuilder()
+      // Construct using forge_abi.Rpc.RequestGetForgeStats.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -40555,23 +44018,23 @@ public final class Rpc {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestGetForgeStatistics_descriptor;
+        return forge_abi.Rpc.internal_static_forge_abi_RequestGetForgeStats_descriptor;
       }
 
-      public forge_abi.Rpc.RequestGetForgeStatistics getDefaultInstanceForType() {
-        return forge_abi.Rpc.RequestGetForgeStatistics.getDefaultInstance();
+      public forge_abi.Rpc.RequestGetForgeStats getDefaultInstanceForType() {
+        return forge_abi.Rpc.RequestGetForgeStats.getDefaultInstance();
       }
 
-      public forge_abi.Rpc.RequestGetForgeStatistics build() {
-        forge_abi.Rpc.RequestGetForgeStatistics result = buildPartial();
+      public forge_abi.Rpc.RequestGetForgeStats build() {
+        forge_abi.Rpc.RequestGetForgeStats result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public forge_abi.Rpc.RequestGetForgeStatistics buildPartial() {
-        forge_abi.Rpc.RequestGetForgeStatistics result = new forge_abi.Rpc.RequestGetForgeStatistics(this);
+      public forge_abi.Rpc.RequestGetForgeStats buildPartial() {
+        forge_abi.Rpc.RequestGetForgeStats result = new forge_abi.Rpc.RequestGetForgeStats(this);
         if (valueCase_ == 1) {
           if (dayInfoBuilder_ == null) {
             result.value_ = value_;
@@ -40618,16 +44081,16 @@ public final class Rpc {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.Rpc.RequestGetForgeStatistics) {
-          return mergeFrom((forge_abi.Rpc.RequestGetForgeStatistics)other);
+        if (other instanceof forge_abi.Rpc.RequestGetForgeStats) {
+          return mergeFrom((forge_abi.Rpc.RequestGetForgeStats)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(forge_abi.Rpc.RequestGetForgeStatistics other) {
-        if (other == forge_abi.Rpc.RequestGetForgeStatistics.getDefaultInstance()) return this;
+      public Builder mergeFrom(forge_abi.Rpc.RequestGetForgeStats other) {
+        if (other == forge_abi.Rpc.RequestGetForgeStats.getDefaultInstance()) return this;
         switch (other.getValueCase()) {
           case DAY_INFO: {
             mergeDayInfo(other.getDayInfo());
@@ -40653,11 +44116,11 @@ public final class Rpc {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        forge_abi.Rpc.RequestGetForgeStatistics parsedMessage = null;
+        forge_abi.Rpc.RequestGetForgeStats parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.Rpc.RequestGetForgeStatistics) e.getUnfinishedMessage();
+          parsedMessage = (forge_abi.Rpc.RequestGetForgeStats) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -40952,46 +44415,46 @@ public final class Rpc {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:forge_abi.RequestGetForgeStatistics)
+      // @@protoc_insertion_point(builder_scope:forge_abi.RequestGetForgeStats)
     }
 
-    // @@protoc_insertion_point(class_scope:forge_abi.RequestGetForgeStatistics)
-    private static final forge_abi.Rpc.RequestGetForgeStatistics DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:forge_abi.RequestGetForgeStats)
+    private static final forge_abi.Rpc.RequestGetForgeStats DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new forge_abi.Rpc.RequestGetForgeStatistics();
+      DEFAULT_INSTANCE = new forge_abi.Rpc.RequestGetForgeStats();
     }
 
-    public static forge_abi.Rpc.RequestGetForgeStatistics getDefaultInstance() {
+    public static forge_abi.Rpc.RequestGetForgeStats getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<RequestGetForgeStatistics>
-        PARSER = new com.google.protobuf.AbstractParser<RequestGetForgeStatistics>() {
-      public RequestGetForgeStatistics parsePartialFrom(
+    private static final com.google.protobuf.Parser<RequestGetForgeStats>
+        PARSER = new com.google.protobuf.AbstractParser<RequestGetForgeStats>() {
+      public RequestGetForgeStats parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new RequestGetForgeStatistics(input, extensionRegistry);
+          return new RequestGetForgeStats(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<RequestGetForgeStatistics> parser() {
+    public static com.google.protobuf.Parser<RequestGetForgeStats> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<RequestGetForgeStatistics> getParserForType() {
+    public com.google.protobuf.Parser<RequestGetForgeStats> getParserForType() {
       return PARSER;
     }
 
-    public forge_abi.Rpc.RequestGetForgeStatistics getDefaultInstanceForType() {
+    public forge_abi.Rpc.RequestGetForgeStats getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface ResponseGetForgeStatisticsOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.ResponseGetForgeStatistics)
+  public interface ResponseGetForgeStatsOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.ResponseGetForgeStats)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -41004,30 +44467,30 @@ public final class Rpc {
     forge_abi.Enum.StatusCode getCode();
 
     /**
-     * <code>.forge_abi.ForgeStatistics forge_statistics = 2;</code>
+     * <code>.forge_abi.ForgeStats forge_stats = 2;</code>
      */
-    boolean hasForgeStatistics();
+    boolean hasForgeStats();
     /**
-     * <code>.forge_abi.ForgeStatistics forge_statistics = 2;</code>
+     * <code>.forge_abi.ForgeStats forge_stats = 2;</code>
      */
-    forge_abi.Type.ForgeStatistics getForgeStatistics();
+    forge_abi.Type.ForgeStats getForgeStats();
     /**
-     * <code>.forge_abi.ForgeStatistics forge_statistics = 2;</code>
+     * <code>.forge_abi.ForgeStats forge_stats = 2;</code>
      */
-    forge_abi.Type.ForgeStatisticsOrBuilder getForgeStatisticsOrBuilder();
+    forge_abi.Type.ForgeStatsOrBuilder getForgeStatsOrBuilder();
   }
   /**
-   * Protobuf type {@code forge_abi.ResponseGetForgeStatistics}
+   * Protobuf type {@code forge_abi.ResponseGetForgeStats}
    */
-  public  static final class ResponseGetForgeStatistics extends
+  public  static final class ResponseGetForgeStats extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.ResponseGetForgeStatistics)
-      ResponseGetForgeStatisticsOrBuilder {
-    // Use ResponseGetForgeStatistics.newBuilder() to construct.
-    private ResponseGetForgeStatistics(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:forge_abi.ResponseGetForgeStats)
+      ResponseGetForgeStatsOrBuilder {
+    // Use ResponseGetForgeStats.newBuilder() to construct.
+    private ResponseGetForgeStats(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private ResponseGetForgeStatistics() {
+    private ResponseGetForgeStats() {
       code_ = 0;
     }
 
@@ -41036,7 +44499,7 @@ public final class Rpc {
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
-    private ResponseGetForgeStatistics(
+    private ResponseGetForgeStats(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -41063,14 +44526,14 @@ public final class Rpc {
               break;
             }
             case 18: {
-              forge_abi.Type.ForgeStatistics.Builder subBuilder = null;
-              if (forgeStatistics_ != null) {
-                subBuilder = forgeStatistics_.toBuilder();
+              forge_abi.Type.ForgeStats.Builder subBuilder = null;
+              if (forgeStats_ != null) {
+                subBuilder = forgeStats_.toBuilder();
               }
-              forgeStatistics_ = input.readMessage(forge_abi.Type.ForgeStatistics.parser(), extensionRegistry);
+              forgeStats_ = input.readMessage(forge_abi.Type.ForgeStats.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(forgeStatistics_);
-                forgeStatistics_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(forgeStats_);
+                forgeStats_ = subBuilder.buildPartial();
               }
 
               break;
@@ -41088,14 +44551,14 @@ public final class Rpc {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return forge_abi.Rpc.internal_static_forge_abi_ResponseGetForgeStatistics_descriptor;
+      return forge_abi.Rpc.internal_static_forge_abi_ResponseGetForgeStats_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return forge_abi.Rpc.internal_static_forge_abi_ResponseGetForgeStatistics_fieldAccessorTable
+      return forge_abi.Rpc.internal_static_forge_abi_ResponseGetForgeStats_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              forge_abi.Rpc.ResponseGetForgeStatistics.class, forge_abi.Rpc.ResponseGetForgeStatistics.Builder.class);
+              forge_abi.Rpc.ResponseGetForgeStats.class, forge_abi.Rpc.ResponseGetForgeStats.Builder.class);
     }
 
     public static final int CODE_FIELD_NUMBER = 1;
@@ -41114,25 +44577,25 @@ public final class Rpc {
       return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
     }
 
-    public static final int FORGE_STATISTICS_FIELD_NUMBER = 2;
-    private forge_abi.Type.ForgeStatistics forgeStatistics_;
+    public static final int FORGE_STATS_FIELD_NUMBER = 2;
+    private forge_abi.Type.ForgeStats forgeStats_;
     /**
-     * <code>.forge_abi.ForgeStatistics forge_statistics = 2;</code>
+     * <code>.forge_abi.ForgeStats forge_stats = 2;</code>
      */
-    public boolean hasForgeStatistics() {
-      return forgeStatistics_ != null;
+    public boolean hasForgeStats() {
+      return forgeStats_ != null;
     }
     /**
-     * <code>.forge_abi.ForgeStatistics forge_statistics = 2;</code>
+     * <code>.forge_abi.ForgeStats forge_stats = 2;</code>
      */
-    public forge_abi.Type.ForgeStatistics getForgeStatistics() {
-      return forgeStatistics_ == null ? forge_abi.Type.ForgeStatistics.getDefaultInstance() : forgeStatistics_;
+    public forge_abi.Type.ForgeStats getForgeStats() {
+      return forgeStats_ == null ? forge_abi.Type.ForgeStats.getDefaultInstance() : forgeStats_;
     }
     /**
-     * <code>.forge_abi.ForgeStatistics forge_statistics = 2;</code>
+     * <code>.forge_abi.ForgeStats forge_stats = 2;</code>
      */
-    public forge_abi.Type.ForgeStatisticsOrBuilder getForgeStatisticsOrBuilder() {
-      return getForgeStatistics();
+    public forge_abi.Type.ForgeStatsOrBuilder getForgeStatsOrBuilder() {
+      return getForgeStats();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -41150,8 +44613,8 @@ public final class Rpc {
       if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
         output.writeEnum(1, code_);
       }
-      if (forgeStatistics_ != null) {
-        output.writeMessage(2, getForgeStatistics());
+      if (forgeStats_ != null) {
+        output.writeMessage(2, getForgeStats());
       }
     }
 
@@ -41164,9 +44627,9 @@ public final class Rpc {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, code_);
       }
-      if (forgeStatistics_ != null) {
+      if (forgeStats_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getForgeStatistics());
+          .computeMessageSize(2, getForgeStats());
       }
       memoizedSize = size;
       return size;
@@ -41178,17 +44641,17 @@ public final class Rpc {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof forge_abi.Rpc.ResponseGetForgeStatistics)) {
+      if (!(obj instanceof forge_abi.Rpc.ResponseGetForgeStats)) {
         return super.equals(obj);
       }
-      forge_abi.Rpc.ResponseGetForgeStatistics other = (forge_abi.Rpc.ResponseGetForgeStatistics) obj;
+      forge_abi.Rpc.ResponseGetForgeStats other = (forge_abi.Rpc.ResponseGetForgeStats) obj;
 
       boolean result = true;
       result = result && code_ == other.code_;
-      result = result && (hasForgeStatistics() == other.hasForgeStatistics());
-      if (hasForgeStatistics()) {
-        result = result && getForgeStatistics()
-            .equals(other.getForgeStatistics());
+      result = result && (hasForgeStats() == other.hasForgeStats());
+      if (hasForgeStats()) {
+        result = result && getForgeStats()
+            .equals(other.getForgeStats());
       }
       return result;
     }
@@ -41202,67 +44665,67 @@ public final class Rpc {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + CODE_FIELD_NUMBER;
       hash = (53 * hash) + code_;
-      if (hasForgeStatistics()) {
-        hash = (37 * hash) + FORGE_STATISTICS_FIELD_NUMBER;
-        hash = (53 * hash) + getForgeStatistics().hashCode();
+      if (hasForgeStats()) {
+        hash = (37 * hash) + FORGE_STATS_FIELD_NUMBER;
+        hash = (53 * hash) + getForgeStats().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static forge_abi.Rpc.ResponseGetForgeStatistics parseFrom(
+    public static forge_abi.Rpc.ResponseGetForgeStats parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static forge_abi.Rpc.ResponseGetForgeStatistics parseFrom(
+    public static forge_abi.Rpc.ResponseGetForgeStats parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static forge_abi.Rpc.ResponseGetForgeStatistics parseFrom(byte[] data)
+    public static forge_abi.Rpc.ResponseGetForgeStats parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static forge_abi.Rpc.ResponseGetForgeStatistics parseFrom(
+    public static forge_abi.Rpc.ResponseGetForgeStats parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static forge_abi.Rpc.ResponseGetForgeStatistics parseFrom(java.io.InputStream input)
+    public static forge_abi.Rpc.ResponseGetForgeStats parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.ResponseGetForgeStatistics parseFrom(
+    public static forge_abi.Rpc.ResponseGetForgeStats parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static forge_abi.Rpc.ResponseGetForgeStatistics parseDelimitedFrom(java.io.InputStream input)
+    public static forge_abi.Rpc.ResponseGetForgeStats parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.ResponseGetForgeStatistics parseDelimitedFrom(
+    public static forge_abi.Rpc.ResponseGetForgeStats parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static forge_abi.Rpc.ResponseGetForgeStatistics parseFrom(
+    public static forge_abi.Rpc.ResponseGetForgeStats parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.ResponseGetForgeStatistics parseFrom(
+    public static forge_abi.Rpc.ResponseGetForgeStats parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -41274,7 +44737,7 @@ public final class Rpc {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(forge_abi.Rpc.ResponseGetForgeStatistics prototype) {
+    public static Builder newBuilder(forge_abi.Rpc.ResponseGetForgeStats prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -41289,25 +44752,25 @@ public final class Rpc {
       return builder;
     }
     /**
-     * Protobuf type {@code forge_abi.ResponseGetForgeStatistics}
+     * Protobuf type {@code forge_abi.ResponseGetForgeStats}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.ResponseGetForgeStatistics)
-        forge_abi.Rpc.ResponseGetForgeStatisticsOrBuilder {
+        // @@protoc_insertion_point(builder_implements:forge_abi.ResponseGetForgeStats)
+        forge_abi.Rpc.ResponseGetForgeStatsOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetForgeStatistics_descriptor;
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetForgeStats_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetForgeStatistics_fieldAccessorTable
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetForgeStats_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                forge_abi.Rpc.ResponseGetForgeStatistics.class, forge_abi.Rpc.ResponseGetForgeStatistics.Builder.class);
+                forge_abi.Rpc.ResponseGetForgeStats.class, forge_abi.Rpc.ResponseGetForgeStats.Builder.class);
       }
 
-      // Construct using forge_abi.Rpc.ResponseGetForgeStatistics.newBuilder()
+      // Construct using forge_abi.Rpc.ResponseGetForgeStats.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -41326,39 +44789,39 @@ public final class Rpc {
         super.clear();
         code_ = 0;
 
-        if (forgeStatisticsBuilder_ == null) {
-          forgeStatistics_ = null;
+        if (forgeStatsBuilder_ == null) {
+          forgeStats_ = null;
         } else {
-          forgeStatistics_ = null;
-          forgeStatisticsBuilder_ = null;
+          forgeStats_ = null;
+          forgeStatsBuilder_ = null;
         }
         return this;
       }
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetForgeStatistics_descriptor;
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetForgeStats_descriptor;
       }
 
-      public forge_abi.Rpc.ResponseGetForgeStatistics getDefaultInstanceForType() {
-        return forge_abi.Rpc.ResponseGetForgeStatistics.getDefaultInstance();
+      public forge_abi.Rpc.ResponseGetForgeStats getDefaultInstanceForType() {
+        return forge_abi.Rpc.ResponseGetForgeStats.getDefaultInstance();
       }
 
-      public forge_abi.Rpc.ResponseGetForgeStatistics build() {
-        forge_abi.Rpc.ResponseGetForgeStatistics result = buildPartial();
+      public forge_abi.Rpc.ResponseGetForgeStats build() {
+        forge_abi.Rpc.ResponseGetForgeStats result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public forge_abi.Rpc.ResponseGetForgeStatistics buildPartial() {
-        forge_abi.Rpc.ResponseGetForgeStatistics result = new forge_abi.Rpc.ResponseGetForgeStatistics(this);
+      public forge_abi.Rpc.ResponseGetForgeStats buildPartial() {
+        forge_abi.Rpc.ResponseGetForgeStats result = new forge_abi.Rpc.ResponseGetForgeStats(this);
         result.code_ = code_;
-        if (forgeStatisticsBuilder_ == null) {
-          result.forgeStatistics_ = forgeStatistics_;
+        if (forgeStatsBuilder_ == null) {
+          result.forgeStats_ = forgeStats_;
         } else {
-          result.forgeStatistics_ = forgeStatisticsBuilder_.build();
+          result.forgeStats_ = forgeStatsBuilder_.build();
         }
         onBuilt();
         return result;
@@ -41391,21 +44854,21 @@ public final class Rpc {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.Rpc.ResponseGetForgeStatistics) {
-          return mergeFrom((forge_abi.Rpc.ResponseGetForgeStatistics)other);
+        if (other instanceof forge_abi.Rpc.ResponseGetForgeStats) {
+          return mergeFrom((forge_abi.Rpc.ResponseGetForgeStats)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(forge_abi.Rpc.ResponseGetForgeStatistics other) {
-        if (other == forge_abi.Rpc.ResponseGetForgeStatistics.getDefaultInstance()) return this;
+      public Builder mergeFrom(forge_abi.Rpc.ResponseGetForgeStats other) {
+        if (other == forge_abi.Rpc.ResponseGetForgeStats.getDefaultInstance()) return this;
         if (other.code_ != 0) {
           setCodeValue(other.getCodeValue());
         }
-        if (other.hasForgeStatistics()) {
-          mergeForgeStatistics(other.getForgeStatistics());
+        if (other.hasForgeStats()) {
+          mergeForgeStats(other.getForgeStats());
         }
         onChanged();
         return this;
@@ -41419,11 +44882,11 @@ public final class Rpc {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        forge_abi.Rpc.ResponseGetForgeStatistics parsedMessage = null;
+        forge_abi.Rpc.ResponseGetForgeStats parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.Rpc.ResponseGetForgeStatistics) e.getUnfinishedMessage();
+          parsedMessage = (forge_abi.Rpc.ResponseGetForgeStats) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -41477,121 +44940,121 @@ public final class Rpc {
         return this;
       }
 
-      private forge_abi.Type.ForgeStatistics forgeStatistics_ = null;
+      private forge_abi.Type.ForgeStats forgeStats_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Type.ForgeStatistics, forge_abi.Type.ForgeStatistics.Builder, forge_abi.Type.ForgeStatisticsOrBuilder> forgeStatisticsBuilder_;
+          forge_abi.Type.ForgeStats, forge_abi.Type.ForgeStats.Builder, forge_abi.Type.ForgeStatsOrBuilder> forgeStatsBuilder_;
       /**
-       * <code>.forge_abi.ForgeStatistics forge_statistics = 2;</code>
+       * <code>.forge_abi.ForgeStats forge_stats = 2;</code>
        */
-      public boolean hasForgeStatistics() {
-        return forgeStatisticsBuilder_ != null || forgeStatistics_ != null;
+      public boolean hasForgeStats() {
+        return forgeStatsBuilder_ != null || forgeStats_ != null;
       }
       /**
-       * <code>.forge_abi.ForgeStatistics forge_statistics = 2;</code>
+       * <code>.forge_abi.ForgeStats forge_stats = 2;</code>
        */
-      public forge_abi.Type.ForgeStatistics getForgeStatistics() {
-        if (forgeStatisticsBuilder_ == null) {
-          return forgeStatistics_ == null ? forge_abi.Type.ForgeStatistics.getDefaultInstance() : forgeStatistics_;
+      public forge_abi.Type.ForgeStats getForgeStats() {
+        if (forgeStatsBuilder_ == null) {
+          return forgeStats_ == null ? forge_abi.Type.ForgeStats.getDefaultInstance() : forgeStats_;
         } else {
-          return forgeStatisticsBuilder_.getMessage();
+          return forgeStatsBuilder_.getMessage();
         }
       }
       /**
-       * <code>.forge_abi.ForgeStatistics forge_statistics = 2;</code>
+       * <code>.forge_abi.ForgeStats forge_stats = 2;</code>
        */
-      public Builder setForgeStatistics(forge_abi.Type.ForgeStatistics value) {
-        if (forgeStatisticsBuilder_ == null) {
+      public Builder setForgeStats(forge_abi.Type.ForgeStats value) {
+        if (forgeStatsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          forgeStatistics_ = value;
+          forgeStats_ = value;
           onChanged();
         } else {
-          forgeStatisticsBuilder_.setMessage(value);
+          forgeStatsBuilder_.setMessage(value);
         }
 
         return this;
       }
       /**
-       * <code>.forge_abi.ForgeStatistics forge_statistics = 2;</code>
+       * <code>.forge_abi.ForgeStats forge_stats = 2;</code>
        */
-      public Builder setForgeStatistics(
-          forge_abi.Type.ForgeStatistics.Builder builderForValue) {
-        if (forgeStatisticsBuilder_ == null) {
-          forgeStatistics_ = builderForValue.build();
+      public Builder setForgeStats(
+          forge_abi.Type.ForgeStats.Builder builderForValue) {
+        if (forgeStatsBuilder_ == null) {
+          forgeStats_ = builderForValue.build();
           onChanged();
         } else {
-          forgeStatisticsBuilder_.setMessage(builderForValue.build());
+          forgeStatsBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
       }
       /**
-       * <code>.forge_abi.ForgeStatistics forge_statistics = 2;</code>
+       * <code>.forge_abi.ForgeStats forge_stats = 2;</code>
        */
-      public Builder mergeForgeStatistics(forge_abi.Type.ForgeStatistics value) {
-        if (forgeStatisticsBuilder_ == null) {
-          if (forgeStatistics_ != null) {
-            forgeStatistics_ =
-              forge_abi.Type.ForgeStatistics.newBuilder(forgeStatistics_).mergeFrom(value).buildPartial();
+      public Builder mergeForgeStats(forge_abi.Type.ForgeStats value) {
+        if (forgeStatsBuilder_ == null) {
+          if (forgeStats_ != null) {
+            forgeStats_ =
+              forge_abi.Type.ForgeStats.newBuilder(forgeStats_).mergeFrom(value).buildPartial();
           } else {
-            forgeStatistics_ = value;
+            forgeStats_ = value;
           }
           onChanged();
         } else {
-          forgeStatisticsBuilder_.mergeFrom(value);
+          forgeStatsBuilder_.mergeFrom(value);
         }
 
         return this;
       }
       /**
-       * <code>.forge_abi.ForgeStatistics forge_statistics = 2;</code>
+       * <code>.forge_abi.ForgeStats forge_stats = 2;</code>
        */
-      public Builder clearForgeStatistics() {
-        if (forgeStatisticsBuilder_ == null) {
-          forgeStatistics_ = null;
+      public Builder clearForgeStats() {
+        if (forgeStatsBuilder_ == null) {
+          forgeStats_ = null;
           onChanged();
         } else {
-          forgeStatistics_ = null;
-          forgeStatisticsBuilder_ = null;
+          forgeStats_ = null;
+          forgeStatsBuilder_ = null;
         }
 
         return this;
       }
       /**
-       * <code>.forge_abi.ForgeStatistics forge_statistics = 2;</code>
+       * <code>.forge_abi.ForgeStats forge_stats = 2;</code>
        */
-      public forge_abi.Type.ForgeStatistics.Builder getForgeStatisticsBuilder() {
+      public forge_abi.Type.ForgeStats.Builder getForgeStatsBuilder() {
         
         onChanged();
-        return getForgeStatisticsFieldBuilder().getBuilder();
+        return getForgeStatsFieldBuilder().getBuilder();
       }
       /**
-       * <code>.forge_abi.ForgeStatistics forge_statistics = 2;</code>
+       * <code>.forge_abi.ForgeStats forge_stats = 2;</code>
        */
-      public forge_abi.Type.ForgeStatisticsOrBuilder getForgeStatisticsOrBuilder() {
-        if (forgeStatisticsBuilder_ != null) {
-          return forgeStatisticsBuilder_.getMessageOrBuilder();
+      public forge_abi.Type.ForgeStatsOrBuilder getForgeStatsOrBuilder() {
+        if (forgeStatsBuilder_ != null) {
+          return forgeStatsBuilder_.getMessageOrBuilder();
         } else {
-          return forgeStatistics_ == null ?
-              forge_abi.Type.ForgeStatistics.getDefaultInstance() : forgeStatistics_;
+          return forgeStats_ == null ?
+              forge_abi.Type.ForgeStats.getDefaultInstance() : forgeStats_;
         }
       }
       /**
-       * <code>.forge_abi.ForgeStatistics forge_statistics = 2;</code>
+       * <code>.forge_abi.ForgeStats forge_stats = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Type.ForgeStatistics, forge_abi.Type.ForgeStatistics.Builder, forge_abi.Type.ForgeStatisticsOrBuilder> 
-          getForgeStatisticsFieldBuilder() {
-        if (forgeStatisticsBuilder_ == null) {
-          forgeStatisticsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.Type.ForgeStatistics, forge_abi.Type.ForgeStatistics.Builder, forge_abi.Type.ForgeStatisticsOrBuilder>(
-                  getForgeStatistics(),
+          forge_abi.Type.ForgeStats, forge_abi.Type.ForgeStats.Builder, forge_abi.Type.ForgeStatsOrBuilder> 
+          getForgeStatsFieldBuilder() {
+        if (forgeStatsBuilder_ == null) {
+          forgeStatsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Type.ForgeStats, forge_abi.Type.ForgeStats.Builder, forge_abi.Type.ForgeStatsOrBuilder>(
+                  getForgeStats(),
                   getParentForChildren(),
                   isClean());
-          forgeStatistics_ = null;
+          forgeStats_ = null;
         }
-        return forgeStatisticsBuilder_;
+        return forgeStatsBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -41604,39 +45067,39 @@ public final class Rpc {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:forge_abi.ResponseGetForgeStatistics)
+      // @@protoc_insertion_point(builder_scope:forge_abi.ResponseGetForgeStats)
     }
 
-    // @@protoc_insertion_point(class_scope:forge_abi.ResponseGetForgeStatistics)
-    private static final forge_abi.Rpc.ResponseGetForgeStatistics DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:forge_abi.ResponseGetForgeStats)
+    private static final forge_abi.Rpc.ResponseGetForgeStats DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new forge_abi.Rpc.ResponseGetForgeStatistics();
+      DEFAULT_INSTANCE = new forge_abi.Rpc.ResponseGetForgeStats();
     }
 
-    public static forge_abi.Rpc.ResponseGetForgeStatistics getDefaultInstance() {
+    public static forge_abi.Rpc.ResponseGetForgeStats getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<ResponseGetForgeStatistics>
-        PARSER = new com.google.protobuf.AbstractParser<ResponseGetForgeStatistics>() {
-      public ResponseGetForgeStatistics parsePartialFrom(
+    private static final com.google.protobuf.Parser<ResponseGetForgeStats>
+        PARSER = new com.google.protobuf.AbstractParser<ResponseGetForgeStats>() {
+      public ResponseGetForgeStats parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ResponseGetForgeStatistics(input, extensionRegistry);
+          return new ResponseGetForgeStats(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<ResponseGetForgeStatistics> parser() {
+    public static com.google.protobuf.Parser<ResponseGetForgeStats> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<ResponseGetForgeStatistics> getParserForType() {
+    public com.google.protobuf.Parser<ResponseGetForgeStats> getParserForType() {
       return PARSER;
     }
 
-    public forge_abi.Rpc.ResponseGetForgeStatistics getDefaultInstanceForType() {
+    public forge_abi.Rpc.ResponseGetForgeStats getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -41697,6 +45160,19 @@ public final class Rpc {
      * <code>.forge_abi.TypeFilter type_filter = 4;</code>
      */
     forge_abi.TraceType.TypeFilterOrBuilder getTypeFilterOrBuilder();
+
+    /**
+     * <code>.forge_abi.ValidityFilter validity_filter = 5;</code>
+     */
+    boolean hasValidityFilter();
+    /**
+     * <code>.forge_abi.ValidityFilter validity_filter = 5;</code>
+     */
+    forge_abi.TraceType.ValidityFilter getValidityFilter();
+    /**
+     * <code>.forge_abi.ValidityFilter validity_filter = 5;</code>
+     */
+    forge_abi.TraceType.ValidityFilterOrBuilder getValidityFilterOrBuilder();
   }
   /**
    * Protobuf type {@code forge_abi.RequestListTransactions}
@@ -41785,6 +45261,19 @@ public final class Rpc {
               if (subBuilder != null) {
                 subBuilder.mergeFrom(typeFilter_);
                 typeFilter_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 42: {
+              forge_abi.TraceType.ValidityFilter.Builder subBuilder = null;
+              if (validityFilter_ != null) {
+                subBuilder = validityFilter_.toBuilder();
+              }
+              validityFilter_ = input.readMessage(forge_abi.TraceType.ValidityFilter.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(validityFilter_);
+                validityFilter_ = subBuilder.buildPartial();
               }
 
               break;
@@ -41896,6 +45385,27 @@ public final class Rpc {
       return getTypeFilter();
     }
 
+    public static final int VALIDITY_FILTER_FIELD_NUMBER = 5;
+    private forge_abi.TraceType.ValidityFilter validityFilter_;
+    /**
+     * <code>.forge_abi.ValidityFilter validity_filter = 5;</code>
+     */
+    public boolean hasValidityFilter() {
+      return validityFilter_ != null;
+    }
+    /**
+     * <code>.forge_abi.ValidityFilter validity_filter = 5;</code>
+     */
+    public forge_abi.TraceType.ValidityFilter getValidityFilter() {
+      return validityFilter_ == null ? forge_abi.TraceType.ValidityFilter.getDefaultInstance() : validityFilter_;
+    }
+    /**
+     * <code>.forge_abi.ValidityFilter validity_filter = 5;</code>
+     */
+    public forge_abi.TraceType.ValidityFilterOrBuilder getValidityFilterOrBuilder() {
+      return getValidityFilter();
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -41920,6 +45430,9 @@ public final class Rpc {
       if (typeFilter_ != null) {
         output.writeMessage(4, getTypeFilter());
       }
+      if (validityFilter_ != null) {
+        output.writeMessage(5, getValidityFilter());
+      }
     }
 
     public int getSerializedSize() {
@@ -41942,6 +45455,10 @@ public final class Rpc {
       if (typeFilter_ != null) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, getTypeFilter());
+      }
+      if (validityFilter_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, getValidityFilter());
       }
       memoizedSize = size;
       return size;
@@ -41979,6 +45496,11 @@ public final class Rpc {
         result = result && getTypeFilter()
             .equals(other.getTypeFilter());
       }
+      result = result && (hasValidityFilter() == other.hasValidityFilter());
+      if (hasValidityFilter()) {
+        result = result && getValidityFilter()
+            .equals(other.getValidityFilter());
+      }
       return result;
     }
 
@@ -42004,6 +45526,10 @@ public final class Rpc {
       if (hasTypeFilter()) {
         hash = (37 * hash) + TYPE_FILTER_FIELD_NUMBER;
         hash = (53 * hash) + getTypeFilter().hashCode();
+      }
+      if (hasValidityFilter()) {
+        hash = (37 * hash) + VALIDITY_FILTER_FIELD_NUMBER;
+        hash = (53 * hash) + getValidityFilter().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -42147,6 +45673,12 @@ public final class Rpc {
           typeFilter_ = null;
           typeFilterBuilder_ = null;
         }
+        if (validityFilterBuilder_ == null) {
+          validityFilter_ = null;
+        } else {
+          validityFilter_ = null;
+          validityFilterBuilder_ = null;
+        }
         return this;
       }
 
@@ -42188,6 +45720,11 @@ public final class Rpc {
           result.typeFilter_ = typeFilter_;
         } else {
           result.typeFilter_ = typeFilterBuilder_.build();
+        }
+        if (validityFilterBuilder_ == null) {
+          result.validityFilter_ = validityFilter_;
+        } else {
+          result.validityFilter_ = validityFilterBuilder_.build();
         }
         onBuilt();
         return result;
@@ -42241,6 +45778,9 @@ public final class Rpc {
         }
         if (other.hasTypeFilter()) {
           mergeTypeFilter(other.getTypeFilter());
+        }
+        if (other.hasValidityFilter()) {
+          mergeValidityFilter(other.getValidityFilter());
         }
         onChanged();
         return this;
@@ -42734,6 +46274,123 @@ public final class Rpc {
           typeFilter_ = null;
         }
         return typeFilterBuilder_;
+      }
+
+      private forge_abi.TraceType.ValidityFilter validityFilter_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.TraceType.ValidityFilter, forge_abi.TraceType.ValidityFilter.Builder, forge_abi.TraceType.ValidityFilterOrBuilder> validityFilterBuilder_;
+      /**
+       * <code>.forge_abi.ValidityFilter validity_filter = 5;</code>
+       */
+      public boolean hasValidityFilter() {
+        return validityFilterBuilder_ != null || validityFilter_ != null;
+      }
+      /**
+       * <code>.forge_abi.ValidityFilter validity_filter = 5;</code>
+       */
+      public forge_abi.TraceType.ValidityFilter getValidityFilter() {
+        if (validityFilterBuilder_ == null) {
+          return validityFilter_ == null ? forge_abi.TraceType.ValidityFilter.getDefaultInstance() : validityFilter_;
+        } else {
+          return validityFilterBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.forge_abi.ValidityFilter validity_filter = 5;</code>
+       */
+      public Builder setValidityFilter(forge_abi.TraceType.ValidityFilter value) {
+        if (validityFilterBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          validityFilter_ = value;
+          onChanged();
+        } else {
+          validityFilterBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.ValidityFilter validity_filter = 5;</code>
+       */
+      public Builder setValidityFilter(
+          forge_abi.TraceType.ValidityFilter.Builder builderForValue) {
+        if (validityFilterBuilder_ == null) {
+          validityFilter_ = builderForValue.build();
+          onChanged();
+        } else {
+          validityFilterBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.ValidityFilter validity_filter = 5;</code>
+       */
+      public Builder mergeValidityFilter(forge_abi.TraceType.ValidityFilter value) {
+        if (validityFilterBuilder_ == null) {
+          if (validityFilter_ != null) {
+            validityFilter_ =
+              forge_abi.TraceType.ValidityFilter.newBuilder(validityFilter_).mergeFrom(value).buildPartial();
+          } else {
+            validityFilter_ = value;
+          }
+          onChanged();
+        } else {
+          validityFilterBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.ValidityFilter validity_filter = 5;</code>
+       */
+      public Builder clearValidityFilter() {
+        if (validityFilterBuilder_ == null) {
+          validityFilter_ = null;
+          onChanged();
+        } else {
+          validityFilter_ = null;
+          validityFilterBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.ValidityFilter validity_filter = 5;</code>
+       */
+      public forge_abi.TraceType.ValidityFilter.Builder getValidityFilterBuilder() {
+        
+        onChanged();
+        return getValidityFilterFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.ValidityFilter validity_filter = 5;</code>
+       */
+      public forge_abi.TraceType.ValidityFilterOrBuilder getValidityFilterOrBuilder() {
+        if (validityFilterBuilder_ != null) {
+          return validityFilterBuilder_.getMessageOrBuilder();
+        } else {
+          return validityFilter_ == null ?
+              forge_abi.TraceType.ValidityFilter.getDefaultInstance() : validityFilter_;
+        }
+      }
+      /**
+       * <code>.forge_abi.ValidityFilter validity_filter = 5;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.TraceType.ValidityFilter, forge_abi.TraceType.ValidityFilter.Builder, forge_abi.TraceType.ValidityFilterOrBuilder> 
+          getValidityFilterFieldBuilder() {
+        if (validityFilterBuilder_ == null) {
+          validityFilterBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.TraceType.ValidityFilter, forge_abi.TraceType.ValidityFilter.Builder, forge_abi.TraceType.ValidityFilterOrBuilder>(
+                  getValidityFilter(),
+                  getParentForChildren(),
+                  isClean());
+          validityFilter_ = null;
+        }
+        return validityFilterBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -43808,2781 +47465,8 @@ public final class Rpc {
 
   }
 
-  public interface RequestGetAssetAddressOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.RequestGetAssetAddress)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>string sender_address = 1;</code>
-     */
-    java.lang.String getSenderAddress();
-    /**
-     * <code>string sender_address = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getSenderAddressBytes();
-
-    /**
-     * <code>.forge_abi.CreateAssetTx itx = 2;</code>
-     */
-    boolean hasItx();
-    /**
-     * <code>.forge_abi.CreateAssetTx itx = 2;</code>
-     */
-    forge_abi.Tx.CreateAssetTx getItx();
-    /**
-     * <code>.forge_abi.CreateAssetTx itx = 2;</code>
-     */
-    forge_abi.Tx.CreateAssetTxOrBuilder getItxOrBuilder();
-
-    /**
-     * <code>.forge_abi.WalletType wallet_type = 3;</code>
-     */
-    boolean hasWalletType();
-    /**
-     * <code>.forge_abi.WalletType wallet_type = 3;</code>
-     */
-    forge_abi.Type.WalletType getWalletType();
-    /**
-     * <code>.forge_abi.WalletType wallet_type = 3;</code>
-     */
-    forge_abi.Type.WalletTypeOrBuilder getWalletTypeOrBuilder();
-  }
-  /**
-   * Protobuf type {@code forge_abi.RequestGetAssetAddress}
-   */
-  public  static final class RequestGetAssetAddress extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.RequestGetAssetAddress)
-      RequestGetAssetAddressOrBuilder {
-    // Use RequestGetAssetAddress.newBuilder() to construct.
-    private RequestGetAssetAddress(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private RequestGetAssetAddress() {
-      senderAddress_ = "";
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private RequestGetAssetAddress(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              senderAddress_ = s;
-              break;
-            }
-            case 18: {
-              forge_abi.Tx.CreateAssetTx.Builder subBuilder = null;
-              if (itx_ != null) {
-                subBuilder = itx_.toBuilder();
-              }
-              itx_ = input.readMessage(forge_abi.Tx.CreateAssetTx.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(itx_);
-                itx_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 26: {
-              forge_abi.Type.WalletType.Builder subBuilder = null;
-              if (walletType_ != null) {
-                subBuilder = walletType_.toBuilder();
-              }
-              walletType_ = input.readMessage(forge_abi.Type.WalletType.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(walletType_);
-                walletType_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.Rpc.internal_static_forge_abi_RequestGetAssetAddress_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.Rpc.internal_static_forge_abi_RequestGetAssetAddress_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.Rpc.RequestGetAssetAddress.class, forge_abi.Rpc.RequestGetAssetAddress.Builder.class);
-    }
-
-    public static final int SENDER_ADDRESS_FIELD_NUMBER = 1;
-    private volatile java.lang.Object senderAddress_;
-    /**
-     * <code>string sender_address = 1;</code>
-     */
-    public java.lang.String getSenderAddress() {
-      java.lang.Object ref = senderAddress_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        senderAddress_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string sender_address = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getSenderAddressBytes() {
-      java.lang.Object ref = senderAddress_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        senderAddress_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int ITX_FIELD_NUMBER = 2;
-    private forge_abi.Tx.CreateAssetTx itx_;
-    /**
-     * <code>.forge_abi.CreateAssetTx itx = 2;</code>
-     */
-    public boolean hasItx() {
-      return itx_ != null;
-    }
-    /**
-     * <code>.forge_abi.CreateAssetTx itx = 2;</code>
-     */
-    public forge_abi.Tx.CreateAssetTx getItx() {
-      return itx_ == null ? forge_abi.Tx.CreateAssetTx.getDefaultInstance() : itx_;
-    }
-    /**
-     * <code>.forge_abi.CreateAssetTx itx = 2;</code>
-     */
-    public forge_abi.Tx.CreateAssetTxOrBuilder getItxOrBuilder() {
-      return getItx();
-    }
-
-    public static final int WALLET_TYPE_FIELD_NUMBER = 3;
-    private forge_abi.Type.WalletType walletType_;
-    /**
-     * <code>.forge_abi.WalletType wallet_type = 3;</code>
-     */
-    public boolean hasWalletType() {
-      return walletType_ != null;
-    }
-    /**
-     * <code>.forge_abi.WalletType wallet_type = 3;</code>
-     */
-    public forge_abi.Type.WalletType getWalletType() {
-      return walletType_ == null ? forge_abi.Type.WalletType.getDefaultInstance() : walletType_;
-    }
-    /**
-     * <code>.forge_abi.WalletType wallet_type = 3;</code>
-     */
-    public forge_abi.Type.WalletTypeOrBuilder getWalletTypeOrBuilder() {
-      return getWalletType();
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getSenderAddressBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, senderAddress_);
-      }
-      if (itx_ != null) {
-        output.writeMessage(2, getItx());
-      }
-      if (walletType_ != null) {
-        output.writeMessage(3, getWalletType());
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getSenderAddressBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, senderAddress_);
-      }
-      if (itx_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getItx());
-      }
-      if (walletType_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getWalletType());
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.Rpc.RequestGetAssetAddress)) {
-        return super.equals(obj);
-      }
-      forge_abi.Rpc.RequestGetAssetAddress other = (forge_abi.Rpc.RequestGetAssetAddress) obj;
-
-      boolean result = true;
-      result = result && getSenderAddress()
-          .equals(other.getSenderAddress());
-      result = result && (hasItx() == other.hasItx());
-      if (hasItx()) {
-        result = result && getItx()
-            .equals(other.getItx());
-      }
-      result = result && (hasWalletType() == other.hasWalletType());
-      if (hasWalletType()) {
-        result = result && getWalletType()
-            .equals(other.getWalletType());
-      }
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + SENDER_ADDRESS_FIELD_NUMBER;
-      hash = (53 * hash) + getSenderAddress().hashCode();
-      if (hasItx()) {
-        hash = (37 * hash) + ITX_FIELD_NUMBER;
-        hash = (53 * hash) + getItx().hashCode();
-      }
-      if (hasWalletType()) {
-        hash = (37 * hash) + WALLET_TYPE_FIELD_NUMBER;
-        hash = (53 * hash) + getWalletType().hashCode();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.Rpc.RequestGetAssetAddress parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.RequestGetAssetAddress parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestGetAssetAddress parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.RequestGetAssetAddress parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestGetAssetAddress parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.RequestGetAssetAddress parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestGetAssetAddress parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.RequestGetAssetAddress parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestGetAssetAddress parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.RequestGetAssetAddress parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.Rpc.RequestGetAssetAddress prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code forge_abi.RequestGetAssetAddress}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.RequestGetAssetAddress)
-        forge_abi.Rpc.RequestGetAssetAddressOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestGetAssetAddress_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestGetAssetAddress_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.Rpc.RequestGetAssetAddress.class, forge_abi.Rpc.RequestGetAssetAddress.Builder.class);
-      }
-
-      // Construct using forge_abi.Rpc.RequestGetAssetAddress.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        senderAddress_ = "";
-
-        if (itxBuilder_ == null) {
-          itx_ = null;
-        } else {
-          itx_ = null;
-          itxBuilder_ = null;
-        }
-        if (walletTypeBuilder_ == null) {
-          walletType_ = null;
-        } else {
-          walletType_ = null;
-          walletTypeBuilder_ = null;
-        }
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestGetAssetAddress_descriptor;
-      }
-
-      public forge_abi.Rpc.RequestGetAssetAddress getDefaultInstanceForType() {
-        return forge_abi.Rpc.RequestGetAssetAddress.getDefaultInstance();
-      }
-
-      public forge_abi.Rpc.RequestGetAssetAddress build() {
-        forge_abi.Rpc.RequestGetAssetAddress result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.Rpc.RequestGetAssetAddress buildPartial() {
-        forge_abi.Rpc.RequestGetAssetAddress result = new forge_abi.Rpc.RequestGetAssetAddress(this);
-        result.senderAddress_ = senderAddress_;
-        if (itxBuilder_ == null) {
-          result.itx_ = itx_;
-        } else {
-          result.itx_ = itxBuilder_.build();
-        }
-        if (walletTypeBuilder_ == null) {
-          result.walletType_ = walletType_;
-        } else {
-          result.walletType_ = walletTypeBuilder_.build();
-        }
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.Rpc.RequestGetAssetAddress) {
-          return mergeFrom((forge_abi.Rpc.RequestGetAssetAddress)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.Rpc.RequestGetAssetAddress other) {
-        if (other == forge_abi.Rpc.RequestGetAssetAddress.getDefaultInstance()) return this;
-        if (!other.getSenderAddress().isEmpty()) {
-          senderAddress_ = other.senderAddress_;
-          onChanged();
-        }
-        if (other.hasItx()) {
-          mergeItx(other.getItx());
-        }
-        if (other.hasWalletType()) {
-          mergeWalletType(other.getWalletType());
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.Rpc.RequestGetAssetAddress parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.Rpc.RequestGetAssetAddress) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object senderAddress_ = "";
-      /**
-       * <code>string sender_address = 1;</code>
-       */
-      public java.lang.String getSenderAddress() {
-        java.lang.Object ref = senderAddress_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          senderAddress_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string sender_address = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getSenderAddressBytes() {
-        java.lang.Object ref = senderAddress_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          senderAddress_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string sender_address = 1;</code>
-       */
-      public Builder setSenderAddress(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        senderAddress_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string sender_address = 1;</code>
-       */
-      public Builder clearSenderAddress() {
-        
-        senderAddress_ = getDefaultInstance().getSenderAddress();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string sender_address = 1;</code>
-       */
-      public Builder setSenderAddressBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        senderAddress_ = value;
-        onChanged();
-        return this;
-      }
-
-      private forge_abi.Tx.CreateAssetTx itx_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Tx.CreateAssetTx, forge_abi.Tx.CreateAssetTx.Builder, forge_abi.Tx.CreateAssetTxOrBuilder> itxBuilder_;
-      /**
-       * <code>.forge_abi.CreateAssetTx itx = 2;</code>
-       */
-      public boolean hasItx() {
-        return itxBuilder_ != null || itx_ != null;
-      }
-      /**
-       * <code>.forge_abi.CreateAssetTx itx = 2;</code>
-       */
-      public forge_abi.Tx.CreateAssetTx getItx() {
-        if (itxBuilder_ == null) {
-          return itx_ == null ? forge_abi.Tx.CreateAssetTx.getDefaultInstance() : itx_;
-        } else {
-          return itxBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.forge_abi.CreateAssetTx itx = 2;</code>
-       */
-      public Builder setItx(forge_abi.Tx.CreateAssetTx value) {
-        if (itxBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          itx_ = value;
-          onChanged();
-        } else {
-          itxBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.CreateAssetTx itx = 2;</code>
-       */
-      public Builder setItx(
-          forge_abi.Tx.CreateAssetTx.Builder builderForValue) {
-        if (itxBuilder_ == null) {
-          itx_ = builderForValue.build();
-          onChanged();
-        } else {
-          itxBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.CreateAssetTx itx = 2;</code>
-       */
-      public Builder mergeItx(forge_abi.Tx.CreateAssetTx value) {
-        if (itxBuilder_ == null) {
-          if (itx_ != null) {
-            itx_ =
-              forge_abi.Tx.CreateAssetTx.newBuilder(itx_).mergeFrom(value).buildPartial();
-          } else {
-            itx_ = value;
-          }
-          onChanged();
-        } else {
-          itxBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.CreateAssetTx itx = 2;</code>
-       */
-      public Builder clearItx() {
-        if (itxBuilder_ == null) {
-          itx_ = null;
-          onChanged();
-        } else {
-          itx_ = null;
-          itxBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.CreateAssetTx itx = 2;</code>
-       */
-      public forge_abi.Tx.CreateAssetTx.Builder getItxBuilder() {
-        
-        onChanged();
-        return getItxFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.forge_abi.CreateAssetTx itx = 2;</code>
-       */
-      public forge_abi.Tx.CreateAssetTxOrBuilder getItxOrBuilder() {
-        if (itxBuilder_ != null) {
-          return itxBuilder_.getMessageOrBuilder();
-        } else {
-          return itx_ == null ?
-              forge_abi.Tx.CreateAssetTx.getDefaultInstance() : itx_;
-        }
-      }
-      /**
-       * <code>.forge_abi.CreateAssetTx itx = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Tx.CreateAssetTx, forge_abi.Tx.CreateAssetTx.Builder, forge_abi.Tx.CreateAssetTxOrBuilder> 
-          getItxFieldBuilder() {
-        if (itxBuilder_ == null) {
-          itxBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.Tx.CreateAssetTx, forge_abi.Tx.CreateAssetTx.Builder, forge_abi.Tx.CreateAssetTxOrBuilder>(
-                  getItx(),
-                  getParentForChildren(),
-                  isClean());
-          itx_ = null;
-        }
-        return itxBuilder_;
-      }
-
-      private forge_abi.Type.WalletType walletType_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Type.WalletType, forge_abi.Type.WalletType.Builder, forge_abi.Type.WalletTypeOrBuilder> walletTypeBuilder_;
-      /**
-       * <code>.forge_abi.WalletType wallet_type = 3;</code>
-       */
-      public boolean hasWalletType() {
-        return walletTypeBuilder_ != null || walletType_ != null;
-      }
-      /**
-       * <code>.forge_abi.WalletType wallet_type = 3;</code>
-       */
-      public forge_abi.Type.WalletType getWalletType() {
-        if (walletTypeBuilder_ == null) {
-          return walletType_ == null ? forge_abi.Type.WalletType.getDefaultInstance() : walletType_;
-        } else {
-          return walletTypeBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.forge_abi.WalletType wallet_type = 3;</code>
-       */
-      public Builder setWalletType(forge_abi.Type.WalletType value) {
-        if (walletTypeBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          walletType_ = value;
-          onChanged();
-        } else {
-          walletTypeBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.WalletType wallet_type = 3;</code>
-       */
-      public Builder setWalletType(
-          forge_abi.Type.WalletType.Builder builderForValue) {
-        if (walletTypeBuilder_ == null) {
-          walletType_ = builderForValue.build();
-          onChanged();
-        } else {
-          walletTypeBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.WalletType wallet_type = 3;</code>
-       */
-      public Builder mergeWalletType(forge_abi.Type.WalletType value) {
-        if (walletTypeBuilder_ == null) {
-          if (walletType_ != null) {
-            walletType_ =
-              forge_abi.Type.WalletType.newBuilder(walletType_).mergeFrom(value).buildPartial();
-          } else {
-            walletType_ = value;
-          }
-          onChanged();
-        } else {
-          walletTypeBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.WalletType wallet_type = 3;</code>
-       */
-      public Builder clearWalletType() {
-        if (walletTypeBuilder_ == null) {
-          walletType_ = null;
-          onChanged();
-        } else {
-          walletType_ = null;
-          walletTypeBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.WalletType wallet_type = 3;</code>
-       */
-      public forge_abi.Type.WalletType.Builder getWalletTypeBuilder() {
-        
-        onChanged();
-        return getWalletTypeFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.forge_abi.WalletType wallet_type = 3;</code>
-       */
-      public forge_abi.Type.WalletTypeOrBuilder getWalletTypeOrBuilder() {
-        if (walletTypeBuilder_ != null) {
-          return walletTypeBuilder_.getMessageOrBuilder();
-        } else {
-          return walletType_ == null ?
-              forge_abi.Type.WalletType.getDefaultInstance() : walletType_;
-        }
-      }
-      /**
-       * <code>.forge_abi.WalletType wallet_type = 3;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Type.WalletType, forge_abi.Type.WalletType.Builder, forge_abi.Type.WalletTypeOrBuilder> 
-          getWalletTypeFieldBuilder() {
-        if (walletTypeBuilder_ == null) {
-          walletTypeBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.Type.WalletType, forge_abi.Type.WalletType.Builder, forge_abi.Type.WalletTypeOrBuilder>(
-                  getWalletType(),
-                  getParentForChildren(),
-                  isClean());
-          walletType_ = null;
-        }
-        return walletTypeBuilder_;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.RequestGetAssetAddress)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.RequestGetAssetAddress)
-    private static final forge_abi.Rpc.RequestGetAssetAddress DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.Rpc.RequestGetAssetAddress();
-    }
-
-    public static forge_abi.Rpc.RequestGetAssetAddress getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<RequestGetAssetAddress>
-        PARSER = new com.google.protobuf.AbstractParser<RequestGetAssetAddress>() {
-      public RequestGetAssetAddress parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new RequestGetAssetAddress(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<RequestGetAssetAddress> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<RequestGetAssetAddress> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.Rpc.RequestGetAssetAddress getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface ResponseGetAssetAddressOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.ResponseGetAssetAddress)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    int getCodeValue();
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    forge_abi.Enum.StatusCode getCode();
-
-    /**
-     * <code>string asset_address = 2;</code>
-     */
-    java.lang.String getAssetAddress();
-    /**
-     * <code>string asset_address = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getAssetAddressBytes();
-  }
-  /**
-   * Protobuf type {@code forge_abi.ResponseGetAssetAddress}
-   */
-  public  static final class ResponseGetAssetAddress extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.ResponseGetAssetAddress)
-      ResponseGetAssetAddressOrBuilder {
-    // Use ResponseGetAssetAddress.newBuilder() to construct.
-    private ResponseGetAssetAddress(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private ResponseGetAssetAddress() {
-      code_ = 0;
-      assetAddress_ = "";
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private ResponseGetAssetAddress(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              int rawValue = input.readEnum();
-
-              code_ = rawValue;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              assetAddress_ = s;
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.Rpc.internal_static_forge_abi_ResponseGetAssetAddress_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.Rpc.internal_static_forge_abi_ResponseGetAssetAddress_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.Rpc.ResponseGetAssetAddress.class, forge_abi.Rpc.ResponseGetAssetAddress.Builder.class);
-    }
-
-    public static final int CODE_FIELD_NUMBER = 1;
-    private int code_;
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    public int getCodeValue() {
-      return code_;
-    }
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    public forge_abi.Enum.StatusCode getCode() {
-      forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
-      return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
-    }
-
-    public static final int ASSET_ADDRESS_FIELD_NUMBER = 2;
-    private volatile java.lang.Object assetAddress_;
-    /**
-     * <code>string asset_address = 2;</code>
-     */
-    public java.lang.String getAssetAddress() {
-      java.lang.Object ref = assetAddress_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        assetAddress_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string asset_address = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getAssetAddressBytes() {
-      java.lang.Object ref = assetAddress_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        assetAddress_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
-        output.writeEnum(1, code_);
-      }
-      if (!getAssetAddressBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, assetAddress_);
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, code_);
-      }
-      if (!getAssetAddressBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, assetAddress_);
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.Rpc.ResponseGetAssetAddress)) {
-        return super.equals(obj);
-      }
-      forge_abi.Rpc.ResponseGetAssetAddress other = (forge_abi.Rpc.ResponseGetAssetAddress) obj;
-
-      boolean result = true;
-      result = result && code_ == other.code_;
-      result = result && getAssetAddress()
-          .equals(other.getAssetAddress());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + CODE_FIELD_NUMBER;
-      hash = (53 * hash) + code_;
-      hash = (37 * hash) + ASSET_ADDRESS_FIELD_NUMBER;
-      hash = (53 * hash) + getAssetAddress().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.Rpc.ResponseGetAssetAddress parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.ResponseGetAssetAddress parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseGetAssetAddress parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.ResponseGetAssetAddress parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseGetAssetAddress parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.ResponseGetAssetAddress parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseGetAssetAddress parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.ResponseGetAssetAddress parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseGetAssetAddress parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.ResponseGetAssetAddress parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.Rpc.ResponseGetAssetAddress prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code forge_abi.ResponseGetAssetAddress}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.ResponseGetAssetAddress)
-        forge_abi.Rpc.ResponseGetAssetAddressOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetAssetAddress_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetAssetAddress_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.Rpc.ResponseGetAssetAddress.class, forge_abi.Rpc.ResponseGetAssetAddress.Builder.class);
-      }
-
-      // Construct using forge_abi.Rpc.ResponseGetAssetAddress.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        code_ = 0;
-
-        assetAddress_ = "";
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetAssetAddress_descriptor;
-      }
-
-      public forge_abi.Rpc.ResponseGetAssetAddress getDefaultInstanceForType() {
-        return forge_abi.Rpc.ResponseGetAssetAddress.getDefaultInstance();
-      }
-
-      public forge_abi.Rpc.ResponseGetAssetAddress build() {
-        forge_abi.Rpc.ResponseGetAssetAddress result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.Rpc.ResponseGetAssetAddress buildPartial() {
-        forge_abi.Rpc.ResponseGetAssetAddress result = new forge_abi.Rpc.ResponseGetAssetAddress(this);
-        result.code_ = code_;
-        result.assetAddress_ = assetAddress_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.Rpc.ResponseGetAssetAddress) {
-          return mergeFrom((forge_abi.Rpc.ResponseGetAssetAddress)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.Rpc.ResponseGetAssetAddress other) {
-        if (other == forge_abi.Rpc.ResponseGetAssetAddress.getDefaultInstance()) return this;
-        if (other.code_ != 0) {
-          setCodeValue(other.getCodeValue());
-        }
-        if (!other.getAssetAddress().isEmpty()) {
-          assetAddress_ = other.assetAddress_;
-          onChanged();
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.Rpc.ResponseGetAssetAddress parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.Rpc.ResponseGetAssetAddress) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private int code_ = 0;
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public int getCodeValue() {
-        return code_;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public Builder setCodeValue(int value) {
-        code_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public forge_abi.Enum.StatusCode getCode() {
-        forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
-        return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public Builder setCode(forge_abi.Enum.StatusCode value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        code_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public Builder clearCode() {
-        
-        code_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object assetAddress_ = "";
-      /**
-       * <code>string asset_address = 2;</code>
-       */
-      public java.lang.String getAssetAddress() {
-        java.lang.Object ref = assetAddress_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          assetAddress_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string asset_address = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getAssetAddressBytes() {
-        java.lang.Object ref = assetAddress_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          assetAddress_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string asset_address = 2;</code>
-       */
-      public Builder setAssetAddress(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        assetAddress_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string asset_address = 2;</code>
-       */
-      public Builder clearAssetAddress() {
-        
-        assetAddress_ = getDefaultInstance().getAssetAddress();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string asset_address = 2;</code>
-       */
-      public Builder setAssetAddressBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        assetAddress_ = value;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.ResponseGetAssetAddress)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.ResponseGetAssetAddress)
-    private static final forge_abi.Rpc.ResponseGetAssetAddress DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.Rpc.ResponseGetAssetAddress();
-    }
-
-    public static forge_abi.Rpc.ResponseGetAssetAddress getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<ResponseGetAssetAddress>
-        PARSER = new com.google.protobuf.AbstractParser<ResponseGetAssetAddress>() {
-      public ResponseGetAssetAddress parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ResponseGetAssetAddress(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<ResponseGetAssetAddress> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ResponseGetAssetAddress> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.Rpc.ResponseGetAssetAddress getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface RequestSignDataOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.RequestSignData)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>bytes data = 1;</code>
-     */
-    com.google.protobuf.ByteString getData();
-
-    /**
-     * <code>.forge_abi.WalletInfo wallet = 2;</code>
-     */
-    boolean hasWallet();
-    /**
-     * <code>.forge_abi.WalletInfo wallet = 2;</code>
-     */
-    forge_abi.Type.WalletInfo getWallet();
-    /**
-     * <code>.forge_abi.WalletInfo wallet = 2;</code>
-     */
-    forge_abi.Type.WalletInfoOrBuilder getWalletOrBuilder();
-
-    /**
-     * <code>string token = 3;</code>
-     */
-    java.lang.String getToken();
-    /**
-     * <code>string token = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getTokenBytes();
-  }
-  /**
-   * Protobuf type {@code forge_abi.RequestSignData}
-   */
-  public  static final class RequestSignData extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.RequestSignData)
-      RequestSignDataOrBuilder {
-    // Use RequestSignData.newBuilder() to construct.
-    private RequestSignData(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private RequestSignData() {
-      data_ = com.google.protobuf.ByteString.EMPTY;
-      token_ = "";
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private RequestSignData(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-
-              data_ = input.readBytes();
-              break;
-            }
-            case 18: {
-              forge_abi.Type.WalletInfo.Builder subBuilder = null;
-              if (wallet_ != null) {
-                subBuilder = wallet_.toBuilder();
-              }
-              wallet_ = input.readMessage(forge_abi.Type.WalletInfo.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(wallet_);
-                wallet_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              token_ = s;
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.Rpc.internal_static_forge_abi_RequestSignData_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.Rpc.internal_static_forge_abi_RequestSignData_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.Rpc.RequestSignData.class, forge_abi.Rpc.RequestSignData.Builder.class);
-    }
-
-    public static final int DATA_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString data_;
-    /**
-     * <code>bytes data = 1;</code>
-     */
-    public com.google.protobuf.ByteString getData() {
-      return data_;
-    }
-
-    public static final int WALLET_FIELD_NUMBER = 2;
-    private forge_abi.Type.WalletInfo wallet_;
-    /**
-     * <code>.forge_abi.WalletInfo wallet = 2;</code>
-     */
-    public boolean hasWallet() {
-      return wallet_ != null;
-    }
-    /**
-     * <code>.forge_abi.WalletInfo wallet = 2;</code>
-     */
-    public forge_abi.Type.WalletInfo getWallet() {
-      return wallet_ == null ? forge_abi.Type.WalletInfo.getDefaultInstance() : wallet_;
-    }
-    /**
-     * <code>.forge_abi.WalletInfo wallet = 2;</code>
-     */
-    public forge_abi.Type.WalletInfoOrBuilder getWalletOrBuilder() {
-      return getWallet();
-    }
-
-    public static final int TOKEN_FIELD_NUMBER = 3;
-    private volatile java.lang.Object token_;
-    /**
-     * <code>string token = 3;</code>
-     */
-    public java.lang.String getToken() {
-      java.lang.Object ref = token_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        token_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string token = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getTokenBytes() {
-      java.lang.Object ref = token_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        token_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!data_.isEmpty()) {
-        output.writeBytes(1, data_);
-      }
-      if (wallet_ != null) {
-        output.writeMessage(2, getWallet());
-      }
-      if (!getTokenBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, token_);
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!data_.isEmpty()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, data_);
-      }
-      if (wallet_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getWallet());
-      }
-      if (!getTokenBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, token_);
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.Rpc.RequestSignData)) {
-        return super.equals(obj);
-      }
-      forge_abi.Rpc.RequestSignData other = (forge_abi.Rpc.RequestSignData) obj;
-
-      boolean result = true;
-      result = result && getData()
-          .equals(other.getData());
-      result = result && (hasWallet() == other.hasWallet());
-      if (hasWallet()) {
-        result = result && getWallet()
-            .equals(other.getWallet());
-      }
-      result = result && getToken()
-          .equals(other.getToken());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + DATA_FIELD_NUMBER;
-      hash = (53 * hash) + getData().hashCode();
-      if (hasWallet()) {
-        hash = (37 * hash) + WALLET_FIELD_NUMBER;
-        hash = (53 * hash) + getWallet().hashCode();
-      }
-      hash = (37 * hash) + TOKEN_FIELD_NUMBER;
-      hash = (53 * hash) + getToken().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.Rpc.RequestSignData parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.RequestSignData parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestSignData parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.RequestSignData parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestSignData parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.RequestSignData parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestSignData parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.RequestSignData parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestSignData parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.RequestSignData parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.Rpc.RequestSignData prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code forge_abi.RequestSignData}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.RequestSignData)
-        forge_abi.Rpc.RequestSignDataOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestSignData_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestSignData_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.Rpc.RequestSignData.class, forge_abi.Rpc.RequestSignData.Builder.class);
-      }
-
-      // Construct using forge_abi.Rpc.RequestSignData.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        data_ = com.google.protobuf.ByteString.EMPTY;
-
-        if (walletBuilder_ == null) {
-          wallet_ = null;
-        } else {
-          wallet_ = null;
-          walletBuilder_ = null;
-        }
-        token_ = "";
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestSignData_descriptor;
-      }
-
-      public forge_abi.Rpc.RequestSignData getDefaultInstanceForType() {
-        return forge_abi.Rpc.RequestSignData.getDefaultInstance();
-      }
-
-      public forge_abi.Rpc.RequestSignData build() {
-        forge_abi.Rpc.RequestSignData result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.Rpc.RequestSignData buildPartial() {
-        forge_abi.Rpc.RequestSignData result = new forge_abi.Rpc.RequestSignData(this);
-        result.data_ = data_;
-        if (walletBuilder_ == null) {
-          result.wallet_ = wallet_;
-        } else {
-          result.wallet_ = walletBuilder_.build();
-        }
-        result.token_ = token_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.Rpc.RequestSignData) {
-          return mergeFrom((forge_abi.Rpc.RequestSignData)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.Rpc.RequestSignData other) {
-        if (other == forge_abi.Rpc.RequestSignData.getDefaultInstance()) return this;
-        if (other.getData() != com.google.protobuf.ByteString.EMPTY) {
-          setData(other.getData());
-        }
-        if (other.hasWallet()) {
-          mergeWallet(other.getWallet());
-        }
-        if (!other.getToken().isEmpty()) {
-          token_ = other.token_;
-          onChanged();
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.Rpc.RequestSignData parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.Rpc.RequestSignData) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
-      /**
-       * <code>bytes data = 1;</code>
-       */
-      public com.google.protobuf.ByteString getData() {
-        return data_;
-      }
-      /**
-       * <code>bytes data = 1;</code>
-       */
-      public Builder setData(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        data_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>bytes data = 1;</code>
-       */
-      public Builder clearData() {
-        
-        data_ = getDefaultInstance().getData();
-        onChanged();
-        return this;
-      }
-
-      private forge_abi.Type.WalletInfo wallet_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Type.WalletInfo, forge_abi.Type.WalletInfo.Builder, forge_abi.Type.WalletInfoOrBuilder> walletBuilder_;
-      /**
-       * <code>.forge_abi.WalletInfo wallet = 2;</code>
-       */
-      public boolean hasWallet() {
-        return walletBuilder_ != null || wallet_ != null;
-      }
-      /**
-       * <code>.forge_abi.WalletInfo wallet = 2;</code>
-       */
-      public forge_abi.Type.WalletInfo getWallet() {
-        if (walletBuilder_ == null) {
-          return wallet_ == null ? forge_abi.Type.WalletInfo.getDefaultInstance() : wallet_;
-        } else {
-          return walletBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.forge_abi.WalletInfo wallet = 2;</code>
-       */
-      public Builder setWallet(forge_abi.Type.WalletInfo value) {
-        if (walletBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          wallet_ = value;
-          onChanged();
-        } else {
-          walletBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.WalletInfo wallet = 2;</code>
-       */
-      public Builder setWallet(
-          forge_abi.Type.WalletInfo.Builder builderForValue) {
-        if (walletBuilder_ == null) {
-          wallet_ = builderForValue.build();
-          onChanged();
-        } else {
-          walletBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.WalletInfo wallet = 2;</code>
-       */
-      public Builder mergeWallet(forge_abi.Type.WalletInfo value) {
-        if (walletBuilder_ == null) {
-          if (wallet_ != null) {
-            wallet_ =
-              forge_abi.Type.WalletInfo.newBuilder(wallet_).mergeFrom(value).buildPartial();
-          } else {
-            wallet_ = value;
-          }
-          onChanged();
-        } else {
-          walletBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.WalletInfo wallet = 2;</code>
-       */
-      public Builder clearWallet() {
-        if (walletBuilder_ == null) {
-          wallet_ = null;
-          onChanged();
-        } else {
-          wallet_ = null;
-          walletBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.WalletInfo wallet = 2;</code>
-       */
-      public forge_abi.Type.WalletInfo.Builder getWalletBuilder() {
-        
-        onChanged();
-        return getWalletFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.forge_abi.WalletInfo wallet = 2;</code>
-       */
-      public forge_abi.Type.WalletInfoOrBuilder getWalletOrBuilder() {
-        if (walletBuilder_ != null) {
-          return walletBuilder_.getMessageOrBuilder();
-        } else {
-          return wallet_ == null ?
-              forge_abi.Type.WalletInfo.getDefaultInstance() : wallet_;
-        }
-      }
-      /**
-       * <code>.forge_abi.WalletInfo wallet = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Type.WalletInfo, forge_abi.Type.WalletInfo.Builder, forge_abi.Type.WalletInfoOrBuilder> 
-          getWalletFieldBuilder() {
-        if (walletBuilder_ == null) {
-          walletBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.Type.WalletInfo, forge_abi.Type.WalletInfo.Builder, forge_abi.Type.WalletInfoOrBuilder>(
-                  getWallet(),
-                  getParentForChildren(),
-                  isClean());
-          wallet_ = null;
-        }
-        return walletBuilder_;
-      }
-
-      private java.lang.Object token_ = "";
-      /**
-       * <code>string token = 3;</code>
-       */
-      public java.lang.String getToken() {
-        java.lang.Object ref = token_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          token_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string token = 3;</code>
-       */
-      public com.google.protobuf.ByteString
-          getTokenBytes() {
-        java.lang.Object ref = token_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          token_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string token = 3;</code>
-       */
-      public Builder setToken(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        token_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string token = 3;</code>
-       */
-      public Builder clearToken() {
-        
-        token_ = getDefaultInstance().getToken();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string token = 3;</code>
-       */
-      public Builder setTokenBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        token_ = value;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.RequestSignData)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.RequestSignData)
-    private static final forge_abi.Rpc.RequestSignData DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.Rpc.RequestSignData();
-    }
-
-    public static forge_abi.Rpc.RequestSignData getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<RequestSignData>
-        PARSER = new com.google.protobuf.AbstractParser<RequestSignData>() {
-      public RequestSignData parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new RequestSignData(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<RequestSignData> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<RequestSignData> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.Rpc.RequestSignData getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface ResponseSignDataOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.ResponseSignData)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    int getCodeValue();
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    forge_abi.Enum.StatusCode getCode();
-
-    /**
-     * <code>bytes signature = 2;</code>
-     */
-    com.google.protobuf.ByteString getSignature();
-  }
-  /**
-   * Protobuf type {@code forge_abi.ResponseSignData}
-   */
-  public  static final class ResponseSignData extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.ResponseSignData)
-      ResponseSignDataOrBuilder {
-    // Use ResponseSignData.newBuilder() to construct.
-    private ResponseSignData(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private ResponseSignData() {
-      code_ = 0;
-      signature_ = com.google.protobuf.ByteString.EMPTY;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private ResponseSignData(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              int rawValue = input.readEnum();
-
-              code_ = rawValue;
-              break;
-            }
-            case 18: {
-
-              signature_ = input.readBytes();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.Rpc.internal_static_forge_abi_ResponseSignData_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.Rpc.internal_static_forge_abi_ResponseSignData_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.Rpc.ResponseSignData.class, forge_abi.Rpc.ResponseSignData.Builder.class);
-    }
-
-    public static final int CODE_FIELD_NUMBER = 1;
-    private int code_;
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    public int getCodeValue() {
-      return code_;
-    }
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    public forge_abi.Enum.StatusCode getCode() {
-      forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
-      return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
-    }
-
-    public static final int SIGNATURE_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString signature_;
-    /**
-     * <code>bytes signature = 2;</code>
-     */
-    public com.google.protobuf.ByteString getSignature() {
-      return signature_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
-        output.writeEnum(1, code_);
-      }
-      if (!signature_.isEmpty()) {
-        output.writeBytes(2, signature_);
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, code_);
-      }
-      if (!signature_.isEmpty()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, signature_);
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.Rpc.ResponseSignData)) {
-        return super.equals(obj);
-      }
-      forge_abi.Rpc.ResponseSignData other = (forge_abi.Rpc.ResponseSignData) obj;
-
-      boolean result = true;
-      result = result && code_ == other.code_;
-      result = result && getSignature()
-          .equals(other.getSignature());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + CODE_FIELD_NUMBER;
-      hash = (53 * hash) + code_;
-      hash = (37 * hash) + SIGNATURE_FIELD_NUMBER;
-      hash = (53 * hash) + getSignature().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.Rpc.ResponseSignData parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.ResponseSignData parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseSignData parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.ResponseSignData parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseSignData parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.ResponseSignData parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseSignData parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.ResponseSignData parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseSignData parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.ResponseSignData parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.Rpc.ResponseSignData prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code forge_abi.ResponseSignData}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.ResponseSignData)
-        forge_abi.Rpc.ResponseSignDataOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseSignData_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseSignData_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.Rpc.ResponseSignData.class, forge_abi.Rpc.ResponseSignData.Builder.class);
-      }
-
-      // Construct using forge_abi.Rpc.ResponseSignData.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        code_ = 0;
-
-        signature_ = com.google.protobuf.ByteString.EMPTY;
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseSignData_descriptor;
-      }
-
-      public forge_abi.Rpc.ResponseSignData getDefaultInstanceForType() {
-        return forge_abi.Rpc.ResponseSignData.getDefaultInstance();
-      }
-
-      public forge_abi.Rpc.ResponseSignData build() {
-        forge_abi.Rpc.ResponseSignData result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.Rpc.ResponseSignData buildPartial() {
-        forge_abi.Rpc.ResponseSignData result = new forge_abi.Rpc.ResponseSignData(this);
-        result.code_ = code_;
-        result.signature_ = signature_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.Rpc.ResponseSignData) {
-          return mergeFrom((forge_abi.Rpc.ResponseSignData)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.Rpc.ResponseSignData other) {
-        if (other == forge_abi.Rpc.ResponseSignData.getDefaultInstance()) return this;
-        if (other.code_ != 0) {
-          setCodeValue(other.getCodeValue());
-        }
-        if (other.getSignature() != com.google.protobuf.ByteString.EMPTY) {
-          setSignature(other.getSignature());
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.Rpc.ResponseSignData parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.Rpc.ResponseSignData) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private int code_ = 0;
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public int getCodeValue() {
-        return code_;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public Builder setCodeValue(int value) {
-        code_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public forge_abi.Enum.StatusCode getCode() {
-        forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
-        return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public Builder setCode(forge_abi.Enum.StatusCode value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        code_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public Builder clearCode() {
-        
-        code_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private com.google.protobuf.ByteString signature_ = com.google.protobuf.ByteString.EMPTY;
-      /**
-       * <code>bytes signature = 2;</code>
-       */
-      public com.google.protobuf.ByteString getSignature() {
-        return signature_;
-      }
-      /**
-       * <code>bytes signature = 2;</code>
-       */
-      public Builder setSignature(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        signature_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>bytes signature = 2;</code>
-       */
-      public Builder clearSignature() {
-        
-        signature_ = getDefaultInstance().getSignature();
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.ResponseSignData)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.ResponseSignData)
-    private static final forge_abi.Rpc.ResponseSignData DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.Rpc.ResponseSignData();
-    }
-
-    public static forge_abi.Rpc.ResponseSignData getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<ResponseSignData>
-        PARSER = new com.google.protobuf.AbstractParser<ResponseSignData>() {
-      public ResponseSignData parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ResponseSignData(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<ResponseSignData> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ResponseSignData> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.Rpc.ResponseSignData getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface RequestGetAssetsOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.RequestGetAssets)
+  public interface RequestListAssetsOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.RequestListAssets)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -46609,17 +47493,17 @@ public final class Rpc {
         getOwnerAddressBytes();
   }
   /**
-   * Protobuf type {@code forge_abi.RequestGetAssets}
+   * Protobuf type {@code forge_abi.RequestListAssets}
    */
-  public  static final class RequestGetAssets extends
+  public  static final class RequestListAssets extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.RequestGetAssets)
-      RequestGetAssetsOrBuilder {
-    // Use RequestGetAssets.newBuilder() to construct.
-    private RequestGetAssets(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:forge_abi.RequestListAssets)
+      RequestListAssetsOrBuilder {
+    // Use RequestListAssets.newBuilder() to construct.
+    private RequestListAssets(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private RequestGetAssets() {
+    private RequestListAssets() {
       ownerAddress_ = "";
     }
 
@@ -46628,7 +47512,7 @@ public final class Rpc {
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
-    private RequestGetAssets(
+    private RequestListAssets(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -46680,14 +47564,14 @@ public final class Rpc {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return forge_abi.Rpc.internal_static_forge_abi_RequestGetAssets_descriptor;
+      return forge_abi.Rpc.internal_static_forge_abi_RequestListAssets_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return forge_abi.Rpc.internal_static_forge_abi_RequestGetAssets_fieldAccessorTable
+      return forge_abi.Rpc.internal_static_forge_abi_RequestListAssets_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              forge_abi.Rpc.RequestGetAssets.class, forge_abi.Rpc.RequestGetAssets.Builder.class);
+              forge_abi.Rpc.RequestListAssets.class, forge_abi.Rpc.RequestListAssets.Builder.class);
     }
 
     public static final int PAGING_FIELD_NUMBER = 1;
@@ -46787,10 +47671,10 @@ public final class Rpc {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof forge_abi.Rpc.RequestGetAssets)) {
+      if (!(obj instanceof forge_abi.Rpc.RequestListAssets)) {
         return super.equals(obj);
       }
-      forge_abi.Rpc.RequestGetAssets other = (forge_abi.Rpc.RequestGetAssets) obj;
+      forge_abi.Rpc.RequestListAssets other = (forge_abi.Rpc.RequestListAssets) obj;
 
       boolean result = true;
       result = result && (hasPaging() == other.hasPaging());
@@ -46821,58 +47705,58 @@ public final class Rpc {
       return hash;
     }
 
-    public static forge_abi.Rpc.RequestGetAssets parseFrom(
+    public static forge_abi.Rpc.RequestListAssets parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static forge_abi.Rpc.RequestGetAssets parseFrom(
+    public static forge_abi.Rpc.RequestListAssets parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static forge_abi.Rpc.RequestGetAssets parseFrom(byte[] data)
+    public static forge_abi.Rpc.RequestListAssets parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static forge_abi.Rpc.RequestGetAssets parseFrom(
+    public static forge_abi.Rpc.RequestListAssets parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static forge_abi.Rpc.RequestGetAssets parseFrom(java.io.InputStream input)
+    public static forge_abi.Rpc.RequestListAssets parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.RequestGetAssets parseFrom(
+    public static forge_abi.Rpc.RequestListAssets parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static forge_abi.Rpc.RequestGetAssets parseDelimitedFrom(java.io.InputStream input)
+    public static forge_abi.Rpc.RequestListAssets parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.RequestGetAssets parseDelimitedFrom(
+    public static forge_abi.Rpc.RequestListAssets parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static forge_abi.Rpc.RequestGetAssets parseFrom(
+    public static forge_abi.Rpc.RequestListAssets parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.RequestGetAssets parseFrom(
+    public static forge_abi.Rpc.RequestListAssets parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -46884,7 +47768,7 @@ public final class Rpc {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(forge_abi.Rpc.RequestGetAssets prototype) {
+    public static Builder newBuilder(forge_abi.Rpc.RequestListAssets prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -46899,25 +47783,25 @@ public final class Rpc {
       return builder;
     }
     /**
-     * Protobuf type {@code forge_abi.RequestGetAssets}
+     * Protobuf type {@code forge_abi.RequestListAssets}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.RequestGetAssets)
-        forge_abi.Rpc.RequestGetAssetsOrBuilder {
+        // @@protoc_insertion_point(builder_implements:forge_abi.RequestListAssets)
+        forge_abi.Rpc.RequestListAssetsOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestGetAssets_descriptor;
+        return forge_abi.Rpc.internal_static_forge_abi_RequestListAssets_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestGetAssets_fieldAccessorTable
+        return forge_abi.Rpc.internal_static_forge_abi_RequestListAssets_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                forge_abi.Rpc.RequestGetAssets.class, forge_abi.Rpc.RequestGetAssets.Builder.class);
+                forge_abi.Rpc.RequestListAssets.class, forge_abi.Rpc.RequestListAssets.Builder.class);
       }
 
-      // Construct using forge_abi.Rpc.RequestGetAssets.newBuilder()
+      // Construct using forge_abi.Rpc.RequestListAssets.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -46947,23 +47831,23 @@ public final class Rpc {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestGetAssets_descriptor;
+        return forge_abi.Rpc.internal_static_forge_abi_RequestListAssets_descriptor;
       }
 
-      public forge_abi.Rpc.RequestGetAssets getDefaultInstanceForType() {
-        return forge_abi.Rpc.RequestGetAssets.getDefaultInstance();
+      public forge_abi.Rpc.RequestListAssets getDefaultInstanceForType() {
+        return forge_abi.Rpc.RequestListAssets.getDefaultInstance();
       }
 
-      public forge_abi.Rpc.RequestGetAssets build() {
-        forge_abi.Rpc.RequestGetAssets result = buildPartial();
+      public forge_abi.Rpc.RequestListAssets build() {
+        forge_abi.Rpc.RequestListAssets result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public forge_abi.Rpc.RequestGetAssets buildPartial() {
-        forge_abi.Rpc.RequestGetAssets result = new forge_abi.Rpc.RequestGetAssets(this);
+      public forge_abi.Rpc.RequestListAssets buildPartial() {
+        forge_abi.Rpc.RequestListAssets result = new forge_abi.Rpc.RequestListAssets(this);
         if (pagingBuilder_ == null) {
           result.paging_ = paging_;
         } else {
@@ -47001,16 +47885,16 @@ public final class Rpc {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.Rpc.RequestGetAssets) {
-          return mergeFrom((forge_abi.Rpc.RequestGetAssets)other);
+        if (other instanceof forge_abi.Rpc.RequestListAssets) {
+          return mergeFrom((forge_abi.Rpc.RequestListAssets)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(forge_abi.Rpc.RequestGetAssets other) {
-        if (other == forge_abi.Rpc.RequestGetAssets.getDefaultInstance()) return this;
+      public Builder mergeFrom(forge_abi.Rpc.RequestListAssets other) {
+        if (other == forge_abi.Rpc.RequestListAssets.getDefaultInstance()) return this;
         if (other.hasPaging()) {
           mergePaging(other.getPaging());
         }
@@ -47030,11 +47914,11 @@ public final class Rpc {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        forge_abi.Rpc.RequestGetAssets parsedMessage = null;
+        forge_abi.Rpc.RequestListAssets parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.Rpc.RequestGetAssets) e.getUnfinishedMessage();
+          parsedMessage = (forge_abi.Rpc.RequestListAssets) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -47240,46 +48124,46 @@ public final class Rpc {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:forge_abi.RequestGetAssets)
+      // @@protoc_insertion_point(builder_scope:forge_abi.RequestListAssets)
     }
 
-    // @@protoc_insertion_point(class_scope:forge_abi.RequestGetAssets)
-    private static final forge_abi.Rpc.RequestGetAssets DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:forge_abi.RequestListAssets)
+    private static final forge_abi.Rpc.RequestListAssets DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new forge_abi.Rpc.RequestGetAssets();
+      DEFAULT_INSTANCE = new forge_abi.Rpc.RequestListAssets();
     }
 
-    public static forge_abi.Rpc.RequestGetAssets getDefaultInstance() {
+    public static forge_abi.Rpc.RequestListAssets getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<RequestGetAssets>
-        PARSER = new com.google.protobuf.AbstractParser<RequestGetAssets>() {
-      public RequestGetAssets parsePartialFrom(
+    private static final com.google.protobuf.Parser<RequestListAssets>
+        PARSER = new com.google.protobuf.AbstractParser<RequestListAssets>() {
+      public RequestListAssets parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new RequestGetAssets(input, extensionRegistry);
+          return new RequestListAssets(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<RequestGetAssets> parser() {
+    public static com.google.protobuf.Parser<RequestListAssets> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<RequestGetAssets> getParserForType() {
+    public com.google.protobuf.Parser<RequestListAssets> getParserForType() {
       return PARSER;
     }
 
-    public forge_abi.Rpc.RequestGetAssets getDefaultInstanceForType() {
+    public forge_abi.Rpc.RequestListAssets getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface ResponseGetAssetsOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.ResponseGetAssets)
+  public interface ResponseListAssetsOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.ResponseListAssets)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -47329,17 +48213,17 @@ public final class Rpc {
         int index);
   }
   /**
-   * Protobuf type {@code forge_abi.ResponseGetAssets}
+   * Protobuf type {@code forge_abi.ResponseListAssets}
    */
-  public  static final class ResponseGetAssets extends
+  public  static final class ResponseListAssets extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.ResponseGetAssets)
-      ResponseGetAssetsOrBuilder {
-    // Use ResponseGetAssets.newBuilder() to construct.
-    private ResponseGetAssets(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:forge_abi.ResponseListAssets)
+      ResponseListAssetsOrBuilder {
+    // Use ResponseListAssets.newBuilder() to construct.
+    private ResponseListAssets(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private ResponseGetAssets() {
+    private ResponseListAssets() {
       code_ = 0;
       assets_ = java.util.Collections.emptyList();
     }
@@ -47349,7 +48233,7 @@ public final class Rpc {
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
-    private ResponseGetAssets(
+    private ResponseListAssets(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -47413,14 +48297,14 @@ public final class Rpc {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return forge_abi.Rpc.internal_static_forge_abi_ResponseGetAssets_descriptor;
+      return forge_abi.Rpc.internal_static_forge_abi_ResponseListAssets_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return forge_abi.Rpc.internal_static_forge_abi_ResponseGetAssets_fieldAccessorTable
+      return forge_abi.Rpc.internal_static_forge_abi_ResponseListAssets_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              forge_abi.Rpc.ResponseGetAssets.class, forge_abi.Rpc.ResponseGetAssets.Builder.class);
+              forge_abi.Rpc.ResponseListAssets.class, forge_abi.Rpc.ResponseListAssets.Builder.class);
     }
 
     private int bitField0_;
@@ -47546,10 +48430,10 @@ public final class Rpc {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof forge_abi.Rpc.ResponseGetAssets)) {
+      if (!(obj instanceof forge_abi.Rpc.ResponseListAssets)) {
         return super.equals(obj);
       }
-      forge_abi.Rpc.ResponseGetAssets other = (forge_abi.Rpc.ResponseGetAssets) obj;
+      forge_abi.Rpc.ResponseListAssets other = (forge_abi.Rpc.ResponseListAssets) obj;
 
       boolean result = true;
       result = result && code_ == other.code_;
@@ -47585,58 +48469,58 @@ public final class Rpc {
       return hash;
     }
 
-    public static forge_abi.Rpc.ResponseGetAssets parseFrom(
+    public static forge_abi.Rpc.ResponseListAssets parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static forge_abi.Rpc.ResponseGetAssets parseFrom(
+    public static forge_abi.Rpc.ResponseListAssets parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static forge_abi.Rpc.ResponseGetAssets parseFrom(byte[] data)
+    public static forge_abi.Rpc.ResponseListAssets parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static forge_abi.Rpc.ResponseGetAssets parseFrom(
+    public static forge_abi.Rpc.ResponseListAssets parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static forge_abi.Rpc.ResponseGetAssets parseFrom(java.io.InputStream input)
+    public static forge_abi.Rpc.ResponseListAssets parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.ResponseGetAssets parseFrom(
+    public static forge_abi.Rpc.ResponseListAssets parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static forge_abi.Rpc.ResponseGetAssets parseDelimitedFrom(java.io.InputStream input)
+    public static forge_abi.Rpc.ResponseListAssets parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.ResponseGetAssets parseDelimitedFrom(
+    public static forge_abi.Rpc.ResponseListAssets parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static forge_abi.Rpc.ResponseGetAssets parseFrom(
+    public static forge_abi.Rpc.ResponseListAssets parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.ResponseGetAssets parseFrom(
+    public static forge_abi.Rpc.ResponseListAssets parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -47648,7 +48532,7 @@ public final class Rpc {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(forge_abi.Rpc.ResponseGetAssets prototype) {
+    public static Builder newBuilder(forge_abi.Rpc.ResponseListAssets prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -47663,25 +48547,25 @@ public final class Rpc {
       return builder;
     }
     /**
-     * Protobuf type {@code forge_abi.ResponseGetAssets}
+     * Protobuf type {@code forge_abi.ResponseListAssets}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.ResponseGetAssets)
-        forge_abi.Rpc.ResponseGetAssetsOrBuilder {
+        // @@protoc_insertion_point(builder_implements:forge_abi.ResponseListAssets)
+        forge_abi.Rpc.ResponseListAssetsOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetAssets_descriptor;
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseListAssets_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetAssets_fieldAccessorTable
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseListAssets_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                forge_abi.Rpc.ResponseGetAssets.class, forge_abi.Rpc.ResponseGetAssets.Builder.class);
+                forge_abi.Rpc.ResponseListAssets.class, forge_abi.Rpc.ResponseListAssets.Builder.class);
       }
 
-      // Construct using forge_abi.Rpc.ResponseGetAssets.newBuilder()
+      // Construct using forge_abi.Rpc.ResponseListAssets.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -47718,23 +48602,23 @@ public final class Rpc {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetAssets_descriptor;
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseListAssets_descriptor;
       }
 
-      public forge_abi.Rpc.ResponseGetAssets getDefaultInstanceForType() {
-        return forge_abi.Rpc.ResponseGetAssets.getDefaultInstance();
+      public forge_abi.Rpc.ResponseListAssets getDefaultInstanceForType() {
+        return forge_abi.Rpc.ResponseListAssets.getDefaultInstance();
       }
 
-      public forge_abi.Rpc.ResponseGetAssets build() {
-        forge_abi.Rpc.ResponseGetAssets result = buildPartial();
+      public forge_abi.Rpc.ResponseListAssets build() {
+        forge_abi.Rpc.ResponseListAssets result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public forge_abi.Rpc.ResponseGetAssets buildPartial() {
-        forge_abi.Rpc.ResponseGetAssets result = new forge_abi.Rpc.ResponseGetAssets(this);
+      public forge_abi.Rpc.ResponseListAssets buildPartial() {
+        forge_abi.Rpc.ResponseListAssets result = new forge_abi.Rpc.ResponseListAssets(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         result.code_ = code_;
@@ -47784,16 +48668,16 @@ public final class Rpc {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.Rpc.ResponseGetAssets) {
-          return mergeFrom((forge_abi.Rpc.ResponseGetAssets)other);
+        if (other instanceof forge_abi.Rpc.ResponseListAssets) {
+          return mergeFrom((forge_abi.Rpc.ResponseListAssets)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(forge_abi.Rpc.ResponseGetAssets other) {
-        if (other == forge_abi.Rpc.ResponseGetAssets.getDefaultInstance()) return this;
+      public Builder mergeFrom(forge_abi.Rpc.ResponseListAssets other) {
+        if (other == forge_abi.Rpc.ResponseListAssets.getDefaultInstance()) return this;
         if (other.code_ != 0) {
           setCodeValue(other.getCodeValue());
         }
@@ -47838,11 +48722,11 @@ public final class Rpc {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        forge_abi.Rpc.ResponseGetAssets parsedMessage = null;
+        forge_abi.Rpc.ResponseListAssets parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.Rpc.ResponseGetAssets) e.getUnfinishedMessage();
+          parsedMessage = (forge_abi.Rpc.ResponseListAssets) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -48264,46 +49148,46 @@ public final class Rpc {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:forge_abi.ResponseGetAssets)
+      // @@protoc_insertion_point(builder_scope:forge_abi.ResponseListAssets)
     }
 
-    // @@protoc_insertion_point(class_scope:forge_abi.ResponseGetAssets)
-    private static final forge_abi.Rpc.ResponseGetAssets DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:forge_abi.ResponseListAssets)
+    private static final forge_abi.Rpc.ResponseListAssets DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new forge_abi.Rpc.ResponseGetAssets();
+      DEFAULT_INSTANCE = new forge_abi.Rpc.ResponseListAssets();
     }
 
-    public static forge_abi.Rpc.ResponseGetAssets getDefaultInstance() {
+    public static forge_abi.Rpc.ResponseListAssets getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<ResponseGetAssets>
-        PARSER = new com.google.protobuf.AbstractParser<ResponseGetAssets>() {
-      public ResponseGetAssets parsePartialFrom(
+    private static final com.google.protobuf.Parser<ResponseListAssets>
+        PARSER = new com.google.protobuf.AbstractParser<ResponseListAssets>() {
+      public ResponseListAssets parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ResponseGetAssets(input, extensionRegistry);
+          return new ResponseListAssets(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<ResponseGetAssets> parser() {
+    public static com.google.protobuf.Parser<ResponseListAssets> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<ResponseGetAssets> getParserForType() {
+    public com.google.protobuf.Parser<ResponseListAssets> getParserForType() {
       return PARSER;
     }
 
-    public forge_abi.Rpc.ResponseGetAssets getDefaultInstanceForType() {
+    public forge_abi.Rpc.ResponseListAssets getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface RequestGetStakesOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.RequestGetStakes)
+  public interface RequestListStakesOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.RequestListStakes)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -48333,17 +49217,17 @@ public final class Rpc {
     forge_abi.TraceType.AddressFilterOrBuilder getAddressFilterOrBuilder();
   }
   /**
-   * Protobuf type {@code forge_abi.RequestGetStakes}
+   * Protobuf type {@code forge_abi.RequestListStakes}
    */
-  public  static final class RequestGetStakes extends
+  public  static final class RequestListStakes extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.RequestGetStakes)
-      RequestGetStakesOrBuilder {
-    // Use RequestGetStakes.newBuilder() to construct.
-    private RequestGetStakes(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:forge_abi.RequestListStakes)
+      RequestListStakesOrBuilder {
+    // Use RequestListStakes.newBuilder() to construct.
+    private RequestListStakes(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private RequestGetStakes() {
+    private RequestListStakes() {
     }
 
     @java.lang.Override
@@ -48351,7 +49235,7 @@ public final class Rpc {
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
-    private RequestGetStakes(
+    private RequestListStakes(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -48410,14 +49294,14 @@ public final class Rpc {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return forge_abi.Rpc.internal_static_forge_abi_RequestGetStakes_descriptor;
+      return forge_abi.Rpc.internal_static_forge_abi_RequestListStakes_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return forge_abi.Rpc.internal_static_forge_abi_RequestGetStakes_fieldAccessorTable
+      return forge_abi.Rpc.internal_static_forge_abi_RequestListStakes_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              forge_abi.Rpc.RequestGetStakes.class, forge_abi.Rpc.RequestGetStakes.Builder.class);
+              forge_abi.Rpc.RequestListStakes.class, forge_abi.Rpc.RequestListStakes.Builder.class);
     }
 
     public static final int PAGING_FIELD_NUMBER = 1;
@@ -48505,10 +49389,10 @@ public final class Rpc {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof forge_abi.Rpc.RequestGetStakes)) {
+      if (!(obj instanceof forge_abi.Rpc.RequestListStakes)) {
         return super.equals(obj);
       }
-      forge_abi.Rpc.RequestGetStakes other = (forge_abi.Rpc.RequestGetStakes) obj;
+      forge_abi.Rpc.RequestListStakes other = (forge_abi.Rpc.RequestListStakes) obj;
 
       boolean result = true;
       result = result && (hasPaging() == other.hasPaging());
@@ -48544,58 +49428,58 @@ public final class Rpc {
       return hash;
     }
 
-    public static forge_abi.Rpc.RequestGetStakes parseFrom(
+    public static forge_abi.Rpc.RequestListStakes parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static forge_abi.Rpc.RequestGetStakes parseFrom(
+    public static forge_abi.Rpc.RequestListStakes parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static forge_abi.Rpc.RequestGetStakes parseFrom(byte[] data)
+    public static forge_abi.Rpc.RequestListStakes parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static forge_abi.Rpc.RequestGetStakes parseFrom(
+    public static forge_abi.Rpc.RequestListStakes parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static forge_abi.Rpc.RequestGetStakes parseFrom(java.io.InputStream input)
+    public static forge_abi.Rpc.RequestListStakes parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.RequestGetStakes parseFrom(
+    public static forge_abi.Rpc.RequestListStakes parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static forge_abi.Rpc.RequestGetStakes parseDelimitedFrom(java.io.InputStream input)
+    public static forge_abi.Rpc.RequestListStakes parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.RequestGetStakes parseDelimitedFrom(
+    public static forge_abi.Rpc.RequestListStakes parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static forge_abi.Rpc.RequestGetStakes parseFrom(
+    public static forge_abi.Rpc.RequestListStakes parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.RequestGetStakes parseFrom(
+    public static forge_abi.Rpc.RequestListStakes parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -48607,7 +49491,7 @@ public final class Rpc {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(forge_abi.Rpc.RequestGetStakes prototype) {
+    public static Builder newBuilder(forge_abi.Rpc.RequestListStakes prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -48622,25 +49506,25 @@ public final class Rpc {
       return builder;
     }
     /**
-     * Protobuf type {@code forge_abi.RequestGetStakes}
+     * Protobuf type {@code forge_abi.RequestListStakes}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.RequestGetStakes)
-        forge_abi.Rpc.RequestGetStakesOrBuilder {
+        // @@protoc_insertion_point(builder_implements:forge_abi.RequestListStakes)
+        forge_abi.Rpc.RequestListStakesOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestGetStakes_descriptor;
+        return forge_abi.Rpc.internal_static_forge_abi_RequestListStakes_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestGetStakes_fieldAccessorTable
+        return forge_abi.Rpc.internal_static_forge_abi_RequestListStakes_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                forge_abi.Rpc.RequestGetStakes.class, forge_abi.Rpc.RequestGetStakes.Builder.class);
+                forge_abi.Rpc.RequestListStakes.class, forge_abi.Rpc.RequestListStakes.Builder.class);
       }
 
-      // Construct using forge_abi.Rpc.RequestGetStakes.newBuilder()
+      // Construct using forge_abi.Rpc.RequestListStakes.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -48674,23 +49558,23 @@ public final class Rpc {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestGetStakes_descriptor;
+        return forge_abi.Rpc.internal_static_forge_abi_RequestListStakes_descriptor;
       }
 
-      public forge_abi.Rpc.RequestGetStakes getDefaultInstanceForType() {
-        return forge_abi.Rpc.RequestGetStakes.getDefaultInstance();
+      public forge_abi.Rpc.RequestListStakes getDefaultInstanceForType() {
+        return forge_abi.Rpc.RequestListStakes.getDefaultInstance();
       }
 
-      public forge_abi.Rpc.RequestGetStakes build() {
-        forge_abi.Rpc.RequestGetStakes result = buildPartial();
+      public forge_abi.Rpc.RequestListStakes build() {
+        forge_abi.Rpc.RequestListStakes result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public forge_abi.Rpc.RequestGetStakes buildPartial() {
-        forge_abi.Rpc.RequestGetStakes result = new forge_abi.Rpc.RequestGetStakes(this);
+      public forge_abi.Rpc.RequestListStakes buildPartial() {
+        forge_abi.Rpc.RequestListStakes result = new forge_abi.Rpc.RequestListStakes(this);
         if (pagingBuilder_ == null) {
           result.paging_ = paging_;
         } else {
@@ -48732,16 +49616,16 @@ public final class Rpc {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.Rpc.RequestGetStakes) {
-          return mergeFrom((forge_abi.Rpc.RequestGetStakes)other);
+        if (other instanceof forge_abi.Rpc.RequestListStakes) {
+          return mergeFrom((forge_abi.Rpc.RequestListStakes)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(forge_abi.Rpc.RequestGetStakes other) {
-        if (other == forge_abi.Rpc.RequestGetStakes.getDefaultInstance()) return this;
+      public Builder mergeFrom(forge_abi.Rpc.RequestListStakes other) {
+        if (other == forge_abi.Rpc.RequestListStakes.getDefaultInstance()) return this;
         if (other.hasPaging()) {
           mergePaging(other.getPaging());
         }
@@ -48760,11 +49644,11 @@ public final class Rpc {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        forge_abi.Rpc.RequestGetStakes parsedMessage = null;
+        forge_abi.Rpc.RequestListStakes parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.Rpc.RequestGetStakes) e.getUnfinishedMessage();
+          parsedMessage = (forge_abi.Rpc.RequestListStakes) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -49018,46 +49902,46 @@ public final class Rpc {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:forge_abi.RequestGetStakes)
+      // @@protoc_insertion_point(builder_scope:forge_abi.RequestListStakes)
     }
 
-    // @@protoc_insertion_point(class_scope:forge_abi.RequestGetStakes)
-    private static final forge_abi.Rpc.RequestGetStakes DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:forge_abi.RequestListStakes)
+    private static final forge_abi.Rpc.RequestListStakes DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new forge_abi.Rpc.RequestGetStakes();
+      DEFAULT_INSTANCE = new forge_abi.Rpc.RequestListStakes();
     }
 
-    public static forge_abi.Rpc.RequestGetStakes getDefaultInstance() {
+    public static forge_abi.Rpc.RequestListStakes getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<RequestGetStakes>
-        PARSER = new com.google.protobuf.AbstractParser<RequestGetStakes>() {
-      public RequestGetStakes parsePartialFrom(
+    private static final com.google.protobuf.Parser<RequestListStakes>
+        PARSER = new com.google.protobuf.AbstractParser<RequestListStakes>() {
+      public RequestListStakes parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new RequestGetStakes(input, extensionRegistry);
+          return new RequestListStakes(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<RequestGetStakes> parser() {
+    public static com.google.protobuf.Parser<RequestListStakes> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<RequestGetStakes> getParserForType() {
+    public com.google.protobuf.Parser<RequestListStakes> getParserForType() {
       return PARSER;
     }
 
-    public forge_abi.Rpc.RequestGetStakes getDefaultInstanceForType() {
+    public forge_abi.Rpc.RequestListStakes getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface ResponseGetStakesOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.ResponseGetStakes)
+  public interface ResponseListStakesOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.ResponseListStakes)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -49107,17 +49991,17 @@ public final class Rpc {
         int index);
   }
   /**
-   * Protobuf type {@code forge_abi.ResponseGetStakes}
+   * Protobuf type {@code forge_abi.ResponseListStakes}
    */
-  public  static final class ResponseGetStakes extends
+  public  static final class ResponseListStakes extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.ResponseGetStakes)
-      ResponseGetStakesOrBuilder {
-    // Use ResponseGetStakes.newBuilder() to construct.
-    private ResponseGetStakes(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:forge_abi.ResponseListStakes)
+      ResponseListStakesOrBuilder {
+    // Use ResponseListStakes.newBuilder() to construct.
+    private ResponseListStakes(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private ResponseGetStakes() {
+    private ResponseListStakes() {
       code_ = 0;
       stakes_ = java.util.Collections.emptyList();
     }
@@ -49127,7 +50011,7 @@ public final class Rpc {
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
-    private ResponseGetStakes(
+    private ResponseListStakes(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -49191,14 +50075,14 @@ public final class Rpc {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return forge_abi.Rpc.internal_static_forge_abi_ResponseGetStakes_descriptor;
+      return forge_abi.Rpc.internal_static_forge_abi_ResponseListStakes_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return forge_abi.Rpc.internal_static_forge_abi_ResponseGetStakes_fieldAccessorTable
+      return forge_abi.Rpc.internal_static_forge_abi_ResponseListStakes_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              forge_abi.Rpc.ResponseGetStakes.class, forge_abi.Rpc.ResponseGetStakes.Builder.class);
+              forge_abi.Rpc.ResponseListStakes.class, forge_abi.Rpc.ResponseListStakes.Builder.class);
     }
 
     private int bitField0_;
@@ -49324,10 +50208,10 @@ public final class Rpc {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof forge_abi.Rpc.ResponseGetStakes)) {
+      if (!(obj instanceof forge_abi.Rpc.ResponseListStakes)) {
         return super.equals(obj);
       }
-      forge_abi.Rpc.ResponseGetStakes other = (forge_abi.Rpc.ResponseGetStakes) obj;
+      forge_abi.Rpc.ResponseListStakes other = (forge_abi.Rpc.ResponseListStakes) obj;
 
       boolean result = true;
       result = result && code_ == other.code_;
@@ -49363,58 +50247,58 @@ public final class Rpc {
       return hash;
     }
 
-    public static forge_abi.Rpc.ResponseGetStakes parseFrom(
+    public static forge_abi.Rpc.ResponseListStakes parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static forge_abi.Rpc.ResponseGetStakes parseFrom(
+    public static forge_abi.Rpc.ResponseListStakes parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static forge_abi.Rpc.ResponseGetStakes parseFrom(byte[] data)
+    public static forge_abi.Rpc.ResponseListStakes parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static forge_abi.Rpc.ResponseGetStakes parseFrom(
+    public static forge_abi.Rpc.ResponseListStakes parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static forge_abi.Rpc.ResponseGetStakes parseFrom(java.io.InputStream input)
+    public static forge_abi.Rpc.ResponseListStakes parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.ResponseGetStakes parseFrom(
+    public static forge_abi.Rpc.ResponseListStakes parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static forge_abi.Rpc.ResponseGetStakes parseDelimitedFrom(java.io.InputStream input)
+    public static forge_abi.Rpc.ResponseListStakes parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.ResponseGetStakes parseDelimitedFrom(
+    public static forge_abi.Rpc.ResponseListStakes parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static forge_abi.Rpc.ResponseGetStakes parseFrom(
+    public static forge_abi.Rpc.ResponseListStakes parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.ResponseGetStakes parseFrom(
+    public static forge_abi.Rpc.ResponseListStakes parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -49426,7 +50310,7 @@ public final class Rpc {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(forge_abi.Rpc.ResponseGetStakes prototype) {
+    public static Builder newBuilder(forge_abi.Rpc.ResponseListStakes prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -49441,25 +50325,25 @@ public final class Rpc {
       return builder;
     }
     /**
-     * Protobuf type {@code forge_abi.ResponseGetStakes}
+     * Protobuf type {@code forge_abi.ResponseListStakes}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.ResponseGetStakes)
-        forge_abi.Rpc.ResponseGetStakesOrBuilder {
+        // @@protoc_insertion_point(builder_implements:forge_abi.ResponseListStakes)
+        forge_abi.Rpc.ResponseListStakesOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetStakes_descriptor;
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseListStakes_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetStakes_fieldAccessorTable
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseListStakes_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                forge_abi.Rpc.ResponseGetStakes.class, forge_abi.Rpc.ResponseGetStakes.Builder.class);
+                forge_abi.Rpc.ResponseListStakes.class, forge_abi.Rpc.ResponseListStakes.Builder.class);
       }
 
-      // Construct using forge_abi.Rpc.ResponseGetStakes.newBuilder()
+      // Construct using forge_abi.Rpc.ResponseListStakes.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -49496,23 +50380,23 @@ public final class Rpc {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetStakes_descriptor;
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseListStakes_descriptor;
       }
 
-      public forge_abi.Rpc.ResponseGetStakes getDefaultInstanceForType() {
-        return forge_abi.Rpc.ResponseGetStakes.getDefaultInstance();
+      public forge_abi.Rpc.ResponseListStakes getDefaultInstanceForType() {
+        return forge_abi.Rpc.ResponseListStakes.getDefaultInstance();
       }
 
-      public forge_abi.Rpc.ResponseGetStakes build() {
-        forge_abi.Rpc.ResponseGetStakes result = buildPartial();
+      public forge_abi.Rpc.ResponseListStakes build() {
+        forge_abi.Rpc.ResponseListStakes result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public forge_abi.Rpc.ResponseGetStakes buildPartial() {
-        forge_abi.Rpc.ResponseGetStakes result = new forge_abi.Rpc.ResponseGetStakes(this);
+      public forge_abi.Rpc.ResponseListStakes buildPartial() {
+        forge_abi.Rpc.ResponseListStakes result = new forge_abi.Rpc.ResponseListStakes(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         result.code_ = code_;
@@ -49562,16 +50446,16 @@ public final class Rpc {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.Rpc.ResponseGetStakes) {
-          return mergeFrom((forge_abi.Rpc.ResponseGetStakes)other);
+        if (other instanceof forge_abi.Rpc.ResponseListStakes) {
+          return mergeFrom((forge_abi.Rpc.ResponseListStakes)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(forge_abi.Rpc.ResponseGetStakes other) {
-        if (other == forge_abi.Rpc.ResponseGetStakes.getDefaultInstance()) return this;
+      public Builder mergeFrom(forge_abi.Rpc.ResponseListStakes other) {
+        if (other == forge_abi.Rpc.ResponseListStakes.getDefaultInstance()) return this;
         if (other.code_ != 0) {
           setCodeValue(other.getCodeValue());
         }
@@ -49616,11 +50500,11 @@ public final class Rpc {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        forge_abi.Rpc.ResponseGetStakes parsedMessage = null;
+        forge_abi.Rpc.ResponseListStakes parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.Rpc.ResponseGetStakes) e.getUnfinishedMessage();
+          parsedMessage = (forge_abi.Rpc.ResponseListStakes) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -50042,46 +50926,1201 @@ public final class Rpc {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:forge_abi.ResponseGetStakes)
+      // @@protoc_insertion_point(builder_scope:forge_abi.ResponseListStakes)
     }
 
-    // @@protoc_insertion_point(class_scope:forge_abi.ResponseGetStakes)
-    private static final forge_abi.Rpc.ResponseGetStakes DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:forge_abi.ResponseListStakes)
+    private static final forge_abi.Rpc.ResponseListStakes DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new forge_abi.Rpc.ResponseGetStakes();
+      DEFAULT_INSTANCE = new forge_abi.Rpc.ResponseListStakes();
     }
 
-    public static forge_abi.Rpc.ResponseGetStakes getDefaultInstance() {
+    public static forge_abi.Rpc.ResponseListStakes getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<ResponseGetStakes>
-        PARSER = new com.google.protobuf.AbstractParser<ResponseGetStakes>() {
-      public ResponseGetStakes parsePartialFrom(
+    private static final com.google.protobuf.Parser<ResponseListStakes>
+        PARSER = new com.google.protobuf.AbstractParser<ResponseListStakes>() {
+      public ResponseListStakes parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ResponseGetStakes(input, extensionRegistry);
+          return new ResponseListStakes(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<ResponseGetStakes> parser() {
+    public static com.google.protobuf.Parser<ResponseListStakes> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<ResponseGetStakes> getParserForType() {
+    public com.google.protobuf.Parser<ResponseListStakes> getParserForType() {
       return PARSER;
     }
 
-    public forge_abi.Rpc.ResponseGetStakes getDefaultInstanceForType() {
+    public forge_abi.Rpc.ResponseListStakes getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface RequestGetTopAccountsOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.RequestGetTopAccounts)
+  public interface RequestListAccountOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.RequestListAccount)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string owner_address = 1;</code>
+     */
+    java.lang.String getOwnerAddress();
+    /**
+     * <code>string owner_address = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getOwnerAddressBytes();
+  }
+  /**
+   * Protobuf type {@code forge_abi.RequestListAccount}
+   */
+  public  static final class RequestListAccount extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:forge_abi.RequestListAccount)
+      RequestListAccountOrBuilder {
+    // Use RequestListAccount.newBuilder() to construct.
+    private RequestListAccount(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private RequestListAccount() {
+      ownerAddress_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private RequestListAccount(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              ownerAddress_ = s;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return forge_abi.Rpc.internal_static_forge_abi_RequestListAccount_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return forge_abi.Rpc.internal_static_forge_abi_RequestListAccount_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              forge_abi.Rpc.RequestListAccount.class, forge_abi.Rpc.RequestListAccount.Builder.class);
+    }
+
+    public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
+    private volatile java.lang.Object ownerAddress_;
+    /**
+     * <code>string owner_address = 1;</code>
+     */
+    public java.lang.String getOwnerAddress() {
+      java.lang.Object ref = ownerAddress_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        ownerAddress_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string owner_address = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getOwnerAddressBytes() {
+      java.lang.Object ref = ownerAddress_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        ownerAddress_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getOwnerAddressBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, ownerAddress_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getOwnerAddressBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, ownerAddress_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof forge_abi.Rpc.RequestListAccount)) {
+        return super.equals(obj);
+      }
+      forge_abi.Rpc.RequestListAccount other = (forge_abi.Rpc.RequestListAccount) obj;
+
+      boolean result = true;
+      result = result && getOwnerAddress()
+          .equals(other.getOwnerAddress());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + OWNER_ADDRESS_FIELD_NUMBER;
+      hash = (53 * hash) + getOwnerAddress().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static forge_abi.Rpc.RequestListAccount parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.Rpc.RequestListAccount parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.Rpc.RequestListAccount parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.Rpc.RequestListAccount parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.Rpc.RequestListAccount parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.RequestListAccount parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.Rpc.RequestListAccount parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.RequestListAccount parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.Rpc.RequestListAccount parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.RequestListAccount parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(forge_abi.Rpc.RequestListAccount prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code forge_abi.RequestListAccount}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:forge_abi.RequestListAccount)
+        forge_abi.Rpc.RequestListAccountOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return forge_abi.Rpc.internal_static_forge_abi_RequestListAccount_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return forge_abi.Rpc.internal_static_forge_abi_RequestListAccount_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                forge_abi.Rpc.RequestListAccount.class, forge_abi.Rpc.RequestListAccount.Builder.class);
+      }
+
+      // Construct using forge_abi.Rpc.RequestListAccount.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        ownerAddress_ = "";
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return forge_abi.Rpc.internal_static_forge_abi_RequestListAccount_descriptor;
+      }
+
+      public forge_abi.Rpc.RequestListAccount getDefaultInstanceForType() {
+        return forge_abi.Rpc.RequestListAccount.getDefaultInstance();
+      }
+
+      public forge_abi.Rpc.RequestListAccount build() {
+        forge_abi.Rpc.RequestListAccount result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public forge_abi.Rpc.RequestListAccount buildPartial() {
+        forge_abi.Rpc.RequestListAccount result = new forge_abi.Rpc.RequestListAccount(this);
+        result.ownerAddress_ = ownerAddress_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof forge_abi.Rpc.RequestListAccount) {
+          return mergeFrom((forge_abi.Rpc.RequestListAccount)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(forge_abi.Rpc.RequestListAccount other) {
+        if (other == forge_abi.Rpc.RequestListAccount.getDefaultInstance()) return this;
+        if (!other.getOwnerAddress().isEmpty()) {
+          ownerAddress_ = other.ownerAddress_;
+          onChanged();
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        forge_abi.Rpc.RequestListAccount parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (forge_abi.Rpc.RequestListAccount) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object ownerAddress_ = "";
+      /**
+       * <code>string owner_address = 1;</code>
+       */
+      public java.lang.String getOwnerAddress() {
+        java.lang.Object ref = ownerAddress_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          ownerAddress_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string owner_address = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getOwnerAddressBytes() {
+        java.lang.Object ref = ownerAddress_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          ownerAddress_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string owner_address = 1;</code>
+       */
+      public Builder setOwnerAddress(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        ownerAddress_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string owner_address = 1;</code>
+       */
+      public Builder clearOwnerAddress() {
+        
+        ownerAddress_ = getDefaultInstance().getOwnerAddress();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string owner_address = 1;</code>
+       */
+      public Builder setOwnerAddressBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        ownerAddress_ = value;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:forge_abi.RequestListAccount)
+    }
+
+    // @@protoc_insertion_point(class_scope:forge_abi.RequestListAccount)
+    private static final forge_abi.Rpc.RequestListAccount DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new forge_abi.Rpc.RequestListAccount();
+    }
+
+    public static forge_abi.Rpc.RequestListAccount getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<RequestListAccount>
+        PARSER = new com.google.protobuf.AbstractParser<RequestListAccount>() {
+      public RequestListAccount parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new RequestListAccount(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<RequestListAccount> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RequestListAccount> getParserForType() {
+      return PARSER;
+    }
+
+    public forge_abi.Rpc.RequestListAccount getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ResponseListAccountOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.ResponseListAccount)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.forge_abi.StatusCode code = 1;</code>
+     */
+    int getCodeValue();
+    /**
+     * <code>.forge_abi.StatusCode code = 1;</code>
+     */
+    forge_abi.Enum.StatusCode getCode();
+
+    /**
+     * <code>.forge_abi.IndexedAccountState account = 2;</code>
+     */
+    boolean hasAccount();
+    /**
+     * <code>.forge_abi.IndexedAccountState account = 2;</code>
+     */
+    forge_abi.TraceType.IndexedAccountState getAccount();
+    /**
+     * <code>.forge_abi.IndexedAccountState account = 2;</code>
+     */
+    forge_abi.TraceType.IndexedAccountStateOrBuilder getAccountOrBuilder();
+  }
+  /**
+   * Protobuf type {@code forge_abi.ResponseListAccount}
+   */
+  public  static final class ResponseListAccount extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:forge_abi.ResponseListAccount)
+      ResponseListAccountOrBuilder {
+    // Use ResponseListAccount.newBuilder() to construct.
+    private ResponseListAccount(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ResponseListAccount() {
+      code_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private ResponseListAccount(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+
+              code_ = rawValue;
+              break;
+            }
+            case 18: {
+              forge_abi.TraceType.IndexedAccountState.Builder subBuilder = null;
+              if (account_ != null) {
+                subBuilder = account_.toBuilder();
+              }
+              account_ = input.readMessage(forge_abi.TraceType.IndexedAccountState.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(account_);
+                account_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return forge_abi.Rpc.internal_static_forge_abi_ResponseListAccount_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return forge_abi.Rpc.internal_static_forge_abi_ResponseListAccount_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              forge_abi.Rpc.ResponseListAccount.class, forge_abi.Rpc.ResponseListAccount.Builder.class);
+    }
+
+    public static final int CODE_FIELD_NUMBER = 1;
+    private int code_;
+    /**
+     * <code>.forge_abi.StatusCode code = 1;</code>
+     */
+    public int getCodeValue() {
+      return code_;
+    }
+    /**
+     * <code>.forge_abi.StatusCode code = 1;</code>
+     */
+    public forge_abi.Enum.StatusCode getCode() {
+      forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
+      return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
+    }
+
+    public static final int ACCOUNT_FIELD_NUMBER = 2;
+    private forge_abi.TraceType.IndexedAccountState account_;
+    /**
+     * <code>.forge_abi.IndexedAccountState account = 2;</code>
+     */
+    public boolean hasAccount() {
+      return account_ != null;
+    }
+    /**
+     * <code>.forge_abi.IndexedAccountState account = 2;</code>
+     */
+    public forge_abi.TraceType.IndexedAccountState getAccount() {
+      return account_ == null ? forge_abi.TraceType.IndexedAccountState.getDefaultInstance() : account_;
+    }
+    /**
+     * <code>.forge_abi.IndexedAccountState account = 2;</code>
+     */
+    public forge_abi.TraceType.IndexedAccountStateOrBuilder getAccountOrBuilder() {
+      return getAccount();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
+        output.writeEnum(1, code_);
+      }
+      if (account_ != null) {
+        output.writeMessage(2, getAccount());
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, code_);
+      }
+      if (account_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getAccount());
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof forge_abi.Rpc.ResponseListAccount)) {
+        return super.equals(obj);
+      }
+      forge_abi.Rpc.ResponseListAccount other = (forge_abi.Rpc.ResponseListAccount) obj;
+
+      boolean result = true;
+      result = result && code_ == other.code_;
+      result = result && (hasAccount() == other.hasAccount());
+      if (hasAccount()) {
+        result = result && getAccount()
+            .equals(other.getAccount());
+      }
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + CODE_FIELD_NUMBER;
+      hash = (53 * hash) + code_;
+      if (hasAccount()) {
+        hash = (37 * hash) + ACCOUNT_FIELD_NUMBER;
+        hash = (53 * hash) + getAccount().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static forge_abi.Rpc.ResponseListAccount parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.Rpc.ResponseListAccount parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.Rpc.ResponseListAccount parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.Rpc.ResponseListAccount parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.Rpc.ResponseListAccount parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.ResponseListAccount parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.Rpc.ResponseListAccount parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.ResponseListAccount parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.Rpc.ResponseListAccount parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.ResponseListAccount parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(forge_abi.Rpc.ResponseListAccount prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code forge_abi.ResponseListAccount}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:forge_abi.ResponseListAccount)
+        forge_abi.Rpc.ResponseListAccountOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseListAccount_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseListAccount_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                forge_abi.Rpc.ResponseListAccount.class, forge_abi.Rpc.ResponseListAccount.Builder.class);
+      }
+
+      // Construct using forge_abi.Rpc.ResponseListAccount.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        code_ = 0;
+
+        if (accountBuilder_ == null) {
+          account_ = null;
+        } else {
+          account_ = null;
+          accountBuilder_ = null;
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseListAccount_descriptor;
+      }
+
+      public forge_abi.Rpc.ResponseListAccount getDefaultInstanceForType() {
+        return forge_abi.Rpc.ResponseListAccount.getDefaultInstance();
+      }
+
+      public forge_abi.Rpc.ResponseListAccount build() {
+        forge_abi.Rpc.ResponseListAccount result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public forge_abi.Rpc.ResponseListAccount buildPartial() {
+        forge_abi.Rpc.ResponseListAccount result = new forge_abi.Rpc.ResponseListAccount(this);
+        result.code_ = code_;
+        if (accountBuilder_ == null) {
+          result.account_ = account_;
+        } else {
+          result.account_ = accountBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof forge_abi.Rpc.ResponseListAccount) {
+          return mergeFrom((forge_abi.Rpc.ResponseListAccount)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(forge_abi.Rpc.ResponseListAccount other) {
+        if (other == forge_abi.Rpc.ResponseListAccount.getDefaultInstance()) return this;
+        if (other.code_ != 0) {
+          setCodeValue(other.getCodeValue());
+        }
+        if (other.hasAccount()) {
+          mergeAccount(other.getAccount());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        forge_abi.Rpc.ResponseListAccount parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (forge_abi.Rpc.ResponseListAccount) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int code_ = 0;
+      /**
+       * <code>.forge_abi.StatusCode code = 1;</code>
+       */
+      public int getCodeValue() {
+        return code_;
+      }
+      /**
+       * <code>.forge_abi.StatusCode code = 1;</code>
+       */
+      public Builder setCodeValue(int value) {
+        code_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.forge_abi.StatusCode code = 1;</code>
+       */
+      public forge_abi.Enum.StatusCode getCode() {
+        forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
+        return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.forge_abi.StatusCode code = 1;</code>
+       */
+      public Builder setCode(forge_abi.Enum.StatusCode value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        code_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.forge_abi.StatusCode code = 1;</code>
+       */
+      public Builder clearCode() {
+        
+        code_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private forge_abi.TraceType.IndexedAccountState account_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.TraceType.IndexedAccountState, forge_abi.TraceType.IndexedAccountState.Builder, forge_abi.TraceType.IndexedAccountStateOrBuilder> accountBuilder_;
+      /**
+       * <code>.forge_abi.IndexedAccountState account = 2;</code>
+       */
+      public boolean hasAccount() {
+        return accountBuilder_ != null || account_ != null;
+      }
+      /**
+       * <code>.forge_abi.IndexedAccountState account = 2;</code>
+       */
+      public forge_abi.TraceType.IndexedAccountState getAccount() {
+        if (accountBuilder_ == null) {
+          return account_ == null ? forge_abi.TraceType.IndexedAccountState.getDefaultInstance() : account_;
+        } else {
+          return accountBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.forge_abi.IndexedAccountState account = 2;</code>
+       */
+      public Builder setAccount(forge_abi.TraceType.IndexedAccountState value) {
+        if (accountBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          account_ = value;
+          onChanged();
+        } else {
+          accountBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.IndexedAccountState account = 2;</code>
+       */
+      public Builder setAccount(
+          forge_abi.TraceType.IndexedAccountState.Builder builderForValue) {
+        if (accountBuilder_ == null) {
+          account_ = builderForValue.build();
+          onChanged();
+        } else {
+          accountBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.IndexedAccountState account = 2;</code>
+       */
+      public Builder mergeAccount(forge_abi.TraceType.IndexedAccountState value) {
+        if (accountBuilder_ == null) {
+          if (account_ != null) {
+            account_ =
+              forge_abi.TraceType.IndexedAccountState.newBuilder(account_).mergeFrom(value).buildPartial();
+          } else {
+            account_ = value;
+          }
+          onChanged();
+        } else {
+          accountBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.IndexedAccountState account = 2;</code>
+       */
+      public Builder clearAccount() {
+        if (accountBuilder_ == null) {
+          account_ = null;
+          onChanged();
+        } else {
+          account_ = null;
+          accountBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.IndexedAccountState account = 2;</code>
+       */
+      public forge_abi.TraceType.IndexedAccountState.Builder getAccountBuilder() {
+        
+        onChanged();
+        return getAccountFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.IndexedAccountState account = 2;</code>
+       */
+      public forge_abi.TraceType.IndexedAccountStateOrBuilder getAccountOrBuilder() {
+        if (accountBuilder_ != null) {
+          return accountBuilder_.getMessageOrBuilder();
+        } else {
+          return account_ == null ?
+              forge_abi.TraceType.IndexedAccountState.getDefaultInstance() : account_;
+        }
+      }
+      /**
+       * <code>.forge_abi.IndexedAccountState account = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.TraceType.IndexedAccountState, forge_abi.TraceType.IndexedAccountState.Builder, forge_abi.TraceType.IndexedAccountStateOrBuilder> 
+          getAccountFieldBuilder() {
+        if (accountBuilder_ == null) {
+          accountBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.TraceType.IndexedAccountState, forge_abi.TraceType.IndexedAccountState.Builder, forge_abi.TraceType.IndexedAccountStateOrBuilder>(
+                  getAccount(),
+                  getParentForChildren(),
+                  isClean());
+          account_ = null;
+        }
+        return accountBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:forge_abi.ResponseListAccount)
+    }
+
+    // @@protoc_insertion_point(class_scope:forge_abi.ResponseListAccount)
+    private static final forge_abi.Rpc.ResponseListAccount DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new forge_abi.Rpc.ResponseListAccount();
+    }
+
+    public static forge_abi.Rpc.ResponseListAccount getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ResponseListAccount>
+        PARSER = new com.google.protobuf.AbstractParser<ResponseListAccount>() {
+      public ResponseListAccount parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new ResponseListAccount(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ResponseListAccount> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ResponseListAccount> getParserForType() {
+      return PARSER;
+    }
+
+    public forge_abi.Rpc.ResponseListAccount getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface RequestListTopAccountsOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.RequestListTopAccounts)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -50098,17 +52137,17 @@ public final class Rpc {
     forge_abi.TraceType.PageInputOrBuilder getPagingOrBuilder();
   }
   /**
-   * Protobuf type {@code forge_abi.RequestGetTopAccounts}
+   * Protobuf type {@code forge_abi.RequestListTopAccounts}
    */
-  public  static final class RequestGetTopAccounts extends
+  public  static final class RequestListTopAccounts extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.RequestGetTopAccounts)
-      RequestGetTopAccountsOrBuilder {
-    // Use RequestGetTopAccounts.newBuilder() to construct.
-    private RequestGetTopAccounts(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:forge_abi.RequestListTopAccounts)
+      RequestListTopAccountsOrBuilder {
+    // Use RequestListTopAccounts.newBuilder() to construct.
+    private RequestListTopAccounts(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private RequestGetTopAccounts() {
+    private RequestListTopAccounts() {
     }
 
     @java.lang.Override
@@ -50116,7 +52155,7 @@ public final class Rpc {
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
-    private RequestGetTopAccounts(
+    private RequestListTopAccounts(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -50162,14 +52201,14 @@ public final class Rpc {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return forge_abi.Rpc.internal_static_forge_abi_RequestGetTopAccounts_descriptor;
+      return forge_abi.Rpc.internal_static_forge_abi_RequestListTopAccounts_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return forge_abi.Rpc.internal_static_forge_abi_RequestGetTopAccounts_fieldAccessorTable
+      return forge_abi.Rpc.internal_static_forge_abi_RequestListTopAccounts_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              forge_abi.Rpc.RequestGetTopAccounts.class, forge_abi.Rpc.RequestGetTopAccounts.Builder.class);
+              forge_abi.Rpc.RequestListTopAccounts.class, forge_abi.Rpc.RequestListTopAccounts.Builder.class);
     }
 
     public static final int PAGING_FIELD_NUMBER = 1;
@@ -50229,10 +52268,10 @@ public final class Rpc {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof forge_abi.Rpc.RequestGetTopAccounts)) {
+      if (!(obj instanceof forge_abi.Rpc.RequestListTopAccounts)) {
         return super.equals(obj);
       }
-      forge_abi.Rpc.RequestGetTopAccounts other = (forge_abi.Rpc.RequestGetTopAccounts) obj;
+      forge_abi.Rpc.RequestListTopAccounts other = (forge_abi.Rpc.RequestListTopAccounts) obj;
 
       boolean result = true;
       result = result && (hasPaging() == other.hasPaging());
@@ -50259,58 +52298,58 @@ public final class Rpc {
       return hash;
     }
 
-    public static forge_abi.Rpc.RequestGetTopAccounts parseFrom(
+    public static forge_abi.Rpc.RequestListTopAccounts parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static forge_abi.Rpc.RequestGetTopAccounts parseFrom(
+    public static forge_abi.Rpc.RequestListTopAccounts parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static forge_abi.Rpc.RequestGetTopAccounts parseFrom(byte[] data)
+    public static forge_abi.Rpc.RequestListTopAccounts parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static forge_abi.Rpc.RequestGetTopAccounts parseFrom(
+    public static forge_abi.Rpc.RequestListTopAccounts parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static forge_abi.Rpc.RequestGetTopAccounts parseFrom(java.io.InputStream input)
+    public static forge_abi.Rpc.RequestListTopAccounts parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.RequestGetTopAccounts parseFrom(
+    public static forge_abi.Rpc.RequestListTopAccounts parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static forge_abi.Rpc.RequestGetTopAccounts parseDelimitedFrom(java.io.InputStream input)
+    public static forge_abi.Rpc.RequestListTopAccounts parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.RequestGetTopAccounts parseDelimitedFrom(
+    public static forge_abi.Rpc.RequestListTopAccounts parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static forge_abi.Rpc.RequestGetTopAccounts parseFrom(
+    public static forge_abi.Rpc.RequestListTopAccounts parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.RequestGetTopAccounts parseFrom(
+    public static forge_abi.Rpc.RequestListTopAccounts parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -50322,7 +52361,7 @@ public final class Rpc {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(forge_abi.Rpc.RequestGetTopAccounts prototype) {
+    public static Builder newBuilder(forge_abi.Rpc.RequestListTopAccounts prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -50337,25 +52376,25 @@ public final class Rpc {
       return builder;
     }
     /**
-     * Protobuf type {@code forge_abi.RequestGetTopAccounts}
+     * Protobuf type {@code forge_abi.RequestListTopAccounts}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.RequestGetTopAccounts)
-        forge_abi.Rpc.RequestGetTopAccountsOrBuilder {
+        // @@protoc_insertion_point(builder_implements:forge_abi.RequestListTopAccounts)
+        forge_abi.Rpc.RequestListTopAccountsOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestGetTopAccounts_descriptor;
+        return forge_abi.Rpc.internal_static_forge_abi_RequestListTopAccounts_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestGetTopAccounts_fieldAccessorTable
+        return forge_abi.Rpc.internal_static_forge_abi_RequestListTopAccounts_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                forge_abi.Rpc.RequestGetTopAccounts.class, forge_abi.Rpc.RequestGetTopAccounts.Builder.class);
+                forge_abi.Rpc.RequestListTopAccounts.class, forge_abi.Rpc.RequestListTopAccounts.Builder.class);
       }
 
-      // Construct using forge_abi.Rpc.RequestGetTopAccounts.newBuilder()
+      // Construct using forge_abi.Rpc.RequestListTopAccounts.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -50383,23 +52422,23 @@ public final class Rpc {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestGetTopAccounts_descriptor;
+        return forge_abi.Rpc.internal_static_forge_abi_RequestListTopAccounts_descriptor;
       }
 
-      public forge_abi.Rpc.RequestGetTopAccounts getDefaultInstanceForType() {
-        return forge_abi.Rpc.RequestGetTopAccounts.getDefaultInstance();
+      public forge_abi.Rpc.RequestListTopAccounts getDefaultInstanceForType() {
+        return forge_abi.Rpc.RequestListTopAccounts.getDefaultInstance();
       }
 
-      public forge_abi.Rpc.RequestGetTopAccounts build() {
-        forge_abi.Rpc.RequestGetTopAccounts result = buildPartial();
+      public forge_abi.Rpc.RequestListTopAccounts build() {
+        forge_abi.Rpc.RequestListTopAccounts result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public forge_abi.Rpc.RequestGetTopAccounts buildPartial() {
-        forge_abi.Rpc.RequestGetTopAccounts result = new forge_abi.Rpc.RequestGetTopAccounts(this);
+      public forge_abi.Rpc.RequestListTopAccounts buildPartial() {
+        forge_abi.Rpc.RequestListTopAccounts result = new forge_abi.Rpc.RequestListTopAccounts(this);
         if (pagingBuilder_ == null) {
           result.paging_ = paging_;
         } else {
@@ -50436,16 +52475,16 @@ public final class Rpc {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.Rpc.RequestGetTopAccounts) {
-          return mergeFrom((forge_abi.Rpc.RequestGetTopAccounts)other);
+        if (other instanceof forge_abi.Rpc.RequestListTopAccounts) {
+          return mergeFrom((forge_abi.Rpc.RequestListTopAccounts)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(forge_abi.Rpc.RequestGetTopAccounts other) {
-        if (other == forge_abi.Rpc.RequestGetTopAccounts.getDefaultInstance()) return this;
+      public Builder mergeFrom(forge_abi.Rpc.RequestListTopAccounts other) {
+        if (other == forge_abi.Rpc.RequestListTopAccounts.getDefaultInstance()) return this;
         if (other.hasPaging()) {
           mergePaging(other.getPaging());
         }
@@ -50461,11 +52500,11 @@ public final class Rpc {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        forge_abi.Rpc.RequestGetTopAccounts parsedMessage = null;
+        forge_abi.Rpc.RequestListTopAccounts parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.Rpc.RequestGetTopAccounts) e.getUnfinishedMessage();
+          parsedMessage = (forge_abi.Rpc.RequestListTopAccounts) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -50602,46 +52641,46 @@ public final class Rpc {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:forge_abi.RequestGetTopAccounts)
+      // @@protoc_insertion_point(builder_scope:forge_abi.RequestListTopAccounts)
     }
 
-    // @@protoc_insertion_point(class_scope:forge_abi.RequestGetTopAccounts)
-    private static final forge_abi.Rpc.RequestGetTopAccounts DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:forge_abi.RequestListTopAccounts)
+    private static final forge_abi.Rpc.RequestListTopAccounts DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new forge_abi.Rpc.RequestGetTopAccounts();
+      DEFAULT_INSTANCE = new forge_abi.Rpc.RequestListTopAccounts();
     }
 
-    public static forge_abi.Rpc.RequestGetTopAccounts getDefaultInstance() {
+    public static forge_abi.Rpc.RequestListTopAccounts getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<RequestGetTopAccounts>
-        PARSER = new com.google.protobuf.AbstractParser<RequestGetTopAccounts>() {
-      public RequestGetTopAccounts parsePartialFrom(
+    private static final com.google.protobuf.Parser<RequestListTopAccounts>
+        PARSER = new com.google.protobuf.AbstractParser<RequestListTopAccounts>() {
+      public RequestListTopAccounts parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new RequestGetTopAccounts(input, extensionRegistry);
+          return new RequestListTopAccounts(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<RequestGetTopAccounts> parser() {
+    public static com.google.protobuf.Parser<RequestListTopAccounts> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<RequestGetTopAccounts> getParserForType() {
+    public com.google.protobuf.Parser<RequestListTopAccounts> getParserForType() {
       return PARSER;
     }
 
-    public forge_abi.Rpc.RequestGetTopAccounts getDefaultInstanceForType() {
+    public forge_abi.Rpc.RequestListTopAccounts getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface ResponseGetTopAccountsOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.ResponseGetTopAccounts)
+  public interface ResponseListTopAccountsOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.ResponseListTopAccounts)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -50691,17 +52730,17 @@ public final class Rpc {
         int index);
   }
   /**
-   * Protobuf type {@code forge_abi.ResponseGetTopAccounts}
+   * Protobuf type {@code forge_abi.ResponseListTopAccounts}
    */
-  public  static final class ResponseGetTopAccounts extends
+  public  static final class ResponseListTopAccounts extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.ResponseGetTopAccounts)
-      ResponseGetTopAccountsOrBuilder {
-    // Use ResponseGetTopAccounts.newBuilder() to construct.
-    private ResponseGetTopAccounts(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:forge_abi.ResponseListTopAccounts)
+      ResponseListTopAccountsOrBuilder {
+    // Use ResponseListTopAccounts.newBuilder() to construct.
+    private ResponseListTopAccounts(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private ResponseGetTopAccounts() {
+    private ResponseListTopAccounts() {
       code_ = 0;
       accounts_ = java.util.Collections.emptyList();
     }
@@ -50711,7 +52750,7 @@ public final class Rpc {
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
-    private ResponseGetTopAccounts(
+    private ResponseListTopAccounts(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -50775,14 +52814,14 @@ public final class Rpc {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return forge_abi.Rpc.internal_static_forge_abi_ResponseGetTopAccounts_descriptor;
+      return forge_abi.Rpc.internal_static_forge_abi_ResponseListTopAccounts_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return forge_abi.Rpc.internal_static_forge_abi_ResponseGetTopAccounts_fieldAccessorTable
+      return forge_abi.Rpc.internal_static_forge_abi_ResponseListTopAccounts_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              forge_abi.Rpc.ResponseGetTopAccounts.class, forge_abi.Rpc.ResponseGetTopAccounts.Builder.class);
+              forge_abi.Rpc.ResponseListTopAccounts.class, forge_abi.Rpc.ResponseListTopAccounts.Builder.class);
     }
 
     private int bitField0_;
@@ -50908,10 +52947,10 @@ public final class Rpc {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof forge_abi.Rpc.ResponseGetTopAccounts)) {
+      if (!(obj instanceof forge_abi.Rpc.ResponseListTopAccounts)) {
         return super.equals(obj);
       }
-      forge_abi.Rpc.ResponseGetTopAccounts other = (forge_abi.Rpc.ResponseGetTopAccounts) obj;
+      forge_abi.Rpc.ResponseListTopAccounts other = (forge_abi.Rpc.ResponseListTopAccounts) obj;
 
       boolean result = true;
       result = result && code_ == other.code_;
@@ -50947,58 +52986,58 @@ public final class Rpc {
       return hash;
     }
 
-    public static forge_abi.Rpc.ResponseGetTopAccounts parseFrom(
+    public static forge_abi.Rpc.ResponseListTopAccounts parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static forge_abi.Rpc.ResponseGetTopAccounts parseFrom(
+    public static forge_abi.Rpc.ResponseListTopAccounts parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static forge_abi.Rpc.ResponseGetTopAccounts parseFrom(byte[] data)
+    public static forge_abi.Rpc.ResponseListTopAccounts parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static forge_abi.Rpc.ResponseGetTopAccounts parseFrom(
+    public static forge_abi.Rpc.ResponseListTopAccounts parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static forge_abi.Rpc.ResponseGetTopAccounts parseFrom(java.io.InputStream input)
+    public static forge_abi.Rpc.ResponseListTopAccounts parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.ResponseGetTopAccounts parseFrom(
+    public static forge_abi.Rpc.ResponseListTopAccounts parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static forge_abi.Rpc.ResponseGetTopAccounts parseDelimitedFrom(java.io.InputStream input)
+    public static forge_abi.Rpc.ResponseListTopAccounts parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.ResponseGetTopAccounts parseDelimitedFrom(
+    public static forge_abi.Rpc.ResponseListTopAccounts parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static forge_abi.Rpc.ResponseGetTopAccounts parseFrom(
+    public static forge_abi.Rpc.ResponseListTopAccounts parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static forge_abi.Rpc.ResponseGetTopAccounts parseFrom(
+    public static forge_abi.Rpc.ResponseListTopAccounts parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -51010,7 +53049,7 @@ public final class Rpc {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(forge_abi.Rpc.ResponseGetTopAccounts prototype) {
+    public static Builder newBuilder(forge_abi.Rpc.ResponseListTopAccounts prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -51025,25 +53064,25 @@ public final class Rpc {
       return builder;
     }
     /**
-     * Protobuf type {@code forge_abi.ResponseGetTopAccounts}
+     * Protobuf type {@code forge_abi.ResponseListTopAccounts}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.ResponseGetTopAccounts)
-        forge_abi.Rpc.ResponseGetTopAccountsOrBuilder {
+        // @@protoc_insertion_point(builder_implements:forge_abi.ResponseListTopAccounts)
+        forge_abi.Rpc.ResponseListTopAccountsOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetTopAccounts_descriptor;
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseListTopAccounts_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetTopAccounts_fieldAccessorTable
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseListTopAccounts_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                forge_abi.Rpc.ResponseGetTopAccounts.class, forge_abi.Rpc.ResponseGetTopAccounts.Builder.class);
+                forge_abi.Rpc.ResponseListTopAccounts.class, forge_abi.Rpc.ResponseListTopAccounts.Builder.class);
       }
 
-      // Construct using forge_abi.Rpc.ResponseGetTopAccounts.newBuilder()
+      // Construct using forge_abi.Rpc.ResponseListTopAccounts.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -51080,23 +53119,23 @@ public final class Rpc {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetTopAccounts_descriptor;
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseListTopAccounts_descriptor;
       }
 
-      public forge_abi.Rpc.ResponseGetTopAccounts getDefaultInstanceForType() {
-        return forge_abi.Rpc.ResponseGetTopAccounts.getDefaultInstance();
+      public forge_abi.Rpc.ResponseListTopAccounts getDefaultInstanceForType() {
+        return forge_abi.Rpc.ResponseListTopAccounts.getDefaultInstance();
       }
 
-      public forge_abi.Rpc.ResponseGetTopAccounts build() {
-        forge_abi.Rpc.ResponseGetTopAccounts result = buildPartial();
+      public forge_abi.Rpc.ResponseListTopAccounts build() {
+        forge_abi.Rpc.ResponseListTopAccounts result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public forge_abi.Rpc.ResponseGetTopAccounts buildPartial() {
-        forge_abi.Rpc.ResponseGetTopAccounts result = new forge_abi.Rpc.ResponseGetTopAccounts(this);
+      public forge_abi.Rpc.ResponseListTopAccounts buildPartial() {
+        forge_abi.Rpc.ResponseListTopAccounts result = new forge_abi.Rpc.ResponseListTopAccounts(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         result.code_ = code_;
@@ -51146,16 +53185,16 @@ public final class Rpc {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.Rpc.ResponseGetTopAccounts) {
-          return mergeFrom((forge_abi.Rpc.ResponseGetTopAccounts)other);
+        if (other instanceof forge_abi.Rpc.ResponseListTopAccounts) {
+          return mergeFrom((forge_abi.Rpc.ResponseListTopAccounts)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(forge_abi.Rpc.ResponseGetTopAccounts other) {
-        if (other == forge_abi.Rpc.ResponseGetTopAccounts.getDefaultInstance()) return this;
+      public Builder mergeFrom(forge_abi.Rpc.ResponseListTopAccounts other) {
+        if (other == forge_abi.Rpc.ResponseListTopAccounts.getDefaultInstance()) return this;
         if (other.code_ != 0) {
           setCodeValue(other.getCodeValue());
         }
@@ -51200,11 +53239,11 @@ public final class Rpc {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        forge_abi.Rpc.ResponseGetTopAccounts parsedMessage = null;
+        forge_abi.Rpc.ResponseListTopAccounts parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.Rpc.ResponseGetTopAccounts) e.getUnfinishedMessage();
+          parsedMessage = (forge_abi.Rpc.ResponseListTopAccounts) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -51626,39 +53665,39 @@ public final class Rpc {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:forge_abi.ResponseGetTopAccounts)
+      // @@protoc_insertion_point(builder_scope:forge_abi.ResponseListTopAccounts)
     }
 
-    // @@protoc_insertion_point(class_scope:forge_abi.ResponseGetTopAccounts)
-    private static final forge_abi.Rpc.ResponseGetTopAccounts DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:forge_abi.ResponseListTopAccounts)
+    private static final forge_abi.Rpc.ResponseListTopAccounts DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new forge_abi.Rpc.ResponseGetTopAccounts();
+      DEFAULT_INSTANCE = new forge_abi.Rpc.ResponseListTopAccounts();
     }
 
-    public static forge_abi.Rpc.ResponseGetTopAccounts getDefaultInstance() {
+    public static forge_abi.Rpc.ResponseListTopAccounts getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<ResponseGetTopAccounts>
-        PARSER = new com.google.protobuf.AbstractParser<ResponseGetTopAccounts>() {
-      public ResponseGetTopAccounts parsePartialFrom(
+    private static final com.google.protobuf.Parser<ResponseListTopAccounts>
+        PARSER = new com.google.protobuf.AbstractParser<ResponseListTopAccounts>() {
+      public ResponseListTopAccounts parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ResponseGetTopAccounts(input, extensionRegistry);
+          return new ResponseListTopAccounts(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<ResponseGetTopAccounts> parser() {
+    public static com.google.protobuf.Parser<ResponseListTopAccounts> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<ResponseGetTopAccounts> getParserForType() {
+    public com.google.protobuf.Parser<ResponseListTopAccounts> getParserForType() {
       return PARSER;
     }
 
-    public forge_abi.Rpc.ResponseGetTopAccounts getDefaultInstanceForType() {
+    public forge_abi.Rpc.ResponseListTopAccounts getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -53426,43 +55465,43 @@ public final class Rpc {
     forge_abi.TraceType.TimeFilterOrBuilder getTimeFilterOrBuilder();
 
     /**
-     * <code>.forge_abi.HeightFilter height_filter = 4;</code>
+     * <code>.forge_abi.RangeFilter height_filter = 4;</code>
      */
     boolean hasHeightFilter();
     /**
-     * <code>.forge_abi.HeightFilter height_filter = 4;</code>
+     * <code>.forge_abi.RangeFilter height_filter = 4;</code>
      */
-    forge_abi.TraceType.HeightFilter getHeightFilter();
+    forge_abi.TraceType.RangeFilter getHeightFilter();
     /**
-     * <code>.forge_abi.HeightFilter height_filter = 4;</code>
+     * <code>.forge_abi.RangeFilter height_filter = 4;</code>
      */
-    forge_abi.TraceType.HeightFilterOrBuilder getHeightFilterOrBuilder();
+    forge_abi.TraceType.RangeFilterOrBuilder getHeightFilterOrBuilder();
 
     /**
-     * <code>.forge_abi.NumTxsFilter num_txs_filter = 5;</code>
+     * <code>.forge_abi.RangeFilter num_txs_filter = 5;</code>
      */
     boolean hasNumTxsFilter();
     /**
-     * <code>.forge_abi.NumTxsFilter num_txs_filter = 5;</code>
+     * <code>.forge_abi.RangeFilter num_txs_filter = 5;</code>
      */
-    forge_abi.TraceType.NumTxsFilter getNumTxsFilter();
+    forge_abi.TraceType.RangeFilter getNumTxsFilter();
     /**
-     * <code>.forge_abi.NumTxsFilter num_txs_filter = 5;</code>
+     * <code>.forge_abi.RangeFilter num_txs_filter = 5;</code>
      */
-    forge_abi.TraceType.NumTxsFilterOrBuilder getNumTxsFilterOrBuilder();
+    forge_abi.TraceType.RangeFilterOrBuilder getNumTxsFilterOrBuilder();
 
     /**
-     * <code>.forge_abi.NumInvalidTxsFilter num_invalid_txs_filter = 6;</code>
+     * <code>.forge_abi.RangeFilter num_invalid_txs_filter = 6;</code>
      */
     boolean hasNumInvalidTxsFilter();
     /**
-     * <code>.forge_abi.NumInvalidTxsFilter num_invalid_txs_filter = 6;</code>
+     * <code>.forge_abi.RangeFilter num_invalid_txs_filter = 6;</code>
      */
-    forge_abi.TraceType.NumInvalidTxsFilter getNumInvalidTxsFilter();
+    forge_abi.TraceType.RangeFilter getNumInvalidTxsFilter();
     /**
-     * <code>.forge_abi.NumInvalidTxsFilter num_invalid_txs_filter = 6;</code>
+     * <code>.forge_abi.RangeFilter num_invalid_txs_filter = 6;</code>
      */
-    forge_abi.TraceType.NumInvalidTxsFilterOrBuilder getNumInvalidTxsFilterOrBuilder();
+    forge_abi.TraceType.RangeFilterOrBuilder getNumInvalidTxsFilterOrBuilder();
   }
   /**
    * Protobuf type {@code forge_abi.RequestListBlocks}
@@ -53537,11 +55576,11 @@ public final class Rpc {
               break;
             }
             case 34: {
-              forge_abi.TraceType.HeightFilter.Builder subBuilder = null;
+              forge_abi.TraceType.RangeFilter.Builder subBuilder = null;
               if (heightFilter_ != null) {
                 subBuilder = heightFilter_.toBuilder();
               }
-              heightFilter_ = input.readMessage(forge_abi.TraceType.HeightFilter.parser(), extensionRegistry);
+              heightFilter_ = input.readMessage(forge_abi.TraceType.RangeFilter.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(heightFilter_);
                 heightFilter_ = subBuilder.buildPartial();
@@ -53550,11 +55589,11 @@ public final class Rpc {
               break;
             }
             case 42: {
-              forge_abi.TraceType.NumTxsFilter.Builder subBuilder = null;
+              forge_abi.TraceType.RangeFilter.Builder subBuilder = null;
               if (numTxsFilter_ != null) {
                 subBuilder = numTxsFilter_.toBuilder();
               }
-              numTxsFilter_ = input.readMessage(forge_abi.TraceType.NumTxsFilter.parser(), extensionRegistry);
+              numTxsFilter_ = input.readMessage(forge_abi.TraceType.RangeFilter.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(numTxsFilter_);
                 numTxsFilter_ = subBuilder.buildPartial();
@@ -53563,11 +55602,11 @@ public final class Rpc {
               break;
             }
             case 50: {
-              forge_abi.TraceType.NumInvalidTxsFilter.Builder subBuilder = null;
+              forge_abi.TraceType.RangeFilter.Builder subBuilder = null;
               if (numInvalidTxsFilter_ != null) {
                 subBuilder = numInvalidTxsFilter_.toBuilder();
               }
-              numInvalidTxsFilter_ = input.readMessage(forge_abi.TraceType.NumInvalidTxsFilter.parser(), extensionRegistry);
+              numInvalidTxsFilter_ = input.readMessage(forge_abi.TraceType.RangeFilter.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(numInvalidTxsFilter_);
                 numInvalidTxsFilter_ = subBuilder.buildPartial();
@@ -53675,65 +55714,65 @@ public final class Rpc {
     }
 
     public static final int HEIGHT_FILTER_FIELD_NUMBER = 4;
-    private forge_abi.TraceType.HeightFilter heightFilter_;
+    private forge_abi.TraceType.RangeFilter heightFilter_;
     /**
-     * <code>.forge_abi.HeightFilter height_filter = 4;</code>
+     * <code>.forge_abi.RangeFilter height_filter = 4;</code>
      */
     public boolean hasHeightFilter() {
       return heightFilter_ != null;
     }
     /**
-     * <code>.forge_abi.HeightFilter height_filter = 4;</code>
+     * <code>.forge_abi.RangeFilter height_filter = 4;</code>
      */
-    public forge_abi.TraceType.HeightFilter getHeightFilter() {
-      return heightFilter_ == null ? forge_abi.TraceType.HeightFilter.getDefaultInstance() : heightFilter_;
+    public forge_abi.TraceType.RangeFilter getHeightFilter() {
+      return heightFilter_ == null ? forge_abi.TraceType.RangeFilter.getDefaultInstance() : heightFilter_;
     }
     /**
-     * <code>.forge_abi.HeightFilter height_filter = 4;</code>
+     * <code>.forge_abi.RangeFilter height_filter = 4;</code>
      */
-    public forge_abi.TraceType.HeightFilterOrBuilder getHeightFilterOrBuilder() {
+    public forge_abi.TraceType.RangeFilterOrBuilder getHeightFilterOrBuilder() {
       return getHeightFilter();
     }
 
     public static final int NUM_TXS_FILTER_FIELD_NUMBER = 5;
-    private forge_abi.TraceType.NumTxsFilter numTxsFilter_;
+    private forge_abi.TraceType.RangeFilter numTxsFilter_;
     /**
-     * <code>.forge_abi.NumTxsFilter num_txs_filter = 5;</code>
+     * <code>.forge_abi.RangeFilter num_txs_filter = 5;</code>
      */
     public boolean hasNumTxsFilter() {
       return numTxsFilter_ != null;
     }
     /**
-     * <code>.forge_abi.NumTxsFilter num_txs_filter = 5;</code>
+     * <code>.forge_abi.RangeFilter num_txs_filter = 5;</code>
      */
-    public forge_abi.TraceType.NumTxsFilter getNumTxsFilter() {
-      return numTxsFilter_ == null ? forge_abi.TraceType.NumTxsFilter.getDefaultInstance() : numTxsFilter_;
+    public forge_abi.TraceType.RangeFilter getNumTxsFilter() {
+      return numTxsFilter_ == null ? forge_abi.TraceType.RangeFilter.getDefaultInstance() : numTxsFilter_;
     }
     /**
-     * <code>.forge_abi.NumTxsFilter num_txs_filter = 5;</code>
+     * <code>.forge_abi.RangeFilter num_txs_filter = 5;</code>
      */
-    public forge_abi.TraceType.NumTxsFilterOrBuilder getNumTxsFilterOrBuilder() {
+    public forge_abi.TraceType.RangeFilterOrBuilder getNumTxsFilterOrBuilder() {
       return getNumTxsFilter();
     }
 
     public static final int NUM_INVALID_TXS_FILTER_FIELD_NUMBER = 6;
-    private forge_abi.TraceType.NumInvalidTxsFilter numInvalidTxsFilter_;
+    private forge_abi.TraceType.RangeFilter numInvalidTxsFilter_;
     /**
-     * <code>.forge_abi.NumInvalidTxsFilter num_invalid_txs_filter = 6;</code>
+     * <code>.forge_abi.RangeFilter num_invalid_txs_filter = 6;</code>
      */
     public boolean hasNumInvalidTxsFilter() {
       return numInvalidTxsFilter_ != null;
     }
     /**
-     * <code>.forge_abi.NumInvalidTxsFilter num_invalid_txs_filter = 6;</code>
+     * <code>.forge_abi.RangeFilter num_invalid_txs_filter = 6;</code>
      */
-    public forge_abi.TraceType.NumInvalidTxsFilter getNumInvalidTxsFilter() {
-      return numInvalidTxsFilter_ == null ? forge_abi.TraceType.NumInvalidTxsFilter.getDefaultInstance() : numInvalidTxsFilter_;
+    public forge_abi.TraceType.RangeFilter getNumInvalidTxsFilter() {
+      return numInvalidTxsFilter_ == null ? forge_abi.TraceType.RangeFilter.getDefaultInstance() : numInvalidTxsFilter_;
     }
     /**
-     * <code>.forge_abi.NumInvalidTxsFilter num_invalid_txs_filter = 6;</code>
+     * <code>.forge_abi.RangeFilter num_invalid_txs_filter = 6;</code>
      */
-    public forge_abi.TraceType.NumInvalidTxsFilterOrBuilder getNumInvalidTxsFilterOrBuilder() {
+    public forge_abi.TraceType.RangeFilterOrBuilder getNumInvalidTxsFilterOrBuilder() {
       return getNumInvalidTxsFilter();
     }
 
@@ -54459,29 +56498,29 @@ public final class Rpc {
         return timeFilterBuilder_;
       }
 
-      private forge_abi.TraceType.HeightFilter heightFilter_ = null;
+      private forge_abi.TraceType.RangeFilter heightFilter_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.HeightFilter, forge_abi.TraceType.HeightFilter.Builder, forge_abi.TraceType.HeightFilterOrBuilder> heightFilterBuilder_;
+          forge_abi.TraceType.RangeFilter, forge_abi.TraceType.RangeFilter.Builder, forge_abi.TraceType.RangeFilterOrBuilder> heightFilterBuilder_;
       /**
-       * <code>.forge_abi.HeightFilter height_filter = 4;</code>
+       * <code>.forge_abi.RangeFilter height_filter = 4;</code>
        */
       public boolean hasHeightFilter() {
         return heightFilterBuilder_ != null || heightFilter_ != null;
       }
       /**
-       * <code>.forge_abi.HeightFilter height_filter = 4;</code>
+       * <code>.forge_abi.RangeFilter height_filter = 4;</code>
        */
-      public forge_abi.TraceType.HeightFilter getHeightFilter() {
+      public forge_abi.TraceType.RangeFilter getHeightFilter() {
         if (heightFilterBuilder_ == null) {
-          return heightFilter_ == null ? forge_abi.TraceType.HeightFilter.getDefaultInstance() : heightFilter_;
+          return heightFilter_ == null ? forge_abi.TraceType.RangeFilter.getDefaultInstance() : heightFilter_;
         } else {
           return heightFilterBuilder_.getMessage();
         }
       }
       /**
-       * <code>.forge_abi.HeightFilter height_filter = 4;</code>
+       * <code>.forge_abi.RangeFilter height_filter = 4;</code>
        */
-      public Builder setHeightFilter(forge_abi.TraceType.HeightFilter value) {
+      public Builder setHeightFilter(forge_abi.TraceType.RangeFilter value) {
         if (heightFilterBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -54495,10 +56534,10 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.HeightFilter height_filter = 4;</code>
+       * <code>.forge_abi.RangeFilter height_filter = 4;</code>
        */
       public Builder setHeightFilter(
-          forge_abi.TraceType.HeightFilter.Builder builderForValue) {
+          forge_abi.TraceType.RangeFilter.Builder builderForValue) {
         if (heightFilterBuilder_ == null) {
           heightFilter_ = builderForValue.build();
           onChanged();
@@ -54509,13 +56548,13 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.HeightFilter height_filter = 4;</code>
+       * <code>.forge_abi.RangeFilter height_filter = 4;</code>
        */
-      public Builder mergeHeightFilter(forge_abi.TraceType.HeightFilter value) {
+      public Builder mergeHeightFilter(forge_abi.TraceType.RangeFilter value) {
         if (heightFilterBuilder_ == null) {
           if (heightFilter_ != null) {
             heightFilter_ =
-              forge_abi.TraceType.HeightFilter.newBuilder(heightFilter_).mergeFrom(value).buildPartial();
+              forge_abi.TraceType.RangeFilter.newBuilder(heightFilter_).mergeFrom(value).buildPartial();
           } else {
             heightFilter_ = value;
           }
@@ -54527,7 +56566,7 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.HeightFilter height_filter = 4;</code>
+       * <code>.forge_abi.RangeFilter height_filter = 4;</code>
        */
       public Builder clearHeightFilter() {
         if (heightFilterBuilder_ == null) {
@@ -54541,33 +56580,33 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.HeightFilter height_filter = 4;</code>
+       * <code>.forge_abi.RangeFilter height_filter = 4;</code>
        */
-      public forge_abi.TraceType.HeightFilter.Builder getHeightFilterBuilder() {
+      public forge_abi.TraceType.RangeFilter.Builder getHeightFilterBuilder() {
         
         onChanged();
         return getHeightFilterFieldBuilder().getBuilder();
       }
       /**
-       * <code>.forge_abi.HeightFilter height_filter = 4;</code>
+       * <code>.forge_abi.RangeFilter height_filter = 4;</code>
        */
-      public forge_abi.TraceType.HeightFilterOrBuilder getHeightFilterOrBuilder() {
+      public forge_abi.TraceType.RangeFilterOrBuilder getHeightFilterOrBuilder() {
         if (heightFilterBuilder_ != null) {
           return heightFilterBuilder_.getMessageOrBuilder();
         } else {
           return heightFilter_ == null ?
-              forge_abi.TraceType.HeightFilter.getDefaultInstance() : heightFilter_;
+              forge_abi.TraceType.RangeFilter.getDefaultInstance() : heightFilter_;
         }
       }
       /**
-       * <code>.forge_abi.HeightFilter height_filter = 4;</code>
+       * <code>.forge_abi.RangeFilter height_filter = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.HeightFilter, forge_abi.TraceType.HeightFilter.Builder, forge_abi.TraceType.HeightFilterOrBuilder> 
+          forge_abi.TraceType.RangeFilter, forge_abi.TraceType.RangeFilter.Builder, forge_abi.TraceType.RangeFilterOrBuilder> 
           getHeightFilterFieldBuilder() {
         if (heightFilterBuilder_ == null) {
           heightFilterBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.TraceType.HeightFilter, forge_abi.TraceType.HeightFilter.Builder, forge_abi.TraceType.HeightFilterOrBuilder>(
+              forge_abi.TraceType.RangeFilter, forge_abi.TraceType.RangeFilter.Builder, forge_abi.TraceType.RangeFilterOrBuilder>(
                   getHeightFilter(),
                   getParentForChildren(),
                   isClean());
@@ -54576,29 +56615,29 @@ public final class Rpc {
         return heightFilterBuilder_;
       }
 
-      private forge_abi.TraceType.NumTxsFilter numTxsFilter_ = null;
+      private forge_abi.TraceType.RangeFilter numTxsFilter_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.NumTxsFilter, forge_abi.TraceType.NumTxsFilter.Builder, forge_abi.TraceType.NumTxsFilterOrBuilder> numTxsFilterBuilder_;
+          forge_abi.TraceType.RangeFilter, forge_abi.TraceType.RangeFilter.Builder, forge_abi.TraceType.RangeFilterOrBuilder> numTxsFilterBuilder_;
       /**
-       * <code>.forge_abi.NumTxsFilter num_txs_filter = 5;</code>
+       * <code>.forge_abi.RangeFilter num_txs_filter = 5;</code>
        */
       public boolean hasNumTxsFilter() {
         return numTxsFilterBuilder_ != null || numTxsFilter_ != null;
       }
       /**
-       * <code>.forge_abi.NumTxsFilter num_txs_filter = 5;</code>
+       * <code>.forge_abi.RangeFilter num_txs_filter = 5;</code>
        */
-      public forge_abi.TraceType.NumTxsFilter getNumTxsFilter() {
+      public forge_abi.TraceType.RangeFilter getNumTxsFilter() {
         if (numTxsFilterBuilder_ == null) {
-          return numTxsFilter_ == null ? forge_abi.TraceType.NumTxsFilter.getDefaultInstance() : numTxsFilter_;
+          return numTxsFilter_ == null ? forge_abi.TraceType.RangeFilter.getDefaultInstance() : numTxsFilter_;
         } else {
           return numTxsFilterBuilder_.getMessage();
         }
       }
       /**
-       * <code>.forge_abi.NumTxsFilter num_txs_filter = 5;</code>
+       * <code>.forge_abi.RangeFilter num_txs_filter = 5;</code>
        */
-      public Builder setNumTxsFilter(forge_abi.TraceType.NumTxsFilter value) {
+      public Builder setNumTxsFilter(forge_abi.TraceType.RangeFilter value) {
         if (numTxsFilterBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -54612,10 +56651,10 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.NumTxsFilter num_txs_filter = 5;</code>
+       * <code>.forge_abi.RangeFilter num_txs_filter = 5;</code>
        */
       public Builder setNumTxsFilter(
-          forge_abi.TraceType.NumTxsFilter.Builder builderForValue) {
+          forge_abi.TraceType.RangeFilter.Builder builderForValue) {
         if (numTxsFilterBuilder_ == null) {
           numTxsFilter_ = builderForValue.build();
           onChanged();
@@ -54626,13 +56665,13 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.NumTxsFilter num_txs_filter = 5;</code>
+       * <code>.forge_abi.RangeFilter num_txs_filter = 5;</code>
        */
-      public Builder mergeNumTxsFilter(forge_abi.TraceType.NumTxsFilter value) {
+      public Builder mergeNumTxsFilter(forge_abi.TraceType.RangeFilter value) {
         if (numTxsFilterBuilder_ == null) {
           if (numTxsFilter_ != null) {
             numTxsFilter_ =
-              forge_abi.TraceType.NumTxsFilter.newBuilder(numTxsFilter_).mergeFrom(value).buildPartial();
+              forge_abi.TraceType.RangeFilter.newBuilder(numTxsFilter_).mergeFrom(value).buildPartial();
           } else {
             numTxsFilter_ = value;
           }
@@ -54644,7 +56683,7 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.NumTxsFilter num_txs_filter = 5;</code>
+       * <code>.forge_abi.RangeFilter num_txs_filter = 5;</code>
        */
       public Builder clearNumTxsFilter() {
         if (numTxsFilterBuilder_ == null) {
@@ -54658,33 +56697,33 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.NumTxsFilter num_txs_filter = 5;</code>
+       * <code>.forge_abi.RangeFilter num_txs_filter = 5;</code>
        */
-      public forge_abi.TraceType.NumTxsFilter.Builder getNumTxsFilterBuilder() {
+      public forge_abi.TraceType.RangeFilter.Builder getNumTxsFilterBuilder() {
         
         onChanged();
         return getNumTxsFilterFieldBuilder().getBuilder();
       }
       /**
-       * <code>.forge_abi.NumTxsFilter num_txs_filter = 5;</code>
+       * <code>.forge_abi.RangeFilter num_txs_filter = 5;</code>
        */
-      public forge_abi.TraceType.NumTxsFilterOrBuilder getNumTxsFilterOrBuilder() {
+      public forge_abi.TraceType.RangeFilterOrBuilder getNumTxsFilterOrBuilder() {
         if (numTxsFilterBuilder_ != null) {
           return numTxsFilterBuilder_.getMessageOrBuilder();
         } else {
           return numTxsFilter_ == null ?
-              forge_abi.TraceType.NumTxsFilter.getDefaultInstance() : numTxsFilter_;
+              forge_abi.TraceType.RangeFilter.getDefaultInstance() : numTxsFilter_;
         }
       }
       /**
-       * <code>.forge_abi.NumTxsFilter num_txs_filter = 5;</code>
+       * <code>.forge_abi.RangeFilter num_txs_filter = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.NumTxsFilter, forge_abi.TraceType.NumTxsFilter.Builder, forge_abi.TraceType.NumTxsFilterOrBuilder> 
+          forge_abi.TraceType.RangeFilter, forge_abi.TraceType.RangeFilter.Builder, forge_abi.TraceType.RangeFilterOrBuilder> 
           getNumTxsFilterFieldBuilder() {
         if (numTxsFilterBuilder_ == null) {
           numTxsFilterBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.TraceType.NumTxsFilter, forge_abi.TraceType.NumTxsFilter.Builder, forge_abi.TraceType.NumTxsFilterOrBuilder>(
+              forge_abi.TraceType.RangeFilter, forge_abi.TraceType.RangeFilter.Builder, forge_abi.TraceType.RangeFilterOrBuilder>(
                   getNumTxsFilter(),
                   getParentForChildren(),
                   isClean());
@@ -54693,29 +56732,29 @@ public final class Rpc {
         return numTxsFilterBuilder_;
       }
 
-      private forge_abi.TraceType.NumInvalidTxsFilter numInvalidTxsFilter_ = null;
+      private forge_abi.TraceType.RangeFilter numInvalidTxsFilter_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.NumInvalidTxsFilter, forge_abi.TraceType.NumInvalidTxsFilter.Builder, forge_abi.TraceType.NumInvalidTxsFilterOrBuilder> numInvalidTxsFilterBuilder_;
+          forge_abi.TraceType.RangeFilter, forge_abi.TraceType.RangeFilter.Builder, forge_abi.TraceType.RangeFilterOrBuilder> numInvalidTxsFilterBuilder_;
       /**
-       * <code>.forge_abi.NumInvalidTxsFilter num_invalid_txs_filter = 6;</code>
+       * <code>.forge_abi.RangeFilter num_invalid_txs_filter = 6;</code>
        */
       public boolean hasNumInvalidTxsFilter() {
         return numInvalidTxsFilterBuilder_ != null || numInvalidTxsFilter_ != null;
       }
       /**
-       * <code>.forge_abi.NumInvalidTxsFilter num_invalid_txs_filter = 6;</code>
+       * <code>.forge_abi.RangeFilter num_invalid_txs_filter = 6;</code>
        */
-      public forge_abi.TraceType.NumInvalidTxsFilter getNumInvalidTxsFilter() {
+      public forge_abi.TraceType.RangeFilter getNumInvalidTxsFilter() {
         if (numInvalidTxsFilterBuilder_ == null) {
-          return numInvalidTxsFilter_ == null ? forge_abi.TraceType.NumInvalidTxsFilter.getDefaultInstance() : numInvalidTxsFilter_;
+          return numInvalidTxsFilter_ == null ? forge_abi.TraceType.RangeFilter.getDefaultInstance() : numInvalidTxsFilter_;
         } else {
           return numInvalidTxsFilterBuilder_.getMessage();
         }
       }
       /**
-       * <code>.forge_abi.NumInvalidTxsFilter num_invalid_txs_filter = 6;</code>
+       * <code>.forge_abi.RangeFilter num_invalid_txs_filter = 6;</code>
        */
-      public Builder setNumInvalidTxsFilter(forge_abi.TraceType.NumInvalidTxsFilter value) {
+      public Builder setNumInvalidTxsFilter(forge_abi.TraceType.RangeFilter value) {
         if (numInvalidTxsFilterBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -54729,10 +56768,10 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.NumInvalidTxsFilter num_invalid_txs_filter = 6;</code>
+       * <code>.forge_abi.RangeFilter num_invalid_txs_filter = 6;</code>
        */
       public Builder setNumInvalidTxsFilter(
-          forge_abi.TraceType.NumInvalidTxsFilter.Builder builderForValue) {
+          forge_abi.TraceType.RangeFilter.Builder builderForValue) {
         if (numInvalidTxsFilterBuilder_ == null) {
           numInvalidTxsFilter_ = builderForValue.build();
           onChanged();
@@ -54743,13 +56782,13 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.NumInvalidTxsFilter num_invalid_txs_filter = 6;</code>
+       * <code>.forge_abi.RangeFilter num_invalid_txs_filter = 6;</code>
        */
-      public Builder mergeNumInvalidTxsFilter(forge_abi.TraceType.NumInvalidTxsFilter value) {
+      public Builder mergeNumInvalidTxsFilter(forge_abi.TraceType.RangeFilter value) {
         if (numInvalidTxsFilterBuilder_ == null) {
           if (numInvalidTxsFilter_ != null) {
             numInvalidTxsFilter_ =
-              forge_abi.TraceType.NumInvalidTxsFilter.newBuilder(numInvalidTxsFilter_).mergeFrom(value).buildPartial();
+              forge_abi.TraceType.RangeFilter.newBuilder(numInvalidTxsFilter_).mergeFrom(value).buildPartial();
           } else {
             numInvalidTxsFilter_ = value;
           }
@@ -54761,7 +56800,7 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.NumInvalidTxsFilter num_invalid_txs_filter = 6;</code>
+       * <code>.forge_abi.RangeFilter num_invalid_txs_filter = 6;</code>
        */
       public Builder clearNumInvalidTxsFilter() {
         if (numInvalidTxsFilterBuilder_ == null) {
@@ -54775,33 +56814,33 @@ public final class Rpc {
         return this;
       }
       /**
-       * <code>.forge_abi.NumInvalidTxsFilter num_invalid_txs_filter = 6;</code>
+       * <code>.forge_abi.RangeFilter num_invalid_txs_filter = 6;</code>
        */
-      public forge_abi.TraceType.NumInvalidTxsFilter.Builder getNumInvalidTxsFilterBuilder() {
+      public forge_abi.TraceType.RangeFilter.Builder getNumInvalidTxsFilterBuilder() {
         
         onChanged();
         return getNumInvalidTxsFilterFieldBuilder().getBuilder();
       }
       /**
-       * <code>.forge_abi.NumInvalidTxsFilter num_invalid_txs_filter = 6;</code>
+       * <code>.forge_abi.RangeFilter num_invalid_txs_filter = 6;</code>
        */
-      public forge_abi.TraceType.NumInvalidTxsFilterOrBuilder getNumInvalidTxsFilterOrBuilder() {
+      public forge_abi.TraceType.RangeFilterOrBuilder getNumInvalidTxsFilterOrBuilder() {
         if (numInvalidTxsFilterBuilder_ != null) {
           return numInvalidTxsFilterBuilder_.getMessageOrBuilder();
         } else {
           return numInvalidTxsFilter_ == null ?
-              forge_abi.TraceType.NumInvalidTxsFilter.getDefaultInstance() : numInvalidTxsFilter_;
+              forge_abi.TraceType.RangeFilter.getDefaultInstance() : numInvalidTxsFilter_;
         }
       }
       /**
-       * <code>.forge_abi.NumInvalidTxsFilter num_invalid_txs_filter = 6;</code>
+       * <code>.forge_abi.RangeFilter num_invalid_txs_filter = 6;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.NumInvalidTxsFilter, forge_abi.TraceType.NumInvalidTxsFilter.Builder, forge_abi.TraceType.NumInvalidTxsFilterOrBuilder> 
+          forge_abi.TraceType.RangeFilter, forge_abi.TraceType.RangeFilter.Builder, forge_abi.TraceType.RangeFilterOrBuilder> 
           getNumInvalidTxsFilterFieldBuilder() {
         if (numInvalidTxsFilterBuilder_ == null) {
           numInvalidTxsFilterBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.TraceType.NumInvalidTxsFilter, forge_abi.TraceType.NumInvalidTxsFilter.Builder, forge_abi.TraceType.NumInvalidTxsFilterOrBuilder>(
+              forge_abi.TraceType.RangeFilter, forge_abi.TraceType.RangeFilter.Builder, forge_abi.TraceType.RangeFilterOrBuilder>(
                   getNumInvalidTxsFilter(),
                   getParentForChildren(),
                   isClean());
@@ -55882,1921 +57921,6 @@ public final class Rpc {
 
   }
 
-  public interface RequestListAssetsOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.RequestListAssets)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>.forge_abi.PageInput paging = 1;</code>
-     */
-    boolean hasPaging();
-    /**
-     * <code>.forge_abi.PageInput paging = 1;</code>
-     */
-    forge_abi.TraceType.PageInput getPaging();
-    /**
-     * <code>.forge_abi.PageInput paging = 1;</code>
-     */
-    forge_abi.TraceType.PageInputOrBuilder getPagingOrBuilder();
-
-    /**
-     * <code>string owner_address = 2;</code>
-     */
-    java.lang.String getOwnerAddress();
-    /**
-     * <code>string owner_address = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getOwnerAddressBytes();
-  }
-  /**
-   * Protobuf type {@code forge_abi.RequestListAssets}
-   */
-  public  static final class RequestListAssets extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.RequestListAssets)
-      RequestListAssetsOrBuilder {
-    // Use RequestListAssets.newBuilder() to construct.
-    private RequestListAssets(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private RequestListAssets() {
-      ownerAddress_ = "";
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private RequestListAssets(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              forge_abi.TraceType.PageInput.Builder subBuilder = null;
-              if (paging_ != null) {
-                subBuilder = paging_.toBuilder();
-              }
-              paging_ = input.readMessage(forge_abi.TraceType.PageInput.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(paging_);
-                paging_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              ownerAddress_ = s;
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.Rpc.internal_static_forge_abi_RequestListAssets_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.Rpc.internal_static_forge_abi_RequestListAssets_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.Rpc.RequestListAssets.class, forge_abi.Rpc.RequestListAssets.Builder.class);
-    }
-
-    public static final int PAGING_FIELD_NUMBER = 1;
-    private forge_abi.TraceType.PageInput paging_;
-    /**
-     * <code>.forge_abi.PageInput paging = 1;</code>
-     */
-    public boolean hasPaging() {
-      return paging_ != null;
-    }
-    /**
-     * <code>.forge_abi.PageInput paging = 1;</code>
-     */
-    public forge_abi.TraceType.PageInput getPaging() {
-      return paging_ == null ? forge_abi.TraceType.PageInput.getDefaultInstance() : paging_;
-    }
-    /**
-     * <code>.forge_abi.PageInput paging = 1;</code>
-     */
-    public forge_abi.TraceType.PageInputOrBuilder getPagingOrBuilder() {
-      return getPaging();
-    }
-
-    public static final int OWNER_ADDRESS_FIELD_NUMBER = 2;
-    private volatile java.lang.Object ownerAddress_;
-    /**
-     * <code>string owner_address = 2;</code>
-     */
-    public java.lang.String getOwnerAddress() {
-      java.lang.Object ref = ownerAddress_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        ownerAddress_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string owner_address = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getOwnerAddressBytes() {
-      java.lang.Object ref = ownerAddress_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        ownerAddress_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (paging_ != null) {
-        output.writeMessage(1, getPaging());
-      }
-      if (!getOwnerAddressBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, ownerAddress_);
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (paging_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getPaging());
-      }
-      if (!getOwnerAddressBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, ownerAddress_);
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.Rpc.RequestListAssets)) {
-        return super.equals(obj);
-      }
-      forge_abi.Rpc.RequestListAssets other = (forge_abi.Rpc.RequestListAssets) obj;
-
-      boolean result = true;
-      result = result && (hasPaging() == other.hasPaging());
-      if (hasPaging()) {
-        result = result && getPaging()
-            .equals(other.getPaging());
-      }
-      result = result && getOwnerAddress()
-          .equals(other.getOwnerAddress());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasPaging()) {
-        hash = (37 * hash) + PAGING_FIELD_NUMBER;
-        hash = (53 * hash) + getPaging().hashCode();
-      }
-      hash = (37 * hash) + OWNER_ADDRESS_FIELD_NUMBER;
-      hash = (53 * hash) + getOwnerAddress().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.Rpc.RequestListAssets parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.RequestListAssets parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestListAssets parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.RequestListAssets parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestListAssets parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.RequestListAssets parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestListAssets parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.RequestListAssets parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestListAssets parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.RequestListAssets parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.Rpc.RequestListAssets prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code forge_abi.RequestListAssets}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.RequestListAssets)
-        forge_abi.Rpc.RequestListAssetsOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestListAssets_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestListAssets_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.Rpc.RequestListAssets.class, forge_abi.Rpc.RequestListAssets.Builder.class);
-      }
-
-      // Construct using forge_abi.Rpc.RequestListAssets.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        if (pagingBuilder_ == null) {
-          paging_ = null;
-        } else {
-          paging_ = null;
-          pagingBuilder_ = null;
-        }
-        ownerAddress_ = "";
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestListAssets_descriptor;
-      }
-
-      public forge_abi.Rpc.RequestListAssets getDefaultInstanceForType() {
-        return forge_abi.Rpc.RequestListAssets.getDefaultInstance();
-      }
-
-      public forge_abi.Rpc.RequestListAssets build() {
-        forge_abi.Rpc.RequestListAssets result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.Rpc.RequestListAssets buildPartial() {
-        forge_abi.Rpc.RequestListAssets result = new forge_abi.Rpc.RequestListAssets(this);
-        if (pagingBuilder_ == null) {
-          result.paging_ = paging_;
-        } else {
-          result.paging_ = pagingBuilder_.build();
-        }
-        result.ownerAddress_ = ownerAddress_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.Rpc.RequestListAssets) {
-          return mergeFrom((forge_abi.Rpc.RequestListAssets)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.Rpc.RequestListAssets other) {
-        if (other == forge_abi.Rpc.RequestListAssets.getDefaultInstance()) return this;
-        if (other.hasPaging()) {
-          mergePaging(other.getPaging());
-        }
-        if (!other.getOwnerAddress().isEmpty()) {
-          ownerAddress_ = other.ownerAddress_;
-          onChanged();
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.Rpc.RequestListAssets parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.Rpc.RequestListAssets) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private forge_abi.TraceType.PageInput paging_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.PageInput, forge_abi.TraceType.PageInput.Builder, forge_abi.TraceType.PageInputOrBuilder> pagingBuilder_;
-      /**
-       * <code>.forge_abi.PageInput paging = 1;</code>
-       */
-      public boolean hasPaging() {
-        return pagingBuilder_ != null || paging_ != null;
-      }
-      /**
-       * <code>.forge_abi.PageInput paging = 1;</code>
-       */
-      public forge_abi.TraceType.PageInput getPaging() {
-        if (pagingBuilder_ == null) {
-          return paging_ == null ? forge_abi.TraceType.PageInput.getDefaultInstance() : paging_;
-        } else {
-          return pagingBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.forge_abi.PageInput paging = 1;</code>
-       */
-      public Builder setPaging(forge_abi.TraceType.PageInput value) {
-        if (pagingBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          paging_ = value;
-          onChanged();
-        } else {
-          pagingBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.PageInput paging = 1;</code>
-       */
-      public Builder setPaging(
-          forge_abi.TraceType.PageInput.Builder builderForValue) {
-        if (pagingBuilder_ == null) {
-          paging_ = builderForValue.build();
-          onChanged();
-        } else {
-          pagingBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.PageInput paging = 1;</code>
-       */
-      public Builder mergePaging(forge_abi.TraceType.PageInput value) {
-        if (pagingBuilder_ == null) {
-          if (paging_ != null) {
-            paging_ =
-              forge_abi.TraceType.PageInput.newBuilder(paging_).mergeFrom(value).buildPartial();
-          } else {
-            paging_ = value;
-          }
-          onChanged();
-        } else {
-          pagingBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.PageInput paging = 1;</code>
-       */
-      public Builder clearPaging() {
-        if (pagingBuilder_ == null) {
-          paging_ = null;
-          onChanged();
-        } else {
-          paging_ = null;
-          pagingBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.PageInput paging = 1;</code>
-       */
-      public forge_abi.TraceType.PageInput.Builder getPagingBuilder() {
-        
-        onChanged();
-        return getPagingFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.forge_abi.PageInput paging = 1;</code>
-       */
-      public forge_abi.TraceType.PageInputOrBuilder getPagingOrBuilder() {
-        if (pagingBuilder_ != null) {
-          return pagingBuilder_.getMessageOrBuilder();
-        } else {
-          return paging_ == null ?
-              forge_abi.TraceType.PageInput.getDefaultInstance() : paging_;
-        }
-      }
-      /**
-       * <code>.forge_abi.PageInput paging = 1;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.PageInput, forge_abi.TraceType.PageInput.Builder, forge_abi.TraceType.PageInputOrBuilder> 
-          getPagingFieldBuilder() {
-        if (pagingBuilder_ == null) {
-          pagingBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.TraceType.PageInput, forge_abi.TraceType.PageInput.Builder, forge_abi.TraceType.PageInputOrBuilder>(
-                  getPaging(),
-                  getParentForChildren(),
-                  isClean());
-          paging_ = null;
-        }
-        return pagingBuilder_;
-      }
-
-      private java.lang.Object ownerAddress_ = "";
-      /**
-       * <code>string owner_address = 2;</code>
-       */
-      public java.lang.String getOwnerAddress() {
-        java.lang.Object ref = ownerAddress_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          ownerAddress_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string owner_address = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getOwnerAddressBytes() {
-        java.lang.Object ref = ownerAddress_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          ownerAddress_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string owner_address = 2;</code>
-       */
-      public Builder setOwnerAddress(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        ownerAddress_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string owner_address = 2;</code>
-       */
-      public Builder clearOwnerAddress() {
-        
-        ownerAddress_ = getDefaultInstance().getOwnerAddress();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string owner_address = 2;</code>
-       */
-      public Builder setOwnerAddressBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        ownerAddress_ = value;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.RequestListAssets)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.RequestListAssets)
-    private static final forge_abi.Rpc.RequestListAssets DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.Rpc.RequestListAssets();
-    }
-
-    public static forge_abi.Rpc.RequestListAssets getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<RequestListAssets>
-        PARSER = new com.google.protobuf.AbstractParser<RequestListAssets>() {
-      public RequestListAssets parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new RequestListAssets(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<RequestListAssets> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<RequestListAssets> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.Rpc.RequestListAssets getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface ResponseListAssetsOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.ResponseListAssets)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    int getCodeValue();
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    forge_abi.Enum.StatusCode getCode();
-
-    /**
-     * <code>.forge_abi.PageInfo page = 2;</code>
-     */
-    boolean hasPage();
-    /**
-     * <code>.forge_abi.PageInfo page = 2;</code>
-     */
-    forge_abi.TraceType.PageInfo getPage();
-    /**
-     * <code>.forge_abi.PageInfo page = 2;</code>
-     */
-    forge_abi.TraceType.PageInfoOrBuilder getPageOrBuilder();
-
-    /**
-     * <code>.forge_abi.IndexedAccountState account = 3;</code>
-     */
-    boolean hasAccount();
-    /**
-     * <code>.forge_abi.IndexedAccountState account = 3;</code>
-     */
-    forge_abi.TraceType.IndexedAccountState getAccount();
-    /**
-     * <code>.forge_abi.IndexedAccountState account = 3;</code>
-     */
-    forge_abi.TraceType.IndexedAccountStateOrBuilder getAccountOrBuilder();
-
-    /**
-     * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-     */
-    java.util.List<forge_abi.TraceType.IndexedAssetState> 
-        getAssetsList();
-    /**
-     * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-     */
-    forge_abi.TraceType.IndexedAssetState getAssets(int index);
-    /**
-     * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-     */
-    int getAssetsCount();
-    /**
-     * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-     */
-    java.util.List<? extends forge_abi.TraceType.IndexedAssetStateOrBuilder> 
-        getAssetsOrBuilderList();
-    /**
-     * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-     */
-    forge_abi.TraceType.IndexedAssetStateOrBuilder getAssetsOrBuilder(
-        int index);
-  }
-  /**
-   * Protobuf type {@code forge_abi.ResponseListAssets}
-   */
-  public  static final class ResponseListAssets extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.ResponseListAssets)
-      ResponseListAssetsOrBuilder {
-    // Use ResponseListAssets.newBuilder() to construct.
-    private ResponseListAssets(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private ResponseListAssets() {
-      code_ = 0;
-      assets_ = java.util.Collections.emptyList();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private ResponseListAssets(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              int rawValue = input.readEnum();
-
-              code_ = rawValue;
-              break;
-            }
-            case 18: {
-              forge_abi.TraceType.PageInfo.Builder subBuilder = null;
-              if (page_ != null) {
-                subBuilder = page_.toBuilder();
-              }
-              page_ = input.readMessage(forge_abi.TraceType.PageInfo.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(page_);
-                page_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 26: {
-              forge_abi.TraceType.IndexedAccountState.Builder subBuilder = null;
-              if (account_ != null) {
-                subBuilder = account_.toBuilder();
-              }
-              account_ = input.readMessage(forge_abi.TraceType.IndexedAccountState.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(account_);
-                account_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 34: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                assets_ = new java.util.ArrayList<forge_abi.TraceType.IndexedAssetState>();
-                mutable_bitField0_ |= 0x00000008;
-              }
-              assets_.add(
-                  input.readMessage(forge_abi.TraceType.IndexedAssetState.parser(), extensionRegistry));
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-          assets_ = java.util.Collections.unmodifiableList(assets_);
-        }
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.Rpc.internal_static_forge_abi_ResponseListAssets_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.Rpc.internal_static_forge_abi_ResponseListAssets_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.Rpc.ResponseListAssets.class, forge_abi.Rpc.ResponseListAssets.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int CODE_FIELD_NUMBER = 1;
-    private int code_;
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    public int getCodeValue() {
-      return code_;
-    }
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    public forge_abi.Enum.StatusCode getCode() {
-      forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
-      return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
-    }
-
-    public static final int PAGE_FIELD_NUMBER = 2;
-    private forge_abi.TraceType.PageInfo page_;
-    /**
-     * <code>.forge_abi.PageInfo page = 2;</code>
-     */
-    public boolean hasPage() {
-      return page_ != null;
-    }
-    /**
-     * <code>.forge_abi.PageInfo page = 2;</code>
-     */
-    public forge_abi.TraceType.PageInfo getPage() {
-      return page_ == null ? forge_abi.TraceType.PageInfo.getDefaultInstance() : page_;
-    }
-    /**
-     * <code>.forge_abi.PageInfo page = 2;</code>
-     */
-    public forge_abi.TraceType.PageInfoOrBuilder getPageOrBuilder() {
-      return getPage();
-    }
-
-    public static final int ACCOUNT_FIELD_NUMBER = 3;
-    private forge_abi.TraceType.IndexedAccountState account_;
-    /**
-     * <code>.forge_abi.IndexedAccountState account = 3;</code>
-     */
-    public boolean hasAccount() {
-      return account_ != null;
-    }
-    /**
-     * <code>.forge_abi.IndexedAccountState account = 3;</code>
-     */
-    public forge_abi.TraceType.IndexedAccountState getAccount() {
-      return account_ == null ? forge_abi.TraceType.IndexedAccountState.getDefaultInstance() : account_;
-    }
-    /**
-     * <code>.forge_abi.IndexedAccountState account = 3;</code>
-     */
-    public forge_abi.TraceType.IndexedAccountStateOrBuilder getAccountOrBuilder() {
-      return getAccount();
-    }
-
-    public static final int ASSETS_FIELD_NUMBER = 4;
-    private java.util.List<forge_abi.TraceType.IndexedAssetState> assets_;
-    /**
-     * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-     */
-    public java.util.List<forge_abi.TraceType.IndexedAssetState> getAssetsList() {
-      return assets_;
-    }
-    /**
-     * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-     */
-    public java.util.List<? extends forge_abi.TraceType.IndexedAssetStateOrBuilder> 
-        getAssetsOrBuilderList() {
-      return assets_;
-    }
-    /**
-     * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-     */
-    public int getAssetsCount() {
-      return assets_.size();
-    }
-    /**
-     * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-     */
-    public forge_abi.TraceType.IndexedAssetState getAssets(int index) {
-      return assets_.get(index);
-    }
-    /**
-     * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-     */
-    public forge_abi.TraceType.IndexedAssetStateOrBuilder getAssetsOrBuilder(
-        int index) {
-      return assets_.get(index);
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
-        output.writeEnum(1, code_);
-      }
-      if (page_ != null) {
-        output.writeMessage(2, getPage());
-      }
-      if (account_ != null) {
-        output.writeMessage(3, getAccount());
-      }
-      for (int i = 0; i < assets_.size(); i++) {
-        output.writeMessage(4, assets_.get(i));
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, code_);
-      }
-      if (page_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getPage());
-      }
-      if (account_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getAccount());
-      }
-      for (int i = 0; i < assets_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, assets_.get(i));
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.Rpc.ResponseListAssets)) {
-        return super.equals(obj);
-      }
-      forge_abi.Rpc.ResponseListAssets other = (forge_abi.Rpc.ResponseListAssets) obj;
-
-      boolean result = true;
-      result = result && code_ == other.code_;
-      result = result && (hasPage() == other.hasPage());
-      if (hasPage()) {
-        result = result && getPage()
-            .equals(other.getPage());
-      }
-      result = result && (hasAccount() == other.hasAccount());
-      if (hasAccount()) {
-        result = result && getAccount()
-            .equals(other.getAccount());
-      }
-      result = result && getAssetsList()
-          .equals(other.getAssetsList());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + CODE_FIELD_NUMBER;
-      hash = (53 * hash) + code_;
-      if (hasPage()) {
-        hash = (37 * hash) + PAGE_FIELD_NUMBER;
-        hash = (53 * hash) + getPage().hashCode();
-      }
-      if (hasAccount()) {
-        hash = (37 * hash) + ACCOUNT_FIELD_NUMBER;
-        hash = (53 * hash) + getAccount().hashCode();
-      }
-      if (getAssetsCount() > 0) {
-        hash = (37 * hash) + ASSETS_FIELD_NUMBER;
-        hash = (53 * hash) + getAssetsList().hashCode();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.Rpc.ResponseListAssets parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.ResponseListAssets parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseListAssets parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.ResponseListAssets parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseListAssets parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.ResponseListAssets parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseListAssets parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.ResponseListAssets parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseListAssets parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.ResponseListAssets parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.Rpc.ResponseListAssets prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code forge_abi.ResponseListAssets}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.ResponseListAssets)
-        forge_abi.Rpc.ResponseListAssetsOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseListAssets_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseListAssets_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.Rpc.ResponseListAssets.class, forge_abi.Rpc.ResponseListAssets.Builder.class);
-      }
-
-      // Construct using forge_abi.Rpc.ResponseListAssets.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-          getAssetsFieldBuilder();
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        code_ = 0;
-
-        if (pageBuilder_ == null) {
-          page_ = null;
-        } else {
-          page_ = null;
-          pageBuilder_ = null;
-        }
-        if (accountBuilder_ == null) {
-          account_ = null;
-        } else {
-          account_ = null;
-          accountBuilder_ = null;
-        }
-        if (assetsBuilder_ == null) {
-          assets_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
-        } else {
-          assetsBuilder_.clear();
-        }
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseListAssets_descriptor;
-      }
-
-      public forge_abi.Rpc.ResponseListAssets getDefaultInstanceForType() {
-        return forge_abi.Rpc.ResponseListAssets.getDefaultInstance();
-      }
-
-      public forge_abi.Rpc.ResponseListAssets build() {
-        forge_abi.Rpc.ResponseListAssets result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.Rpc.ResponseListAssets buildPartial() {
-        forge_abi.Rpc.ResponseListAssets result = new forge_abi.Rpc.ResponseListAssets(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        result.code_ = code_;
-        if (pageBuilder_ == null) {
-          result.page_ = page_;
-        } else {
-          result.page_ = pageBuilder_.build();
-        }
-        if (accountBuilder_ == null) {
-          result.account_ = account_;
-        } else {
-          result.account_ = accountBuilder_.build();
-        }
-        if (assetsBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
-            assets_ = java.util.Collections.unmodifiableList(assets_);
-            bitField0_ = (bitField0_ & ~0x00000008);
-          }
-          result.assets_ = assets_;
-        } else {
-          result.assets_ = assetsBuilder_.build();
-        }
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.Rpc.ResponseListAssets) {
-          return mergeFrom((forge_abi.Rpc.ResponseListAssets)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.Rpc.ResponseListAssets other) {
-        if (other == forge_abi.Rpc.ResponseListAssets.getDefaultInstance()) return this;
-        if (other.code_ != 0) {
-          setCodeValue(other.getCodeValue());
-        }
-        if (other.hasPage()) {
-          mergePage(other.getPage());
-        }
-        if (other.hasAccount()) {
-          mergeAccount(other.getAccount());
-        }
-        if (assetsBuilder_ == null) {
-          if (!other.assets_.isEmpty()) {
-            if (assets_.isEmpty()) {
-              assets_ = other.assets_;
-              bitField0_ = (bitField0_ & ~0x00000008);
-            } else {
-              ensureAssetsIsMutable();
-              assets_.addAll(other.assets_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.assets_.isEmpty()) {
-            if (assetsBuilder_.isEmpty()) {
-              assetsBuilder_.dispose();
-              assetsBuilder_ = null;
-              assets_ = other.assets_;
-              bitField0_ = (bitField0_ & ~0x00000008);
-              assetsBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getAssetsFieldBuilder() : null;
-            } else {
-              assetsBuilder_.addAllMessages(other.assets_);
-            }
-          }
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.Rpc.ResponseListAssets parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.Rpc.ResponseListAssets) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int code_ = 0;
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public int getCodeValue() {
-        return code_;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public Builder setCodeValue(int value) {
-        code_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public forge_abi.Enum.StatusCode getCode() {
-        forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
-        return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public Builder setCode(forge_abi.Enum.StatusCode value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        code_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public Builder clearCode() {
-        
-        code_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private forge_abi.TraceType.PageInfo page_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.PageInfo, forge_abi.TraceType.PageInfo.Builder, forge_abi.TraceType.PageInfoOrBuilder> pageBuilder_;
-      /**
-       * <code>.forge_abi.PageInfo page = 2;</code>
-       */
-      public boolean hasPage() {
-        return pageBuilder_ != null || page_ != null;
-      }
-      /**
-       * <code>.forge_abi.PageInfo page = 2;</code>
-       */
-      public forge_abi.TraceType.PageInfo getPage() {
-        if (pageBuilder_ == null) {
-          return page_ == null ? forge_abi.TraceType.PageInfo.getDefaultInstance() : page_;
-        } else {
-          return pageBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.forge_abi.PageInfo page = 2;</code>
-       */
-      public Builder setPage(forge_abi.TraceType.PageInfo value) {
-        if (pageBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          page_ = value;
-          onChanged();
-        } else {
-          pageBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.PageInfo page = 2;</code>
-       */
-      public Builder setPage(
-          forge_abi.TraceType.PageInfo.Builder builderForValue) {
-        if (pageBuilder_ == null) {
-          page_ = builderForValue.build();
-          onChanged();
-        } else {
-          pageBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.PageInfo page = 2;</code>
-       */
-      public Builder mergePage(forge_abi.TraceType.PageInfo value) {
-        if (pageBuilder_ == null) {
-          if (page_ != null) {
-            page_ =
-              forge_abi.TraceType.PageInfo.newBuilder(page_).mergeFrom(value).buildPartial();
-          } else {
-            page_ = value;
-          }
-          onChanged();
-        } else {
-          pageBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.PageInfo page = 2;</code>
-       */
-      public Builder clearPage() {
-        if (pageBuilder_ == null) {
-          page_ = null;
-          onChanged();
-        } else {
-          page_ = null;
-          pageBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.PageInfo page = 2;</code>
-       */
-      public forge_abi.TraceType.PageInfo.Builder getPageBuilder() {
-        
-        onChanged();
-        return getPageFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.forge_abi.PageInfo page = 2;</code>
-       */
-      public forge_abi.TraceType.PageInfoOrBuilder getPageOrBuilder() {
-        if (pageBuilder_ != null) {
-          return pageBuilder_.getMessageOrBuilder();
-        } else {
-          return page_ == null ?
-              forge_abi.TraceType.PageInfo.getDefaultInstance() : page_;
-        }
-      }
-      /**
-       * <code>.forge_abi.PageInfo page = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.PageInfo, forge_abi.TraceType.PageInfo.Builder, forge_abi.TraceType.PageInfoOrBuilder> 
-          getPageFieldBuilder() {
-        if (pageBuilder_ == null) {
-          pageBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.TraceType.PageInfo, forge_abi.TraceType.PageInfo.Builder, forge_abi.TraceType.PageInfoOrBuilder>(
-                  getPage(),
-                  getParentForChildren(),
-                  isClean());
-          page_ = null;
-        }
-        return pageBuilder_;
-      }
-
-      private forge_abi.TraceType.IndexedAccountState account_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.IndexedAccountState, forge_abi.TraceType.IndexedAccountState.Builder, forge_abi.TraceType.IndexedAccountStateOrBuilder> accountBuilder_;
-      /**
-       * <code>.forge_abi.IndexedAccountState account = 3;</code>
-       */
-      public boolean hasAccount() {
-        return accountBuilder_ != null || account_ != null;
-      }
-      /**
-       * <code>.forge_abi.IndexedAccountState account = 3;</code>
-       */
-      public forge_abi.TraceType.IndexedAccountState getAccount() {
-        if (accountBuilder_ == null) {
-          return account_ == null ? forge_abi.TraceType.IndexedAccountState.getDefaultInstance() : account_;
-        } else {
-          return accountBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.forge_abi.IndexedAccountState account = 3;</code>
-       */
-      public Builder setAccount(forge_abi.TraceType.IndexedAccountState value) {
-        if (accountBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          account_ = value;
-          onChanged();
-        } else {
-          accountBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedAccountState account = 3;</code>
-       */
-      public Builder setAccount(
-          forge_abi.TraceType.IndexedAccountState.Builder builderForValue) {
-        if (accountBuilder_ == null) {
-          account_ = builderForValue.build();
-          onChanged();
-        } else {
-          accountBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedAccountState account = 3;</code>
-       */
-      public Builder mergeAccount(forge_abi.TraceType.IndexedAccountState value) {
-        if (accountBuilder_ == null) {
-          if (account_ != null) {
-            account_ =
-              forge_abi.TraceType.IndexedAccountState.newBuilder(account_).mergeFrom(value).buildPartial();
-          } else {
-            account_ = value;
-          }
-          onChanged();
-        } else {
-          accountBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedAccountState account = 3;</code>
-       */
-      public Builder clearAccount() {
-        if (accountBuilder_ == null) {
-          account_ = null;
-          onChanged();
-        } else {
-          account_ = null;
-          accountBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.IndexedAccountState account = 3;</code>
-       */
-      public forge_abi.TraceType.IndexedAccountState.Builder getAccountBuilder() {
-        
-        onChanged();
-        return getAccountFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.forge_abi.IndexedAccountState account = 3;</code>
-       */
-      public forge_abi.TraceType.IndexedAccountStateOrBuilder getAccountOrBuilder() {
-        if (accountBuilder_ != null) {
-          return accountBuilder_.getMessageOrBuilder();
-        } else {
-          return account_ == null ?
-              forge_abi.TraceType.IndexedAccountState.getDefaultInstance() : account_;
-        }
-      }
-      /**
-       * <code>.forge_abi.IndexedAccountState account = 3;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.TraceType.IndexedAccountState, forge_abi.TraceType.IndexedAccountState.Builder, forge_abi.TraceType.IndexedAccountStateOrBuilder> 
-          getAccountFieldBuilder() {
-        if (accountBuilder_ == null) {
-          accountBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.TraceType.IndexedAccountState, forge_abi.TraceType.IndexedAccountState.Builder, forge_abi.TraceType.IndexedAccountStateOrBuilder>(
-                  getAccount(),
-                  getParentForChildren(),
-                  isClean());
-          account_ = null;
-        }
-        return accountBuilder_;
-      }
-
-      private java.util.List<forge_abi.TraceType.IndexedAssetState> assets_ =
-        java.util.Collections.emptyList();
-      private void ensureAssetsIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          assets_ = new java.util.ArrayList<forge_abi.TraceType.IndexedAssetState>(assets_);
-          bitField0_ |= 0x00000008;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          forge_abi.TraceType.IndexedAssetState, forge_abi.TraceType.IndexedAssetState.Builder, forge_abi.TraceType.IndexedAssetStateOrBuilder> assetsBuilder_;
-
-      /**
-       * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-       */
-      public java.util.List<forge_abi.TraceType.IndexedAssetState> getAssetsList() {
-        if (assetsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(assets_);
-        } else {
-          return assetsBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-       */
-      public int getAssetsCount() {
-        if (assetsBuilder_ == null) {
-          return assets_.size();
-        } else {
-          return assetsBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-       */
-      public forge_abi.TraceType.IndexedAssetState getAssets(int index) {
-        if (assetsBuilder_ == null) {
-          return assets_.get(index);
-        } else {
-          return assetsBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-       */
-      public Builder setAssets(
-          int index, forge_abi.TraceType.IndexedAssetState value) {
-        if (assetsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureAssetsIsMutable();
-          assets_.set(index, value);
-          onChanged();
-        } else {
-          assetsBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-       */
-      public Builder setAssets(
-          int index, forge_abi.TraceType.IndexedAssetState.Builder builderForValue) {
-        if (assetsBuilder_ == null) {
-          ensureAssetsIsMutable();
-          assets_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          assetsBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-       */
-      public Builder addAssets(forge_abi.TraceType.IndexedAssetState value) {
-        if (assetsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureAssetsIsMutable();
-          assets_.add(value);
-          onChanged();
-        } else {
-          assetsBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-       */
-      public Builder addAssets(
-          int index, forge_abi.TraceType.IndexedAssetState value) {
-        if (assetsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureAssetsIsMutable();
-          assets_.add(index, value);
-          onChanged();
-        } else {
-          assetsBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-       */
-      public Builder addAssets(
-          forge_abi.TraceType.IndexedAssetState.Builder builderForValue) {
-        if (assetsBuilder_ == null) {
-          ensureAssetsIsMutable();
-          assets_.add(builderForValue.build());
-          onChanged();
-        } else {
-          assetsBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-       */
-      public Builder addAssets(
-          int index, forge_abi.TraceType.IndexedAssetState.Builder builderForValue) {
-        if (assetsBuilder_ == null) {
-          ensureAssetsIsMutable();
-          assets_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          assetsBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-       */
-      public Builder addAllAssets(
-          java.lang.Iterable<? extends forge_abi.TraceType.IndexedAssetState> values) {
-        if (assetsBuilder_ == null) {
-          ensureAssetsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, assets_);
-          onChanged();
-        } else {
-          assetsBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-       */
-      public Builder clearAssets() {
-        if (assetsBuilder_ == null) {
-          assets_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
-          onChanged();
-        } else {
-          assetsBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-       */
-      public Builder removeAssets(int index) {
-        if (assetsBuilder_ == null) {
-          ensureAssetsIsMutable();
-          assets_.remove(index);
-          onChanged();
-        } else {
-          assetsBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-       */
-      public forge_abi.TraceType.IndexedAssetState.Builder getAssetsBuilder(
-          int index) {
-        return getAssetsFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-       */
-      public forge_abi.TraceType.IndexedAssetStateOrBuilder getAssetsOrBuilder(
-          int index) {
-        if (assetsBuilder_ == null) {
-          return assets_.get(index);  } else {
-          return assetsBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-       */
-      public java.util.List<? extends forge_abi.TraceType.IndexedAssetStateOrBuilder> 
-           getAssetsOrBuilderList() {
-        if (assetsBuilder_ != null) {
-          return assetsBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(assets_);
-        }
-      }
-      /**
-       * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-       */
-      public forge_abi.TraceType.IndexedAssetState.Builder addAssetsBuilder() {
-        return getAssetsFieldBuilder().addBuilder(
-            forge_abi.TraceType.IndexedAssetState.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-       */
-      public forge_abi.TraceType.IndexedAssetState.Builder addAssetsBuilder(
-          int index) {
-        return getAssetsFieldBuilder().addBuilder(
-            index, forge_abi.TraceType.IndexedAssetState.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .forge_abi.IndexedAssetState assets = 4;</code>
-       */
-      public java.util.List<forge_abi.TraceType.IndexedAssetState.Builder> 
-           getAssetsBuilderList() {
-        return getAssetsFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          forge_abi.TraceType.IndexedAssetState, forge_abi.TraceType.IndexedAssetState.Builder, forge_abi.TraceType.IndexedAssetStateOrBuilder> 
-          getAssetsFieldBuilder() {
-        if (assetsBuilder_ == null) {
-          assetsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              forge_abi.TraceType.IndexedAssetState, forge_abi.TraceType.IndexedAssetState.Builder, forge_abi.TraceType.IndexedAssetStateOrBuilder>(
-                  assets_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
-                  getParentForChildren(),
-                  isClean());
-          assets_ = null;
-        }
-        return assetsBuilder_;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.ResponseListAssets)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.ResponseListAssets)
-    private static final forge_abi.Rpc.ResponseListAssets DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.Rpc.ResponseListAssets();
-    }
-
-    public static forge_abi.Rpc.ResponseListAssets getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<ResponseListAssets>
-        PARSER = new com.google.protobuf.AbstractParser<ResponseListAssets>() {
-      public ResponseListAssets parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ResponseListAssets(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<ResponseListAssets> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ResponseListAssets> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.Rpc.ResponseListAssets getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   public interface RequestGetHealthStatusOrBuilder extends
       // @@protoc_insertion_point(interface_extends:forge_abi.RequestGetHealthStatus)
       com.google.protobuf.MessageOrBuilder {
@@ -58814,2886 +58938,6 @@ public final class Rpc {
 
   }
 
-  public interface RequestStartSimulatorOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.RequestStartSimulator)
-      com.google.protobuf.MessageOrBuilder {
-  }
-  /**
-   * Protobuf type {@code forge_abi.RequestStartSimulator}
-   */
-  public  static final class RequestStartSimulator extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.RequestStartSimulator)
-      RequestStartSimulatorOrBuilder {
-    // Use RequestStartSimulator.newBuilder() to construct.
-    private RequestStartSimulator(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private RequestStartSimulator() {
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private RequestStartSimulator(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.Rpc.internal_static_forge_abi_RequestStartSimulator_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.Rpc.internal_static_forge_abi_RequestStartSimulator_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.Rpc.RequestStartSimulator.class, forge_abi.Rpc.RequestStartSimulator.Builder.class);
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.Rpc.RequestStartSimulator)) {
-        return super.equals(obj);
-      }
-      forge_abi.Rpc.RequestStartSimulator other = (forge_abi.Rpc.RequestStartSimulator) obj;
-
-      boolean result = true;
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.Rpc.RequestStartSimulator parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.RequestStartSimulator parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestStartSimulator parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.RequestStartSimulator parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestStartSimulator parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.RequestStartSimulator parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestStartSimulator parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.RequestStartSimulator parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestStartSimulator parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.RequestStartSimulator parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.Rpc.RequestStartSimulator prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code forge_abi.RequestStartSimulator}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.RequestStartSimulator)
-        forge_abi.Rpc.RequestStartSimulatorOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestStartSimulator_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestStartSimulator_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.Rpc.RequestStartSimulator.class, forge_abi.Rpc.RequestStartSimulator.Builder.class);
-      }
-
-      // Construct using forge_abi.Rpc.RequestStartSimulator.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestStartSimulator_descriptor;
-      }
-
-      public forge_abi.Rpc.RequestStartSimulator getDefaultInstanceForType() {
-        return forge_abi.Rpc.RequestStartSimulator.getDefaultInstance();
-      }
-
-      public forge_abi.Rpc.RequestStartSimulator build() {
-        forge_abi.Rpc.RequestStartSimulator result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.Rpc.RequestStartSimulator buildPartial() {
-        forge_abi.Rpc.RequestStartSimulator result = new forge_abi.Rpc.RequestStartSimulator(this);
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.Rpc.RequestStartSimulator) {
-          return mergeFrom((forge_abi.Rpc.RequestStartSimulator)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.Rpc.RequestStartSimulator other) {
-        if (other == forge_abi.Rpc.RequestStartSimulator.getDefaultInstance()) return this;
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.Rpc.RequestStartSimulator parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.Rpc.RequestStartSimulator) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.RequestStartSimulator)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.RequestStartSimulator)
-    private static final forge_abi.Rpc.RequestStartSimulator DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.Rpc.RequestStartSimulator();
-    }
-
-    public static forge_abi.Rpc.RequestStartSimulator getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<RequestStartSimulator>
-        PARSER = new com.google.protobuf.AbstractParser<RequestStartSimulator>() {
-      public RequestStartSimulator parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new RequestStartSimulator(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<RequestStartSimulator> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<RequestStartSimulator> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.Rpc.RequestStartSimulator getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface ResponseStartSimulatorOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.ResponseStartSimulator)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    int getCodeValue();
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    forge_abi.Enum.StatusCode getCode();
-
-    /**
-     * <code>string result = 2;</code>
-     */
-    java.lang.String getResult();
-    /**
-     * <code>string result = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getResultBytes();
-  }
-  /**
-   * Protobuf type {@code forge_abi.ResponseStartSimulator}
-   */
-  public  static final class ResponseStartSimulator extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.ResponseStartSimulator)
-      ResponseStartSimulatorOrBuilder {
-    // Use ResponseStartSimulator.newBuilder() to construct.
-    private ResponseStartSimulator(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private ResponseStartSimulator() {
-      code_ = 0;
-      result_ = "";
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private ResponseStartSimulator(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              int rawValue = input.readEnum();
-
-              code_ = rawValue;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              result_ = s;
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.Rpc.internal_static_forge_abi_ResponseStartSimulator_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.Rpc.internal_static_forge_abi_ResponseStartSimulator_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.Rpc.ResponseStartSimulator.class, forge_abi.Rpc.ResponseStartSimulator.Builder.class);
-    }
-
-    public static final int CODE_FIELD_NUMBER = 1;
-    private int code_;
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    public int getCodeValue() {
-      return code_;
-    }
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    public forge_abi.Enum.StatusCode getCode() {
-      forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
-      return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
-    }
-
-    public static final int RESULT_FIELD_NUMBER = 2;
-    private volatile java.lang.Object result_;
-    /**
-     * <code>string result = 2;</code>
-     */
-    public java.lang.String getResult() {
-      java.lang.Object ref = result_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        result_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string result = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getResultBytes() {
-      java.lang.Object ref = result_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        result_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
-        output.writeEnum(1, code_);
-      }
-      if (!getResultBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, result_);
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, code_);
-      }
-      if (!getResultBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, result_);
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.Rpc.ResponseStartSimulator)) {
-        return super.equals(obj);
-      }
-      forge_abi.Rpc.ResponseStartSimulator other = (forge_abi.Rpc.ResponseStartSimulator) obj;
-
-      boolean result = true;
-      result = result && code_ == other.code_;
-      result = result && getResult()
-          .equals(other.getResult());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + CODE_FIELD_NUMBER;
-      hash = (53 * hash) + code_;
-      hash = (37 * hash) + RESULT_FIELD_NUMBER;
-      hash = (53 * hash) + getResult().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.Rpc.ResponseStartSimulator parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.ResponseStartSimulator parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseStartSimulator parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.ResponseStartSimulator parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseStartSimulator parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.ResponseStartSimulator parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseStartSimulator parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.ResponseStartSimulator parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseStartSimulator parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.ResponseStartSimulator parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.Rpc.ResponseStartSimulator prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code forge_abi.ResponseStartSimulator}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.ResponseStartSimulator)
-        forge_abi.Rpc.ResponseStartSimulatorOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseStartSimulator_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseStartSimulator_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.Rpc.ResponseStartSimulator.class, forge_abi.Rpc.ResponseStartSimulator.Builder.class);
-      }
-
-      // Construct using forge_abi.Rpc.ResponseStartSimulator.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        code_ = 0;
-
-        result_ = "";
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseStartSimulator_descriptor;
-      }
-
-      public forge_abi.Rpc.ResponseStartSimulator getDefaultInstanceForType() {
-        return forge_abi.Rpc.ResponseStartSimulator.getDefaultInstance();
-      }
-
-      public forge_abi.Rpc.ResponseStartSimulator build() {
-        forge_abi.Rpc.ResponseStartSimulator result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.Rpc.ResponseStartSimulator buildPartial() {
-        forge_abi.Rpc.ResponseStartSimulator result = new forge_abi.Rpc.ResponseStartSimulator(this);
-        result.code_ = code_;
-        result.result_ = result_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.Rpc.ResponseStartSimulator) {
-          return mergeFrom((forge_abi.Rpc.ResponseStartSimulator)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.Rpc.ResponseStartSimulator other) {
-        if (other == forge_abi.Rpc.ResponseStartSimulator.getDefaultInstance()) return this;
-        if (other.code_ != 0) {
-          setCodeValue(other.getCodeValue());
-        }
-        if (!other.getResult().isEmpty()) {
-          result_ = other.result_;
-          onChanged();
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.Rpc.ResponseStartSimulator parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.Rpc.ResponseStartSimulator) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private int code_ = 0;
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public int getCodeValue() {
-        return code_;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public Builder setCodeValue(int value) {
-        code_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public forge_abi.Enum.StatusCode getCode() {
-        forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
-        return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public Builder setCode(forge_abi.Enum.StatusCode value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        code_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public Builder clearCode() {
-        
-        code_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object result_ = "";
-      /**
-       * <code>string result = 2;</code>
-       */
-      public java.lang.String getResult() {
-        java.lang.Object ref = result_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          result_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string result = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getResultBytes() {
-        java.lang.Object ref = result_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          result_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string result = 2;</code>
-       */
-      public Builder setResult(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        result_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string result = 2;</code>
-       */
-      public Builder clearResult() {
-        
-        result_ = getDefaultInstance().getResult();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string result = 2;</code>
-       */
-      public Builder setResultBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        result_ = value;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.ResponseStartSimulator)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.ResponseStartSimulator)
-    private static final forge_abi.Rpc.ResponseStartSimulator DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.Rpc.ResponseStartSimulator();
-    }
-
-    public static forge_abi.Rpc.ResponseStartSimulator getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<ResponseStartSimulator>
-        PARSER = new com.google.protobuf.AbstractParser<ResponseStartSimulator>() {
-      public ResponseStartSimulator parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ResponseStartSimulator(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<ResponseStartSimulator> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ResponseStartSimulator> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.Rpc.ResponseStartSimulator getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface RequestStopSimulatorOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.RequestStopSimulator)
-      com.google.protobuf.MessageOrBuilder {
-  }
-  /**
-   * Protobuf type {@code forge_abi.RequestStopSimulator}
-   */
-  public  static final class RequestStopSimulator extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.RequestStopSimulator)
-      RequestStopSimulatorOrBuilder {
-    // Use RequestStopSimulator.newBuilder() to construct.
-    private RequestStopSimulator(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private RequestStopSimulator() {
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private RequestStopSimulator(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.Rpc.internal_static_forge_abi_RequestStopSimulator_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.Rpc.internal_static_forge_abi_RequestStopSimulator_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.Rpc.RequestStopSimulator.class, forge_abi.Rpc.RequestStopSimulator.Builder.class);
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.Rpc.RequestStopSimulator)) {
-        return super.equals(obj);
-      }
-      forge_abi.Rpc.RequestStopSimulator other = (forge_abi.Rpc.RequestStopSimulator) obj;
-
-      boolean result = true;
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.Rpc.RequestStopSimulator parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.RequestStopSimulator parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestStopSimulator parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.RequestStopSimulator parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestStopSimulator parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.RequestStopSimulator parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestStopSimulator parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.RequestStopSimulator parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestStopSimulator parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.RequestStopSimulator parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.Rpc.RequestStopSimulator prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code forge_abi.RequestStopSimulator}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.RequestStopSimulator)
-        forge_abi.Rpc.RequestStopSimulatorOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestStopSimulator_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestStopSimulator_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.Rpc.RequestStopSimulator.class, forge_abi.Rpc.RequestStopSimulator.Builder.class);
-      }
-
-      // Construct using forge_abi.Rpc.RequestStopSimulator.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestStopSimulator_descriptor;
-      }
-
-      public forge_abi.Rpc.RequestStopSimulator getDefaultInstanceForType() {
-        return forge_abi.Rpc.RequestStopSimulator.getDefaultInstance();
-      }
-
-      public forge_abi.Rpc.RequestStopSimulator build() {
-        forge_abi.Rpc.RequestStopSimulator result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.Rpc.RequestStopSimulator buildPartial() {
-        forge_abi.Rpc.RequestStopSimulator result = new forge_abi.Rpc.RequestStopSimulator(this);
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.Rpc.RequestStopSimulator) {
-          return mergeFrom((forge_abi.Rpc.RequestStopSimulator)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.Rpc.RequestStopSimulator other) {
-        if (other == forge_abi.Rpc.RequestStopSimulator.getDefaultInstance()) return this;
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.Rpc.RequestStopSimulator parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.Rpc.RequestStopSimulator) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.RequestStopSimulator)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.RequestStopSimulator)
-    private static final forge_abi.Rpc.RequestStopSimulator DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.Rpc.RequestStopSimulator();
-    }
-
-    public static forge_abi.Rpc.RequestStopSimulator getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<RequestStopSimulator>
-        PARSER = new com.google.protobuf.AbstractParser<RequestStopSimulator>() {
-      public RequestStopSimulator parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new RequestStopSimulator(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<RequestStopSimulator> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<RequestStopSimulator> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.Rpc.RequestStopSimulator getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface ResponseStopSimulatorOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.ResponseStopSimulator)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    int getCodeValue();
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    forge_abi.Enum.StatusCode getCode();
-
-    /**
-     * <code>string result = 2;</code>
-     */
-    java.lang.String getResult();
-    /**
-     * <code>string result = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getResultBytes();
-  }
-  /**
-   * Protobuf type {@code forge_abi.ResponseStopSimulator}
-   */
-  public  static final class ResponseStopSimulator extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.ResponseStopSimulator)
-      ResponseStopSimulatorOrBuilder {
-    // Use ResponseStopSimulator.newBuilder() to construct.
-    private ResponseStopSimulator(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private ResponseStopSimulator() {
-      code_ = 0;
-      result_ = "";
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private ResponseStopSimulator(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              int rawValue = input.readEnum();
-
-              code_ = rawValue;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              result_ = s;
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.Rpc.internal_static_forge_abi_ResponseStopSimulator_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.Rpc.internal_static_forge_abi_ResponseStopSimulator_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.Rpc.ResponseStopSimulator.class, forge_abi.Rpc.ResponseStopSimulator.Builder.class);
-    }
-
-    public static final int CODE_FIELD_NUMBER = 1;
-    private int code_;
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    public int getCodeValue() {
-      return code_;
-    }
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    public forge_abi.Enum.StatusCode getCode() {
-      forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
-      return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
-    }
-
-    public static final int RESULT_FIELD_NUMBER = 2;
-    private volatile java.lang.Object result_;
-    /**
-     * <code>string result = 2;</code>
-     */
-    public java.lang.String getResult() {
-      java.lang.Object ref = result_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        result_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string result = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getResultBytes() {
-      java.lang.Object ref = result_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        result_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
-        output.writeEnum(1, code_);
-      }
-      if (!getResultBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, result_);
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, code_);
-      }
-      if (!getResultBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, result_);
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.Rpc.ResponseStopSimulator)) {
-        return super.equals(obj);
-      }
-      forge_abi.Rpc.ResponseStopSimulator other = (forge_abi.Rpc.ResponseStopSimulator) obj;
-
-      boolean result = true;
-      result = result && code_ == other.code_;
-      result = result && getResult()
-          .equals(other.getResult());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + CODE_FIELD_NUMBER;
-      hash = (53 * hash) + code_;
-      hash = (37 * hash) + RESULT_FIELD_NUMBER;
-      hash = (53 * hash) + getResult().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.Rpc.ResponseStopSimulator parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.ResponseStopSimulator parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseStopSimulator parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.ResponseStopSimulator parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseStopSimulator parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.ResponseStopSimulator parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseStopSimulator parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.ResponseStopSimulator parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseStopSimulator parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.ResponseStopSimulator parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.Rpc.ResponseStopSimulator prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code forge_abi.ResponseStopSimulator}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.ResponseStopSimulator)
-        forge_abi.Rpc.ResponseStopSimulatorOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseStopSimulator_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseStopSimulator_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.Rpc.ResponseStopSimulator.class, forge_abi.Rpc.ResponseStopSimulator.Builder.class);
-      }
-
-      // Construct using forge_abi.Rpc.ResponseStopSimulator.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        code_ = 0;
-
-        result_ = "";
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseStopSimulator_descriptor;
-      }
-
-      public forge_abi.Rpc.ResponseStopSimulator getDefaultInstanceForType() {
-        return forge_abi.Rpc.ResponseStopSimulator.getDefaultInstance();
-      }
-
-      public forge_abi.Rpc.ResponseStopSimulator build() {
-        forge_abi.Rpc.ResponseStopSimulator result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.Rpc.ResponseStopSimulator buildPartial() {
-        forge_abi.Rpc.ResponseStopSimulator result = new forge_abi.Rpc.ResponseStopSimulator(this);
-        result.code_ = code_;
-        result.result_ = result_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.Rpc.ResponseStopSimulator) {
-          return mergeFrom((forge_abi.Rpc.ResponseStopSimulator)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.Rpc.ResponseStopSimulator other) {
-        if (other == forge_abi.Rpc.ResponseStopSimulator.getDefaultInstance()) return this;
-        if (other.code_ != 0) {
-          setCodeValue(other.getCodeValue());
-        }
-        if (!other.getResult().isEmpty()) {
-          result_ = other.result_;
-          onChanged();
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.Rpc.ResponseStopSimulator parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.Rpc.ResponseStopSimulator) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private int code_ = 0;
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public int getCodeValue() {
-        return code_;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public Builder setCodeValue(int value) {
-        code_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public forge_abi.Enum.StatusCode getCode() {
-        forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
-        return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public Builder setCode(forge_abi.Enum.StatusCode value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        code_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public Builder clearCode() {
-        
-        code_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object result_ = "";
-      /**
-       * <code>string result = 2;</code>
-       */
-      public java.lang.String getResult() {
-        java.lang.Object ref = result_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          result_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string result = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getResultBytes() {
-        java.lang.Object ref = result_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          result_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string result = 2;</code>
-       */
-      public Builder setResult(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        result_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string result = 2;</code>
-       */
-      public Builder clearResult() {
-        
-        result_ = getDefaultInstance().getResult();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string result = 2;</code>
-       */
-      public Builder setResultBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        result_ = value;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.ResponseStopSimulator)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.ResponseStopSimulator)
-    private static final forge_abi.Rpc.ResponseStopSimulator DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.Rpc.ResponseStopSimulator();
-    }
-
-    public static forge_abi.Rpc.ResponseStopSimulator getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<ResponseStopSimulator>
-        PARSER = new com.google.protobuf.AbstractParser<ResponseStopSimulator>() {
-      public ResponseStopSimulator parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ResponseStopSimulator(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<ResponseStopSimulator> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ResponseStopSimulator> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.Rpc.ResponseStopSimulator getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface RequestGetSimulatorStatusOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.RequestGetSimulatorStatus)
-      com.google.protobuf.MessageOrBuilder {
-  }
-  /**
-   * Protobuf type {@code forge_abi.RequestGetSimulatorStatus}
-   */
-  public  static final class RequestGetSimulatorStatus extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.RequestGetSimulatorStatus)
-      RequestGetSimulatorStatusOrBuilder {
-    // Use RequestGetSimulatorStatus.newBuilder() to construct.
-    private RequestGetSimulatorStatus(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private RequestGetSimulatorStatus() {
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private RequestGetSimulatorStatus(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.Rpc.internal_static_forge_abi_RequestGetSimulatorStatus_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.Rpc.internal_static_forge_abi_RequestGetSimulatorStatus_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.Rpc.RequestGetSimulatorStatus.class, forge_abi.Rpc.RequestGetSimulatorStatus.Builder.class);
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.Rpc.RequestGetSimulatorStatus)) {
-        return super.equals(obj);
-      }
-      forge_abi.Rpc.RequestGetSimulatorStatus other = (forge_abi.Rpc.RequestGetSimulatorStatus) obj;
-
-      boolean result = true;
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.Rpc.RequestGetSimulatorStatus parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.RequestGetSimulatorStatus parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestGetSimulatorStatus parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.RequestGetSimulatorStatus parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestGetSimulatorStatus parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.RequestGetSimulatorStatus parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestGetSimulatorStatus parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.RequestGetSimulatorStatus parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.RequestGetSimulatorStatus parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.RequestGetSimulatorStatus parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.Rpc.RequestGetSimulatorStatus prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code forge_abi.RequestGetSimulatorStatus}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.RequestGetSimulatorStatus)
-        forge_abi.Rpc.RequestGetSimulatorStatusOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestGetSimulatorStatus_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestGetSimulatorStatus_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.Rpc.RequestGetSimulatorStatus.class, forge_abi.Rpc.RequestGetSimulatorStatus.Builder.class);
-      }
-
-      // Construct using forge_abi.Rpc.RequestGetSimulatorStatus.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.Rpc.internal_static_forge_abi_RequestGetSimulatorStatus_descriptor;
-      }
-
-      public forge_abi.Rpc.RequestGetSimulatorStatus getDefaultInstanceForType() {
-        return forge_abi.Rpc.RequestGetSimulatorStatus.getDefaultInstance();
-      }
-
-      public forge_abi.Rpc.RequestGetSimulatorStatus build() {
-        forge_abi.Rpc.RequestGetSimulatorStatus result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.Rpc.RequestGetSimulatorStatus buildPartial() {
-        forge_abi.Rpc.RequestGetSimulatorStatus result = new forge_abi.Rpc.RequestGetSimulatorStatus(this);
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.Rpc.RequestGetSimulatorStatus) {
-          return mergeFrom((forge_abi.Rpc.RequestGetSimulatorStatus)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.Rpc.RequestGetSimulatorStatus other) {
-        if (other == forge_abi.Rpc.RequestGetSimulatorStatus.getDefaultInstance()) return this;
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.Rpc.RequestGetSimulatorStatus parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.Rpc.RequestGetSimulatorStatus) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.RequestGetSimulatorStatus)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.RequestGetSimulatorStatus)
-    private static final forge_abi.Rpc.RequestGetSimulatorStatus DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.Rpc.RequestGetSimulatorStatus();
-    }
-
-    public static forge_abi.Rpc.RequestGetSimulatorStatus getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<RequestGetSimulatorStatus>
-        PARSER = new com.google.protobuf.AbstractParser<RequestGetSimulatorStatus>() {
-      public RequestGetSimulatorStatus parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new RequestGetSimulatorStatus(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<RequestGetSimulatorStatus> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<RequestGetSimulatorStatus> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.Rpc.RequestGetSimulatorStatus getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface ResponseGetSimulatorStatusOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.ResponseGetSimulatorStatus)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    int getCodeValue();
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    forge_abi.Enum.StatusCode getCode();
-
-    /**
-     * <code>string result = 2;</code>
-     */
-    java.lang.String getResult();
-    /**
-     * <code>string result = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getResultBytes();
-  }
-  /**
-   * Protobuf type {@code forge_abi.ResponseGetSimulatorStatus}
-   */
-  public  static final class ResponseGetSimulatorStatus extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.ResponseGetSimulatorStatus)
-      ResponseGetSimulatorStatusOrBuilder {
-    // Use ResponseGetSimulatorStatus.newBuilder() to construct.
-    private ResponseGetSimulatorStatus(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private ResponseGetSimulatorStatus() {
-      code_ = 0;
-      result_ = "";
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private ResponseGetSimulatorStatus(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              int rawValue = input.readEnum();
-
-              code_ = rawValue;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              result_ = s;
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.Rpc.internal_static_forge_abi_ResponseGetSimulatorStatus_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.Rpc.internal_static_forge_abi_ResponseGetSimulatorStatus_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.Rpc.ResponseGetSimulatorStatus.class, forge_abi.Rpc.ResponseGetSimulatorStatus.Builder.class);
-    }
-
-    public static final int CODE_FIELD_NUMBER = 1;
-    private int code_;
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    public int getCodeValue() {
-      return code_;
-    }
-    /**
-     * <code>.forge_abi.StatusCode code = 1;</code>
-     */
-    public forge_abi.Enum.StatusCode getCode() {
-      forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
-      return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
-    }
-
-    public static final int RESULT_FIELD_NUMBER = 2;
-    private volatile java.lang.Object result_;
-    /**
-     * <code>string result = 2;</code>
-     */
-    public java.lang.String getResult() {
-      java.lang.Object ref = result_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        result_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string result = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getResultBytes() {
-      java.lang.Object ref = result_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        result_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
-        output.writeEnum(1, code_);
-      }
-      if (!getResultBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, result_);
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, code_);
-      }
-      if (!getResultBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, result_);
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.Rpc.ResponseGetSimulatorStatus)) {
-        return super.equals(obj);
-      }
-      forge_abi.Rpc.ResponseGetSimulatorStatus other = (forge_abi.Rpc.ResponseGetSimulatorStatus) obj;
-
-      boolean result = true;
-      result = result && code_ == other.code_;
-      result = result && getResult()
-          .equals(other.getResult());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + CODE_FIELD_NUMBER;
-      hash = (53 * hash) + code_;
-      hash = (37 * hash) + RESULT_FIELD_NUMBER;
-      hash = (53 * hash) + getResult().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.Rpc.ResponseGetSimulatorStatus parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.ResponseGetSimulatorStatus parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseGetSimulatorStatus parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.Rpc.ResponseGetSimulatorStatus parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseGetSimulatorStatus parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.ResponseGetSimulatorStatus parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseGetSimulatorStatus parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.ResponseGetSimulatorStatus parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.Rpc.ResponseGetSimulatorStatus parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.Rpc.ResponseGetSimulatorStatus parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.Rpc.ResponseGetSimulatorStatus prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code forge_abi.ResponseGetSimulatorStatus}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.ResponseGetSimulatorStatus)
-        forge_abi.Rpc.ResponseGetSimulatorStatusOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetSimulatorStatus_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetSimulatorStatus_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.Rpc.ResponseGetSimulatorStatus.class, forge_abi.Rpc.ResponseGetSimulatorStatus.Builder.class);
-      }
-
-      // Construct using forge_abi.Rpc.ResponseGetSimulatorStatus.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        code_ = 0;
-
-        result_ = "";
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetSimulatorStatus_descriptor;
-      }
-
-      public forge_abi.Rpc.ResponseGetSimulatorStatus getDefaultInstanceForType() {
-        return forge_abi.Rpc.ResponseGetSimulatorStatus.getDefaultInstance();
-      }
-
-      public forge_abi.Rpc.ResponseGetSimulatorStatus build() {
-        forge_abi.Rpc.ResponseGetSimulatorStatus result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.Rpc.ResponseGetSimulatorStatus buildPartial() {
-        forge_abi.Rpc.ResponseGetSimulatorStatus result = new forge_abi.Rpc.ResponseGetSimulatorStatus(this);
-        result.code_ = code_;
-        result.result_ = result_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.Rpc.ResponseGetSimulatorStatus) {
-          return mergeFrom((forge_abi.Rpc.ResponseGetSimulatorStatus)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.Rpc.ResponseGetSimulatorStatus other) {
-        if (other == forge_abi.Rpc.ResponseGetSimulatorStatus.getDefaultInstance()) return this;
-        if (other.code_ != 0) {
-          setCodeValue(other.getCodeValue());
-        }
-        if (!other.getResult().isEmpty()) {
-          result_ = other.result_;
-          onChanged();
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.Rpc.ResponseGetSimulatorStatus parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.Rpc.ResponseGetSimulatorStatus) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private int code_ = 0;
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public int getCodeValue() {
-        return code_;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public Builder setCodeValue(int value) {
-        code_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public forge_abi.Enum.StatusCode getCode() {
-        forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
-        return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public Builder setCode(forge_abi.Enum.StatusCode value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        code_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.forge_abi.StatusCode code = 1;</code>
-       */
-      public Builder clearCode() {
-        
-        code_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object result_ = "";
-      /**
-       * <code>string result = 2;</code>
-       */
-      public java.lang.String getResult() {
-        java.lang.Object ref = result_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          result_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string result = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getResultBytes() {
-        java.lang.Object ref = result_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          result_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string result = 2;</code>
-       */
-      public Builder setResult(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        result_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string result = 2;</code>
-       */
-      public Builder clearResult() {
-        
-        result_ = getDefaultInstance().getResult();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string result = 2;</code>
-       */
-      public Builder setResultBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        result_ = value;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.ResponseGetSimulatorStatus)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.ResponseGetSimulatorStatus)
-    private static final forge_abi.Rpc.ResponseGetSimulatorStatus DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.Rpc.ResponseGetSimulatorStatus();
-    }
-
-    public static forge_abi.Rpc.ResponseGetSimulatorStatus getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<ResponseGetSimulatorStatus>
-        PARSER = new com.google.protobuf.AbstractParser<ResponseGetSimulatorStatus>() {
-      public ResponseGetSimulatorStatus parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ResponseGetSimulatorStatus(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<ResponseGetSimulatorStatus> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ResponseGetSimulatorStatus> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.Rpc.ResponseGetSimulatorStatus getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_forge_abi_RequestCreateTx_descriptor;
   private static final 
@@ -61835,6 +59079,16 @@ public final class Rpc {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_forge_abi_ResponseGetAssetState_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_forge_abi_RequestGetProtocolState_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_forge_abi_RequestGetProtocolState_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_forge_abi_ResponseGetProtocolState_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_forge_abi_ResponseGetProtocolState_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_forge_abi_RequestGetStakeState_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -61854,6 +59108,16 @@ public final class Rpc {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_forge_abi_ResponseGetForgeState_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_forge_abi_RequestGetTetherInfo_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_forge_abi_RequestGetTetherInfo_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_forge_abi_ResponseGetTetherInfo_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_forge_abi_ResponseGetTetherInfo_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_forge_abi_RequestStoreFile_descriptor;
   private static final 
@@ -61985,15 +59249,15 @@ public final class Rpc {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_forge_abi_ByHour_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_RequestGetForgeStatistics_descriptor;
+    internal_static_forge_abi_RequestGetForgeStats_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_RequestGetForgeStatistics_fieldAccessorTable;
+      internal_static_forge_abi_RequestGetForgeStats_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_ResponseGetForgeStatistics_descriptor;
+    internal_static_forge_abi_ResponseGetForgeStats_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_ResponseGetForgeStatistics_fieldAccessorTable;
+      internal_static_forge_abi_ResponseGetForgeStats_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_forge_abi_RequestListTransactions_descriptor;
   private static final 
@@ -62005,55 +59269,45 @@ public final class Rpc {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_forge_abi_ResponseListTransactions_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_RequestGetAssetAddress_descriptor;
+    internal_static_forge_abi_RequestListAssets_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_RequestGetAssetAddress_fieldAccessorTable;
+      internal_static_forge_abi_RequestListAssets_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_ResponseGetAssetAddress_descriptor;
+    internal_static_forge_abi_ResponseListAssets_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_ResponseGetAssetAddress_fieldAccessorTable;
+      internal_static_forge_abi_ResponseListAssets_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_RequestSignData_descriptor;
+    internal_static_forge_abi_RequestListStakes_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_RequestSignData_fieldAccessorTable;
+      internal_static_forge_abi_RequestListStakes_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_ResponseSignData_descriptor;
+    internal_static_forge_abi_ResponseListStakes_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_ResponseSignData_fieldAccessorTable;
+      internal_static_forge_abi_ResponseListStakes_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_RequestGetAssets_descriptor;
+    internal_static_forge_abi_RequestListAccount_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_RequestGetAssets_fieldAccessorTable;
+      internal_static_forge_abi_RequestListAccount_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_ResponseGetAssets_descriptor;
+    internal_static_forge_abi_ResponseListAccount_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_ResponseGetAssets_fieldAccessorTable;
+      internal_static_forge_abi_ResponseListAccount_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_RequestGetStakes_descriptor;
+    internal_static_forge_abi_RequestListTopAccounts_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_RequestGetStakes_fieldAccessorTable;
+      internal_static_forge_abi_RequestListTopAccounts_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_ResponseGetStakes_descriptor;
+    internal_static_forge_abi_ResponseListTopAccounts_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_ResponseGetStakes_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_RequestGetTopAccounts_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_RequestGetTopAccounts_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_ResponseGetTopAccounts_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_ResponseGetTopAccounts_fieldAccessorTable;
+      internal_static_forge_abi_ResponseListTopAccounts_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_forge_abi_RequestListAssetTransactions_descriptor;
   private static final 
@@ -62075,16 +59329,6 @@ public final class Rpc {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_forge_abi_ResponseListBlocks_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_RequestListAssets_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_RequestListAssets_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_ResponseListAssets_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_ResponseListAssets_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_forge_abi_RequestGetHealthStatus_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -62094,36 +59338,6 @@ public final class Rpc {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_forge_abi_ResponseGetHealthStatus_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_RequestStartSimulator_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_RequestStartSimulator_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_ResponseStartSimulator_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_ResponseStartSimulator_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_RequestStopSimulator_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_RequestStopSimulator_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_ResponseStopSimulator_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_ResponseStopSimulator_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_RequestGetSimulatorStatus_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_RequestGetSimulatorStatus_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_ResponseGetSimulatorStatus_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_ResponseGetSimulatorStatus_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -62135,213 +59349,204 @@ public final class Rpc {
     java.lang.String[] descriptorData = {
       "\n\trpc.proto\022\tforge_abi\032\031google/protobuf/" +
       "any.proto\032\014vendor.proto\032\nenum.proto\032\ntyp" +
-      "e.proto\032\013state.proto\032\010tx.proto\032\020trace_ty" +
-      "pe.proto\"\207\001\n\017RequestCreateTx\022!\n\003itx\030\001 \001(" +
-      "\0132\024.google.protobuf.Any\022\014\n\004from\030\002 \001(\t\022\r\n" +
-      "\005nonce\030\003 \001(\004\022%\n\006wallet\030\004 \001(\0132\025.forge_abi" +
-      ".WalletInfo\022\r\n\005token\030\005 \001(\t\"[\n\020ResponseCr" +
-      "eateTx\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusC" +
-      "ode\022\"\n\002tx\030\002 \001(\0132\026.forge_abi.Transaction\"" +
-      "\217\001\n\017RequestMultisig\022\"\n\002tx\030\001 \001(\0132\026.forge_",
-      "abi.Transaction\022\"\n\004data\030\002 \001(\0132\024.google.p" +
-      "rotobuf.Any\022%\n\006wallet\030\003 \001(\0132\025.forge_abi." +
-      "WalletInfo\022\r\n\005token\030\004 \001(\t\"[\n\020ResponseMul" +
-      "tisig\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCo" +
-      "de\022\"\n\002tx\030\002 \001(\0132\026.forge_abi.Transaction\"y" +
-      "\n\rRequestSendTx\022\"\n\002tx\030\001 \001(\0132\026.forge_abi." +
-      "Transaction\022%\n\006wallet\030\002 \001(\0132\025.forge_abi." +
-      "WalletInfo\022\r\n\005token\030\003 \001(\t\022\016\n\006commit\030\004 \001(" +
-      "\010\"C\n\016ResponseSendTx\022#\n\004code\030\001 \001(\0162\025.forg" +
-      "e_abi.StatusCode\022\014\n\004hash\030\002 \001(\t\"\034\n\014Reques",
-      "tGetTx\022\014\n\004hash\030\001 \001(\t\"^\n\rResponseGetTx\022#\n" +
-      "\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022(\n\004in" +
-      "fo\030\002 \001(\0132\032.forge_abi.TransactionInfo\"!\n\017" +
-      "RequestGetBlock\022\016\n\006height\030\001 \001(\004\"\\\n\020Respo" +
-      "nseGetBlock\022#\n\004code\030\001 \001(\0162\025.forge_abi.St" +
-      "atusCode\022#\n\005block\030\002 \001(\0132\024.forge_abi.Bloc" +
-      "kInfo\"x\n\020RequestGetBlocks\022$\n\006paging\030\001 \001(" +
-      "\0132\024.forge_abi.PageInput\022\022\n\nmin_height\030\002 " +
-      "\001(\004\022\022\n\nmax_height\030\003 \001(\004\022\026\n\016empty_exclude" +
-      "d\030\004 \001(\010\"\201\001\n\021ResponseGetBlocks\022#\n\004code\030\001 ",
-      "\001(\0162\025.forge_abi.StatusCode\022!\n\004page\030\002 \001(\013" +
-      "2\023.forge_abi.PageInfo\022$\n\006blocks\030\003 \003(\0132\024." +
-      "forge_abi.BlockInfo\"_\n\023RequestCreateWall" +
-      "et\022\022\n\npassphrase\030\001 \001(\t\022#\n\004type\030\002 \001(\0132\025.f" +
-      "orge_abi.WalletType\022\017\n\007moniker\030\003 \001(\t\"q\n\024" +
-      "ResponseCreateWallet\022#\n\004code\030\001 \001(\0162\025.for" +
-      "ge_abi.StatusCode\022\r\n\005token\030\002 \001(\t\022%\n\006wall" +
-      "et\030\003 \001(\0132\025.forge_abi.WalletInfo\"8\n\021Reque" +
-      "stLoadWallet\022\017\n\007address\030\001 \001(\t\022\022\n\npassphr" +
-      "ase\030\002 \001(\t\"o\n\022ResponseLoadWallet\022#\n\004code\030",
-      "\001 \001(\0162\025.forge_abi.StatusCode\022\r\n\005token\030\002 " +
-      "\001(\t\022%\n\006wallet\030\003 \001(\0132\025.forge_abi.WalletIn" +
-      "fo\"n\n\024RequestRecoverWallet\022\014\n\004data\030\001 \001(\014" +
-      "\022#\n\004type\030\002 \001(\0132\025.forge_abi.WalletType\022\022\n" +
-      "\npassphrase\030\003 \001(\t\022\017\n\007moniker\030\004 \001(\t\"r\n\025Re" +
-      "sponseRecoverWallet\022#\n\004code\030\001 \001(\0162\025.forg" +
-      "e_abi.StatusCode\022\r\n\005token\030\002 \001(\t\022%\n\006walle" +
-      "t\030\003 \001(\0132\025.forge_abi.WalletInfo\"\023\n\021Reques" +
-      "tListWallet\"J\n\022ResponseListWallet\022#\n\004cod" +
-      "e\030\001 \001(\0162\025.forge_abi.StatusCode\022\017\n\007addres",
-      "s\030\002 \001(\t\"&\n\023RequestRemoveWallet\022\017\n\007addres" +
-      "s\030\001 \001(\t\";\n\024ResponseRemoveWallet\022#\n\004code\030" +
-      "\001 \001(\0162\025.forge_abi.StatusCode\"\'\n\022RequestD" +
-      "eclareNode\022\021\n\tvalidator\030\001 \001(\010\"a\n\023Respons" +
-      "eDeclareNode\022#\n\004code\030\001 \001(\0162\025.forge_abi.S" +
-      "tatusCode\022%\n\006wallet\030\003 \001(\0132\025.forge_abi.Wa" +
-      "lletInfo\"G\n\026RequestGetAccountState\022\017\n\007ad" +
-      "dress\030\001 \001(\t\022\014\n\004keys\030\002 \003(\t\022\016\n\006height\030\003 \001(" +
-      "\004\"f\n\027ResponseGetAccountState\022#\n\004code\030\001 \001" +
-      "(\0162\025.forge_abi.StatusCode\022&\n\005state\030\002 \001(\013",
-      "2\027.forge_abi.AccountState\"E\n\024RequestGetA" +
-      "ssetState\022\017\n\007address\030\001 \001(\t\022\014\n\004keys\030\002 \003(\t" +
-      "\022\016\n\006height\030\003 \001(\004\"b\n\025ResponseGetAssetStat" +
-      "e\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022$" +
-      "\n\005state\030\002 \001(\0132\025.forge_abi.AssetState\"E\n\024" +
-      "RequestGetStakeState\022\017\n\007address\030\001 \001(\t\022\014\n" +
-      "\004keys\030\002 \003(\t\022\016\n\006height\030\003 \001(\004\"b\n\025ResponseG" +
-      "etStakeState\022#\n\004code\030\001 \001(\0162\025.forge_abi.S" +
-      "tatusCode\022$\n\005state\030\002 \001(\0132\025.forge_abi.Sta" +
-      "keState\"4\n\024RequestGetForgeState\022\014\n\004keys\030",
-      "\001 \003(\t\022\016\n\006height\030\003 \001(\004\"b\n\025ResponseGetForg" +
-      "eState\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusC" +
-      "ode\022$\n\005state\030\002 \001(\0132\025.forge_abi.ForgeStat" +
-      "e\"!\n\020RequestStoreFile\022\r\n\005chunk\030\001 \001(\014\"F\n\021" +
-      "ResponseStoreFile\022#\n\004code\030\001 \001(\0162\025.forge_" +
-      "abi.StatusCode\022\014\n\004hash\030\002 \001(\t\"\037\n\017RequestL" +
-      "oadFile\022\014\n\004hash\030\001 \001(\t\"F\n\020ResponseLoadFil" +
-      "e\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022\r" +
-      "\n\005chunk\030\002 \001(\014\"\036\n\016RequestPinFile\022\014\n\004hash\030" +
-      "\001 \001(\t\"6\n\017ResponsePinFile\022#\n\004code\030\001 \001(\0162\025",
-      ".forge_abi.StatusCode\"\025\n\023RequestGetChain" +
-      "Info\"_\n\024ResponseGetChainInfo\022#\n\004code\030\001 \001" +
-      "(\0162\025.forge_abi.StatusCode\022\"\n\004info\030\002 \001(\0132" +
-      "\024.forge_abi.ChainInfo\"\024\n\022RequestGetNodeI" +
-      "nfo\"]\n\023ResponseGetNodeInfo\022#\n\004code\030\001 \001(\016" +
-      "2\025.forge_abi.StatusCode\022!\n\004info\030\002 \001(\0132\023." +
-      "forge_abi.NodeInfo\"+\n\rRequestSearch\022\013\n\003k" +
-      "ey\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\"^\n\016ResponseSearc" +
-      "h\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022\'" +
-      "\n\003txs\030\002 \003(\0132\032.forge_abi.TransactionInfo\"",
-      ")\n\030RequestGetUnconfirmedTxs\022\r\n\005limit\030\001 \001" +
-      "(\r\"t\n\031ResponseGetUnconfirmedTxs\022#\n\004code\030" +
-      "\001 \001(\0162\025.forge_abi.StatusCode\0222\n\017unconfir" +
-      "med_txs\030\002 \001(\0132\031.forge_abi.UnconfirmedTxs" +
-      "\"\023\n\021RequestGetNetInfo\"_\n\022ResponseGetNetI" +
-      "nfo\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode" +
-      "\022$\n\010net_info\030\002 \001(\0132\022.forge_abi.NetInfo\"\032" +
-      "\n\030RequestGetValidatorsInfo\"t\n\031ResponseGe" +
-      "tValidatorsInfo\022#\n\004code\030\001 \001(\0162\025.forge_ab" +
-      "i.StatusCode\0222\n\017validators_info\030\002 \001(\0132\031.",
-      "forge_abi.ValidatorsInfo\"F\n\020RequestSubsc" +
-      "ribe\022\"\n\004type\030\001 \001(\0162\024.forge_abi.TopicType" +
-      "\022\016\n\006filter\030\002 \001(\t\"\246\007\n\021ResponseSubscribe\022#" +
-      "\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022\017\n\005t" +
-      "opic\030\002 \001(\tH\000\022*\n\010transfer\030\003 \001(\0132\026.forge_a" +
-      "bi.TransactionH\000\0221\n\017account_migrate\030\004 \001(" +
-      "\0132\026.forge_abi.TransactionH\000\022)\n\007confirm\030\005" +
-      " \001(\0132\026.forge_abi.TransactionH\000\022.\n\014create" +
-      "_asset\030\006 \001(\0132\026.forge_abi.TransactionH\000\022*" +
-      "\n\010exchange\030\007 \001(\0132\026.forge_abi.Transaction",
-      "H\000\022(\n\006revoke\030\010 \001(\0132\026.forge_abi.Transacti" +
-      "onH\000\0225\n\013begin_block\030\020 \001(\0132\036.abci_vendor." +
-      "RequestBeginBlockH\000\0221\n\tend_block\030\021 \001(\0132\034" +
-      ".abci_vendor.RequestEndBlockH\000\022)\n\007declar" +
-      "e\030\023 \001(\0132\026.forge_abi.TransactionH\000\022.\n\014upd" +
-      "ate_asset\030\024 \001(\0132\026.forge_abi.TransactionH" +
-      "\000\0223\n\021consensus_upgrade\030\025 \001(\0132\026.forge_abi" +
-      ".TransactionH\000\022.\n\014declare_file\030\026 \001(\0132\026.f" +
-      "orge_abi.TransactionH\000\022-\n\013sys_upgrade\030\027 " +
-      "\001(\0132\026.forge_abi.TransactionH\000\022\'\n\005stake\030\030",
-      " \001(\0132\026.forge_abi.TransactionH\000\0220\n\raccoun" +
-      "t_state\030\201\001 \001(\0132\026.forge_abi.TransactionH\000" +
-      "\022.\n\013asset_state\030\202\001 \001(\0132\026.forge_abi.Trans" +
-      "actionH\000\022.\n\013forge_state\030\203\001 \001(\0132\026.forge_a" +
-      "bi.TransactionH\000\022.\n\013stake_state\030\204\001 \001(\0132\026" +
-      ".forge_abi.TransactionH\000B\007\n\005value\"#\n\022Req" +
-      "uestUnsubscribe\022\r\n\005topic\030\001 \001(\t\":\n\023Respon" +
-      "seUnsubscribe\022#\n\004code\030\001 \001(\0162\025.forge_abi." +
-      "StatusCode\"\022\n\020RequestGetConfig\"H\n\021Respon" +
-      "seGetConfig\022#\n\004code\030\001 \001(\0162\025.forge_abi.St",
-      "atusCode\022\016\n\006config\030\002 \001(\t\"-\n\005ByDay\022\022\n\nsta" +
-      "rt_date\030\001 \001(\t\022\020\n\010end_date\030\002 \001(\t\"\026\n\006ByHou" +
-      "r\022\014\n\004date\030\001 \001(\t\"m\n\031RequestGetForgeStatis" +
-      "tics\022$\n\010day_info\030\001 \001(\0132\020.forge_abi.ByDay" +
-      "H\000\022!\n\004date\030\002 \001(\0132\021.forge_abi.ByHourH\000B\007\n" +
-      "\005value\"w\n\032ResponseGetForgeStatistics\022#\n\004" +
-      "code\030\001 \001(\0162\025.forge_abi.StatusCode\0224\n\020for" +
-      "ge_statistics\030\002 \001(\0132\032.forge_abi.ForgeSta" +
-      "tistics\"\311\001\n\027RequestListTransactions\022$\n\006p" +
-      "aging\030\001 \001(\0132\024.forge_abi.PageInput\022*\n\013tim",
-      "e_filter\030\002 \001(\0132\025.forge_abi.TimeFilter\0220\n" +
-      "\016address_filter\030\003 \001(\0132\030.forge_abi.Addres" +
-      "sFilter\022*\n\013type_filter\030\004 \001(\0132\025.forge_abi" +
-      ".TypeFilter\"\227\001\n\030ResponseListTransactions" +
-      "\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022!\n" +
-      "\004page\030\002 \001(\0132\023.forge_abi.PageInfo\0223\n\014tran" +
-      "sactions\030\003 \003(\0132\035.forge_abi.IndexedTransa" +
-      "ction\"\203\001\n\026RequestGetAssetAddress\022\026\n\016send" +
-      "er_address\030\001 \001(\t\022%\n\003itx\030\002 \001(\0132\030.forge_ab" +
-      "i.CreateAssetTx\022*\n\013wallet_type\030\003 \001(\0132\025.f",
-      "orge_abi.WalletType\"U\n\027ResponseGetAssetA" +
-      "ddress\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusC" +
-      "ode\022\025\n\rasset_address\030\002 \001(\t\"U\n\017RequestSig" +
-      "nData\022\014\n\004data\030\001 \001(\014\022%\n\006wallet\030\002 \001(\0132\025.fo" +
-      "rge_abi.WalletInfo\022\r\n\005token\030\003 \001(\t\"J\n\020Res" +
-      "ponseSignData\022#\n\004code\030\001 \001(\0162\025.forge_abi." +
-      "StatusCode\022\021\n\tsignature\030\002 \001(\014\"O\n\020Request" +
-      "GetAssets\022$\n\006paging\030\001 \001(\0132\024.forge_abi.Pa" +
-      "geInput\022\025\n\rowner_address\030\002 \001(\t\"\211\001\n\021Respo" +
-      "nseGetAssets\022#\n\004code\030\001 \001(\0162\025.forge_abi.S",
-      "tatusCode\022!\n\004page\030\002 \001(\0132\023.forge_abi.Page" +
-      "Info\022,\n\006assets\030\003 \003(\0132\034.forge_abi.Indexed" +
-      "AssetState\"j\n\020RequestGetStakes\022$\n\006paging" +
-      "\030\001 \001(\0132\024.forge_abi.PageInput\0220\n\016address_" +
-      "filter\030\002 \001(\0132\030.forge_abi.AddressFilter\"\211" +
-      "\001\n\021ResponseGetStakes\022#\n\004code\030\001 \001(\0162\025.for" +
-      "ge_abi.StatusCode\022!\n\004page\030\002 \001(\0132\023.forge_" +
-      "abi.PageInfo\022,\n\006stakes\030\003 \003(\0132\034.forge_abi" +
-      ".IndexedStakeState\"=\n\025RequestGetTopAccou" +
-      "nts\022$\n\006paging\030\001 \001(\0132\024.forge_abi.PageInpu",
-      "t\"\222\001\n\026ResponseGetTopAccounts\022#\n\004code\030\001 \001" +
-      "(\0162\025.forge_abi.StatusCode\022!\n\004page\030\002 \001(\0132" +
-      "\023.forge_abi.PageInfo\0220\n\010accounts\030\003 \003(\0132\036" +
-      ".forge_abi.IndexedAccountState\"U\n\034Reques" +
-      "tListAssetTransactions\022$\n\006paging\030\001 \001(\0132\024" +
-      ".forge_abi.PageInput\022\017\n\007address\030\002 \001(\t\"\234\001" +
-      "\n\035ResponseListAssetTransactions\022#\n\004code\030" +
+      "e.proto\032\013state.proto\032\020trace_type.proto\"\207" +
+      "\001\n\017RequestCreateTx\022!\n\003itx\030\001 \001(\0132\024.google" +
+      ".protobuf.Any\022\014\n\004from\030\002 \001(\t\022\r\n\005nonce\030\003 \001" +
+      "(\004\022%\n\006wallet\030\004 \001(\0132\025.forge_abi.WalletInf" +
+      "o\022\r\n\005token\030\005 \001(\t\"[\n\020ResponseCreateTx\022#\n\004" +
+      "code\030\001 \001(\0162\025.forge_abi.StatusCode\022\"\n\002tx\030" +
+      "\002 \001(\0132\026.forge_abi.Transaction\"\217\001\n\017Reques" +
+      "tMultisig\022\"\n\002tx\030\001 \001(\0132\026.forge_abi.Transa",
+      "ction\022\"\n\004data\030\002 \001(\0132\024.google.protobuf.An" +
+      "y\022%\n\006wallet\030\003 \001(\0132\025.forge_abi.WalletInfo" +
+      "\022\r\n\005token\030\004 \001(\t\"[\n\020ResponseMultisig\022#\n\004c" +
+      "ode\030\001 \001(\0162\025.forge_abi.StatusCode\022\"\n\002tx\030\002" +
+      " \001(\0132\026.forge_abi.Transaction\"y\n\rRequestS" +
+      "endTx\022\"\n\002tx\030\001 \001(\0132\026.forge_abi.Transactio" +
+      "n\022%\n\006wallet\030\002 \001(\0132\025.forge_abi.WalletInfo" +
+      "\022\r\n\005token\030\003 \001(\t\022\016\n\006commit\030\004 \001(\010\"C\n\016Respo" +
+      "nseSendTx\022#\n\004code\030\001 \001(\0162\025.forge_abi.Stat" +
+      "usCode\022\014\n\004hash\030\002 \001(\t\"\034\n\014RequestGetTx\022\014\n\004",
+      "hash\030\001 \001(\t\"^\n\rResponseGetTx\022#\n\004code\030\001 \001(" +
+      "\0162\025.forge_abi.StatusCode\022(\n\004info\030\002 \001(\0132\032" +
+      ".forge_abi.TransactionInfo\"!\n\017RequestGet" +
+      "Block\022\016\n\006height\030\001 \001(\004\"\\\n\020ResponseGetBloc" +
+      "k\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022#" +
+      "\n\005block\030\002 \001(\0132\024.forge_abi.BlockInfo\"\177\n\020R" +
+      "equestGetBlocks\022$\n\006paging\030\001 \001(\0132\024.forge_" +
+      "abi.PageInput\022-\n\rheight_filter\030\002 \001(\0132\026.f" +
+      "orge_abi.RangeFilter\022\026\n\016empty_excluded\030\003" +
+      " \001(\010\"\207\001\n\021ResponseGetBlocks\022#\n\004code\030\001 \001(\016",
+      "2\025.forge_abi.StatusCode\022!\n\004page\030\002 \001(\0132\023." +
+      "forge_abi.PageInfo\022*\n\006blocks\030\003 \003(\0132\032.for" +
+      "ge_abi.BlockInfoSimple\"_\n\023RequestCreateW" +
+      "allet\022\022\n\npassphrase\030\001 \001(\t\022#\n\004type\030\002 \001(\0132" +
+      "\025.forge_abi.WalletType\022\017\n\007moniker\030\003 \001(\t\"" +
+      "q\n\024ResponseCreateWallet\022#\n\004code\030\001 \001(\0162\025." +
+      "forge_abi.StatusCode\022\r\n\005token\030\002 \001(\t\022%\n\006w" +
+      "allet\030\003 \001(\0132\025.forge_abi.WalletInfo\"8\n\021Re" +
+      "questLoadWallet\022\017\n\007address\030\001 \001(\t\022\022\n\npass" +
+      "phrase\030\002 \001(\t\"o\n\022ResponseLoadWallet\022#\n\004co",
+      "de\030\001 \001(\0162\025.forge_abi.StatusCode\022\r\n\005token" +
+      "\030\002 \001(\t\022%\n\006wallet\030\003 \001(\0132\025.forge_abi.Walle" +
+      "tInfo\"n\n\024RequestRecoverWallet\022\014\n\004data\030\001 " +
+      "\001(\014\022#\n\004type\030\002 \001(\0132\025.forge_abi.WalletType" +
+      "\022\022\n\npassphrase\030\003 \001(\t\022\017\n\007moniker\030\004 \001(\t\"r\n" +
+      "\025ResponseRecoverWallet\022#\n\004code\030\001 \001(\0162\025.f" +
+      "orge_abi.StatusCode\022\r\n\005token\030\002 \001(\t\022%\n\006wa" +
+      "llet\030\003 \001(\0132\025.forge_abi.WalletInfo\"\023\n\021Req" +
+      "uestListWallet\"J\n\022ResponseListWallet\022#\n\004" +
+      "code\030\001 \001(\0162\025.forge_abi.StatusCode\022\017\n\007add",
+      "ress\030\002 \001(\t\"&\n\023RequestRemoveWallet\022\017\n\007add" +
+      "ress\030\001 \001(\t\";\n\024ResponseRemoveWallet\022#\n\004co" +
+      "de\030\001 \001(\0162\025.forge_abi.StatusCode\"\'\n\022Reque" +
+      "stDeclareNode\022\021\n\tvalidator\030\001 \001(\010\"a\n\023Resp" +
+      "onseDeclareNode\022#\n\004code\030\001 \001(\0162\025.forge_ab" +
+      "i.StatusCode\022%\n\006wallet\030\003 \001(\0132\025.forge_abi" +
+      ".WalletInfo\"G\n\026RequestGetAccountState\022\017\n" +
+      "\007address\030\001 \001(\t\022\014\n\004keys\030\002 \003(\t\022\016\n\006height\030\003" +
+      " \001(\004\"f\n\027ResponseGetAccountState\022#\n\004code\030" +
+      "\001 \001(\0162\025.forge_abi.StatusCode\022&\n\005state\030\002 ",
+      "\001(\0132\027.forge_abi.AccountState\"E\n\024RequestG" +
+      "etAssetState\022\017\n\007address\030\001 \001(\t\022\014\n\004keys\030\002 " +
+      "\003(\t\022\016\n\006height\030\003 \001(\004\"b\n\025ResponseGetAssetS" +
+      "tate\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCod" +
+      "e\022$\n\005state\030\002 \001(\0132\025.forge_abi.AssetState\"" +
+      "H\n\027RequestGetProtocolState\022\017\n\007address\030\001 " +
+      "\001(\t\022\014\n\004keys\030\002 \003(\t\022\016\n\006height\030\003 \001(\004\"h\n\030Res" +
+      "ponseGetProtocolState\022#\n\004code\030\001 \001(\0162\025.fo" +
+      "rge_abi.StatusCode\022\'\n\005state\030\002 \001(\0132\030.forg" +
+      "e_abi.ProtocolState\"E\n\024RequestGetStakeSt",
+      "ate\022\017\n\007address\030\001 \001(\t\022\014\n\004keys\030\002 \003(\t\022\016\n\006he" +
+      "ight\030\003 \001(\004\"b\n\025ResponseGetStakeState\022#\n\004c" +
+      "ode\030\001 \001(\0162\025.forge_abi.StatusCode\022$\n\005stat" +
+      "e\030\002 \001(\0132\025.forge_abi.StakeState\"4\n\024Reques" +
+      "tGetForgeState\022\014\n\004keys\030\001 \003(\t\022\016\n\006height\030\003" +
+      " \001(\004\"b\n\025ResponseGetForgeState\022#\n\004code\030\001 " +
+      "\001(\0162\025.forge_abi.StatusCode\022$\n\005state\030\002 \001(" +
+      "\0132\025.forge_abi.ForgeState\"B\n\024RequestGetTe" +
+      "therInfo\022\014\n\004hash\030\001 \001(\t\022\014\n\004keys\030\002 \003(\t\022\016\n\006" +
+      "height\030\003 \001(\004\"a\n\025ResponseGetTetherInfo\022#\n",
+      "\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022#\n\004in" +
+      "fo\030\002 \001(\0132\025.forge_abi.TetherInfo\"!\n\020Reque" +
+      "stStoreFile\022\r\n\005chunk\030\001 \001(\014\"F\n\021ResponseSt" +
+      "oreFile\022#\n\004code\030\001 \001(\0162\025.forge_abi.Status" +
+      "Code\022\014\n\004hash\030\002 \001(\t\"\037\n\017RequestLoadFile\022\014\n" +
+      "\004hash\030\001 \001(\t\"F\n\020ResponseLoadFile\022#\n\004code\030" +
+      "\001 \001(\0162\025.forge_abi.StatusCode\022\r\n\005chunk\030\002 " +
+      "\001(\014\"\036\n\016RequestPinFile\022\014\n\004hash\030\001 \001(\t\"6\n\017R" +
+      "esponsePinFile\022#\n\004code\030\001 \001(\0162\025.forge_abi" +
+      ".StatusCode\"\025\n\023RequestGetChainInfo\"_\n\024Re",
+      "sponseGetChainInfo\022#\n\004code\030\001 \001(\0162\025.forge" +
+      "_abi.StatusCode\022\"\n\004info\030\002 \001(\0132\024.forge_ab" +
+      "i.ChainInfo\"\024\n\022RequestGetNodeInfo\"]\n\023Res" +
+      "ponseGetNodeInfo\022#\n\004code\030\001 \001(\0162\025.forge_a" +
+      "bi.StatusCode\022!\n\004info\030\002 \001(\0132\023.forge_abi." +
+      "NodeInfo\"+\n\rRequestSearch\022\013\n\003key\030\001 \001(\t\022\r" +
+      "\n\005value\030\002 \001(\t\"^\n\016ResponseSearch\022#\n\004code\030" +
+      "\001 \001(\0162\025.forge_abi.StatusCode\022\'\n\003txs\030\002 \003(" +
+      "\0132\032.forge_abi.TransactionInfo\"@\n\030Request" +
+      "GetUnconfirmedTxs\022$\n\006paging\030\001 \001(\0132\024.forg",
+      "e_abi.PageInput\"\227\001\n\031ResponseGetUnconfirm" +
+      "edTxs\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCo" +
+      "de\022!\n\004page\030\002 \001(\0132\023.forge_abi.PageInfo\0222\n" +
+      "\017unconfirmed_txs\030\003 \001(\0132\031.forge_abi.Uncon" +
+      "firmedTxs\"\023\n\021RequestGetNetInfo\"_\n\022Respon" +
+      "seGetNetInfo\022#\n\004code\030\001 \001(\0162\025.forge_abi.S" +
+      "tatusCode\022$\n\010net_info\030\002 \001(\0132\022.forge_abi." +
+      "NetInfo\"\032\n\030RequestGetValidatorsInfo\"t\n\031R" +
+      "esponseGetValidatorsInfo\022#\n\004code\030\001 \001(\0162\025" +
+      ".forge_abi.StatusCode\0222\n\017validators_info",
+      "\030\002 \001(\0132\031.forge_abi.ValidatorsInfo\"1\n\020Req" +
+      "uestSubscribe\022\r\n\005topic\030\001 \001(\t\022\016\n\006filter\030\002" +
+      " \001(\t\"\331\007\n\021ResponseSubscribe\022#\n\004code\030\001 \001(\016" +
+      "2\025.forge_abi.StatusCode\022\017\n\005topic\030\002 \001(\tH\000" +
+      "\022*\n\010transfer\030\003 \001(\0132\026.forge_abi.Transacti" +
+      "onH\000\0221\n\017account_migrate\030\004 \001(\0132\026.forge_ab" +
+      "i.TransactionH\000\022)\n\007confirm\030\005 \001(\0132\026.forge" +
+      "_abi.TransactionH\000\022.\n\014create_asset\030\006 \001(\013" +
+      "2\026.forge_abi.TransactionH\000\022*\n\010exchange\030\007" +
+      " \001(\0132\026.forge_abi.TransactionH\000\022(\n\006revoke",
+      "\030\010 \001(\0132\026.forge_abi.TransactionH\000\0225\n\013begi" +
+      "n_block\030\020 \001(\0132\036.abci_vendor.RequestBegin" +
+      "BlockH\000\0221\n\tend_block\030\021 \001(\0132\034.abci_vendor" +
+      ".RequestEndBlockH\000\022)\n\007declare\030\023 \001(\0132\026.fo" +
+      "rge_abi.TransactionH\000\022.\n\014update_asset\030\024 " +
+      "\001(\0132\026.forge_abi.TransactionH\000\0223\n\021consens" +
+      "us_upgrade\030\025 \001(\0132\026.forge_abi.Transaction" +
+      "H\000\022.\n\014declare_file\030\026 \001(\0132\026.forge_abi.Tra" +
+      "nsactionH\000\022-\n\013sys_upgrade\030\027 \001(\0132\026.forge_" +
+      "abi.TransactionH\000\022\'\n\005stake\030\030 \001(\0132\026.forge",
+      "_abi.TransactionH\000\0221\n\raccount_state\030\201\001 \001" +
+      "(\0132\027.forge_abi.AccountStateH\000\022-\n\013asset_s" +
+      "tate\030\202\001 \001(\0132\025.forge_abi.AssetStateH\000\022-\n\013" +
+      "forge_state\030\203\001 \001(\0132\025.forge_abi.ForgeStat" +
+      "eH\000\022-\n\013stake_state\030\204\001 \001(\0132\025.forge_abi.St" +
+      "akeStateH\000\0223\n\016protocol_state\030\205\001 \001(\0132\030.fo" +
+      "rge_abi.ProtocolStateH\000B\007\n\005value\"#\n\022Requ" +
+      "estUnsubscribe\022\r\n\005topic\030\001 \001(\t\":\n\023Respons" +
+      "eUnsubscribe\022#\n\004code\030\001 \001(\0162\025.forge_abi.S" +
+      "tatusCode\"\022\n\020RequestGetConfig\"H\n\021Respons",
+      "eGetConfig\022#\n\004code\030\001 \001(\0162\025.forge_abi.Sta" +
+      "tusCode\022\016\n\006config\030\002 \001(\t\"-\n\005ByDay\022\022\n\nstar" +
+      "t_date\030\001 \001(\t\022\020\n\010end_date\030\002 \001(\t\"\026\n\006ByHour" +
+      "\022\014\n\004date\030\001 \001(\t\"h\n\024RequestGetForgeStats\022$" +
+      "\n\010day_info\030\001 \001(\0132\020.forge_abi.ByDayH\000\022!\n\004" +
+      "date\030\002 \001(\0132\021.forge_abi.ByHourH\000B\007\n\005value" +
+      "\"h\n\025ResponseGetForgeStats\022#\n\004code\030\001 \001(\0162" +
+      "\025.forge_abi.StatusCode\022*\n\013forge_stats\030\002 " +
+      "\001(\0132\025.forge_abi.ForgeStats\"\375\001\n\027RequestLi" +
+      "stTransactions\022$\n\006paging\030\001 \001(\0132\024.forge_a",
+      "bi.PageInput\022*\n\013time_filter\030\002 \001(\0132\025.forg" +
+      "e_abi.TimeFilter\0220\n\016address_filter\030\003 \001(\013" +
+      "2\030.forge_abi.AddressFilter\022*\n\013type_filte" +
+      "r\030\004 \001(\0132\025.forge_abi.TypeFilter\0222\n\017validi" +
+      "ty_filter\030\005 \001(\0132\031.forge_abi.ValidityFilt" +
+      "er\"\227\001\n\030ResponseListTransactions\022#\n\004code\030" +
       "\001 \001(\0162\025.forge_abi.StatusCode\022!\n\004page\030\002 \001" +
       "(\0132\023.forge_abi.PageInfo\0223\n\014transactions\030" +
-      "\003 \003(\0132\035.forge_abi.IndexedTransaction\"\230\002\n",
-      "\021RequestListBlocks\022$\n\006paging\030\001 \001(\0132\024.for" +
-      "ge_abi.PageInput\022\020\n\010proposer\030\002 \001(\t\022*\n\013ti" +
-      "me_filter\030\003 \001(\0132\025.forge_abi.TimeFilter\022." +
-      "\n\rheight_filter\030\004 \001(\0132\027.forge_abi.Height" +
-      "Filter\022/\n\016num_txs_filter\030\005 \001(\0132\027.forge_a" +
-      "bi.NumTxsFilter\022>\n\026num_invalid_txs_filte" +
-      "r\030\006 \001(\0132\036.forge_abi.NumInvalidTxsFilter\"" +
-      "\205\001\n\022ResponseListBlocks\022#\n\004code\030\001 \001(\0162\025.f" +
-      "orge_abi.StatusCode\022!\n\004page\030\002 \001(\0132\023.forg" +
-      "e_abi.PageInfo\022\'\n\006blocks\030\003 \003(\0132\027.forge_a",
-      "bi.IndexedBlock\"P\n\021RequestListAssets\022$\n\006" +
-      "paging\030\001 \001(\0132\024.forge_abi.PageInput\022\025\n\row" +
-      "ner_address\030\002 \001(\t\"\273\001\n\022ResponseListAssets" +
-      "\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022!\n" +
-      "\004page\030\002 \001(\0132\023.forge_abi.PageInfo\022/\n\007acco" +
-      "unt\030\003 \001(\0132\036.forge_abi.IndexedAccountStat" +
-      "e\022,\n\006assets\030\004 \003(\0132\034.forge_abi.IndexedAss" +
-      "etState\"\030\n\026RequestGetHealthStatus\"n\n\027Res" +
-      "ponseGetHealthStatus\022#\n\004code\030\001 \001(\0162\025.for" +
-      "ge_abi.StatusCode\022.\n\rhealth_status\030\002 \001(\013",
-      "2\027.forge_abi.HealthStatus\"\027\n\025RequestStar" +
-      "tSimulator\"M\n\026ResponseStartSimulator\022#\n\004" +
-      "code\030\001 \001(\0162\025.forge_abi.StatusCode\022\016\n\006res" +
-      "ult\030\002 \001(\t\"\026\n\024RequestStopSimulator\"L\n\025Res" +
-      "ponseStopSimulator\022#\n\004code\030\001 \001(\0162\025.forge" +
-      "_abi.StatusCode\022\016\n\006result\030\002 \001(\t\"\033\n\031Reque" +
-      "stGetSimulatorStatus\"Q\n\032ResponseGetSimul" +
-      "atorStatus\022#\n\004code\030\001 \001(\0162\025.forge_abi.Sta" +
-      "tusCode\022\016\n\006result\030\002 \001(\tb\006proto3"
+      "\003 \003(\0132\035.forge_abi.IndexedTransaction\"P\n\021" +
+      "RequestListAssets\022$\n\006paging\030\001 \001(\0132\024.forg",
+      "e_abi.PageInput\022\025\n\rowner_address\030\002 \001(\t\"\212" +
+      "\001\n\022ResponseListAssets\022#\n\004code\030\001 \001(\0162\025.fo" +
+      "rge_abi.StatusCode\022!\n\004page\030\002 \001(\0132\023.forge" +
+      "_abi.PageInfo\022,\n\006assets\030\003 \003(\0132\034.forge_ab" +
+      "i.IndexedAssetState\"k\n\021RequestListStakes" +
+      "\022$\n\006paging\030\001 \001(\0132\024.forge_abi.PageInput\0220" +
+      "\n\016address_filter\030\002 \001(\0132\030.forge_abi.Addre" +
+      "ssFilter\"\212\001\n\022ResponseListStakes\022#\n\004code\030" +
+      "\001 \001(\0162\025.forge_abi.StatusCode\022!\n\004page\030\002 \001" +
+      "(\0132\023.forge_abi.PageInfo\022,\n\006stakes\030\003 \003(\0132",
+      "\034.forge_abi.IndexedStakeState\"+\n\022Request" +
+      "ListAccount\022\025\n\rowner_address\030\001 \001(\t\"k\n\023Re" +
+      "sponseListAccount\022#\n\004code\030\001 \001(\0162\025.forge_" +
+      "abi.StatusCode\022/\n\007account\030\002 \001(\0132\036.forge_" +
+      "abi.IndexedAccountState\">\n\026RequestListTo" +
+      "pAccounts\022$\n\006paging\030\001 \001(\0132\024.forge_abi.Pa" +
+      "geInput\"\223\001\n\027ResponseListTopAccounts\022#\n\004c" +
+      "ode\030\001 \001(\0162\025.forge_abi.StatusCode\022!\n\004page" +
+      "\030\002 \001(\0132\023.forge_abi.PageInfo\0220\n\010accounts\030" +
+      "\003 \003(\0132\036.forge_abi.IndexedAccountState\"U\n",
+      "\034RequestListAssetTransactions\022$\n\006paging\030" +
+      "\001 \001(\0132\024.forge_abi.PageInput\022\017\n\007address\030\002" +
+      " \001(\t\"\234\001\n\035ResponseListAssetTransactions\022#" +
+      "\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022!\n\004p" +
+      "age\030\002 \001(\0132\023.forge_abi.PageInfo\0223\n\014transa" +
+      "ctions\030\003 \003(\0132\035.forge_abi.IndexedTransact" +
+      "ion\"\216\002\n\021RequestListBlocks\022$\n\006paging\030\001 \001(" +
+      "\0132\024.forge_abi.PageInput\022\020\n\010proposer\030\002 \001(" +
+      "\t\022*\n\013time_filter\030\003 \001(\0132\025.forge_abi.TimeF" +
+      "ilter\022-\n\rheight_filter\030\004 \001(\0132\026.forge_abi",
+      ".RangeFilter\022.\n\016num_txs_filter\030\005 \001(\0132\026.f" +
+      "orge_abi.RangeFilter\0226\n\026num_invalid_txs_" +
+      "filter\030\006 \001(\0132\026.forge_abi.RangeFilter\"\205\001\n" +
+      "\022ResponseListBlocks\022#\n\004code\030\001 \001(\0162\025.forg" +
+      "e_abi.StatusCode\022!\n\004page\030\002 \001(\0132\023.forge_a" +
+      "bi.PageInfo\022\'\n\006blocks\030\003 \003(\0132\027.forge_abi." +
+      "IndexedBlock\"\030\n\026RequestGetHealthStatus\"n" +
+      "\n\027ResponseGetHealthStatus\022#\n\004code\030\001 \001(\0162" +
+      "\025.forge_abi.StatusCode\022.\n\rhealth_status\030" +
+      "\002 \001(\0132\027.forge_abi.HealthStatusb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -62359,7 +59564,6 @@ public final class Rpc {
           forge_abi.Enum.getDescriptor(),
           forge_abi.Type.getDescriptor(),
           forge_abi.State.getDescriptor(),
-          forge_abi.Tx.getDescriptor(),
           forge_abi.TraceType.getDescriptor(),
         }, assigner);
     internal_static_forge_abi_RequestCreateTx_descriptor =
@@ -62427,7 +59631,7 @@ public final class Rpc {
     internal_static_forge_abi_RequestGetBlocks_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestGetBlocks_descriptor,
-        new java.lang.String[] { "Paging", "MinHeight", "MaxHeight", "EmptyExcluded", });
+        new java.lang.String[] { "Paging", "HeightFilter", "EmptyExcluded", });
     internal_static_forge_abi_ResponseGetBlocks_descriptor =
       getDescriptor().getMessageTypes().get(11);
     internal_static_forge_abi_ResponseGetBlocks_fieldAccessorTable = new
@@ -62530,306 +59734,306 @@ public final class Rpc {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseGetAssetState_descriptor,
         new java.lang.String[] { "Code", "State", });
-    internal_static_forge_abi_RequestGetStakeState_descriptor =
+    internal_static_forge_abi_RequestGetProtocolState_descriptor =
       getDescriptor().getMessageTypes().get(28);
+    internal_static_forge_abi_RequestGetProtocolState_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_RequestGetProtocolState_descriptor,
+        new java.lang.String[] { "Address", "Keys", "Height", });
+    internal_static_forge_abi_ResponseGetProtocolState_descriptor =
+      getDescriptor().getMessageTypes().get(29);
+    internal_static_forge_abi_ResponseGetProtocolState_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_ResponseGetProtocolState_descriptor,
+        new java.lang.String[] { "Code", "State", });
+    internal_static_forge_abi_RequestGetStakeState_descriptor =
+      getDescriptor().getMessageTypes().get(30);
     internal_static_forge_abi_RequestGetStakeState_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestGetStakeState_descriptor,
         new java.lang.String[] { "Address", "Keys", "Height", });
     internal_static_forge_abi_ResponseGetStakeState_descriptor =
-      getDescriptor().getMessageTypes().get(29);
+      getDescriptor().getMessageTypes().get(31);
     internal_static_forge_abi_ResponseGetStakeState_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseGetStakeState_descriptor,
         new java.lang.String[] { "Code", "State", });
     internal_static_forge_abi_RequestGetForgeState_descriptor =
-      getDescriptor().getMessageTypes().get(30);
+      getDescriptor().getMessageTypes().get(32);
     internal_static_forge_abi_RequestGetForgeState_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestGetForgeState_descriptor,
         new java.lang.String[] { "Keys", "Height", });
     internal_static_forge_abi_ResponseGetForgeState_descriptor =
-      getDescriptor().getMessageTypes().get(31);
+      getDescriptor().getMessageTypes().get(33);
     internal_static_forge_abi_ResponseGetForgeState_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseGetForgeState_descriptor,
         new java.lang.String[] { "Code", "State", });
+    internal_static_forge_abi_RequestGetTetherInfo_descriptor =
+      getDescriptor().getMessageTypes().get(34);
+    internal_static_forge_abi_RequestGetTetherInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_RequestGetTetherInfo_descriptor,
+        new java.lang.String[] { "Hash", "Keys", "Height", });
+    internal_static_forge_abi_ResponseGetTetherInfo_descriptor =
+      getDescriptor().getMessageTypes().get(35);
+    internal_static_forge_abi_ResponseGetTetherInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_ResponseGetTetherInfo_descriptor,
+        new java.lang.String[] { "Code", "Info", });
     internal_static_forge_abi_RequestStoreFile_descriptor =
-      getDescriptor().getMessageTypes().get(32);
+      getDescriptor().getMessageTypes().get(36);
     internal_static_forge_abi_RequestStoreFile_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestStoreFile_descriptor,
         new java.lang.String[] { "Chunk", });
     internal_static_forge_abi_ResponseStoreFile_descriptor =
-      getDescriptor().getMessageTypes().get(33);
+      getDescriptor().getMessageTypes().get(37);
     internal_static_forge_abi_ResponseStoreFile_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseStoreFile_descriptor,
         new java.lang.String[] { "Code", "Hash", });
     internal_static_forge_abi_RequestLoadFile_descriptor =
-      getDescriptor().getMessageTypes().get(34);
+      getDescriptor().getMessageTypes().get(38);
     internal_static_forge_abi_RequestLoadFile_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestLoadFile_descriptor,
         new java.lang.String[] { "Hash", });
     internal_static_forge_abi_ResponseLoadFile_descriptor =
-      getDescriptor().getMessageTypes().get(35);
+      getDescriptor().getMessageTypes().get(39);
     internal_static_forge_abi_ResponseLoadFile_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseLoadFile_descriptor,
         new java.lang.String[] { "Code", "Chunk", });
     internal_static_forge_abi_RequestPinFile_descriptor =
-      getDescriptor().getMessageTypes().get(36);
+      getDescriptor().getMessageTypes().get(40);
     internal_static_forge_abi_RequestPinFile_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestPinFile_descriptor,
         new java.lang.String[] { "Hash", });
     internal_static_forge_abi_ResponsePinFile_descriptor =
-      getDescriptor().getMessageTypes().get(37);
+      getDescriptor().getMessageTypes().get(41);
     internal_static_forge_abi_ResponsePinFile_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponsePinFile_descriptor,
         new java.lang.String[] { "Code", });
     internal_static_forge_abi_RequestGetChainInfo_descriptor =
-      getDescriptor().getMessageTypes().get(38);
+      getDescriptor().getMessageTypes().get(42);
     internal_static_forge_abi_RequestGetChainInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestGetChainInfo_descriptor,
         new java.lang.String[] { });
     internal_static_forge_abi_ResponseGetChainInfo_descriptor =
-      getDescriptor().getMessageTypes().get(39);
+      getDescriptor().getMessageTypes().get(43);
     internal_static_forge_abi_ResponseGetChainInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseGetChainInfo_descriptor,
         new java.lang.String[] { "Code", "Info", });
     internal_static_forge_abi_RequestGetNodeInfo_descriptor =
-      getDescriptor().getMessageTypes().get(40);
+      getDescriptor().getMessageTypes().get(44);
     internal_static_forge_abi_RequestGetNodeInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestGetNodeInfo_descriptor,
         new java.lang.String[] { });
     internal_static_forge_abi_ResponseGetNodeInfo_descriptor =
-      getDescriptor().getMessageTypes().get(41);
+      getDescriptor().getMessageTypes().get(45);
     internal_static_forge_abi_ResponseGetNodeInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseGetNodeInfo_descriptor,
         new java.lang.String[] { "Code", "Info", });
     internal_static_forge_abi_RequestSearch_descriptor =
-      getDescriptor().getMessageTypes().get(42);
+      getDescriptor().getMessageTypes().get(46);
     internal_static_forge_abi_RequestSearch_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestSearch_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_forge_abi_ResponseSearch_descriptor =
-      getDescriptor().getMessageTypes().get(43);
+      getDescriptor().getMessageTypes().get(47);
     internal_static_forge_abi_ResponseSearch_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseSearch_descriptor,
         new java.lang.String[] { "Code", "Txs", });
     internal_static_forge_abi_RequestGetUnconfirmedTxs_descriptor =
-      getDescriptor().getMessageTypes().get(44);
+      getDescriptor().getMessageTypes().get(48);
     internal_static_forge_abi_RequestGetUnconfirmedTxs_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestGetUnconfirmedTxs_descriptor,
-        new java.lang.String[] { "Limit", });
+        new java.lang.String[] { "Paging", });
     internal_static_forge_abi_ResponseGetUnconfirmedTxs_descriptor =
-      getDescriptor().getMessageTypes().get(45);
+      getDescriptor().getMessageTypes().get(49);
     internal_static_forge_abi_ResponseGetUnconfirmedTxs_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseGetUnconfirmedTxs_descriptor,
-        new java.lang.String[] { "Code", "UnconfirmedTxs", });
+        new java.lang.String[] { "Code", "Page", "UnconfirmedTxs", });
     internal_static_forge_abi_RequestGetNetInfo_descriptor =
-      getDescriptor().getMessageTypes().get(46);
+      getDescriptor().getMessageTypes().get(50);
     internal_static_forge_abi_RequestGetNetInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestGetNetInfo_descriptor,
         new java.lang.String[] { });
     internal_static_forge_abi_ResponseGetNetInfo_descriptor =
-      getDescriptor().getMessageTypes().get(47);
+      getDescriptor().getMessageTypes().get(51);
     internal_static_forge_abi_ResponseGetNetInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseGetNetInfo_descriptor,
         new java.lang.String[] { "Code", "NetInfo", });
     internal_static_forge_abi_RequestGetValidatorsInfo_descriptor =
-      getDescriptor().getMessageTypes().get(48);
+      getDescriptor().getMessageTypes().get(52);
     internal_static_forge_abi_RequestGetValidatorsInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestGetValidatorsInfo_descriptor,
         new java.lang.String[] { });
     internal_static_forge_abi_ResponseGetValidatorsInfo_descriptor =
-      getDescriptor().getMessageTypes().get(49);
+      getDescriptor().getMessageTypes().get(53);
     internal_static_forge_abi_ResponseGetValidatorsInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseGetValidatorsInfo_descriptor,
         new java.lang.String[] { "Code", "ValidatorsInfo", });
     internal_static_forge_abi_RequestSubscribe_descriptor =
-      getDescriptor().getMessageTypes().get(50);
+      getDescriptor().getMessageTypes().get(54);
     internal_static_forge_abi_RequestSubscribe_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestSubscribe_descriptor,
-        new java.lang.String[] { "Type", "Filter", });
+        new java.lang.String[] { "Topic", "Filter", });
     internal_static_forge_abi_ResponseSubscribe_descriptor =
-      getDescriptor().getMessageTypes().get(51);
+      getDescriptor().getMessageTypes().get(55);
     internal_static_forge_abi_ResponseSubscribe_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseSubscribe_descriptor,
-        new java.lang.String[] { "Code", "Topic", "Transfer", "AccountMigrate", "Confirm", "CreateAsset", "Exchange", "Revoke", "BeginBlock", "EndBlock", "Declare", "UpdateAsset", "ConsensusUpgrade", "DeclareFile", "SysUpgrade", "Stake", "AccountState", "AssetState", "ForgeState", "StakeState", "Value", });
+        new java.lang.String[] { "Code", "Topic", "Transfer", "AccountMigrate", "Confirm", "CreateAsset", "Exchange", "Revoke", "BeginBlock", "EndBlock", "Declare", "UpdateAsset", "ConsensusUpgrade", "DeclareFile", "SysUpgrade", "Stake", "AccountState", "AssetState", "ForgeState", "StakeState", "ProtocolState", "Value", });
     internal_static_forge_abi_RequestUnsubscribe_descriptor =
-      getDescriptor().getMessageTypes().get(52);
+      getDescriptor().getMessageTypes().get(56);
     internal_static_forge_abi_RequestUnsubscribe_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestUnsubscribe_descriptor,
         new java.lang.String[] { "Topic", });
     internal_static_forge_abi_ResponseUnsubscribe_descriptor =
-      getDescriptor().getMessageTypes().get(53);
+      getDescriptor().getMessageTypes().get(57);
     internal_static_forge_abi_ResponseUnsubscribe_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseUnsubscribe_descriptor,
         new java.lang.String[] { "Code", });
     internal_static_forge_abi_RequestGetConfig_descriptor =
-      getDescriptor().getMessageTypes().get(54);
+      getDescriptor().getMessageTypes().get(58);
     internal_static_forge_abi_RequestGetConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestGetConfig_descriptor,
         new java.lang.String[] { });
     internal_static_forge_abi_ResponseGetConfig_descriptor =
-      getDescriptor().getMessageTypes().get(55);
+      getDescriptor().getMessageTypes().get(59);
     internal_static_forge_abi_ResponseGetConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseGetConfig_descriptor,
         new java.lang.String[] { "Code", "Config", });
     internal_static_forge_abi_ByDay_descriptor =
-      getDescriptor().getMessageTypes().get(56);
+      getDescriptor().getMessageTypes().get(60);
     internal_static_forge_abi_ByDay_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ByDay_descriptor,
         new java.lang.String[] { "StartDate", "EndDate", });
     internal_static_forge_abi_ByHour_descriptor =
-      getDescriptor().getMessageTypes().get(57);
+      getDescriptor().getMessageTypes().get(61);
     internal_static_forge_abi_ByHour_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ByHour_descriptor,
         new java.lang.String[] { "Date", });
-    internal_static_forge_abi_RequestGetForgeStatistics_descriptor =
-      getDescriptor().getMessageTypes().get(58);
-    internal_static_forge_abi_RequestGetForgeStatistics_fieldAccessorTable = new
+    internal_static_forge_abi_RequestGetForgeStats_descriptor =
+      getDescriptor().getMessageTypes().get(62);
+    internal_static_forge_abi_RequestGetForgeStats_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_RequestGetForgeStatistics_descriptor,
+        internal_static_forge_abi_RequestGetForgeStats_descriptor,
         new java.lang.String[] { "DayInfo", "Date", "Value", });
-    internal_static_forge_abi_ResponseGetForgeStatistics_descriptor =
-      getDescriptor().getMessageTypes().get(59);
-    internal_static_forge_abi_ResponseGetForgeStatistics_fieldAccessorTable = new
+    internal_static_forge_abi_ResponseGetForgeStats_descriptor =
+      getDescriptor().getMessageTypes().get(63);
+    internal_static_forge_abi_ResponseGetForgeStats_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_ResponseGetForgeStatistics_descriptor,
-        new java.lang.String[] { "Code", "ForgeStatistics", });
+        internal_static_forge_abi_ResponseGetForgeStats_descriptor,
+        new java.lang.String[] { "Code", "ForgeStats", });
     internal_static_forge_abi_RequestListTransactions_descriptor =
-      getDescriptor().getMessageTypes().get(60);
+      getDescriptor().getMessageTypes().get(64);
     internal_static_forge_abi_RequestListTransactions_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestListTransactions_descriptor,
-        new java.lang.String[] { "Paging", "TimeFilter", "AddressFilter", "TypeFilter", });
+        new java.lang.String[] { "Paging", "TimeFilter", "AddressFilter", "TypeFilter", "ValidityFilter", });
     internal_static_forge_abi_ResponseListTransactions_descriptor =
-      getDescriptor().getMessageTypes().get(61);
+      getDescriptor().getMessageTypes().get(65);
     internal_static_forge_abi_ResponseListTransactions_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseListTransactions_descriptor,
         new java.lang.String[] { "Code", "Page", "Transactions", });
-    internal_static_forge_abi_RequestGetAssetAddress_descriptor =
-      getDescriptor().getMessageTypes().get(62);
-    internal_static_forge_abi_RequestGetAssetAddress_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_RequestGetAssetAddress_descriptor,
-        new java.lang.String[] { "SenderAddress", "Itx", "WalletType", });
-    internal_static_forge_abi_ResponseGetAssetAddress_descriptor =
-      getDescriptor().getMessageTypes().get(63);
-    internal_static_forge_abi_ResponseGetAssetAddress_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_ResponseGetAssetAddress_descriptor,
-        new java.lang.String[] { "Code", "AssetAddress", });
-    internal_static_forge_abi_RequestSignData_descriptor =
-      getDescriptor().getMessageTypes().get(64);
-    internal_static_forge_abi_RequestSignData_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_RequestSignData_descriptor,
-        new java.lang.String[] { "Data", "Wallet", "Token", });
-    internal_static_forge_abi_ResponseSignData_descriptor =
-      getDescriptor().getMessageTypes().get(65);
-    internal_static_forge_abi_ResponseSignData_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_ResponseSignData_descriptor,
-        new java.lang.String[] { "Code", "Signature", });
-    internal_static_forge_abi_RequestGetAssets_descriptor =
-      getDescriptor().getMessageTypes().get(66);
-    internal_static_forge_abi_RequestGetAssets_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_RequestGetAssets_descriptor,
-        new java.lang.String[] { "Paging", "OwnerAddress", });
-    internal_static_forge_abi_ResponseGetAssets_descriptor =
-      getDescriptor().getMessageTypes().get(67);
-    internal_static_forge_abi_ResponseGetAssets_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_ResponseGetAssets_descriptor,
-        new java.lang.String[] { "Code", "Page", "Assets", });
-    internal_static_forge_abi_RequestGetStakes_descriptor =
-      getDescriptor().getMessageTypes().get(68);
-    internal_static_forge_abi_RequestGetStakes_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_RequestGetStakes_descriptor,
-        new java.lang.String[] { "Paging", "AddressFilter", });
-    internal_static_forge_abi_ResponseGetStakes_descriptor =
-      getDescriptor().getMessageTypes().get(69);
-    internal_static_forge_abi_ResponseGetStakes_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_ResponseGetStakes_descriptor,
-        new java.lang.String[] { "Code", "Page", "Stakes", });
-    internal_static_forge_abi_RequestGetTopAccounts_descriptor =
-      getDescriptor().getMessageTypes().get(70);
-    internal_static_forge_abi_RequestGetTopAccounts_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_RequestGetTopAccounts_descriptor,
-        new java.lang.String[] { "Paging", });
-    internal_static_forge_abi_ResponseGetTopAccounts_descriptor =
-      getDescriptor().getMessageTypes().get(71);
-    internal_static_forge_abi_ResponseGetTopAccounts_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_ResponseGetTopAccounts_descriptor,
-        new java.lang.String[] { "Code", "Page", "Accounts", });
-    internal_static_forge_abi_RequestListAssetTransactions_descriptor =
-      getDescriptor().getMessageTypes().get(72);
-    internal_static_forge_abi_RequestListAssetTransactions_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_RequestListAssetTransactions_descriptor,
-        new java.lang.String[] { "Paging", "Address", });
-    internal_static_forge_abi_ResponseListAssetTransactions_descriptor =
-      getDescriptor().getMessageTypes().get(73);
-    internal_static_forge_abi_ResponseListAssetTransactions_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_ResponseListAssetTransactions_descriptor,
-        new java.lang.String[] { "Code", "Page", "Transactions", });
-    internal_static_forge_abi_RequestListBlocks_descriptor =
-      getDescriptor().getMessageTypes().get(74);
-    internal_static_forge_abi_RequestListBlocks_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_RequestListBlocks_descriptor,
-        new java.lang.String[] { "Paging", "Proposer", "TimeFilter", "HeightFilter", "NumTxsFilter", "NumInvalidTxsFilter", });
-    internal_static_forge_abi_ResponseListBlocks_descriptor =
-      getDescriptor().getMessageTypes().get(75);
-    internal_static_forge_abi_ResponseListBlocks_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_ResponseListBlocks_descriptor,
-        new java.lang.String[] { "Code", "Page", "Blocks", });
     internal_static_forge_abi_RequestListAssets_descriptor =
-      getDescriptor().getMessageTypes().get(76);
+      getDescriptor().getMessageTypes().get(66);
     internal_static_forge_abi_RequestListAssets_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestListAssets_descriptor,
         new java.lang.String[] { "Paging", "OwnerAddress", });
     internal_static_forge_abi_ResponseListAssets_descriptor =
-      getDescriptor().getMessageTypes().get(77);
+      getDescriptor().getMessageTypes().get(67);
     internal_static_forge_abi_ResponseListAssets_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseListAssets_descriptor,
-        new java.lang.String[] { "Code", "Page", "Account", "Assets", });
+        new java.lang.String[] { "Code", "Page", "Assets", });
+    internal_static_forge_abi_RequestListStakes_descriptor =
+      getDescriptor().getMessageTypes().get(68);
+    internal_static_forge_abi_RequestListStakes_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_RequestListStakes_descriptor,
+        new java.lang.String[] { "Paging", "AddressFilter", });
+    internal_static_forge_abi_ResponseListStakes_descriptor =
+      getDescriptor().getMessageTypes().get(69);
+    internal_static_forge_abi_ResponseListStakes_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_ResponseListStakes_descriptor,
+        new java.lang.String[] { "Code", "Page", "Stakes", });
+    internal_static_forge_abi_RequestListAccount_descriptor =
+      getDescriptor().getMessageTypes().get(70);
+    internal_static_forge_abi_RequestListAccount_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_RequestListAccount_descriptor,
+        new java.lang.String[] { "OwnerAddress", });
+    internal_static_forge_abi_ResponseListAccount_descriptor =
+      getDescriptor().getMessageTypes().get(71);
+    internal_static_forge_abi_ResponseListAccount_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_ResponseListAccount_descriptor,
+        new java.lang.String[] { "Code", "Account", });
+    internal_static_forge_abi_RequestListTopAccounts_descriptor =
+      getDescriptor().getMessageTypes().get(72);
+    internal_static_forge_abi_RequestListTopAccounts_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_RequestListTopAccounts_descriptor,
+        new java.lang.String[] { "Paging", });
+    internal_static_forge_abi_ResponseListTopAccounts_descriptor =
+      getDescriptor().getMessageTypes().get(73);
+    internal_static_forge_abi_ResponseListTopAccounts_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_ResponseListTopAccounts_descriptor,
+        new java.lang.String[] { "Code", "Page", "Accounts", });
+    internal_static_forge_abi_RequestListAssetTransactions_descriptor =
+      getDescriptor().getMessageTypes().get(74);
+    internal_static_forge_abi_RequestListAssetTransactions_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_RequestListAssetTransactions_descriptor,
+        new java.lang.String[] { "Paging", "Address", });
+    internal_static_forge_abi_ResponseListAssetTransactions_descriptor =
+      getDescriptor().getMessageTypes().get(75);
+    internal_static_forge_abi_ResponseListAssetTransactions_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_ResponseListAssetTransactions_descriptor,
+        new java.lang.String[] { "Code", "Page", "Transactions", });
+    internal_static_forge_abi_RequestListBlocks_descriptor =
+      getDescriptor().getMessageTypes().get(76);
+    internal_static_forge_abi_RequestListBlocks_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_RequestListBlocks_descriptor,
+        new java.lang.String[] { "Paging", "Proposer", "TimeFilter", "HeightFilter", "NumTxsFilter", "NumInvalidTxsFilter", });
+    internal_static_forge_abi_ResponseListBlocks_descriptor =
+      getDescriptor().getMessageTypes().get(77);
+    internal_static_forge_abi_ResponseListBlocks_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_ResponseListBlocks_descriptor,
+        new java.lang.String[] { "Code", "Page", "Blocks", });
     internal_static_forge_abi_RequestGetHealthStatus_descriptor =
       getDescriptor().getMessageTypes().get(78);
     internal_static_forge_abi_RequestGetHealthStatus_fieldAccessorTable = new
@@ -62842,48 +60046,11 @@ public final class Rpc {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseGetHealthStatus_descriptor,
         new java.lang.String[] { "Code", "HealthStatus", });
-    internal_static_forge_abi_RequestStartSimulator_descriptor =
-      getDescriptor().getMessageTypes().get(80);
-    internal_static_forge_abi_RequestStartSimulator_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_RequestStartSimulator_descriptor,
-        new java.lang.String[] { });
-    internal_static_forge_abi_ResponseStartSimulator_descriptor =
-      getDescriptor().getMessageTypes().get(81);
-    internal_static_forge_abi_ResponseStartSimulator_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_ResponseStartSimulator_descriptor,
-        new java.lang.String[] { "Code", "Result", });
-    internal_static_forge_abi_RequestStopSimulator_descriptor =
-      getDescriptor().getMessageTypes().get(82);
-    internal_static_forge_abi_RequestStopSimulator_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_RequestStopSimulator_descriptor,
-        new java.lang.String[] { });
-    internal_static_forge_abi_ResponseStopSimulator_descriptor =
-      getDescriptor().getMessageTypes().get(83);
-    internal_static_forge_abi_ResponseStopSimulator_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_ResponseStopSimulator_descriptor,
-        new java.lang.String[] { "Code", "Result", });
-    internal_static_forge_abi_RequestGetSimulatorStatus_descriptor =
-      getDescriptor().getMessageTypes().get(84);
-    internal_static_forge_abi_RequestGetSimulatorStatus_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_RequestGetSimulatorStatus_descriptor,
-        new java.lang.String[] { });
-    internal_static_forge_abi_ResponseGetSimulatorStatus_descriptor =
-      getDescriptor().getMessageTypes().get(85);
-    internal_static_forge_abi_ResponseGetSimulatorStatus_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_ResponseGetSimulatorStatus_descriptor,
-        new java.lang.String[] { "Code", "Result", });
     com.google.protobuf.AnyProto.getDescriptor();
     abci_vendor.Vendor.getDescriptor();
     forge_abi.Enum.getDescriptor();
     forge_abi.Type.getDescriptor();
     forge_abi.State.getDescriptor();
-    forge_abi.Tx.getDescriptor();
     forge_abi.TraceType.getDescriptor();
   }
 
