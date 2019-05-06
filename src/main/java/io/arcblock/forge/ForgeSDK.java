@@ -1,4 +1,5 @@
-// !!!! auto Generated ,Do not Edit !!!!
+// /** auto Generated ,Do not Edit 
+//  ForgeSDK is tool to connect and communicate with forge node and provide blocking ,async and reactive method to handlechain method. and the high level  */
 package io.arcblock.forge;
 
 import com.google.common.util.concurrent.ListenableFuture;
@@ -30,7 +31,7 @@ import forge_abi.Rpc.RequestGetNetInfo;
 import forge_abi.Rpc.RequestGetNodeInfo;
 import forge_abi.Rpc.RequestGetProtocolState;
 import forge_abi.Rpc.RequestGetStakeState;
-import forge_abi.Rpc.RequestGetTetherInfo;
+import forge_abi.Rpc.RequestGetTetherState;
 import forge_abi.Rpc.RequestGetTx;
 import forge_abi.Rpc.RequestGetUnconfirmedTxs;
 import forge_abi.Rpc.RequestGetValidatorsInfo;
@@ -69,7 +70,7 @@ import forge_abi.Rpc.ResponseGetNetInfo;
 import forge_abi.Rpc.ResponseGetNodeInfo;
 import forge_abi.Rpc.ResponseGetProtocolState;
 import forge_abi.Rpc.ResponseGetStakeState;
-import forge_abi.Rpc.ResponseGetTetherInfo;
+import forge_abi.Rpc.ResponseGetTetherState;
 import forge_abi.Rpc.ResponseGetTx;
 import forge_abi.Rpc.ResponseGetUnconfirmedTxs;
 import forge_abi.Rpc.ResponseGetValidatorsInfo;
@@ -465,9 +466,9 @@ public final class ForgeSDK {
     return stateRpcStub.getStakeState(observer);
   }
 
-  public StreamObserver<RequestGetTetherInfo> getTetherInfo(
-      StreamObserver<ResponseGetTetherInfo> observer) {
-    return stateRpcStub.getTetherInfo(observer);
+  public StreamObserver<RequestGetTetherState> getTetherState(
+      StreamObserver<ResponseGetTetherState> observer) {
+    return stateRpcStub.getTetherState(observer);
   }
 
   public ResponseCreateWallet createWallet(RequestCreateWallet request) {

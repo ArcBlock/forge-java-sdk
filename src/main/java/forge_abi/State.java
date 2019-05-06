@@ -57,17 +57,17 @@ public final class State {
     com.google.protobuf.ByteString getPk();
 
     /**
-     * <code>.forge_abi.WalletType type = 6;</code>
+     * <code>.forge_abi.WalletType type = 6 [deprecated = true];</code>
      */
-    boolean hasType();
+    @java.lang.Deprecated boolean hasType();
     /**
-     * <code>.forge_abi.WalletType type = 6;</code>
+     * <code>.forge_abi.WalletType type = 6 [deprecated = true];</code>
      */
-    forge_abi.Type.WalletType getType();
+    @java.lang.Deprecated forge_abi.Type.WalletType getType();
     /**
-     * <code>.forge_abi.WalletType type = 6;</code>
+     * <code>.forge_abi.WalletType type = 6 [deprecated = true];</code>
      */
-    forge_abi.Type.WalletTypeOrBuilder getTypeOrBuilder();
+    @java.lang.Deprecated forge_abi.Type.WalletTypeOrBuilder getTypeOrBuilder();
 
     /**
      * <code>string moniker = 7;</code>
@@ -214,7 +214,8 @@ public final class State {
 
     /**
      * <pre>
-     * The current deposit this account has received. It cannot exceed the deposit cap.
+     * The current deposit this account has received. It cannot exceed the deposit
+     * cap.
      * </pre>
      *
      * <code>.forge_abi.BigUint deposit_received = 19;</code>
@@ -222,7 +223,8 @@ public final class State {
     boolean hasDepositReceived();
     /**
      * <pre>
-     * The current deposit this account has received. It cannot exceed the deposit cap.
+     * The current deposit this account has received. It cannot exceed the deposit
+     * cap.
      * </pre>
      *
      * <code>.forge_abi.BigUint deposit_received = 19;</code>
@@ -230,7 +232,8 @@ public final class State {
     forge_abi.Type.BigUint getDepositReceived();
     /**
      * <pre>
-     * The current deposit this account has received. It cannot exceed the deposit cap.
+     * The current deposit this account has received. It cannot exceed the deposit
+     * cap.
      * </pre>
      *
      * <code>.forge_abi.BigUint deposit_received = 19;</code>
@@ -573,21 +576,21 @@ public final class State {
     public static final int TYPE_FIELD_NUMBER = 6;
     private forge_abi.Type.WalletType type_;
     /**
-     * <code>.forge_abi.WalletType type = 6;</code>
+     * <code>.forge_abi.WalletType type = 6 [deprecated = true];</code>
      */
-    public boolean hasType() {
+    @java.lang.Deprecated public boolean hasType() {
       return type_ != null;
     }
     /**
-     * <code>.forge_abi.WalletType type = 6;</code>
+     * <code>.forge_abi.WalletType type = 6 [deprecated = true];</code>
      */
-    public forge_abi.Type.WalletType getType() {
+    @java.lang.Deprecated public forge_abi.Type.WalletType getType() {
       return type_ == null ? forge_abi.Type.WalletType.getDefaultInstance() : type_;
     }
     /**
-     * <code>.forge_abi.WalletType type = 6;</code>
+     * <code>.forge_abi.WalletType type = 6 [deprecated = true];</code>
      */
-    public forge_abi.Type.WalletTypeOrBuilder getTypeOrBuilder() {
+    @java.lang.Deprecated public forge_abi.Type.WalletTypeOrBuilder getTypeOrBuilder() {
       return getType();
     }
 
@@ -842,7 +845,8 @@ public final class State {
     private forge_abi.Type.BigUint depositReceived_;
     /**
      * <pre>
-     * The current deposit this account has received. It cannot exceed the deposit cap.
+     * The current deposit this account has received. It cannot exceed the deposit
+     * cap.
      * </pre>
      *
      * <code>.forge_abi.BigUint deposit_received = 19;</code>
@@ -852,7 +856,8 @@ public final class State {
     }
     /**
      * <pre>
-     * The current deposit this account has received. It cannot exceed the deposit cap.
+     * The current deposit this account has received. It cannot exceed the deposit
+     * cap.
      * </pre>
      *
      * <code>.forge_abi.BigUint deposit_received = 19;</code>
@@ -862,7 +867,8 @@ public final class State {
     }
     /**
      * <pre>
-     * The current deposit this account has received. It cannot exceed the deposit cap.
+     * The current deposit this account has received. It cannot exceed the deposit
+     * cap.
      * </pre>
      *
      * <code>.forge_abi.BigUint deposit_received = 19;</code>
@@ -1849,15 +1855,15 @@ public final class State {
       private com.google.protobuf.SingleFieldBuilderV3<
           forge_abi.Type.WalletType, forge_abi.Type.WalletType.Builder, forge_abi.Type.WalletTypeOrBuilder> typeBuilder_;
       /**
-       * <code>.forge_abi.WalletType type = 6;</code>
+       * <code>.forge_abi.WalletType type = 6 [deprecated = true];</code>
        */
-      public boolean hasType() {
+      @java.lang.Deprecated public boolean hasType() {
         return typeBuilder_ != null || type_ != null;
       }
       /**
-       * <code>.forge_abi.WalletType type = 6;</code>
+       * <code>.forge_abi.WalletType type = 6 [deprecated = true];</code>
        */
-      public forge_abi.Type.WalletType getType() {
+      @java.lang.Deprecated public forge_abi.Type.WalletType getType() {
         if (typeBuilder_ == null) {
           return type_ == null ? forge_abi.Type.WalletType.getDefaultInstance() : type_;
         } else {
@@ -1865,9 +1871,9 @@ public final class State {
         }
       }
       /**
-       * <code>.forge_abi.WalletType type = 6;</code>
+       * <code>.forge_abi.WalletType type = 6 [deprecated = true];</code>
        */
-      public Builder setType(forge_abi.Type.WalletType value) {
+      @java.lang.Deprecated public Builder setType(forge_abi.Type.WalletType value) {
         if (typeBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1881,9 +1887,9 @@ public final class State {
         return this;
       }
       /**
-       * <code>.forge_abi.WalletType type = 6;</code>
+       * <code>.forge_abi.WalletType type = 6 [deprecated = true];</code>
        */
-      public Builder setType(
+      @java.lang.Deprecated public Builder setType(
           forge_abi.Type.WalletType.Builder builderForValue) {
         if (typeBuilder_ == null) {
           type_ = builderForValue.build();
@@ -1895,9 +1901,9 @@ public final class State {
         return this;
       }
       /**
-       * <code>.forge_abi.WalletType type = 6;</code>
+       * <code>.forge_abi.WalletType type = 6 [deprecated = true];</code>
        */
-      public Builder mergeType(forge_abi.Type.WalletType value) {
+      @java.lang.Deprecated public Builder mergeType(forge_abi.Type.WalletType value) {
         if (typeBuilder_ == null) {
           if (type_ != null) {
             type_ =
@@ -1913,9 +1919,9 @@ public final class State {
         return this;
       }
       /**
-       * <code>.forge_abi.WalletType type = 6;</code>
+       * <code>.forge_abi.WalletType type = 6 [deprecated = true];</code>
        */
-      public Builder clearType() {
+      @java.lang.Deprecated public Builder clearType() {
         if (typeBuilder_ == null) {
           type_ = null;
           onChanged();
@@ -1927,17 +1933,17 @@ public final class State {
         return this;
       }
       /**
-       * <code>.forge_abi.WalletType type = 6;</code>
+       * <code>.forge_abi.WalletType type = 6 [deprecated = true];</code>
        */
-      public forge_abi.Type.WalletType.Builder getTypeBuilder() {
+      @java.lang.Deprecated public forge_abi.Type.WalletType.Builder getTypeBuilder() {
         
         onChanged();
         return getTypeFieldBuilder().getBuilder();
       }
       /**
-       * <code>.forge_abi.WalletType type = 6;</code>
+       * <code>.forge_abi.WalletType type = 6 [deprecated = true];</code>
        */
-      public forge_abi.Type.WalletTypeOrBuilder getTypeOrBuilder() {
+      @java.lang.Deprecated public forge_abi.Type.WalletTypeOrBuilder getTypeOrBuilder() {
         if (typeBuilder_ != null) {
           return typeBuilder_.getMessageOrBuilder();
         } else {
@@ -1946,7 +1952,7 @@ public final class State {
         }
       }
       /**
-       * <code>.forge_abi.WalletType type = 6;</code>
+       * <code>.forge_abi.WalletType type = 6 [deprecated = true];</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           forge_abi.Type.WalletType, forge_abi.Type.WalletType.Builder, forge_abi.Type.WalletTypeOrBuilder> 
@@ -2853,7 +2859,8 @@ public final class State {
           forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder> depositReceivedBuilder_;
       /**
        * <pre>
-       * The current deposit this account has received. It cannot exceed the deposit cap.
+       * The current deposit this account has received. It cannot exceed the deposit
+       * cap.
        * </pre>
        *
        * <code>.forge_abi.BigUint deposit_received = 19;</code>
@@ -2863,7 +2870,8 @@ public final class State {
       }
       /**
        * <pre>
-       * The current deposit this account has received. It cannot exceed the deposit cap.
+       * The current deposit this account has received. It cannot exceed the deposit
+       * cap.
        * </pre>
        *
        * <code>.forge_abi.BigUint deposit_received = 19;</code>
@@ -2877,7 +2885,8 @@ public final class State {
       }
       /**
        * <pre>
-       * The current deposit this account has received. It cannot exceed the deposit cap.
+       * The current deposit this account has received. It cannot exceed the deposit
+       * cap.
        * </pre>
        *
        * <code>.forge_abi.BigUint deposit_received = 19;</code>
@@ -2897,7 +2906,8 @@ public final class State {
       }
       /**
        * <pre>
-       * The current deposit this account has received. It cannot exceed the deposit cap.
+       * The current deposit this account has received. It cannot exceed the deposit
+       * cap.
        * </pre>
        *
        * <code>.forge_abi.BigUint deposit_received = 19;</code>
@@ -2915,7 +2925,8 @@ public final class State {
       }
       /**
        * <pre>
-       * The current deposit this account has received. It cannot exceed the deposit cap.
+       * The current deposit this account has received. It cannot exceed the deposit
+       * cap.
        * </pre>
        *
        * <code>.forge_abi.BigUint deposit_received = 19;</code>
@@ -2937,7 +2948,8 @@ public final class State {
       }
       /**
        * <pre>
-       * The current deposit this account has received. It cannot exceed the deposit cap.
+       * The current deposit this account has received. It cannot exceed the deposit
+       * cap.
        * </pre>
        *
        * <code>.forge_abi.BigUint deposit_received = 19;</code>
@@ -2955,7 +2967,8 @@ public final class State {
       }
       /**
        * <pre>
-       * The current deposit this account has received. It cannot exceed the deposit cap.
+       * The current deposit this account has received. It cannot exceed the deposit
+       * cap.
        * </pre>
        *
        * <code>.forge_abi.BigUint deposit_received = 19;</code>
@@ -2967,7 +2980,8 @@ public final class State {
       }
       /**
        * <pre>
-       * The current deposit this account has received. It cannot exceed the deposit cap.
+       * The current deposit this account has received. It cannot exceed the deposit
+       * cap.
        * </pre>
        *
        * <code>.forge_abi.BigUint deposit_received = 19;</code>
@@ -2982,7 +2996,8 @@ public final class State {
       }
       /**
        * <pre>
-       * The current deposit this account has received. It cannot exceed the deposit cap.
+       * The current deposit this account has received. It cannot exceed the deposit
+       * cap.
        * </pre>
        *
        * <code>.forge_abi.BigUint deposit_received = 19;</code>
@@ -13091,55 +13106,33 @@ public final class State {
         getAddressBytes();
 
     /**
-     * <code>string name = 2;</code>
+     * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
      */
-    java.lang.String getName();
+    boolean hasItx();
     /**
-     * <code>string name = 2;</code>
+     * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
      */
-    com.google.protobuf.ByteString
-        getNameBytes();
-
+    forge_abi.DeployProtocol.DeployProtocolTx getItx();
     /**
-     * <code>uint32 version = 3;</code>
+     * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
      */
-    int getVersion();
-
-    /**
-     * <code>string description = 4;</code>
-     */
-    java.lang.String getDescription();
-    /**
-     * <code>string description = 4;</code>
-     */
-    com.google.protobuf.ByteString
-        getDescriptionBytes();
-
-    /**
-     * <code>string tx_hash = 5;</code>
-     */
-    java.lang.String getTxHash();
-    /**
-     * <code>string tx_hash = 5;</code>
-     */
-    com.google.protobuf.ByteString
-        getTxHashBytes();
+    forge_abi.DeployProtocol.DeployProtocolTxOrBuilder getItxOrBuilder();
 
     /**
      * <pre>
      * root hash of the MPT of this tx protocol
      * </pre>
      *
-     * <code>bytes root_hash = 6;</code>
+     * <code>bytes root_hash = 3;</code>
      */
     com.google.protobuf.ByteString getRootHash();
 
     /**
-     * <code>.forge_abi.ProtocolStatus status = 7;</code>
+     * <code>.forge_abi.ProtocolStatus status = 4;</code>
      */
     int getStatusValue();
     /**
-     * <code>.forge_abi.ProtocolStatus status = 7;</code>
+     * <code>.forge_abi.ProtocolStatus status = 4;</code>
      */
     forge_abi.Enum.ProtocolStatus getStatus();
 
@@ -13232,10 +13225,6 @@ public final class State {
     }
     private ProtocolState() {
       address_ = "";
-      name_ = "";
-      version_ = 0;
-      description_ = "";
-      txHash_ = "";
       rootHash_ = com.google.protobuf.ByteString.EMPTY;
       status_ = 0;
       migratedTo_ = com.google.protobuf.LazyStringArrayList.EMPTY;
@@ -13274,34 +13263,24 @@ public final class State {
               break;
             }
             case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
+              forge_abi.DeployProtocol.DeployProtocolTx.Builder subBuilder = null;
+              if (itx_ != null) {
+                subBuilder = itx_.toBuilder();
+              }
+              itx_ = input.readMessage(forge_abi.DeployProtocol.DeployProtocolTx.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(itx_);
+                itx_ = subBuilder.buildPartial();
+              }
 
-              name_ = s;
               break;
             }
-            case 24: {
-
-              version_ = input.readUInt32();
-              break;
-            }
-            case 34: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              description_ = s;
-              break;
-            }
-            case 42: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              txHash_ = s;
-              break;
-            }
-            case 50: {
+            case 26: {
 
               rootHash_ = input.readBytes();
               break;
             }
-            case 56: {
+            case 32: {
               int rawValue = input.readEnum();
 
               status_ = rawValue;
@@ -13309,18 +13288,18 @@ public final class State {
             }
             case 98: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
                 migratedTo_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000080;
+                mutable_bitField0_ |= 0x00000010;
               }
               migratedTo_.add(s);
               break;
             }
             case 106: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
                 migratedFrom_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000100;
+                mutable_bitField0_ |= 0x00000020;
               }
               migratedFrom_.add(s);
               break;
@@ -13359,10 +13338,10 @@ public final class State {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
           migratedTo_ = migratedTo_.getUnmodifiableView();
         }
-        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
           migratedFrom_ = migratedFrom_.getUnmodifiableView();
         }
         makeExtensionsImmutable();
@@ -13415,140 +13394,50 @@ public final class State {
       }
     }
 
-    public static final int NAME_FIELD_NUMBER = 2;
-    private volatile java.lang.Object name_;
+    public static final int ITX_FIELD_NUMBER = 2;
+    private forge_abi.DeployProtocol.DeployProtocolTx itx_;
     /**
-     * <code>string name = 2;</code>
+     * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
      */
-    public java.lang.String getName() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        name_ = s;
-        return s;
-      }
+    public boolean hasItx() {
+      return itx_ != null;
     }
     /**
-     * <code>string name = 2;</code>
+     * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
      */
-    public com.google.protobuf.ByteString
-        getNameBytes() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        name_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public forge_abi.DeployProtocol.DeployProtocolTx getItx() {
+      return itx_ == null ? forge_abi.DeployProtocol.DeployProtocolTx.getDefaultInstance() : itx_;
+    }
+    /**
+     * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
+     */
+    public forge_abi.DeployProtocol.DeployProtocolTxOrBuilder getItxOrBuilder() {
+      return getItx();
     }
 
-    public static final int VERSION_FIELD_NUMBER = 3;
-    private int version_;
-    /**
-     * <code>uint32 version = 3;</code>
-     */
-    public int getVersion() {
-      return version_;
-    }
-
-    public static final int DESCRIPTION_FIELD_NUMBER = 4;
-    private volatile java.lang.Object description_;
-    /**
-     * <code>string description = 4;</code>
-     */
-    public java.lang.String getDescription() {
-      java.lang.Object ref = description_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        description_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string description = 4;</code>
-     */
-    public com.google.protobuf.ByteString
-        getDescriptionBytes() {
-      java.lang.Object ref = description_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        description_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int TX_HASH_FIELD_NUMBER = 5;
-    private volatile java.lang.Object txHash_;
-    /**
-     * <code>string tx_hash = 5;</code>
-     */
-    public java.lang.String getTxHash() {
-      java.lang.Object ref = txHash_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        txHash_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string tx_hash = 5;</code>
-     */
-    public com.google.protobuf.ByteString
-        getTxHashBytes() {
-      java.lang.Object ref = txHash_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        txHash_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int ROOT_HASH_FIELD_NUMBER = 6;
+    public static final int ROOT_HASH_FIELD_NUMBER = 3;
     private com.google.protobuf.ByteString rootHash_;
     /**
      * <pre>
      * root hash of the MPT of this tx protocol
      * </pre>
      *
-     * <code>bytes root_hash = 6;</code>
+     * <code>bytes root_hash = 3;</code>
      */
     public com.google.protobuf.ByteString getRootHash() {
       return rootHash_;
     }
 
-    public static final int STATUS_FIELD_NUMBER = 7;
+    public static final int STATUS_FIELD_NUMBER = 4;
     private int status_;
     /**
-     * <code>.forge_abi.ProtocolStatus status = 7;</code>
+     * <code>.forge_abi.ProtocolStatus status = 4;</code>
      */
     public int getStatusValue() {
       return status_;
     }
     /**
-     * <code>.forge_abi.ProtocolStatus status = 7;</code>
+     * <code>.forge_abi.ProtocolStatus status = 4;</code>
      */
     public forge_abi.Enum.ProtocolStatus getStatus() {
       forge_abi.Enum.ProtocolStatus result = forge_abi.Enum.ProtocolStatus.valueOf(status_);
@@ -13682,23 +13571,14 @@ public final class State {
       if (!getAddressBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, address_);
       }
-      if (!getNameBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
-      }
-      if (version_ != 0) {
-        output.writeUInt32(3, version_);
-      }
-      if (!getDescriptionBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, description_);
-      }
-      if (!getTxHashBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, txHash_);
+      if (itx_ != null) {
+        output.writeMessage(2, getItx());
       }
       if (!rootHash_.isEmpty()) {
-        output.writeBytes(6, rootHash_);
+        output.writeBytes(3, rootHash_);
       }
       if (status_ != forge_abi.Enum.ProtocolStatus.running.getNumber()) {
-        output.writeEnum(7, status_);
+        output.writeEnum(4, status_);
       }
       for (int i = 0; i < migratedTo_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 12, migratedTo_.getRaw(i));
@@ -13722,26 +13602,17 @@ public final class State {
       if (!getAddressBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, address_);
       }
-      if (!getNameBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
-      }
-      if (version_ != 0) {
+      if (itx_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(3, version_);
-      }
-      if (!getDescriptionBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, description_);
-      }
-      if (!getTxHashBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, txHash_);
+          .computeMessageSize(2, getItx());
       }
       if (!rootHash_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(6, rootHash_);
+          .computeBytesSize(3, rootHash_);
       }
       if (status_ != forge_abi.Enum.ProtocolStatus.running.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(7, status_);
+          .computeEnumSize(4, status_);
       }
       {
         int dataSize = 0;
@@ -13785,14 +13656,11 @@ public final class State {
       boolean result = true;
       result = result && getAddress()
           .equals(other.getAddress());
-      result = result && getName()
-          .equals(other.getName());
-      result = result && (getVersion()
-          == other.getVersion());
-      result = result && getDescription()
-          .equals(other.getDescription());
-      result = result && getTxHash()
-          .equals(other.getTxHash());
+      result = result && (hasItx() == other.hasItx());
+      if (hasItx()) {
+        result = result && getItx()
+            .equals(other.getItx());
+      }
       result = result && getRootHash()
           .equals(other.getRootHash());
       result = result && status_ == other.status_;
@@ -13822,14 +13690,10 @@ public final class State {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ADDRESS_FIELD_NUMBER;
       hash = (53 * hash) + getAddress().hashCode();
-      hash = (37 * hash) + NAME_FIELD_NUMBER;
-      hash = (53 * hash) + getName().hashCode();
-      hash = (37 * hash) + VERSION_FIELD_NUMBER;
-      hash = (53 * hash) + getVersion();
-      hash = (37 * hash) + DESCRIPTION_FIELD_NUMBER;
-      hash = (53 * hash) + getDescription().hashCode();
-      hash = (37 * hash) + TX_HASH_FIELD_NUMBER;
-      hash = (53 * hash) + getTxHash().hashCode();
+      if (hasItx()) {
+        hash = (37 * hash) + ITX_FIELD_NUMBER;
+        hash = (53 * hash) + getItx().hashCode();
+      }
       hash = (37 * hash) + ROOT_HASH_FIELD_NUMBER;
       hash = (53 * hash) + getRootHash().hashCode();
       hash = (37 * hash) + STATUS_FIELD_NUMBER;
@@ -13970,22 +13834,20 @@ public final class State {
         super.clear();
         address_ = "";
 
-        name_ = "";
-
-        version_ = 0;
-
-        description_ = "";
-
-        txHash_ = "";
-
+        if (itxBuilder_ == null) {
+          itx_ = null;
+        } else {
+          itx_ = null;
+          itxBuilder_ = null;
+        }
         rootHash_ = com.google.protobuf.ByteString.EMPTY;
 
         status_ = 0;
 
         migratedTo_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000010);
         migratedFrom_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000020);
         if (contextBuilder_ == null) {
           context_ = null;
         } else {
@@ -14023,20 +13885,21 @@ public final class State {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         result.address_ = address_;
-        result.name_ = name_;
-        result.version_ = version_;
-        result.description_ = description_;
-        result.txHash_ = txHash_;
+        if (itxBuilder_ == null) {
+          result.itx_ = itx_;
+        } else {
+          result.itx_ = itxBuilder_.build();
+        }
         result.rootHash_ = rootHash_;
         result.status_ = status_;
-        if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
           migratedTo_ = migratedTo_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000080);
+          bitField0_ = (bitField0_ & ~0x00000010);
         }
         result.migratedTo_ = migratedTo_;
-        if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        if (((bitField0_ & 0x00000020) == 0x00000020)) {
           migratedFrom_ = migratedFrom_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000100);
+          bitField0_ = (bitField0_ & ~0x00000020);
         }
         result.migratedFrom_ = migratedFrom_;
         if (contextBuilder_ == null) {
@@ -14095,20 +13958,8 @@ public final class State {
           address_ = other.address_;
           onChanged();
         }
-        if (!other.getName().isEmpty()) {
-          name_ = other.name_;
-          onChanged();
-        }
-        if (other.getVersion() != 0) {
-          setVersion(other.getVersion());
-        }
-        if (!other.getDescription().isEmpty()) {
-          description_ = other.description_;
-          onChanged();
-        }
-        if (!other.getTxHash().isEmpty()) {
-          txHash_ = other.txHash_;
-          onChanged();
+        if (other.hasItx()) {
+          mergeItx(other.getItx());
         }
         if (other.getRootHash() != com.google.protobuf.ByteString.EMPTY) {
           setRootHash(other.getRootHash());
@@ -14119,7 +13970,7 @@ public final class State {
         if (!other.migratedTo_.isEmpty()) {
           if (migratedTo_.isEmpty()) {
             migratedTo_ = other.migratedTo_;
-            bitField0_ = (bitField0_ & ~0x00000080);
+            bitField0_ = (bitField0_ & ~0x00000010);
           } else {
             ensureMigratedToIsMutable();
             migratedTo_.addAll(other.migratedTo_);
@@ -14129,7 +13980,7 @@ public final class State {
         if (!other.migratedFrom_.isEmpty()) {
           if (migratedFrom_.isEmpty()) {
             migratedFrom_ = other.migratedFrom_;
-            bitField0_ = (bitField0_ & ~0x00000100);
+            bitField0_ = (bitField0_ & ~0x00000020);
           } else {
             ensureMigratedFromIsMutable();
             migratedFrom_.addAll(other.migratedFrom_);
@@ -14238,237 +14089,121 @@ public final class State {
         return this;
       }
 
-      private java.lang.Object name_ = "";
+      private forge_abi.DeployProtocol.DeployProtocolTx itx_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.DeployProtocol.DeployProtocolTx, forge_abi.DeployProtocol.DeployProtocolTx.Builder, forge_abi.DeployProtocol.DeployProtocolTxOrBuilder> itxBuilder_;
       /**
-       * <code>string name = 2;</code>
+       * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
        */
-      public java.lang.String getName() {
-        java.lang.Object ref = name_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          name_ = s;
-          return s;
+      public boolean hasItx() {
+        return itxBuilder_ != null || itx_ != null;
+      }
+      /**
+       * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
+       */
+      public forge_abi.DeployProtocol.DeployProtocolTx getItx() {
+        if (itxBuilder_ == null) {
+          return itx_ == null ? forge_abi.DeployProtocol.DeployProtocolTx.getDefaultInstance() : itx_;
         } else {
-          return (java.lang.String) ref;
+          return itxBuilder_.getMessage();
         }
       }
       /**
-       * <code>string name = 2;</code>
+       * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
        */
-      public com.google.protobuf.ByteString
-          getNameBytes() {
-        java.lang.Object ref = name_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          name_ = b;
-          return b;
+      public Builder setItx(forge_abi.DeployProtocol.DeployProtocolTx value) {
+        if (itxBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          itx_ = value;
+          onChanged();
         } else {
-          return (com.google.protobuf.ByteString) ref;
+          itxBuilder_.setMessage(value);
         }
-      }
-      /**
-       * <code>string name = 2;</code>
-       */
-      public Builder setName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        name_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string name = 2;</code>
-       */
-      public Builder clearName() {
-        
-        name_ = getDefaultInstance().getName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string name = 2;</code>
-       */
-      public Builder setNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        name_ = value;
-        onChanged();
-        return this;
-      }
 
-      private int version_ ;
-      /**
-       * <code>uint32 version = 3;</code>
-       */
-      public int getVersion() {
-        return version_;
-      }
-      /**
-       * <code>uint32 version = 3;</code>
-       */
-      public Builder setVersion(int value) {
-        
-        version_ = value;
-        onChanged();
         return this;
       }
       /**
-       * <code>uint32 version = 3;</code>
+       * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
        */
-      public Builder clearVersion() {
-        
-        version_ = 0;
-        onChanged();
-        return this;
-      }
+      public Builder setItx(
+          forge_abi.DeployProtocol.DeployProtocolTx.Builder builderForValue) {
+        if (itxBuilder_ == null) {
+          itx_ = builderForValue.build();
+          onChanged();
+        } else {
+          itxBuilder_.setMessage(builderForValue.build());
+        }
 
-      private java.lang.Object description_ = "";
+        return this;
+      }
       /**
-       * <code>string description = 4;</code>
+       * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
        */
-      public java.lang.String getDescription() {
-        java.lang.Object ref = description_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          description_ = s;
-          return s;
+      public Builder mergeItx(forge_abi.DeployProtocol.DeployProtocolTx value) {
+        if (itxBuilder_ == null) {
+          if (itx_ != null) {
+            itx_ =
+              forge_abi.DeployProtocol.DeployProtocolTx.newBuilder(itx_).mergeFrom(value).buildPartial();
+          } else {
+            itx_ = value;
+          }
+          onChanged();
         } else {
-          return (java.lang.String) ref;
+          itxBuilder_.mergeFrom(value);
         }
-      }
-      /**
-       * <code>string description = 4;</code>
-       */
-      public com.google.protobuf.ByteString
-          getDescriptionBytes() {
-        java.lang.Object ref = description_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          description_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string description = 4;</code>
-       */
-      public Builder setDescription(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        description_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string description = 4;</code>
-       */
-      public Builder clearDescription() {
-        
-        description_ = getDefaultInstance().getDescription();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string description = 4;</code>
-       */
-      public Builder setDescriptionBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        description_ = value;
-        onChanged();
-        return this;
-      }
 
-      private java.lang.Object txHash_ = "";
+        return this;
+      }
       /**
-       * <code>string tx_hash = 5;</code>
+       * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
        */
-      public java.lang.String getTxHash() {
-        java.lang.Object ref = txHash_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          txHash_ = s;
-          return s;
+      public Builder clearItx() {
+        if (itxBuilder_ == null) {
+          itx_ = null;
+          onChanged();
         } else {
-          return (java.lang.String) ref;
+          itx_ = null;
+          itxBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
+       */
+      public forge_abi.DeployProtocol.DeployProtocolTx.Builder getItxBuilder() {
+        
+        onChanged();
+        return getItxFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
+       */
+      public forge_abi.DeployProtocol.DeployProtocolTxOrBuilder getItxOrBuilder() {
+        if (itxBuilder_ != null) {
+          return itxBuilder_.getMessageOrBuilder();
+        } else {
+          return itx_ == null ?
+              forge_abi.DeployProtocol.DeployProtocolTx.getDefaultInstance() : itx_;
         }
       }
       /**
-       * <code>string tx_hash = 5;</code>
+       * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
        */
-      public com.google.protobuf.ByteString
-          getTxHashBytes() {
-        java.lang.Object ref = txHash_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          txHash_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.DeployProtocol.DeployProtocolTx, forge_abi.DeployProtocol.DeployProtocolTx.Builder, forge_abi.DeployProtocol.DeployProtocolTxOrBuilder> 
+          getItxFieldBuilder() {
+        if (itxBuilder_ == null) {
+          itxBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.DeployProtocol.DeployProtocolTx, forge_abi.DeployProtocol.DeployProtocolTx.Builder, forge_abi.DeployProtocol.DeployProtocolTxOrBuilder>(
+                  getItx(),
+                  getParentForChildren(),
+                  isClean());
+          itx_ = null;
         }
-      }
-      /**
-       * <code>string tx_hash = 5;</code>
-       */
-      public Builder setTxHash(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        txHash_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string tx_hash = 5;</code>
-       */
-      public Builder clearTxHash() {
-        
-        txHash_ = getDefaultInstance().getTxHash();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string tx_hash = 5;</code>
-       */
-      public Builder setTxHashBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        txHash_ = value;
-        onChanged();
-        return this;
+        return itxBuilder_;
       }
 
       private com.google.protobuf.ByteString rootHash_ = com.google.protobuf.ByteString.EMPTY;
@@ -14477,7 +14212,7 @@ public final class State {
        * root hash of the MPT of this tx protocol
        * </pre>
        *
-       * <code>bytes root_hash = 6;</code>
+       * <code>bytes root_hash = 3;</code>
        */
       public com.google.protobuf.ByteString getRootHash() {
         return rootHash_;
@@ -14487,7 +14222,7 @@ public final class State {
        * root hash of the MPT of this tx protocol
        * </pre>
        *
-       * <code>bytes root_hash = 6;</code>
+       * <code>bytes root_hash = 3;</code>
        */
       public Builder setRootHash(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -14503,7 +14238,7 @@ public final class State {
        * root hash of the MPT of this tx protocol
        * </pre>
        *
-       * <code>bytes root_hash = 6;</code>
+       * <code>bytes root_hash = 3;</code>
        */
       public Builder clearRootHash() {
         
@@ -14514,13 +14249,13 @@ public final class State {
 
       private int status_ = 0;
       /**
-       * <code>.forge_abi.ProtocolStatus status = 7;</code>
+       * <code>.forge_abi.ProtocolStatus status = 4;</code>
        */
       public int getStatusValue() {
         return status_;
       }
       /**
-       * <code>.forge_abi.ProtocolStatus status = 7;</code>
+       * <code>.forge_abi.ProtocolStatus status = 4;</code>
        */
       public Builder setStatusValue(int value) {
         status_ = value;
@@ -14528,14 +14263,14 @@ public final class State {
         return this;
       }
       /**
-       * <code>.forge_abi.ProtocolStatus status = 7;</code>
+       * <code>.forge_abi.ProtocolStatus status = 4;</code>
        */
       public forge_abi.Enum.ProtocolStatus getStatus() {
         forge_abi.Enum.ProtocolStatus result = forge_abi.Enum.ProtocolStatus.valueOf(status_);
         return result == null ? forge_abi.Enum.ProtocolStatus.UNRECOGNIZED : result;
       }
       /**
-       * <code>.forge_abi.ProtocolStatus status = 7;</code>
+       * <code>.forge_abi.ProtocolStatus status = 4;</code>
        */
       public Builder setStatus(forge_abi.Enum.ProtocolStatus value) {
         if (value == null) {
@@ -14547,7 +14282,7 @@ public final class State {
         return this;
       }
       /**
-       * <code>.forge_abi.ProtocolStatus status = 7;</code>
+       * <code>.forge_abi.ProtocolStatus status = 4;</code>
        */
       public Builder clearStatus() {
         
@@ -14558,9 +14293,9 @@ public final class State {
 
       private com.google.protobuf.LazyStringList migratedTo_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureMigratedToIsMutable() {
-        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
           migratedTo_ = new com.google.protobuf.LazyStringArrayList(migratedTo_);
-          bitField0_ |= 0x00000080;
+          bitField0_ |= 0x00000010;
          }
       }
       /**
@@ -14631,7 +14366,7 @@ public final class State {
        */
       public Builder clearMigratedTo() {
         migratedTo_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
         return this;
       }
@@ -14652,9 +14387,9 @@ public final class State {
 
       private com.google.protobuf.LazyStringList migratedFrom_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureMigratedFromIsMutable() {
-        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
           migratedFrom_ = new com.google.protobuf.LazyStringArrayList(migratedFrom_);
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000020;
          }
       }
       /**
@@ -14725,7 +14460,7 @@ public final class State {
        */
       public Builder clearMigratedFrom() {
         migratedFrom_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000020);
         onChanged();
         return this;
       }
@@ -15067,444 +14802,6 @@ public final class State {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>bool available = 1;</code>
-     */
-    boolean getAvailable();
-  }
-  /**
-   * <pre>
-   * This is the one stored in state DB.
-   * </pre>
-   *
-   * Protobuf type {@code forge_abi.TetherState}
-   */
-  public  static final class TetherState extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.TetherState)
-      TetherStateOrBuilder {
-    // Use TetherState.newBuilder() to construct.
-    private TetherState(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private TetherState() {
-      available_ = false;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private TetherState(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-
-              available_ = input.readBool();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return forge_abi.State.internal_static_forge_abi_TetherState_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return forge_abi.State.internal_static_forge_abi_TetherState_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              forge_abi.State.TetherState.class, forge_abi.State.TetherState.Builder.class);
-    }
-
-    public static final int AVAILABLE_FIELD_NUMBER = 1;
-    private boolean available_;
-    /**
-     * <code>bool available = 1;</code>
-     */
-    public boolean getAvailable() {
-      return available_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (available_ != false) {
-        output.writeBool(1, available_);
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (available_ != false) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(1, available_);
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof forge_abi.State.TetherState)) {
-        return super.equals(obj);
-      }
-      forge_abi.State.TetherState other = (forge_abi.State.TetherState) obj;
-
-      boolean result = true;
-      result = result && (getAvailable()
-          == other.getAvailable());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + AVAILABLE_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-          getAvailable());
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static forge_abi.State.TetherState parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.State.TetherState parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.State.TetherState parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static forge_abi.State.TetherState parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static forge_abi.State.TetherState parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.State.TetherState parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.State.TetherState parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static forge_abi.State.TetherState parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static forge_abi.State.TetherState parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static forge_abi.State.TetherState parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(forge_abi.State.TetherState prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * <pre>
-     * This is the one stored in state DB.
-     * </pre>
-     *
-     * Protobuf type {@code forge_abi.TetherState}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.TetherState)
-        forge_abi.State.TetherStateOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return forge_abi.State.internal_static_forge_abi_TetherState_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return forge_abi.State.internal_static_forge_abi_TetherState_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                forge_abi.State.TetherState.class, forge_abi.State.TetherState.Builder.class);
-      }
-
-      // Construct using forge_abi.State.TetherState.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        available_ = false;
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return forge_abi.State.internal_static_forge_abi_TetherState_descriptor;
-      }
-
-      public forge_abi.State.TetherState getDefaultInstanceForType() {
-        return forge_abi.State.TetherState.getDefaultInstance();
-      }
-
-      public forge_abi.State.TetherState build() {
-        forge_abi.State.TetherState result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public forge_abi.State.TetherState buildPartial() {
-        forge_abi.State.TetherState result = new forge_abi.State.TetherState(this);
-        result.available_ = available_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.State.TetherState) {
-          return mergeFrom((forge_abi.State.TetherState)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(forge_abi.State.TetherState other) {
-        if (other == forge_abi.State.TetherState.getDefaultInstance()) return this;
-        if (other.getAvailable() != false) {
-          setAvailable(other.getAvailable());
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        forge_abi.State.TetherState parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.State.TetherState) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private boolean available_ ;
-      /**
-       * <code>bool available = 1;</code>
-       */
-      public boolean getAvailable() {
-        return available_;
-      }
-      /**
-       * <code>bool available = 1;</code>
-       */
-      public Builder setAvailable(boolean value) {
-        
-        available_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>bool available = 1;</code>
-       */
-      public Builder clearAvailable() {
-        
-        available_ = false;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:forge_abi.TetherState)
-    }
-
-    // @@protoc_insertion_point(class_scope:forge_abi.TetherState)
-    private static final forge_abi.State.TetherState DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new forge_abi.State.TetherState();
-    }
-
-    public static forge_abi.State.TetherState getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<TetherState>
-        PARSER = new com.google.protobuf.AbstractParser<TetherState>() {
-      public TetherState parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new TetherState(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<TetherState> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<TetherState> getParserForType() {
-      return PARSER;
-    }
-
-    public forge_abi.State.TetherState getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface TetherInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.TetherInfo)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
      * <code>string hash = 1;</code>
      */
     java.lang.String getHash();
@@ -15610,29 +14907,40 @@ public final class State {
      * <code>.google.protobuf.Timestamp locktime = 10;</code>
      */
     com.google.protobuf.TimestampOrBuilder getLocktimeOrBuilder();
+
+    /**
+     * <code>string address = 11;</code>
+     */
+    java.lang.String getAddress();
+    /**
+     * <code>string address = 11;</code>
+     */
+    com.google.protobuf.ByteString
+        getAddressBytes();
   }
   /**
    * <pre>
    * This is just for displaying purpose.
    * </pre>
    *
-   * Protobuf type {@code forge_abi.TetherInfo}
+   * Protobuf type {@code forge_abi.TetherState}
    */
-  public  static final class TetherInfo extends
+  public  static final class TetherState extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.TetherInfo)
-      TetherInfoOrBuilder {
-    // Use TetherInfo.newBuilder() to construct.
-    private TetherInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:forge_abi.TetherState)
+      TetherStateOrBuilder {
+    // Use TetherState.newBuilder() to construct.
+    private TetherState(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private TetherInfo() {
+    private TetherState() {
       hash_ = "";
       available_ = false;
       custodian_ = "";
       depositor_ = "";
       withdrawer_ = "";
       target_ = "";
+      address_ = "";
     }
 
     @java.lang.Override
@@ -15640,7 +14948,7 @@ public final class State {
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
-    private TetherInfo(
+    private TetherState(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -15747,6 +15055,12 @@ public final class State {
 
               break;
             }
+            case 90: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              address_ = s;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -15760,14 +15074,14 @@ public final class State {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return forge_abi.State.internal_static_forge_abi_TetherInfo_descriptor;
+      return forge_abi.State.internal_static_forge_abi_TetherState_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return forge_abi.State.internal_static_forge_abi_TetherInfo_fieldAccessorTable
+      return forge_abi.State.internal_static_forge_abi_TetherState_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              forge_abi.State.TetherInfo.class, forge_abi.State.TetherInfo.Builder.class);
+              forge_abi.State.TetherState.class, forge_abi.State.TetherState.Builder.class);
     }
 
     public static final int HASH_FIELD_NUMBER = 1;
@@ -16033,6 +15347,40 @@ public final class State {
       return getLocktime();
     }
 
+    public static final int ADDRESS_FIELD_NUMBER = 11;
+    private volatile java.lang.Object address_;
+    /**
+     * <code>string address = 11;</code>
+     */
+    public java.lang.String getAddress() {
+      java.lang.Object ref = address_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        address_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string address = 11;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAddressBytes() {
+      java.lang.Object ref = address_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        address_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -16074,6 +15422,9 @@ public final class State {
       }
       if (locktime_ != null) {
         output.writeMessage(10, getLocktime());
+      }
+      if (!getAddressBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 11, address_);
       }
     }
 
@@ -16117,6 +15468,9 @@ public final class State {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(10, getLocktime());
       }
+      if (!getAddressBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(11, address_);
+      }
       memoizedSize = size;
       return size;
     }
@@ -16127,10 +15481,10 @@ public final class State {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof forge_abi.State.TetherInfo)) {
+      if (!(obj instanceof forge_abi.State.TetherState)) {
         return super.equals(obj);
       }
-      forge_abi.State.TetherInfo other = (forge_abi.State.TetherInfo) obj;
+      forge_abi.State.TetherState other = (forge_abi.State.TetherState) obj;
 
       boolean result = true;
       result = result && getHash()
@@ -16165,6 +15519,8 @@ public final class State {
         result = result && getLocktime()
             .equals(other.getLocktime());
       }
+      result = result && getAddress()
+          .equals(other.getAddress());
       return result;
     }
 
@@ -16204,63 +15560,65 @@ public final class State {
         hash = (37 * hash) + LOCKTIME_FIELD_NUMBER;
         hash = (53 * hash) + getLocktime().hashCode();
       }
+      hash = (37 * hash) + ADDRESS_FIELD_NUMBER;
+      hash = (53 * hash) + getAddress().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static forge_abi.State.TetherInfo parseFrom(
+    public static forge_abi.State.TetherState parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static forge_abi.State.TetherInfo parseFrom(
+    public static forge_abi.State.TetherState parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static forge_abi.State.TetherInfo parseFrom(byte[] data)
+    public static forge_abi.State.TetherState parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static forge_abi.State.TetherInfo parseFrom(
+    public static forge_abi.State.TetherState parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static forge_abi.State.TetherInfo parseFrom(java.io.InputStream input)
+    public static forge_abi.State.TetherState parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static forge_abi.State.TetherInfo parseFrom(
+    public static forge_abi.State.TetherState parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static forge_abi.State.TetherInfo parseDelimitedFrom(java.io.InputStream input)
+    public static forge_abi.State.TetherState parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static forge_abi.State.TetherInfo parseDelimitedFrom(
+    public static forge_abi.State.TetherState parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static forge_abi.State.TetherInfo parseFrom(
+    public static forge_abi.State.TetherState parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static forge_abi.State.TetherInfo parseFrom(
+    public static forge_abi.State.TetherState parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -16272,7 +15630,7 @@ public final class State {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(forge_abi.State.TetherInfo prototype) {
+    public static Builder newBuilder(forge_abi.State.TetherState prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -16291,25 +15649,25 @@ public final class State {
      * This is just for displaying purpose.
      * </pre>
      *
-     * Protobuf type {@code forge_abi.TetherInfo}
+     * Protobuf type {@code forge_abi.TetherState}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.TetherInfo)
-        forge_abi.State.TetherInfoOrBuilder {
+        // @@protoc_insertion_point(builder_implements:forge_abi.TetherState)
+        forge_abi.State.TetherStateOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return forge_abi.State.internal_static_forge_abi_TetherInfo_descriptor;
+        return forge_abi.State.internal_static_forge_abi_TetherState_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return forge_abi.State.internal_static_forge_abi_TetherInfo_fieldAccessorTable
+        return forge_abi.State.internal_static_forge_abi_TetherState_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                forge_abi.State.TetherInfo.class, forge_abi.State.TetherInfo.Builder.class);
+                forge_abi.State.TetherState.class, forge_abi.State.TetherState.Builder.class);
       }
 
-      // Construct using forge_abi.State.TetherInfo.newBuilder()
+      // Construct using forge_abi.State.TetherState.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -16362,28 +15720,30 @@ public final class State {
           locktime_ = null;
           locktimeBuilder_ = null;
         }
+        address_ = "";
+
         return this;
       }
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return forge_abi.State.internal_static_forge_abi_TetherInfo_descriptor;
+        return forge_abi.State.internal_static_forge_abi_TetherState_descriptor;
       }
 
-      public forge_abi.State.TetherInfo getDefaultInstanceForType() {
-        return forge_abi.State.TetherInfo.getDefaultInstance();
+      public forge_abi.State.TetherState getDefaultInstanceForType() {
+        return forge_abi.State.TetherState.getDefaultInstance();
       }
 
-      public forge_abi.State.TetherInfo build() {
-        forge_abi.State.TetherInfo result = buildPartial();
+      public forge_abi.State.TetherState build() {
+        forge_abi.State.TetherState result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public forge_abi.State.TetherInfo buildPartial() {
-        forge_abi.State.TetherInfo result = new forge_abi.State.TetherInfo(this);
+      public forge_abi.State.TetherState buildPartial() {
+        forge_abi.State.TetherState result = new forge_abi.State.TetherState(this);
         result.hash_ = hash_;
         result.available_ = available_;
         result.custodian_ = custodian_;
@@ -16410,6 +15770,7 @@ public final class State {
         } else {
           result.locktime_ = locktimeBuilder_.build();
         }
+        result.address_ = address_;
         onBuilt();
         return result;
       }
@@ -16441,16 +15802,16 @@ public final class State {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.State.TetherInfo) {
-          return mergeFrom((forge_abi.State.TetherInfo)other);
+        if (other instanceof forge_abi.State.TetherState) {
+          return mergeFrom((forge_abi.State.TetherState)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(forge_abi.State.TetherInfo other) {
-        if (other == forge_abi.State.TetherInfo.getDefaultInstance()) return this;
+      public Builder mergeFrom(forge_abi.State.TetherState other) {
+        if (other == forge_abi.State.TetherState.getDefaultInstance()) return this;
         if (!other.getHash().isEmpty()) {
           hash_ = other.hash_;
           onChanged();
@@ -16486,6 +15847,10 @@ public final class State {
         if (other.hasLocktime()) {
           mergeLocktime(other.getLocktime());
         }
+        if (!other.getAddress().isEmpty()) {
+          address_ = other.address_;
+          onChanged();
+        }
         onChanged();
         return this;
       }
@@ -16498,11 +15863,11 @@ public final class State {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        forge_abi.State.TetherInfo parsedMessage = null;
+        forge_abi.State.TetherState parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.State.TetherInfo) e.getUnfinishedMessage();
+          parsedMessage = (forge_abi.State.TetherState) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -17350,6 +16715,650 @@ public final class State {
         }
         return locktimeBuilder_;
       }
+
+      private java.lang.Object address_ = "";
+      /**
+       * <code>string address = 11;</code>
+       */
+      public java.lang.String getAddress() {
+        java.lang.Object ref = address_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          address_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string address = 11;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAddressBytes() {
+        java.lang.Object ref = address_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          address_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string address = 11;</code>
+       */
+      public Builder setAddress(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        address_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string address = 11;</code>
+       */
+      public Builder clearAddress() {
+        
+        address_ = getDefaultInstance().getAddress();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string address = 11;</code>
+       */
+      public Builder setAddressBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        address_ = value;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:forge_abi.TetherState)
+    }
+
+    // @@protoc_insertion_point(class_scope:forge_abi.TetherState)
+    private static final forge_abi.State.TetherState DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new forge_abi.State.TetherState();
+    }
+
+    public static forge_abi.State.TetherState getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<TetherState>
+        PARSER = new com.google.protobuf.AbstractParser<TetherState>() {
+      public TetherState parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new TetherState(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<TetherState> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TetherState> getParserForType() {
+      return PARSER;
+    }
+
+    public forge_abi.State.TetherState getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface TetherInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.TetherInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>bool available = 1;</code>
+     */
+    boolean getAvailable();
+
+    /**
+     * <code>string hash = 2;</code>
+     */
+    java.lang.String getHash();
+    /**
+     * <code>string hash = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getHashBytes();
+  }
+  /**
+   * <pre>
+   * This is the one stored in state DB.
+   * </pre>
+   *
+   * Protobuf type {@code forge_abi.TetherInfo}
+   */
+  public  static final class TetherInfo extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:forge_abi.TetherInfo)
+      TetherInfoOrBuilder {
+    // Use TetherInfo.newBuilder() to construct.
+    private TetherInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private TetherInfo() {
+      available_ = false;
+      hash_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private TetherInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              available_ = input.readBool();
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              hash_ = s;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return forge_abi.State.internal_static_forge_abi_TetherInfo_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return forge_abi.State.internal_static_forge_abi_TetherInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              forge_abi.State.TetherInfo.class, forge_abi.State.TetherInfo.Builder.class);
+    }
+
+    public static final int AVAILABLE_FIELD_NUMBER = 1;
+    private boolean available_;
+    /**
+     * <code>bool available = 1;</code>
+     */
+    public boolean getAvailable() {
+      return available_;
+    }
+
+    public static final int HASH_FIELD_NUMBER = 2;
+    private volatile java.lang.Object hash_;
+    /**
+     * <code>string hash = 2;</code>
+     */
+    public java.lang.String getHash() {
+      java.lang.Object ref = hash_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        hash_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string hash = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getHashBytes() {
+      java.lang.Object ref = hash_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        hash_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (available_ != false) {
+        output.writeBool(1, available_);
+      }
+      if (!getHashBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, hash_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (available_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(1, available_);
+      }
+      if (!getHashBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, hash_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof forge_abi.State.TetherInfo)) {
+        return super.equals(obj);
+      }
+      forge_abi.State.TetherInfo other = (forge_abi.State.TetherInfo) obj;
+
+      boolean result = true;
+      result = result && (getAvailable()
+          == other.getAvailable());
+      result = result && getHash()
+          .equals(other.getHash());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + AVAILABLE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getAvailable());
+      hash = (37 * hash) + HASH_FIELD_NUMBER;
+      hash = (53 * hash) + getHash().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static forge_abi.State.TetherInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.State.TetherInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.State.TetherInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.State.TetherInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.State.TetherInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.State.TetherInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.State.TetherInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static forge_abi.State.TetherInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.State.TetherInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.State.TetherInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(forge_abi.State.TetherInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * This is the one stored in state DB.
+     * </pre>
+     *
+     * Protobuf type {@code forge_abi.TetherInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:forge_abi.TetherInfo)
+        forge_abi.State.TetherInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return forge_abi.State.internal_static_forge_abi_TetherInfo_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return forge_abi.State.internal_static_forge_abi_TetherInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                forge_abi.State.TetherInfo.class, forge_abi.State.TetherInfo.Builder.class);
+      }
+
+      // Construct using forge_abi.State.TetherInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        available_ = false;
+
+        hash_ = "";
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return forge_abi.State.internal_static_forge_abi_TetherInfo_descriptor;
+      }
+
+      public forge_abi.State.TetherInfo getDefaultInstanceForType() {
+        return forge_abi.State.TetherInfo.getDefaultInstance();
+      }
+
+      public forge_abi.State.TetherInfo build() {
+        forge_abi.State.TetherInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public forge_abi.State.TetherInfo buildPartial() {
+        forge_abi.State.TetherInfo result = new forge_abi.State.TetherInfo(this);
+        result.available_ = available_;
+        result.hash_ = hash_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof forge_abi.State.TetherInfo) {
+          return mergeFrom((forge_abi.State.TetherInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(forge_abi.State.TetherInfo other) {
+        if (other == forge_abi.State.TetherInfo.getDefaultInstance()) return this;
+        if (other.getAvailable() != false) {
+          setAvailable(other.getAvailable());
+        }
+        if (!other.getHash().isEmpty()) {
+          hash_ = other.hash_;
+          onChanged();
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        forge_abi.State.TetherInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (forge_abi.State.TetherInfo) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private boolean available_ ;
+      /**
+       * <code>bool available = 1;</code>
+       */
+      public boolean getAvailable() {
+        return available_;
+      }
+      /**
+       * <code>bool available = 1;</code>
+       */
+      public Builder setAvailable(boolean value) {
+        
+        available_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool available = 1;</code>
+       */
+      public Builder clearAvailable() {
+        
+        available_ = false;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object hash_ = "";
+      /**
+       * <code>string hash = 2;</code>
+       */
+      public java.lang.String getHash() {
+        java.lang.Object ref = hash_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          hash_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string hash = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getHashBytes() {
+        java.lang.Object ref = hash_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          hash_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string hash = 2;</code>
+       */
+      public Builder setHash(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        hash_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string hash = 2;</code>
+       */
+      public Builder clearHash() {
+        
+        hash_ = getDefaultInstance().getHash();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string hash = 2;</code>
+       */
+      public Builder setHashBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        hash_ = value;
+        onChanged();
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
@@ -17475,73 +17484,74 @@ public final class State {
     java.lang.String[] descriptorData = {
       "\n\013state.proto\022\tforge_abi\032\031google/protobu" +
       "f/any.proto\032\037google/protobuf/timestamp.p" +
-      "roto\032\nenum.proto\032\ntype.proto\"\355\003\n\014Account" +
-      "State\022#\n\007balance\030\001 \001(\0132\022.forge_abi.BigUi" +
-      "nt\022\r\n\005nonce\030\002 \001(\004\022\017\n\007num_txs\030\003 \001(\004\022\017\n\007ad" +
-      "dress\030\004 \001(\t\022\n\n\002pk\030\005 \001(\014\022#\n\004type\030\006 \001(\0132\025." +
-      "forge_abi.WalletType\022\017\n\007moniker\030\007 \001(\t\022(\n" +
-      "\007context\030\010 \001(\0132\027.forge_abi.StateContext\022" +
-      "\016\n\006issuer\030\t \001(\t\022\023\n\013migrated_to\030\r \003(\t\022\025\n\r" +
-      "migrated_from\030\016 \003(\t\022\022\n\nnum_assets\030\017 \001(\004\022",
-      "&\n\005stake\030\020 \001(\0132\027.forge_abi.StakeContext\022" +
-      ".\n\014pinned_files\030\021 \001(\0132\030.forge_abi.Circul" +
-      "arQueue\022!\n\004poke\030\022 \001(\0132\023.forge_abi.PokeIn" +
-      "fo\022,\n\020deposit_received\030\023 \001(\0132\022.forge_abi" +
-      ".BigUint\022\"\n\004data\0302 \001(\0132\024.google.protobuf" +
-      ".Any\"\254\002\n\nAssetState\022\017\n\007address\030\001 \001(\t\022\r\n\005" +
-      "owner\030\002 \001(\t\022\017\n\007moniker\030\003 \001(\t\022\020\n\010readonly" +
-      "\030\004 \001(\010\022\025\n\rtransferrable\030\005 \001(\010\022\013\n\003ttl\030\006 \001" +
-      "(\r\0221\n\rconsumed_time\030\007 \001(\0132\032.google.proto" +
-      "buf.Timestamp\022\016\n\006issuer\030\010 \001(\t\022&\n\005stake\030\r",
-      " \001(\0132\027.forge_abi.StakeContext\022(\n\007context" +
-      "\030\016 \001(\0132\027.forge_abi.StateContext\022\"\n\004data\030" +
-      "2 \001(\0132\024.google.protobuf.Any\"-\n\014CoreProto" +
-      "col\022\014\n\004name\030\001 \001(\t\022\017\n\007address\030\002 \001(\t\"\252\005\n\nF" +
-      "orgeState\022\017\n\007address\030\001 \001(\t\022-\n\tconsensus\030" +
-      "\002 \001(\0132\032.forge_abi.ConsensusParams\022/\n\005tas" +
-      "ks\030\003 \003(\0132 .forge_abi.ForgeState.TasksEnt" +
-      "ry\022>\n\rstake_summary\030\004 \003(\0132\'.forge_abi.Fo" +
-      "rgeState.StakeSummaryEntry\022\017\n\007version\030\005 " +
-      "\001(\t\022\026\n\016forge_app_hash\030\007 \001(\014\022$\n\005token\030\010 \001",
-      "(\0132\025.forge_abi.ForgeToken\022/\n\ttx_config\030\t" +
-      " \001(\0132\034.forge_abi.TransactionConfig\022,\n\014st" +
-      "ake_config\030\n \001(\0132\026.forge_abi.StakeConfig" +
-      "\022*\n\013poke_config\030\013 \001(\0132\025.forge_abi.PokeCo" +
-      "nfig\022*\n\tprotocols\030\014 \003(\0132\027.forge_abi.Core" +
-      "Protocol\022,\n\014upgrade_info\030\016 \001(\0132\026.forge_a" +
-      "bi.UpgradeInfo\022\"\n\004data\030\017 \001(\0132\024.google.pr" +
-      "otobuf.Any\032E\n\nTasksEntry\022\013\n\003key\030\001 \001(\004\022&\n" +
-      "\005value\030\002 \001(\0132\027.forge_abi.UpgradeTasks:\0028" +
-      "\001\032L\n\021StakeSummaryEntry\022\013\n\003key\030\001 \001(\r\022&\n\005v",
-      "alue\030\002 \001(\0132\027.forge_abi.StakeSummary:\0028\001\"" +
-      "_\n\tRootState\022\017\n\007address\030\001 \001(\t\022\017\n\007account" +
-      "\030\002 \001(\014\022\r\n\005asset\030\003 \001(\014\022\017\n\007receipt\030\004 \001(\014\022\020" +
-      "\n\010protocol\030\005 \001(\014\"\273\001\n\nStakeState\022\017\n\007addre" +
-      "ss\030\001 \001(\t\022\014\n\004from\030\002 \001(\t\022\n\n\002to\030\003 \001(\t\022#\n\007ba" +
-      "lance\030\004 \001(\0132\022.forge_abi.BigUint\022\017\n\007messa" +
-      "ge\030\005 \001(\t\022(\n\007context\030\016 \001(\0132\027.forge_abi.St" +
-      "ateContext\022\"\n\004data\030\017 \001(\0132\024.google.protob" +
-      "uf.Any\"\267\001\n\017StatisticsState\022\017\n\007address\030\001 " +
-      "\001(\t\022\022\n\nnum_blocks\030\002 \001(\004\022\017\n\007num_txs\030\003 \001(\004",
-      "\022&\n\nnum_stakes\030\004 \001(\0132\022.forge_abi.BigUint" +
-      "\022\026\n\016num_validators\030\005 \001(\r\022.\n\rtx_statistic" +
-      "s\030\006 \001(\0132\027.forge_abi.TxStatistics\"!\n\016Blac" +
-      "klistState\022\017\n\007address\030\001 \003(\t\"\235\002\n\rProtocol" +
-      "State\022\017\n\007address\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\017\n\007" +
-      "version\030\003 \001(\r\022\023\n\013description\030\004 \001(\t\022\017\n\007tx" +
-      "_hash\030\005 \001(\t\022\021\n\troot_hash\030\006 \001(\014\022)\n\006status" +
-      "\030\007 \001(\0162\031.forge_abi.ProtocolStatus\022\023\n\013mig" +
+      "roto\032\nenum.proto\032\ntype.proto\032\025deploy_pro" +
+      "tocol.proto\"\361\003\n\014AccountState\022#\n\007balance\030" +
+      "\001 \001(\0132\022.forge_abi.BigUint\022\r\n\005nonce\030\002 \001(\004" +
+      "\022\017\n\007num_txs\030\003 \001(\004\022\017\n\007address\030\004 \001(\t\022\n\n\002pk" +
+      "\030\005 \001(\014\022\'\n\004type\030\006 \001(\0132\025.forge_abi.WalletT" +
+      "ypeB\002\030\001\022\017\n\007moniker\030\007 \001(\t\022(\n\007context\030\010 \001(" +
+      "\0132\027.forge_abi.StateContext\022\016\n\006issuer\030\t \001" +
+      "(\t\022\023\n\013migrated_to\030\r \003(\t\022\025\n\rmigrated_from",
+      "\030\016 \003(\t\022\022\n\nnum_assets\030\017 \001(\004\022&\n\005stake\030\020 \001(" +
+      "\0132\027.forge_abi.StakeContext\022.\n\014pinned_fil" +
+      "es\030\021 \001(\0132\030.forge_abi.CircularQueue\022!\n\004po" +
+      "ke\030\022 \001(\0132\023.forge_abi.PokeInfo\022,\n\020deposit" +
+      "_received\030\023 \001(\0132\022.forge_abi.BigUint\022\"\n\004d" +
+      "ata\0302 \001(\0132\024.google.protobuf.Any\"\254\002\n\nAsse" +
+      "tState\022\017\n\007address\030\001 \001(\t\022\r\n\005owner\030\002 \001(\t\022\017" +
+      "\n\007moniker\030\003 \001(\t\022\020\n\010readonly\030\004 \001(\010\022\025\n\rtra" +
+      "nsferrable\030\005 \001(\010\022\013\n\003ttl\030\006 \001(\r\0221\n\rconsume" +
+      "d_time\030\007 \001(\0132\032.google.protobuf.Timestamp",
+      "\022\016\n\006issuer\030\010 \001(\t\022&\n\005stake\030\r \001(\0132\027.forge_" +
+      "abi.StakeContext\022(\n\007context\030\016 \001(\0132\027.forg" +
+      "e_abi.StateContext\022\"\n\004data\0302 \001(\0132\024.googl" +
+      "e.protobuf.Any\"-\n\014CoreProtocol\022\014\n\004name\030\001" +
+      " \001(\t\022\017\n\007address\030\002 \001(\t\"\252\005\n\nForgeState\022\017\n\007" +
+      "address\030\001 \001(\t\022-\n\tconsensus\030\002 \001(\0132\032.forge" +
+      "_abi.ConsensusParams\022/\n\005tasks\030\003 \003(\0132 .fo" +
+      "rge_abi.ForgeState.TasksEntry\022>\n\rstake_s" +
+      "ummary\030\004 \003(\0132\'.forge_abi.ForgeState.Stak" +
+      "eSummaryEntry\022\017\n\007version\030\005 \001(\t\022\026\n\016forge_",
+      "app_hash\030\007 \001(\014\022$\n\005token\030\010 \001(\0132\025.forge_ab" +
+      "i.ForgeToken\022/\n\ttx_config\030\t \001(\0132\034.forge_" +
+      "abi.TransactionConfig\022,\n\014stake_config\030\n " +
+      "\001(\0132\026.forge_abi.StakeConfig\022*\n\013poke_conf" +
+      "ig\030\013 \001(\0132\025.forge_abi.PokeConfig\022*\n\tproto" +
+      "cols\030\014 \003(\0132\027.forge_abi.CoreProtocol\022,\n\014u" +
+      "pgrade_info\030\016 \001(\0132\026.forge_abi.UpgradeInf" +
+      "o\022\"\n\004data\030\017 \001(\0132\024.google.protobuf.Any\032E\n" +
+      "\nTasksEntry\022\013\n\003key\030\001 \001(\004\022&\n\005value\030\002 \001(\0132" +
+      "\027.forge_abi.UpgradeTasks:\0028\001\032L\n\021StakeSum",
+      "maryEntry\022\013\n\003key\030\001 \001(\r\022&\n\005value\030\002 \001(\0132\027." +
+      "forge_abi.StakeSummary:\0028\001\"_\n\tRootState\022" +
+      "\017\n\007address\030\001 \001(\t\022\017\n\007account\030\002 \001(\014\022\r\n\005ass" +
+      "et\030\003 \001(\014\022\017\n\007receipt\030\004 \001(\014\022\020\n\010protocol\030\005 " +
+      "\001(\014\"\273\001\n\nStakeState\022\017\n\007address\030\001 \001(\t\022\014\n\004f" +
+      "rom\030\002 \001(\t\022\n\n\002to\030\003 \001(\t\022#\n\007balance\030\004 \001(\0132\022" +
+      ".forge_abi.BigUint\022\017\n\007message\030\005 \001(\t\022(\n\007c" +
+      "ontext\030\016 \001(\0132\027.forge_abi.StateContext\022\"\n" +
+      "\004data\030\017 \001(\0132\024.google.protobuf.Any\"\267\001\n\017St" +
+      "atisticsState\022\017\n\007address\030\001 \001(\t\022\022\n\nnum_bl",
+      "ocks\030\002 \001(\004\022\017\n\007num_txs\030\003 \001(\004\022&\n\nnum_stake" +
+      "s\030\004 \001(\0132\022.forge_abi.BigUint\022\026\n\016num_valid" +
+      "ators\030\005 \001(\r\022.\n\rtx_statistics\030\006 \001(\0132\027.for" +
+      "ge_abi.TxStatistics\"!\n\016BlacklistState\022\017\n" +
+      "\007address\030\001 \003(\t\"\202\002\n\rProtocolState\022\017\n\007addr" +
+      "ess\030\001 \001(\t\022(\n\003itx\030\002 \001(\0132\033.forge_abi.Deplo" +
+      "yProtocolTx\022\021\n\troot_hash\030\003 \001(\014\022)\n\006status" +
+      "\030\004 \001(\0162\031.forge_abi.ProtocolStatus\022\023\n\013mig" +
       "rated_to\030\014 \003(\t\022\025\n\rmigrated_from\030\r \003(\t\022(\n" +
       "\007context\030\016 \001(\0132\027.forge_abi.StateContext\022",
-      "\"\n\004data\030\017 \001(\0132\024.google.protobuf.Any\" \n\013T" +
-      "etherState\022\021\n\tavailable\030\001 \001(\010\"\224\002\n\nTether" +
-      "Info\022\014\n\004hash\030\001 \001(\t\022\021\n\tavailable\030\002 \001(\010\022\021\n" +
-      "\tcustodian\030\003 \001(\t\022\021\n\tdepositor\030\004 \001(\t\022\022\n\nw" +
-      "ithdrawer\030\005 \001(\t\022!\n\005value\030\006 \001(\0132\022.forge_a" +
-      "bi.BigUint\022&\n\ncommission\030\007 \001(\0132\022.forge_a" +
-      "bi.BigUint\022\"\n\006charge\030\010 \001(\0132\022.forge_abi.B" +
-      "igUint\022\016\n\006target\030\t \001(\t\022,\n\010locktime\030\n \001(\013" +
-      "2\032.google.protobuf.Timestampb\006proto3"
+      "\"\n\004data\030\017 \001(\0132\024.google.protobuf.Any\"\246\002\n\013" +
+      "TetherState\022\014\n\004hash\030\001 \001(\t\022\021\n\tavailable\030\002" +
+      " \001(\010\022\021\n\tcustodian\030\003 \001(\t\022\021\n\tdepositor\030\004 \001" +
+      "(\t\022\022\n\nwithdrawer\030\005 \001(\t\022!\n\005value\030\006 \001(\0132\022." +
+      "forge_abi.BigUint\022&\n\ncommission\030\007 \001(\0132\022." +
+      "forge_abi.BigUint\022\"\n\006charge\030\010 \001(\0132\022.forg" +
+      "e_abi.BigUint\022\016\n\006target\030\t \001(\t\022,\n\010locktim" +
+      "e\030\n \001(\0132\032.google.protobuf.Timestamp\022\017\n\007a" +
+      "ddress\030\013 \001(\t\"-\n\nTetherInfo\022\021\n\tavailable\030" +
+      "\001 \001(\010\022\014\n\004hash\030\002 \001(\tb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -17558,6 +17568,7 @@ public final class State {
           com.google.protobuf.TimestampProto.getDescriptor(),
           forge_abi.Enum.getDescriptor(),
           forge_abi.Type.getDescriptor(),
+          forge_abi.DeployProtocol.getDescriptor(),
         }, assigner);
     internal_static_forge_abi_AccountState_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -17624,23 +17635,24 @@ public final class State {
     internal_static_forge_abi_ProtocolState_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ProtocolState_descriptor,
-        new java.lang.String[] { "Address", "Name", "Version", "Description", "TxHash", "RootHash", "Status", "MigratedTo", "MigratedFrom", "Context", "Data", });
+        new java.lang.String[] { "Address", "Itx", "RootHash", "Status", "MigratedTo", "MigratedFrom", "Context", "Data", });
     internal_static_forge_abi_TetherState_descriptor =
       getDescriptor().getMessageTypes().get(9);
     internal_static_forge_abi_TetherState_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_TetherState_descriptor,
-        new java.lang.String[] { "Available", });
+        new java.lang.String[] { "Hash", "Available", "Custodian", "Depositor", "Withdrawer", "Value", "Commission", "Charge", "Target", "Locktime", "Address", });
     internal_static_forge_abi_TetherInfo_descriptor =
       getDescriptor().getMessageTypes().get(10);
     internal_static_forge_abi_TetherInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_TetherInfo_descriptor,
-        new java.lang.String[] { "Hash", "Available", "Custodian", "Depositor", "Withdrawer", "Value", "Commission", "Charge", "Target", "Locktime", });
+        new java.lang.String[] { "Available", "Hash", });
     com.google.protobuf.AnyProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
     forge_abi.Enum.getDescriptor();
     forge_abi.Type.getDescriptor();
+    forge_abi.DeployProtocol.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

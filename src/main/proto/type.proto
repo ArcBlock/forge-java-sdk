@@ -22,7 +22,7 @@ message WalletType {
 }
 
 message WalletInfo {
-  WalletType type = 1;
+  WalletType type = 1 [ deprecated = true ];
   bytes sk = 2;
   bytes pk = 3;
   string address = 4;
@@ -154,11 +154,16 @@ message TransactionInfo {
   google.protobuf.Timestamp time = 7;
 }
 
+message DeclareConfig {
+  bool restricted = 1;
+  uint32 hierarchy = 2;
+}
 message TransactionConfig {
   uint32 max_asset_size = 1;
   uint32 max_list_size = 2;
   uint32 max_multisig = 3;
   uint64 minimum_stake = 4;
+  DeclareConfig declare = 5;
 }
 
 message BlockInfo {

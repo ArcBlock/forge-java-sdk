@@ -923,9 +923,10 @@ public final class Declare {
   static {
     java.lang.String[] descriptorData = {
       "\n\rdeclare.proto\022\tforge_abi\032\031google/proto" +
-      "buf/any.proto\"P\n\tDeclareTx\022\017\n\007moniker\030\001 " +
-      "\001(\t\022\016\n\006issuer\030\002 \001(\t\022\"\n\004data\030\017 \001(\0132\024.goog" +
-      "le.protobuf.Anyb\006proto3"
+      "buf/any.proto\032\037google/protobuf/timestamp" +
+      ".proto\032\nenum.proto\032\ntype.proto\"P\n\tDeclar" +
+      "eTx\022\017\n\007moniker\030\001 \001(\t\022\016\n\006issuer\030\002 \001(\t\022\"\n\004" +
+      "data\030\017 \001(\0132\024.google.protobuf.Anyb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -939,6 +940,9 @@ public final class Declare {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.AnyProto.getDescriptor(),
+          com.google.protobuf.TimestampProto.getDescriptor(),
+          forge_abi.Enum.getDescriptor(),
+          forge_abi.Type.getDescriptor(),
         }, assigner);
     internal_static_forge_abi_DeclareTx_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -947,6 +951,9 @@ public final class Declare {
         internal_static_forge_abi_DeclareTx_descriptor,
         new java.lang.String[] { "Moniker", "Issuer", "Data", });
     com.google.protobuf.AnyProto.getDescriptor();
+    com.google.protobuf.TimestampProto.getDescriptor();
+    forge_abi.Enum.getDescriptor();
+    forge_abi.Type.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

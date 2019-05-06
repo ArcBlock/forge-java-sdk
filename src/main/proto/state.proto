@@ -5,6 +5,7 @@ import "google/protobuf/any.proto";
 import "google/protobuf/timestamp.proto";
 import "enum.proto";
 import "type.proto";
+import "deploy_protocol.proto";
 
 // State definition
 
@@ -14,7 +15,7 @@ message AccountState {
   uint64 num_txs = 3;
   string address = 4;
   bytes pk = 5;
-  WalletType type = 6;
+  WalletType type = 6 [ deprecated = true ];
   string moniker = 7;
   StateContext context = 8;
   string issuer = 9;
@@ -31,7 +32,8 @@ message AccountState {
   StakeContext stake = 16;
   CircularQueue pinned_files = 17;
   PokeInfo poke = 18;
-  // The current deposit this account has received. It cannot exceed the deposit cap.
+  // The current deposit this account has received. It cannot exceed the deposit
+  // cap.
   BigUint deposit_received = 19;
 
   google.protobuf.Any data = 50;
@@ -126,13 +128,10 @@ message BlacklistState { repeated string address = 1; }
 
 message ProtocolState {
   string address = 1;
-  string name = 2;
-  uint32 version = 3;
-  string description = 4;
-  string tx_hash = 5;
+  DeployProtocolTx itx = 2;
   // root hash of the MPT of this tx protocol
-  bytes root_hash = 6;
-  ProtocolStatus status = 7;
+  bytes root_hash = 3;
+  ProtocolStatus status = 4;
 
   repeated string migrated_to = 12;
   repeated string migrated_from = 13;
@@ -141,13 +140,8 @@ message ProtocolState {
   google.protobuf.Any data = 15; // forge app can define their own app state
 }
 
-// This is the one stored in state DB.
-message TetherState {
-  bool available = 1;
-}
-
 // This is just for displaying purpose.
-message TetherInfo {
+message TetherState {
   string hash = 1;
   bool available = 2;
   string custodian = 3;
@@ -158,4 +152,11 @@ message TetherInfo {
   BigUint charge = 8;
   string target = 9;
   google.protobuf.Timestamp locktime = 10;
+  string address = 11;
+}
+
+// This is the one stored in state DB.
+message TetherInfo {
+  bool available = 1;
+  string hash = 2;
 }

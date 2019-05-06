@@ -9,7 +9,7 @@ import io.arcblock.forge.utils.Base58Btc
  *
  **/
 
-object Util{
+object DidUtils{
 
   /**
    * decodeDidRoleType
@@ -17,7 +17,7 @@ object Util{
    * @return RoleType
    */
   fun decodeDidRoleType(did: String):RoleType{
-    return Util.decodeDidRoleType(Base58Btc.decode(did.removePrefix("did:abt:")))
+    return DidUtils.decodeDidRoleType(Base58Btc.decode(did.removePrefix("did:abt:")))
   }
 
   /**
@@ -25,7 +25,7 @@ object Util{
    * @param did DID address no matter did:abt:xxx or zXXXXXX
    */
   fun decodeDidHashType(did: String):HashType{
-    return Util.decodeDidHashType(Base58Btc.decode(did.removePrefix("did:abt:")))
+    return DidUtils.decodeDidHashType(Base58Btc.decode(did.removePrefix("did:abt:")))
   }
 
   /**
@@ -33,7 +33,7 @@ object Util{
    * @param did DID address no matter did:abt:xxx or zXXXXXX
    */
   fun decodeDidSignType(did: String):KeyType {
-    return Util.decodeDidSignType(Base58Btc.decode(did.removePrefix("did:abt:")))
+    return DidUtils.decodeDidSignType(Base58Btc.decode(did.removePrefix("did:abt:")))
   }
 
   /**

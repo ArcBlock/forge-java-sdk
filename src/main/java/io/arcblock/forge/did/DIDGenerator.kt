@@ -1,17 +1,15 @@
 package io.arcblock.forge.did
 
-import com.google.crypto.tink.subtle.Ed25519Sign
+
 import forge_abi.*
 import io.arcblock.forge.*
 import io.arcblock.forge.did.HashType.SHA3
 import io.arcblock.forge.did.KeyType.ED25519
-import io.arcblock.forge.did.KeyType.SECP256K1
 import io.arcblock.forge.did.RoleType.*
 import io.arcblock.forge.hash.ArcSha3Hasher
 import org.bitcoinj.core.Base58
 import org.bitcoinj.crypto.ChildNumber
 import org.bitcoinj.crypto.HDKeyDerivation
-import org.web3j.crypto.ECKeyPair
 import java.math.BigInteger
 
 /**
@@ -123,11 +121,12 @@ object DIDGenerator {
    * @return Asset address
    */
   fun genAssetDid(senderAddress: String, itx: ByteArray): String{
-    val hashType = Util.decodeDidHashType(senderAddress)
-    val keyType  = Util.decodeDidSignType(senderAddress)
+    val hashType = DidUtils.decodeDidHashType(senderAddress)
+    val keyType  = DidUtils.decodeDidSignType(senderAddress)
     val itxNoAddress= CreateAsset.CreateAssetTx.newBuilder().mergeFrom(itx).clearAddress().build().toByteArray()
     return pk2did(ASSET,keyType,hashType,senderAddress.toByteArray()+ArcSha3Hasher.sha(itxNoAddress))
   }
+
 
 
   /**

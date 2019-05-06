@@ -3,7 +3,7 @@ package io.arcblock.forge.utils
 import org.bitcoinj.core.Base58
 
 /**
- * Base58 Btc Util
+ * Base58 Btc DidUtils
  *
  **/
 object Base58Btc {

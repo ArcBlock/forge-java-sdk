@@ -58,7 +58,7 @@ public final class Service {
       "oreFile(\001\022F\n\tload_file\022\032.forge_abi.Reque" +
       "stLoadFile\032\033.forge_abi.ResponseLoadFile0" +
       "\001\022A\n\010pin_file\022\031.forge_abi.RequestPinFile" +
-      "\032\032.forge_abi.ResponsePinFile2\261\004\n\010StateRp" +
+      "\032\032.forge_abi.ResponsePinFile2\264\004\n\010StateRp" +
       "c\022^\n\021get_account_state\022!.forge_abi.Reque" +
       "stGetAccountState\032\".forge_abi.ResponseGe" +
       "tAccountState(\0010\001\022X\n\017get_asset_state\022\037.f" +
@@ -70,42 +70,42 @@ public final class Service {
       "otocolState\032#.forge_abi.ResponseGetProto" +
       "colState(\0010\001\022X\n\017get_stake_state\022\037.forge_" +
       "abi.RequestGetStakeState\032 .forge_abi.Res" +
-      "ponseGetStakeState(\0010\001\022X\n\017get_tether_inf" +
-      "o\022\037.forge_abi.RequestGetTetherInfo\032 .for" +
-      "ge_abi.ResponseGetTetherInfo(\0010\0012\355\003\n\tWal",
-      "letRpc\022P\n\rcreate_wallet\022\036.forge_abi.Requ" +
-      "estCreateWallet\032\037.forge_abi.ResponseCrea" +
-      "teWallet\022J\n\013load_wallet\022\034.forge_abi.Requ" +
-      "estLoadWallet\032\035.forge_abi.ResponseLoadWa" +
-      "llet\022S\n\016recover_wallet\022\037.forge_abi.Reque" +
-      "stRecoverWallet\032 .forge_abi.ResponseReco" +
-      "verWallet\022L\n\013list_wallet\022\034.forge_abi.Req" +
-      "uestListWallet\032\035.forge_abi.ResponseListW" +
-      "allet0\001\022P\n\rremove_wallet\022\036.forge_abi.Req" +
-      "uestRemoveWallet\032\037.forge_abi.ResponseRem",
-      "oveWallet\022M\n\014declare_node\022\035.forge_abi.Re" +
-      "questDeclareNode\032\036.forge_abi.ResponseDec" +
-      "lareNode2\227\006\n\010StatsRpc\022T\n\017get_forge_stats" +
-      "\022\037.forge_abi.RequestGetForgeStats\032 .forg" +
-      "e_abi.ResponseGetForgeStats\022\\\n\021list_tran" +
-      "sactions\022\".forge_abi.RequestListTransact" +
-      "ions\032#.forge_abi.ResponseListTransaction" +
-      "s\022J\n\013list_assets\022\034.forge_abi.RequestList" +
-      "Assets\032\035.forge_abi.ResponseListAssets\022J\n" +
-      "\013list_stakes\022\034.forge_abi.RequestListStak",
-      "es\032\035.forge_abi.ResponseListStakes\022M\n\014lis" +
-      "t_account\022\035.forge_abi.RequestListAccount" +
-      "\032\036.forge_abi.ResponseListAccount\022Z\n\021list" +
-      "_top_accounts\022!.forge_abi.RequestListTop" +
-      "Accounts\032\".forge_abi.ResponseListTopAcco" +
-      "unts\022l\n\027list_asset_transactions\022\'.forge_" +
-      "abi.RequestListAssetTransactions\032(.forge" +
-      "_abi.ResponseListAssetTransactions\022J\n\013li" +
-      "st_blocks\022\034.forge_abi.RequestListBlocks\032" +
-      "\035.forge_abi.ResponseListBlocks\022Z\n\021get_he",
-      "alth_status\022!.forge_abi.RequestGetHealth" +
-      "Status\032\".forge_abi.ResponseGetHealthStat" +
-      "usb\006proto3"
+      "ponseGetStakeState(\0010\001\022[\n\020get_tether_sta" +
+      "te\022 .forge_abi.RequestGetTetherState\032!.f" +
+      "orge_abi.ResponseGetTetherState(\0010\0012\355\003\n\t",
+      "WalletRpc\022P\n\rcreate_wallet\022\036.forge_abi.R" +
+      "equestCreateWallet\032\037.forge_abi.ResponseC" +
+      "reateWallet\022J\n\013load_wallet\022\034.forge_abi.R" +
+      "equestLoadWallet\032\035.forge_abi.ResponseLoa" +
+      "dWallet\022S\n\016recover_wallet\022\037.forge_abi.Re" +
+      "questRecoverWallet\032 .forge_abi.ResponseR" +
+      "ecoverWallet\022L\n\013list_wallet\022\034.forge_abi." +
+      "RequestListWallet\032\035.forge_abi.ResponseLi" +
+      "stWallet0\001\022P\n\rremove_wallet\022\036.forge_abi." +
+      "RequestRemoveWallet\032\037.forge_abi.Response",
+      "RemoveWallet\022M\n\014declare_node\022\035.forge_abi" +
+      ".RequestDeclareNode\032\036.forge_abi.Response" +
+      "DeclareNode2\227\006\n\010StatsRpc\022T\n\017get_forge_st" +
+      "ats\022\037.forge_abi.RequestGetForgeStats\032 .f" +
+      "orge_abi.ResponseGetForgeStats\022\\\n\021list_t" +
+      "ransactions\022\".forge_abi.RequestListTrans" +
+      "actions\032#.forge_abi.ResponseListTransact" +
+      "ions\022J\n\013list_assets\022\034.forge_abi.RequestL" +
+      "istAssets\032\035.forge_abi.ResponseListAssets" +
+      "\022J\n\013list_stakes\022\034.forge_abi.RequestListS",
+      "takes\032\035.forge_abi.ResponseListStakes\022M\n\014" +
+      "list_account\022\035.forge_abi.RequestListAcco" +
+      "unt\032\036.forge_abi.ResponseListAccount\022Z\n\021l" +
+      "ist_top_accounts\022!.forge_abi.RequestList" +
+      "TopAccounts\032\".forge_abi.ResponseListTopA" +
+      "ccounts\022l\n\027list_asset_transactions\022\'.for" +
+      "ge_abi.RequestListAssetTransactions\032(.fo" +
+      "rge_abi.ResponseListAssetTransactions\022J\n" +
+      "\013list_blocks\022\034.forge_abi.RequestListBloc" +
+      "ks\032\035.forge_abi.ResponseListBlocks\022Z\n\021get",
+      "_health_status\022!.forge_abi.RequestGetHea" +
+      "lthStatus\032\".forge_abi.ResponseGetHealthS" +
+      "tatusb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

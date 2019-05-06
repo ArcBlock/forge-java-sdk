@@ -199,15 +199,15 @@ message ResponseGetForgeState {
   ForgeState state = 2;
 }
 
-message RequestGetTetherInfo {
-  string hash = 1;
+message RequestGetTetherState {
+  string address = 1;
   repeated string keys = 2;
   uint64 height = 3;
 }
 
-message ResponseGetTetherInfo {
+message ResponseGetTetherState {
   StatusCode code = 1;
-  TetherInfo info = 2;
+  TetherState state = 2;
 }
 
 // store_file(chunk): store a piece of data into ipfs, return its hash address

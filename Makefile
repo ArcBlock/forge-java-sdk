@@ -26,7 +26,7 @@ all: build
 test:
 	@echo "Running test suites..."
 	@./gradlew test
-	@./gradlew jacocoTestReport
+
 
 
 
@@ -42,6 +42,10 @@ download-proto:
 doc:
 	@echo "Building the documenation..."
 	@./gradlew dokka
+
+upload-doc:
+	@aws s3 sync $(OUTPUT_FOLDER) s3://docs.arcblock.io/forge/forge-java-sdk/ --region us-west-2 --profile prod
+
 
 precommit: dep lint doc build test
 
@@ -66,4 +70,5 @@ run:
 
 include .makefiles/*.mk
 
-.PHONY: build init travis-init install dep all test doc precommit travis clean watch run bump-version create-pr download-proto
+.PHONY: build init travis-init install dep all test doc precommit travis clean watch run bump-version create-pr download-proto \
+upload-doc

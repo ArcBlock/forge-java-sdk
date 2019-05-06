@@ -4210,16 +4210,17 @@ public final class DeployProtocol {
   static {
     java.lang.String[] descriptorData = {
       "\n\025deploy_protocol.proto\022\tforge_abi\032\031goog" +
-      "le/protobuf/any.proto\",\n\010CodeInfo\022\020\n\010che" +
-      "cksum\030\001 \001(\014\022\016\n\006binary\030\002 \001(\014\"\'\n\010TypeUrls\022" +
-      "\013\n\003url\030\001 \001(\t\022\016\n\006module\030\002 \001(\t\"\213\002\n\020DeployP" +
-      "rotocolTx\022\017\n\007address\030\001 \001(\t\022\014\n\004name\030\002 \001(\t" +
-      "\022\017\n\007version\030\003 \001(\r\022\021\n\tnamespace\030\004 \001(\t\022\023\n\013" +
-      "description\030\005 \001(\t\022&\n\ttype_urls\030\006 \003(\0132\023.f" +
-      "orge_abi.TypeUrls\022\r\n\005proto\030\007 \001(\t\022\020\n\010pipe" +
-      "line\030\010 \001(\t\022\017\n\007sources\030\t \003(\t\022!\n\004code\030\n \003(" +
-      "\0132\023.forge_abi.CodeInfo\022\"\n\004data\030\017 \001(\0132\024.g",
-      "oogle.protobuf.Anyb\006proto3"
+      "le/protobuf/any.proto\032\nenum.proto\032\ntype." +
+      "proto\",\n\010CodeInfo\022\020\n\010checksum\030\001 \001(\014\022\016\n\006b" +
+      "inary\030\002 \001(\014\"\'\n\010TypeUrls\022\013\n\003url\030\001 \001(\t\022\016\n\006" +
+      "module\030\002 \001(\t\"\213\002\n\020DeployProtocolTx\022\017\n\007add" +
+      "ress\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\017\n\007version\030\003 \001(" +
+      "\r\022\021\n\tnamespace\030\004 \001(\t\022\023\n\013description\030\005 \001(" +
+      "\t\022&\n\ttype_urls\030\006 \003(\0132\023.forge_abi.TypeUrl" +
+      "s\022\r\n\005proto\030\007 \001(\t\022\020\n\010pipeline\030\010 \001(\t\022\017\n\007so" +
+      "urces\030\t \003(\t\022!\n\004code\030\n \003(\0132\023.forge_abi.Co",
+      "deInfo\022\"\n\004data\030\017 \001(\0132\024.google.protobuf.A" +
+      "nyb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4233,6 +4234,8 @@ public final class DeployProtocol {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.AnyProto.getDescriptor(),
+          forge_abi.Enum.getDescriptor(),
+          forge_abi.Type.getDescriptor(),
         }, assigner);
     internal_static_forge_abi_CodeInfo_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -4253,6 +4256,8 @@ public final class DeployProtocol {
         internal_static_forge_abi_DeployProtocolTx_descriptor,
         new java.lang.String[] { "Address", "Name", "Version", "Namespace", "Description", "TypeUrls", "Proto", "Pipeline", "Sources", "Code", "Data", });
     com.google.protobuf.AnyProto.getDescriptor();
+    forge_abi.Enum.getDescriptor();
+    forge_abi.Type.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
