@@ -27,9 +27,6 @@ test:
 	@echo "Running test suites..."
 	@./gradlew test
 
-
-
-
 lint:
 	@echo "Linting the software..."
 
@@ -44,7 +41,8 @@ doc:
 	@./gradlew dokka
 
 upload-doc:
-	@aws s3 sync $(OUTPUT_FOLDER) s3://docs.arcblock.io/forge/forge-java-sdk/ --region us-west-2 --profile prod
+	@echo "uploading docs..."
+	@aws s3 sync docs s3://docs.arcblock.io/forge/sdks/java/ --region us-west-2 --profile prod
 
 
 precommit: dep lint doc build test
@@ -66,9 +64,8 @@ watch:
 
 run:
 	@echo "Running the software..."
-
+	@./gradlew :examples:bootRun
 
 include .makefiles/*.mk
 
-.PHONY: build init travis-init install dep all test doc precommit travis clean watch run bump-version create-pr download-proto \
-upload-doc
+.PHONY: build init travis-init install dep all test doc precommit travis clean watch run bump-version create-pr download-proto upload-doc

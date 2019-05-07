@@ -1,2 +1,3 @@
 rootProject.name = 'io.arcblock.forge'
-
+include 'core'
+include 'examples'

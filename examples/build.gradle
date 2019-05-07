@@ -1,45 +1,57 @@
 buildscript {
-    repositories {
-        jcenter()
-    }
-    
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
+  ext.kotlin_version = '1.3.30'
+  ext.spring_boot_version = '1.5.4.RELEASE'
+
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
+    classpath "org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_version"
+
+  }
 }
 
+plugins {
+  id 'org.springframework.boot' version '2.1.4.RELEASE'
+  id 'java'
+}
 apply plugin: 'kotlin'
-apply plugin: 'application'
+apply plugin: "kotlin-spring"
+apply plugin: 'io.spring.dependency-management'
 
-group 'open_ranks'
-version '0.0.1'
-mainClassName = "io.ktor.server.netty.EngineMain"
-
-sourceSets {
-    main.kotlin.srcDirs = main.java.srcDirs = ['src']
-    test.kotlin.srcDirs = test.java.srcDirs = ['test']
-    main.resources.srcDirs = ['resources']
-    test.resources.srcDirs = ['testresources']
-}
-
+//version = '0.0.1-SNAPSHOT'
+//sourceCompatibility = '1.8'
+//
 repositories {
-    mavenLocal()
-    jcenter()
-    maven { url 'https://kotlin.bintray.com/ktor' }
-    maven { url 'https://kotlin.bintray.com/kotlin-js-wrappers' }
+  mavenLocal()
+  mavenCentral()
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    compile "io.ktor:ktor-server-netty:$ktor_version"
-    compile "ch.qos.logback:logback-classic:$logback_version"
-    compile "io.ktor:ktor-server-core:$ktor_version"
-    compile "io.ktor:ktor-html-builder:$ktor_version"
-    compile "org.jetbrains:kotlin-css-jvm:1.0.0-pre.31-kotlin-1.2.41"
-    compile "io.ktor:ktor-gson:$ktor_version"
-    compile "io.ktor:ktor-client-core:$ktor_version"
-    compile "io.ktor:ktor-client-core-jvm:$ktor_version"
-    compile "io.ktor:ktor-client-apache:$ktor_version"
-  compile "forge-java-sdk:core:0.1.1"
-    testCompile "io.ktor:ktor-server-tests:$ktor_version"
+//  compile ("io.arcblock.forge:core:0.1.1")
+  compile project(":core")
+
+//  implementation 'com.google.protobuf:protobuf-java:3.6.1'
+
+  implementation 'io.grpc:grpc-netty:1.20.0'
+
+  implementation 'org.springframework.boot:spring-boot-starter'
+  implementation("org.springframework.boot:spring-boot-starter-web")
+//  implementation 'com.nimbusds:nimbus-jose-jwt:7.1'
+//  implementation("org.postgresql:postgresql:42.2.2")
+//  implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.1.4.RELEASE'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+}
+compileKotlin {
+  kotlinOptions {
+    jvmTarget = "1.8"
+  }
+}
+compileTestKotlin {
+  kotlinOptions {
+    jvmTarget = "1.8"
+  }
 }
