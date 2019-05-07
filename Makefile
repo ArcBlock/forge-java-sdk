@@ -34,7 +34,9 @@ download-proto:
 	@echo "downloading proto files"
 	@echo $(shell ./download_proto.sh )
 
-
+del-doc-remote:
+	@echo "deleting docs in docs.arcblock.io..."
+	@aws s3 sync tools/ s3://docs.arcblock.io/forge/sdks/java/ --include "index.html" --region us-west-2 --profile prod
 
 doc:
 	@echo "Building the documenation..."
@@ -42,9 +44,10 @@ doc:
 
 upload-doc:
 	@echo "uploading docs..."
-	@aws s3 sync docs s3://docs.arcblock.io/forge/sdks/java/ --region us-west-2 --profile prod
-
-
+	@aws s3 cp tools/index.html s3://docs.arcblock.io/forge/sdks/java/ --region us-west-2 --profile prod
+	@aws s3 sync core/docs s3://docs.arcblock.io/forge/sdks/java/${VERSION}/ --region us-west-2 --profile prod
+	@aws s3 sync core/docs s3://docs.arcblock.io/forge/sdks/java/latest/ --region us-west-2 --profile prod
+	
 precommit: dep lint doc build test
 
 travis: precommit
