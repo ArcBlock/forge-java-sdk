@@ -15,10 +15,15 @@ class AuthServiceImpl:IAuthService {
   @Autowired lateinit var metaInfo: MetaInfo
   @Autowired lateinit var gson: Gson
 
-  override fun requestAuth():String{
+
+  override fun requestAuth(jwt: String): String {
     val claim = ProfileClaim(metaInfo, listOf("Username","email") )
     val token = DidAuthUtils.createDidAuthToken(appInfo = appInfo,authClaims = arrayOf(claim),currentTimestamp = System.currentTimeMillis(),wallet = walletInfo )
     return gson.toJson(DidResponseBody(appPk = walletInfo.pkBase58(),authInfo = token))
-
   }
+
+  override fun handleAuth(token: String, jwt: String): String {
+    return "ok"
+  }
+
 }

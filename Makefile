@@ -25,7 +25,8 @@ all: build
 
 test:
 	@echo "Running test suites..."
-	@./gradlew test
+	@./gradlew :core:test
+	@./gradlew :did:test
 
 lint:
 	@echo "Linting the software..."
