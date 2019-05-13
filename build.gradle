@@ -1,0 +1,23 @@
+
+
+allprojects {
+  repositories {
+    mavenCentral()
+    jcenter()
+  }
+}
+
+group 'io.arcblock.forge'
+version project.file("version").readLines().first()
+
+
+
+
+
+
+
+
+
+
+
+
