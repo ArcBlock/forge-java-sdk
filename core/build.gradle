@@ -1,0 +1,475 @@
+
+import com.squareup.javapoet.*
+
+import javax.lang.model.element.Modifier
+import java.lang.reflect.ParameterizedType
+import java.lang.reflect.Type
+import java.util.concurrent.TimeUnit
+import java.util.function.Consumer
+
+buildscript {
+  ext.kotlin_version = '1.3.21'
+  repositories {
+    mavenCentral()
+    jcenter()
+  }
+  dependencies {
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.21"
+    classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.8'
+    classpath 'com.squareup:javapoet:1.11.1'
+    classpath 'de.undercouch:gradle-download-task:3.4.3'
+  }
+}
+
+plugins {
+  id 'java'
+  id 'org.jetbrains.kotlin.jvm' version '1.3.21'
+  id "de.undercouch.download" version "3.4.3"
+  id 'org.jetbrains.dokka' version '0.9.18'
+}
+
+
+group 'io.arcblock.forge'
+compileKotlin {
+  kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+  kotlinOptions.jvmTarget = "1.8"
+}
+
+//plugins {
+//
+//}
+
+apply plugin: 'jacoco'
+apply plugin: 'maven-publish'
+apply plugin: 'com.google.protobuf'
+
+ext { springBootVersion = '2.1.4.RELEASE' }
+
+
+jar {
+  baseName = "core"
+  version =  project.file("../version").readLines().first()
+}
+
+
+sourceCompatibility = 1.8
+
+
+sourceSets {
+  main {
+    kotlin { srcDir "src/main/kotlin" }
+    java { srcDirs ("src/main/java",
+      "build/classes/java/main"
+    )
+    }
+  }
+  test {
+    kotlin { srcDir "src/test/kotlin" }
+    java { srcDir "src/test/java" }
+  }
+}
+
+
+
+protobuf {
+  protoc {
+    artifact = "com.google.protobuf:protoc:3.2.0"
+  }
+  plugins {
+    grpc {
+      artifact = 'io.grpc:protoc-gen-grpc-java:1.4.0'
+    }
+  }
+  generatedFilesBaseDir = "src"
+
+  generateProtoTasks {
+    all()*.plugins {
+      grpc {
+        outputSubDir = "java"
+      }
+    }
+  }
+}
+
+dokka {
+  outputFormat = 'javadoc'
+  outputDirectory = "./docs/"
+  jdkVersion = 8
+
+
+  packageOptions {
+    prefix = "kotlin.internal" // will match kotlin.internal and all sub-packages of it
+    suppress = true
+  }
+  packageOptions {
+    prefix = "abci_vendor"
+    suppress = true
+  }
+  packageOptions {
+    prefix = "forge_abi"
+    suppress = true
+  }
+
+}
+javadoc {
+  enabled = false
+}
+
+repositories {
+  jcenter()
+    mavenCentral()
+}
+
+dependencies {
+  dokkaRuntime "org.jetbrains.dokka:dokka-fatjar:0.9.18"
+  api 'com.google.protobuf:protobuf-java:3.6.1'
+  api 'org.bitcoinj:bitcoinj-core:0.14.3'
+  api 'com.madgag.spongycastle:prov:1.58.0.0'
+  api ('org.web3j:core:4.2.0')
+  api 'io.grpc:grpc-netty:1.4.0'
+  api 'io.grpc:grpc-protobuf:1.4.0'
+  api 'io.grpc:grpc-stub:1.4.0'
+  api ('com.google.code.gson:gson:2.8.2')
+  implementation ('com.google.crypto.tink:tink:1.2.2'){
+    exclude module:"protobuf"
+  }
+  api 'org.apache.commons:commons-lang3:3.4'
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+  testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+//dependencyManagement {
+//  imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
+//}
+
+publishing {
+  repositories {
+    maven {
+      def releaseUrl = "s3://android-docs.arcblock.io.s3.amazonaws.com/release"
+      def snapshotUrl = "s3://android-docs.arcblock.io.s3.amazonaws.com/snapshot"
+      url releaseUrl
+
+      credentials(AwsCredentials) {
+        accessKey project.hasProperty("AWS_S3_ACCESSKEY") ? AWS_S3_ACCESSKEY : System.getenv("AWS_S3_ACCESSKEY")
+        secretKey project.hasProperty("AWS_S3_SECRETKEY") ? AWS_S3_SECRETKEY : System.getenv("AWS_S3_SECRETKEY")
+      }
+    }
+  }
+
+  publications {
+    mavenJava(MavenPublication) {
+      groupId rootProject.group
+      artifactId 'core'
+      version rootProject.version
+      from components.java
+    }
+  }
+
+}
+
+
+
+task a_download_proto(type: Download) {
+  src 'https://api.github.com/repos/ArcBlock/forge-abi/master/lib/protobuf/abi.proto'
+  headers(['Authorization':' token 56f65bc672518cda44134a8a953f857e1851db00','Accept': ' application/vnd.github.v3.raw'])
+  dest file('src/main/proto/')
+  overwrite true
+}
+
+
+
+
+class genForgeABI extends DefaultTask {
+  File outdir = new File("${project.rootDir.path}/core/src/main/java/")
+  def futureClazz =ClassName.get("com.google.common.util.concurrent","ListenableFuture")
+  def rxClazz = ClassName.get("io.grpc.stub","StreamObserver")
+  @TaskAction
+  def genClient(){
+    def protobuf = project.file(project.rootDir.path+"/core/src/main/proto/service.proto")
+    HashMap<String,ArrayList<HashMap<String,String>>> serverMap =new HashMap()
+    if(protobuf.canWrite()){
+      def curStr = ""
+      ArrayList<HashMap<String,String>> list =new ArrayList<>()
+      def halfline = ""
+      boolean  begined= false
+      protobuf.readLines().forEach(new Consumer<String>() {
+        @Override
+        void accept(String s) {
+          if (s.isEmpty()) return
+          s = s.trim()
+          if(s.startsWith("//")) return
+          if (s.trim().startsWith("service")){
+            begined = true
+            curStr = s.replace("service","").replace("{","").trim()
+            list.clear()
+          }else if (begined){
+            if(s.trim().startsWith("rpc")){
+              if(s.contains(";")){
+                list.add(decodeMethod(s))
+              }else {
+                halfline = halfline+s
+              }
+            }else if(s.trim().startsWith("}")){
+              serverMap[curStr] = new ArrayList<HashMap<String, String>>()
+              serverMap[curStr].addAll(list)
+            }else if(s.contains(";")){
+              halfline = halfline+s
+              list.add(decodeMethod(halfline))
+              halfline = ""
+            }else {
+              halfline = halfline+s
+            }
+          }
+        }
+      })
+      println("map:\n $serverMap")
+      generateSDKFile(serverMap)
+
+    }
+  }
+
+  def generateSDKFile(HashMap<String,ArrayList<HashMap<String,String>>> map){
+    MethodSpec.Builder main = MethodSpec.methodBuilder("init")
+      .addModifiers(Modifier.PUBLIC)
+      .returns(void.class)
+    .addParameter(ClassName.get("io.grpc","ManagedChannelBuilder"), "builder")
+//      .addParameter(String.class, "host")
+//      .addParameter(Integer.class, "port")
+      .addCode("channel =  builder.build();")
+
+
+
+    TypeSpec.Builder classBuilder = TypeSpec.classBuilder("ForgeSDK")
+      .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
+      .addField(ClassName.get("io.grpc","ManagedChannel"), "channel" ,Modifier.PRIVATE)
+
+    map.keySet().forEach(
+      new Consumer<String>() {
+        @Override
+        void accept(String s) {
+          def rpcServer = s
+          def camelNameStr = camelName(s)
+          classBuilder.addField(
+            ClassName.get("forge_abi.${s}Grpc","${s}BlockingStub", new String[0])
+            ,"${camelNameStr}BlockingStub",Modifier.PRIVATE)
+          classBuilder.addField(
+            ClassName.get("forge_abi.${s}Grpc","${s}Stub", new String[0])
+            ,"${camelNameStr}Stub",Modifier.PRIVATE)
+          classBuilder.addField(
+            ClassName.get("forge_abi.${s}Grpc","${s}FutureStub", new String[0])
+            ,"${camelNameStr}FutureStub",Modifier.PRIVATE)
+
+          main.addCode("${camelNameStr}BlockingStub = \$T.newBlockingStub(channel);\n",ClassName.get("forge_abi","${s}Grpc"))
+          main.addCode("${camelNameStr}Stub = ${s}Grpc.newStub(channel);\n")
+          main.addCode("${camelNameStr}FutureStub = ${s}Grpc.newFutureStub(channel);\n")
+
+          map[s].forEach(new Consumer<HashMap<String, String>>() {
+            @Override
+            void accept(HashMap<String, String> properties) {
+              def ret = properties["ret"]
+              def param = properties["param"].trim()
+              def med = properties["med"].trim()
+              def stream = properties["stream"]
+              def responClazz =ClassName.get("forge_abi.Rpc",ret)
+              def paramClazz =ClassName.get("forge_abi.Rpc",param)
+
+              if(stream == null){
+                MethodSpec ms = MethodSpec.methodBuilder(med)
+                  .addModifiers(Modifier.PUBLIC)
+                  .addParameter(
+                    ParameterSpec.builder(ClassName.get("forge_abi.Rpc", properties["param"], new String[0]),"request",new Modifier[0]).build()
+                  ).returns(ClassName.get("forge_abi.Rpc", ret, new String[0]))
+                  .addCode("return ${camelNameStr}BlockingStub.$med(request);\n")
+                  .build()
+                classBuilder.addMethod(ms)
+
+                //async method
+                MethodSpec asyncM = MethodSpec.methodBuilder("async"+firstUpper(med))
+                  .addModifiers(Modifier.PUBLIC)
+                  .addParameter(
+                    ParameterSpec.builder(ClassName.get("forge_abi.Rpc", properties["param"], new String[0]),"request",new Modifier[0]).build()
+                  ).returns(ParameterizedTypeName.get(futureClazz, responClazz))
+                  .addCode("return ${camelNameStr}FutureStub.$med(request);\n")
+                  .build()
+                classBuilder.addMethod(asyncM)
+
+
+                //reactive method
+                MethodSpec rxM = MethodSpec.methodBuilder("rx"+firstUpper(med))
+                  .addModifiers(Modifier.PUBLIC)
+                  .addParameter(
+                    ParameterSpec.builder(ClassName.get("forge_abi.Rpc", properties["param"], new String[0]),"request",new Modifier[0]).build()
+                  )
+                  .addParameter(
+                    ParameterSpec.builder(ParameterizedTypeName.get(rxClazz,responClazz),"observer",new Modifier[0]).build()
+                  )
+                  .returns(void.class)
+                  .addCode("${camelNameStr}Stub.$med(request, observer);\n")
+                  .build()
+                classBuilder.addMethod(rxM)
+              }else{
+
+                MethodSpec.Builder sM = MethodSpec.methodBuilder(med)
+                  .addModifiers(Modifier.PUBLIC)
+
+                if (!stream.contains("left") && stream.contains("return")){
+                  //return is stream
+                  sM.addParameter(
+                    ParameterSpec.builder(ClassName.get("forge_abi.Rpc", param),"request",new Modifier[0]).build()
+                  )
+                  .addCode("${camelNameStr}Stub.$med(request, observer);\n")
+                  .returns(void.class)
+                }else {
+                  sM.addCode("return ${camelNameStr}Stub.$med(observer);\n")
+                    .returns(ParameterizedTypeName.get(rxClazz, paramClazz))
+                }
+                sM
+                  .addParameter(
+                    ParameterSpec.builder(ParameterizedTypeName.get(rxClazz, responClazz),"observer",new Modifier[0]).build()
+                  )
+                  .build()
+                classBuilder.addMethod(sM.build())
+              }
+            }
+          })
+        }
+      })
+
+    MethodSpec.Builder secoundMain = MethodSpec.methodBuilder("init")
+      .addModifiers(Modifier.PRIVATE)
+      .returns(void.class)
+      .addParameter(String.class, "host")
+      .addParameter(Integer.class, "port")
+      .addCode("init(ManagedChannelBuilder.forAddress(host, port).usePlaintext(true));\n")
+
+
+
+    def instanceType = TypeSpec.classBuilder("Holder")
+      .addModifiers(Modifier.PRIVATE,Modifier.STATIC)
+      .addField(
+        FieldSpec.builder(ClassName.get("io.arcblock.forge","ForgeSDK"),"INSTANCE",Modifier.PRIVATE,Modifier.STATIC,Modifier.FINAL)
+        .initializer("new ForgeSDK()").build()
+      )
+      .build()
+
+
+    MethodSpec.Builder instance = MethodSpec.methodBuilder("connect")
+      .addModifiers(Modifier.PUBLIC,Modifier.STATIC)
+      .returns(ClassName.get("io.arcblock.forge","ForgeSDK"))
+      .addParameter(String.class, "host")
+      .addParameter(Integer.class, "port")
+      .addCode("Holder.INSTANCE.init(host, port);\nreturn Holder.INSTANCE;\n")
+
+
+    MethodSpec.Builder instance2 = MethodSpec.methodBuilder("connect")
+      .addModifiers(Modifier.PUBLIC,Modifier.STATIC)
+      .addParameter(ClassName.get("io.grpc","ManagedChannelBuilder"), "builder")
+      .returns(ClassName.get("io.arcblock.forge","ForgeSDK"))
+      .addCode("Holder.INSTANCE.init(builder);\nreturn Holder.INSTANCE;\n")
+
+
+    MethodSpec.Builder shutdown = MethodSpec.methodBuilder("shutdown")
+      .addModifiers(Modifier.PUBLIC)
+    .addException(InterruptedException.class)
+      .returns(void.class)
+      .addCode("channel.awaitTermination(6, \$T.SECONDS);\n", TimeUnit.class)
+
+
+
+    TypeSpec forgeSDK = classBuilder
+
+      .addMethod(main.build())
+    .addMethod(secoundMain.build())
+    .addMethod(instance.build())
+      .addMethod(instance2.build())
+    .addMethod(shutdown.build())
+    .addType(instanceType)
+    .addJavadoc("Auto Generated ,Do not Edit ForgeSDK is tool to connect and \n" +
+      "communicate with forge node and provide blocking ,async and reactive \n" +
+      "method to handle hain method.\n" +
+      "and the high level usage please to reference \n" +
+      "https://docs.arcblock.io/forge/latest/txs/#categories\n ")
+      .build()
+    JavaFile javaFile  = JavaFile.builder("io.arcblock.forge", forgeSDK)
+      .build()
+
+    javaFile.writeTo(outdir)
+
+  }
+  String firstUpper(String s){
+    StringBuilder result = new StringBuilder();
+    result.append(s.substring(0,1).toUpperCase())
+    result.append(s.substring(1))
+    return result.toString()
+  }
+
+  HashMap<String,String> decodeMethod(String line){
+    HashMap<String,String> ret = new HashMap<>()
+    def slice = line.split("returns")
+    int firstLeft = slice[0].indexOf("(")
+    int firstRight = slice[0].indexOf(")")
+    ret["med"]=camelName(slice[0].substring(3,firstLeft)).trim()
+    ret["param"]=slice[0].substring(firstLeft+1,firstRight).replace("stream","").trim()
+    int lastLeft = slice[1].indexOf("(")
+    int lastRight = slice[1].indexOf(")")
+    ret["ret"]=slice[1].substring(lastLeft+1,lastRight).replace("stream","").trim()
+
+    if(slice[0].contains("stream")){
+      ret["stream"] += " left"
+    }
+
+    if (slice[1].contains("stream")){
+      ret["stream"] += " return"
+    }
+    ret
+  }
+
+  public static String camelName(String name) {
+    camelName(name, false)
+  }
+
+  public static String camelName(String name, boolean big) {
+    StringBuilder result = new StringBuilder();
+
+    if (name == null || name.isEmpty()) {
+
+      return "";
+    } else if (!name.contains("_")) {
+
+      return name.substring(0, 1).toLowerCase() + name.substring(1);
+    }
+
+    String[] camels = name.split("_");
+    for (String camel : camels) {
+
+      if (camel.isEmpty()) {
+        continue;
+      }
+
+      if (!big && result.length() == 0) {
+
+        result.append(camel.toLowerCase());
+      } else {
+
+        result.append(camel.substring(0, 1).toUpperCase());
+        result.append(camel.substring(1).toLowerCase());
+      }
+    }
+    return result.toString().trim();
+  }
+}
+task genForgeSDK(type: genForgeABI){
+
+}
+
+
+
+
+
+
+
+
+
+

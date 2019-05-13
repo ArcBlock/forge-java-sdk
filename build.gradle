@@ -1,71 +1,23 @@
-buildscript {
-  ext.kotlin_version = '1.3.21'
+
+
+allprojects {
   repositories {
     mavenCentral()
-  }
-  dependencies {
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.21"
-    classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.8'
+    jcenter()
   }
 }
 
-plugins {
-    id 'java'
-  id 'org.jetbrains.kotlin.jvm' version '1.3.21'
-
-}
-
-apply plugin: 'com.google.protobuf'
-group 'forge-java-sdk'
-version '1.0-SNAPSHOT'
-
-sourceCompatibility = 1.8
-
-sourceSets {
-  main {
-    kotlin { srcDir "src/main/kotlin" }
-    java { srcDir "src/main/java" }
-  }
-  test {
-    kotlin { srcDir "src/test/kotlin" }
-    java { srcDir "src/test/java" }
-  }
-}
+group 'io.arcblock.forge'
+version project.file("version").readLines().first()
 
 
-compileKotlin {
-  kotlinOptions.jvmTarget = "1.8"
-}
-compileTestKotlin {
-  kotlinOptions.jvmTarget = "1.8"
-}
-//
-//sourceSets {
-//  main.java.srcDirs += "${protobuf.generatedFilesBaseDir}/main/javalite"
-//}
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-  implementation 'com.google.protobuf:protobuf-java:3.6.1'
-  implementation 'org.bitcoinj:bitcoinj-core:0.14.3'
-  implementation 'com.madgag.spongycastle:prov:1.58.0.0'
-  implementation ('org.web3j:core:4.2.0-android') {
-    exclude module: 'jackson-core'
-    exclude module: 'jackson-annotations'
-    exclude module: 'jackson-databind'
-  }
-  implementation ('com.google.code.gson:gson:2.8.2')
-//  implementation rootProject.ext.dependencies["utilcode"]
-  implementation ('com.google.crypto.tink:tink-android:1.2.2'){
-    exclude module:"protobuf-lite"
-
-  }
-  implementation 'org.apache.commons:commons-lang3:3.4'
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
 
-  testCompile group: 'junit', name: 'junit', version: '4.12'
-}
+
+
+
+
+
+
+
+
