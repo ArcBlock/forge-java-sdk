@@ -1,9 +1,9 @@
 package com.example.demo.components
 
-import io.arcblock.forge.*
-import org.springframework.stereotype.*
+import io.arcblock.forge.ForgeSDK
+import org.springframework.stereotype.Component
 
 @Component
 class ForgeSDKComponent {
-    var forgeSDK: ForgeSDK = ForgeSDK.connect("localhost",28210)
+    var forgeSDK: ForgeSDK = ForgeSDK.connect("localhost", 28210)
 }

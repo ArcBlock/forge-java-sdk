@@ -12,7 +12,7 @@ object Base58Btc {
    * @param data base58 string
    * @return binary
    */
-  fun decode(data: String):ByteArray{
+  fun decode(data: String): ByteArray {
     return Base58.decode(data.removePrefix("z"))
   }
 
@@ -21,7 +21,7 @@ object Base58Btc {
    * @param data binary
    * @return base58 string
    */
-  fun encode(data: ByteArray):String{
+  fun encode(data: ByteArray): String {
     return "z".plus(Base58.encode(data))
   }
 }

@@ -24,18 +24,15 @@ class ArcSha3HasherTest {
         Assert.assertEquals("t1GFCxpXFopWk82SS2sJbgj2IYJ0RPcNiE9dAkDScS4Q4RbpGSrzyRp+xXZH45NAVzQLTPQI1aVlkvgnTuxT8A==", rst)
     }
 
-
     @Test
     fun sha224() {
         val rst = BaseEncoding.base64().encode(ArcSha3Hasher.sha224("abc".toByteArray()))
         Assert.assertEquals("5kKCTD+M8krQkjTufTx2b8mjpRaNDJStc7Rv3w==", rst)
-
     }
 
     @Test
     fun sha256() {
         val rst = BaseEncoding.base64().encode(ArcSha3Hasher.sha256("abc".toByteArray()))
         Assert.assertEquals("Ophdp0/iJbIEXBcta9OQvYVfCG4+nVJbRr/iRRFDFTI=", rst)
-
     }
 }

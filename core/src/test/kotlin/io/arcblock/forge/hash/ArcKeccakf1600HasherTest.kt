@@ -40,7 +40,6 @@ class ArcKeccakf1600HasherTest {
   fun sha384() {
     val rst = BaseEncoding.base64().encode(ArcKeccakf1600Hasher.sha384("abc".toByteArray()))
     Assert.assertEquals(rst, "998RZfAzM3vgmOfSiK1qL3RAnXpgtJw2ZCIY3hYbH5n4xoHkr68xo02yn7dj48KO")
-
   }
 
   @Test

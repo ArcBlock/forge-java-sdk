@@ -1,9 +1,9 @@
 package com.example.demo.beans
 
-import forge_abi.*
+import forge_abi.Type
 
 open class AppDid {
-    //var did: String = ""
+    // var did: String = ""
 
     var sk: ByteArray = ByteArray(0)
     var pk: ByteArray = ByteArray(0)

@@ -7,23 +7,19 @@ import io.arcblock.forge.did.KeyType.ED25519
 import io.arcblock.forge.did.KeyType.SECP256K1
 import io.arcblock.forge.encodeToDER
 import org.bitcoinj.core.ECKey.CURVE
-import org.spongycastle.crypto.signers.ECDSASigner
-import org.web3j.crypto.ECKeyPair
-import java.lang.Exception
-import org.spongycastle.crypto.ec.CustomNamedCurves
-import org.spongycastle.crypto.params.ECDomainParameters
-import org.web3j.crypto.ECDSASignature
+import org.spongycastle.asn1.ASN1InputStream
 import org.spongycastle.asn1.ASN1Integer
 import org.spongycastle.asn1.DLSequence
-import org.spongycastle.asn1.ASN1InputStream
-import java.io.IOException
 import org.spongycastle.crypto.params.ECPublicKeyParameters
+import org.spongycastle.crypto.signers.ECDSASigner
+import org.web3j.crypto.ECDSASignature
+import org.web3j.crypto.ECKeyPair
+import java.io.IOException
 
 /**
  *  Singer help you to Sign any binary ,such as a Transaction.
  *  and help you to verify if the signature is correct
- * Author       :paperhuang
- * Time         :2019/2/19
+ *
  **/
 object Signer {
 
@@ -35,8 +31,8 @@ object Signer {
    * @return signature out put
    *
    */
-  fun sign(keyType: KeyType,content:ByteArray,sk: ByteArray):ByteArray{
-    return when(keyType){
+  fun sign(keyType: KeyType, content: ByteArray, sk: ByteArray): ByteArray {
+    return when (keyType) {
       ED25519 -> {
         Ed25519Sign(sk.sliceArray(0..31)).sign(content)
       }
@@ -54,19 +50,18 @@ object Signer {
    * @param signature signature binary
    * @return is Correct
    */
-  fun verify(keyType: KeyType,content:ByteArray,pk: ByteArray,signature: ByteArray):Boolean{
+  fun verify(keyType: KeyType, content: ByteArray, pk: ByteArray, signature: ByteArray): Boolean {
     try {
-       return when(keyType){
+      return when (keyType) {
         ED25519 -> {
-           Ed25519Verify(pk).verify(signature,content)
+          Ed25519Verify(pk).verify(signature, content)
           true
         }
         SECP256K1 -> {
-          return verify(content, signature,pk)
+          return verify(content, signature, pk)
         }
       }
-
-    }catch (e:Exception){
+    } catch (e: Exception) {
       return false
     }
   }
@@ -74,15 +69,15 @@ object Signer {
   /**
    * SECP256K1 verify
    */
-  private fun verify(data:ByteArray, signature:ByteArray,pk:ByteArray):Boolean{
+  private fun verify(data: ByteArray, signature: ByteArray, pk: ByteArray): Boolean {
     val signer = ECDSASigner()
     val params = ECPublicKeyParameters(CURVE.curve.decodePoint(pk), CURVE)
     signer.init(false, params)
     val sig = decodeFromDER(signature)
-    return signer.verifySignature(data,sig.r,sig.s)
+    return signer.verifySignature(data, sig.r, sig.s)
   }
 
-  private fun decodeFromDER(bytes:ByteArray):ECDSASignature{
+  private fun decodeFromDER(bytes: ByteArray): ECDSASignature {
     var decoder: ASN1InputStream? = null
     try {
       decoder = ASN1InputStream(bytes)
@@ -105,9 +100,6 @@ object Signer {
         decoder.close()
       } catch (x: IOException) {
       }
-
     }
   }
-
-
 }

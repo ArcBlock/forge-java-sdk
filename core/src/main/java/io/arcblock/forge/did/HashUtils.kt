@@ -10,12 +10,11 @@ import org.web3j.crypto.Hash
  **/
 object HashUtils {
 
-  fun keccak(input:ByteArray) :ByteArray{
+  fun keccak(input: ByteArray): ByteArray {
     return Hash.sha3(input)
   }
 
-  fun sha3(input:ByteArray) :ByteArray{
+  fun sha3(input: ByteArray): ByteArray {
     return Hash.sha3(input)
   }
-
 }

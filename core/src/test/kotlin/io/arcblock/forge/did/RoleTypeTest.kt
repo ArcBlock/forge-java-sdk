@@ -6,6 +6,5 @@ class RoleTypeTest {
 
     @Test
     fun decodeDidRoleType() {
-
     }
 }
