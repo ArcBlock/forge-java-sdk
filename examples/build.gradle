@@ -27,21 +27,26 @@ apply plugin: 'io.spring.dependency-management'
 repositories {
   mavenLocal()
   mavenCentral()
+  maven { url "http://android-docs.arcblock.io/release" }
+
 }
 
 dependencies {
-//  compile ("io.arcblock.forge:core:0.1.1")
+//  compile ("io.arcblock.forge:core:0.25")
   compile project(":core")
-
+  compile project(":did")
+  implementation 'com.nimbusds:nimbus-jose-jwt:7.1'
 //  implementation 'com.google.protobuf:protobuf-java:3.6.1'
 
   implementation 'io.grpc:grpc-netty:1.20.0'
 
   implementation 'org.springframework.boot:spring-boot-starter'
+  implementation 'org.springframework.boot:spring-boot-starter-security'
+  implementation "com.auth0:java-jwt:3.4.0"
   implementation("org.springframework.boot:spring-boot-starter-web")
 //  implementation 'com.nimbusds:nimbus-jose-jwt:7.1'
 //  implementation("org.postgresql:postgresql:42.2.2")
-//  implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.1.4.RELEASE'
+//  implementation 'org.boot:spring-boot-starter-thymeleaf:2.1.4.RELEASE'
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }

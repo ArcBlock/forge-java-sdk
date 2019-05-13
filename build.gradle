@@ -7,6 +7,9 @@ allprojects {
   }
 }
 
+group 'io.arcblock.forge'
+version project.file("version").readLines().first()
+
 
 
 

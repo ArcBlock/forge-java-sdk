@@ -1,5 +1,8 @@
 package io.arcblock.forge.did
 
+import com.google.common.io.*
+import io.arcblock.forge.utils.*
+
 class WalletInfo (var address: String){
   lateinit var pk: ByteArray
   lateinit var sk: ByteArray
@@ -16,4 +19,6 @@ class WalletInfo (var address: String){
   fun getSignType(): KeyType{
     return DidUtils.decodeDidSignType(address)
   }
+
+  fun pkBase58():String = Base58Btc.encode(pk)
 }
