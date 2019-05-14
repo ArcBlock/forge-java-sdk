@@ -10,13 +10,13 @@ A detailed reference manual for forge-python-sdk can be found [here](../../../fo
 
 if you are using gradle ,you have to add url to your repositories
 
-```
+``` gradle
  repositories {
-	  maven { url "http://android-docs.arcblock.io/release" }
+    maven { url "http://android-docs.arcblock.io/release" }
  }
 
  dependencies {
- 	  implementation("io.arcblock.forge:core:${forge_version}")
+    implementation("io.arcblock.forge:core:${forge_version}")
  }
 ```
 
@@ -68,7 +68,7 @@ val Alice = forge.createWallet(Rpc.RequestCreateWallet.newBuilder()
 
 ### Step 3: Query your account information.
 
-```
+``` kotlin
 forge.getForgeSDK().getAccountState()
 ```
 
@@ -89,7 +89,7 @@ wait some seconds, check your account balance .
 
 create another wallet (suppose: Bob) as step 2.
 
-```
+``` kotlin
 //create TransferTx
 val sendToken = BigInteger.valueOf(1L).plus(BigDecimal("1e$decimal").toBigInteger())
 val itx = Transfer.TransferTx.newBuilder()
@@ -112,11 +112,11 @@ and decimal is 16.
 
 🎉 Congratulations! You have finished the tutorial! Now you should have a general sense about how Forge works. Now continue to explore !
 
-### Welcome contribution
+## Welcome contribution
 
 Want to contribute? Great! First, read this page
 
-#### Setup Develop Environment
+### Setup Develop Environment
 
 first, you have to install [forge-cli](https://docs.arcblock.io/forge/latest/tools/forge_cli.html) and setup a local chain.
 
@@ -125,9 +125,13 @@ make sure you have installed java ,make and ktlint.
 clone this Repo. and open terminal in this Repo. run:
 
 ```shell
-make download-proto
+
 make build
-make run
+
+//if you want update protobuf, run first
+make download-proto
+make genForgeSDK
+
 ```
 
 it will start a SpringBoot example.
@@ -140,7 +144,7 @@ and it will return forge info.
 
 Now, you can add your code to this project and feel free to create request pull or issue .
 
-#### Code reviews
+### Code reviews
 
 All submissions, including submissions by project members, require review. We
 use GitHub pull requests for this purpose.

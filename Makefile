@@ -36,6 +36,10 @@ download-proto:
 	@echo "downloading proto files"
 	@echo $(shell ./download_proto.sh )
 
+genForgeSDK:
+	@echo "generate ForgeSDK file ..."
+	@./gradlew :core:genForgeSDK
+
 del-doc-remote:
 	@echo "deleting docs in docs.arcblock.io..."
 	@aws s3 sync tools/ s3://docs.arcblock.io/forge/sdks/java/ --include "index.html" --region us-west-2 --profile prod
@@ -57,6 +61,7 @@ travis: precommit
 
 travis-deploy:
 	@echo "Deploy the software by travis"
+	@./gradlew build
 	@./gradlew publish
 
 clean:
@@ -73,4 +78,4 @@ run:
 
 include .makefiles/*.mk
 
-.PHONY: build init travis-init install dep all test doc precommit travis clean watch run bump-version create-pr download-proto upload-doc
+.PHONY: build init travis-init install dep all test doc precommit travis clean watch run bump-version create-pr download-proto upload-doc genForgeSDK

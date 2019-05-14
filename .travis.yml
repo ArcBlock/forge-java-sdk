@@ -15,7 +15,11 @@ deploy:
   provider: releases
   api_key:
     secure: Q+kKbLBmZkrraaJ5zEurVaRIcfGSZPP1jocyaB32Cu645M9ZYJcO0gueNDfkqpU3Em4vVcxreiRFrBZ07lKGicinvJApfxu7dAjMRrAXGaajhJ3Fs8OUR6rUfdEfSo3bI5szmncLkNt9LYQbjGCY9wgux0oARAYHjfUZrRfKuBe3Zb26iEwWEfE6UCUWSgS79Wjzv8QvQxtLXmGsYgXW3WEozrjJvjlv+8rEBLwfFR0F/xasiv0/gZQOJMubqmL8Bm4/bEpjIRLZf4LgjXm+kWlmCCmojb0cTbi8rVyVvQ36guG5Nyj2txOsqzX6w3+oiwAm3XvB5PxAFrYWPrVQBLKSyJ3J/IlLojyLzYSSCG1+27VpMSi8g8ySt89vGaT1DNH9Td1CwB55Mb5Cw1ZYjHu2EF96zJr5/RCXABCwfVqykCHk4rrHe6DYR08sQsNDhYbDmiMTmuzuASNIvBG+IITiWlZSsk2ixBooNenjT1EEup3c65ITA+0ElZ5pylJe+wzmwyaTxI0rvKCZY2DrPZGtNqn7PNYQP91oFOAXtltIOZkUhPeFLl9NLoNNOu5bLj+LBPKEq/VhZcwxYrhXemkSpuMNGNY/3LlY627gFqehaQ47uQXbH0DQqQ4PEpWccaCP6Mf44R7lIFXTsCNm9jjkJ8Z1vIv9Hey2rB6hOZg=
-  file: build/libs/*.jar
+  file_glob: true
+  file: 
+    - core/build/libs/*
+    - did/build/libs/*
+  skip_cleanup: true
   on:
     repo: ArcBlock/forge-java-sdk
     branch: master
