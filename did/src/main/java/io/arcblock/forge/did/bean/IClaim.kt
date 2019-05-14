@@ -3,7 +3,6 @@ package io.arcblock.forge.did.bean
 /**
  * JWT Claim
  */
-interface IClaim{
+interface IClaim {
   val meta: MetaInfo
 }
-

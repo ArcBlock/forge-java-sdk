@@ -1,9 +1,8 @@
 package io.arcblock.forge
 
 import com.google.common.io.BaseEncoding
-import io.arcblock.forge.did.*
-import org.junit.*
-
+import io.arcblock.forge.did.HashType
+import org.junit.Test
 
 class test {
   @Test

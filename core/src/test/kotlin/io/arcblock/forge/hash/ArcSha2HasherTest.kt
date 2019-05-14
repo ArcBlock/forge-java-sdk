@@ -40,14 +40,12 @@ class ArcSha2HasherTest {
   fun sha384() {
     val rst = BaseEncoding.base64().encode(ArcSha2Hasher.sha384("abc".toByteArray()))
     Assert.assertEquals("cxAPAc8lh2aQbDSjD5pIbwclnGJ+oGltl8RYJWBEf1mm30p8+WBwgnGjAySxSB70", rst)
-
   }
 
   @Test
   fun sha3841() {
     val rst = BaseEncoding.base64().encode(ArcSha2Hasher.sha384("abc".toByteArray(), 1))
     Assert.assertEquals("ywB1P0WjXou1oD1pmsZQBycsMqsO3tFjGotgWkP/W+2AhgcroefMI1i67KE0yCWn", rst)
-
   }
 
   @Test

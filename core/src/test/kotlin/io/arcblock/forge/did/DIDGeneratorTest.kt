@@ -1,12 +1,15 @@
 package io.arcblock.forge.did
 
 import com.google.common.io.BaseEncoding
-import io.arcblock.forge.*
+import io.arcblock.forge.Hasher
+import io.arcblock.forge.WalletKit
 import io.arcblock.forge.bip44.Bip44Utils
+import io.arcblock.forge.deBase16
+import io.arcblock.forge.getPK
+import io.arcblock.forge.toHexString
 import org.junit.Assert
-import org.junit.Test
-
 import org.junit.Before
+import org.junit.Test
 import org.web3j.crypto.ECKeyPair
 
 class DIDGeneratorTest {
@@ -50,7 +53,6 @@ class DIDGeneratorTest {
     val sk = "26954E19E8781905E2CF91A18AE4F36A954C142176EE1BC27C2635520C49BC55".deBase16()
     val did = DIDGenerator.sk2did(RoleType.ACCOUNT, KeyType.SECP256K1, HashType.SHA3, sk)
     Assert.assertEquals("did:abt:z1Ee1H8g248HqroacmEnZzMYgbhjz1Z2WSvv", did)
-
   }
 
   @Test
@@ -73,7 +75,6 @@ class DIDGeneratorTest {
 
     pre = DIDGenerator.preAppend(RoleType.APPLICATION, KeyType.SECP256K1, HashType.SHA3_512)
     Assert.assertEquals("0C25", pre.toHexString().toUpperCase())
-
   }
 
   @Test
@@ -100,6 +101,5 @@ class DIDGeneratorTest {
       BaseEncoding.base16().encode(kp.getPK()))
     Assert.assertEquals("0450863AD64A87AE8A2FE83C1AF1A8403CB53F53E486D8511DAD8A04887E5B23522CD470243453A299FA9E77237716103ABC11A1DF38855ED6F2EE187E9C582BA6",
       WalletKit.sk2pk(KeyType.SECP256K1, sk).toHexString().toUpperCase())
-
   }
 }

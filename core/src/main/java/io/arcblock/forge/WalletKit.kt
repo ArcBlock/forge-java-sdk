@@ -1,21 +1,16 @@
 package io.arcblock.forge
 
-
-import com.google.crypto.tink.subtle.*
-import com.google.protobuf.*
+import com.google.crypto.tink.subtle.Ed25519Sign
 import com.google.protobuf.Any
-import forge_abi.*
+import com.google.protobuf.ByteString
 import forge_abi.Type
-import io.arcblock.forge.bip44.Bip44Utils
-import io.arcblock.forge.did.*
-import io.arcblock.forge.signer.*
-import java.util.Collections
-import org.bitcoinj.wallet.DeterministicSeed
 import org.web3j.crypto.ECKeyPair
 import java.time.LocalDate
 import forge_abi.Poke
-
-
+import forge_abi.Rpc
+import io.arcblock.forge.did.KeyType
+import io.arcblock.forge.did.WalletInfo
+import io.arcblock.forge.signer.Signer
 
 /**
  * This kit can help you to generate a Wallet with master Seed, private key and public key
@@ -43,20 +38,20 @@ object WalletKit {
   /**
    * create transaction by wallet and itx: TransferTx, ExchangeTx, CreateTx...
    */
-  fun createTx(wallet: WalletInfo, nonce: Long, chainID: String, itx: Any): Type.Transaction{
+  fun createTx(wallet: WalletInfo, nonce: Long, chainID: String, itx: Any): Type.Transaction {
     val unTx = Type.Transaction.newBuilder()
       .setChainId(chainID).setFrom(wallet.address)
       .setPk(ByteString.copyFrom(wallet.pk))
       .setNonce(nonce)
       .setItx(itx)
       .build()
-    return sign(wallet,unTx)
+    return sign(wallet, unTx)
   }
 
   /**
    * create a PokeTx to get some token
    */
-  fun poke(wallet: WalletInfo,forge: ForgeSDK):Type.Transaction{
+  fun poke(wallet: WalletInfo, forge: ForgeSDK): Type.Transaction {
     val forgeState = forge
       .getForgeState(Rpc.RequestGetForgeState.newBuilder()
         .build())
@@ -81,31 +76,25 @@ object WalletKit {
   /**
    *  signature a transaction by a wallet
    */
-  fun sign(wallet: WalletInfo, tx: Type.Transaction): Type.Transaction{
+  fun sign(wallet: WalletInfo, tx: Type.Transaction): Type.Transaction {
     val unSigTx = tx.toBuilder().setFrom(wallet.address)
             .setPk(ByteString.copyFrom(wallet.pk))
       .setSignature(ByteString.EMPTY).build()
     val sig = Signer.sign(wallet.getSignType(),
-      Hasher.hash(wallet.getHashType(),unSigTx.toByteArray())
-      , wallet.sk)
+      Hasher.hash(wallet.getHashType(), unSigTx.toByteArray()), wallet.sk)
     return unSigTx.toBuilder().setSignature(ByteString.copyFrom(sig)).build()
   }
 
   /**
    * multi sign when make Exchange
    */
-  fun multiSigExchange(wallet: WalletInfo, tx: Type.Transaction): Type.Transaction{
+  fun multiSigExchange(wallet: WalletInfo, tx: Type.Transaction): Type.Transaction {
     val multiSig = Type.Multisig.newBuilder().setSigner(wallet.address)
       .setPk(ByteString.copyFrom(wallet.pk)).build()
     val unSigTx = tx.toBuilder().addSignatures(multiSig).build()
     val sig = Signer.sign(wallet.getSignType(),
-      Hasher.hash(wallet.getHashType(),unSigTx.toByteArray())
-      , wallet.sk)
-    return tx.toBuilder().setSignatures(0,multiSig.toBuilder().setSignature(ByteString.copyFrom(sig)).build())
+      Hasher.hash(wallet.getHashType(), unSigTx.toByteArray()), wallet.sk)
+    return tx.toBuilder().setSignatures(0, multiSig.toBuilder().setSignature(ByteString.copyFrom(sig)).build())
       .build()
   }
-
-
-
-
 }

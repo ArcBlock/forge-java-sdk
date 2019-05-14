@@ -1,5 +1,7 @@
-#Java-SDK
+# Java-SDK
+
 ## forge-java-sdk
+
 forge sdk for java development.
 For Forge-related setup, please checkout [Forge](https://github.com/ArcBlock/forge)
 A detailed reference manual for forge-python-sdk can be found [here](../../../forge-java-sdk).
@@ -31,7 +33,6 @@ Or you know another's node config info.
 
 Find the config your forge is using by `forge config`, find forge section, and get sock_grpc.
 
-
 ## Tutorials
 
 ### Step 0: create a project.
@@ -51,7 +52,7 @@ and add `forge = ForgeSDK.connectTo(host, port);` when you application init
 
 ### Step 2: create a wallet.
 
-``` kotlin
+```kotlin
 val Alice = forge.createWallet(Rpc.RequestCreateWallet.newBuilder()
                         .setMoniker(usr)
                         .setPassphrase(pass)
@@ -60,6 +61,7 @@ val Alice = forge.createWallet(Rpc.RequestCreateWallet.newBuilder()
 // Alice contains:
 
 ```
+
 ::: tip Notes
 `moniker` is a nickname for this wallet on Forge. `passphrase` is used by Forge to encrypt the wallet into a keystore file. More details about wallet declaration rules are [here](../intro/concepts).
 :::
@@ -70,10 +72,9 @@ val Alice = forge.createWallet(Rpc.RequestCreateWallet.newBuilder()
 forge.getForgeSDK().getAccountState()
 ```
 
-
 ### Step 4: Poke your wallet to get some token.
 
-``` kotlin
+```kotlin
 forge.
 val tx = WalletKit.poke(WalletInfo(Alice), forge)
 val response = forge.sendTx(Rpc.RequestSendTx.newBuilder()
@@ -81,6 +82,7 @@ val response = forge.sendTx(Rpc.RequestSendTx.newBuilder()
                     .setTx(createTxResp.getTx())
                     .build());
 ```
+
 wait some seconds, check your account balance .
 
 ### Step 5: Transfer your token to other.
@@ -108,5 +110,41 @@ if it works, response will return a hash string. you can query this hash use for
 and decimal is 16.
 :::
 
+🎉 Congratulations! You have finished the tutorial! Now you should have a general sense about how Forge works. Now continue to explore !
 
- 🎉 Congratulations! You have finished the tutorial! Now you should have a general sense about how Forge works. Now continue to explore !
+### Welcome contribution
+
+Want to contribute? Great! First, read this page
+
+#### Setup Develop Environment
+
+first, you have to install [forge-cli](https://docs.arcblock.io/forge/latest/tools/forge_cli.html) and setup a local chain.
+
+make sure you have installed java ,make and ktlint.
+
+clone this Repo. and open terminal in this Repo. run:
+
+```shell
+make download-proto
+make build
+make run
+```
+
+it will start a SpringBoot example.
+
+```shell
+curl http://localhost:8081/
+```
+
+and it will return forge info.
+
+Now, you can add your code to this project and feel free to create request pull or issue .
+
+#### Code reviews
+
+All submissions, including submissions by project members, require review. We
+use GitHub pull requests for this purpose.
+
+Before you commit your code ,please run `make test` to make sure all test is passed. and there is a pre-commit to check kotlin code.
+
+Thank you for considering contributing, and feel free to contribute .

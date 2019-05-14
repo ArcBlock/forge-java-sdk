@@ -1,9 +1,9 @@
 package io.arcblock.forge.did.bean
 
-import io.arcblock.forge.did.*
-import io.arcblock.forge.did.bean.*
-import io.arcblock.forge.utils.*
-import java.sql.*
+import io.arcblock.forge.did.DIDGenerator
+import io.arcblock.forge.did.DidAuthUtils
+import io.arcblock.forge.did.DidUtils
+import io.arcblock.forge.utils.Base58Btc
 
 class DIDTokenBody(
   var action: String,
@@ -45,6 +45,4 @@ class DIDTokenBody(
     }
     return true
   }
-
-
 }

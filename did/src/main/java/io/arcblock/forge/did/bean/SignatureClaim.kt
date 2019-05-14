@@ -7,6 +7,6 @@ package io.arcblock.forge.did.bean
  * @origin : transaction origin binary to Base58
  * @data: transaction binary hash result to base58
  */
-class SignatureClaim(override val meta: MetaInfo, var sig: String, var origin:String, var data: String) :IClaim {
+class SignatureClaim(override val meta: MetaInfo, var sig: String, var origin: String, var data: String) : IClaim {
   val type = ClaimType.SIGNATURE.toString()
 }

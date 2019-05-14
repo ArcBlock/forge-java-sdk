@@ -1,8 +1,5 @@
 package io.arcblock.forge
 
-import org.junit.Assert
-import org.junit.Test
-
 class WalletKitTest {
 //
 //  @Test

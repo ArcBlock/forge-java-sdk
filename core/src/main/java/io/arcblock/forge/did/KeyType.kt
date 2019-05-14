@@ -7,5 +7,5 @@ package io.arcblock.forge.did
  * Edited Time  :
  **/
 enum class KeyType {
-  ED25519,SECP256K1
+  ED25519, SECP256K1
 }

@@ -12,7 +12,7 @@ class UtilTest {
   lateinit var did: String
   @Before
   fun setUp() {
-    kp= DidKeyPair(KeyType.ED25519, Bip44Utils.genSeed("abc", "def", "").seedBytes!!)
+    kp = DidKeyPair(KeyType.ED25519, Bip44Utils.genSeed("abc", "def", "").seedBytes!!)
     did = DIDGenerator.genAppDid(kp).removePrefix("did:abt:")
   }
 

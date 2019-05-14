@@ -1,9 +1,9 @@
 package io.arcblock.forge.did
 
-import io.arcblock.forge.*
+import io.arcblock.forge.WalletKit
 import io.arcblock.forge.did.KeyType.ED25519
 import io.arcblock.forge.did.KeyType.SECP256K1
-import org.web3j.crypto.*
+import org.web3j.crypto.ECKeyPair
 
 /**
  * Generate KeyPair for Forge
@@ -14,17 +14,17 @@ import org.web3j.crypto.*
  * Edited By    :
  * Edited Time  :
  **/
-class DidKeyPair( keyType: KeyType,seed:ByteArray) {
+class DidKeyPair(keyType: KeyType, seed: ByteArray) {
 
-  var privateKey:ByteArray
-  var publicKey:ByteArray
+  var privateKey: ByteArray
+  var publicKey: ByteArray
 
   init {
-    when(keyType){
-      ED25519 ->{
+    when (keyType) {
+      ED25519 -> {
 
-        publicKey = WalletKit.sk2pk(keyType,seed)
-        privateKey = seed+publicKey
+        publicKey = WalletKit.sk2pk(keyType, seed)
+        privateKey = seed + publicKey
       }
       SECP256K1 -> {
         ECKeyPair.create(seed).let {

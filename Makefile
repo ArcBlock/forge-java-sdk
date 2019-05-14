@@ -30,6 +30,7 @@ test:
 
 lint:
 	@echo "Linting the software..."
+	@ktlint --color
 
 download-proto:
 	@echo "downloading proto files"
@@ -49,7 +50,7 @@ upload-doc:
 	@aws s3 sync core/docs s3://docs.arcblock.io/forge/sdks/java/${VERSION}/ --region us-west-2 --profile prod
 	@aws s3 sync core/docs s3://docs.arcblock.io/forge/sdks/java/latest/ --region us-west-2 --profile prod
 	
-precommit: dep lint doc build test
+precommit: dep build test
 
 travis: precommit
 

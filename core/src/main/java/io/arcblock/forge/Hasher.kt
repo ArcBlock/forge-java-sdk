@@ -1,12 +1,14 @@
 package io.arcblock.forge
 
-import io.arcblock.forge.did.*
-import io.arcblock.forge.hash.*
+import io.arcblock.forge.did.HashType
+import io.arcblock.forge.did.HashUtils
+import io.arcblock.forge.hash.ArcKeccakf1600Hasher
+import io.arcblock.forge.hash.ArcSha3Hasher
 
 /**
  *  Calculate Hash
  */
-object Hasher{
+object Hasher {
 
   /**
    * Calculate Hash
@@ -17,21 +19,21 @@ object Hasher{
   fun hash(hashType: HashType, contents: ByteArray): ByteArray {
     return when (hashType) {
       HashType.SHA3 -> {
-        ArcSha3Hasher.sha256(contents,1)
+        ArcSha3Hasher.sha256(contents, 1)
       }
       HashType.KECCAK -> {
         ArcKeccakf1600Hasher.sha(contents)
       }
-      HashType.KECCAK_384-> {
+      HashType.KECCAK_384 -> {
         ArcKeccakf1600Hasher.sha384(contents)
       }
-      HashType.KECCAK_512-> {
+      HashType.KECCAK_512 -> {
         ArcKeccakf1600Hasher.sha512(contents)
       }
-      HashType.SHA3_384-> {
+      HashType.SHA3_384 -> {
         ArcKeccakf1600Hasher.sha384(contents)
       }
-      HashType.SHA3_512-> {
+      HashType.SHA3_512 -> {
         ArcKeccakf1600Hasher.sha512(contents)
       }
       else -> {
@@ -39,5 +41,4 @@ object Hasher{
       }
     }
   }
-
 }
