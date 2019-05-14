@@ -36,12 +36,9 @@ dependencies {
   compile project(":core")
   compile project(":did")
   implementation 'com.nimbusds:nimbus-jose-jwt:7.1'
-//  implementation 'com.google.protobuf:protobuf-java:3.6.1'
-
   implementation 'io.grpc:grpc-netty:1.20.0'
-
   implementation 'org.springframework.boot:spring-boot-starter'
-  implementation 'org.springframework.boot:spring-boot-starter-security'
+//  implementation 'org.springframework.boot:spring-boot-starter-security'
   implementation "com.auth0:java-jwt:3.4.0"
   implementation("org.springframework.boot:spring-boot-starter-web")
 //  implementation 'com.nimbusds:nimbus-jose-jwt:7.1'

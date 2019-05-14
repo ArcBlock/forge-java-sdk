@@ -30,6 +30,7 @@ test:
 
 lint:
 	@echo "Linting the software..."
+	@ktlint --color
 
 download-proto:
 	@echo "downloading proto files"
