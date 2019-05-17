@@ -3,6 +3,7 @@ package io.arcblock.forge
 import io.arcblock.forge.did.HashType
 import io.arcblock.forge.did.HashUtils
 import io.arcblock.forge.hash.ArcKeccakf1600Hasher
+import io.arcblock.forge.hash.ArcSha2Hasher
 import io.arcblock.forge.hash.ArcSha3Hasher
 
 /**
@@ -35,6 +36,9 @@ object Hasher {
       }
       HashType.SHA3_512 -> {
         ArcKeccakf1600Hasher.sha512(contents)
+      }
+      HashType.SHA2 ->{
+        ArcSha2Hasher.sha(contents)
       }
       else -> {
         HashUtils.sha3(contents)

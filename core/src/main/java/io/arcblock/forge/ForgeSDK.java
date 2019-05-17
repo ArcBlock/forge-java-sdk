@@ -113,12 +113,11 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Auto Generated ,Do not Edit ForgeSDK is tool to connect and 
- * communicate with forge node and provide blocking ,async and reactive
- * method to handle chain method.
- * and the high level usage please to reference forge docs
+ * communicate with forge node and provide blocking ,async and reactive 
+ * method to handle hain method.
+ * and the high level usage please to reference 
  * https://docs.arcblock.io/forge/latest/txs/#categories
- *
- */
+ *   */
 public final class ForgeSDK {
   private ManagedChannel channel;
 

@@ -1,10 +1,14 @@
 package io.arcblock.forge.did
 
 import com.google.common.io.BaseEncoding
+import com.google.protobuf.Any
+import com.google.protobuf.ByteString
+import forge_abi.CreateAsset
 import io.arcblock.forge.Hasher
 import io.arcblock.forge.WalletKit
 import io.arcblock.forge.bip44.Bip44Utils
 import io.arcblock.forge.deBase16
+import io.arcblock.forge.didToAddr
 import io.arcblock.forge.getPK
 import io.arcblock.forge.toHexString
 import org.junit.Assert
@@ -101,5 +105,49 @@ class DIDGeneratorTest {
       BaseEncoding.base16().encode(kp.getPK()))
     Assert.assertEquals("0450863AD64A87AE8A2FE83C1AF1A8403CB53F53E486D8511DAD8A04887E5B23522CD470243453A299FA9E77237716103ABC11A1DF38855ED6F2EE187E9C582BA6",
       WalletKit.sk2pk(KeyType.SECP256K1, sk).toHexString().toUpperCase())
+  }
+
+  @Test
+  fun genAssetDid(){
+    val data =Any.newBuilder().setTypeUrl("test_asset").setValue(ByteString.copyFromUtf8("hello world")).build()
+    val itx = CreateAsset.CreateAssetTx.newBuilder().setData(data)
+      .setMoniker("")
+      .setReadonly(false)
+      .setParent("")
+      .setTransferrable(false)
+      .setTtl(0)
+      .build()
+    println("itx:$itx")
+    val address = DIDGenerator.genAssetDid("z1fAiQRmNDFSoFAFTq4R5UsaYpL6y4s8XSx",itx.toByteArray())
+    Assert.assertEquals("zjdmmAWQDGgb68y6GAcoSx3n8exZC1hvxQ4H",address.didToAddr())
+  }
+  @Test
+  fun genTxaddr(){
+    val data =Any.newBuilder().setTypeUrl("test_asset").setValue(ByteString.copyFromUtf8("hello world")).build()
+    val itx = CreateAsset.CreateAssetTx.newBuilder().setData(data)
+      .setMoniker("")
+      .setReadonly(false)
+      .setParent("")
+      .setTransferrable(false)
+      .setTtl(0)
+      .build()
+    println("itx:$itx")
+    val address = DIDGenerator.toTxAddress(itx.toByteArray())
+    Assert.assertEquals("z2E3v9oZB7LsX6vkTLzsDkNHM12vkVjhvavMS",address.didToAddr())
+  }
+
+  @Test
+  fun toStakeAddr(){
+    val w1="z1Y2f7cwqSyR4c9azZLNAHimtbjLR3cxPnX"
+    val rst="zrjq3G7UjWJ3etFjtP6LDjk3Aqabz3eh3n5w"
+    val w2="z1fAiQRmNDFSoFAFTq4R5UsaYpL6y4s8XSx"
+    Assert.assertEquals(rst, DIDGenerator.toStakeAddress(w1,w2))
+  }
+
+  @Test
+  fun toTether(){
+        val rst = DIDGenerator.toTetherAddress(BaseEncoding.base16().decode("5D9394E3BBFF052548876A7420E6F5B32C3855995511DEC7A5539CD2C56BD396"))
+// do not work now
+//    Assert.assertEquals("z2MBxdfRmeozARcnPvPi42fndxmhn7rLi9D7g",rst)
   }
 }

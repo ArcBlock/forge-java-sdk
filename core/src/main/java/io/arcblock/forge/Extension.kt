@@ -3,14 +3,13 @@ package io.arcblock.forge
 import com.google.common.io.BaseEncoding
 import forge_abi.Rpc
 import forge_abi.Type
-
 import org.spongycastle.asn1.ASN1Integer
 import org.spongycastle.asn1.DERSequenceGenerator
+import org.spongycastle.crypto.ec.CustomNamedCurves
+import org.spongycastle.crypto.params.ECDomainParameters
 import org.web3j.crypto.ECDSASignature
 import org.web3j.crypto.ECKeyPair
 import java.io.ByteArrayOutputStream
-import org.spongycastle.crypto.params.ECDomainParameters
-import org.spongycastle.crypto.ec.CustomNamedCurves
 
 private val CURVE_PARAMS = CustomNamedCurves.getByName("secp256k1")
 val CURVE = ECDomainParameters(CURVE_PARAMS.curve, CURVE_PARAMS.g, CURVE_PARAMS.n, CURVE_PARAMS.h)
@@ -54,4 +53,20 @@ fun ECKeyPair.getPK(): ByteArray {
  */
 fun ForgeSDK.sendTx(tx: Type.Transaction): Rpc.ResponseSendTx {
   return sendTx(Rpc.RequestSendTx.newBuilder().setTx(tx).build())
+}
+
+/**
+ * base58btc address to DID
+ */
+fun String.addrToDID(): String {
+  if (this.startsWith("did:abt:z")) {
+    return this
+  } else return "did:abt:".plus(this)
+}
+
+/**
+ * DID to base58btc address
+ */
+fun String.didToAddr(): String {
+  return this.removePrefix("did:abt:")
 }
