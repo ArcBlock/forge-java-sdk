@@ -154,4 +154,5 @@ class DIDGeneratorTest {
   //  Assert.assertEquals("z2MC8w872CYeZ3zZSERMkaKSmiDrHHr7vDxYE",rst)
 
   }
+
 }

@@ -9,6 +9,7 @@ import io.arcblock.forge.did.KeyType.ED25519
 import io.arcblock.forge.hash.ArcSha2Hasher
 import io.arcblock.forge.hash.ArcSha3Hasher
 import io.arcblock.forge.utils.Base58Btc
+import org.bitcoinj.core.Base58
 import org.bitcoinj.crypto.ChildNumber
 import org.bitcoinj.crypto.HDKeyDerivation
 import java.math.BigInteger
@@ -34,7 +35,7 @@ object DIDGenerator {
    *
    */
   fun genAppDid(didKeyPair: DidKeyPair): String {
-    // Convert the HD secret key to user_did by using the rules described in DID section.
+      // Convert the HD secret key to user_did by using the rules described in DID section.
     return DIDGenerator.sk2did(didKeyPair.privateKey)
   }
 
@@ -167,7 +168,7 @@ object DIDGenerator {
    * generate tether address
    */
   fun toTetherAddress(hash: ByteArray): String {
-    
+
     return hashToAddress(RoleType.TETHER, ED25519, SHA2, hash)
   }
 
