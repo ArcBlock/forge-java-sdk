@@ -3,7 +3,6 @@ package com.example.demo.commanders
 import com.example.demo.beans.AppDid
 import com.example.demo.components.ForgeSDKComponent
 import forge_abi.Rpc
-import io.arcblock.forge.bip44.Bip44Utils
 import io.arcblock.forge.did.DIDGenerator
 import io.arcblock.forge.did.HashType
 import io.arcblock.forge.did.KeyType
@@ -36,9 +35,6 @@ class ServiceDidRunner : CommandLineRunner {
 
   override fun run(vararg args: String?) {
     logger.info("Init Service Self DID")
-    val seed = Bip44Utils.genSeed("abc", "ccd", "")
-    val kp = Bip44Utils.genKeyPair(seed)
-    val did = DIDGenerator.sk2did(RoleType.APPLICATION, KeyType.ED25519, HashType.SHA3, kp.privateKey.toByteArray())
 
     val response = forgeSDKComponent.forgeSDK.getChainInfo(Rpc.RequestGetChainInfo.getDefaultInstance())
     appDid.chainInfo = response.info
@@ -53,11 +49,11 @@ class ServiceDidRunner : CommandLineRunner {
     appInfo.icon = ""
     appInfo.name = "Application name"
     appInfo.path = "https://abtwallet.io/i/"
-    appInfo.publisher = did
+    appInfo.publisher =  DIDGenerator.sk2did(RoleType.APPLICATION, KeyType.ED25519, HashType.SHA3, walletInfo.pk)
+
     appInfo.subtitle = "Sub title"
 
-    walletInfo.address = did.removePrefix("did:abt:")
-    walletInfo.sk = kp.privateKey.toByteArray().sliceArray(0..31)
-    walletInfo.pk = kp.publicKey.toByteArray()
+
+
   }
 }

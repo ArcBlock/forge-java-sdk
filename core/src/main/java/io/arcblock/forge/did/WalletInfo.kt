@@ -1,11 +1,12 @@
 package io.arcblock.forge.did
 
+import forge_abi.Rpc
 import io.arcblock.forge.utils.Base58Btc
 
-class WalletInfo(var address: String) {
-  lateinit var pk: ByteArray
-  lateinit var sk: ByteArray
-  var token: String? = null
+class WalletInfo(val address: String, val pk: ByteArray,val sk: ByteArray) {
+
+  constructor(response: Rpc.ResponseCreateWallet):this(response.wallet.address,response.wallet.pk.toByteArray()
+    ,response.wallet.sk.toByteArray())
 
   fun getAccountType(): RoleType {
     return DidUtils.decodeDidRoleType(address)
@@ -20,4 +21,7 @@ class WalletInfo(var address: String) {
   }
 
   fun pkBase58(): String = Base58Btc.encode(pk)
+
+
+
 }

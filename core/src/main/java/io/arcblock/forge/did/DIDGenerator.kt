@@ -2,10 +2,11 @@ package io.arcblock.forge.did
 
 import forge_abi.CreateAsset
 import io.arcblock.forge.Hasher
-import io.arcblock.forge.WalletKit
+import io.arcblock.forge.WalletUtils
 import io.arcblock.forge.did.HashType.SHA2
 import io.arcblock.forge.did.HashType.SHA3
 import io.arcblock.forge.did.KeyType.ED25519
+import io.arcblock.forge.hash.ArcSha2Hasher
 import io.arcblock.forge.hash.ArcSha3Hasher
 import io.arcblock.forge.utils.Base58Btc
 import org.bitcoinj.crypto.ChildNumber
@@ -107,7 +108,7 @@ object DIDGenerator {
   did:abt:zNKtCNqYWLYWYW3gWRA1vnRykfCBZYHZvzKr
    */
   fun sk2did(roleType: RoleType, keyType: KeyType, hashType: HashType, sk: ByteArray): String {
-    val pk = WalletKit.sk2pk(keyType, sk)
+    val pk = WalletUtils.sk2pk(keyType, sk)
     return pk2did(roleType, keyType, hashType, pk)
   }
 
@@ -131,7 +132,7 @@ object DIDGenerator {
    * @param hashType enum HashType, such as SHA3 or KECCAK
    */
   fun pk2Address(roleType: RoleType, keyType: KeyType, hashType: HashType, pk: ByteArray): String {
-    val pkHash = Hasher.hash(hashType, pk)
+    val pkHash = if (hashType == SHA2) ArcSha2Hasher.sha256(pk, 1) else Hasher.hash(hashType, pk)
     return hashToAddress(roleType, keyType, hashType, pkHash)
   }
 
@@ -148,7 +149,7 @@ object DIDGenerator {
    * @param hashType enum HashType, such as SHA3 or KECCAK
    */
   fun pk2did(roleType: RoleType, keyType: KeyType, hashType: HashType, pk: ByteArray): String {
-    return "did:abt:z".plus(pk2Address(roleType, keyType, hashType, pk))
+    return "did:abt:".plus(pk2Address(roleType, keyType, hashType, pk))
   }
 
   /**

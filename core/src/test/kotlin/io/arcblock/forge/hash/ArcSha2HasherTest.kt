@@ -1,6 +1,7 @@
 package io.arcblock.forge.hash
 
 import com.google.common.io.BaseEncoding
+import io.arcblock.forge.toHexString
 import org.junit.Assert
 import org.junit.Test
 
@@ -32,8 +33,13 @@ class ArcSha2HasherTest {
 
   @Test
   fun sha2561() {
-    val rst = BaseEncoding.base64().encode(ArcSha2Hasher.sha256("abc".toByteArray(), 1))
+    var rst = BaseEncoding.base64().encode(ArcSha2Hasher.sha256("abc".toByteArray(), 1))
     Assert.assertEquals("ungWv48Bz+pBQUDeXa4iI7ADYaOWF3qctBD/YfIAFa0=", rst)
+
+     rst = ArcSha2Hasher.sha256("2c06ce922dedaa0e2c141b040bb8034af17bf9962266".toByteArray(), 1).toHexString()
+    //Assert.assertEquals("ungWv48Bz+pBQUDeXa4iI7ADYaOWF3qctBD/YfIAFa0=", rst)
+    println("rst:$rst")
+
   }
 
   @Test
