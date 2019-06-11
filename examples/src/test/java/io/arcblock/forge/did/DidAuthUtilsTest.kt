@@ -12,7 +12,7 @@ class DidAuthUtilsTest {
     val appInfo = AppInfo()
     // declare a claim
     val claim1 = ProfileClaim(MetaInfo("profile info", ""), arrayListOf("username", "email"))
-    val wallet = WalletInfo("zXXXXXXXX")
+
     // DidAuthUtils.createDidAuthToken(arrayOf(claim1),appInfo,System.currentTimeMillis(),wallet)
   }
 }

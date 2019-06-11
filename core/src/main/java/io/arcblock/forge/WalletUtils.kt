@@ -3,20 +3,21 @@ package io.arcblock.forge
 import com.google.crypto.tink.subtle.Ed25519Sign
 import com.google.protobuf.Any
 import com.google.protobuf.ByteString
-import forge_abi.Type
-import org.web3j.crypto.ECKeyPair
-import java.time.LocalDate
 import forge_abi.Poke
 import forge_abi.Rpc
+import forge_abi.Transfer
+import forge_abi.Type
 import io.arcblock.forge.did.KeyType
 import io.arcblock.forge.did.WalletInfo
 import io.arcblock.forge.signer.Signer
+import org.web3j.crypto.ECKeyPair
+import java.time.LocalDate
 
 /**
  * This kit can help you to generate a Wallet with master Seed, private key and public key
  *
  */
-object WalletKit {
+object WalletUtils {
 
   /**
    * generate PK from SK.
@@ -35,6 +36,16 @@ object WalletKit {
     }
   }
 
+
+
+  fun createTranserTx(wallet: WalletInfo,  chainID: String, itx: Transfer.TransferTx): Type.Transaction {
+    return WalletUtils.createTx(wallet,System.currentTimeMillis(),chainID, Any.newBuilder()
+      .setTypeUrl(TypeUrls.TRANSFER)
+      .setValue(itx.toByteString())
+      .build()
+    )
+  }
+
   /**
    * create transaction by wallet and itx: TransferTx, ExchangeTx, CreateTx...
    */
@@ -51,7 +62,11 @@ object WalletKit {
   /**
    * create a PokeTx to get some token
    */
-  fun poke(wallet: WalletInfo, forge: ForgeSDK): Type.Transaction {
+  fun poke(wallet: WalletInfo, forge: ForgeSDK, chainID: String): Type.Transaction {
+    return WalletUtils.poke(wallet,forge, System.currentTimeMillis(),chainID)
+  }
+
+  fun poke(wallet: WalletInfo, forge: ForgeSDK, nonce: Long, chainID: String): Type.Transaction {
     val forgeState = forge
       .getForgeState(Rpc.RequestGetForgeState.newBuilder()
         .build())
@@ -60,17 +75,9 @@ object WalletKit {
       .setAddress(forgeState.getState().getPokeConfig().getAddress())
       .setDate(LocalDate.now().toString())
       .build()
-    val createTx = Rpc.RequestCreateTx.newBuilder()
-      .setFrom(wallet.address)
-      .setItx(Any.newBuilder()
-        .setTypeUrl(TypeUrls.POKE)
-        .setValue(itx.toByteString())
-        .build())
-      .setNonce(0L)
-      .setToken(wallet.token)
-      .build()
-    val createTxResp = forge.createTx(createTx)
-    return createTxResp.tx
+    return createTx(wallet,nonce,chainID,Any.newBuilder().setTypeUrl(TypeUrls.POKE)
+      .setValue(itx.toByteString())
+      .build())
   }
 
   /**

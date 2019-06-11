@@ -2,11 +2,13 @@ package io.arcblock.forge.did
 
 import forge_abi.CreateAsset
 import io.arcblock.forge.Hasher
-import io.arcblock.forge.WalletKit
+import io.arcblock.forge.WalletUtils
+import io.arcblock.forge.did.HashType.SHA2
 import io.arcblock.forge.did.HashType.SHA3
 import io.arcblock.forge.did.KeyType.ED25519
+import io.arcblock.forge.hash.ArcSha2Hasher
 import io.arcblock.forge.hash.ArcSha3Hasher
-import org.bitcoinj.core.Base58
+import io.arcblock.forge.utils.Base58Btc
 import org.bitcoinj.crypto.ChildNumber
 import org.bitcoinj.crypto.HDKeyDerivation
 import java.math.BigInteger
@@ -32,7 +34,7 @@ object DIDGenerator {
    *
    */
   fun genAppDid(didKeyPair: DidKeyPair): String {
-      // Convert the HD secret key to user_did by using the rules described in DID section.
+    // Convert the HD secret key to user_did by using the rules described in DID section.
     return DIDGenerator.sk2did(didKeyPair.privateKey)
   }
 
@@ -106,7 +108,7 @@ object DIDGenerator {
   did:abt:zNKtCNqYWLYWYW3gWRA1vnRykfCBZYHZvzKr
    */
   fun sk2did(roleType: RoleType, keyType: KeyType, hashType: HashType, sk: ByteArray): String {
-    val pk = WalletKit.sk2pk(keyType, sk)
+    val pk = WalletUtils.sk2pk(keyType, sk)
     return pk2did(roleType, keyType, hashType, pk)
   }
 
@@ -117,10 +119,27 @@ object DIDGenerator {
    * @return Asset address
    */
   fun genAssetDid(senderAddress: String, itx: ByteArray): String {
-    val hashType = DidUtils.decodeDidHashType(senderAddress)
-    val keyType = DidUtils.decodeDidSignType(senderAddress)
+//    val hashType = DidUtils.decodeDidHashType(senderAddress)
+//    val keyType = DidUtils.decodeDidSignType(senderAddress)
     val itxNoAddress = CreateAsset.CreateAssetTx.newBuilder().mergeFrom(itx).clearAddress().build().toByteArray()
-    return pk2did(RoleType.ASSET, keyType, hashType, senderAddress.toByteArray() + ArcSha3Hasher.sha(itxNoAddress))
+    return hashToAddress(RoleType.ASSET, ED25519, SHA3, ArcSha3Hasher.sha(itxNoAddress))
+  }
+
+  /**
+   * Generate address by user publicKey
+   * @param roleType use enum RoleType, such as ACCOUNT or APPLICATION
+   * @param keyType publicKey type ED25519 or SECP256K1
+   * @param hashType enum HashType, such as SHA3 or KECCAK
+   */
+  fun pk2Address(roleType: RoleType, keyType: KeyType, hashType: HashType, pk: ByteArray): String {
+    val pkHash = if (hashType == SHA2) ArcSha2Hasher.sha256(pk, 1) else Hasher.hash(hashType, pk)
+    return hashToAddress(roleType, keyType, hashType, pkHash)
+  }
+
+  fun hashToAddress(roleType: RoleType, keyType: KeyType, hashType: HashType, hash: ByteArray): String {
+    val appendPk = preAppend(roleType, keyType, hashType) + hash.sliceArray(0..19)
+    val suffix = appendPk + Hasher.hash(hashType, appendPk).sliceArray(0..3)
+    return Base58Btc.encode(suffix)
   }
 
   /**
@@ -130,21 +149,60 @@ object DIDGenerator {
    * @param hashType enum HashType, such as SHA3 or KECCAK
    */
   fun pk2did(roleType: RoleType, keyType: KeyType, hashType: HashType, pk: ByteArray): String {
-
-    val pkHash = Hasher.hash(hashType, pk).sliceArray(0..19)
-    val appendPk = preAppend(roleType, keyType, hashType) + pkHash
-    val suffix = appendPk + Hasher.hash(hashType, appendPk).sliceArray(0..3)
-    return "did:abt:z".plus(Base58.encode(suffix))
+    return "did:abt:".plus(pk2Address(roleType, keyType, hashType, pk))
   }
 
   /**
    * generate prefix of did
    */
   fun preAppend(roleType: RoleType, keyType: KeyType, hashType: HashType): ByteArray {
-    val append = (roleType.ordinal.shl(10).and(0b1111110000000000)).or(keyType.ordinal.shl(5).and(0b1111100000)).or(hashType.ordinal.and(0b11111))
+    val append = (roleType.value.shl(10).and(0b1111110000000000)).or(keyType.value.shl(5).and(0b1111100000)).or(hashType.value.and(0b11111))
     var ret = ByteArray(2)
     ret[1] = append.and(0b11111111).toByte()
     ret[0] = append.shr(8).and(0b11111111).toByte()
     return ret
   }
+
+  /**
+   * generate tether address
+   */
+  fun toTetherAddress(hash: ByteArray): String {
+    
+    return hashToAddress(RoleType.TETHER, ED25519, SHA2, hash)
+  }
+
+  /**
+   * generate validator address
+   */
+  fun toValidatorAddress(hash: ByteArray): String {
+    return hashToAddress(RoleType.VALIDATOR, ED25519, SHA2, hash)
+  }
+
+  /**
+   * generate node address
+   */
+  fun toNodeAddress(hash: ByteArray): String {
+    return hashToAddress(RoleType.NODE, ED25519, SHA2, hash)
+  }
+
+  /**
+   * Generate stake address. Use sender's address + receiver's address as pseudo public key.
+   * Use `ed25519` as pseudo key type. Use sha3 and base58 by default.
+   */
+  fun toStakeAddress(addr1: String, addr2: String): String{
+    val data = (if (addr1.compareTo(addr2) < 0){
+      addr1+addr2
+    } else addr2+addr1).toByteArray()
+    return pk2Address(RoleType.STAKE, ED25519,SHA3, data)
+  }
+
+  /**
+   *   Generate address for tx.
+   */
+  fun toTxAddress(itx: ByteArray): String{
+    val data = Hasher.hash(SHA3,itx)
+    return hashToAddress(RoleType.TX, ED25519, SHA3, data)
+  }
+
+
 }

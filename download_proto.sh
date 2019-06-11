@@ -1,13 +1,11 @@
 #!/bin/sh
 #"https://api.github.com/repos/ArcBlock/forge-abi/contents/lib/protobuf/tx.proto"  \
 LIST=(
-https://raw.githubusercontent.com/ArcBlock/ex_abci_proto/master/lib/protos/vendor.proto \
-
+  https://raw.githubusercontent.com/ArcBlock/ex_abci_proto/master/lib/protos/vendor.proto \
   "https://api.github.com/repos/ArcBlock/forge-abi/contents/lib/protobuf/enum.proto" \
   "https://api.github.com/repos/ArcBlock/forge-abi/contents/lib/protobuf/rpc.proto"  \
-
   "https://api.github.com/repos/ArcBlock/forge-abi/contents/lib/protobuf/service.proto" \
- "https://api.github.com/repos/ArcBlock/forge-abi/contents/lib/protobuf/state.proto" \
+  "https://api.github.com/repos/ArcBlock/forge-abi/contents/lib/protobuf/state.proto" \
   "https://api.github.com/repos/ArcBlock/forge-abi/contents/lib/protobuf/trace_type.proto" \
   "https://api.github.com/repos/ArcBlock/forge-abi/contents/lib/protobuf/type.proto"
  )
@@ -23,13 +21,16 @@ TLIST=(
   "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/governance/upgrade_node/protocol.proto" \
   "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/misc/poke/protocol.proto" \
   "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/stake/stake/protocol.proto" \
-  "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/trade/deposit_tether/protocol.proto" \
+  "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/trade/approve_tether/protocol.proto" \
+  "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/trade/deposit_tether/protocol.proto" \  
   "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/trade/exchange/protocol.proto" \
   "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/trade/exchange_tether/protocol.proto" \
+  "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/trade/revoke_tether/protocol.proto" \      
   "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/trade/transfer/protocol.proto" \
+  "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/trade/withdraw_tether/protocol.proto" \      
 )
 
-cd src/main/proto/
+cd core/src/main/proto/
 rm *.proto
 for f in ${LIST[@]}
 do
