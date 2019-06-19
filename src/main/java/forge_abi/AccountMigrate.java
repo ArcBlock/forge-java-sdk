@@ -32,25 +32,25 @@ public final class AccountMigrate {
      * new wallet type
      * </pre>
      *
-     * <code>.forge_abi.WalletType type = 2;</code>
+     * <code>.forge_abi.WalletType type = 2 [deprecated = true];</code>
      */
-    boolean hasType();
+    @java.lang.Deprecated boolean hasType();
     /**
      * <pre>
      * new wallet type
      * </pre>
      *
-     * <code>.forge_abi.WalletType type = 2;</code>
+     * <code>.forge_abi.WalletType type = 2 [deprecated = true];</code>
      */
-    forge_abi.Type.WalletType getType();
+    @java.lang.Deprecated forge_abi.Type.WalletType getType();
     /**
      * <pre>
      * new wallet type
      * </pre>
      *
-     * <code>.forge_abi.WalletType type = 2;</code>
+     * <code>.forge_abi.WalletType type = 2 [deprecated = true];</code>
      */
-    forge_abi.Type.WalletTypeOrBuilder getTypeOrBuilder();
+    @java.lang.Deprecated forge_abi.Type.WalletTypeOrBuilder getTypeOrBuilder();
 
     /**
      * <pre>
@@ -216,9 +216,9 @@ public final class AccountMigrate {
      * new wallet type
      * </pre>
      *
-     * <code>.forge_abi.WalletType type = 2;</code>
+     * <code>.forge_abi.WalletType type = 2 [deprecated = true];</code>
      */
-    public boolean hasType() {
+    @java.lang.Deprecated public boolean hasType() {
       return type_ != null;
     }
     /**
@@ -226,9 +226,9 @@ public final class AccountMigrate {
      * new wallet type
      * </pre>
      *
-     * <code>.forge_abi.WalletType type = 2;</code>
+     * <code>.forge_abi.WalletType type = 2 [deprecated = true];</code>
      */
-    public forge_abi.Type.WalletType getType() {
+    @java.lang.Deprecated public forge_abi.Type.WalletType getType() {
       return type_ == null ? forge_abi.Type.WalletType.getDefaultInstance() : type_;
     }
     /**
@@ -236,9 +236,9 @@ public final class AccountMigrate {
      * new wallet type
      * </pre>
      *
-     * <code>.forge_abi.WalletType type = 2;</code>
+     * <code>.forge_abi.WalletType type = 2 [deprecated = true];</code>
      */
-    public forge_abi.Type.WalletTypeOrBuilder getTypeOrBuilder() {
+    @java.lang.Deprecated public forge_abi.Type.WalletTypeOrBuilder getTypeOrBuilder() {
       return getType();
     }
 
@@ -712,9 +712,9 @@ public final class AccountMigrate {
        * new wallet type
        * </pre>
        *
-       * <code>.forge_abi.WalletType type = 2;</code>
+       * <code>.forge_abi.WalletType type = 2 [deprecated = true];</code>
        */
-      public boolean hasType() {
+      @java.lang.Deprecated public boolean hasType() {
         return typeBuilder_ != null || type_ != null;
       }
       /**
@@ -722,9 +722,9 @@ public final class AccountMigrate {
        * new wallet type
        * </pre>
        *
-       * <code>.forge_abi.WalletType type = 2;</code>
+       * <code>.forge_abi.WalletType type = 2 [deprecated = true];</code>
        */
-      public forge_abi.Type.WalletType getType() {
+      @java.lang.Deprecated public forge_abi.Type.WalletType getType() {
         if (typeBuilder_ == null) {
           return type_ == null ? forge_abi.Type.WalletType.getDefaultInstance() : type_;
         } else {
@@ -736,9 +736,9 @@ public final class AccountMigrate {
        * new wallet type
        * </pre>
        *
-       * <code>.forge_abi.WalletType type = 2;</code>
+       * <code>.forge_abi.WalletType type = 2 [deprecated = true];</code>
        */
-      public Builder setType(forge_abi.Type.WalletType value) {
+      @java.lang.Deprecated public Builder setType(forge_abi.Type.WalletType value) {
         if (typeBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -756,9 +756,9 @@ public final class AccountMigrate {
        * new wallet type
        * </pre>
        *
-       * <code>.forge_abi.WalletType type = 2;</code>
+       * <code>.forge_abi.WalletType type = 2 [deprecated = true];</code>
        */
-      public Builder setType(
+      @java.lang.Deprecated public Builder setType(
           forge_abi.Type.WalletType.Builder builderForValue) {
         if (typeBuilder_ == null) {
           type_ = builderForValue.build();
@@ -774,9 +774,9 @@ public final class AccountMigrate {
        * new wallet type
        * </pre>
        *
-       * <code>.forge_abi.WalletType type = 2;</code>
+       * <code>.forge_abi.WalletType type = 2 [deprecated = true];</code>
        */
-      public Builder mergeType(forge_abi.Type.WalletType value) {
+      @java.lang.Deprecated public Builder mergeType(forge_abi.Type.WalletType value) {
         if (typeBuilder_ == null) {
           if (type_ != null) {
             type_ =
@@ -796,9 +796,9 @@ public final class AccountMigrate {
        * new wallet type
        * </pre>
        *
-       * <code>.forge_abi.WalletType type = 2;</code>
+       * <code>.forge_abi.WalletType type = 2 [deprecated = true];</code>
        */
-      public Builder clearType() {
+      @java.lang.Deprecated public Builder clearType() {
         if (typeBuilder_ == null) {
           type_ = null;
           onChanged();
@@ -814,9 +814,9 @@ public final class AccountMigrate {
        * new wallet type
        * </pre>
        *
-       * <code>.forge_abi.WalletType type = 2;</code>
+       * <code>.forge_abi.WalletType type = 2 [deprecated = true];</code>
        */
-      public forge_abi.Type.WalletType.Builder getTypeBuilder() {
+      @java.lang.Deprecated public forge_abi.Type.WalletType.Builder getTypeBuilder() {
         
         onChanged();
         return getTypeFieldBuilder().getBuilder();
@@ -826,9 +826,9 @@ public final class AccountMigrate {
        * new wallet type
        * </pre>
        *
-       * <code>.forge_abi.WalletType type = 2;</code>
+       * <code>.forge_abi.WalletType type = 2 [deprecated = true];</code>
        */
-      public forge_abi.Type.WalletTypeOrBuilder getTypeOrBuilder() {
+      @java.lang.Deprecated public forge_abi.Type.WalletTypeOrBuilder getTypeOrBuilder() {
         if (typeBuilder_ != null) {
           return typeBuilder_.getMessageOrBuilder();
         } else {
@@ -841,7 +841,7 @@ public final class AccountMigrate {
        * new wallet type
        * </pre>
        *
-       * <code>.forge_abi.WalletType type = 2;</code>
+       * <code>.forge_abi.WalletType type = 2 [deprecated = true];</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           forge_abi.Type.WalletType, forge_abi.Type.WalletType.Builder, forge_abi.Type.WalletTypeOrBuilder> 
@@ -1162,11 +1162,11 @@ public final class AccountMigrate {
   static {
     java.lang.String[] descriptorData = {
       "\n\025account_migrate.proto\022\tforge_abi\032\031goog" +
-      "le/protobuf/any.proto\032\ntype.proto\"x\n\020Acc" +
-      "ountMigrateTx\022\n\n\002pk\030\001 \001(\014\022#\n\004type\030\002 \001(\0132" +
-      "\025.forge_abi.WalletType\022\017\n\007address\030\003 \001(\t\022" +
-      "\"\n\004data\030\017 \001(\0132\024.google.protobuf.Anyb\006pro" +
-      "to3"
+      "le/protobuf/any.proto\032\ntype.proto\"|\n\020Acc" +
+      "ountMigrateTx\022\n\n\002pk\030\001 \001(\014\022\'\n\004type\030\002 \001(\0132" +
+      "\025.forge_abi.WalletTypeB\002\030\001\022\017\n\007address\030\003 " +
+      "\001(\t\022\"\n\004data\030\017 \001(\0132\024.google.protobuf.Anyb" +
+      "\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

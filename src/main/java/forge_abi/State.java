@@ -3274,6 +3274,24 @@ public final class State {
         getIssuerBytes();
 
     /**
+     * <pre>
+     * parent address for the asset state, e.g. a ticket is inherited from an event
+     * </pre>
+     *
+     * <code>string parent = 9;</code>
+     */
+    java.lang.String getParent();
+    /**
+     * <pre>
+     * parent address for the asset state, e.g. a ticket is inherited from an event
+     * </pre>
+     *
+     * <code>string parent = 9;</code>
+     */
+    com.google.protobuf.ByteString
+        getParentBytes();
+
+    /**
      * <code>.forge_abi.StakeContext stake = 13;</code>
      */
     boolean hasStake();
@@ -3331,6 +3349,7 @@ public final class State {
       transferrable_ = false;
       ttl_ = 0;
       issuer_ = "";
+      parent_ = "";
     }
 
     @java.lang.Override
@@ -3408,6 +3427,12 @@ public final class State {
               java.lang.String s = input.readStringRequireUtf8();
 
               issuer_ = s;
+              break;
+            }
+            case 74: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              parent_ = s;
               break;
             }
             case 106: {
@@ -3676,6 +3701,48 @@ public final class State {
       }
     }
 
+    public static final int PARENT_FIELD_NUMBER = 9;
+    private volatile java.lang.Object parent_;
+    /**
+     * <pre>
+     * parent address for the asset state, e.g. a ticket is inherited from an event
+     * </pre>
+     *
+     * <code>string parent = 9;</code>
+     */
+    public java.lang.String getParent() {
+      java.lang.Object ref = parent_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        parent_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * parent address for the asset state, e.g. a ticket is inherited from an event
+     * </pre>
+     *
+     * <code>string parent = 9;</code>
+     */
+    public com.google.protobuf.ByteString
+        getParentBytes() {
+      java.lang.Object ref = parent_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        parent_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     public static final int STAKE_FIELD_NUMBER = 13;
     private forge_abi.Type.StakeContext stake_;
     /**
@@ -3775,6 +3842,9 @@ public final class State {
       if (!getIssuerBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 8, issuer_);
       }
+      if (!getParentBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 9, parent_);
+      }
       if (stake_ != null) {
         output.writeMessage(13, getStake());
       }
@@ -3818,6 +3888,9 @@ public final class State {
       }
       if (!getIssuerBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, issuer_);
+      }
+      if (!getParentBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, parent_);
       }
       if (stake_ != null) {
         size += com.google.protobuf.CodedOutputStream
@@ -3866,6 +3939,8 @@ public final class State {
       }
       result = result && getIssuer()
           .equals(other.getIssuer());
+      result = result && getParent()
+          .equals(other.getParent());
       result = result && (hasStake() == other.hasStake());
       if (hasStake()) {
         result = result && getStake()
@@ -3911,6 +3986,8 @@ public final class State {
       }
       hash = (37 * hash) + ISSUER_FIELD_NUMBER;
       hash = (53 * hash) + getIssuer().hashCode();
+      hash = (37 * hash) + PARENT_FIELD_NUMBER;
+      hash = (53 * hash) + getParent().hashCode();
       if (hasStake()) {
         hash = (37 * hash) + STAKE_FIELD_NUMBER;
         hash = (53 * hash) + getStake().hashCode();
@@ -4061,6 +4138,8 @@ public final class State {
         }
         issuer_ = "";
 
+        parent_ = "";
+
         if (stakeBuilder_ == null) {
           stake_ = null;
         } else {
@@ -4113,6 +4192,7 @@ public final class State {
           result.consumedTime_ = consumedTimeBuilder_.build();
         }
         result.issuer_ = issuer_;
+        result.parent_ = parent_;
         if (stakeBuilder_ == null) {
           result.stake_ = stake_;
         } else {
@@ -4195,6 +4275,10 @@ public final class State {
         }
         if (!other.getIssuer().isEmpty()) {
           issuer_ = other.issuer_;
+          onChanged();
+        }
+        if (!other.getParent().isEmpty()) {
+          parent_ = other.parent_;
           onChanged();
         }
         if (other.hasStake()) {
@@ -4755,6 +4839,95 @@ public final class State {
   checkByteStringIsUtf8(value);
         
         issuer_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object parent_ = "";
+      /**
+       * <pre>
+       * parent address for the asset state, e.g. a ticket is inherited from an event
+       * </pre>
+       *
+       * <code>string parent = 9;</code>
+       */
+      public java.lang.String getParent() {
+        java.lang.Object ref = parent_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          parent_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * parent address for the asset state, e.g. a ticket is inherited from an event
+       * </pre>
+       *
+       * <code>string parent = 9;</code>
+       */
+      public com.google.protobuf.ByteString
+          getParentBytes() {
+        java.lang.Object ref = parent_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          parent_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * parent address for the asset state, e.g. a ticket is inherited from an event
+       * </pre>
+       *
+       * <code>string parent = 9;</code>
+       */
+      public Builder setParent(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        parent_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * parent address for the asset state, e.g. a ticket is inherited from an event
+       * </pre>
+       *
+       * <code>string parent = 9;</code>
+       */
+      public Builder clearParent() {
+        
+        parent_ = getDefaultInstance().getParent();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * parent address for the asset state, e.g. a ticket is inherited from an event
+       * </pre>
+       *
+       * <code>string parent = 9;</code>
+       */
+      public Builder setParentBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        parent_ = value;
         onChanged();
         return this;
       }
@@ -9088,6 +9261,16 @@ public final class State {
      * <code>bytes protocol = 5;</code>
      */
     com.google.protobuf.ByteString getProtocol();
+
+    /**
+     * <code>bytes governance = 6;</code>
+     */
+    com.google.protobuf.ByteString getGovernance();
+
+    /**
+     * <code>bytes custom = 7;</code>
+     */
+    com.google.protobuf.ByteString getCustom();
   }
   /**
    * <pre>
@@ -9113,6 +9296,8 @@ public final class State {
       asset_ = com.google.protobuf.ByteString.EMPTY;
       receipt_ = com.google.protobuf.ByteString.EMPTY;
       protocol_ = com.google.protobuf.ByteString.EMPTY;
+      governance_ = com.google.protobuf.ByteString.EMPTY;
+      custom_ = com.google.protobuf.ByteString.EMPTY;
     }
 
     @java.lang.Override
@@ -9164,6 +9349,16 @@ public final class State {
             case 42: {
 
               protocol_ = input.readBytes();
+              break;
+            }
+            case 50: {
+
+              governance_ = input.readBytes();
+              break;
+            }
+            case 58: {
+
+              custom_ = input.readBytes();
               break;
             }
           }
@@ -9259,6 +9454,24 @@ public final class State {
       return protocol_;
     }
 
+    public static final int GOVERNANCE_FIELD_NUMBER = 6;
+    private com.google.protobuf.ByteString governance_;
+    /**
+     * <code>bytes governance = 6;</code>
+     */
+    public com.google.protobuf.ByteString getGovernance() {
+      return governance_;
+    }
+
+    public static final int CUSTOM_FIELD_NUMBER = 7;
+    private com.google.protobuf.ByteString custom_;
+    /**
+     * <code>bytes custom = 7;</code>
+     */
+    public com.google.protobuf.ByteString getCustom() {
+      return custom_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -9286,6 +9499,12 @@ public final class State {
       if (!protocol_.isEmpty()) {
         output.writeBytes(5, protocol_);
       }
+      if (!governance_.isEmpty()) {
+        output.writeBytes(6, governance_);
+      }
+      if (!custom_.isEmpty()) {
+        output.writeBytes(7, custom_);
+      }
     }
 
     public int getSerializedSize() {
@@ -9311,6 +9530,14 @@ public final class State {
       if (!protocol_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(5, protocol_);
+      }
+      if (!governance_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, governance_);
+      }
+      if (!custom_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, custom_);
       }
       memoizedSize = size;
       return size;
@@ -9338,6 +9565,10 @@ public final class State {
           .equals(other.getReceipt());
       result = result && getProtocol()
           .equals(other.getProtocol());
+      result = result && getGovernance()
+          .equals(other.getGovernance());
+      result = result && getCustom()
+          .equals(other.getCustom());
       return result;
     }
 
@@ -9358,6 +9589,10 @@ public final class State {
       hash = (53 * hash) + getReceipt().hashCode();
       hash = (37 * hash) + PROTOCOL_FIELD_NUMBER;
       hash = (53 * hash) + getProtocol().hashCode();
+      hash = (37 * hash) + GOVERNANCE_FIELD_NUMBER;
+      hash = (53 * hash) + getGovernance().hashCode();
+      hash = (37 * hash) + CUSTOM_FIELD_NUMBER;
+      hash = (53 * hash) + getCustom().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -9493,6 +9728,10 @@ public final class State {
 
         protocol_ = com.google.protobuf.ByteString.EMPTY;
 
+        governance_ = com.google.protobuf.ByteString.EMPTY;
+
+        custom_ = com.google.protobuf.ByteString.EMPTY;
+
         return this;
       }
 
@@ -9520,6 +9759,8 @@ public final class State {
         result.asset_ = asset_;
         result.receipt_ = receipt_;
         result.protocol_ = protocol_;
+        result.governance_ = governance_;
+        result.custom_ = custom_;
         onBuilt();
         return result;
       }
@@ -9576,6 +9817,12 @@ public final class State {
         }
         if (other.getProtocol() != com.google.protobuf.ByteString.EMPTY) {
           setProtocol(other.getProtocol());
+        }
+        if (other.getGovernance() != com.google.protobuf.ByteString.EMPTY) {
+          setGovernance(other.getGovernance());
+        }
+        if (other.getCustom() != com.google.protobuf.ByteString.EMPTY) {
+          setCustom(other.getCustom());
         }
         onChanged();
         return this;
@@ -9784,6 +10031,64 @@ public final class State {
       public Builder clearProtocol() {
         
         protocol_ = getDefaultInstance().getProtocol();
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString governance_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>bytes governance = 6;</code>
+       */
+      public com.google.protobuf.ByteString getGovernance() {
+        return governance_;
+      }
+      /**
+       * <code>bytes governance = 6;</code>
+       */
+      public Builder setGovernance(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        governance_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bytes governance = 6;</code>
+       */
+      public Builder clearGovernance() {
+        
+        governance_ = getDefaultInstance().getGovernance();
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString custom_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>bytes custom = 7;</code>
+       */
+      public com.google.protobuf.ByteString getCustom() {
+        return custom_;
+      }
+      /**
+       * <code>bytes custom = 7;</code>
+       */
+      public Builder setCustom(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        custom_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bytes custom = 7;</code>
+       */
+      public Builder clearCustom() {
+        
+        custom_ = getDefaultInstance().getCustom();
         onChanged();
         return this;
       }
@@ -17497,61 +17802,62 @@ public final class State {
       "es\030\021 \001(\0132\030.forge_abi.CircularQueue\022!\n\004po" +
       "ke\030\022 \001(\0132\023.forge_abi.PokeInfo\022,\n\020deposit" +
       "_received\030\023 \001(\0132\022.forge_abi.BigUint\022\"\n\004d" +
-      "ata\0302 \001(\0132\024.google.protobuf.Any\"\254\002\n\nAsse" +
+      "ata\0302 \001(\0132\024.google.protobuf.Any\"\274\002\n\nAsse" +
       "tState\022\017\n\007address\030\001 \001(\t\022\r\n\005owner\030\002 \001(\t\022\017" +
       "\n\007moniker\030\003 \001(\t\022\020\n\010readonly\030\004 \001(\010\022\025\n\rtra" +
       "nsferrable\030\005 \001(\010\022\013\n\003ttl\030\006 \001(\r\0221\n\rconsume" +
       "d_time\030\007 \001(\0132\032.google.protobuf.Timestamp",
-      "\022\016\n\006issuer\030\010 \001(\t\022&\n\005stake\030\r \001(\0132\027.forge_" +
-      "abi.StakeContext\022(\n\007context\030\016 \001(\0132\027.forg" +
-      "e_abi.StateContext\022\"\n\004data\0302 \001(\0132\024.googl" +
-      "e.protobuf.Any\"-\n\014CoreProtocol\022\014\n\004name\030\001" +
-      " \001(\t\022\017\n\007address\030\002 \001(\t\"\252\005\n\nForgeState\022\017\n\007" +
-      "address\030\001 \001(\t\022-\n\tconsensus\030\002 \001(\0132\032.forge" +
-      "_abi.ConsensusParams\022/\n\005tasks\030\003 \003(\0132 .fo" +
-      "rge_abi.ForgeState.TasksEntry\022>\n\rstake_s" +
-      "ummary\030\004 \003(\0132\'.forge_abi.ForgeState.Stak" +
-      "eSummaryEntry\022\017\n\007version\030\005 \001(\t\022\026\n\016forge_",
-      "app_hash\030\007 \001(\014\022$\n\005token\030\010 \001(\0132\025.forge_ab" +
-      "i.ForgeToken\022/\n\ttx_config\030\t \001(\0132\034.forge_" +
-      "abi.TransactionConfig\022,\n\014stake_config\030\n " +
-      "\001(\0132\026.forge_abi.StakeConfig\022*\n\013poke_conf" +
-      "ig\030\013 \001(\0132\025.forge_abi.PokeConfig\022*\n\tproto" +
-      "cols\030\014 \003(\0132\027.forge_abi.CoreProtocol\022,\n\014u" +
-      "pgrade_info\030\016 \001(\0132\026.forge_abi.UpgradeInf" +
-      "o\022\"\n\004data\030\017 \001(\0132\024.google.protobuf.Any\032E\n" +
-      "\nTasksEntry\022\013\n\003key\030\001 \001(\004\022&\n\005value\030\002 \001(\0132" +
-      "\027.forge_abi.UpgradeTasks:\0028\001\032L\n\021StakeSum",
-      "maryEntry\022\013\n\003key\030\001 \001(\r\022&\n\005value\030\002 \001(\0132\027." +
-      "forge_abi.StakeSummary:\0028\001\"_\n\tRootState\022" +
-      "\017\n\007address\030\001 \001(\t\022\017\n\007account\030\002 \001(\014\022\r\n\005ass" +
-      "et\030\003 \001(\014\022\017\n\007receipt\030\004 \001(\014\022\020\n\010protocol\030\005 " +
-      "\001(\014\"\273\001\n\nStakeState\022\017\n\007address\030\001 \001(\t\022\014\n\004f" +
-      "rom\030\002 \001(\t\022\n\n\002to\030\003 \001(\t\022#\n\007balance\030\004 \001(\0132\022" +
-      ".forge_abi.BigUint\022\017\n\007message\030\005 \001(\t\022(\n\007c" +
-      "ontext\030\016 \001(\0132\027.forge_abi.StateContext\022\"\n" +
-      "\004data\030\017 \001(\0132\024.google.protobuf.Any\"\267\001\n\017St" +
-      "atisticsState\022\017\n\007address\030\001 \001(\t\022\022\n\nnum_bl",
-      "ocks\030\002 \001(\004\022\017\n\007num_txs\030\003 \001(\004\022&\n\nnum_stake" +
-      "s\030\004 \001(\0132\022.forge_abi.BigUint\022\026\n\016num_valid" +
-      "ators\030\005 \001(\r\022.\n\rtx_statistics\030\006 \001(\0132\027.for" +
-      "ge_abi.TxStatistics\"!\n\016BlacklistState\022\017\n" +
-      "\007address\030\001 \003(\t\"\202\002\n\rProtocolState\022\017\n\007addr" +
-      "ess\030\001 \001(\t\022(\n\003itx\030\002 \001(\0132\033.forge_abi.Deplo" +
-      "yProtocolTx\022\021\n\troot_hash\030\003 \001(\014\022)\n\006status" +
-      "\030\004 \001(\0162\031.forge_abi.ProtocolStatus\022\023\n\013mig" +
-      "rated_to\030\014 \003(\t\022\025\n\rmigrated_from\030\r \003(\t\022(\n" +
-      "\007context\030\016 \001(\0132\027.forge_abi.StateContext\022",
-      "\"\n\004data\030\017 \001(\0132\024.google.protobuf.Any\"\246\002\n\013" +
-      "TetherState\022\014\n\004hash\030\001 \001(\t\022\021\n\tavailable\030\002" +
-      " \001(\010\022\021\n\tcustodian\030\003 \001(\t\022\021\n\tdepositor\030\004 \001" +
-      "(\t\022\022\n\nwithdrawer\030\005 \001(\t\022!\n\005value\030\006 \001(\0132\022." +
-      "forge_abi.BigUint\022&\n\ncommission\030\007 \001(\0132\022." +
-      "forge_abi.BigUint\022\"\n\006charge\030\010 \001(\0132\022.forg" +
-      "e_abi.BigUint\022\016\n\006target\030\t \001(\t\022,\n\010locktim" +
-      "e\030\n \001(\0132\032.google.protobuf.Timestamp\022\017\n\007a" +
-      "ddress\030\013 \001(\t\"-\n\nTetherInfo\022\021\n\tavailable\030" +
-      "\001 \001(\010\022\014\n\004hash\030\002 \001(\tb\006proto3"
+      "\022\016\n\006issuer\030\010 \001(\t\022\016\n\006parent\030\t \001(\t\022&\n\005stak" +
+      "e\030\r \001(\0132\027.forge_abi.StakeContext\022(\n\007cont" +
+      "ext\030\016 \001(\0132\027.forge_abi.StateContext\022\"\n\004da" +
+      "ta\0302 \001(\0132\024.google.protobuf.Any\"-\n\014CorePr" +
+      "otocol\022\014\n\004name\030\001 \001(\t\022\017\n\007address\030\002 \001(\t\"\252\005" +
+      "\n\nForgeState\022\017\n\007address\030\001 \001(\t\022-\n\tconsens" +
+      "us\030\002 \001(\0132\032.forge_abi.ConsensusParams\022/\n\005" +
+      "tasks\030\003 \003(\0132 .forge_abi.ForgeState.Tasks" +
+      "Entry\022>\n\rstake_summary\030\004 \003(\0132\'.forge_abi" +
+      ".ForgeState.StakeSummaryEntry\022\017\n\007version",
+      "\030\005 \001(\t\022\026\n\016forge_app_hash\030\007 \001(\014\022$\n\005token\030" +
+      "\010 \001(\0132\025.forge_abi.ForgeToken\022/\n\ttx_confi" +
+      "g\030\t \001(\0132\034.forge_abi.TransactionConfig\022,\n" +
+      "\014stake_config\030\n \001(\0132\026.forge_abi.StakeCon" +
+      "fig\022*\n\013poke_config\030\013 \001(\0132\025.forge_abi.Pok" +
+      "eConfig\022*\n\tprotocols\030\014 \003(\0132\027.forge_abi.C" +
+      "oreProtocol\022,\n\014upgrade_info\030\016 \001(\0132\026.forg" +
+      "e_abi.UpgradeInfo\022\"\n\004data\030\017 \001(\0132\024.google" +
+      ".protobuf.Any\032E\n\nTasksEntry\022\013\n\003key\030\001 \001(\004" +
+      "\022&\n\005value\030\002 \001(\0132\027.forge_abi.UpgradeTasks",
+      ":\0028\001\032L\n\021StakeSummaryEntry\022\013\n\003key\030\001 \001(\r\022&" +
+      "\n\005value\030\002 \001(\0132\027.forge_abi.StakeSummary:\002" +
+      "8\001\"\203\001\n\tRootState\022\017\n\007address\030\001 \001(\t\022\017\n\007acc" +
+      "ount\030\002 \001(\014\022\r\n\005asset\030\003 \001(\014\022\017\n\007receipt\030\004 \001" +
+      "(\014\022\020\n\010protocol\030\005 \001(\014\022\022\n\ngovernance\030\006 \001(\014" +
+      "\022\016\n\006custom\030\007 \001(\014\"\273\001\n\nStakeState\022\017\n\007addre" +
+      "ss\030\001 \001(\t\022\014\n\004from\030\002 \001(\t\022\n\n\002to\030\003 \001(\t\022#\n\007ba" +
+      "lance\030\004 \001(\0132\022.forge_abi.BigUint\022\017\n\007messa" +
+      "ge\030\005 \001(\t\022(\n\007context\030\016 \001(\0132\027.forge_abi.St" +
+      "ateContext\022\"\n\004data\030\017 \001(\0132\024.google.protob",
+      "uf.Any\"\267\001\n\017StatisticsState\022\017\n\007address\030\001 " +
+      "\001(\t\022\022\n\nnum_blocks\030\002 \001(\004\022\017\n\007num_txs\030\003 \001(\004" +
+      "\022&\n\nnum_stakes\030\004 \001(\0132\022.forge_abi.BigUint" +
+      "\022\026\n\016num_validators\030\005 \001(\r\022.\n\rtx_statistic" +
+      "s\030\006 \001(\0132\027.forge_abi.TxStatistics\"!\n\016Blac" +
+      "klistState\022\017\n\007address\030\001 \003(\t\"\202\002\n\rProtocol" +
+      "State\022\017\n\007address\030\001 \001(\t\022(\n\003itx\030\002 \001(\0132\033.fo" +
+      "rge_abi.DeployProtocolTx\022\021\n\troot_hash\030\003 " +
+      "\001(\014\022)\n\006status\030\004 \001(\0162\031.forge_abi.Protocol" +
+      "Status\022\023\n\013migrated_to\030\014 \003(\t\022\025\n\rmigrated_",
+      "from\030\r \003(\t\022(\n\007context\030\016 \001(\0132\027.forge_abi." +
+      "StateContext\022\"\n\004data\030\017 \001(\0132\024.google.prot" +
+      "obuf.Any\"\246\002\n\013TetherState\022\014\n\004hash\030\001 \001(\t\022\021" +
+      "\n\tavailable\030\002 \001(\010\022\021\n\tcustodian\030\003 \001(\t\022\021\n\t" +
+      "depositor\030\004 \001(\t\022\022\n\nwithdrawer\030\005 \001(\t\022!\n\005v" +
+      "alue\030\006 \001(\0132\022.forge_abi.BigUint\022&\n\ncommis" +
+      "sion\030\007 \001(\0132\022.forge_abi.BigUint\022\"\n\006charge" +
+      "\030\010 \001(\0132\022.forge_abi.BigUint\022\016\n\006target\030\t \001" +
+      "(\t\022,\n\010locktime\030\n \001(\0132\032.google.protobuf.T" +
+      "imestamp\022\017\n\007address\030\013 \001(\t\"-\n\nTetherInfo\022",
+      "\021\n\tavailable\030\001 \001(\010\022\014\n\004hash\030\002 \001(\tb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -17581,7 +17887,7 @@ public final class State {
     internal_static_forge_abi_AssetState_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_AssetState_descriptor,
-        new java.lang.String[] { "Address", "Owner", "Moniker", "Readonly", "Transferrable", "Ttl", "ConsumedTime", "Issuer", "Stake", "Context", "Data", });
+        new java.lang.String[] { "Address", "Owner", "Moniker", "Readonly", "Transferrable", "Ttl", "ConsumedTime", "Issuer", "Parent", "Stake", "Context", "Data", });
     internal_static_forge_abi_CoreProtocol_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_forge_abi_CoreProtocol_fieldAccessorTable = new
@@ -17611,7 +17917,7 @@ public final class State {
     internal_static_forge_abi_RootState_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RootState_descriptor,
-        new java.lang.String[] { "Address", "Account", "Asset", "Receipt", "Protocol", });
+        new java.lang.String[] { "Address", "Account", "Asset", "Receipt", "Protocol", "Governance", "Custom", });
     internal_static_forge_abi_StakeState_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_forge_abi_StakeState_fieldAccessorTable = new

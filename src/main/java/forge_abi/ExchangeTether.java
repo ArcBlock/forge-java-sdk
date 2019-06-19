@@ -51,28 +51,17 @@ public final class ExchangeTether {
         getAssetsBytes(int index);
 
     /**
-     * <code>repeated .forge_abi.Transaction deposits = 3;</code>
+     * <code>.forge_abi.Transaction deposit = 3;</code>
      */
-    java.util.List<forge_abi.Type.Transaction> 
-        getDepositsList();
+    boolean hasDeposit();
     /**
-     * <code>repeated .forge_abi.Transaction deposits = 3;</code>
+     * <code>.forge_abi.Transaction deposit = 3;</code>
      */
-    forge_abi.Type.Transaction getDeposits(int index);
+    forge_abi.Type.Transaction getDeposit();
     /**
-     * <code>repeated .forge_abi.Transaction deposits = 3;</code>
+     * <code>.forge_abi.Transaction deposit = 3;</code>
      */
-    int getDepositsCount();
-    /**
-     * <code>repeated .forge_abi.Transaction deposits = 3;</code>
-     */
-    java.util.List<? extends forge_abi.Type.TransactionOrBuilder> 
-        getDepositsOrBuilderList();
-    /**
-     * <code>repeated .forge_abi.Transaction deposits = 3;</code>
-     */
-    forge_abi.Type.TransactionOrBuilder getDepositsOrBuilder(
-        int index);
+    forge_abi.Type.TransactionOrBuilder getDepositOrBuilder();
   }
   /**
    * Protobuf type {@code forge_abi.TetherExchangeInfo}
@@ -87,7 +76,6 @@ public final class ExchangeTether {
     }
     private TetherExchangeInfo() {
       assets_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      deposits_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -138,12 +126,16 @@ public final class ExchangeTether {
               break;
             }
             case 26: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                deposits_ = new java.util.ArrayList<forge_abi.Type.Transaction>();
-                mutable_bitField0_ |= 0x00000004;
+              forge_abi.Type.Transaction.Builder subBuilder = null;
+              if (deposit_ != null) {
+                subBuilder = deposit_.toBuilder();
               }
-              deposits_.add(
-                  input.readMessage(forge_abi.Type.Transaction.parser(), extensionRegistry));
+              deposit_ = input.readMessage(forge_abi.Type.Transaction.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(deposit_);
+                deposit_ = subBuilder.buildPartial();
+              }
+
               break;
             }
           }
@@ -156,9 +148,6 @@ public final class ExchangeTether {
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           assets_ = assets_.getUnmodifiableView();
-        }
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-          deposits_ = java.util.Collections.unmodifiableList(deposits_);
         }
         makeExtensionsImmutable();
       }
@@ -226,39 +215,25 @@ public final class ExchangeTether {
       return assets_.getByteString(index);
     }
 
-    public static final int DEPOSITS_FIELD_NUMBER = 3;
-    private java.util.List<forge_abi.Type.Transaction> deposits_;
+    public static final int DEPOSIT_FIELD_NUMBER = 3;
+    private forge_abi.Type.Transaction deposit_;
     /**
-     * <code>repeated .forge_abi.Transaction deposits = 3;</code>
+     * <code>.forge_abi.Transaction deposit = 3;</code>
      */
-    public java.util.List<forge_abi.Type.Transaction> getDepositsList() {
-      return deposits_;
+    public boolean hasDeposit() {
+      return deposit_ != null;
     }
     /**
-     * <code>repeated .forge_abi.Transaction deposits = 3;</code>
+     * <code>.forge_abi.Transaction deposit = 3;</code>
      */
-    public java.util.List<? extends forge_abi.Type.TransactionOrBuilder> 
-        getDepositsOrBuilderList() {
-      return deposits_;
+    public forge_abi.Type.Transaction getDeposit() {
+      return deposit_ == null ? forge_abi.Type.Transaction.getDefaultInstance() : deposit_;
     }
     /**
-     * <code>repeated .forge_abi.Transaction deposits = 3;</code>
+     * <code>.forge_abi.Transaction deposit = 3;</code>
      */
-    public int getDepositsCount() {
-      return deposits_.size();
-    }
-    /**
-     * <code>repeated .forge_abi.Transaction deposits = 3;</code>
-     */
-    public forge_abi.Type.Transaction getDeposits(int index) {
-      return deposits_.get(index);
-    }
-    /**
-     * <code>repeated .forge_abi.Transaction deposits = 3;</code>
-     */
-    public forge_abi.Type.TransactionOrBuilder getDepositsOrBuilder(
-        int index) {
-      return deposits_.get(index);
+    public forge_abi.Type.TransactionOrBuilder getDepositOrBuilder() {
+      return getDeposit();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -279,8 +254,8 @@ public final class ExchangeTether {
       for (int i = 0; i < assets_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, assets_.getRaw(i));
       }
-      for (int i = 0; i < deposits_.size(); i++) {
-        output.writeMessage(3, deposits_.get(i));
+      if (deposit_ != null) {
+        output.writeMessage(3, getDeposit());
       }
     }
 
@@ -301,9 +276,9 @@ public final class ExchangeTether {
         size += dataSize;
         size += 1 * getAssetsList().size();
       }
-      for (int i = 0; i < deposits_.size(); i++) {
+      if (deposit_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, deposits_.get(i));
+          .computeMessageSize(3, getDeposit());
       }
       memoizedSize = size;
       return size;
@@ -328,8 +303,11 @@ public final class ExchangeTether {
       }
       result = result && getAssetsList()
           .equals(other.getAssetsList());
-      result = result && getDepositsList()
-          .equals(other.getDepositsList());
+      result = result && (hasDeposit() == other.hasDeposit());
+      if (hasDeposit()) {
+        result = result && getDeposit()
+            .equals(other.getDeposit());
+      }
       return result;
     }
 
@@ -348,9 +326,9 @@ public final class ExchangeTether {
         hash = (37 * hash) + ASSETS_FIELD_NUMBER;
         hash = (53 * hash) + getAssetsList().hashCode();
       }
-      if (getDepositsCount() > 0) {
-        hash = (37 * hash) + DEPOSITS_FIELD_NUMBER;
-        hash = (53 * hash) + getDepositsList().hashCode();
+      if (hasDeposit()) {
+        hash = (37 * hash) + DEPOSIT_FIELD_NUMBER;
+        hash = (53 * hash) + getDeposit().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -466,7 +444,6 @@ public final class ExchangeTether {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getDepositsFieldBuilder();
         }
       }
       public Builder clear() {
@@ -479,11 +456,11 @@ public final class ExchangeTether {
         }
         assets_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
-        if (depositsBuilder_ == null) {
-          deposits_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+        if (depositBuilder_ == null) {
+          deposit_ = null;
         } else {
-          depositsBuilder_.clear();
+          deposit_ = null;
+          depositBuilder_ = null;
         }
         return this;
       }
@@ -519,14 +496,10 @@ public final class ExchangeTether {
           bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.assets_ = assets_;
-        if (depositsBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
-            deposits_ = java.util.Collections.unmodifiableList(deposits_);
-            bitField0_ = (bitField0_ & ~0x00000004);
-          }
-          result.deposits_ = deposits_;
+        if (depositBuilder_ == null) {
+          result.deposit_ = deposit_;
         } else {
-          result.deposits_ = depositsBuilder_.build();
+          result.deposit_ = depositBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -583,31 +556,8 @@ public final class ExchangeTether {
           }
           onChanged();
         }
-        if (depositsBuilder_ == null) {
-          if (!other.deposits_.isEmpty()) {
-            if (deposits_.isEmpty()) {
-              deposits_ = other.deposits_;
-              bitField0_ = (bitField0_ & ~0x00000004);
-            } else {
-              ensureDepositsIsMutable();
-              deposits_.addAll(other.deposits_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.deposits_.isEmpty()) {
-            if (depositsBuilder_.isEmpty()) {
-              depositsBuilder_.dispose();
-              depositsBuilder_ = null;
-              deposits_ = other.deposits_;
-              bitField0_ = (bitField0_ & ~0x00000004);
-              depositsBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getDepositsFieldBuilder() : null;
-            } else {
-              depositsBuilder_.addAllMessages(other.deposits_);
-            }
-          }
+        if (other.hasDeposit()) {
+          mergeDeposit(other.getDeposit());
         }
         onChanged();
         return this;
@@ -847,244 +797,121 @@ public final class ExchangeTether {
         return this;
       }
 
-      private java.util.List<forge_abi.Type.Transaction> deposits_ =
-        java.util.Collections.emptyList();
-      private void ensureDepositsIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          deposits_ = new java.util.ArrayList<forge_abi.Type.Transaction>(deposits_);
-          bitField0_ |= 0x00000004;
-         }
+      private forge_abi.Type.Transaction deposit_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> depositBuilder_;
+      /**
+       * <code>.forge_abi.Transaction deposit = 3;</code>
+       */
+      public boolean hasDeposit() {
+        return depositBuilder_ != null || deposit_ != null;
       }
+      /**
+       * <code>.forge_abi.Transaction deposit = 3;</code>
+       */
+      public forge_abi.Type.Transaction getDeposit() {
+        if (depositBuilder_ == null) {
+          return deposit_ == null ? forge_abi.Type.Transaction.getDefaultInstance() : deposit_;
+        } else {
+          return depositBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.forge_abi.Transaction deposit = 3;</code>
+       */
+      public Builder setDeposit(forge_abi.Type.Transaction value) {
+        if (depositBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          deposit_ = value;
+          onChanged();
+        } else {
+          depositBuilder_.setMessage(value);
+        }
 
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> depositsBuilder_;
-
-      /**
-       * <code>repeated .forge_abi.Transaction deposits = 3;</code>
-       */
-      public java.util.List<forge_abi.Type.Transaction> getDepositsList() {
-        if (depositsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(deposits_);
-        } else {
-          return depositsBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .forge_abi.Transaction deposits = 3;</code>
-       */
-      public int getDepositsCount() {
-        if (depositsBuilder_ == null) {
-          return deposits_.size();
-        } else {
-          return depositsBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .forge_abi.Transaction deposits = 3;</code>
-       */
-      public forge_abi.Type.Transaction getDeposits(int index) {
-        if (depositsBuilder_ == null) {
-          return deposits_.get(index);
-        } else {
-          return depositsBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .forge_abi.Transaction deposits = 3;</code>
-       */
-      public Builder setDeposits(
-          int index, forge_abi.Type.Transaction value) {
-        if (depositsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureDepositsIsMutable();
-          deposits_.set(index, value);
-          onChanged();
-        } else {
-          depositsBuilder_.setMessage(index, value);
-        }
         return this;
       }
       /**
-       * <code>repeated .forge_abi.Transaction deposits = 3;</code>
+       * <code>.forge_abi.Transaction deposit = 3;</code>
        */
-      public Builder setDeposits(
-          int index, forge_abi.Type.Transaction.Builder builderForValue) {
-        if (depositsBuilder_ == null) {
-          ensureDepositsIsMutable();
-          deposits_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          depositsBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .forge_abi.Transaction deposits = 3;</code>
-       */
-      public Builder addDeposits(forge_abi.Type.Transaction value) {
-        if (depositsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureDepositsIsMutable();
-          deposits_.add(value);
-          onChanged();
-        } else {
-          depositsBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .forge_abi.Transaction deposits = 3;</code>
-       */
-      public Builder addDeposits(
-          int index, forge_abi.Type.Transaction value) {
-        if (depositsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureDepositsIsMutable();
-          deposits_.add(index, value);
-          onChanged();
-        } else {
-          depositsBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .forge_abi.Transaction deposits = 3;</code>
-       */
-      public Builder addDeposits(
+      public Builder setDeposit(
           forge_abi.Type.Transaction.Builder builderForValue) {
-        if (depositsBuilder_ == null) {
-          ensureDepositsIsMutable();
-          deposits_.add(builderForValue.build());
+        if (depositBuilder_ == null) {
+          deposit_ = builderForValue.build();
           onChanged();
         } else {
-          depositsBuilder_.addMessage(builderForValue.build());
+          depositBuilder_.setMessage(builderForValue.build());
         }
+
         return this;
       }
       /**
-       * <code>repeated .forge_abi.Transaction deposits = 3;</code>
+       * <code>.forge_abi.Transaction deposit = 3;</code>
        */
-      public Builder addDeposits(
-          int index, forge_abi.Type.Transaction.Builder builderForValue) {
-        if (depositsBuilder_ == null) {
-          ensureDepositsIsMutable();
-          deposits_.add(index, builderForValue.build());
+      public Builder mergeDeposit(forge_abi.Type.Transaction value) {
+        if (depositBuilder_ == null) {
+          if (deposit_ != null) {
+            deposit_ =
+              forge_abi.Type.Transaction.newBuilder(deposit_).mergeFrom(value).buildPartial();
+          } else {
+            deposit_ = value;
+          }
           onChanged();
         } else {
-          depositsBuilder_.addMessage(index, builderForValue.build());
+          depositBuilder_.mergeFrom(value);
         }
+
         return this;
       }
       /**
-       * <code>repeated .forge_abi.Transaction deposits = 3;</code>
+       * <code>.forge_abi.Transaction deposit = 3;</code>
        */
-      public Builder addAllDeposits(
-          java.lang.Iterable<? extends forge_abi.Type.Transaction> values) {
-        if (depositsBuilder_ == null) {
-          ensureDepositsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, deposits_);
+      public Builder clearDeposit() {
+        if (depositBuilder_ == null) {
+          deposit_ = null;
           onChanged();
         } else {
-          depositsBuilder_.addAllMessages(values);
+          deposit_ = null;
+          depositBuilder_ = null;
         }
+
         return this;
       }
       /**
-       * <code>repeated .forge_abi.Transaction deposits = 3;</code>
+       * <code>.forge_abi.Transaction deposit = 3;</code>
        */
-      public Builder clearDeposits() {
-        if (depositsBuilder_ == null) {
-          deposits_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
-          onChanged();
+      public forge_abi.Type.Transaction.Builder getDepositBuilder() {
+        
+        onChanged();
+        return getDepositFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.Transaction deposit = 3;</code>
+       */
+      public forge_abi.Type.TransactionOrBuilder getDepositOrBuilder() {
+        if (depositBuilder_ != null) {
+          return depositBuilder_.getMessageOrBuilder();
         } else {
-          depositsBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .forge_abi.Transaction deposits = 3;</code>
-       */
-      public Builder removeDeposits(int index) {
-        if (depositsBuilder_ == null) {
-          ensureDepositsIsMutable();
-          deposits_.remove(index);
-          onChanged();
-        } else {
-          depositsBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .forge_abi.Transaction deposits = 3;</code>
-       */
-      public forge_abi.Type.Transaction.Builder getDepositsBuilder(
-          int index) {
-        return getDepositsFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .forge_abi.Transaction deposits = 3;</code>
-       */
-      public forge_abi.Type.TransactionOrBuilder getDepositsOrBuilder(
-          int index) {
-        if (depositsBuilder_ == null) {
-          return deposits_.get(index);  } else {
-          return depositsBuilder_.getMessageOrBuilder(index);
+          return deposit_ == null ?
+              forge_abi.Type.Transaction.getDefaultInstance() : deposit_;
         }
       }
       /**
-       * <code>repeated .forge_abi.Transaction deposits = 3;</code>
+       * <code>.forge_abi.Transaction deposit = 3;</code>
        */
-      public java.util.List<? extends forge_abi.Type.TransactionOrBuilder> 
-           getDepositsOrBuilderList() {
-        if (depositsBuilder_ != null) {
-          return depositsBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(deposits_);
-        }
-      }
-      /**
-       * <code>repeated .forge_abi.Transaction deposits = 3;</code>
-       */
-      public forge_abi.Type.Transaction.Builder addDepositsBuilder() {
-        return getDepositsFieldBuilder().addBuilder(
-            forge_abi.Type.Transaction.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .forge_abi.Transaction deposits = 3;</code>
-       */
-      public forge_abi.Type.Transaction.Builder addDepositsBuilder(
-          int index) {
-        return getDepositsFieldBuilder().addBuilder(
-            index, forge_abi.Type.Transaction.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .forge_abi.Transaction deposits = 3;</code>
-       */
-      public java.util.List<forge_abi.Type.Transaction.Builder> 
-           getDepositsBuilderList() {
-        return getDepositsFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
+      private com.google.protobuf.SingleFieldBuilderV3<
           forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> 
-          getDepositsFieldBuilder() {
-        if (depositsBuilder_ == null) {
-          depositsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+          getDepositFieldBuilder() {
+        if (depositBuilder_ == null) {
+          depositBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder>(
-                  deposits_,
-                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getDeposit(),
                   getParentForChildren(),
                   isClean());
-          deposits_ = null;
+          deposit_ = null;
         }
-        return depositsBuilder_;
+        return depositBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -2366,15 +2193,16 @@ public final class ExchangeTether {
     java.lang.String[] descriptorData = {
       "\n\025exchange_tether.proto\022\tforge_abi\032\031goog" +
       "le/protobuf/any.proto\032\037google/protobuf/t" +
-      "imestamp.proto\032\ntype.proto\032\016exchange.pro" +
-      "to\"q\n\022TetherExchangeInfo\022!\n\005value\030\001 \001(\0132" +
-      "\022.forge_abi.BigUint\022\016\n\006assets\030\002 \003(\t\022(\n\010d" +
-      "eposits\030\003 \003(\0132\026.forge_abi.Transaction\"\300\001" +
-      "\n\020ExchangeTetherTx\022\'\n\006sender\030\001 \001(\0132\027.for" +
-      "ge_abi.ExchangeInfo\022/\n\010receiver\030\002 \001(\0132\035." +
-      "forge_abi.TetherExchangeInfo\022.\n\nexpired_" +
-      "at\030\003 \001(\0132\032.google.protobuf.Timestamp\022\"\n\004",
-      "data\030\017 \001(\0132\024.google.protobuf.Anyb\006proto3"
+      "imestamp.proto\032\ntype.proto\032\024deposit_teth" +
+      "er.proto\032\016exchange.proto\"p\n\022TetherExchan" +
+      "geInfo\022!\n\005value\030\001 \001(\0132\022.forge_abi.BigUin" +
+      "t\022\016\n\006assets\030\002 \003(\t\022\'\n\007deposit\030\003 \001(\0132\026.for" +
+      "ge_abi.Transaction\"\300\001\n\020ExchangeTetherTx\022" +
+      "\'\n\006sender\030\001 \001(\0132\027.forge_abi.ExchangeInfo" +
+      "\022/\n\010receiver\030\002 \001(\0132\035.forge_abi.TetherExc" +
+      "hangeInfo\022.\n\nexpired_at\030\003 \001(\0132\032.google.p",
+      "rotobuf.Timestamp\022\"\n\004data\030\017 \001(\0132\024.google" +
+      ".protobuf.Anyb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2390,6 +2218,7 @@ public final class ExchangeTether {
           com.google.protobuf.AnyProto.getDescriptor(),
           com.google.protobuf.TimestampProto.getDescriptor(),
           forge_abi.Type.getDescriptor(),
+          forge_abi.DepositTether.getDescriptor(),
           forge_abi.Exchange.getDescriptor(),
         }, assigner);
     internal_static_forge_abi_TetherExchangeInfo_descriptor =
@@ -2397,7 +2226,7 @@ public final class ExchangeTether {
     internal_static_forge_abi_TetherExchangeInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_TetherExchangeInfo_descriptor,
-        new java.lang.String[] { "Value", "Assets", "Deposits", });
+        new java.lang.String[] { "Value", "Assets", "Deposit", });
     internal_static_forge_abi_ExchangeTetherTx_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_forge_abi_ExchangeTetherTx_fieldAccessorTable = new
@@ -2407,6 +2236,7 @@ public final class ExchangeTether {
     com.google.protobuf.AnyProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
     forge_abi.Type.getDescriptor();
+    forge_abi.DepositTether.getDescriptor();
     forge_abi.Exchange.getDescriptor();
   }
 

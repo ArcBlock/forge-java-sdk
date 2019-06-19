@@ -201,6 +201,14 @@ public final class Enum {
      */
     invalid_expiry_date(49),
     /**
+     * <code>invalid_deposit = 50;</code>
+     */
+    invalid_deposit(50),
+    /**
+     * <code>invalid_custodian = 51;</code>
+     */
+    invalid_custodian(51),
+    /**
      * <code>forbidden = 403;</code>
      */
     forbidden(403),
@@ -397,6 +405,14 @@ public final class Enum {
      */
     public static final int invalid_expiry_date_VALUE = 49;
     /**
+     * <code>invalid_deposit = 50;</code>
+     */
+    public static final int invalid_deposit_VALUE = 50;
+    /**
+     * <code>invalid_custodian = 51;</code>
+     */
+    public static final int invalid_custodian_VALUE = 51;
+    /**
      * <code>forbidden = 403;</code>
      */
     public static final int forbidden_VALUE = 403;
@@ -471,6 +487,8 @@ public final class Enum {
         case 47: return invalid_withdrawer;
         case 48: return duplicate_tether;
         case 49: return invalid_expiry_date;
+        case 50: return invalid_deposit;
+        case 51: return invalid_custodian;
         case 403: return forbidden;
         case 500: return internal;
         case 504: return timeout;
@@ -2115,7 +2133,7 @@ public final class Enum {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nenum.proto\022\tforge_abi*\350\007\n\nStatusCode\022\006" +
+      "\n\nenum.proto\022\tforge_abi*\224\010\n\nStatusCode\022\006" +
       "\n\002ok\020\000\022\021\n\rinvalid_nonce\020\001\022\025\n\021invalid_sig" +
       "nature\020\002\022\030\n\024invalid_sender_state\020\003\022\032\n\026in" +
       "valid_receiver_state\020\004\022\025\n\021insufficient_d" +
@@ -2139,44 +2157,45 @@ public final class Enum {
       "xceed_deposit_cap\020,\022\032\n\026invalid_deposit_t" +
       "arget\020-\022\025\n\021invalid_depositor\020.\022\026\n\022invali" +
       "d_withdrawer\020/\022\024\n\020duplicate_tether\0200\022\027\n\023" +
-      "invalid_expiry_date\0201\022\016\n\tforbidden\020\223\003\022\r\n" +
-      "\010internal\020\364\003\022\014\n\007timeout\020\370\003*\337\002\n\tTopicType" +
-      "\022\014\n\010transfer\020\000\022\014\n\010exchange\020\001\022\013\n\007declare\020" +
-      "\002\022\020\n\014create_asset\020\003\022\020\n\014update_asset\020\004\022\t\n" +
-      "\005stake\020\005\022\023\n\017account_migrate\020\006\022\017\n\013begin_b" +
-      "lock\020\020\022\r\n\tend_block\020\021\022\025\n\021consensus_upgra",
-      "de\020\025\022\020\n\014declare_file\020\026\022\017\n\013sys_upgrade\020\027\022" +
-      "\017\n\013application\020\030\022\021\n\rconsume_asset\020\031\022\010\n\004p" +
-      "oke\020\032\022\022\n\raccount_state\020\201\001\022\020\n\013asset_state" +
-      "\020\202\001\022\020\n\013forge_state\020\203\001\022\020\n\013stake_state\020\204\001\022" +
-      "\023\n\016protocol_state\020\205\001*%\n\007KeyType\022\013\n\007ed255" +
-      "19\020\000\022\r\n\tsecp256k1\020\001*f\n\010HashType\022\n\n\006kecca" +
-      "k\020\000\022\010\n\004sha3\020\001\022\010\n\004sha2\020\002\022\016\n\nkeccak_384\020\006\022" +
-      "\014\n\010sha3_384\020\007\022\016\n\nkeccak_512\020\r\022\014\n\010sha3_51" +
-      "2\020\016*&\n\014EncodingType\022\n\n\006base16\020\000\022\n\n\006base5" +
-      "8\020\001*\351\001\n\010RoleType\022\020\n\014role_account\020\000\022\r\n\tro",
-      "le_node\020\001\022\017\n\013role_device\020\002\022\024\n\020role_appli" +
-      "cation\020\003\022\027\n\023role_smart_contract\020\004\022\014\n\010rol" +
-      "e_bot\020\005\022\016\n\nrole_asset\020\006\022\016\n\nrole_stake\020\007\022" +
-      "\022\n\016role_validator\020\010\022\016\n\nrole_group\020\t\022\013\n\007r" +
-      "ole_tx\020\n\022\017\n\013role_tether\020\013\022\014\n\010role_any\020?*" +
-      "\256\001\n\013UpgradeType\022\016\n\nconfig_app\020\000\022\020\n\014confi" +
-      "g_forge\020\001\022\016\n\nconfig_dfs\020\002\022\024\n\020config_cons" +
-      "ensus\020\003\022\016\n\nconfig_p2p\020\004\022\013\n\007exe_app\020\n\022\r\n\t" +
-      "exe_forge\020\013\022\013\n\007exe_dfs\020\014\022\021\n\rexe_consensu" +
-      "s\020\r\022\013\n\007exe_p2p\020\016*\352\001\n\rUpgradeAction\022\n\n\006ve",
-      "rify\020\000\022\n\n\006backup\020\001\022\013\n\007replace\020\002\022\017\n\013resta" +
-      "rt_app\020\n\022\017\n\013restart_dfs\020\013\022\025\n\021restart_con" +
-      "sensus\020\014\022\017\n\013restart_p2p\020\r\022\021\n\rrestart_for" +
-      "ge\020\016\022\024\n\020rollback_if_fail\020\036\022\027\n\023restart_al" +
-      "l_if_fail\020\037\022\021\n\rcrash_if_fail\020!\022\025\n\021drop_a" +
-      "ddress_book\0202*d\n\tStateType\022\021\n\rstate_acco" +
-      "unt\020\000\022\017\n\013state_asset\020\001\022\021\n\rstate_channel\020" +
-      "\002\022\017\n\013state_forge\020\003\022\017\n\013state_stake\020\004*M\n\tS" +
-      "takeType\022\016\n\nstake_node\020\000\022\016\n\nstake_user\020\001" +
-      "\022\017\n\013stake_asset\020\002\022\017\n\013stake_chain\020\003*9\n\016Pr",
-      "otocolStatus\022\013\n\007running\020\000\022\n\n\006paused\020\001\022\016\n" +
-      "\nterminated\020\002b\006proto3"
+      "invalid_expiry_date\0201\022\023\n\017invalid_deposit" +
+      "\0202\022\025\n\021invalid_custodian\0203\022\016\n\tforbidden\020\223" +
+      "\003\022\r\n\010internal\020\364\003\022\014\n\007timeout\020\370\003*\337\002\n\tTopic" +
+      "Type\022\014\n\010transfer\020\000\022\014\n\010exchange\020\001\022\013\n\007decl" +
+      "are\020\002\022\020\n\014create_asset\020\003\022\020\n\014update_asset\020" +
+      "\004\022\t\n\005stake\020\005\022\023\n\017account_migrate\020\006\022\017\n\013beg",
+      "in_block\020\020\022\r\n\tend_block\020\021\022\025\n\021consensus_u" +
+      "pgrade\020\025\022\020\n\014declare_file\020\026\022\017\n\013sys_upgrad" +
+      "e\020\027\022\017\n\013application\020\030\022\021\n\rconsume_asset\020\031\022" +
+      "\010\n\004poke\020\032\022\022\n\raccount_state\020\201\001\022\020\n\013asset_s" +
+      "tate\020\202\001\022\020\n\013forge_state\020\203\001\022\020\n\013stake_state" +
+      "\020\204\001\022\023\n\016protocol_state\020\205\001*%\n\007KeyType\022\013\n\007e" +
+      "d25519\020\000\022\r\n\tsecp256k1\020\001*f\n\010HashType\022\n\n\006k" +
+      "eccak\020\000\022\010\n\004sha3\020\001\022\010\n\004sha2\020\002\022\016\n\nkeccak_38" +
+      "4\020\006\022\014\n\010sha3_384\020\007\022\016\n\nkeccak_512\020\r\022\014\n\010sha" +
+      "3_512\020\016*&\n\014EncodingType\022\n\n\006base16\020\000\022\n\n\006b",
+      "ase58\020\001*\351\001\n\010RoleType\022\020\n\014role_account\020\000\022\r" +
+      "\n\trole_node\020\001\022\017\n\013role_device\020\002\022\024\n\020role_a" +
+      "pplication\020\003\022\027\n\023role_smart_contract\020\004\022\014\n" +
+      "\010role_bot\020\005\022\016\n\nrole_asset\020\006\022\016\n\nrole_stak" +
+      "e\020\007\022\022\n\016role_validator\020\010\022\016\n\nrole_group\020\t\022" +
+      "\013\n\007role_tx\020\n\022\017\n\013role_tether\020\013\022\014\n\010role_an" +
+      "y\020?*\256\001\n\013UpgradeType\022\016\n\nconfig_app\020\000\022\020\n\014c" +
+      "onfig_forge\020\001\022\016\n\nconfig_dfs\020\002\022\024\n\020config_" +
+      "consensus\020\003\022\016\n\nconfig_p2p\020\004\022\013\n\007exe_app\020\n" +
+      "\022\r\n\texe_forge\020\013\022\013\n\007exe_dfs\020\014\022\021\n\rexe_cons",
+      "ensus\020\r\022\013\n\007exe_p2p\020\016*\352\001\n\rUpgradeAction\022\n" +
+      "\n\006verify\020\000\022\n\n\006backup\020\001\022\013\n\007replace\020\002\022\017\n\013r" +
+      "estart_app\020\n\022\017\n\013restart_dfs\020\013\022\025\n\021restart" +
+      "_consensus\020\014\022\017\n\013restart_p2p\020\r\022\021\n\rrestart" +
+      "_forge\020\016\022\024\n\020rollback_if_fail\020\036\022\027\n\023restar" +
+      "t_all_if_fail\020\037\022\021\n\rcrash_if_fail\020!\022\025\n\021dr" +
+      "op_address_book\0202*d\n\tStateType\022\021\n\rstate_" +
+      "account\020\000\022\017\n\013state_asset\020\001\022\021\n\rstate_chan" +
+      "nel\020\002\022\017\n\013state_forge\020\003\022\017\n\013state_stake\020\004*" +
+      "M\n\tStakeType\022\016\n\nstake_node\020\000\022\016\n\nstake_us",
+      "er\020\001\022\017\n\013stake_asset\020\002\022\017\n\013stake_chain\020\003*9" +
+      "\n\016ProtocolStatus\022\013\n\007running\020\000\022\n\n\006paused\020" +
+      "\001\022\016\n\nterminated\020\002b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

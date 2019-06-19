@@ -85,7 +85,7 @@ public final class Service {
       "RequestRemoveWallet\032\037.forge_abi.Response",
       "RemoveWallet\022M\n\014declare_node\022\035.forge_abi" +
       ".RequestDeclareNode\032\036.forge_abi.Response" +
-      "DeclareNode2\227\006\n\010StatsRpc\022T\n\017get_forge_st" +
+      "DeclareNode2\346\006\n\010StatsRpc\022T\n\017get_forge_st" +
       "ats\022\037.forge_abi.RequestGetForgeStats\032 .f" +
       "orge_abi.ResponseGetForgeStats\022\\\n\021list_t" +
       "ransactions\022\".forge_abi.RequestListTrans" +
@@ -105,7 +105,9 @@ public final class Service {
       "ks\032\035.forge_abi.ResponseListBlocks\022Z\n\021get",
       "_health_status\022!.forge_abi.RequestGetHea" +
       "lthStatus\032\".forge_abi.ResponseGetHealthS" +
-      "tatusb\006proto3"
+      "tatus\022M\n\014list_tethers\022\035.forge_abi.Reques" +
+      "tListTethers\032\036.forge_abi.ResponseListTet" +
+      "hersb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

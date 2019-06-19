@@ -22,7 +22,7 @@ public final class ConsumeAsset {
      * <pre>
      * `issuer` could be the same as `from`, or different, depending on use case.
      * when this tx is being mutisigned by the asset holder, the wallet could
-     * check if the issuer is the issuer of the ticket, otherwise wallet shall
+     * check if the issuer is the issuer of the asset, otherwise wallet shall
      * refuse signing it. when it goes into the chain, at verify state stage, we
      * shall check `from` of this tx:
      *  a. the same as the issuer
@@ -45,7 +45,7 @@ public final class ConsumeAsset {
      * <pre>
      * `issuer` could be the same as `from`, or different, depending on use case.
      * when this tx is being mutisigned by the asset holder, the wallet could
-     * check if the issuer is the issuer of the ticket, otherwise wallet shall
+     * check if the issuer is the issuer of the asset, otherwise wallet shall
      * refuse signing it. when it goes into the chain, at verify state stage, we
      * shall check `from` of this tx:
      *  a. the same as the issuer
@@ -208,7 +208,7 @@ public final class ConsumeAsset {
      * <pre>
      * `issuer` could be the same as `from`, or different, depending on use case.
      * when this tx is being mutisigned by the asset holder, the wallet could
-     * check if the issuer is the issuer of the ticket, otherwise wallet shall
+     * check if the issuer is the issuer of the asset, otherwise wallet shall
      * refuse signing it. when it goes into the chain, at verify state stage, we
      * shall check `from` of this tx:
      *  a. the same as the issuer
@@ -242,7 +242,7 @@ public final class ConsumeAsset {
      * <pre>
      * `issuer` could be the same as `from`, or different, depending on use case.
      * when this tx is being mutisigned by the asset holder, the wallet could
-     * check if the issuer is the issuer of the ticket, otherwise wallet shall
+     * check if the issuer is the issuer of the asset, otherwise wallet shall
      * refuse signing it. when it goes into the chain, at verify state stage, we
      * shall check `from` of this tx:
      *  a. the same as the issuer
@@ -674,7 +674,7 @@ public final class ConsumeAsset {
        * <pre>
        * `issuer` could be the same as `from`, or different, depending on use case.
        * when this tx is being mutisigned by the asset holder, the wallet could
-       * check if the issuer is the issuer of the ticket, otherwise wallet shall
+       * check if the issuer is the issuer of the asset, otherwise wallet shall
        * refuse signing it. when it goes into the chain, at verify state stage, we
        * shall check `from` of this tx:
        *  a. the same as the issuer
@@ -708,7 +708,7 @@ public final class ConsumeAsset {
        * <pre>
        * `issuer` could be the same as `from`, or different, depending on use case.
        * when this tx is being mutisigned by the asset holder, the wallet could
-       * check if the issuer is the issuer of the ticket, otherwise wallet shall
+       * check if the issuer is the issuer of the asset, otherwise wallet shall
        * refuse signing it. when it goes into the chain, at verify state stage, we
        * shall check `from` of this tx:
        *  a. the same as the issuer
@@ -743,7 +743,7 @@ public final class ConsumeAsset {
        * <pre>
        * `issuer` could be the same as `from`, or different, depending on use case.
        * when this tx is being mutisigned by the asset holder, the wallet could
-       * check if the issuer is the issuer of the ticket, otherwise wallet shall
+       * check if the issuer is the issuer of the asset, otherwise wallet shall
        * refuse signing it. when it goes into the chain, at verify state stage, we
        * shall check `from` of this tx:
        *  a. the same as the issuer
@@ -775,7 +775,7 @@ public final class ConsumeAsset {
        * <pre>
        * `issuer` could be the same as `from`, or different, depending on use case.
        * when this tx is being mutisigned by the asset holder, the wallet could
-       * check if the issuer is the issuer of the ticket, otherwise wallet shall
+       * check if the issuer is the issuer of the asset, otherwise wallet shall
        * refuse signing it. when it goes into the chain, at verify state stage, we
        * shall check `from` of this tx:
        *  a. the same as the issuer
@@ -803,7 +803,7 @@ public final class ConsumeAsset {
        * <pre>
        * `issuer` could be the same as `from`, or different, depending on use case.
        * when this tx is being mutisigned by the asset holder, the wallet could
-       * check if the issuer is the issuer of the ticket, otherwise wallet shall
+       * check if the issuer is the issuer of the asset, otherwise wallet shall
        * refuse signing it. when it goes into the chain, at verify state stage, we
        * shall check `from` of this tx:
        *  a. the same as the issuer
