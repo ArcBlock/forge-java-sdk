@@ -50,6 +50,8 @@ message AssetState {
   google.protobuf.Timestamp consumed_time = 7;
   // who issued the asset
   string issuer = 8;
+  // parent address for the asset state, e.g. a ticket is inherited from an event
+  string parent = 9;
 
   // 10-12 is reserved
 
@@ -100,6 +102,8 @@ message RootState {
   bytes asset = 3;
   bytes receipt = 4;
   bytes protocol = 5;
+  bytes governance = 6;
+  bytes custom = 7;
 }
 
 message StakeState {
