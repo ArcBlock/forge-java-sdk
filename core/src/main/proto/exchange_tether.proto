@@ -4,12 +4,27 @@ package forge_abi;
 import "google/protobuf/any.proto";
 import "google/protobuf/timestamp.proto";
 import "type.proto";
-import "exchange.proto";
+
+// In order to make the content in this folder self-contained we need to duplicate the protobuf definition here.
+message DepositTetherTx {
+  BigUint value = 1;
+  BigUint commission = 2;
+  BigUint charge = 3;
+  string target = 4;
+  string withdrawer = 5;
+  google.protobuf.Timestamp locktime = 6;
+}
+
+// In order to make the content in this folder self-contained we need to duplicate the protobuf definition here.
+message ExchangeInfo {
+  BigUint value = 1;
+  repeated string assets = 2;
+}
 
 message TetherExchangeInfo {
   BigUint value = 1;
   repeated string assets = 2;
-  repeated Transaction deposits = 3;
+  Transaction deposit = 3;
 }
 
 // This transaction is designed to make cross-chain transaction.

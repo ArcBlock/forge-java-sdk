@@ -59,8 +59,9 @@ precommit: dep build test
 travis: precommit
 
 
-travis-deploy:
+travis-deploy: 
 	@echo "Deploy the software by travis"
+	@make release
 	@./gradlew build
 	@./gradlew publish
 

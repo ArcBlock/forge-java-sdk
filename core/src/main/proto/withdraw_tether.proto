@@ -1,0 +1,52 @@
+syntax = "proto3";
+package forge_abi;
+
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+import "type.proto";
+
+// In order to make the content in this folder self-contained we need to duplicate the protobuf definition here.
+message TetherExchangeInfo {
+  BigUint value = 1;
+  repeated string assets = 2;
+  Transaction deposit = 3;
+}
+
+// In order to make the content in this folder self-contained we need to duplicate the protobuf definition here.
+message ExchangeTetherTx {
+  ExchangeInfo sender = 1;
+  TetherExchangeInfo receiver = 2;
+  google.protobuf.Timestamp expired_at = 3;
+  google.protobuf.Any data = 15;
+}
+
+// In order to make the content in this folder self-contained we need to duplicate the protobuf definition here.
+message ExchangeInfo {
+  BigUint value = 1;
+  repeated string assets = 2;
+}
+
+message TetherTradeInfo {
+  BigUint value = 1;
+  repeated string assets = 2;
+  // The tether address
+  string tether = 3;
+}
+
+// This transaction is designed to make cross-chain transaction.
+message WithdrawTetherTx {
+  // The outter transaction's fields
+  string from = 1;
+  uint64 nonce = 2;
+  string chain_id = 3;
+  bytes pk = 4;
+  bytes signature = 5;
+  repeated Multisig signatures = 6;
+
+  // The inner exchange tether transaction's fields
+  ExchangeInfo sender = 7;
+  TetherTradeInfo receiver = 8;
+  google.protobuf.Timestamp expired_at = 9;
+  // This is the data field of the inner exchange tether transaction
+  google.protobuf.Any data = 10;
+}
