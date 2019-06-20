@@ -3110,18 +3110,18 @@ public final class WithdrawTether {
     java.lang.String[] descriptorData = {
       "\n\025withdraw_tether.proto\022\tforge_abi\032\031goog" +
       "le/protobuf/any.proto\032\037google/protobuf/t" +
-      "imestamp.proto\032\ntype.proto\032\016exchange.pro" +
-      "to\"T\n\017TetherTradeInfo\022!\n\005value\030\001 \001(\0132\022.f" +
-      "orge_abi.BigUint\022\016\n\006assets\030\002 \003(\t\022\016\n\006teth" +
-      "er\030\003 \001(\t\"\264\002\n\020WithdrawTetherTx\022\014\n\004from\030\001 " +
-      "\001(\t\022\r\n\005nonce\030\002 \001(\004\022\020\n\010chain_id\030\003 \001(\t\022\n\n\002" +
-      "pk\030\004 \001(\014\022\021\n\tsignature\030\005 \001(\014\022\'\n\nsignature" +
-      "s\030\006 \003(\0132\023.forge_abi.Multisig\022\'\n\006sender\030\007" +
-      " \001(\0132\027.forge_abi.ExchangeInfo\022,\n\010receive",
-      "r\030\010 \001(\0132\032.forge_abi.TetherTradeInfo\022.\n\ne" +
-      "xpired_at\030\t \001(\0132\032.google.protobuf.Timest" +
-      "amp\022\"\n\004data\030\n \001(\0132\024.google.protobuf.Anyb" +
-      "\006proto3"
+      "imestamp.proto\032\ntype.proto\032\025exchange_tet" +
+      "her.proto\032\016exchange.proto\"T\n\017TetherTrade" +
+      "Info\022!\n\005value\030\001 \001(\0132\022.forge_abi.BigUint\022" +
+      "\016\n\006assets\030\002 \003(\t\022\016\n\006tether\030\003 \001(\t\"\264\002\n\020With" +
+      "drawTetherTx\022\014\n\004from\030\001 \001(\t\022\r\n\005nonce\030\002 \001(" +
+      "\004\022\020\n\010chain_id\030\003 \001(\t\022\n\n\002pk\030\004 \001(\014\022\021\n\tsigna" +
+      "ture\030\005 \001(\014\022\'\n\nsignatures\030\006 \003(\0132\023.forge_a" +
+      "bi.Multisig\022\'\n\006sender\030\007 \001(\0132\027.forge_abi.",
+      "ExchangeInfo\022,\n\010receiver\030\010 \001(\0132\032.forge_a" +
+      "bi.TetherTradeInfo\022.\n\nexpired_at\030\t \001(\0132\032" +
+      ".google.protobuf.Timestamp\022\"\n\004data\030\n \001(\013" +
+      "2\024.google.protobuf.Anyb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3137,6 +3137,7 @@ public final class WithdrawTether {
           com.google.protobuf.AnyProto.getDescriptor(),
           com.google.protobuf.TimestampProto.getDescriptor(),
           forge_abi.Type.getDescriptor(),
+          forge_abi.ExchangeTether.getDescriptor(),
           forge_abi.Exchange.getDescriptor(),
         }, assigner);
     internal_static_forge_abi_TetherTradeInfo_descriptor =
@@ -3154,6 +3155,7 @@ public final class WithdrawTether {
     com.google.protobuf.AnyProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
     forge_abi.Type.getDescriptor();
+    forge_abi.ExchangeTether.getDescriptor();
     forge_abi.Exchange.getDescriptor();
   }
 
