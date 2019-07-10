@@ -7,7 +7,6 @@ import "type.proto";
 import "deposit_tether.proto";
 import "exchange.proto";
 
-
 message TetherExchangeInfo {
   BigUint value = 1;
   repeated string assets = 2;

@@ -1,3 +1,6 @@
+## 0.30.0 (June 20, 2019)
+  - common update
+
 ## 0.28.0 (June 19, 2019)
 update proto buf
 prepare cross chain
