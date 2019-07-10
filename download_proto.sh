@@ -28,6 +28,9 @@ TLIST=(
   "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/trade/revoke_tether/protocol.proto" \      
   "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/trade/transfer/protocol.proto" \
   "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/trade/withdraw_tether/protocol.proto" \      
+  "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/swap/retrieve_swap/protocol.proto" \      
+  "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/swap/revoke_swap/protocol.proto" \      
+  "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/swap/setup_swap/protocol.proto" \      
 )
 
 cd core/src/main/proto/

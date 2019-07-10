@@ -14761,6 +14761,15 @@ public final class Type {
 
     /**
      * <pre>
+     * gas required for this tx
+     * </pre>
+     *
+     * <code>uint32 gas = 5;</code>
+     */
+    int getGas();
+
+    /**
+     * <pre>
      * signature of the transaction
      * </pre>
      *
@@ -14821,6 +14830,7 @@ public final class Type {
       nonce_ = 0L;
       chainId_ = "";
       pk_ = com.google.protobuf.ByteString.EMPTY;
+      gas_ = 0;
       signature_ = com.google.protobuf.ByteString.EMPTY;
       signatures_ = java.util.Collections.emptyList();
     }
@@ -14872,15 +14882,20 @@ public final class Type {
               pk_ = input.readBytes();
               break;
             }
+            case 40: {
+
+              gas_ = input.readUInt32();
+              break;
+            }
             case 106: {
 
               signature_ = input.readBytes();
               break;
             }
             case 114: {
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
                 signatures_ = new java.util.ArrayList<forge_abi.Type.Multisig>();
-                mutable_bitField0_ |= 0x00000020;
+                mutable_bitField0_ |= 0x00000040;
               }
               signatures_.add(
                   input.readMessage(forge_abi.Type.Multisig.parser(), extensionRegistry));
@@ -14907,7 +14922,7 @@ public final class Type {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
           signatures_ = java.util.Collections.unmodifiableList(signatures_);
         }
         makeExtensionsImmutable();
@@ -15024,6 +15039,19 @@ public final class Type {
       return pk_;
     }
 
+    public static final int GAS_FIELD_NUMBER = 5;
+    private int gas_;
+    /**
+     * <pre>
+     * gas required for this tx
+     * </pre>
+     *
+     * <code>uint32 gas = 5;</code>
+     */
+    public int getGas() {
+      return gas_;
+    }
+
     public static final int SIGNATURE_FIELD_NUMBER = 13;
     private com.google.protobuf.ByteString signature_;
     /**
@@ -15117,6 +15145,9 @@ public final class Type {
       if (!pk_.isEmpty()) {
         output.writeBytes(4, pk_);
       }
+      if (gas_ != 0) {
+        output.writeUInt32(5, gas_);
+      }
       if (!signature_.isEmpty()) {
         output.writeBytes(13, signature_);
       }
@@ -15146,6 +15177,10 @@ public final class Type {
       if (!pk_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(4, pk_);
+      }
+      if (gas_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(5, gas_);
       }
       if (!signature_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
@@ -15183,6 +15218,8 @@ public final class Type {
           .equals(other.getChainId());
       result = result && getPk()
           .equals(other.getPk());
+      result = result && (getGas()
+          == other.getGas());
       result = result && getSignature()
           .equals(other.getSignature());
       result = result && getSignaturesList()
@@ -15211,6 +15248,8 @@ public final class Type {
       hash = (53 * hash) + getChainId().hashCode();
       hash = (37 * hash) + PK_FIELD_NUMBER;
       hash = (53 * hash) + getPk().hashCode();
+      hash = (37 * hash) + GAS_FIELD_NUMBER;
+      hash = (53 * hash) + getGas();
       hash = (37 * hash) + SIGNATURE_FIELD_NUMBER;
       hash = (53 * hash) + getSignature().hashCode();
       if (getSignaturesCount() > 0) {
@@ -15348,11 +15387,13 @@ public final class Type {
 
         pk_ = com.google.protobuf.ByteString.EMPTY;
 
+        gas_ = 0;
+
         signature_ = com.google.protobuf.ByteString.EMPTY;
 
         if (signaturesBuilder_ == null) {
           signatures_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000040);
         } else {
           signaturesBuilder_.clear();
         }
@@ -15390,11 +15431,12 @@ public final class Type {
         result.nonce_ = nonce_;
         result.chainId_ = chainId_;
         result.pk_ = pk_;
+        result.gas_ = gas_;
         result.signature_ = signature_;
         if (signaturesBuilder_ == null) {
-          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          if (((bitField0_ & 0x00000040) == 0x00000040)) {
             signatures_ = java.util.Collections.unmodifiableList(signatures_);
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000040);
           }
           result.signatures_ = signatures_;
         } else {
@@ -15461,6 +15503,9 @@ public final class Type {
         if (other.getPk() != com.google.protobuf.ByteString.EMPTY) {
           setPk(other.getPk());
         }
+        if (other.getGas() != 0) {
+          setGas(other.getGas());
+        }
         if (other.getSignature() != com.google.protobuf.ByteString.EMPTY) {
           setSignature(other.getSignature());
         }
@@ -15468,7 +15513,7 @@ public final class Type {
           if (!other.signatures_.isEmpty()) {
             if (signatures_.isEmpty()) {
               signatures_ = other.signatures_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000040);
             } else {
               ensureSignaturesIsMutable();
               signatures_.addAll(other.signatures_);
@@ -15481,7 +15526,7 @@ public final class Type {
               signaturesBuilder_.dispose();
               signaturesBuilder_ = null;
               signatures_ = other.signatures_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000040);
               signaturesBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getSignaturesFieldBuilder() : null;
@@ -15745,6 +15790,44 @@ public final class Type {
         return this;
       }
 
+      private int gas_ ;
+      /**
+       * <pre>
+       * gas required for this tx
+       * </pre>
+       *
+       * <code>uint32 gas = 5;</code>
+       */
+      public int getGas() {
+        return gas_;
+      }
+      /**
+       * <pre>
+       * gas required for this tx
+       * </pre>
+       *
+       * <code>uint32 gas = 5;</code>
+       */
+      public Builder setGas(int value) {
+        
+        gas_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * gas required for this tx
+       * </pre>
+       *
+       * <code>uint32 gas = 5;</code>
+       */
+      public Builder clearGas() {
+        
+        gas_ = 0;
+        onChanged();
+        return this;
+      }
+
       private com.google.protobuf.ByteString signature_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <pre>
@@ -15789,9 +15872,9 @@ public final class Type {
       private java.util.List<forge_abi.Type.Multisig> signatures_ =
         java.util.Collections.emptyList();
       private void ensureSignaturesIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
           signatures_ = new java.util.ArrayList<forge_abi.Type.Multisig>(signatures_);
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000040;
          }
       }
 
@@ -15941,7 +16024,7 @@ public final class Type {
       public Builder clearSignatures() {
         if (signaturesBuilder_ == null) {
           signatures_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000040);
           onChanged();
         } else {
           signaturesBuilder_.clear();
@@ -16018,7 +16101,7 @@ public final class Type {
           signaturesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               forge_abi.Type.Multisig, forge_abi.Type.Multisig.Builder, forge_abi.Type.MultisigOrBuilder>(
                   signatures_,
-                  ((bitField0_ & 0x00000020) == 0x00000020),
+                  ((bitField0_ & 0x00000040) == 0x00000040),
                   getParentForChildren(),
                   isClean());
           signatures_ = null;
@@ -45890,121 +45973,121 @@ public final class Type {
       "\017last_block_time\030\007 \001(\0132\032.google.protobuf" +
       ".Timestamp\"]\n\010Multisig\022\016\n\006signer\030\001 \001(\t\022\n" +
       "\n\002pk\030\002 \001(\014\022\021\n\tsignature\030\003 \001(\014\022\"\n\004data\030\017 " +
-      "\001(\0132\024.google.protobuf.Any\"\247\001\n\013Transactio" +
+      "\001(\0132\024.google.protobuf.Any\"\264\001\n\013Transactio" +
       "n\022\014\n\004from\030\001 \001(\t\022\r\n\005nonce\030\002 \001(\004\022\020\n\010chain_" +
-      "id\030\003 \001(\t\022\n\n\002pk\030\004 \001(\014\022\021\n\tsignature\030\r \001(\014\022" +
-      "\'\n\nsignatures\030\016 \003(\0132\023.forge_abi.Multisig" +
-      "\022!\n\003itx\030\017 \001(\0132\024.google.protobuf.Any\"\324\001\n\017" +
-      "TransactionInfo\022\"\n\002tx\030\001 \001(\0132\026.forge_abi." +
-      "Transaction\022\016\n\006height\030\002 \001(\004\022\r\n\005index\030\003 \001",
-      "(\r\022\014\n\004hash\030\004 \001(\t\022!\n\004tags\030\005 \003(\0132\023.abci_ve" +
-      "ndor.KVPair\022#\n\004code\030\006 \001(\0162\025.forge_abi.St" +
-      "atusCode\022(\n\004time\030\007 \001(\0132\032.google.protobuf" +
-      ".Timestamp\"6\n\rDeclareConfig\022\022\n\nrestricte" +
-      "d\030\001 \001(\010\022\021\n\thierarchy\030\002 \001(\r\"\232\001\n\021Transacti" +
-      "onConfig\022\026\n\016max_asset_size\030\001 \001(\r\022\025\n\rmax_" +
-      "list_size\030\002 \001(\r\022\024\n\014max_multisig\030\003 \001(\r\022\025\n" +
-      "\rminimum_stake\030\004 \001(\004\022)\n\007declare\030\005 \001(\0132\030." +
-      "forge_abi.DeclareConfig\"\231\004\n\tBlockInfo\022\016\n" +
-      "\006height\030\001 \001(\004\022\017\n\007num_txs\030\002 \001(\r\022(\n\004time\030\003",
-      " \001(\0132\032.google.protobuf.Timestamp\022\020\n\010app_" +
-      "hash\030\004 \001(\014\022\020\n\010proposer\030\005 \001(\014\022\'\n\003txs\030\006 \003(" +
-      "\0132\032.forge_abi.TransactionInfo\022\021\n\ttotal_t" +
-      "xs\030\007 \001(\004\022/\n\013invalid_txs\030\010 \003(\0132\032.forge_ab" +
-      "i.TransactionInfo\022\022\n\ntxs_hashes\030\t \003(\t\022\032\n" +
-      "\022invalid_txs_hashes\030\n \003(\t\022\026\n\016consensus_h" +
-      "ash\030\013 \001(\014\022\021\n\tdata_hash\030\014 \001(\014\022\025\n\revidence" +
-      "_hash\030\r \001(\014\022\030\n\020last_commit_hash\030\016 \001(\014\022\031\n" +
-      "\021last_results_hash\030\017 \001(\014\022\034\n\024next_validat" +
-      "ors_hash\030\020 \001(\014\022\027\n\017validators_hash\030\021 \001(\014\022",
-      "%\n\007version\030\022 \001(\0132\024.abci_vendor.Version\022+" +
-      "\n\rlast_block_id\030\023 \001(\0132\024.abci_vendor.Bloc" +
-      "kID\"\305\003\n\017BlockInfoSimple\022\016\n\006height\030\001 \001(\004\022" +
-      "\017\n\007num_txs\030\002 \001(\r\022(\n\004time\030\003 \001(\0132\032.google." +
-      "protobuf.Timestamp\022\020\n\010app_hash\030\004 \001(\014\022\020\n\010" +
-      "proposer\030\005 \001(\014\022\021\n\ttotal_txs\030\006 \001(\004\022\022\n\ntxs" +
-      "_hashes\030\007 \003(\t\022\032\n\022invalid_txs_hashes\030\010 \003(" +
-      "\t\022\026\n\016consensus_hash\030\t \001(\014\022\021\n\tdata_hash\030\n" +
-      " \001(\014\022\025\n\revidence_hash\030\013 \001(\014\022\030\n\020last_comm" +
-      "it_hash\030\014 \001(\014\022\031\n\021last_results_hash\030\r \001(\014",
-      "\022\034\n\024next_validators_hash\030\016 \001(\014\022\027\n\017valida" +
-      "tors_hash\030\017 \001(\014\022%\n\007version\030\020 \001(\0132\024.abci_" +
-      "vendor.Version\022+\n\rlast_block_id\030\021 \001(\0132\024." +
-      "abci_vendor.BlockID\"=\n\010TxStatus\022#\n\004code\030" +
-      "\001 \001(\0162\025.forge_abi.StatusCode\022\014\n\004hash\030\002 \001" +
-      "(\t\"c\n\rCircularQueue\022\r\n\005items\030\001 \003(\014\022\020\n\010ty" +
-      "pe_url\030\002 \001(\t\022\021\n\tmax_items\030\003 \001(\r\022\020\n\010circu" +
-      "lar\030\004 \001(\010\022\014\n\004fifo\030\005 \001(\010\"\242\001\n\014StateContext" +
-      "\022\022\n\ngenesis_tx\030\001 \001(\t\022\026\n\016renaissance_tx\030\002" +
-      " \001(\t\0220\n\014genesis_time\030\003 \001(\0132\032.google.prot",
-      "obuf.Timestamp\0224\n\020renaissance_time\030\004 \001(\013" +
-      "2\032.google.protobuf.Timestamp\"\202\002\n\014StakeCo" +
-      "ntext\022(\n\014total_stakes\030\001 \001(\0132\022.forge_abi." +
-      "BigUint\022*\n\016total_unstakes\030\002 \001(\0132\022.forge_" +
-      "abi.BigUint\0221\n\025total_received_stakes\030\003 \001" +
-      "(\0132\022.forge_abi.BigUint\022/\n\rrecent_stakes\030" +
-      "\004 \001(\0132\030.forge_abi.CircularQueue\0228\n\026recen" +
-      "t_received_stakes\030\017 \001(\0132\030.forge_abi.Circ" +
-      "ularQueue\"\216\001\n\014StakeSummary\022(\n\014total_stak" +
-      "es\030\001 \001(\0132\022.forge_abi.BigUint\022*\n\016total_un",
-      "stakes\030\002 \001(\0132\022.forge_abi.BigUint\022(\n\007cont" +
-      "ext\030\003 \001(\0132\027.forge_abi.StateContext\"F\n\013St" +
-      "akeConfig\022\027\n\017timeout_general\030\001 \001(\r\022\036\n\026ti" +
-      "meout_stake_for_node\030\002 \001(\r\"D\n\016Unconfirme" +
-      "dTxs\022\r\n\005n_txs\030\001 \001(\r\022#\n\003txs\030\002 \003(\0132\026.forge" +
-      "_abi.Transaction\"d\n\007NetInfo\022\021\n\tlistening" +
-      "\030\001 \001(\010\022\021\n\tlisteners\030\002 \003(\t\022\017\n\007n_peers\030\003 \001" +
-      "(\r\022\"\n\005peers\030\004 \003(\0132\023.forge_abi.PeerInfo\"M" +
-      "\n\007GeoInfo\022\014\n\004city\030\001 \001(\t\022\017\n\007country\030\002 \001(\t" +
-      "\022\020\n\010latitude\030\003 \001(\002\022\021\n\tlongitude\030\004 \001(\002\"\205\001",
-      "\n\010PeerInfo\022\n\n\002id\030\001 \001(\t\022\017\n\007network\030\002 \001(\t\022" +
-      "\031\n\021consensus_version\030\003 \001(\t\022\017\n\007moniker\030\004 " +
-      "\001(\t\022\n\n\002ip\030\005 \001(\t\022$\n\010geo_info\030\006 \001(\0132\022.forg" +
-      "e_abi.GeoInfo\"T\n\016ValidatorsInfo\022\024\n\014block" +
-      "_height\030\001 \001(\004\022,\n\nvalidators\030\002 \003(\0132\030.forg" +
-      "e_abi.ValidatorInfo\"\253\001\n\rValidatorInfo\022\017\n" +
-      "\007address\030\001 \001(\t\022$\n\007pub_key\030\002 \001(\0132\023.abci_v" +
-      "endor.PubKey\022\024\n\014voting_power\030\003 \001(\004\022\031\n\021pr" +
-      "oposer_priority\030\004 \001(\t\022\014\n\004name\030\005 \001(\t\022$\n\010g" +
-      "eo_info\030\006 \001(\0132\022.forge_abi.GeoInfo\"\255\001\n\013Ge",
-      "nesisInfo\022\024\n\014genesis_time\030\001 \001(\t\022\020\n\010chain" +
-      "_id\030\002 \001(\t\0226\n\020consensus_params\030\003 \001(\0132\034.ab" +
-      "ci_vendor.ConsensusParams\022,\n\nvalidators\030" +
-      "\004 \003(\0132\030.forge_abi.ValidatorInfo\022\020\n\010app_h" +
-      "ash\030\005 \001(\t\"\214\004\n\nForgeStats\022\022\n\nnum_blocks\030\001" +
-      " \003(\004\022\017\n\007num_txs\030\002 \003(\004\022&\n\nnum_stakes\030\003 \003(" +
-      "\0132\022.forge_abi.BigUint\022\026\n\016num_validators\030" +
-      "\004 \003(\r\022\037\n\027num_account_migrate_txs\030\005 \003(\004\022\034" +
-      "\n\024num_create_asset_txs\030\006 \003(\004\022!\n\031num_cons" +
-      "ensus_upgrade_txs\030\007 \003(\r\022\027\n\017num_declare_t",
-      "xs\030\010 \003(\004\022\034\n\024num_declare_file_txs\030\t \003(\004\022\030" +
-      "\n\020num_exchange_txs\030\n \003(\004\022\025\n\rnum_stake_tx" +
-      "s\030\013 \003(\004\022\033\n\023num_sys_upgrade_txs\030\014 \003(\r\022\030\n\020" +
-      "num_transfer_txs\030\r \003(\004\022\034\n\024num_update_ass" +
-      "et_txs\030\016 \003(\004\022\035\n\025num_consume_asset_txs\030\017 " +
-      "\003(\004\022\024\n\014num_poke_txs\030\020 \003(\004\022\013\n\003tps\030\021 \003(\r\022\017" +
-      "\n\007max_tps\030\022 \001(\r\022\017\n\007avg_tps\030\023 \001(\r\022\026\n\016avg_" +
-      "block_time\030\024 \001(\002\"\342\002\n\014TxStatistics\022\037\n\027num" +
-      "_account_migrate_txs\030\001 \001(\004\022\034\n\024num_create" +
-      "_asset_txs\030\002 \001(\004\022!\n\031num_consensus_upgrad",
-      "e_txs\030\003 \001(\r\022\027\n\017num_declare_txs\030\004 \001(\004\022\034\n\024" +
-      "num_declare_file_txs\030\005 \001(\004\022\030\n\020num_exchan" +
-      "ge_txs\030\006 \001(\004\022\025\n\rnum_stake_txs\030\007 \001(\004\022\033\n\023n" +
-      "um_sys_upgrade_txs\030\010 \001(\r\022\030\n\020num_transfer" +
-      "_txs\030\t \001(\004\022\034\n\024num_update_asset_txs\030\n \001(\004" +
-      "\022\035\n\025num_consume_asset_txs\030\013 \001(\004\022\024\n\014num_p" +
-      "oke_txs\030\014 \001(\004\"\262\001\n\nForgeToken\022\014\n\004name\030\001 \001" +
-      "(\t\022\016\n\006symbol\030\002 \001(\t\022\014\n\004unit\030\003 \001(\t\022\023\n\013desc" +
-      "ription\030\004 \001(\t\022\014\n\004icon\030\005 \001(\014\022\017\n\007decimal\030\006" +
-      " \001(\r\022\026\n\016initial_supply\030\007 \001(\004\022\024\n\014total_su",
-      "pply\030\010 \001(\004\022\026\n\016inflation_rate\030\t \001(\r\"}\n\010Po" +
-      "keInfo\022\'\n\013daily_limit\030\001 \001(\0132\022.forge_abi." +
-      "BigUint\022$\n\010leftover\030\002 \001(\0132\022.forge_abi.Bi" +
-      "gUint\022\"\n\006amount\030\003 \001(\0132\022.forge_abi.BigUin" +
-      "t\"S\n\nPokeConfig\022\017\n\007address\030\001 \001(\t\022\023\n\013dail" +
-      "y_limit\030\002 \001(\004\022\017\n\007balance\030\003 \001(\004\022\016\n\006amount" +
-      "\030\004 \001(\004\".\n\013UpgradeInfo\022\016\n\006height\030\001 \001(\004\022\017\n" +
-      "\007version\030\002 \001(\tb\006proto3"
+      "id\030\003 \001(\t\022\n\n\002pk\030\004 \001(\014\022\013\n\003gas\030\005 \001(\r\022\021\n\tsig" +
+      "nature\030\r \001(\014\022\'\n\nsignatures\030\016 \003(\0132\023.forge" +
+      "_abi.Multisig\022!\n\003itx\030\017 \001(\0132\024.google.prot" +
+      "obuf.Any\"\324\001\n\017TransactionInfo\022\"\n\002tx\030\001 \001(\013" +
+      "2\026.forge_abi.Transaction\022\016\n\006height\030\002 \001(\004",
+      "\022\r\n\005index\030\003 \001(\r\022\014\n\004hash\030\004 \001(\t\022!\n\004tags\030\005 " +
+      "\003(\0132\023.abci_vendor.KVPair\022#\n\004code\030\006 \001(\0162\025" +
+      ".forge_abi.StatusCode\022(\n\004time\030\007 \001(\0132\032.go" +
+      "ogle.protobuf.Timestamp\"6\n\rDeclareConfig" +
+      "\022\022\n\nrestricted\030\001 \001(\010\022\021\n\thierarchy\030\002 \001(\r\"" +
+      "\232\001\n\021TransactionConfig\022\026\n\016max_asset_size\030" +
+      "\001 \001(\r\022\025\n\rmax_list_size\030\002 \001(\r\022\024\n\014max_mult" +
+      "isig\030\003 \001(\r\022\025\n\rminimum_stake\030\004 \001(\004\022)\n\007dec" +
+      "lare\030\005 \001(\0132\030.forge_abi.DeclareConfig\"\231\004\n" +
+      "\tBlockInfo\022\016\n\006height\030\001 \001(\004\022\017\n\007num_txs\030\002 ",
+      "\001(\r\022(\n\004time\030\003 \001(\0132\032.google.protobuf.Time" +
+      "stamp\022\020\n\010app_hash\030\004 \001(\014\022\020\n\010proposer\030\005 \001(" +
+      "\014\022\'\n\003txs\030\006 \003(\0132\032.forge_abi.TransactionIn" +
+      "fo\022\021\n\ttotal_txs\030\007 \001(\004\022/\n\013invalid_txs\030\010 \003" +
+      "(\0132\032.forge_abi.TransactionInfo\022\022\n\ntxs_ha" +
+      "shes\030\t \003(\t\022\032\n\022invalid_txs_hashes\030\n \003(\t\022\026" +
+      "\n\016consensus_hash\030\013 \001(\014\022\021\n\tdata_hash\030\014 \001(" +
+      "\014\022\025\n\revidence_hash\030\r \001(\014\022\030\n\020last_commit_" +
+      "hash\030\016 \001(\014\022\031\n\021last_results_hash\030\017 \001(\014\022\034\n" +
+      "\024next_validators_hash\030\020 \001(\014\022\027\n\017validator",
+      "s_hash\030\021 \001(\014\022%\n\007version\030\022 \001(\0132\024.abci_ven" +
+      "dor.Version\022+\n\rlast_block_id\030\023 \001(\0132\024.abc" +
+      "i_vendor.BlockID\"\305\003\n\017BlockInfoSimple\022\016\n\006" +
+      "height\030\001 \001(\004\022\017\n\007num_txs\030\002 \001(\r\022(\n\004time\030\003 " +
+      "\001(\0132\032.google.protobuf.Timestamp\022\020\n\010app_h" +
+      "ash\030\004 \001(\014\022\020\n\010proposer\030\005 \001(\014\022\021\n\ttotal_txs" +
+      "\030\006 \001(\004\022\022\n\ntxs_hashes\030\007 \003(\t\022\032\n\022invalid_tx" +
+      "s_hashes\030\010 \003(\t\022\026\n\016consensus_hash\030\t \001(\014\022\021" +
+      "\n\tdata_hash\030\n \001(\014\022\025\n\revidence_hash\030\013 \001(\014" +
+      "\022\030\n\020last_commit_hash\030\014 \001(\014\022\031\n\021last_resul",
+      "ts_hash\030\r \001(\014\022\034\n\024next_validators_hash\030\016 " +
+      "\001(\014\022\027\n\017validators_hash\030\017 \001(\014\022%\n\007version\030" +
+      "\020 \001(\0132\024.abci_vendor.Version\022+\n\rlast_bloc" +
+      "k_id\030\021 \001(\0132\024.abci_vendor.BlockID\"=\n\010TxSt" +
+      "atus\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCod" +
+      "e\022\014\n\004hash\030\002 \001(\t\"c\n\rCircularQueue\022\r\n\005item" +
+      "s\030\001 \003(\014\022\020\n\010type_url\030\002 \001(\t\022\021\n\tmax_items\030\003" +
+      " \001(\r\022\020\n\010circular\030\004 \001(\010\022\014\n\004fifo\030\005 \001(\010\"\242\001\n" +
+      "\014StateContext\022\022\n\ngenesis_tx\030\001 \001(\t\022\026\n\016ren" +
+      "aissance_tx\030\002 \001(\t\0220\n\014genesis_time\030\003 \001(\0132",
+      "\032.google.protobuf.Timestamp\0224\n\020renaissan" +
+      "ce_time\030\004 \001(\0132\032.google.protobuf.Timestam" +
+      "p\"\202\002\n\014StakeContext\022(\n\014total_stakes\030\001 \001(\013" +
+      "2\022.forge_abi.BigUint\022*\n\016total_unstakes\030\002" +
+      " \001(\0132\022.forge_abi.BigUint\0221\n\025total_receiv" +
+      "ed_stakes\030\003 \001(\0132\022.forge_abi.BigUint\022/\n\rr" +
+      "ecent_stakes\030\004 \001(\0132\030.forge_abi.CircularQ" +
+      "ueue\0228\n\026recent_received_stakes\030\017 \001(\0132\030.f" +
+      "orge_abi.CircularQueue\"\216\001\n\014StakeSummary\022" +
+      "(\n\014total_stakes\030\001 \001(\0132\022.forge_abi.BigUin",
+      "t\022*\n\016total_unstakes\030\002 \001(\0132\022.forge_abi.Bi" +
+      "gUint\022(\n\007context\030\003 \001(\0132\027.forge_abi.State" +
+      "Context\"F\n\013StakeConfig\022\027\n\017timeout_genera" +
+      "l\030\001 \001(\r\022\036\n\026timeout_stake_for_node\030\002 \001(\r\"" +
+      "D\n\016UnconfirmedTxs\022\r\n\005n_txs\030\001 \001(\r\022#\n\003txs\030" +
+      "\002 \003(\0132\026.forge_abi.Transaction\"d\n\007NetInfo" +
+      "\022\021\n\tlistening\030\001 \001(\010\022\021\n\tlisteners\030\002 \003(\t\022\017" +
+      "\n\007n_peers\030\003 \001(\r\022\"\n\005peers\030\004 \003(\0132\023.forge_a" +
+      "bi.PeerInfo\"M\n\007GeoInfo\022\014\n\004city\030\001 \001(\t\022\017\n\007" +
+      "country\030\002 \001(\t\022\020\n\010latitude\030\003 \001(\002\022\021\n\tlongi",
+      "tude\030\004 \001(\002\"\205\001\n\010PeerInfo\022\n\n\002id\030\001 \001(\t\022\017\n\007n" +
+      "etwork\030\002 \001(\t\022\031\n\021consensus_version\030\003 \001(\t\022" +
+      "\017\n\007moniker\030\004 \001(\t\022\n\n\002ip\030\005 \001(\t\022$\n\010geo_info" +
+      "\030\006 \001(\0132\022.forge_abi.GeoInfo\"T\n\016Validators" +
+      "Info\022\024\n\014block_height\030\001 \001(\004\022,\n\nvalidators" +
+      "\030\002 \003(\0132\030.forge_abi.ValidatorInfo\"\253\001\n\rVal" +
+      "idatorInfo\022\017\n\007address\030\001 \001(\t\022$\n\007pub_key\030\002" +
+      " \001(\0132\023.abci_vendor.PubKey\022\024\n\014voting_powe" +
+      "r\030\003 \001(\004\022\031\n\021proposer_priority\030\004 \001(\t\022\014\n\004na" +
+      "me\030\005 \001(\t\022$\n\010geo_info\030\006 \001(\0132\022.forge_abi.G",
+      "eoInfo\"\255\001\n\013GenesisInfo\022\024\n\014genesis_time\030\001" +
+      " \001(\t\022\020\n\010chain_id\030\002 \001(\t\0226\n\020consensus_para" +
+      "ms\030\003 \001(\0132\034.abci_vendor.ConsensusParams\022," +
+      "\n\nvalidators\030\004 \003(\0132\030.forge_abi.Validator" +
+      "Info\022\020\n\010app_hash\030\005 \001(\t\"\214\004\n\nForgeStats\022\022\n" +
+      "\nnum_blocks\030\001 \003(\004\022\017\n\007num_txs\030\002 \003(\004\022&\n\nnu" +
+      "m_stakes\030\003 \003(\0132\022.forge_abi.BigUint\022\026\n\016nu" +
+      "m_validators\030\004 \003(\r\022\037\n\027num_account_migrat" +
+      "e_txs\030\005 \003(\004\022\034\n\024num_create_asset_txs\030\006 \003(" +
+      "\004\022!\n\031num_consensus_upgrade_txs\030\007 \003(\r\022\027\n\017",
+      "num_declare_txs\030\010 \003(\004\022\034\n\024num_declare_fil" +
+      "e_txs\030\t \003(\004\022\030\n\020num_exchange_txs\030\n \003(\004\022\025\n" +
+      "\rnum_stake_txs\030\013 \003(\004\022\033\n\023num_sys_upgrade_" +
+      "txs\030\014 \003(\r\022\030\n\020num_transfer_txs\030\r \003(\004\022\034\n\024n" +
+      "um_update_asset_txs\030\016 \003(\004\022\035\n\025num_consume" +
+      "_asset_txs\030\017 \003(\004\022\024\n\014num_poke_txs\030\020 \003(\004\022\013" +
+      "\n\003tps\030\021 \003(\r\022\017\n\007max_tps\030\022 \001(\r\022\017\n\007avg_tps\030" +
+      "\023 \001(\r\022\026\n\016avg_block_time\030\024 \001(\002\"\342\002\n\014TxStat" +
+      "istics\022\037\n\027num_account_migrate_txs\030\001 \001(\004\022" +
+      "\034\n\024num_create_asset_txs\030\002 \001(\004\022!\n\031num_con",
+      "sensus_upgrade_txs\030\003 \001(\r\022\027\n\017num_declare_" +
+      "txs\030\004 \001(\004\022\034\n\024num_declare_file_txs\030\005 \001(\004\022" +
+      "\030\n\020num_exchange_txs\030\006 \001(\004\022\025\n\rnum_stake_t" +
+      "xs\030\007 \001(\004\022\033\n\023num_sys_upgrade_txs\030\010 \001(\r\022\030\n" +
+      "\020num_transfer_txs\030\t \001(\004\022\034\n\024num_update_as" +
+      "set_txs\030\n \001(\004\022\035\n\025num_consume_asset_txs\030\013" +
+      " \001(\004\022\024\n\014num_poke_txs\030\014 \001(\004\"\262\001\n\nForgeToke" +
+      "n\022\014\n\004name\030\001 \001(\t\022\016\n\006symbol\030\002 \001(\t\022\014\n\004unit\030" +
+      "\003 \001(\t\022\023\n\013description\030\004 \001(\t\022\014\n\004icon\030\005 \001(\014" +
+      "\022\017\n\007decimal\030\006 \001(\r\022\026\n\016initial_supply\030\007 \001(",
+      "\004\022\024\n\014total_supply\030\010 \001(\004\022\026\n\016inflation_rat" +
+      "e\030\t \001(\r\"}\n\010PokeInfo\022\'\n\013daily_limit\030\001 \001(\013" +
+      "2\022.forge_abi.BigUint\022$\n\010leftover\030\002 \001(\0132\022" +
+      ".forge_abi.BigUint\022\"\n\006amount\030\003 \001(\0132\022.for" +
+      "ge_abi.BigUint\"S\n\nPokeConfig\022\017\n\007address\030" +
+      "\001 \001(\t\022\023\n\013daily_limit\030\002 \001(\004\022\017\n\007balance\030\003 " +
+      "\001(\004\022\016\n\006amount\030\004 \001(\004\".\n\013UpgradeInfo\022\016\n\006he" +
+      "ight\030\001 \001(\004\022\017\n\007version\030\002 \001(\tb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -46111,7 +46194,7 @@ public final class Type {
     internal_static_forge_abi_Transaction_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_Transaction_descriptor,
-        new java.lang.String[] { "From", "Nonce", "ChainId", "Pk", "Signature", "Signatures", "Itx", });
+        new java.lang.String[] { "From", "Nonce", "ChainId", "Pk", "Gas", "Signature", "Signatures", "Itx", });
     internal_static_forge_abi_TransactionInfo_descriptor =
       getDescriptor().getMessageTypes().get(13);
     internal_static_forge_abi_TransactionInfo_fieldAccessorTable = new
