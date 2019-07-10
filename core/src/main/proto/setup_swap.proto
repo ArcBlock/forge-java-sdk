@@ -3,7 +3,6 @@ package forge_abi;
 
 import "google/protobuf/any.proto";
 import "type.proto";
-import "state.proto";
 
 message SetupSwapTx {
   // The amount of token to swap.
@@ -21,3 +20,15 @@ message SetupSwapTx {
   google.protobuf.Any data = 15;
 }
 
+message SwapState {
+  string hash = 1;
+  string address = 2;
+  bytes hashkey = 3;
+  string sender = 4;
+  string receiver = 5;
+  BigUint value = 6;
+  repeated string assets = 7;
+  uint32 locktime = 8;
+  bytes hashlock = 9;
+  StateContext context = 10;
+}
