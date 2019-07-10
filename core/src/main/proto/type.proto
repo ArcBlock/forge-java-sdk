@@ -133,6 +133,8 @@ message Transaction {
   string chain_id = 3;
   // public key of the sender
   bytes pk = 4;
+  // gas required for this tx
+  uint32 gas = 5;
 
   // signature of the transaction
   bytes signature = 13;

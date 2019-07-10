@@ -55,6 +55,9 @@ enum StatusCode {
   invalid_expiry_date = 49;
   invalid_deposit = 50;
   invalid_custodian = 51;
+  insufficient_gas = 52;
+  invalid_swap = 53;
+  invalid_hashkey = 54;
 
   forbidden = 403;
   internal = 500;
