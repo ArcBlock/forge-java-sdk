@@ -2193,8 +2193,8 @@ public final class ExchangeTether {
     java.lang.String[] descriptorData = {
       "\n\025exchange_tether.proto\022\tforge_abi\032\031goog" +
       "le/protobuf/any.proto\032\037google/protobuf/t" +
-      "imestamp.proto\032\ntype.proto\032\024deposit_teth" +
-      "er.proto\032\016exchange.proto\"p\n\022TetherExchan" +
+      "imestamp.proto\032\ntype.proto\032\016exchange.pro" +
+      "to\032\024deposit_tether.proto\"p\n\022TetherExchan" +
       "geInfo\022!\n\005value\030\001 \001(\0132\022.forge_abi.BigUin" +
       "t\022\016\n\006assets\030\002 \003(\t\022\'\n\007deposit\030\003 \001(\0132\026.for" +
       "ge_abi.Transaction\"\300\001\n\020ExchangeTetherTx\022" +
@@ -2218,8 +2218,8 @@ public final class ExchangeTether {
           com.google.protobuf.AnyProto.getDescriptor(),
           com.google.protobuf.TimestampProto.getDescriptor(),
           forge_abi.Type.getDescriptor(),
-          forge_abi.DepositTether.getDescriptor(),
           forge_abi.Exchange.getDescriptor(),
+          forge_abi.DepositTether.getDescriptor(),
         }, assigner);
     internal_static_forge_abi_TetherExchangeInfo_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -2236,8 +2236,8 @@ public final class ExchangeTether {
     com.google.protobuf.AnyProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
     forge_abi.Type.getDescriptor();
-    forge_abi.DepositTether.getDescriptor();
     forge_abi.Exchange.getDescriptor();
+    forge_abi.DepositTether.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
