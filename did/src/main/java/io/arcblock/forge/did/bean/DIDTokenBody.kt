@@ -5,6 +5,7 @@ import io.arcblock.forge.did.DidAuthUtils
 import io.arcblock.forge.did.DidUtils
 import io.arcblock.forge.utils.Base58Btc
 
+
 class DIDTokenBody(
   var action: String,
   var appInfo: AppInfo,

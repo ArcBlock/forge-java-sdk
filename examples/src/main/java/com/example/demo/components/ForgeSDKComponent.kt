@@ -5,5 +5,5 @@ import org.springframework.stereotype.Component
 
 @Component
 class ForgeSDKComponent {
-    var forgeSDK: ForgeSDK = ForgeSDK.connect("localhost", 28210)
+    var forgeSDK: ForgeSDK = ForgeSDK.connect("localhost", 10020)
 }

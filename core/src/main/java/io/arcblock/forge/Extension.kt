@@ -1,8 +1,12 @@
 package io.arcblock.forge
 
 import com.google.common.io.BaseEncoding
+import com.google.protobuf.ByteString
 import forge_abi.Rpc
 import forge_abi.Type
+import io.arcblock.forge.did.HashType
+import io.arcblock.forge.did.KeyType
+import io.arcblock.forge.signer.Signer
 import org.spongycastle.asn1.ASN1Integer
 import org.spongycastle.asn1.DERSequenceGenerator
 import org.spongycastle.crypto.ec.CustomNamedCurves
@@ -70,3 +74,14 @@ fun String.addrToDID(): String {
 fun String.didToAddr(): String {
   return this.removePrefix("did:abt:")
 }
+
+fun ByteArray.hash(type: HashType) = Hasher.hash(type, this)
+fun ByteArray.sign(sk: ByteArray) = Signer.sign(KeyType.ED25519, this, sk)
+fun ByteArray.sign(sk: ByteArray, type: KeyType) = Signer.sign(type, this, sk)
+fun ByteArray.toByteString() = ByteString.copyFrom(this)
+
+fun Type.Transaction.signTx(sk: ByteArray) : Type.Transaction {
+  val sig = this.toByteArray().hash(HashType.SHA3).sign(sk)
+  return this.toBuilder().setSignature(sig.toByteString()).buildPartial()
+}
+

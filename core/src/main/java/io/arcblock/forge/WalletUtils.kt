@@ -59,6 +59,16 @@ object WalletUtils {
     return sign(wallet, unTx)
   }
 
+  fun createUnsignTx(wallet: WalletInfo, nonce: Long, chainID: String, itx: Any): Type.Transaction {
+    return Type.Transaction.newBuilder()
+      .setChainId(chainID).setFrom(wallet.address)
+      .setPk(ByteString.copyFrom(wallet.pk))
+      .setNonce(nonce)
+      .setItx(itx)
+      .build()
+  }
+
+
   /**
    * create a PokeTx to get some token
    */
@@ -79,6 +89,8 @@ object WalletUtils {
       .setValue(itx.toByteString())
       .build())
   }
+
+
 
   /**
    *  signature a transaction by a wallet
