@@ -5,7 +5,12 @@ import com.google.common.io.BaseEncoding
 import forge_abi.Rpc
 import io.arcblock.forge.TransactionFactory
 import io.arcblock.forge.WalletUtils
-import io.arcblock.forge.did.*
+import io.arcblock.forge.did.DIDGenerator
+import io.arcblock.forge.did.DidAuthUtils
+import io.arcblock.forge.did.HashType
+import io.arcblock.forge.did.KeyType
+import io.arcblock.forge.did.RoleType
+import io.arcblock.forge.did.WalletInfo
 import io.arcblock.forge.did.bean.AppInfo
 import io.arcblock.forge.did.bean.MetaInfo
 import io.arcblock.forge.did.bean.ProfileClaim
@@ -17,6 +22,10 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
+
+
+
+
 
 
 @RestController
@@ -46,67 +55,70 @@ class SwapSvcController {
   val appInfo: AppInfo by lazy {
     AppInfo().let {
       it.description = "Swap Test"
-      it.icon = "http://10.113.10.166:8807/images/logo@2x.png"
-      it.name = "Anbillum Company"
-      it.chainHost = "$host:8410/api/"
-      it.chainId = app.chainId
-      it.chainToken = app.chainToken
-      it.chainVersion = app.chainVersion
-      it.decimals = app.decimals
-      it.publisher = "did:abt:$addr"
-      it
-    }
+    it.icon = "http://10.113.10.166:8807/images/logo@2x.png"
+    it.name = "Anbillum Company"
+    it.chainHost = "$host:8410/api/"
+    it.chainId = app.chainId
+    it.chainToken = app.chainToken
+    it.chainVersion = app.chainVersion
+    it.decimals = app.decimals
+    it.publisher = "did:abt:$addr"
+    it
   }
+}
 
 
-  @RequestMapping("/", method = arrayOf(RequestMethod.POST))
+
+
+  @RequestMapping("/",method = arrayOf(RequestMethod.POST))
   @ResponseBody
-  fun allPost(): String {
+  fun allPost(): String{
     return "{\"result\":\"ok\"}"
   }
 
-  @RequestMapping("/swap", method = arrayOf(RequestMethod.GET))
+  @RequestMapping("/swap",method = arrayOf(RequestMethod.GET))
   @ResponseBody
-  fun newSwap(): String {
-    val claim = ProfileClaim(MetaInfo("Mock Swap data", ""),
-      arrayListOf("name", "avatar", "signature", "birthday", "phone", "email"))
-    val swapClaim = SwapClaim(MetaInfo("Mock data", ""),
-      arrayOf(""), "$host:8310/api", "3", "${appInfo.chainId}", ""
-    )
-    val content = DidAuthUtils.createDidAuthToken(arrayOf(swapClaim), appInfo, System.currentTimeMillis() / 1000,
-      wallet, "$host:8081/did/")
+  fun newSwap():String{
+    val claim = ProfileClaim(MetaInfo("Mock Swap data",""),
+      arrayListOf("name","avatar","signature","birthday","phone","email"))
+    val swapClaim = SwapClaim(MetaInfo("Mock data",""),
+      arrayOf(""),"$host:8310/api","3","${appInfo.chainId}",""
+      )
+    val content = DidAuthUtils.createDidAuthToken(arrayOf(swapClaim),appInfo,System.currentTimeMillis()/1000,
+      wallet,"$host:8081/did/")
     return "{\"appPk\":\"${Base58Btc.encode(wallet.pk)}\",\"authInfo\":\"$content\"}"
   }
 
   @RequestMapping("/auth", method = [RequestMethod.GET])
   @ResponseBody
-  fun auth(): String {
-    val claim = ProfileClaim(MetaInfo("Mock data", ""),
-      arrayListOf("name", "avatar", "signature", "birthday", "phone", "email"))
+  fun auth():String{
+    val claim = ProfileClaim(MetaInfo("Mock data",""),
+      arrayListOf("name","avatar","signature","birthday","phone","email"))
 
-    val content = DidAuthUtils.createDidAuthToken(arrayOf(claim), appInfo, System.currentTimeMillis() / 1000,
-      wallet, "$host:8081/did/auth")
+    val content = DidAuthUtils.createDidAuthToken(arrayOf(claim),appInfo,System.currentTimeMillis()/1000,
+      wallet,"$host:8081/did/auth")
     return "{\"appPk\":\"${Base58Btc.encode(wallet.pk)}\",\"authInfo\":\"$content\"}"
   }
 
 
   @RequestMapping("/poke", method = [RequestMethod.GET])
   @ResponseBody
-  fun poke(skb64: String): String {
+  fun poke(skb64: String):String{
     val sk = BaseEncoding.base64Url().decode(skb64)
     val did = DIDGenerator.sk2did(sk)
-    val pk = WalletUtils.sk2pk(KeyType.ED25519, sk)
+    val pk = WalletUtils.sk2pk(KeyType.ED25519,sk)
 
     val forgeState = forge.forgeSDK
       .getForgeState(Rpc.RequestGetForgeState.newBuilder()
         .build())
 
-    val tmp = WalletInfo(did.removePrefix("did:abt:"), pk, sk)
-    val tx = TransactionFactory.unsignPoke(forgeState.state.pokeConfig.address, app.chainId, tmp).signTx(sk)
+    val tmp = WalletInfo(did.removePrefix("did:abt:"),pk,sk)
+    val tx = TransactionFactory.unsignPoke(forgeState.state.pokeConfig.address,app.chainId,tmp).signTx(sk)
     val rst = forge.forgeSDK.sendTx(Rpc.RequestSendTx.newBuilder().setTx(tx).build())
 
     return "{${rst.hash}}"
   }
+
 
 
 }
