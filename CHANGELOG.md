@@ -1,3 +1,11 @@
+## 0.35.0 (September 03, 2019)
+  - update protocal to support delegate
+  - Merge branch 'version/0.32' into feature/delegate
+  - Add delegate protocol
+  - add did poke demo
+  - fix error import
+  - bump version
+
 ## 0.30.0 (June 20, 2019)
   - common update
 
