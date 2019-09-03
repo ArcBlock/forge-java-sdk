@@ -2050,11 +2050,11 @@ public final class AcquireAsset {
   static {
     java.lang.String[] descriptorData = {
       "\n\023acquire_asset.proto\022\tforge_abi\032\031google" +
-      "/protobuf/any.proto\032\ntype.proto\"*\n\tAsset" +
-      "Spec\022\017\n\007address\030\001 \001(\t\022\014\n\004data\030\002 \001(\t\"e\n\016A" +
-      "cquireAssetTx\022\n\n\002to\030\001 \001(\t\022#\n\005specs\030\002 \003(\013" +
-      "2\024.forge_abi.AssetSpec\022\"\n\004data\030\017 \001(\0132\024.g" +
-      "oogle.protobuf.Anyb\006proto3"
+      "/protobuf/any.proto\"*\n\tAssetSpec\022\017\n\007addr" +
+      "ess\030\001 \001(\t\022\014\n\004data\030\002 \001(\t\"e\n\016AcquireAssetT" +
+      "x\022\n\n\002to\030\001 \001(\t\022#\n\005specs\030\002 \003(\0132\024.forge_abi" +
+      ".AssetSpec\022\"\n\004data\030\017 \001(\0132\024.google.protob" +
+      "uf.Anyb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2068,7 +2068,6 @@ public final class AcquireAsset {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.AnyProto.getDescriptor(),
-          forge_abi.Type.getDescriptor(),
         }, assigner);
     internal_static_forge_abi_AssetSpec_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -2083,7 +2082,6 @@ public final class AcquireAsset {
         internal_static_forge_abi_AcquireAssetTx_descriptor,
         new java.lang.String[] { "To", "Specs", "Data", });
     com.google.protobuf.AnyProto.getDescriptor();
-    forge_abi.Type.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

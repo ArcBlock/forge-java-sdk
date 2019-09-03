@@ -2,14 +2,28 @@ package io.arcblock.forge
 
 import com.google.protobuf.Any
 import com.google.protobuf.ByteString
-import forge_abi.Poke
-import forge_abi.Type
+import forge_abi.*
+import io.arcblock.forge.did.DIDGenerator
 import io.arcblock.forge.did.WalletInfo
+import io.arcblock.forge.utils.address
 import java.time.LocalDate
+import java.util.*
 
 object TransactionFactory {
-  fun unsignPoke(pokeAddress:String,chainID:String, wallet: WalletInfo): Type.Transaction{
 
+  fun generateNonce(): Long {
+    return System.currentTimeMillis()
+  }
+
+  fun delare(chainID: String, wallet: WalletInfo, moniker: String? = null): Type.Transaction {
+    val itx = Declare.DeclareTx.newBuilder()
+      .setMoniker(moniker
+        ?: UUID.randomUUID().toString().replace("-", "")).setIssuer(wallet.address.address()).build()
+    return createTransaction(chainID, wallet.address, wallet.pk, itx.toByteString(), TypeUrls.DECLARE)
+  }
+
+
+  fun unsignPoke(pokeAddress: String, chainID: String, wallet: WalletInfo): Type.Transaction {
     val itx = Poke.PokeTx.newBuilder()
       .setAddress(pokeAddress)
       .setDate(LocalDate.now().toString())
@@ -23,7 +37,44 @@ object TransactionFactory {
         .setValue(itx.toByteString())
         .build())
       .build()
+
   }
+
+  fun unsignDelegate(from: String, to: String, chainID: String, wallet: WalletInfo, rules: List<String>): Type.Transaction {
+    val itx = Delegate.DelegateTx.newBuilder()
+      .setAddress(DIDGenerator.genDelegateAddress(from, to))
+      .addOps(Delegate.DelegateOp.newBuilder()
+        .setTypeUrl(TypeUrls.TRANSFER)
+        .addAllRules(rules)
+        .build())
+      .setTo(to)
+      .build()
+    return createTransaction(chainID, wallet.address, wallet.pk, itx.toByteString(), TypeUrls.DELEGATE)
+  }
+
+  fun unsignRevodeDelegate(from: String, to: String, chainID: String, wallet: WalletInfo, typeUrls: List<String>): Type.Transaction {
+    val itx = RevokeDelegate.RevokeDelegationTx.newBuilder()
+      .setAddress(DIDGenerator.genDelegateAddress(from, to))
+      .addAllTypeUrls(typeUrls)
+      .setTo(to)
+      .build()
+    return createTransaction(chainID, wallet.address, wallet.pk, itx.toByteString(), TypeUrls.REVOKE_DELEGATE)
+  }
+
+
+  fun createTransaction(chanId: String, from: String, pk: ByteArray, itx: ByteString, typeUrl: String): Type.Transaction {
+    return Type.Transaction.newBuilder()
+      .setChainId(chanId).setFrom(from)
+      .setPk(ByteString.copyFrom(pk))
+      .setNonce(generateNonce())
+      .setItx(Any.getDefaultInstance().toBuilder().setTypeUrl(typeUrl)
+        .setValue(itx)
+        .build())
+      .build()
+
+  }
+
+
 }
 
 

@@ -3,16 +3,19 @@ package io.arcblock.forge.did
 import forge_abi.CreateAsset
 import io.arcblock.forge.Hasher
 import io.arcblock.forge.WalletUtils
+import io.arcblock.forge.bip44.Bip44Utils
 import io.arcblock.forge.did.HashType.SHA2
 import io.arcblock.forge.did.HashType.SHA3
 import io.arcblock.forge.did.KeyType.ED25519
+import io.arcblock.forge.hash
 import io.arcblock.forge.hash.ArcSha2Hasher
 import io.arcblock.forge.hash.ArcSha3Hasher
 import io.arcblock.forge.utils.Base58Btc
-import org.bitcoinj.core.Base58
+import io.arcblock.forge.utils.address
 import org.bitcoinj.crypto.ChildNumber
 import org.bitcoinj.crypto.HDKeyDerivation
 import java.math.BigInteger
+import java.util.*
 
 /**
  *  @see <a href="https://github.com/ArcBlock/ABT-DID-Protocol">link</a>
@@ -35,8 +38,8 @@ object DIDGenerator {
    *
    */
   fun genAppDid(didKeyPair: DidKeyPair): String {
-      // Convert the HD secret key to user_did by using the rules described in DID section.
-    return DIDGenerator.sk2did(didKeyPair.privateKey)
+    // Convert the HD secret key to user_did by using the rules described in DID section.
+    return sk2did(didKeyPair.privateKey)
   }
 
   /**
@@ -50,7 +53,6 @@ object DIDGenerator {
   fun genAppKeyPair(appid: String, index: Int, seed: ByteArray, keyType: KeyType): DidKeyPair {
     // Apply sha3 to the app_did
     val sha3out = ArcSha3Hasher.sha256(appid.toByteArray(), 1)
-
     //    Take the first 64 bits of the hash
     //    Split the these 64 bits into two 32-bits-long sections denoted as S1 and S2.
     val S1 = BigInteger(sha3out.sliceArray(0..3)) // big-endian by default
@@ -81,7 +83,7 @@ object DIDGenerator {
    * and use default Wallet type: ACCOUNT ED25519 SHA3
    */
   fun sk2did(sk: ByteArray): String {
-    return DIDGenerator.sk2did(RoleType.ACCOUNT, ED25519, SHA3, sk)
+    return sk2did(RoleType.ACCOUNT, ED25519, SHA3, sk)
   }
 
   /**
@@ -137,7 +139,7 @@ object DIDGenerator {
     return hashToAddress(roleType, keyType, hashType, pkHash)
   }
 
-  fun hashToAddress(roleType: RoleType, keyType: KeyType, hashType: HashType, hash: ByteArray): String {
+  fun hashToAddress(roleType: RoleType, keyType: KeyType = ED25519, hashType: HashType = SHA3, hash: ByteArray): String {
     val appendPk = preAppend(roleType, keyType, hashType) + hash.sliceArray(0..19)
     val suffix = appendPk + Hasher.hash(hashType, appendPk).sliceArray(0..3)
     return Base58Btc.encode(suffix)
@@ -162,6 +164,15 @@ object DIDGenerator {
     ret[1] = append.and(0b11111111).toByte()
     ret[0] = append.shr(8).and(0b11111111).toByte()
     return ret
+  }
+
+  /**
+   * random wallet
+   */
+  fun randomWallet(): WalletInfo {
+    val seed =Bip44Utils.genSeed(UUID.randomUUID().toString(),UUID.randomUUID().toString(),UUID.randomUUID().toString())
+    val sk= Bip44Utils.genKeyPair(seed).privateKey.toByteArray()
+    return WalletInfo(sk=sk,pk = WalletUtils.sk2pk(sk= sk),address = sk2did(sk).address())
   }
 
   /**
@@ -190,20 +201,27 @@ object DIDGenerator {
    * Generate stake address. Use sender's address + receiver's address as pseudo public key.
    * Use `ed25519` as pseudo key type. Use sha3 and base58 by default.
    */
-  fun toStakeAddress(addr1: String, addr2: String): String{
-    val data = (if (addr1.compareTo(addr2) < 0){
-      addr1+addr2
-    } else addr2+addr1).toByteArray()
-    return pk2Address(RoleType.STAKE, ED25519,SHA3, data)
+  fun toStakeAddress(addr1: String, addr2: String): String {
+    val data = (if (addr1.compareTo(addr2) < 0) {
+      addr1 + addr2
+    } else addr2 + addr1).toByteArray()
+    return pk2Address(RoleType.STAKE, ED25519, SHA3, data)
   }
 
   /**
    *   Generate address for tx.
    */
-  fun toTxAddress(itx: ByteArray): String{
-    val data = Hasher.hash(SHA3,itx)
+  fun toTxAddress(itx: ByteArray): String {
+    val data = Hasher.hash(SHA3, itx)
     return hashToAddress(RoleType.TX, ED25519, SHA3, data)
   }
 
+  /**
+   * Generate delegateDID
+   */
+  fun genDelegateAddress(sender: String, receiver: String): String {
+    val data = sender.toByteArray() + receiver.toByteArray()
+    return hashToAddress(RoleType.DELEGATE, hash = data.hash(SHA3))
+  }
 
 }

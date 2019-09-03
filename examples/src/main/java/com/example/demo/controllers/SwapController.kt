@@ -7,26 +7,16 @@ import com.google.protobuf.ByteString
 import forge_abi.Rpc
 import forge_abi.Type
 import io.arcblock.forge.TransactionFactory
+import io.arcblock.forge.did.DIDGenerator
 import io.arcblock.forge.did.DidAuthUtils
 import io.arcblock.forge.did.WalletInfo
-import io.arcblock.forge.did.bean.AppInfo
-import io.arcblock.forge.did.bean.DidRequestBody
-import io.arcblock.forge.did.bean.IClaim
-import io.arcblock.forge.did.bean.MetaInfo
-import io.arcblock.forge.did.bean.ProfileClaim
-import io.arcblock.forge.did.bean.SignatureClaim
+import io.arcblock.forge.did.bean.*
+import io.arcblock.forge.signTx
 import io.arcblock.forge.utils.Base58Btc
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.ResponseBody
-import org.springframework.web.bind.annotation.RestController
-
-
-
-
+import org.springframework.web.bind.annotation.*
+import java.net.InetAddress
 
 
 @RestController
@@ -39,23 +29,17 @@ class SwapController {
   @Autowired
   lateinit var app: AppInfo
 
-//  val sk = BaseEncoding.base64().decode("dxX9ASBY+BTNayyTnIRC4A8QadAFi3F+GuE3+It8ltcM0h56H8xeJqTHn2w03uEfKJ801fjmeaygaIt0rHBaNg==")
-//  val pk = BaseEncoding.base64().decode("DNIeeh/MXiakx59sNN7hHyifNNX45nmsoGiLdKxwWjY=")
-//  val addr = DIDGenerator.pk2did(RoleType.ACCOUNT, KeyType.ED25519, HashType.SHA3, pk).removePrefix("did:abt:")
-
-
-  val sk = BaseEncoding.base16().decode("B4C1FED5090DD64518C20EAF5F1636CB4C2A68456A945161192635EFB83C675275CB8DA37D1FBE381AD7190ACE1C87E4D1312A689B2605F4C27A2C9E1CE63CC5")
-  val pk = BaseEncoding.base16().decode("75CB8DA37D1FBE381AD7190ACE1C87E4D1312A689B2605F4C27A2C9E1CE63CC5")
-  val addr = "z1ewYeWM7cLamiB6qy6mDHnzw1U5wEZCoj7"
-
+  val sk = BaseEncoding.base64Url().decode("tk3pcIjpDRzeUGutXL7mjf52jNfA_kztlQnIgYnBStiY2X5pZlsLGwfiMgFA6a8qLhCEgMjGmEBjcFROew9TXw")
+  val pk = BaseEncoding.base64Url().decode("mNl-aWZbCxsH4jIBQOmvKi4QhIDIxphAY3BUTnsPU18")
+  val addr = "z1TpjUv5ZVVpY854GVk9W9Zfnb4HKqQzRSg"
   val wallet = WalletInfo(addr, pk, sk)
-  var ip = "10.165.107.171"
-  //val ip = InetAddress.getByName("en0").hostAddress
+  var ip = InetAddress.getLocalHost().hostAddress
   val host = "http://$ip"
+
 
   init {
     logger.info("iPaddr:$ip")
-
+    logger.info("Pk:${Base58Btc.encode(pk)}")
   }
 
 
@@ -107,6 +91,24 @@ class SwapController {
     return "{\"appPk\":\"${Base58Btc.encode(wallet.pk)}\",\"authInfo\":\"$content\"}"
   }
 
+  @RequestMapping("/paper", method = [RequestMethod.GET])
+  @ResponseBody
+  fun delegatePaper():String {
+    val w = DIDGenerator.randomWallet()
+    logger.info("address======>\n ${w.address}")
+    val declare = forge.forgeSDK.sendTx(Rpc.RequestSendTx.newBuilder().setTx(TransactionFactory.delare(app.chainId,w).signTx(w.sk)).build())
+    logger.info("declare======>\n ${declare.toString()}")
+    val forgeState = forge.forgeSDK
+      .getForgeState(Rpc.RequestGetForgeState.newBuilder()
+        .build())
+
+    val tx = TransactionFactory.unsignPoke(forgeState.state.pokeConfig.address,app.chainId, w).signTx(w.sk)
+    val rst = forge.forgeSDK.sendTx(Rpc.RequestSendTx.newBuilder().setTx(tx).build())
+    logger.info("poke ->>>>>>> \n $rst")
+    return rst.toString()
+  }
+
+
 
   @RequestMapping("/poke", method = [RequestMethod.GET])
   @ResponseBody
@@ -133,8 +135,10 @@ class SwapController {
 
     val tx = Type.Transaction.getDefaultInstance().toBuilder().mergeFrom(Base58Btc.decode(claim.origin))
       .setSignature(ByteString.copyFrom(Base58Btc.decode(claim.sig))).build()
-    val hash = forge.forgeSDK.sendTx(Rpc.RequestSendTx.newBuilder().setTx(tx).build()).hash
-    return "{\"hash\":\"$hash\"}"
+
+    val rst = forge.forgeSDK.sendTx(Rpc.RequestSendTx.newBuilder().setTx(tx).build())
+    logger.info("hash:${rst.code}")
+    return "{\"hash\":\"${rst.hash}\"}"
   }
 
 }

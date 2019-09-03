@@ -1771,15 +1771,14 @@ public final class DepositTether {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\024deposit_tether.proto\022\tforge_abi\032\031googl" +
-      "e/protobuf/any.proto\032\037google/protobuf/ti" +
-      "mestamp.proto\032\ntype.proto\"\322\001\n\017DepositTet" +
-      "herTx\022!\n\005value\030\001 \001(\0132\022.forge_abi.BigUint" +
-      "\022&\n\ncommission\030\002 \001(\0132\022.forge_abi.BigUint" +
-      "\022\"\n\006charge\030\003 \001(\0132\022.forge_abi.BigUint\022\016\n\006" +
-      "target\030\004 \001(\t\022\022\n\nwithdrawer\030\005 \001(\t\022,\n\010lock" +
-      "time\030\006 \001(\0132\032.google.protobuf.Timestampb\006" +
-      "proto3"
+      "\n\024deposit_tether.proto\022\tforge_abi\032\037googl" +
+      "e/protobuf/timestamp.proto\032\ntype.proto\"\322" +
+      "\001\n\017DepositTetherTx\022!\n\005value\030\001 \001(\0132\022.forg" +
+      "e_abi.BigUint\022&\n\ncommission\030\002 \001(\0132\022.forg" +
+      "e_abi.BigUint\022\"\n\006charge\030\003 \001(\0132\022.forge_ab" +
+      "i.BigUint\022\016\n\006target\030\004 \001(\t\022\022\n\nwithdrawer\030" +
+      "\005 \001(\t\022,\n\010locktime\030\006 \001(\0132\032.google.protobu" +
+      "f.Timestampb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1792,7 +1791,6 @@ public final class DepositTether {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.google.protobuf.AnyProto.getDescriptor(),
           com.google.protobuf.TimestampProto.getDescriptor(),
           forge_abi.Type.getDescriptor(),
         }, assigner);
@@ -1802,7 +1800,6 @@ public final class DepositTether {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_DepositTetherTx_descriptor,
         new java.lang.String[] { "Value", "Commission", "Charge", "Target", "Withdrawer", "Locktime", });
-    com.google.protobuf.AnyProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
     forge_abi.Type.getDescriptor();
   }

@@ -1445,6 +1445,41 @@ public final class DeployProtocol {
 
     /**
      * <pre>
+     * categories or tags this protocol belongs to
+     * </pre>
+     *
+     * <code>repeated string tags = 11;</code>
+     */
+    java.util.List<java.lang.String>
+        getTagsList();
+    /**
+     * <pre>
+     * categories or tags this protocol belongs to
+     * </pre>
+     *
+     * <code>repeated string tags = 11;</code>
+     */
+    int getTagsCount();
+    /**
+     * <pre>
+     * categories or tags this protocol belongs to
+     * </pre>
+     *
+     * <code>repeated string tags = 11;</code>
+     */
+    java.lang.String getTags(int index);
+    /**
+     * <pre>
+     * categories or tags this protocol belongs to
+     * </pre>
+     *
+     * <code>repeated string tags = 11;</code>
+     */
+    com.google.protobuf.ByteString
+        getTagsBytes(int index);
+
+    /**
+     * <pre>
      * forge won't update data into state if app is interested in this tx.
      * </pre>
      *
@@ -1490,6 +1525,7 @@ public final class DeployProtocol {
       pipeline_ = "";
       sources_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       code_ = java.util.Collections.emptyList();
+      tags_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
 
     @java.lang.Override
@@ -1585,6 +1621,15 @@ public final class DeployProtocol {
                   input.readMessage(forge_abi.DeployProtocol.CodeInfo.parser(), extensionRegistry));
               break;
             }
+            case 90: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+                tags_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000400;
+              }
+              tags_.add(s);
+              break;
+            }
             case 122: {
               com.google.protobuf.Any.Builder subBuilder = null;
               if (data_ != null) {
@@ -1614,6 +1659,9 @@ public final class DeployProtocol {
         }
         if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
           code_ = java.util.Collections.unmodifiableList(code_);
+        }
+        if (((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+          tags_ = tags_.getUnmodifiableView();
         }
         makeExtensionsImmutable();
       }
@@ -2058,6 +2106,51 @@ public final class DeployProtocol {
       return code_.get(index);
     }
 
+    public static final int TAGS_FIELD_NUMBER = 11;
+    private com.google.protobuf.LazyStringList tags_;
+    /**
+     * <pre>
+     * categories or tags this protocol belongs to
+     * </pre>
+     *
+     * <code>repeated string tags = 11;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getTagsList() {
+      return tags_;
+    }
+    /**
+     * <pre>
+     * categories or tags this protocol belongs to
+     * </pre>
+     *
+     * <code>repeated string tags = 11;</code>
+     */
+    public int getTagsCount() {
+      return tags_.size();
+    }
+    /**
+     * <pre>
+     * categories or tags this protocol belongs to
+     * </pre>
+     *
+     * <code>repeated string tags = 11;</code>
+     */
+    public java.lang.String getTags(int index) {
+      return tags_.get(index);
+    }
+    /**
+     * <pre>
+     * categories or tags this protocol belongs to
+     * </pre>
+     *
+     * <code>repeated string tags = 11;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTagsBytes(int index) {
+      return tags_.getByteString(index);
+    }
+
     public static final int DATA_FIELD_NUMBER = 15;
     private com.google.protobuf.Any data_;
     /**
@@ -2133,6 +2226,9 @@ public final class DeployProtocol {
       for (int i = 0; i < code_.size(); i++) {
         output.writeMessage(10, code_.get(i));
       }
+      for (int i = 0; i < tags_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 11, tags_.getRaw(i));
+      }
       if (data_ != null) {
         output.writeMessage(15, getData());
       }
@@ -2181,6 +2277,14 @@ public final class DeployProtocol {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(10, code_.get(i));
       }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < tags_.size(); i++) {
+          dataSize += computeStringSizeNoTag(tags_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getTagsList().size();
+      }
       if (data_ != null) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(15, getData());
@@ -2221,6 +2325,8 @@ public final class DeployProtocol {
           .equals(other.getSourcesList());
       result = result && getCodeList()
           .equals(other.getCodeList());
+      result = result && getTagsList()
+          .equals(other.getTagsList());
       result = result && (hasData() == other.hasData());
       if (hasData()) {
         result = result && getData()
@@ -2261,6 +2367,10 @@ public final class DeployProtocol {
       if (getCodeCount() > 0) {
         hash = (37 * hash) + CODE_FIELD_NUMBER;
         hash = (53 * hash) + getCodeList().hashCode();
+      }
+      if (getTagsCount() > 0) {
+        hash = (37 * hash) + TAGS_FIELD_NUMBER;
+        hash = (53 * hash) + getTagsList().hashCode();
       }
       if (hasData()) {
         hash = (37 * hash) + DATA_FIELD_NUMBER;
@@ -2414,6 +2524,8 @@ public final class DeployProtocol {
         } else {
           codeBuilder_.clear();
         }
+        tags_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000400);
         if (dataBuilder_ == null) {
           data_ = null;
         } else {
@@ -2474,6 +2586,11 @@ public final class DeployProtocol {
         } else {
           result.code_ = codeBuilder_.build();
         }
+        if (((bitField0_ & 0x00000400) == 0x00000400)) {
+          tags_ = tags_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000400);
+        }
+        result.tags_ = tags_;
         if (dataBuilder_ == null) {
           result.data_ = data_;
         } else {
@@ -2609,6 +2726,16 @@ public final class DeployProtocol {
               codeBuilder_.addAllMessages(other.code_);
             }
           }
+        }
+        if (!other.tags_.isEmpty()) {
+          if (tags_.isEmpty()) {
+            tags_ = other.tags_;
+            bitField0_ = (bitField0_ & ~0x00000400);
+          } else {
+            ensureTagsIsMutable();
+            tags_.addAll(other.tags_);
+          }
+          onChanged();
         }
         if (other.hasData()) {
           mergeData(other.getData());
@@ -3984,6 +4111,136 @@ public final class DeployProtocol {
         return codeBuilder_;
       }
 
+      private com.google.protobuf.LazyStringList tags_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureTagsIsMutable() {
+        if (!((bitField0_ & 0x00000400) == 0x00000400)) {
+          tags_ = new com.google.protobuf.LazyStringArrayList(tags_);
+          bitField0_ |= 0x00000400;
+         }
+      }
+      /**
+       * <pre>
+       * categories or tags this protocol belongs to
+       * </pre>
+       *
+       * <code>repeated string tags = 11;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getTagsList() {
+        return tags_.getUnmodifiableView();
+      }
+      /**
+       * <pre>
+       * categories or tags this protocol belongs to
+       * </pre>
+       *
+       * <code>repeated string tags = 11;</code>
+       */
+      public int getTagsCount() {
+        return tags_.size();
+      }
+      /**
+       * <pre>
+       * categories or tags this protocol belongs to
+       * </pre>
+       *
+       * <code>repeated string tags = 11;</code>
+       */
+      public java.lang.String getTags(int index) {
+        return tags_.get(index);
+      }
+      /**
+       * <pre>
+       * categories or tags this protocol belongs to
+       * </pre>
+       *
+       * <code>repeated string tags = 11;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTagsBytes(int index) {
+        return tags_.getByteString(index);
+      }
+      /**
+       * <pre>
+       * categories or tags this protocol belongs to
+       * </pre>
+       *
+       * <code>repeated string tags = 11;</code>
+       */
+      public Builder setTags(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureTagsIsMutable();
+        tags_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * categories or tags this protocol belongs to
+       * </pre>
+       *
+       * <code>repeated string tags = 11;</code>
+       */
+      public Builder addTags(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureTagsIsMutable();
+        tags_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * categories or tags this protocol belongs to
+       * </pre>
+       *
+       * <code>repeated string tags = 11;</code>
+       */
+      public Builder addAllTags(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureTagsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, tags_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * categories or tags this protocol belongs to
+       * </pre>
+       *
+       * <code>repeated string tags = 11;</code>
+       */
+      public Builder clearTags() {
+        tags_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000400);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * categories or tags this protocol belongs to
+       * </pre>
+       *
+       * <code>repeated string tags = 11;</code>
+       */
+      public Builder addTagsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureTagsIsMutable();
+        tags_.add(value);
+        onChanged();
+        return this;
+      }
+
       private com.google.protobuf.Any data_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> dataBuilder_;
@@ -4210,17 +4467,16 @@ public final class DeployProtocol {
   static {
     java.lang.String[] descriptorData = {
       "\n\025deploy_protocol.proto\022\tforge_abi\032\031goog" +
-      "le/protobuf/any.proto\032\nenum.proto\032\ntype." +
-      "proto\",\n\010CodeInfo\022\020\n\010checksum\030\001 \001(\014\022\016\n\006b" +
-      "inary\030\002 \001(\014\"\'\n\010TypeUrls\022\013\n\003url\030\001 \001(\t\022\016\n\006" +
-      "module\030\002 \001(\t\"\213\002\n\020DeployProtocolTx\022\017\n\007add" +
-      "ress\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\017\n\007version\030\003 \001(" +
-      "\r\022\021\n\tnamespace\030\004 \001(\t\022\023\n\013description\030\005 \001(" +
-      "\t\022&\n\ttype_urls\030\006 \003(\0132\023.forge_abi.TypeUrl" +
-      "s\022\r\n\005proto\030\007 \001(\t\022\020\n\010pipeline\030\010 \001(\t\022\017\n\007so" +
-      "urces\030\t \003(\t\022!\n\004code\030\n \003(\0132\023.forge_abi.Co",
-      "deInfo\022\"\n\004data\030\017 \001(\0132\024.google.protobuf.A" +
-      "nyb\006proto3"
+      "le/protobuf/any.proto\",\n\010CodeInfo\022\020\n\010che" +
+      "cksum\030\001 \001(\014\022\016\n\006binary\030\002 \001(\014\"\'\n\010TypeUrls\022" +
+      "\013\n\003url\030\001 \001(\t\022\016\n\006module\030\002 \001(\t\"\231\002\n\020DeployP" +
+      "rotocolTx\022\017\n\007address\030\001 \001(\t\022\014\n\004name\030\002 \001(\t" +
+      "\022\017\n\007version\030\003 \001(\r\022\021\n\tnamespace\030\004 \001(\t\022\023\n\013" +
+      "description\030\005 \001(\t\022&\n\ttype_urls\030\006 \003(\0132\023.f" +
+      "orge_abi.TypeUrls\022\r\n\005proto\030\007 \001(\t\022\020\n\010pipe" +
+      "line\030\010 \001(\t\022\017\n\007sources\030\t \003(\t\022!\n\004code\030\n \003(" +
+      "\0132\023.forge_abi.CodeInfo\022\014\n\004tags\030\013 \003(\t\022\"\n\004",
+      "data\030\017 \001(\0132\024.google.protobuf.Anyb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4234,8 +4490,6 @@ public final class DeployProtocol {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.AnyProto.getDescriptor(),
-          forge_abi.Enum.getDescriptor(),
-          forge_abi.Type.getDescriptor(),
         }, assigner);
     internal_static_forge_abi_CodeInfo_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -4254,10 +4508,8 @@ public final class DeployProtocol {
     internal_static_forge_abi_DeployProtocolTx_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_DeployProtocolTx_descriptor,
-        new java.lang.String[] { "Address", "Name", "Version", "Namespace", "Description", "TypeUrls", "Proto", "Pipeline", "Sources", "Code", "Data", });
+        new java.lang.String[] { "Address", "Name", "Version", "Namespace", "Description", "TypeUrls", "Proto", "Pipeline", "Sources", "Code", "Tags", "Data", });
     com.google.protobuf.AnyProto.getDescriptor();
-    forge_abi.Enum.getDescriptor();
-    forge_abi.Type.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

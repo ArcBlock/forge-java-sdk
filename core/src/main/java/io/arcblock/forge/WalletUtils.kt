@@ -22,7 +22,7 @@ object WalletUtils {
   /**
    * generate PK from SK.
    */
-  fun sk2pk(keyType: KeyType, sk: ByteArray): ByteArray {
+  fun sk2pk(keyType: KeyType = KeyType.ED25519, sk: ByteArray): ByteArray {
     return when (keyType) {
       KeyType.ED25519 -> {
         val signer = Ed25519Sign(sk.sliceArray(0..31))
