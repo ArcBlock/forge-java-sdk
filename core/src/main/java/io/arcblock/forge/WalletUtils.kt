@@ -22,7 +22,7 @@ object WalletUtils {
   /**
    * generate PK from SK.
    */
-  fun sk2pk(keyType: KeyType, sk: ByteArray): ByteArray {
+  fun sk2pk(keyType: KeyType = KeyType.ED25519, sk: ByteArray): ByteArray {
     return when (keyType) {
       KeyType.ED25519 -> {
         val signer = Ed25519Sign(sk.sliceArray(0..31))
@@ -59,6 +59,16 @@ object WalletUtils {
     return sign(wallet, unTx)
   }
 
+  fun createUnsignTx(wallet: WalletInfo, nonce: Long, chainID: String, itx: Any): Type.Transaction {
+    return Type.Transaction.newBuilder()
+      .setChainId(chainID).setFrom(wallet.address)
+      .setPk(ByteString.copyFrom(wallet.pk))
+      .setNonce(nonce)
+      .setItx(itx)
+      .build()
+  }
+
+
   /**
    * create a PokeTx to get some token
    */
@@ -79,6 +89,8 @@ object WalletUtils {
       .setValue(itx.toByteString())
       .build())
   }
+
+
 
   /**
    *  signature a transaction by a wallet

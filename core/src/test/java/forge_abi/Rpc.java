@@ -1830,6 +1830,16 @@ public final class Rpc {
      */
     com.google.protobuf.ByteString
         getTokenBytes();
+
+    /**
+     * <code>string delegatee = 5;</code>
+     */
+    java.lang.String getDelegatee();
+    /**
+     * <code>string delegatee = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getDelegateeBytes();
   }
   /**
    * <pre>
@@ -1848,6 +1858,7 @@ public final class Rpc {
     }
     private RequestMultisig() {
       token_ = "";
+      delegatee_ = "";
     }
 
     @java.lang.Override
@@ -1918,6 +1929,12 @@ public final class Rpc {
               java.lang.String s = input.readStringRequireUtf8();
 
               token_ = s;
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              delegatee_ = s;
               break;
             }
           }
@@ -2052,6 +2069,40 @@ public final class Rpc {
       }
     }
 
+    public static final int DELEGATEE_FIELD_NUMBER = 5;
+    private volatile java.lang.Object delegatee_;
+    /**
+     * <code>string delegatee = 5;</code>
+     */
+    public java.lang.String getDelegatee() {
+      java.lang.Object ref = delegatee_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        delegatee_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string delegatee = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDelegateeBytes() {
+      java.lang.Object ref = delegatee_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        delegatee_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -2076,6 +2127,9 @@ public final class Rpc {
       if (!getTokenBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, token_);
       }
+      if (!getDelegateeBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, delegatee_);
+      }
     }
 
     public int getSerializedSize() {
@@ -2097,6 +2151,9 @@ public final class Rpc {
       }
       if (!getTokenBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, token_);
+      }
+      if (!getDelegateeBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, delegatee_);
       }
       memoizedSize = size;
       return size;
@@ -2131,6 +2188,8 @@ public final class Rpc {
       }
       result = result && getToken()
           .equals(other.getToken());
+      result = result && getDelegatee()
+          .equals(other.getDelegatee());
       return result;
     }
 
@@ -2155,6 +2214,8 @@ public final class Rpc {
       }
       hash = (37 * hash) + TOKEN_FIELD_NUMBER;
       hash = (53 * hash) + getToken().hashCode();
+      hash = (37 * hash) + DELEGATEE_FIELD_NUMBER;
+      hash = (53 * hash) + getDelegatee().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2297,6 +2358,8 @@ public final class Rpc {
         }
         token_ = "";
 
+        delegatee_ = "";
+
         return this;
       }
 
@@ -2335,6 +2398,7 @@ public final class Rpc {
           result.wallet_ = walletBuilder_.build();
         }
         result.token_ = token_;
+        result.delegatee_ = delegatee_;
         onBuilt();
         return result;
       }
@@ -2387,6 +2451,10 @@ public final class Rpc {
         }
         if (!other.getToken().isEmpty()) {
           token_ = other.token_;
+          onChanged();
+        }
+        if (!other.getDelegatee().isEmpty()) {
+          delegatee_ = other.delegatee_;
           onChanged();
         }
         onChanged();
@@ -2867,6 +2935,75 @@ public final class Rpc {
   checkByteStringIsUtf8(value);
         
         token_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object delegatee_ = "";
+      /**
+       * <code>string delegatee = 5;</code>
+       */
+      public java.lang.String getDelegatee() {
+        java.lang.Object ref = delegatee_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          delegatee_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string delegatee = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDelegateeBytes() {
+        java.lang.Object ref = delegatee_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          delegatee_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string delegatee = 5;</code>
+       */
+      public Builder setDelegatee(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        delegatee_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string delegatee = 5;</code>
+       */
+      public Builder clearDelegatee() {
+        
+        delegatee_ = getDefaultInstance().getDelegatee();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string delegatee = 5;</code>
+       */
+      public Builder setDelegateeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        delegatee_ = value;
         onChanged();
         return this;
       }
@@ -26788,6 +26925,1419 @@ public final class Rpc {
 
   }
 
+  public interface RequestGetDelegateStateOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.RequestGetDelegateState)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string address = 1;</code>
+     */
+    java.lang.String getAddress();
+    /**
+     * <code>string address = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getAddressBytes();
+
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    java.util.List<java.lang.String>
+        getKeysList();
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    int getKeysCount();
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    java.lang.String getKeys(int index);
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getKeysBytes(int index);
+
+    /**
+     * <code>uint64 height = 3;</code>
+     */
+    long getHeight();
+  }
+  /**
+   * Protobuf type {@code forge_abi.RequestGetDelegateState}
+   */
+  public  static final class RequestGetDelegateState extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:forge_abi.RequestGetDelegateState)
+      RequestGetDelegateStateOrBuilder {
+    // Use RequestGetDelegateState.newBuilder() to construct.
+    private RequestGetDelegateState(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private RequestGetDelegateState() {
+      address_ = "";
+      keys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      height_ = 0L;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private RequestGetDelegateState(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              address_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                keys_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              keys_.add(s);
+              break;
+            }
+            case 24: {
+
+              height_ = input.readUInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          keys_ = keys_.getUnmodifiableView();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return forge_abi.Rpc.internal_static_forge_abi_RequestGetDelegateState_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return forge_abi.Rpc.internal_static_forge_abi_RequestGetDelegateState_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              forge_abi.Rpc.RequestGetDelegateState.class, forge_abi.Rpc.RequestGetDelegateState.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int ADDRESS_FIELD_NUMBER = 1;
+    private volatile java.lang.Object address_;
+    /**
+     * <code>string address = 1;</code>
+     */
+    public java.lang.String getAddress() {
+      java.lang.Object ref = address_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        address_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string address = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAddressBytes() {
+      java.lang.Object ref = address_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        address_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int KEYS_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList keys_;
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getKeysList() {
+      return keys_;
+    }
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    public int getKeysCount() {
+      return keys_.size();
+    }
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    public java.lang.String getKeys(int index) {
+      return keys_.get(index);
+    }
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getKeysBytes(int index) {
+      return keys_.getByteString(index);
+    }
+
+    public static final int HEIGHT_FIELD_NUMBER = 3;
+    private long height_;
+    /**
+     * <code>uint64 height = 3;</code>
+     */
+    public long getHeight() {
+      return height_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getAddressBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, address_);
+      }
+      for (int i = 0; i < keys_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, keys_.getRaw(i));
+      }
+      if (height_ != 0L) {
+        output.writeUInt64(3, height_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getAddressBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, address_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < keys_.size(); i++) {
+          dataSize += computeStringSizeNoTag(keys_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getKeysList().size();
+      }
+      if (height_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(3, height_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof forge_abi.Rpc.RequestGetDelegateState)) {
+        return super.equals(obj);
+      }
+      forge_abi.Rpc.RequestGetDelegateState other = (forge_abi.Rpc.RequestGetDelegateState) obj;
+
+      boolean result = true;
+      result = result && getAddress()
+          .equals(other.getAddress());
+      result = result && getKeysList()
+          .equals(other.getKeysList());
+      result = result && (getHeight()
+          == other.getHeight());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ADDRESS_FIELD_NUMBER;
+      hash = (53 * hash) + getAddress().hashCode();
+      if (getKeysCount() > 0) {
+        hash = (37 * hash) + KEYS_FIELD_NUMBER;
+        hash = (53 * hash) + getKeysList().hashCode();
+      }
+      hash = (37 * hash) + HEIGHT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getHeight());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static forge_abi.Rpc.RequestGetDelegateState parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.Rpc.RequestGetDelegateState parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.Rpc.RequestGetDelegateState parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.Rpc.RequestGetDelegateState parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.Rpc.RequestGetDelegateState parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.RequestGetDelegateState parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.Rpc.RequestGetDelegateState parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.RequestGetDelegateState parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.Rpc.RequestGetDelegateState parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.RequestGetDelegateState parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(forge_abi.Rpc.RequestGetDelegateState prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code forge_abi.RequestGetDelegateState}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:forge_abi.RequestGetDelegateState)
+        forge_abi.Rpc.RequestGetDelegateStateOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return forge_abi.Rpc.internal_static_forge_abi_RequestGetDelegateState_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return forge_abi.Rpc.internal_static_forge_abi_RequestGetDelegateState_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                forge_abi.Rpc.RequestGetDelegateState.class, forge_abi.Rpc.RequestGetDelegateState.Builder.class);
+      }
+
+      // Construct using forge_abi.Rpc.RequestGetDelegateState.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        address_ = "";
+
+        keys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        height_ = 0L;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return forge_abi.Rpc.internal_static_forge_abi_RequestGetDelegateState_descriptor;
+      }
+
+      public forge_abi.Rpc.RequestGetDelegateState getDefaultInstanceForType() {
+        return forge_abi.Rpc.RequestGetDelegateState.getDefaultInstance();
+      }
+
+      public forge_abi.Rpc.RequestGetDelegateState build() {
+        forge_abi.Rpc.RequestGetDelegateState result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public forge_abi.Rpc.RequestGetDelegateState buildPartial() {
+        forge_abi.Rpc.RequestGetDelegateState result = new forge_abi.Rpc.RequestGetDelegateState(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.address_ = address_;
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          keys_ = keys_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.keys_ = keys_;
+        result.height_ = height_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof forge_abi.Rpc.RequestGetDelegateState) {
+          return mergeFrom((forge_abi.Rpc.RequestGetDelegateState)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(forge_abi.Rpc.RequestGetDelegateState other) {
+        if (other == forge_abi.Rpc.RequestGetDelegateState.getDefaultInstance()) return this;
+        if (!other.getAddress().isEmpty()) {
+          address_ = other.address_;
+          onChanged();
+        }
+        if (!other.keys_.isEmpty()) {
+          if (keys_.isEmpty()) {
+            keys_ = other.keys_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureKeysIsMutable();
+            keys_.addAll(other.keys_);
+          }
+          onChanged();
+        }
+        if (other.getHeight() != 0L) {
+          setHeight(other.getHeight());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        forge_abi.Rpc.RequestGetDelegateState parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (forge_abi.Rpc.RequestGetDelegateState) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object address_ = "";
+      /**
+       * <code>string address = 1;</code>
+       */
+      public java.lang.String getAddress() {
+        java.lang.Object ref = address_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          address_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string address = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAddressBytes() {
+        java.lang.Object ref = address_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          address_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string address = 1;</code>
+       */
+      public Builder setAddress(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        address_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string address = 1;</code>
+       */
+      public Builder clearAddress() {
+        
+        address_ = getDefaultInstance().getAddress();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string address = 1;</code>
+       */
+      public Builder setAddressBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        address_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList keys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureKeysIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          keys_ = new com.google.protobuf.LazyStringArrayList(keys_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getKeysList() {
+        return keys_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public int getKeysCount() {
+        return keys_.size();
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public java.lang.String getKeys(int index) {
+        return keys_.get(index);
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getKeysBytes(int index) {
+        return keys_.getByteString(index);
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public Builder setKeys(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureKeysIsMutable();
+        keys_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public Builder addKeys(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureKeysIsMutable();
+        keys_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public Builder addAllKeys(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureKeysIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, keys_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public Builder clearKeys() {
+        keys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string keys = 2;</code>
+       */
+      public Builder addKeysBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureKeysIsMutable();
+        keys_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private long height_ ;
+      /**
+       * <code>uint64 height = 3;</code>
+       */
+      public long getHeight() {
+        return height_;
+      }
+      /**
+       * <code>uint64 height = 3;</code>
+       */
+      public Builder setHeight(long value) {
+        
+        height_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint64 height = 3;</code>
+       */
+      public Builder clearHeight() {
+        
+        height_ = 0L;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:forge_abi.RequestGetDelegateState)
+    }
+
+    // @@protoc_insertion_point(class_scope:forge_abi.RequestGetDelegateState)
+    private static final forge_abi.Rpc.RequestGetDelegateState DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new forge_abi.Rpc.RequestGetDelegateState();
+    }
+
+    public static forge_abi.Rpc.RequestGetDelegateState getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<RequestGetDelegateState>
+        PARSER = new com.google.protobuf.AbstractParser<RequestGetDelegateState>() {
+      public RequestGetDelegateState parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new RequestGetDelegateState(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<RequestGetDelegateState> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RequestGetDelegateState> getParserForType() {
+      return PARSER;
+    }
+
+    public forge_abi.Rpc.RequestGetDelegateState getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ResponseGetDelegateStateOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.ResponseGetDelegateState)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.forge_abi.StatusCode code = 1;</code>
+     */
+    int getCodeValue();
+    /**
+     * <code>.forge_abi.StatusCode code = 1;</code>
+     */
+    forge_abi.Enum.StatusCode getCode();
+
+    /**
+     * <code>.forge_abi.DelegateState state = 2;</code>
+     */
+    boolean hasState();
+    /**
+     * <code>.forge_abi.DelegateState state = 2;</code>
+     */
+    forge_abi.State.DelegateState getState();
+    /**
+     * <code>.forge_abi.DelegateState state = 2;</code>
+     */
+    forge_abi.State.DelegateStateOrBuilder getStateOrBuilder();
+  }
+  /**
+   * Protobuf type {@code forge_abi.ResponseGetDelegateState}
+   */
+  public  static final class ResponseGetDelegateState extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:forge_abi.ResponseGetDelegateState)
+      ResponseGetDelegateStateOrBuilder {
+    // Use ResponseGetDelegateState.newBuilder() to construct.
+    private ResponseGetDelegateState(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ResponseGetDelegateState() {
+      code_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private ResponseGetDelegateState(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+
+              code_ = rawValue;
+              break;
+            }
+            case 18: {
+              forge_abi.State.DelegateState.Builder subBuilder = null;
+              if (state_ != null) {
+                subBuilder = state_.toBuilder();
+              }
+              state_ = input.readMessage(forge_abi.State.DelegateState.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(state_);
+                state_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return forge_abi.Rpc.internal_static_forge_abi_ResponseGetDelegateState_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return forge_abi.Rpc.internal_static_forge_abi_ResponseGetDelegateState_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              forge_abi.Rpc.ResponseGetDelegateState.class, forge_abi.Rpc.ResponseGetDelegateState.Builder.class);
+    }
+
+    public static final int CODE_FIELD_NUMBER = 1;
+    private int code_;
+    /**
+     * <code>.forge_abi.StatusCode code = 1;</code>
+     */
+    public int getCodeValue() {
+      return code_;
+    }
+    /**
+     * <code>.forge_abi.StatusCode code = 1;</code>
+     */
+    public forge_abi.Enum.StatusCode getCode() {
+      forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
+      return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
+    }
+
+    public static final int STATE_FIELD_NUMBER = 2;
+    private forge_abi.State.DelegateState state_;
+    /**
+     * <code>.forge_abi.DelegateState state = 2;</code>
+     */
+    public boolean hasState() {
+      return state_ != null;
+    }
+    /**
+     * <code>.forge_abi.DelegateState state = 2;</code>
+     */
+    public forge_abi.State.DelegateState getState() {
+      return state_ == null ? forge_abi.State.DelegateState.getDefaultInstance() : state_;
+    }
+    /**
+     * <code>.forge_abi.DelegateState state = 2;</code>
+     */
+    public forge_abi.State.DelegateStateOrBuilder getStateOrBuilder() {
+      return getState();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
+        output.writeEnum(1, code_);
+      }
+      if (state_ != null) {
+        output.writeMessage(2, getState());
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (code_ != forge_abi.Enum.StatusCode.ok.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, code_);
+      }
+      if (state_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getState());
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof forge_abi.Rpc.ResponseGetDelegateState)) {
+        return super.equals(obj);
+      }
+      forge_abi.Rpc.ResponseGetDelegateState other = (forge_abi.Rpc.ResponseGetDelegateState) obj;
+
+      boolean result = true;
+      result = result && code_ == other.code_;
+      result = result && (hasState() == other.hasState());
+      if (hasState()) {
+        result = result && getState()
+            .equals(other.getState());
+      }
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + CODE_FIELD_NUMBER;
+      hash = (53 * hash) + code_;
+      if (hasState()) {
+        hash = (37 * hash) + STATE_FIELD_NUMBER;
+        hash = (53 * hash) + getState().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static forge_abi.Rpc.ResponseGetDelegateState parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.Rpc.ResponseGetDelegateState parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.Rpc.ResponseGetDelegateState parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.Rpc.ResponseGetDelegateState parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.Rpc.ResponseGetDelegateState parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.ResponseGetDelegateState parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.Rpc.ResponseGetDelegateState parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.ResponseGetDelegateState parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.Rpc.ResponseGetDelegateState parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.Rpc.ResponseGetDelegateState parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(forge_abi.Rpc.ResponseGetDelegateState prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code forge_abi.ResponseGetDelegateState}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:forge_abi.ResponseGetDelegateState)
+        forge_abi.Rpc.ResponseGetDelegateStateOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetDelegateState_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetDelegateState_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                forge_abi.Rpc.ResponseGetDelegateState.class, forge_abi.Rpc.ResponseGetDelegateState.Builder.class);
+      }
+
+      // Construct using forge_abi.Rpc.ResponseGetDelegateState.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        code_ = 0;
+
+        if (stateBuilder_ == null) {
+          state_ = null;
+        } else {
+          state_ = null;
+          stateBuilder_ = null;
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return forge_abi.Rpc.internal_static_forge_abi_ResponseGetDelegateState_descriptor;
+      }
+
+      public forge_abi.Rpc.ResponseGetDelegateState getDefaultInstanceForType() {
+        return forge_abi.Rpc.ResponseGetDelegateState.getDefaultInstance();
+      }
+
+      public forge_abi.Rpc.ResponseGetDelegateState build() {
+        forge_abi.Rpc.ResponseGetDelegateState result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public forge_abi.Rpc.ResponseGetDelegateState buildPartial() {
+        forge_abi.Rpc.ResponseGetDelegateState result = new forge_abi.Rpc.ResponseGetDelegateState(this);
+        result.code_ = code_;
+        if (stateBuilder_ == null) {
+          result.state_ = state_;
+        } else {
+          result.state_ = stateBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof forge_abi.Rpc.ResponseGetDelegateState) {
+          return mergeFrom((forge_abi.Rpc.ResponseGetDelegateState)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(forge_abi.Rpc.ResponseGetDelegateState other) {
+        if (other == forge_abi.Rpc.ResponseGetDelegateState.getDefaultInstance()) return this;
+        if (other.code_ != 0) {
+          setCodeValue(other.getCodeValue());
+        }
+        if (other.hasState()) {
+          mergeState(other.getState());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        forge_abi.Rpc.ResponseGetDelegateState parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (forge_abi.Rpc.ResponseGetDelegateState) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int code_ = 0;
+      /**
+       * <code>.forge_abi.StatusCode code = 1;</code>
+       */
+      public int getCodeValue() {
+        return code_;
+      }
+      /**
+       * <code>.forge_abi.StatusCode code = 1;</code>
+       */
+      public Builder setCodeValue(int value) {
+        code_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.forge_abi.StatusCode code = 1;</code>
+       */
+      public forge_abi.Enum.StatusCode getCode() {
+        forge_abi.Enum.StatusCode result = forge_abi.Enum.StatusCode.valueOf(code_);
+        return result == null ? forge_abi.Enum.StatusCode.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.forge_abi.StatusCode code = 1;</code>
+       */
+      public Builder setCode(forge_abi.Enum.StatusCode value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        code_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.forge_abi.StatusCode code = 1;</code>
+       */
+      public Builder clearCode() {
+        
+        code_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private forge_abi.State.DelegateState state_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.State.DelegateState, forge_abi.State.DelegateState.Builder, forge_abi.State.DelegateStateOrBuilder> stateBuilder_;
+      /**
+       * <code>.forge_abi.DelegateState state = 2;</code>
+       */
+      public boolean hasState() {
+        return stateBuilder_ != null || state_ != null;
+      }
+      /**
+       * <code>.forge_abi.DelegateState state = 2;</code>
+       */
+      public forge_abi.State.DelegateState getState() {
+        if (stateBuilder_ == null) {
+          return state_ == null ? forge_abi.State.DelegateState.getDefaultInstance() : state_;
+        } else {
+          return stateBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.forge_abi.DelegateState state = 2;</code>
+       */
+      public Builder setState(forge_abi.State.DelegateState value) {
+        if (stateBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          state_ = value;
+          onChanged();
+        } else {
+          stateBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.DelegateState state = 2;</code>
+       */
+      public Builder setState(
+          forge_abi.State.DelegateState.Builder builderForValue) {
+        if (stateBuilder_ == null) {
+          state_ = builderForValue.build();
+          onChanged();
+        } else {
+          stateBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.DelegateState state = 2;</code>
+       */
+      public Builder mergeState(forge_abi.State.DelegateState value) {
+        if (stateBuilder_ == null) {
+          if (state_ != null) {
+            state_ =
+              forge_abi.State.DelegateState.newBuilder(state_).mergeFrom(value).buildPartial();
+          } else {
+            state_ = value;
+          }
+          onChanged();
+        } else {
+          stateBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.DelegateState state = 2;</code>
+       */
+      public Builder clearState() {
+        if (stateBuilder_ == null) {
+          state_ = null;
+          onChanged();
+        } else {
+          state_ = null;
+          stateBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.DelegateState state = 2;</code>
+       */
+      public forge_abi.State.DelegateState.Builder getStateBuilder() {
+        
+        onChanged();
+        return getStateFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.DelegateState state = 2;</code>
+       */
+      public forge_abi.State.DelegateStateOrBuilder getStateOrBuilder() {
+        if (stateBuilder_ != null) {
+          return stateBuilder_.getMessageOrBuilder();
+        } else {
+          return state_ == null ?
+              forge_abi.State.DelegateState.getDefaultInstance() : state_;
+        }
+      }
+      /**
+       * <code>.forge_abi.DelegateState state = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.State.DelegateState, forge_abi.State.DelegateState.Builder, forge_abi.State.DelegateStateOrBuilder> 
+          getStateFieldBuilder() {
+        if (stateBuilder_ == null) {
+          stateBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.State.DelegateState, forge_abi.State.DelegateState.Builder, forge_abi.State.DelegateStateOrBuilder>(
+                  getState(),
+                  getParentForChildren(),
+                  isClean());
+          state_ = null;
+        }
+        return stateBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:forge_abi.ResponseGetDelegateState)
+    }
+
+    // @@protoc_insertion_point(class_scope:forge_abi.ResponseGetDelegateState)
+    private static final forge_abi.Rpc.ResponseGetDelegateState DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new forge_abi.Rpc.ResponseGetDelegateState();
+    }
+
+    public static forge_abi.Rpc.ResponseGetDelegateState getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ResponseGetDelegateState>
+        PARSER = new com.google.protobuf.AbstractParser<ResponseGetDelegateState>() {
+      public ResponseGetDelegateState parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new ResponseGetDelegateState(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ResponseGetDelegateState> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ResponseGetDelegateState> getParserForType() {
+      return PARSER;
+    }
+
+    public forge_abi.Rpc.ResponseGetDelegateState getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface RequestStoreFileOrBuilder extends
       // @@protoc_insertion_point(interface_extends:forge_abi.RequestStoreFile)
       com.google.protobuf.MessageOrBuilder {
@@ -37595,6 +39145,33 @@ public final class Rpc {
     forge_abi.Type.TransactionOrBuilder getStakeOrBuilder();
 
     /**
+     * <code>.forge_abi.Transaction delegate = 25;</code>
+     */
+    forge_abi.Type.Transaction getDelegate();
+    /**
+     * <code>.forge_abi.Transaction delegate = 25;</code>
+     */
+    forge_abi.Type.TransactionOrBuilder getDelegateOrBuilder();
+
+    /**
+     * <code>.forge_abi.Transaction activate_protocol = 26;</code>
+     */
+    forge_abi.Type.Transaction getActivateProtocol();
+    /**
+     * <code>.forge_abi.Transaction activate_protocol = 26;</code>
+     */
+    forge_abi.Type.TransactionOrBuilder getActivateProtocolOrBuilder();
+
+    /**
+     * <code>.forge_abi.Transaction deactivate_protocol = 27;</code>
+     */
+    forge_abi.Type.Transaction getDeactivateProtocol();
+    /**
+     * <code>.forge_abi.Transaction deactivate_protocol = 27;</code>
+     */
+    forge_abi.Type.TransactionOrBuilder getDeactivateProtocolOrBuilder();
+
+    /**
      * <code>.forge_abi.AccountState account_state = 129;</code>
      */
     forge_abi.State.AccountState getAccountState();
@@ -37638,6 +39215,15 @@ public final class Rpc {
      * <code>.forge_abi.ProtocolState protocol_state = 133;</code>
      */
     forge_abi.State.ProtocolStateOrBuilder getProtocolStateOrBuilder();
+
+    /**
+     * <code>.forge_abi.DelegateState delegate_state = 134;</code>
+     */
+    forge_abi.State.DelegateState getDelegateState();
+    /**
+     * <code>.forge_abi.DelegateState delegate_state = 134;</code>
+     */
+    forge_abi.State.DelegateStateOrBuilder getDelegateStateOrBuilder();
 
     public forge_abi.Rpc.ResponseSubscribe.ValueCase getValueCase();
   }
@@ -37889,6 +39475,48 @@ public final class Rpc {
               valueCase_ = 24;
               break;
             }
+            case 202: {
+              forge_abi.Type.Transaction.Builder subBuilder = null;
+              if (valueCase_ == 25) {
+                subBuilder = ((forge_abi.Type.Transaction) value_).toBuilder();
+              }
+              value_ =
+                  input.readMessage(forge_abi.Type.Transaction.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((forge_abi.Type.Transaction) value_);
+                value_ = subBuilder.buildPartial();
+              }
+              valueCase_ = 25;
+              break;
+            }
+            case 210: {
+              forge_abi.Type.Transaction.Builder subBuilder = null;
+              if (valueCase_ == 26) {
+                subBuilder = ((forge_abi.Type.Transaction) value_).toBuilder();
+              }
+              value_ =
+                  input.readMessage(forge_abi.Type.Transaction.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((forge_abi.Type.Transaction) value_);
+                value_ = subBuilder.buildPartial();
+              }
+              valueCase_ = 26;
+              break;
+            }
+            case 218: {
+              forge_abi.Type.Transaction.Builder subBuilder = null;
+              if (valueCase_ == 27) {
+                subBuilder = ((forge_abi.Type.Transaction) value_).toBuilder();
+              }
+              value_ =
+                  input.readMessage(forge_abi.Type.Transaction.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((forge_abi.Type.Transaction) value_);
+                value_ = subBuilder.buildPartial();
+              }
+              valueCase_ = 27;
+              break;
+            }
             case 1034: {
               forge_abi.State.AccountState.Builder subBuilder = null;
               if (valueCase_ == 129) {
@@ -37959,6 +39587,20 @@ public final class Rpc {
               valueCase_ = 133;
               break;
             }
+            case 1074: {
+              forge_abi.State.DelegateState.Builder subBuilder = null;
+              if (valueCase_ == 134) {
+                subBuilder = ((forge_abi.State.DelegateState) value_).toBuilder();
+              }
+              value_ =
+                  input.readMessage(forge_abi.State.DelegateState.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((forge_abi.State.DelegateState) value_);
+                value_ = subBuilder.buildPartial();
+              }
+              valueCase_ = 134;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -38001,11 +39643,15 @@ public final class Rpc {
       DECLARE_FILE(22),
       SYS_UPGRADE(23),
       STAKE(24),
+      DELEGATE(25),
+      ACTIVATE_PROTOCOL(26),
+      DEACTIVATE_PROTOCOL(27),
       ACCOUNT_STATE(129),
       ASSET_STATE(130),
       FORGE_STATE(131),
       STAKE_STATE(132),
       PROTOCOL_STATE(133),
+      DELEGATE_STATE(134),
       VALUE_NOT_SET(0);
       private final int value;
       private ValueCase(int value) {
@@ -38036,11 +39682,15 @@ public final class Rpc {
           case 22: return DECLARE_FILE;
           case 23: return SYS_UPGRADE;
           case 24: return STAKE;
+          case 25: return DELEGATE;
+          case 26: return ACTIVATE_PROTOCOL;
+          case 27: return DEACTIVATE_PROTOCOL;
           case 129: return ACCOUNT_STATE;
           case 130: return ASSET_STATE;
           case 131: return FORGE_STATE;
           case 132: return STAKE_STATE;
           case 133: return PROTOCOL_STATE;
+          case 134: return DELEGATE_STATE;
           case 0: return VALUE_NOT_SET;
           default: return null;
         }
@@ -38395,6 +40045,66 @@ public final class Rpc {
       return forge_abi.Type.Transaction.getDefaultInstance();
     }
 
+    public static final int DELEGATE_FIELD_NUMBER = 25;
+    /**
+     * <code>.forge_abi.Transaction delegate = 25;</code>
+     */
+    public forge_abi.Type.Transaction getDelegate() {
+      if (valueCase_ == 25) {
+         return (forge_abi.Type.Transaction) value_;
+      }
+      return forge_abi.Type.Transaction.getDefaultInstance();
+    }
+    /**
+     * <code>.forge_abi.Transaction delegate = 25;</code>
+     */
+    public forge_abi.Type.TransactionOrBuilder getDelegateOrBuilder() {
+      if (valueCase_ == 25) {
+         return (forge_abi.Type.Transaction) value_;
+      }
+      return forge_abi.Type.Transaction.getDefaultInstance();
+    }
+
+    public static final int ACTIVATE_PROTOCOL_FIELD_NUMBER = 26;
+    /**
+     * <code>.forge_abi.Transaction activate_protocol = 26;</code>
+     */
+    public forge_abi.Type.Transaction getActivateProtocol() {
+      if (valueCase_ == 26) {
+         return (forge_abi.Type.Transaction) value_;
+      }
+      return forge_abi.Type.Transaction.getDefaultInstance();
+    }
+    /**
+     * <code>.forge_abi.Transaction activate_protocol = 26;</code>
+     */
+    public forge_abi.Type.TransactionOrBuilder getActivateProtocolOrBuilder() {
+      if (valueCase_ == 26) {
+         return (forge_abi.Type.Transaction) value_;
+      }
+      return forge_abi.Type.Transaction.getDefaultInstance();
+    }
+
+    public static final int DEACTIVATE_PROTOCOL_FIELD_NUMBER = 27;
+    /**
+     * <code>.forge_abi.Transaction deactivate_protocol = 27;</code>
+     */
+    public forge_abi.Type.Transaction getDeactivateProtocol() {
+      if (valueCase_ == 27) {
+         return (forge_abi.Type.Transaction) value_;
+      }
+      return forge_abi.Type.Transaction.getDefaultInstance();
+    }
+    /**
+     * <code>.forge_abi.Transaction deactivate_protocol = 27;</code>
+     */
+    public forge_abi.Type.TransactionOrBuilder getDeactivateProtocolOrBuilder() {
+      if (valueCase_ == 27) {
+         return (forge_abi.Type.Transaction) value_;
+      }
+      return forge_abi.Type.Transaction.getDefaultInstance();
+    }
+
     public static final int ACCOUNT_STATE_FIELD_NUMBER = 129;
     /**
      * <code>.forge_abi.AccountState account_state = 129;</code>
@@ -38495,6 +40205,26 @@ public final class Rpc {
       return forge_abi.State.ProtocolState.getDefaultInstance();
     }
 
+    public static final int DELEGATE_STATE_FIELD_NUMBER = 134;
+    /**
+     * <code>.forge_abi.DelegateState delegate_state = 134;</code>
+     */
+    public forge_abi.State.DelegateState getDelegateState() {
+      if (valueCase_ == 134) {
+         return (forge_abi.State.DelegateState) value_;
+      }
+      return forge_abi.State.DelegateState.getDefaultInstance();
+    }
+    /**
+     * <code>.forge_abi.DelegateState delegate_state = 134;</code>
+     */
+    public forge_abi.State.DelegateStateOrBuilder getDelegateStateOrBuilder() {
+      if (valueCase_ == 134) {
+         return (forge_abi.State.DelegateState) value_;
+      }
+      return forge_abi.State.DelegateState.getDefaultInstance();
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -38555,6 +40285,15 @@ public final class Rpc {
       if (valueCase_ == 24) {
         output.writeMessage(24, (forge_abi.Type.Transaction) value_);
       }
+      if (valueCase_ == 25) {
+        output.writeMessage(25, (forge_abi.Type.Transaction) value_);
+      }
+      if (valueCase_ == 26) {
+        output.writeMessage(26, (forge_abi.Type.Transaction) value_);
+      }
+      if (valueCase_ == 27) {
+        output.writeMessage(27, (forge_abi.Type.Transaction) value_);
+      }
       if (valueCase_ == 129) {
         output.writeMessage(129, (forge_abi.State.AccountState) value_);
       }
@@ -38569,6 +40308,9 @@ public final class Rpc {
       }
       if (valueCase_ == 133) {
         output.writeMessage(133, (forge_abi.State.ProtocolState) value_);
+      }
+      if (valueCase_ == 134) {
+        output.writeMessage(134, (forge_abi.State.DelegateState) value_);
       }
     }
 
@@ -38640,6 +40382,18 @@ public final class Rpc {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(24, (forge_abi.Type.Transaction) value_);
       }
+      if (valueCase_ == 25) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(25, (forge_abi.Type.Transaction) value_);
+      }
+      if (valueCase_ == 26) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(26, (forge_abi.Type.Transaction) value_);
+      }
+      if (valueCase_ == 27) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(27, (forge_abi.Type.Transaction) value_);
+      }
       if (valueCase_ == 129) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(129, (forge_abi.State.AccountState) value_);
@@ -38659,6 +40413,10 @@ public final class Rpc {
       if (valueCase_ == 133) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(133, (forge_abi.State.ProtocolState) value_);
+      }
+      if (valueCase_ == 134) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(134, (forge_abi.State.DelegateState) value_);
       }
       memoizedSize = size;
       return size;
@@ -38741,6 +40499,18 @@ public final class Rpc {
           result = result && getStake()
               .equals(other.getStake());
           break;
+        case 25:
+          result = result && getDelegate()
+              .equals(other.getDelegate());
+          break;
+        case 26:
+          result = result && getActivateProtocol()
+              .equals(other.getActivateProtocol());
+          break;
+        case 27:
+          result = result && getDeactivateProtocol()
+              .equals(other.getDeactivateProtocol());
+          break;
         case 129:
           result = result && getAccountState()
               .equals(other.getAccountState());
@@ -38760,6 +40530,10 @@ public final class Rpc {
         case 133:
           result = result && getProtocolState()
               .equals(other.getProtocolState());
+          break;
+        case 134:
+          result = result && getDelegateState()
+              .equals(other.getDelegateState());
           break;
         case 0:
         default:
@@ -38837,6 +40611,18 @@ public final class Rpc {
           hash = (37 * hash) + STAKE_FIELD_NUMBER;
           hash = (53 * hash) + getStake().hashCode();
           break;
+        case 25:
+          hash = (37 * hash) + DELEGATE_FIELD_NUMBER;
+          hash = (53 * hash) + getDelegate().hashCode();
+          break;
+        case 26:
+          hash = (37 * hash) + ACTIVATE_PROTOCOL_FIELD_NUMBER;
+          hash = (53 * hash) + getActivateProtocol().hashCode();
+          break;
+        case 27:
+          hash = (37 * hash) + DEACTIVATE_PROTOCOL_FIELD_NUMBER;
+          hash = (53 * hash) + getDeactivateProtocol().hashCode();
+          break;
         case 129:
           hash = (37 * hash) + ACCOUNT_STATE_FIELD_NUMBER;
           hash = (53 * hash) + getAccountState().hashCode();
@@ -38856,6 +40642,10 @@ public final class Rpc {
         case 133:
           hash = (37 * hash) + PROTOCOL_STATE_FIELD_NUMBER;
           hash = (53 * hash) + getProtocolState().hashCode();
+          break;
+        case 134:
+          hash = (37 * hash) + DELEGATE_STATE_FIELD_NUMBER;
+          hash = (53 * hash) + getDelegateState().hashCode();
           break;
         case 0:
         default:
@@ -39106,6 +40896,27 @@ public final class Rpc {
             result.value_ = stakeBuilder_.build();
           }
         }
+        if (valueCase_ == 25) {
+          if (delegateBuilder_ == null) {
+            result.value_ = value_;
+          } else {
+            result.value_ = delegateBuilder_.build();
+          }
+        }
+        if (valueCase_ == 26) {
+          if (activateProtocolBuilder_ == null) {
+            result.value_ = value_;
+          } else {
+            result.value_ = activateProtocolBuilder_.build();
+          }
+        }
+        if (valueCase_ == 27) {
+          if (deactivateProtocolBuilder_ == null) {
+            result.value_ = value_;
+          } else {
+            result.value_ = deactivateProtocolBuilder_.build();
+          }
+        }
         if (valueCase_ == 129) {
           if (accountStateBuilder_ == null) {
             result.value_ = value_;
@@ -39139,6 +40950,13 @@ public final class Rpc {
             result.value_ = value_;
           } else {
             result.value_ = protocolStateBuilder_.build();
+          }
+        }
+        if (valueCase_ == 134) {
+          if (delegateStateBuilder_ == null) {
+            result.value_ = value_;
+          } else {
+            result.value_ = delegateStateBuilder_.build();
           }
         }
         result.valueCase_ = valueCase_;
@@ -39249,6 +41067,18 @@ public final class Rpc {
             mergeStake(other.getStake());
             break;
           }
+          case DELEGATE: {
+            mergeDelegate(other.getDelegate());
+            break;
+          }
+          case ACTIVATE_PROTOCOL: {
+            mergeActivateProtocol(other.getActivateProtocol());
+            break;
+          }
+          case DEACTIVATE_PROTOCOL: {
+            mergeDeactivateProtocol(other.getDeactivateProtocol());
+            break;
+          }
           case ACCOUNT_STATE: {
             mergeAccountState(other.getAccountState());
             break;
@@ -39267,6 +41097,10 @@ public final class Rpc {
           }
           case PROTOCOL_STATE: {
             mergeProtocolState(other.getProtocolState());
+            break;
+          }
+          case DELEGATE_STATE: {
+            mergeDelegateState(other.getDelegateState());
             break;
           }
           case VALUE_NOT_SET: {
@@ -41259,6 +43093,396 @@ public final class Rpc {
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> delegateBuilder_;
+      /**
+       * <code>.forge_abi.Transaction delegate = 25;</code>
+       */
+      public forge_abi.Type.Transaction getDelegate() {
+        if (delegateBuilder_ == null) {
+          if (valueCase_ == 25) {
+            return (forge_abi.Type.Transaction) value_;
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        } else {
+          if (valueCase_ == 25) {
+            return delegateBuilder_.getMessage();
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.forge_abi.Transaction delegate = 25;</code>
+       */
+      public Builder setDelegate(forge_abi.Type.Transaction value) {
+        if (delegateBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          value_ = value;
+          onChanged();
+        } else {
+          delegateBuilder_.setMessage(value);
+        }
+        valueCase_ = 25;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction delegate = 25;</code>
+       */
+      public Builder setDelegate(
+          forge_abi.Type.Transaction.Builder builderForValue) {
+        if (delegateBuilder_ == null) {
+          value_ = builderForValue.build();
+          onChanged();
+        } else {
+          delegateBuilder_.setMessage(builderForValue.build());
+        }
+        valueCase_ = 25;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction delegate = 25;</code>
+       */
+      public Builder mergeDelegate(forge_abi.Type.Transaction value) {
+        if (delegateBuilder_ == null) {
+          if (valueCase_ == 25 &&
+              value_ != forge_abi.Type.Transaction.getDefaultInstance()) {
+            value_ = forge_abi.Type.Transaction.newBuilder((forge_abi.Type.Transaction) value_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            value_ = value;
+          }
+          onChanged();
+        } else {
+          if (valueCase_ == 25) {
+            delegateBuilder_.mergeFrom(value);
+          }
+          delegateBuilder_.setMessage(value);
+        }
+        valueCase_ = 25;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction delegate = 25;</code>
+       */
+      public Builder clearDelegate() {
+        if (delegateBuilder_ == null) {
+          if (valueCase_ == 25) {
+            valueCase_ = 0;
+            value_ = null;
+            onChanged();
+          }
+        } else {
+          if (valueCase_ == 25) {
+            valueCase_ = 0;
+            value_ = null;
+          }
+          delegateBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction delegate = 25;</code>
+       */
+      public forge_abi.Type.Transaction.Builder getDelegateBuilder() {
+        return getDelegateFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.Transaction delegate = 25;</code>
+       */
+      public forge_abi.Type.TransactionOrBuilder getDelegateOrBuilder() {
+        if ((valueCase_ == 25) && (delegateBuilder_ != null)) {
+          return delegateBuilder_.getMessageOrBuilder();
+        } else {
+          if (valueCase_ == 25) {
+            return (forge_abi.Type.Transaction) value_;
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.forge_abi.Transaction delegate = 25;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> 
+          getDelegateFieldBuilder() {
+        if (delegateBuilder_ == null) {
+          if (!(valueCase_ == 25)) {
+            value_ = forge_abi.Type.Transaction.getDefaultInstance();
+          }
+          delegateBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder>(
+                  (forge_abi.Type.Transaction) value_,
+                  getParentForChildren(),
+                  isClean());
+          value_ = null;
+        }
+        valueCase_ = 25;
+        onChanged();;
+        return delegateBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> activateProtocolBuilder_;
+      /**
+       * <code>.forge_abi.Transaction activate_protocol = 26;</code>
+       */
+      public forge_abi.Type.Transaction getActivateProtocol() {
+        if (activateProtocolBuilder_ == null) {
+          if (valueCase_ == 26) {
+            return (forge_abi.Type.Transaction) value_;
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        } else {
+          if (valueCase_ == 26) {
+            return activateProtocolBuilder_.getMessage();
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.forge_abi.Transaction activate_protocol = 26;</code>
+       */
+      public Builder setActivateProtocol(forge_abi.Type.Transaction value) {
+        if (activateProtocolBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          value_ = value;
+          onChanged();
+        } else {
+          activateProtocolBuilder_.setMessage(value);
+        }
+        valueCase_ = 26;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction activate_protocol = 26;</code>
+       */
+      public Builder setActivateProtocol(
+          forge_abi.Type.Transaction.Builder builderForValue) {
+        if (activateProtocolBuilder_ == null) {
+          value_ = builderForValue.build();
+          onChanged();
+        } else {
+          activateProtocolBuilder_.setMessage(builderForValue.build());
+        }
+        valueCase_ = 26;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction activate_protocol = 26;</code>
+       */
+      public Builder mergeActivateProtocol(forge_abi.Type.Transaction value) {
+        if (activateProtocolBuilder_ == null) {
+          if (valueCase_ == 26 &&
+              value_ != forge_abi.Type.Transaction.getDefaultInstance()) {
+            value_ = forge_abi.Type.Transaction.newBuilder((forge_abi.Type.Transaction) value_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            value_ = value;
+          }
+          onChanged();
+        } else {
+          if (valueCase_ == 26) {
+            activateProtocolBuilder_.mergeFrom(value);
+          }
+          activateProtocolBuilder_.setMessage(value);
+        }
+        valueCase_ = 26;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction activate_protocol = 26;</code>
+       */
+      public Builder clearActivateProtocol() {
+        if (activateProtocolBuilder_ == null) {
+          if (valueCase_ == 26) {
+            valueCase_ = 0;
+            value_ = null;
+            onChanged();
+          }
+        } else {
+          if (valueCase_ == 26) {
+            valueCase_ = 0;
+            value_ = null;
+          }
+          activateProtocolBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction activate_protocol = 26;</code>
+       */
+      public forge_abi.Type.Transaction.Builder getActivateProtocolBuilder() {
+        return getActivateProtocolFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.Transaction activate_protocol = 26;</code>
+       */
+      public forge_abi.Type.TransactionOrBuilder getActivateProtocolOrBuilder() {
+        if ((valueCase_ == 26) && (activateProtocolBuilder_ != null)) {
+          return activateProtocolBuilder_.getMessageOrBuilder();
+        } else {
+          if (valueCase_ == 26) {
+            return (forge_abi.Type.Transaction) value_;
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.forge_abi.Transaction activate_protocol = 26;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> 
+          getActivateProtocolFieldBuilder() {
+        if (activateProtocolBuilder_ == null) {
+          if (!(valueCase_ == 26)) {
+            value_ = forge_abi.Type.Transaction.getDefaultInstance();
+          }
+          activateProtocolBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder>(
+                  (forge_abi.Type.Transaction) value_,
+                  getParentForChildren(),
+                  isClean());
+          value_ = null;
+        }
+        valueCase_ = 26;
+        onChanged();;
+        return activateProtocolBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> deactivateProtocolBuilder_;
+      /**
+       * <code>.forge_abi.Transaction deactivate_protocol = 27;</code>
+       */
+      public forge_abi.Type.Transaction getDeactivateProtocol() {
+        if (deactivateProtocolBuilder_ == null) {
+          if (valueCase_ == 27) {
+            return (forge_abi.Type.Transaction) value_;
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        } else {
+          if (valueCase_ == 27) {
+            return deactivateProtocolBuilder_.getMessage();
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.forge_abi.Transaction deactivate_protocol = 27;</code>
+       */
+      public Builder setDeactivateProtocol(forge_abi.Type.Transaction value) {
+        if (deactivateProtocolBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          value_ = value;
+          onChanged();
+        } else {
+          deactivateProtocolBuilder_.setMessage(value);
+        }
+        valueCase_ = 27;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction deactivate_protocol = 27;</code>
+       */
+      public Builder setDeactivateProtocol(
+          forge_abi.Type.Transaction.Builder builderForValue) {
+        if (deactivateProtocolBuilder_ == null) {
+          value_ = builderForValue.build();
+          onChanged();
+        } else {
+          deactivateProtocolBuilder_.setMessage(builderForValue.build());
+        }
+        valueCase_ = 27;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction deactivate_protocol = 27;</code>
+       */
+      public Builder mergeDeactivateProtocol(forge_abi.Type.Transaction value) {
+        if (deactivateProtocolBuilder_ == null) {
+          if (valueCase_ == 27 &&
+              value_ != forge_abi.Type.Transaction.getDefaultInstance()) {
+            value_ = forge_abi.Type.Transaction.newBuilder((forge_abi.Type.Transaction) value_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            value_ = value;
+          }
+          onChanged();
+        } else {
+          if (valueCase_ == 27) {
+            deactivateProtocolBuilder_.mergeFrom(value);
+          }
+          deactivateProtocolBuilder_.setMessage(value);
+        }
+        valueCase_ = 27;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction deactivate_protocol = 27;</code>
+       */
+      public Builder clearDeactivateProtocol() {
+        if (deactivateProtocolBuilder_ == null) {
+          if (valueCase_ == 27) {
+            valueCase_ = 0;
+            value_ = null;
+            onChanged();
+          }
+        } else {
+          if (valueCase_ == 27) {
+            valueCase_ = 0;
+            value_ = null;
+          }
+          deactivateProtocolBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction deactivate_protocol = 27;</code>
+       */
+      public forge_abi.Type.Transaction.Builder getDeactivateProtocolBuilder() {
+        return getDeactivateProtocolFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.Transaction deactivate_protocol = 27;</code>
+       */
+      public forge_abi.Type.TransactionOrBuilder getDeactivateProtocolOrBuilder() {
+        if ((valueCase_ == 27) && (deactivateProtocolBuilder_ != null)) {
+          return deactivateProtocolBuilder_.getMessageOrBuilder();
+        } else {
+          if (valueCase_ == 27) {
+            return (forge_abi.Type.Transaction) value_;
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.forge_abi.Transaction deactivate_protocol = 27;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> 
+          getDeactivateProtocolFieldBuilder() {
+        if (deactivateProtocolBuilder_ == null) {
+          if (!(valueCase_ == 27)) {
+            value_ = forge_abi.Type.Transaction.getDefaultInstance();
+          }
+          deactivateProtocolBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder>(
+                  (forge_abi.Type.Transaction) value_,
+                  getParentForChildren(),
+                  isClean());
+          value_ = null;
+        }
+        valueCase_ = 27;
+        onChanged();;
+        return deactivateProtocolBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
           forge_abi.State.AccountState, forge_abi.State.AccountState.Builder, forge_abi.State.AccountStateOrBuilder> accountStateBuilder_;
       /**
        * <code>.forge_abi.AccountState account_state = 129;</code>
@@ -41906,6 +44130,136 @@ public final class Rpc {
         valueCase_ = 133;
         onChanged();;
         return protocolStateBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.State.DelegateState, forge_abi.State.DelegateState.Builder, forge_abi.State.DelegateStateOrBuilder> delegateStateBuilder_;
+      /**
+       * <code>.forge_abi.DelegateState delegate_state = 134;</code>
+       */
+      public forge_abi.State.DelegateState getDelegateState() {
+        if (delegateStateBuilder_ == null) {
+          if (valueCase_ == 134) {
+            return (forge_abi.State.DelegateState) value_;
+          }
+          return forge_abi.State.DelegateState.getDefaultInstance();
+        } else {
+          if (valueCase_ == 134) {
+            return delegateStateBuilder_.getMessage();
+          }
+          return forge_abi.State.DelegateState.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.forge_abi.DelegateState delegate_state = 134;</code>
+       */
+      public Builder setDelegateState(forge_abi.State.DelegateState value) {
+        if (delegateStateBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          value_ = value;
+          onChanged();
+        } else {
+          delegateStateBuilder_.setMessage(value);
+        }
+        valueCase_ = 134;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.DelegateState delegate_state = 134;</code>
+       */
+      public Builder setDelegateState(
+          forge_abi.State.DelegateState.Builder builderForValue) {
+        if (delegateStateBuilder_ == null) {
+          value_ = builderForValue.build();
+          onChanged();
+        } else {
+          delegateStateBuilder_.setMessage(builderForValue.build());
+        }
+        valueCase_ = 134;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.DelegateState delegate_state = 134;</code>
+       */
+      public Builder mergeDelegateState(forge_abi.State.DelegateState value) {
+        if (delegateStateBuilder_ == null) {
+          if (valueCase_ == 134 &&
+              value_ != forge_abi.State.DelegateState.getDefaultInstance()) {
+            value_ = forge_abi.State.DelegateState.newBuilder((forge_abi.State.DelegateState) value_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            value_ = value;
+          }
+          onChanged();
+        } else {
+          if (valueCase_ == 134) {
+            delegateStateBuilder_.mergeFrom(value);
+          }
+          delegateStateBuilder_.setMessage(value);
+        }
+        valueCase_ = 134;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.DelegateState delegate_state = 134;</code>
+       */
+      public Builder clearDelegateState() {
+        if (delegateStateBuilder_ == null) {
+          if (valueCase_ == 134) {
+            valueCase_ = 0;
+            value_ = null;
+            onChanged();
+          }
+        } else {
+          if (valueCase_ == 134) {
+            valueCase_ = 0;
+            value_ = null;
+          }
+          delegateStateBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.forge_abi.DelegateState delegate_state = 134;</code>
+       */
+      public forge_abi.State.DelegateState.Builder getDelegateStateBuilder() {
+        return getDelegateStateFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.DelegateState delegate_state = 134;</code>
+       */
+      public forge_abi.State.DelegateStateOrBuilder getDelegateStateOrBuilder() {
+        if ((valueCase_ == 134) && (delegateStateBuilder_ != null)) {
+          return delegateStateBuilder_.getMessageOrBuilder();
+        } else {
+          if (valueCase_ == 134) {
+            return (forge_abi.State.DelegateState) value_;
+          }
+          return forge_abi.State.DelegateState.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.forge_abi.DelegateState delegate_state = 134;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.State.DelegateState, forge_abi.State.DelegateState.Builder, forge_abi.State.DelegateStateOrBuilder> 
+          getDelegateStateFieldBuilder() {
+        if (delegateStateBuilder_ == null) {
+          if (!(valueCase_ == 134)) {
+            value_ = forge_abi.State.DelegateState.getDefaultInstance();
+          }
+          delegateStateBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.State.DelegateState, forge_abi.State.DelegateState.Builder, forge_abi.State.DelegateStateOrBuilder>(
+                  (forge_abi.State.DelegateState) value_,
+                  getParentForChildren(),
+                  isClean());
+          value_ = null;
+        }
+        valueCase_ = 134;
+        onChanged();;
+        return delegateStateBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -64588,6 +66942,16 @@ public final class Rpc {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_forge_abi_ResponseGetSwapState_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_forge_abi_RequestGetDelegateState_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_forge_abi_RequestGetDelegateState_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_forge_abi_ResponseGetDelegateState_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_forge_abi_ResponseGetDelegateState_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_forge_abi_RequestStoreFile_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -64844,216 +67208,226 @@ public final class Rpc {
       "(\004\022%\n\006wallet\030\004 \001(\0132\025.forge_abi.WalletInf" +
       "o\022\r\n\005token\030\005 \001(\t\"[\n\020ResponseCreateTx\022#\n\004" +
       "code\030\001 \001(\0162\025.forge_abi.StatusCode\022\"\n\002tx\030" +
-      "\002 \001(\0132\026.forge_abi.Transaction\"\217\001\n\017Reques" +
+      "\002 \001(\0132\026.forge_abi.Transaction\"\242\001\n\017Reques" +
       "tMultisig\022\"\n\002tx\030\001 \001(\0132\026.forge_abi.Transa",
       "ction\022\"\n\004data\030\002 \001(\0132\024.google.protobuf.An" +
       "y\022%\n\006wallet\030\003 \001(\0132\025.forge_abi.WalletInfo" +
-      "\022\r\n\005token\030\004 \001(\t\"[\n\020ResponseMultisig\022#\n\004c" +
-      "ode\030\001 \001(\0162\025.forge_abi.StatusCode\022\"\n\002tx\030\002" +
-      " \001(\0132\026.forge_abi.Transaction\"y\n\rRequestS" +
-      "endTx\022\"\n\002tx\030\001 \001(\0132\026.forge_abi.Transactio" +
-      "n\022%\n\006wallet\030\002 \001(\0132\025.forge_abi.WalletInfo" +
-      "\022\r\n\005token\030\003 \001(\t\022\016\n\006commit\030\004 \001(\010\"C\n\016Respo" +
-      "nseSendTx\022#\n\004code\030\001 \001(\0162\025.forge_abi.Stat" +
-      "usCode\022\014\n\004hash\030\002 \001(\t\"\034\n\014RequestGetTx\022\014\n\004",
-      "hash\030\001 \001(\t\"^\n\rResponseGetTx\022#\n\004code\030\001 \001(" +
-      "\0162\025.forge_abi.StatusCode\022(\n\004info\030\002 \001(\0132\032" +
-      ".forge_abi.TransactionInfo\"!\n\017RequestGet" +
-      "Block\022\016\n\006height\030\001 \001(\004\"\\\n\020ResponseGetBloc" +
-      "k\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022#" +
-      "\n\005block\030\002 \001(\0132\024.forge_abi.BlockInfo\"\177\n\020R" +
-      "equestGetBlocks\022$\n\006paging\030\001 \001(\0132\024.forge_" +
-      "abi.PageInput\022-\n\rheight_filter\030\002 \001(\0132\026.f" +
-      "orge_abi.RangeFilter\022\026\n\016empty_excluded\030\003" +
-      " \001(\010\"\207\001\n\021ResponseGetBlocks\022#\n\004code\030\001 \001(\016",
+      "\022\r\n\005token\030\004 \001(\t\022\021\n\tdelegatee\030\005 \001(\t\"[\n\020Re" +
+      "sponseMultisig\022#\n\004code\030\001 \001(\0162\025.forge_abi" +
+      ".StatusCode\022\"\n\002tx\030\002 \001(\0132\026.forge_abi.Tran" +
+      "saction\"y\n\rRequestSendTx\022\"\n\002tx\030\001 \001(\0132\026.f" +
+      "orge_abi.Transaction\022%\n\006wallet\030\002 \001(\0132\025.f" +
+      "orge_abi.WalletInfo\022\r\n\005token\030\003 \001(\t\022\016\n\006co" +
+      "mmit\030\004 \001(\010\"C\n\016ResponseSendTx\022#\n\004code\030\001 \001" +
+      "(\0162\025.forge_abi.StatusCode\022\014\n\004hash\030\002 \001(\t\"",
+      "\034\n\014RequestGetTx\022\014\n\004hash\030\001 \001(\t\"^\n\rRespons" +
+      "eGetTx\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusC" +
+      "ode\022(\n\004info\030\002 \001(\0132\032.forge_abi.Transactio" +
+      "nInfo\"!\n\017RequestGetBlock\022\016\n\006height\030\001 \001(\004" +
+      "\"\\\n\020ResponseGetBlock\022#\n\004code\030\001 \001(\0162\025.for" +
+      "ge_abi.StatusCode\022#\n\005block\030\002 \001(\0132\024.forge" +
+      "_abi.BlockInfo\"\177\n\020RequestGetBlocks\022$\n\006pa" +
+      "ging\030\001 \001(\0132\024.forge_abi.PageInput\022-\n\rheig" +
+      "ht_filter\030\002 \001(\0132\026.forge_abi.RangeFilter\022" +
+      "\026\n\016empty_excluded\030\003 \001(\010\"\207\001\n\021ResponseGetB",
+      "locks\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCo" +
+      "de\022!\n\004page\030\002 \001(\0132\023.forge_abi.PageInfo\022*\n" +
+      "\006blocks\030\003 \003(\0132\032.forge_abi.BlockInfoSimpl" +
+      "e\"_\n\023RequestCreateWallet\022\022\n\npassphrase\030\001" +
+      " \001(\t\022#\n\004type\030\002 \001(\0132\025.forge_abi.WalletTyp" +
+      "e\022\017\n\007moniker\030\003 \001(\t\"q\n\024ResponseCreateWall" +
+      "et\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022" +
+      "\r\n\005token\030\002 \001(\t\022%\n\006wallet\030\003 \001(\0132\025.forge_a" +
+      "bi.WalletInfo\"8\n\021RequestLoadWallet\022\017\n\007ad" +
+      "dress\030\001 \001(\t\022\022\n\npassphrase\030\002 \001(\t\"o\n\022Respo",
+      "nseLoadWallet\022#\n\004code\030\001 \001(\0162\025.forge_abi." +
+      "StatusCode\022\r\n\005token\030\002 \001(\t\022%\n\006wallet\030\003 \001(" +
+      "\0132\025.forge_abi.WalletInfo\"n\n\024RequestRecov" +
+      "erWallet\022\014\n\004data\030\001 \001(\014\022#\n\004type\030\002 \001(\0132\025.f" +
+      "orge_abi.WalletType\022\022\n\npassphrase\030\003 \001(\t\022" +
+      "\017\n\007moniker\030\004 \001(\t\"r\n\025ResponseRecoverWalle" +
+      "t\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022\r" +
+      "\n\005token\030\002 \001(\t\022%\n\006wallet\030\003 \001(\0132\025.forge_ab" +
+      "i.WalletInfo\"\023\n\021RequestListWallet\"J\n\022Res" +
+      "ponseListWallet\022#\n\004code\030\001 \001(\0162\025.forge_ab",
+      "i.StatusCode\022\017\n\007address\030\002 \001(\t\"&\n\023Request" +
+      "RemoveWallet\022\017\n\007address\030\001 \001(\t\";\n\024Respons" +
+      "eRemoveWallet\022#\n\004code\030\001 \001(\0162\025.forge_abi." +
+      "StatusCode\"\'\n\022RequestDeclareNode\022\021\n\tvali" +
+      "dator\030\001 \001(\010\"a\n\023ResponseDeclareNode\022#\n\004co" +
+      "de\030\001 \001(\0162\025.forge_abi.StatusCode\022%\n\006walle" +
+      "t\030\003 \001(\0132\025.forge_abi.WalletInfo\"G\n\026Reques" +
+      "tGetAccountState\022\017\n\007address\030\001 \001(\t\022\014\n\004key" +
+      "s\030\002 \003(\t\022\016\n\006height\030\003 \001(\004\"f\n\027ResponseGetAc" +
+      "countState\022#\n\004code\030\001 \001(\0162\025.forge_abi.Sta",
+      "tusCode\022&\n\005state\030\002 \001(\0132\027.forge_abi.Accou" +
+      "ntState\"E\n\024RequestGetAssetState\022\017\n\007addre" +
+      "ss\030\001 \001(\t\022\014\n\004keys\030\002 \003(\t\022\016\n\006height\030\003 \001(\004\"b" +
+      "\n\025ResponseGetAssetState\022#\n\004code\030\001 \001(\0162\025." +
+      "forge_abi.StatusCode\022$\n\005state\030\002 \001(\0132\025.fo" +
+      "rge_abi.AssetState\"H\n\027RequestGetProtocol" +
+      "State\022\017\n\007address\030\001 \001(\t\022\014\n\004keys\030\002 \003(\t\022\016\n\006" +
+      "height\030\003 \001(\004\"h\n\030ResponseGetProtocolState" +
+      "\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022\'\n" +
+      "\005state\030\002 \001(\0132\030.forge_abi.ProtocolState\"E",
+      "\n\024RequestGetStakeState\022\017\n\007address\030\001 \001(\t\022" +
+      "\014\n\004keys\030\002 \003(\t\022\016\n\006height\030\003 \001(\004\"b\n\025Respons" +
+      "eGetStakeState\022#\n\004code\030\001 \001(\0162\025.forge_abi" +
+      ".StatusCode\022$\n\005state\030\002 \001(\0132\025.forge_abi.S" +
+      "takeState\"4\n\024RequestGetForgeState\022\014\n\004key" +
+      "s\030\001 \003(\t\022\016\n\006height\030\003 \001(\004\"b\n\025ResponseGetFo" +
+      "rgeState\022#\n\004code\030\001 \001(\0162\025.forge_abi.Statu" +
+      "sCode\022$\n\005state\030\002 \001(\0132\025.forge_abi.ForgeSt" +
+      "ate\"F\n\025RequestGetTetherState\022\017\n\007address\030" +
+      "\001 \001(\t\022\014\n\004keys\030\002 \003(\t\022\016\n\006height\030\003 \001(\004\"d\n\026R",
+      "esponseGetTetherState\022#\n\004code\030\001 \001(\0162\025.fo" +
+      "rge_abi.StatusCode\022%\n\005state\030\002 \001(\0132\026.forg" +
+      "e_abi.TetherState\"D\n\023RequestGetSwapState" +
+      "\022\017\n\007address\030\001 \001(\t\022\014\n\004keys\030\002 \003(\t\022\016\n\006heigh" +
+      "t\030\003 \001(\004\"`\n\024ResponseGetSwapState\022#\n\004code\030" +
+      "\001 \001(\0162\025.forge_abi.StatusCode\022#\n\005state\030\002 " +
+      "\001(\0132\024.forge_abi.SwapState\"H\n\027RequestGetD" +
+      "elegateState\022\017\n\007address\030\001 \001(\t\022\014\n\004keys\030\002 " +
+      "\003(\t\022\016\n\006height\030\003 \001(\004\"h\n\030ResponseGetDelega" +
+      "teState\022#\n\004code\030\001 \001(\0162\025.forge_abi.Status",
+      "Code\022\'\n\005state\030\002 \001(\0132\030.forge_abi.Delegate" +
+      "State\"!\n\020RequestStoreFile\022\r\n\005chunk\030\001 \001(\014" +
+      "\"F\n\021ResponseStoreFile\022#\n\004code\030\001 \001(\0162\025.fo" +
+      "rge_abi.StatusCode\022\014\n\004hash\030\002 \001(\t\"\037\n\017Requ" +
+      "estLoadFile\022\014\n\004hash\030\001 \001(\t\"F\n\020ResponseLoa" +
+      "dFile\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCo" +
+      "de\022\r\n\005chunk\030\002 \001(\014\"\036\n\016RequestPinFile\022\014\n\004h" +
+      "ash\030\001 \001(\t\"6\n\017ResponsePinFile\022#\n\004code\030\001 \001" +
+      "(\0162\025.forge_abi.StatusCode\"\025\n\023RequestGetC" +
+      "hainInfo\"_\n\024ResponseGetChainInfo\022#\n\004code",
+      "\030\001 \001(\0162\025.forge_abi.StatusCode\022\"\n\004info\030\002 " +
+      "\001(\0132\024.forge_abi.ChainInfo\"\024\n\022RequestGetN" +
+      "odeInfo\"]\n\023ResponseGetNodeInfo\022#\n\004code\030\001" +
+      " \001(\0162\025.forge_abi.StatusCode\022!\n\004info\030\002 \001(" +
+      "\0132\023.forge_abi.NodeInfo\"+\n\rRequestSearch\022" +
+      "\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\"^\n\016ResponseS" +
+      "earch\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCo" +
+      "de\022\'\n\003txs\030\002 \003(\0132\032.forge_abi.TransactionI" +
+      "nfo\"@\n\030RequestGetUnconfirmedTxs\022$\n\006pagin" +
+      "g\030\001 \001(\0132\024.forge_abi.PageInput\"\227\001\n\031Respon",
+      "seGetUnconfirmedTxs\022#\n\004code\030\001 \001(\0162\025.forg" +
+      "e_abi.StatusCode\022!\n\004page\030\002 \001(\0132\023.forge_a" +
+      "bi.PageInfo\0222\n\017unconfirmed_txs\030\003 \001(\0132\031.f" +
+      "orge_abi.UnconfirmedTxs\"\023\n\021RequestGetNet" +
+      "Info\"_\n\022ResponseGetNetInfo\022#\n\004code\030\001 \001(\016" +
+      "2\025.forge_abi.StatusCode\022$\n\010net_info\030\002 \001(" +
+      "\0132\022.forge_abi.NetInfo\"\032\n\030RequestGetValid" +
+      "atorsInfo\"t\n\031ResponseGetValidatorsInfo\022#" +
+      "\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\0222\n\017v" +
+      "alidators_info\030\002 \001(\0132\031.forge_abi.Validat",
+      "orsInfo\"1\n\020RequestSubscribe\022\r\n\005topic\030\001 \001" +
+      "(\t\022\016\n\006filter\030\002 \001(\t\"\246\t\n\021ResponseSubscribe" +
+      "\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022\017\n" +
+      "\005topic\030\002 \001(\tH\000\022*\n\010transfer\030\003 \001(\0132\026.forge" +
+      "_abi.TransactionH\000\0221\n\017account_migrate\030\004 " +
+      "\001(\0132\026.forge_abi.TransactionH\000\022)\n\007confirm" +
+      "\030\005 \001(\0132\026.forge_abi.TransactionH\000\022.\n\014crea" +
+      "te_asset\030\006 \001(\0132\026.forge_abi.TransactionH\000" +
+      "\022*\n\010exchange\030\007 \001(\0132\026.forge_abi.Transacti" +
+      "onH\000\022(\n\006revoke\030\010 \001(\0132\026.forge_abi.Transac",
+      "tionH\000\0225\n\013begin_block\030\020 \001(\0132\036.abci_vendo" +
+      "r.RequestBeginBlockH\000\0221\n\tend_block\030\021 \001(\013" +
+      "2\034.abci_vendor.RequestEndBlockH\000\022)\n\007decl" +
+      "are\030\023 \001(\0132\026.forge_abi.TransactionH\000\022.\n\014u" +
+      "pdate_asset\030\024 \001(\0132\026.forge_abi.Transactio" +
+      "nH\000\0223\n\021consensus_upgrade\030\025 \001(\0132\026.forge_a" +
+      "bi.TransactionH\000\022.\n\014declare_file\030\026 \001(\0132\026" +
+      ".forge_abi.TransactionH\000\022-\n\013sys_upgrade\030" +
+      "\027 \001(\0132\026.forge_abi.TransactionH\000\022\'\n\005stake" +
+      "\030\030 \001(\0132\026.forge_abi.TransactionH\000\022*\n\010dele",
+      "gate\030\031 \001(\0132\026.forge_abi.TransactionH\000\0223\n\021" +
+      "activate_protocol\030\032 \001(\0132\026.forge_abi.Tran" +
+      "sactionH\000\0225\n\023deactivate_protocol\030\033 \001(\0132\026" +
+      ".forge_abi.TransactionH\000\0221\n\raccount_stat" +
+      "e\030\201\001 \001(\0132\027.forge_abi.AccountStateH\000\022-\n\013a" +
+      "sset_state\030\202\001 \001(\0132\025.forge_abi.AssetState" +
+      "H\000\022-\n\013forge_state\030\203\001 \001(\0132\025.forge_abi.For" +
+      "geStateH\000\022-\n\013stake_state\030\204\001 \001(\0132\025.forge_" +
+      "abi.StakeStateH\000\0223\n\016protocol_state\030\205\001 \001(" +
+      "\0132\030.forge_abi.ProtocolStateH\000\0223\n\016delegat",
+      "e_state\030\206\001 \001(\0132\030.forge_abi.DelegateState" +
+      "H\000B\007\n\005value\"#\n\022RequestUnsubscribe\022\r\n\005top" +
+      "ic\030\001 \001(\t\":\n\023ResponseUnsubscribe\022#\n\004code\030" +
+      "\001 \001(\0162\025.forge_abi.StatusCode\"\"\n\020RequestG" +
+      "etConfig\022\016\n\006parsed\030\001 \001(\010\"H\n\021ResponseGetC" +
+      "onfig\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCo" +
+      "de\022\016\n\006config\030\002 \001(\t\"-\n\005ByDay\022\022\n\nstart_dat" +
+      "e\030\001 \001(\t\022\020\n\010end_date\030\002 \001(\t\"\026\n\006ByHour\022\014\n\004d" +
+      "ate\030\001 \001(\t\"h\n\024RequestGetForgeStats\022$\n\010day" +
+      "_info\030\001 \001(\0132\020.forge_abi.ByDayH\000\022!\n\004date\030",
+      "\002 \001(\0132\021.forge_abi.ByHourH\000B\007\n\005value\"h\n\025R" +
+      "esponseGetForgeStats\022#\n\004code\030\001 \001(\0162\025.for" +
+      "ge_abi.StatusCode\022*\n\013forge_stats\030\002 \001(\0132\025" +
+      ".forge_abi.ForgeStats\"\375\001\n\027RequestListTra" +
+      "nsactions\022$\n\006paging\030\001 \001(\0132\024.forge_abi.Pa" +
+      "geInput\022*\n\013time_filter\030\002 \001(\0132\025.forge_abi" +
+      ".TimeFilter\0220\n\016address_filter\030\003 \001(\0132\030.fo" +
+      "rge_abi.AddressFilter\022*\n\013type_filter\030\004 \001" +
+      "(\0132\025.forge_abi.TypeFilter\0222\n\017validity_fi" +
+      "lter\030\005 \001(\0132\031.forge_abi.ValidityFilter\"\227\001",
+      "\n\030ResponseListTransactions\022#\n\004code\030\001 \001(\016" +
       "2\025.forge_abi.StatusCode\022!\n\004page\030\002 \001(\0132\023." +
-      "forge_abi.PageInfo\022*\n\006blocks\030\003 \003(\0132\032.for" +
-      "ge_abi.BlockInfoSimple\"_\n\023RequestCreateW" +
-      "allet\022\022\n\npassphrase\030\001 \001(\t\022#\n\004type\030\002 \001(\0132" +
-      "\025.forge_abi.WalletType\022\017\n\007moniker\030\003 \001(\t\"" +
-      "q\n\024ResponseCreateWallet\022#\n\004code\030\001 \001(\0162\025." +
-      "forge_abi.StatusCode\022\r\n\005token\030\002 \001(\t\022%\n\006w" +
-      "allet\030\003 \001(\0132\025.forge_abi.WalletInfo\"8\n\021Re" +
-      "questLoadWallet\022\017\n\007address\030\001 \001(\t\022\022\n\npass" +
-      "phrase\030\002 \001(\t\"o\n\022ResponseLoadWallet\022#\n\004co",
-      "de\030\001 \001(\0162\025.forge_abi.StatusCode\022\r\n\005token" +
-      "\030\002 \001(\t\022%\n\006wallet\030\003 \001(\0132\025.forge_abi.Walle" +
-      "tInfo\"n\n\024RequestRecoverWallet\022\014\n\004data\030\001 " +
-      "\001(\014\022#\n\004type\030\002 \001(\0132\025.forge_abi.WalletType" +
-      "\022\022\n\npassphrase\030\003 \001(\t\022\017\n\007moniker\030\004 \001(\t\"r\n" +
-      "\025ResponseRecoverWallet\022#\n\004code\030\001 \001(\0162\025.f" +
-      "orge_abi.StatusCode\022\r\n\005token\030\002 \001(\t\022%\n\006wa" +
-      "llet\030\003 \001(\0132\025.forge_abi.WalletInfo\"\023\n\021Req" +
-      "uestListWallet\"J\n\022ResponseListWallet\022#\n\004" +
-      "code\030\001 \001(\0162\025.forge_abi.StatusCode\022\017\n\007add",
-      "ress\030\002 \001(\t\"&\n\023RequestRemoveWallet\022\017\n\007add" +
-      "ress\030\001 \001(\t\";\n\024ResponseRemoveWallet\022#\n\004co" +
-      "de\030\001 \001(\0162\025.forge_abi.StatusCode\"\'\n\022Reque" +
-      "stDeclareNode\022\021\n\tvalidator\030\001 \001(\010\"a\n\023Resp" +
-      "onseDeclareNode\022#\n\004code\030\001 \001(\0162\025.forge_ab" +
-      "i.StatusCode\022%\n\006wallet\030\003 \001(\0132\025.forge_abi" +
-      ".WalletInfo\"G\n\026RequestGetAccountState\022\017\n" +
-      "\007address\030\001 \001(\t\022\014\n\004keys\030\002 \003(\t\022\016\n\006height\030\003" +
-      " \001(\004\"f\n\027ResponseGetAccountState\022#\n\004code\030" +
-      "\001 \001(\0162\025.forge_abi.StatusCode\022&\n\005state\030\002 ",
-      "\001(\0132\027.forge_abi.AccountState\"E\n\024RequestG" +
-      "etAssetState\022\017\n\007address\030\001 \001(\t\022\014\n\004keys\030\002 " +
-      "\003(\t\022\016\n\006height\030\003 \001(\004\"b\n\025ResponseGetAssetS" +
-      "tate\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCod" +
-      "e\022$\n\005state\030\002 \001(\0132\025.forge_abi.AssetState\"" +
-      "H\n\027RequestGetProtocolState\022\017\n\007address\030\001 " +
-      "\001(\t\022\014\n\004keys\030\002 \003(\t\022\016\n\006height\030\003 \001(\004\"h\n\030Res" +
-      "ponseGetProtocolState\022#\n\004code\030\001 \001(\0162\025.fo" +
-      "rge_abi.StatusCode\022\'\n\005state\030\002 \001(\0132\030.forg" +
-      "e_abi.ProtocolState\"E\n\024RequestGetStakeSt",
-      "ate\022\017\n\007address\030\001 \001(\t\022\014\n\004keys\030\002 \003(\t\022\016\n\006he" +
-      "ight\030\003 \001(\004\"b\n\025ResponseGetStakeState\022#\n\004c" +
-      "ode\030\001 \001(\0162\025.forge_abi.StatusCode\022$\n\005stat" +
-      "e\030\002 \001(\0132\025.forge_abi.StakeState\"4\n\024Reques" +
-      "tGetForgeState\022\014\n\004keys\030\001 \003(\t\022\016\n\006height\030\003" +
-      " \001(\004\"b\n\025ResponseGetForgeState\022#\n\004code\030\001 " +
-      "\001(\0162\025.forge_abi.StatusCode\022$\n\005state\030\002 \001(" +
-      "\0132\025.forge_abi.ForgeState\"F\n\025RequestGetTe" +
-      "therState\022\017\n\007address\030\001 \001(\t\022\014\n\004keys\030\002 \003(\t" +
-      "\022\016\n\006height\030\003 \001(\004\"d\n\026ResponseGetTetherSta",
-      "te\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022" +
-      "%\n\005state\030\002 \001(\0132\026.forge_abi.TetherState\"D" +
-      "\n\023RequestGetSwapState\022\017\n\007address\030\001 \001(\t\022\014" +
-      "\n\004keys\030\002 \003(\t\022\016\n\006height\030\003 \001(\004\"`\n\024Response" +
-      "GetSwapState\022#\n\004code\030\001 \001(\0162\025.forge_abi.S" +
-      "tatusCode\022#\n\005state\030\002 \001(\0132\024.forge_abi.Swa" +
-      "pState\"!\n\020RequestStoreFile\022\r\n\005chunk\030\001 \001(" +
-      "\014\"F\n\021ResponseStoreFile\022#\n\004code\030\001 \001(\0162\025.f" +
-      "orge_abi.StatusCode\022\014\n\004hash\030\002 \001(\t\"\037\n\017Req" +
-      "uestLoadFile\022\014\n\004hash\030\001 \001(\t\"F\n\020ResponseLo",
-      "adFile\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusC" +
-      "ode\022\r\n\005chunk\030\002 \001(\014\"\036\n\016RequestPinFile\022\014\n\004" +
-      "hash\030\001 \001(\t\"6\n\017ResponsePinFile\022#\n\004code\030\001 " +
-      "\001(\0162\025.forge_abi.StatusCode\"\025\n\023RequestGet" +
-      "ChainInfo\"_\n\024ResponseGetChainInfo\022#\n\004cod" +
-      "e\030\001 \001(\0162\025.forge_abi.StatusCode\022\"\n\004info\030\002" +
-      " \001(\0132\024.forge_abi.ChainInfo\"\024\n\022RequestGet" +
-      "NodeInfo\"]\n\023ResponseGetNodeInfo\022#\n\004code\030" +
-      "\001 \001(\0162\025.forge_abi.StatusCode\022!\n\004info\030\002 \001" +
-      "(\0132\023.forge_abi.NodeInfo\"+\n\rRequestSearch",
-      "\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\"^\n\016Response" +
-      "Search\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusC" +
-      "ode\022\'\n\003txs\030\002 \003(\0132\032.forge_abi.Transaction" +
-      "Info\"@\n\030RequestGetUnconfirmedTxs\022$\n\006pagi" +
-      "ng\030\001 \001(\0132\024.forge_abi.PageInput\"\227\001\n\031Respo" +
-      "nseGetUnconfirmedTxs\022#\n\004code\030\001 \001(\0162\025.for" +
-      "ge_abi.StatusCode\022!\n\004page\030\002 \001(\0132\023.forge_" +
-      "abi.PageInfo\0222\n\017unconfirmed_txs\030\003 \001(\0132\031." +
-      "forge_abi.UnconfirmedTxs\"\023\n\021RequestGetNe" +
-      "tInfo\"_\n\022ResponseGetNetInfo\022#\n\004code\030\001 \001(",
-      "\0162\025.forge_abi.StatusCode\022$\n\010net_info\030\002 \001" +
-      "(\0132\022.forge_abi.NetInfo\"\032\n\030RequestGetVali" +
-      "datorsInfo\"t\n\031ResponseGetValidatorsInfo\022" +
-      "#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\0222\n\017" +
-      "validators_info\030\002 \001(\0132\031.forge_abi.Valida" +
-      "torsInfo\"1\n\020RequestSubscribe\022\r\n\005topic\030\001 " +
-      "\001(\t\022\016\n\006filter\030\002 \001(\t\"\331\007\n\021ResponseSubscrib" +
-      "e\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022\017" +
-      "\n\005topic\030\002 \001(\tH\000\022*\n\010transfer\030\003 \001(\0132\026.forg" +
-      "e_abi.TransactionH\000\0221\n\017account_migrate\030\004",
-      " \001(\0132\026.forge_abi.TransactionH\000\022)\n\007confir" +
-      "m\030\005 \001(\0132\026.forge_abi.TransactionH\000\022.\n\014cre" +
-      "ate_asset\030\006 \001(\0132\026.forge_abi.TransactionH" +
-      "\000\022*\n\010exchange\030\007 \001(\0132\026.forge_abi.Transact" +
-      "ionH\000\022(\n\006revoke\030\010 \001(\0132\026.forge_abi.Transa" +
-      "ctionH\000\0225\n\013begin_block\030\020 \001(\0132\036.abci_vend" +
-      "or.RequestBeginBlockH\000\0221\n\tend_block\030\021 \001(" +
-      "\0132\034.abci_vendor.RequestEndBlockH\000\022)\n\007dec" +
-      "lare\030\023 \001(\0132\026.forge_abi.TransactionH\000\022.\n\014" +
-      "update_asset\030\024 \001(\0132\026.forge_abi.Transacti",
-      "onH\000\0223\n\021consensus_upgrade\030\025 \001(\0132\026.forge_" +
-      "abi.TransactionH\000\022.\n\014declare_file\030\026 \001(\0132" +
-      "\026.forge_abi.TransactionH\000\022-\n\013sys_upgrade" +
-      "\030\027 \001(\0132\026.forge_abi.TransactionH\000\022\'\n\005stak" +
-      "e\030\030 \001(\0132\026.forge_abi.TransactionH\000\0221\n\racc" +
-      "ount_state\030\201\001 \001(\0132\027.forge_abi.AccountSta" +
-      "teH\000\022-\n\013asset_state\030\202\001 \001(\0132\025.forge_abi.A" +
-      "ssetStateH\000\022-\n\013forge_state\030\203\001 \001(\0132\025.forg" +
-      "e_abi.ForgeStateH\000\022-\n\013stake_state\030\204\001 \001(\013" +
-      "2\025.forge_abi.StakeStateH\000\0223\n\016protocol_st",
-      "ate\030\205\001 \001(\0132\030.forge_abi.ProtocolStateH\000B\007" +
-      "\n\005value\"#\n\022RequestUnsubscribe\022\r\n\005topic\030\001" +
-      " \001(\t\":\n\023ResponseUnsubscribe\022#\n\004code\030\001 \001(" +
-      "\0162\025.forge_abi.StatusCode\"\"\n\020RequestGetCo" +
-      "nfig\022\016\n\006parsed\030\001 \001(\010\"H\n\021ResponseGetConfi" +
-      "g\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022\016" +
-      "\n\006config\030\002 \001(\t\"-\n\005ByDay\022\022\n\nstart_date\030\001 " +
-      "\001(\t\022\020\n\010end_date\030\002 \001(\t\"\026\n\006ByHour\022\014\n\004date\030" +
-      "\001 \001(\t\"h\n\024RequestGetForgeStats\022$\n\010day_inf" +
-      "o\030\001 \001(\0132\020.forge_abi.ByDayH\000\022!\n\004date\030\002 \001(",
-      "\0132\021.forge_abi.ByHourH\000B\007\n\005value\"h\n\025Respo" +
-      "nseGetForgeStats\022#\n\004code\030\001 \001(\0162\025.forge_a" +
-      "bi.StatusCode\022*\n\013forge_stats\030\002 \001(\0132\025.for" +
-      "ge_abi.ForgeStats\"\375\001\n\027RequestListTransac" +
-      "tions\022$\n\006paging\030\001 \001(\0132\024.forge_abi.PageIn" +
-      "put\022*\n\013time_filter\030\002 \001(\0132\025.forge_abi.Tim" +
-      "eFilter\0220\n\016address_filter\030\003 \001(\0132\030.forge_" +
-      "abi.AddressFilter\022*\n\013type_filter\030\004 \001(\0132\025" +
-      ".forge_abi.TypeFilter\0222\n\017validity_filter" +
-      "\030\005 \001(\0132\031.forge_abi.ValidityFilter\"\227\001\n\030Re",
-      "sponseListTransactions\022#\n\004code\030\001 \001(\0162\025.f" +
-      "orge_abi.StatusCode\022!\n\004page\030\002 \001(\0132\023.forg" +
-      "e_abi.PageInfo\0223\n\014transactions\030\003 \003(\0132\035.f" +
-      "orge_abi.IndexedTransaction\"P\n\021RequestLi" +
-      "stAssets\022$\n\006paging\030\001 \001(\0132\024.forge_abi.Pag" +
-      "eInput\022\025\n\rowner_address\030\002 \001(\t\"\212\001\n\022Respon" +
-      "seListAssets\022#\n\004code\030\001 \001(\0162\025.forge_abi.S" +
+      "forge_abi.PageInfo\0223\n\014transactions\030\003 \003(\013" +
+      "2\035.forge_abi.IndexedTransaction\"P\n\021Reque" +
+      "stListAssets\022$\n\006paging\030\001 \001(\0132\024.forge_abi" +
+      ".PageInput\022\025\n\rowner_address\030\002 \001(\t\"\212\001\n\022Re" +
+      "sponseListAssets\022#\n\004code\030\001 \001(\0162\025.forge_a" +
+      "bi.StatusCode\022!\n\004page\030\002 \001(\0132\023.forge_abi." +
+      "PageInfo\022,\n\006assets\030\003 \003(\0132\034.forge_abi.Ind" +
+      "exedAssetState\"k\n\021RequestListStakes\022$\n\006p",
+      "aging\030\001 \001(\0132\024.forge_abi.PageInput\0220\n\016add" +
+      "ress_filter\030\002 \001(\0132\030.forge_abi.AddressFil" +
+      "ter\"\212\001\n\022ResponseListStakes\022#\n\004code\030\001 \001(\016" +
+      "2\025.forge_abi.StatusCode\022!\n\004page\030\002 \001(\0132\023." +
+      "forge_abi.PageInfo\022,\n\006stakes\030\003 \003(\0132\034.for" +
+      "ge_abi.IndexedStakeState\"+\n\022RequestListA" +
+      "ccount\022\025\n\rowner_address\030\001 \001(\t\"k\n\023Respons" +
+      "eListAccount\022#\n\004code\030\001 \001(\0162\025.forge_abi.S" +
+      "tatusCode\022/\n\007account\030\002 \001(\0132\036.forge_abi.I" +
+      "ndexedAccountState\">\n\026RequestListTopAcco",
+      "unts\022$\n\006paging\030\001 \001(\0132\024.forge_abi.PageInp" +
+      "ut\"\223\001\n\027ResponseListTopAccounts\022#\n\004code\030\001" +
+      " \001(\0162\025.forge_abi.StatusCode\022!\n\004page\030\002 \001(" +
+      "\0132\023.forge_abi.PageInfo\0220\n\010accounts\030\003 \003(\013" +
+      "2\036.forge_abi.IndexedAccountState\"U\n\034Requ" +
+      "estListAssetTransactions\022$\n\006paging\030\001 \001(\013" +
+      "2\024.forge_abi.PageInput\022\017\n\007address\030\002 \001(\t\"" +
+      "\234\001\n\035ResponseListAssetTransactions\022#\n\004cod" +
+      "e\030\001 \001(\0162\025.forge_abi.StatusCode\022!\n\004page\030\002" +
+      " \001(\0132\023.forge_abi.PageInfo\0223\n\014transaction",
+      "s\030\003 \003(\0132\035.forge_abi.IndexedTransaction\"\216" +
+      "\002\n\021RequestListBlocks\022$\n\006paging\030\001 \001(\0132\024.f" +
+      "orge_abi.PageInput\022\020\n\010proposer\030\002 \001(\t\022*\n\013" +
+      "time_filter\030\003 \001(\0132\025.forge_abi.TimeFilter" +
+      "\022-\n\rheight_filter\030\004 \001(\0132\026.forge_abi.Rang" +
+      "eFilter\022.\n\016num_txs_filter\030\005 \001(\0132\026.forge_" +
+      "abi.RangeFilter\0226\n\026num_invalid_txs_filte" +
+      "r\030\006 \001(\0132\026.forge_abi.RangeFilter\"\205\001\n\022Resp" +
+      "onseListBlocks\022#\n\004code\030\001 \001(\0162\025.forge_abi" +
+      ".StatusCode\022!\n\004page\030\002 \001(\0132\023.forge_abi.Pa",
+      "geInfo\022\'\n\006blocks\030\003 \003(\0132\027.forge_abi.Index" +
+      "edBlock\"\207\001\n\022RequestListTethers\022$\n\006paging" +
+      "\030\001 \001(\0132\024.forge_abi.PageInput\022\021\n\tdeposito" +
+      "r\030\002 \001(\t\022\022\n\nwithdrawer\030\003 \001(\t\022\021\n\tcustodian" +
+      "\030\004 \001(\t\022\021\n\tavailable\030\005 \001(\010\"\206\001\n\023ResponseLi" +
+      "stTethers\022#\n\004code\030\001 \001(\0162\025.forge_abi.Stat" +
+      "usCode\022!\n\004page\030\002 \001(\0132\023.forge_abi.PageInf" +
+      "o\022\'\n\007tethers\030\003 \003(\0132\026.forge_abi.TetherSta" +
+      "te\"l\n\017RequestListSwap\022$\n\006paging\030\001 \001(\0132\024." +
+      "forge_abi.PageInput\022\016\n\006sender\030\002 \001(\t\022\020\n\010r",
+      "eceiver\030\003 \001(\t\022\021\n\tavailable\030\004 \001(\010\"~\n\020Resp" +
+      "onseListSwap\022#\n\004code\030\001 \001(\0162\025.forge_abi.S" +
       "tatusCode\022!\n\004page\030\002 \001(\0132\023.forge_abi.Page" +
-      "Info\022,\n\006assets\030\003 \003(\0132\034.forge_abi.Indexed" +
-      "AssetState\"k\n\021RequestListStakes\022$\n\006pagin",
-      "g\030\001 \001(\0132\024.forge_abi.PageInput\0220\n\016address" +
-      "_filter\030\002 \001(\0132\030.forge_abi.AddressFilter\"" +
-      "\212\001\n\022ResponseListStakes\022#\n\004code\030\001 \001(\0162\025.f" +
-      "orge_abi.StatusCode\022!\n\004page\030\002 \001(\0132\023.forg" +
-      "e_abi.PageInfo\022,\n\006stakes\030\003 \003(\0132\034.forge_a" +
-      "bi.IndexedStakeState\"+\n\022RequestListAccou" +
-      "nt\022\025\n\rowner_address\030\001 \001(\t\"k\n\023ResponseLis" +
-      "tAccount\022#\n\004code\030\001 \001(\0162\025.forge_abi.Statu" +
-      "sCode\022/\n\007account\030\002 \001(\0132\036.forge_abi.Index" +
-      "edAccountState\">\n\026RequestListTopAccounts",
-      "\022$\n\006paging\030\001 \001(\0132\024.forge_abi.PageInput\"\223" +
-      "\001\n\027ResponseListTopAccounts\022#\n\004code\030\001 \001(\016" +
-      "2\025.forge_abi.StatusCode\022!\n\004page\030\002 \001(\0132\023." +
-      "forge_abi.PageInfo\0220\n\010accounts\030\003 \003(\0132\036.f" +
-      "orge_abi.IndexedAccountState\"U\n\034RequestL" +
-      "istAssetTransactions\022$\n\006paging\030\001 \001(\0132\024.f" +
-      "orge_abi.PageInput\022\017\n\007address\030\002 \001(\t\"\234\001\n\035" +
-      "ResponseListAssetTransactions\022#\n\004code\030\001 " +
-      "\001(\0162\025.forge_abi.StatusCode\022!\n\004page\030\002 \001(\013" +
-      "2\023.forge_abi.PageInfo\0223\n\014transactions\030\003 ",
-      "\003(\0132\035.forge_abi.IndexedTransaction\"\216\002\n\021R" +
-      "equestListBlocks\022$\n\006paging\030\001 \001(\0132\024.forge" +
-      "_abi.PageInput\022\020\n\010proposer\030\002 \001(\t\022*\n\013time" +
-      "_filter\030\003 \001(\0132\025.forge_abi.TimeFilter\022-\n\r" +
-      "height_filter\030\004 \001(\0132\026.forge_abi.RangeFil" +
-      "ter\022.\n\016num_txs_filter\030\005 \001(\0132\026.forge_abi." +
-      "RangeFilter\0226\n\026num_invalid_txs_filter\030\006 " +
-      "\001(\0132\026.forge_abi.RangeFilter\"\205\001\n\022Response" +
-      "ListBlocks\022#\n\004code\030\001 \001(\0162\025.forge_abi.Sta" +
-      "tusCode\022!\n\004page\030\002 \001(\0132\023.forge_abi.PageIn",
-      "fo\022\'\n\006blocks\030\003 \003(\0132\027.forge_abi.IndexedBl" +
-      "ock\"\207\001\n\022RequestListTethers\022$\n\006paging\030\001 \001" +
-      "(\0132\024.forge_abi.PageInput\022\021\n\tdepositor\030\002 " +
-      "\001(\t\022\022\n\nwithdrawer\030\003 \001(\t\022\021\n\tcustodian\030\004 \001" +
-      "(\t\022\021\n\tavailable\030\005 \001(\010\"\206\001\n\023ResponseListTe" +
-      "thers\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCo" +
-      "de\022!\n\004page\030\002 \001(\0132\023.forge_abi.PageInfo\022\'\n" +
-      "\007tethers\030\003 \003(\0132\026.forge_abi.TetherState\"l" +
-      "\n\017RequestListSwap\022$\n\006paging\030\001 \001(\0132\024.forg" +
-      "e_abi.PageInput\022\016\n\006sender\030\002 \001(\t\022\020\n\010recei",
-      "ver\030\003 \001(\t\022\021\n\tavailable\030\004 \001(\010\"~\n\020Response" +
-      "ListSwap\022#\n\004code\030\001 \001(\0162\025.forge_abi.Statu" +
-      "sCode\022!\n\004page\030\002 \001(\0132\023.forge_abi.PageInfo" +
-      "\022\"\n\004swap\030\003 \003(\0132\024.forge_abi.SwapState\"\030\n\026" +
-      "RequestGetHealthStatus\"n\n\027ResponseGetHea" +
-      "lthStatus\022#\n\004code\030\001 \001(\0162\025.forge_abi.Stat" +
-      "usCode\022.\n\rhealth_status\030\002 \001(\0132\027.forge_ab" +
-      "i.HealthStatusb\006proto3"
+      "Info\022\"\n\004swap\030\003 \003(\0132\024.forge_abi.SwapState" +
+      "\"\030\n\026RequestGetHealthStatus\"n\n\027ResponseGe" +
+      "tHealthStatus\022#\n\004code\030\001 \001(\0162\025.forge_abi." +
+      "StatusCode\022.\n\rhealth_status\030\002 \001(\0132\027.forg" +
+      "e_abi.HealthStatusb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -65090,7 +67464,7 @@ public final class Rpc {
     internal_static_forge_abi_RequestMultisig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestMultisig_descriptor,
-        new java.lang.String[] { "Tx", "Data", "Wallet", "Token", });
+        new java.lang.String[] { "Tx", "Data", "Wallet", "Token", "Delegatee", });
     internal_static_forge_abi_ResponseMultisig_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_forge_abi_ResponseMultisig_fieldAccessorTable = new
@@ -65301,290 +67675,302 @@ public final class Rpc {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseGetSwapState_descriptor,
         new java.lang.String[] { "Code", "State", });
-    internal_static_forge_abi_RequestStoreFile_descriptor =
+    internal_static_forge_abi_RequestGetDelegateState_descriptor =
       getDescriptor().getMessageTypes().get(38);
+    internal_static_forge_abi_RequestGetDelegateState_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_RequestGetDelegateState_descriptor,
+        new java.lang.String[] { "Address", "Keys", "Height", });
+    internal_static_forge_abi_ResponseGetDelegateState_descriptor =
+      getDescriptor().getMessageTypes().get(39);
+    internal_static_forge_abi_ResponseGetDelegateState_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_ResponseGetDelegateState_descriptor,
+        new java.lang.String[] { "Code", "State", });
+    internal_static_forge_abi_RequestStoreFile_descriptor =
+      getDescriptor().getMessageTypes().get(40);
     internal_static_forge_abi_RequestStoreFile_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestStoreFile_descriptor,
         new java.lang.String[] { "Chunk", });
     internal_static_forge_abi_ResponseStoreFile_descriptor =
-      getDescriptor().getMessageTypes().get(39);
+      getDescriptor().getMessageTypes().get(41);
     internal_static_forge_abi_ResponseStoreFile_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseStoreFile_descriptor,
         new java.lang.String[] { "Code", "Hash", });
     internal_static_forge_abi_RequestLoadFile_descriptor =
-      getDescriptor().getMessageTypes().get(40);
+      getDescriptor().getMessageTypes().get(42);
     internal_static_forge_abi_RequestLoadFile_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestLoadFile_descriptor,
         new java.lang.String[] { "Hash", });
     internal_static_forge_abi_ResponseLoadFile_descriptor =
-      getDescriptor().getMessageTypes().get(41);
+      getDescriptor().getMessageTypes().get(43);
     internal_static_forge_abi_ResponseLoadFile_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseLoadFile_descriptor,
         new java.lang.String[] { "Code", "Chunk", });
     internal_static_forge_abi_RequestPinFile_descriptor =
-      getDescriptor().getMessageTypes().get(42);
+      getDescriptor().getMessageTypes().get(44);
     internal_static_forge_abi_RequestPinFile_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestPinFile_descriptor,
         new java.lang.String[] { "Hash", });
     internal_static_forge_abi_ResponsePinFile_descriptor =
-      getDescriptor().getMessageTypes().get(43);
+      getDescriptor().getMessageTypes().get(45);
     internal_static_forge_abi_ResponsePinFile_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponsePinFile_descriptor,
         new java.lang.String[] { "Code", });
     internal_static_forge_abi_RequestGetChainInfo_descriptor =
-      getDescriptor().getMessageTypes().get(44);
+      getDescriptor().getMessageTypes().get(46);
     internal_static_forge_abi_RequestGetChainInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestGetChainInfo_descriptor,
         new java.lang.String[] { });
     internal_static_forge_abi_ResponseGetChainInfo_descriptor =
-      getDescriptor().getMessageTypes().get(45);
+      getDescriptor().getMessageTypes().get(47);
     internal_static_forge_abi_ResponseGetChainInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseGetChainInfo_descriptor,
         new java.lang.String[] { "Code", "Info", });
     internal_static_forge_abi_RequestGetNodeInfo_descriptor =
-      getDescriptor().getMessageTypes().get(46);
+      getDescriptor().getMessageTypes().get(48);
     internal_static_forge_abi_RequestGetNodeInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestGetNodeInfo_descriptor,
         new java.lang.String[] { });
     internal_static_forge_abi_ResponseGetNodeInfo_descriptor =
-      getDescriptor().getMessageTypes().get(47);
+      getDescriptor().getMessageTypes().get(49);
     internal_static_forge_abi_ResponseGetNodeInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseGetNodeInfo_descriptor,
         new java.lang.String[] { "Code", "Info", });
     internal_static_forge_abi_RequestSearch_descriptor =
-      getDescriptor().getMessageTypes().get(48);
+      getDescriptor().getMessageTypes().get(50);
     internal_static_forge_abi_RequestSearch_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestSearch_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_forge_abi_ResponseSearch_descriptor =
-      getDescriptor().getMessageTypes().get(49);
+      getDescriptor().getMessageTypes().get(51);
     internal_static_forge_abi_ResponseSearch_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseSearch_descriptor,
         new java.lang.String[] { "Code", "Txs", });
     internal_static_forge_abi_RequestGetUnconfirmedTxs_descriptor =
-      getDescriptor().getMessageTypes().get(50);
+      getDescriptor().getMessageTypes().get(52);
     internal_static_forge_abi_RequestGetUnconfirmedTxs_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestGetUnconfirmedTxs_descriptor,
         new java.lang.String[] { "Paging", });
     internal_static_forge_abi_ResponseGetUnconfirmedTxs_descriptor =
-      getDescriptor().getMessageTypes().get(51);
+      getDescriptor().getMessageTypes().get(53);
     internal_static_forge_abi_ResponseGetUnconfirmedTxs_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseGetUnconfirmedTxs_descriptor,
         new java.lang.String[] { "Code", "Page", "UnconfirmedTxs", });
     internal_static_forge_abi_RequestGetNetInfo_descriptor =
-      getDescriptor().getMessageTypes().get(52);
+      getDescriptor().getMessageTypes().get(54);
     internal_static_forge_abi_RequestGetNetInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestGetNetInfo_descriptor,
         new java.lang.String[] { });
     internal_static_forge_abi_ResponseGetNetInfo_descriptor =
-      getDescriptor().getMessageTypes().get(53);
+      getDescriptor().getMessageTypes().get(55);
     internal_static_forge_abi_ResponseGetNetInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseGetNetInfo_descriptor,
         new java.lang.String[] { "Code", "NetInfo", });
     internal_static_forge_abi_RequestGetValidatorsInfo_descriptor =
-      getDescriptor().getMessageTypes().get(54);
+      getDescriptor().getMessageTypes().get(56);
     internal_static_forge_abi_RequestGetValidatorsInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestGetValidatorsInfo_descriptor,
         new java.lang.String[] { });
     internal_static_forge_abi_ResponseGetValidatorsInfo_descriptor =
-      getDescriptor().getMessageTypes().get(55);
+      getDescriptor().getMessageTypes().get(57);
     internal_static_forge_abi_ResponseGetValidatorsInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseGetValidatorsInfo_descriptor,
         new java.lang.String[] { "Code", "ValidatorsInfo", });
     internal_static_forge_abi_RequestSubscribe_descriptor =
-      getDescriptor().getMessageTypes().get(56);
+      getDescriptor().getMessageTypes().get(58);
     internal_static_forge_abi_RequestSubscribe_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestSubscribe_descriptor,
         new java.lang.String[] { "Topic", "Filter", });
     internal_static_forge_abi_ResponseSubscribe_descriptor =
-      getDescriptor().getMessageTypes().get(57);
+      getDescriptor().getMessageTypes().get(59);
     internal_static_forge_abi_ResponseSubscribe_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseSubscribe_descriptor,
-        new java.lang.String[] { "Code", "Topic", "Transfer", "AccountMigrate", "Confirm", "CreateAsset", "Exchange", "Revoke", "BeginBlock", "EndBlock", "Declare", "UpdateAsset", "ConsensusUpgrade", "DeclareFile", "SysUpgrade", "Stake", "AccountState", "AssetState", "ForgeState", "StakeState", "ProtocolState", "Value", });
+        new java.lang.String[] { "Code", "Topic", "Transfer", "AccountMigrate", "Confirm", "CreateAsset", "Exchange", "Revoke", "BeginBlock", "EndBlock", "Declare", "UpdateAsset", "ConsensusUpgrade", "DeclareFile", "SysUpgrade", "Stake", "Delegate", "ActivateProtocol", "DeactivateProtocol", "AccountState", "AssetState", "ForgeState", "StakeState", "ProtocolState", "DelegateState", "Value", });
     internal_static_forge_abi_RequestUnsubscribe_descriptor =
-      getDescriptor().getMessageTypes().get(58);
+      getDescriptor().getMessageTypes().get(60);
     internal_static_forge_abi_RequestUnsubscribe_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestUnsubscribe_descriptor,
         new java.lang.String[] { "Topic", });
     internal_static_forge_abi_ResponseUnsubscribe_descriptor =
-      getDescriptor().getMessageTypes().get(59);
+      getDescriptor().getMessageTypes().get(61);
     internal_static_forge_abi_ResponseUnsubscribe_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseUnsubscribe_descriptor,
         new java.lang.String[] { "Code", });
     internal_static_forge_abi_RequestGetConfig_descriptor =
-      getDescriptor().getMessageTypes().get(60);
+      getDescriptor().getMessageTypes().get(62);
     internal_static_forge_abi_RequestGetConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestGetConfig_descriptor,
         new java.lang.String[] { "Parsed", });
     internal_static_forge_abi_ResponseGetConfig_descriptor =
-      getDescriptor().getMessageTypes().get(61);
+      getDescriptor().getMessageTypes().get(63);
     internal_static_forge_abi_ResponseGetConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseGetConfig_descriptor,
         new java.lang.String[] { "Code", "Config", });
     internal_static_forge_abi_ByDay_descriptor =
-      getDescriptor().getMessageTypes().get(62);
+      getDescriptor().getMessageTypes().get(64);
     internal_static_forge_abi_ByDay_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ByDay_descriptor,
         new java.lang.String[] { "StartDate", "EndDate", });
     internal_static_forge_abi_ByHour_descriptor =
-      getDescriptor().getMessageTypes().get(63);
+      getDescriptor().getMessageTypes().get(65);
     internal_static_forge_abi_ByHour_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ByHour_descriptor,
         new java.lang.String[] { "Date", });
     internal_static_forge_abi_RequestGetForgeStats_descriptor =
-      getDescriptor().getMessageTypes().get(64);
+      getDescriptor().getMessageTypes().get(66);
     internal_static_forge_abi_RequestGetForgeStats_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestGetForgeStats_descriptor,
         new java.lang.String[] { "DayInfo", "Date", "Value", });
     internal_static_forge_abi_ResponseGetForgeStats_descriptor =
-      getDescriptor().getMessageTypes().get(65);
+      getDescriptor().getMessageTypes().get(67);
     internal_static_forge_abi_ResponseGetForgeStats_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseGetForgeStats_descriptor,
         new java.lang.String[] { "Code", "ForgeStats", });
     internal_static_forge_abi_RequestListTransactions_descriptor =
-      getDescriptor().getMessageTypes().get(66);
+      getDescriptor().getMessageTypes().get(68);
     internal_static_forge_abi_RequestListTransactions_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestListTransactions_descriptor,
         new java.lang.String[] { "Paging", "TimeFilter", "AddressFilter", "TypeFilter", "ValidityFilter", });
     internal_static_forge_abi_ResponseListTransactions_descriptor =
-      getDescriptor().getMessageTypes().get(67);
+      getDescriptor().getMessageTypes().get(69);
     internal_static_forge_abi_ResponseListTransactions_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseListTransactions_descriptor,
         new java.lang.String[] { "Code", "Page", "Transactions", });
     internal_static_forge_abi_RequestListAssets_descriptor =
-      getDescriptor().getMessageTypes().get(68);
+      getDescriptor().getMessageTypes().get(70);
     internal_static_forge_abi_RequestListAssets_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestListAssets_descriptor,
         new java.lang.String[] { "Paging", "OwnerAddress", });
     internal_static_forge_abi_ResponseListAssets_descriptor =
-      getDescriptor().getMessageTypes().get(69);
+      getDescriptor().getMessageTypes().get(71);
     internal_static_forge_abi_ResponseListAssets_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseListAssets_descriptor,
         new java.lang.String[] { "Code", "Page", "Assets", });
     internal_static_forge_abi_RequestListStakes_descriptor =
-      getDescriptor().getMessageTypes().get(70);
+      getDescriptor().getMessageTypes().get(72);
     internal_static_forge_abi_RequestListStakes_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestListStakes_descriptor,
         new java.lang.String[] { "Paging", "AddressFilter", });
     internal_static_forge_abi_ResponseListStakes_descriptor =
-      getDescriptor().getMessageTypes().get(71);
+      getDescriptor().getMessageTypes().get(73);
     internal_static_forge_abi_ResponseListStakes_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseListStakes_descriptor,
         new java.lang.String[] { "Code", "Page", "Stakes", });
     internal_static_forge_abi_RequestListAccount_descriptor =
-      getDescriptor().getMessageTypes().get(72);
+      getDescriptor().getMessageTypes().get(74);
     internal_static_forge_abi_RequestListAccount_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestListAccount_descriptor,
         new java.lang.String[] { "OwnerAddress", });
     internal_static_forge_abi_ResponseListAccount_descriptor =
-      getDescriptor().getMessageTypes().get(73);
+      getDescriptor().getMessageTypes().get(75);
     internal_static_forge_abi_ResponseListAccount_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseListAccount_descriptor,
         new java.lang.String[] { "Code", "Account", });
     internal_static_forge_abi_RequestListTopAccounts_descriptor =
-      getDescriptor().getMessageTypes().get(74);
+      getDescriptor().getMessageTypes().get(76);
     internal_static_forge_abi_RequestListTopAccounts_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestListTopAccounts_descriptor,
         new java.lang.String[] { "Paging", });
     internal_static_forge_abi_ResponseListTopAccounts_descriptor =
-      getDescriptor().getMessageTypes().get(75);
+      getDescriptor().getMessageTypes().get(77);
     internal_static_forge_abi_ResponseListTopAccounts_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseListTopAccounts_descriptor,
         new java.lang.String[] { "Code", "Page", "Accounts", });
     internal_static_forge_abi_RequestListAssetTransactions_descriptor =
-      getDescriptor().getMessageTypes().get(76);
+      getDescriptor().getMessageTypes().get(78);
     internal_static_forge_abi_RequestListAssetTransactions_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestListAssetTransactions_descriptor,
         new java.lang.String[] { "Paging", "Address", });
     internal_static_forge_abi_ResponseListAssetTransactions_descriptor =
-      getDescriptor().getMessageTypes().get(77);
+      getDescriptor().getMessageTypes().get(79);
     internal_static_forge_abi_ResponseListAssetTransactions_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseListAssetTransactions_descriptor,
         new java.lang.String[] { "Code", "Page", "Transactions", });
     internal_static_forge_abi_RequestListBlocks_descriptor =
-      getDescriptor().getMessageTypes().get(78);
+      getDescriptor().getMessageTypes().get(80);
     internal_static_forge_abi_RequestListBlocks_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestListBlocks_descriptor,
         new java.lang.String[] { "Paging", "Proposer", "TimeFilter", "HeightFilter", "NumTxsFilter", "NumInvalidTxsFilter", });
     internal_static_forge_abi_ResponseListBlocks_descriptor =
-      getDescriptor().getMessageTypes().get(79);
+      getDescriptor().getMessageTypes().get(81);
     internal_static_forge_abi_ResponseListBlocks_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseListBlocks_descriptor,
         new java.lang.String[] { "Code", "Page", "Blocks", });
     internal_static_forge_abi_RequestListTethers_descriptor =
-      getDescriptor().getMessageTypes().get(80);
+      getDescriptor().getMessageTypes().get(82);
     internal_static_forge_abi_RequestListTethers_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestListTethers_descriptor,
         new java.lang.String[] { "Paging", "Depositor", "Withdrawer", "Custodian", "Available", });
     internal_static_forge_abi_ResponseListTethers_descriptor =
-      getDescriptor().getMessageTypes().get(81);
+      getDescriptor().getMessageTypes().get(83);
     internal_static_forge_abi_ResponseListTethers_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseListTethers_descriptor,
         new java.lang.String[] { "Code", "Page", "Tethers", });
     internal_static_forge_abi_RequestListSwap_descriptor =
-      getDescriptor().getMessageTypes().get(82);
+      getDescriptor().getMessageTypes().get(84);
     internal_static_forge_abi_RequestListSwap_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestListSwap_descriptor,
         new java.lang.String[] { "Paging", "Sender", "Receiver", "Available", });
     internal_static_forge_abi_ResponseListSwap_descriptor =
-      getDescriptor().getMessageTypes().get(83);
+      getDescriptor().getMessageTypes().get(85);
     internal_static_forge_abi_ResponseListSwap_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseListSwap_descriptor,
         new java.lang.String[] { "Code", "Page", "Swap", });
     internal_static_forge_abi_RequestGetHealthStatus_descriptor =
-      getDescriptor().getMessageTypes().get(84);
+      getDescriptor().getMessageTypes().get(86);
     internal_static_forge_abi_RequestGetHealthStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RequestGetHealthStatus_descriptor,
         new java.lang.String[] { });
     internal_static_forge_abi_ResponseGetHealthStatus_descriptor =
-      getDescriptor().getMessageTypes().get(85);
+      getDescriptor().getMessageTypes().get(87);
     internal_static_forge_abi_ResponseGetHealthStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseGetHealthStatus_descriptor,

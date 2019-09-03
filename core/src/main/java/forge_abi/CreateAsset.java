@@ -1961,6 +1961,31 @@ public final class CreateAsset {
      * <code>.forge_abi.AssetAttributes attributes = 7;</code>
      */
     forge_abi.CreateAsset.AssetAttributesOrBuilder getAttributesOrBuilder();
+
+    /**
+     * <pre>
+     * extra content that user can inject into the factory
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    boolean hasData();
+    /**
+     * <pre>
+     * extra content that user can inject into the factory
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    com.google.protobuf.Any getData();
+    /**
+     * <pre>
+     * extra content that user can inject into the factory
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    com.google.protobuf.AnyOrBuilder getDataOrBuilder();
   }
   /**
    * Protobuf type {@code forge_abi.AssetFactory}
@@ -2060,6 +2085,19 @@ public final class CreateAsset {
               if (subBuilder != null) {
                 subBuilder.mergeFrom(attributes_);
                 attributes_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 122: {
+              com.google.protobuf.Any.Builder subBuilder = null;
+              if (data_ != null) {
+                subBuilder = data_.toBuilder();
+              }
+              data_ = input.readMessage(com.google.protobuf.Any.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(data_);
+                data_ = subBuilder.buildPartial();
               }
 
               break;
@@ -2366,6 +2404,39 @@ public final class CreateAsset {
       return getAttributes();
     }
 
+    public static final int DATA_FIELD_NUMBER = 15;
+    private com.google.protobuf.Any data_;
+    /**
+     * <pre>
+     * extra content that user can inject into the factory
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    public boolean hasData() {
+      return data_ != null;
+    }
+    /**
+     * <pre>
+     * extra content that user can inject into the factory
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    public com.google.protobuf.Any getData() {
+      return data_ == null ? com.google.protobuf.Any.getDefaultInstance() : data_;
+    }
+    /**
+     * <pre>
+     * extra content that user can inject into the factory
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    public com.google.protobuf.AnyOrBuilder getDataOrBuilder() {
+      return getData();
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -2398,6 +2469,9 @@ public final class CreateAsset {
       }
       if (attributes_ != null) {
         output.writeMessage(7, getAttributes());
+      }
+      if (data_ != null) {
+        output.writeMessage(15, getData());
       }
     }
 
@@ -2435,6 +2509,10 @@ public final class CreateAsset {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(7, getAttributes());
       }
+      if (data_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(15, getData());
+      }
       memoizedSize = size;
       return size;
     }
@@ -2471,6 +2549,11 @@ public final class CreateAsset {
         result = result && getAttributes()
             .equals(other.getAttributes());
       }
+      result = result && (hasData() == other.hasData());
+      if (hasData()) {
+        result = result && getData()
+            .equals(other.getData());
+      }
       return result;
     }
 
@@ -2500,6 +2583,10 @@ public final class CreateAsset {
       if (hasAttributes()) {
         hash = (37 * hash) + ATTRIBUTES_FIELD_NUMBER;
         hash = (53 * hash) + getAttributes().hashCode();
+      }
+      if (hasData()) {
+        hash = (37 * hash) + DATA_FIELD_NUMBER;
+        hash = (53 * hash) + getData().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -2641,6 +2728,12 @@ public final class CreateAsset {
           attributes_ = null;
           attributesBuilder_ = null;
         }
+        if (dataBuilder_ == null) {
+          data_ = null;
+        } else {
+          data_ = null;
+          dataBuilder_ = null;
+        }
         return this;
       }
 
@@ -2683,6 +2776,11 @@ public final class CreateAsset {
           result.attributes_ = attributes_;
         } else {
           result.attributes_ = attributesBuilder_.build();
+        }
+        if (dataBuilder_ == null) {
+          result.data_ = data_;
+        } else {
+          result.data_ = dataBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -2756,6 +2854,9 @@ public final class CreateAsset {
         }
         if (other.hasAttributes()) {
           mergeAttributes(other.getAttributes());
+        }
+        if (other.hasData()) {
+          mergeData(other.getData());
         }
         onChanged();
         return this;
@@ -3585,6 +3686,159 @@ public final class CreateAsset {
         }
         return attributesBuilder_;
       }
+
+      private com.google.protobuf.Any data_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> dataBuilder_;
+      /**
+       * <pre>
+       * extra content that user can inject into the factory
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public boolean hasData() {
+        return dataBuilder_ != null || data_ != null;
+      }
+      /**
+       * <pre>
+       * extra content that user can inject into the factory
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public com.google.protobuf.Any getData() {
+        if (dataBuilder_ == null) {
+          return data_ == null ? com.google.protobuf.Any.getDefaultInstance() : data_;
+        } else {
+          return dataBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * extra content that user can inject into the factory
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public Builder setData(com.google.protobuf.Any value) {
+        if (dataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          data_ = value;
+          onChanged();
+        } else {
+          dataBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * extra content that user can inject into the factory
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public Builder setData(
+          com.google.protobuf.Any.Builder builderForValue) {
+        if (dataBuilder_ == null) {
+          data_ = builderForValue.build();
+          onChanged();
+        } else {
+          dataBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * extra content that user can inject into the factory
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public Builder mergeData(com.google.protobuf.Any value) {
+        if (dataBuilder_ == null) {
+          if (data_ != null) {
+            data_ =
+              com.google.protobuf.Any.newBuilder(data_).mergeFrom(value).buildPartial();
+          } else {
+            data_ = value;
+          }
+          onChanged();
+        } else {
+          dataBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * extra content that user can inject into the factory
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public Builder clearData() {
+        if (dataBuilder_ == null) {
+          data_ = null;
+          onChanged();
+        } else {
+          data_ = null;
+          dataBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * extra content that user can inject into the factory
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public com.google.protobuf.Any.Builder getDataBuilder() {
+        
+        onChanged();
+        return getDataFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       * extra content that user can inject into the factory
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public com.google.protobuf.AnyOrBuilder getDataOrBuilder() {
+        if (dataBuilder_ != null) {
+          return dataBuilder_.getMessageOrBuilder();
+        } else {
+          return data_ == null ?
+              com.google.protobuf.Any.getDefaultInstance() : data_;
+        }
+      }
+      /**
+       * <pre>
+       * extra content that user can inject into the factory
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> 
+          getDataFieldBuilder() {
+        if (dataBuilder_ == null) {
+          dataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder>(
+                  getData(),
+                  getParentForChildren(),
+                  isClean());
+          data_ = null;
+        }
+        return dataBuilder_;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
@@ -3722,6 +3976,31 @@ public final class CreateAsset {
      * <code>uint32 num_created = 8;</code>
      */
     int getNumCreated();
+
+    /**
+     * <pre>
+     * extra context that user
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    boolean hasData();
+    /**
+     * <pre>
+     * extra context that user
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    com.google.protobuf.Any getData();
+    /**
+     * <pre>
+     * extra context that user
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    com.google.protobuf.AnyOrBuilder getDataOrBuilder();
   }
   /**
    * Protobuf type {@code forge_abi.AssetFactoryState}
@@ -3829,6 +4108,19 @@ public final class CreateAsset {
             case 64: {
 
               numCreated_ = input.readUInt32();
+              break;
+            }
+            case 122: {
+              com.google.protobuf.Any.Builder subBuilder = null;
+              if (data_ != null) {
+                subBuilder = data_.toBuilder();
+              }
+              data_ = input.readMessage(com.google.protobuf.Any.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(data_);
+                data_ = subBuilder.buildPartial();
+              }
+
               break;
             }
           }
@@ -4049,6 +4341,39 @@ public final class CreateAsset {
       return numCreated_;
     }
 
+    public static final int DATA_FIELD_NUMBER = 15;
+    private com.google.protobuf.Any data_;
+    /**
+     * <pre>
+     * extra context that user
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    public boolean hasData() {
+      return data_ != null;
+    }
+    /**
+     * <pre>
+     * extra context that user
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    public com.google.protobuf.Any getData() {
+      return data_ == null ? com.google.protobuf.Any.getDefaultInstance() : data_;
+    }
+    /**
+     * <pre>
+     * extra context that user
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    public com.google.protobuf.AnyOrBuilder getDataOrBuilder() {
+      return getData();
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -4084,6 +4409,9 @@ public final class CreateAsset {
       }
       if (numCreated_ != 0) {
         output.writeUInt32(8, numCreated_);
+      }
+      if (data_ != null) {
+        output.writeMessage(15, getData());
       }
     }
 
@@ -4125,6 +4453,10 @@ public final class CreateAsset {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(8, numCreated_);
       }
+      if (data_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(15, getData());
+      }
       memoizedSize = size;
       return size;
     }
@@ -4163,6 +4495,11 @@ public final class CreateAsset {
       }
       result = result && (getNumCreated()
           == other.getNumCreated());
+      result = result && (hasData() == other.hasData());
+      if (hasData()) {
+        result = result && getData()
+            .equals(other.getData());
+      }
       return result;
     }
 
@@ -4195,6 +4532,10 @@ public final class CreateAsset {
       }
       hash = (37 * hash) + NUM_CREATED_FIELD_NUMBER;
       hash = (53 * hash) + getNumCreated();
+      if (hasData()) {
+        hash = (37 * hash) + DATA_FIELD_NUMBER;
+        hash = (53 * hash) + getData().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -4337,6 +4678,12 @@ public final class CreateAsset {
         }
         numCreated_ = 0;
 
+        if (dataBuilder_ == null) {
+          data_ = null;
+        } else {
+          data_ = null;
+          dataBuilder_ = null;
+        }
         return this;
       }
 
@@ -4381,6 +4728,11 @@ public final class CreateAsset {
           result.attributes_ = attributesBuilder_.build();
         }
         result.numCreated_ = numCreated_;
+        if (dataBuilder_ == null) {
+          result.data_ = data_;
+        } else {
+          result.data_ = dataBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4456,6 +4808,9 @@ public final class CreateAsset {
         }
         if (other.getNumCreated() != 0) {
           setNumCreated(other.getNumCreated());
+        }
+        if (other.hasData()) {
+          mergeData(other.getData());
         }
         onChanged();
         return this;
@@ -5070,6 +5425,159 @@ public final class CreateAsset {
         onChanged();
         return this;
       }
+
+      private com.google.protobuf.Any data_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> dataBuilder_;
+      /**
+       * <pre>
+       * extra context that user
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public boolean hasData() {
+        return dataBuilder_ != null || data_ != null;
+      }
+      /**
+       * <pre>
+       * extra context that user
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public com.google.protobuf.Any getData() {
+        if (dataBuilder_ == null) {
+          return data_ == null ? com.google.protobuf.Any.getDefaultInstance() : data_;
+        } else {
+          return dataBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * extra context that user
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public Builder setData(com.google.protobuf.Any value) {
+        if (dataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          data_ = value;
+          onChanged();
+        } else {
+          dataBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * extra context that user
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public Builder setData(
+          com.google.protobuf.Any.Builder builderForValue) {
+        if (dataBuilder_ == null) {
+          data_ = builderForValue.build();
+          onChanged();
+        } else {
+          dataBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * extra context that user
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public Builder mergeData(com.google.protobuf.Any value) {
+        if (dataBuilder_ == null) {
+          if (data_ != null) {
+            data_ =
+              com.google.protobuf.Any.newBuilder(data_).mergeFrom(value).buildPartial();
+          } else {
+            data_ = value;
+          }
+          onChanged();
+        } else {
+          dataBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * extra context that user
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public Builder clearData() {
+        if (dataBuilder_ == null) {
+          data_ = null;
+          onChanged();
+        } else {
+          data_ = null;
+          dataBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * extra context that user
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public com.google.protobuf.Any.Builder getDataBuilder() {
+        
+        onChanged();
+        return getDataFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       * extra context that user
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public com.google.protobuf.AnyOrBuilder getDataOrBuilder() {
+        if (dataBuilder_ != null) {
+          return dataBuilder_.getMessageOrBuilder();
+        } else {
+          return data_ == null ?
+              com.google.protobuf.Any.getDefaultInstance() : data_;
+        }
+      }
+      /**
+       * <pre>
+       * extra context that user
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> 
+          getDataFieldBuilder() {
+        if (dataBuilder_ == null) {
+          dataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder>(
+                  getData(),
+                  getParentForChildren(),
+                  isClean());
+          data_ = null;
+        }
+        return dataBuilder_;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
@@ -5155,17 +5663,19 @@ public final class CreateAsset {
       "\025\n\rtransferrable\030\004 \001(\010\022\013\n\003ttl\030\005 \001(\r\022\016\n\006p" +
       "arent\030\006 \001(\t\022\017\n\007address\030\007 \001(\t\"5\n\017AssetAtt" +
       "ributes\022\025\n\rtransferrable\030\001 \001(\010\022\013\n\003ttl\030\002 " +
-      "\001(\r\"\306\001\n\014AssetFactory\022\023\n\013description\030\001 \001(" +
+      "\001(\r\"\352\001\n\014AssetFactory\022\023\n\013description\030\001 \001(" +
       "\t\022\r\n\005limit\030\002 \001(\r\022!\n\005price\030\003 \001(\0132\022.forge_" +
       "abi.BigUint\022\020\n\010template\030\004 \001(\t\022\031\n\021allowed",
       "_spec_args\030\005 \003(\t\022\022\n\nasset_name\030\006 \001(\t\022.\n\n" +
       "attributes\030\007 \001(\0132\032.forge_abi.AssetAttrib" +
-      "utes\"\340\001\n\021AssetFactoryState\022\023\n\013descriptio" +
-      "n\030\001 \001(\t\022\r\n\005limit\030\002 \001(\r\022!\n\005price\030\003 \001(\0132\022." +
-      "forge_abi.BigUint\022\020\n\010template\030\004 \001(\t\022\031\n\021a" +
-      "llowed_spec_args\030\005 \003(\t\022\022\n\nasset_name\030\006 \001" +
-      "(\t\022.\n\nattributes\030\007 \001(\0132\032.forge_abi.Asset" +
-      "Attributes\022\023\n\013num_created\030\010 \001(\rb\006proto3"
+      "utes\022\"\n\004data\030\017 \001(\0132\024.google.protobuf.Any" +
+      "\"\204\002\n\021AssetFactoryState\022\023\n\013description\030\001 " +
+      "\001(\t\022\r\n\005limit\030\002 \001(\r\022!\n\005price\030\003 \001(\0132\022.forg" +
+      "e_abi.BigUint\022\020\n\010template\030\004 \001(\t\022\031\n\021allow" +
+      "ed_spec_args\030\005 \003(\t\022\022\n\nasset_name\030\006 \001(\t\022." +
+      "\n\nattributes\030\007 \001(\0132\032.forge_abi.AssetAttr" +
+      "ibutes\022\023\n\013num_created\030\010 \001(\r\022\"\n\004data\030\017 \001(" +
+      "\0132\024.google.protobuf.Anyb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5198,13 +5708,13 @@ public final class CreateAsset {
     internal_static_forge_abi_AssetFactory_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_AssetFactory_descriptor,
-        new java.lang.String[] { "Description", "Limit", "Price", "Template", "AllowedSpecArgs", "AssetName", "Attributes", });
+        new java.lang.String[] { "Description", "Limit", "Price", "Template", "AllowedSpecArgs", "AssetName", "Attributes", "Data", });
     internal_static_forge_abi_AssetFactoryState_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_forge_abi_AssetFactoryState_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_AssetFactoryState_descriptor,
-        new java.lang.String[] { "Description", "Limit", "Price", "Template", "AllowedSpecArgs", "AssetName", "Attributes", "NumCreated", });
+        new java.lang.String[] { "Description", "Limit", "Price", "Template", "AllowedSpecArgs", "AssetName", "Attributes", "NumCreated", "Data", });
     com.google.protobuf.AnyProto.getDescriptor();
     forge_abi.Type.getDescriptor();
   }

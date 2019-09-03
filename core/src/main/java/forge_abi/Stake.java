@@ -1546,6 +1546,16 @@ public final class Stake {
         getMessageBytes();
 
     /**
+     * <code>string address = 4;</code>
+     */
+    java.lang.String getAddress();
+    /**
+     * <code>string address = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getAddressBytes();
+
+    /**
      * <pre>
      * forge won't touch this field. Only forge app shall handle it.
      * forge app can extend the stake if the given data cannot meet its
@@ -1602,6 +1612,7 @@ public final class Stake {
     private StakeTx() {
       to_ = "";
       message_ = "";
+      address_ = "";
     }
 
     @java.lang.Override
@@ -1652,6 +1663,12 @@ public final class Stake {
               java.lang.String s = input.readStringRequireUtf8();
 
               message_ = s;
+              break;
+            }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              address_ = s;
               break;
             }
             case 122: {
@@ -1779,6 +1796,40 @@ public final class Stake {
       }
     }
 
+    public static final int ADDRESS_FIELD_NUMBER = 4;
+    private volatile java.lang.Object address_;
+    /**
+     * <code>string address = 4;</code>
+     */
+    public java.lang.String getAddress() {
+      java.lang.Object ref = address_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        address_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string address = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAddressBytes() {
+      java.lang.Object ref = address_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        address_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     public static final int DATA_FIELD_NUMBER = 15;
     private com.google.protobuf.Any data_;
     /**
@@ -1839,6 +1890,9 @@ public final class Stake {
       if (!getMessageBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, message_);
       }
+      if (!getAddressBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, address_);
+      }
       if (data_ != null) {
         output.writeMessage(15, getData());
       }
@@ -1858,6 +1912,9 @@ public final class Stake {
       }
       if (!getMessageBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, message_);
+      }
+      if (!getAddressBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, address_);
       }
       if (data_ != null) {
         size += com.google.protobuf.CodedOutputStream
@@ -1888,6 +1945,8 @@ public final class Stake {
       }
       result = result && getMessage()
           .equals(other.getMessage());
+      result = result && getAddress()
+          .equals(other.getAddress());
       result = result && (hasData() == other.hasData());
       if (hasData()) {
         result = result && getData()
@@ -1911,6 +1970,8 @@ public final class Stake {
       }
       hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
       hash = (53 * hash) + getMessage().hashCode();
+      hash = (37 * hash) + ADDRESS_FIELD_NUMBER;
+      hash = (53 * hash) + getAddress().hashCode();
       if (hasData()) {
         hash = (37 * hash) + DATA_FIELD_NUMBER;
         hash = (53 * hash) + getData().hashCode();
@@ -2055,6 +2116,8 @@ public final class Stake {
         }
         message_ = "";
 
+        address_ = "";
+
         if (dataBuilder_ == null) {
           data_ = null;
         } else {
@@ -2090,6 +2153,7 @@ public final class Stake {
           result.value_ = valueBuilder_.build();
         }
         result.message_ = message_;
+        result.address_ = address_;
         if (dataBuilder_ == null) {
           result.data_ = data_;
         } else {
@@ -2145,6 +2209,10 @@ public final class Stake {
         }
         if (!other.getMessage().isEmpty()) {
           message_ = other.message_;
+          onChanged();
+        }
+        if (!other.getAddress().isEmpty()) {
+          address_ = other.address_;
           onChanged();
         }
         if (other.hasData()) {
@@ -2431,6 +2499,75 @@ public final class Stake {
         return this;
       }
 
+      private java.lang.Object address_ = "";
+      /**
+       * <code>string address = 4;</code>
+       */
+      public java.lang.String getAddress() {
+        java.lang.Object ref = address_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          address_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string address = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAddressBytes() {
+        java.lang.Object ref = address_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          address_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string address = 4;</code>
+       */
+      public Builder setAddress(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        address_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string address = 4;</code>
+       */
+      public Builder clearAddress() {
+        
+        address_ = getDefaultInstance().getAddress();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string address = 4;</code>
+       */
+      public Builder setAddressBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        address_ = value;
+        onChanged();
+        return this;
+      }
+
       private com.google.protobuf.Any data_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> dataBuilder_;
@@ -2687,10 +2824,10 @@ public final class Stake {
       "\n\013stake.proto\022\tforge_abi\032\031google/protobu" +
       "f/any.proto\032\ntype.proto\"\017\n\rstakeForAsset" +
       "\"\017\n\rstakeForChain\"\016\n\014StakeForNode\"\016\n\014sta" +
-      "keForUser\"m\n\007StakeTx\022\n\n\002to\030\001 \001(\t\022!\n\005valu" +
+      "keForUser\"~\n\007StakeTx\022\n\n\002to\030\001 \001(\t\022!\n\005valu" +
       "e\030\002 \001(\0132\022.forge_abi.BigSint\022\017\n\007message\030\003" +
-      " \001(\t\022\"\n\004data\030\017 \001(\0132\024.google.protobuf.Any" +
-      "b\006proto3"
+      " \001(\t\022\017\n\007address\030\004 \001(\t\022\"\n\004data\030\017 \001(\0132\024.go" +
+      "ogle.protobuf.Anyb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2735,7 +2872,7 @@ public final class Stake {
     internal_static_forge_abi_StakeTx_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_StakeTx_descriptor,
-        new java.lang.String[] { "To", "Value", "Message", "Data", });
+        new java.lang.String[] { "To", "Value", "Message", "Address", "Data", });
     com.google.protobuf.AnyProto.getDescriptor();
     forge_abi.Type.getDescriptor();
   }

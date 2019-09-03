@@ -4,6 +4,7 @@ import com.google.common.io.BaseEncoding
 import com.google.gson.Gson
 import io.arcblock.forge.did.bean.AppInfo
 import io.arcblock.forge.did.bean.DIDTokenBody
+import io.arcblock.forge.did.bean.DIDTokenResponse
 import io.arcblock.forge.did.bean.IClaim
 import io.arcblock.forge.signer.Signer
 import org.apache.commons.lang3.StringEscapeUtils
@@ -20,9 +21,9 @@ object DidAuthUtils {
    * @param currentTimestamp: current time .
    * @param wallet: application key info .
    */
-  fun createDidAuthToken(authClaims: Array<IClaim>, appInfo: AppInfo, currentTimestamp: Long, wallet: WalletInfo): String {
+  fun createDidAuthToken(authClaims: Array<IClaim>, appInfo: AppInfo, currentTimestamp: Long, wallet: WalletInfo,url :String= ""): String {
     val exp = (currentTimestamp + 60 * 1000).toString()
-    val body = DIDTokenBody(action = "responseAuth", appInfo = appInfo, requestedClaims = authClaims, url = "", exp = exp,
+    val body = DIDTokenBody(action = "responseAuth", appInfo = appInfo, requestedClaims = authClaims, url = url, exp = exp,
       iat = currentTimestamp.toString(), iss = appInfo.publisher, nbf = currentTimestamp.toString()
     )
 
@@ -36,10 +37,10 @@ object DidAuthUtils {
       .replace("=", "")
   }
 
-  private fun parseJWT(token: String): DIDTokenBody {
+  fun parseJWT(token: String): DIDTokenResponse {
     val jwt = token.split(".")
     val body = String(BaseEncoding.base64Url().decode(jwt[1]))
-    return gs.fromJson(body, DIDTokenBody::class.java)
+    return gs.fromJson(body, DIDTokenResponse::class.java)
   }
 
   /**

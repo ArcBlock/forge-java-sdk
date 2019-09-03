@@ -3469,7 +3469,8 @@ public final class State {
 
     /**
      * <pre>
-     * parent address for the asset state, e.g. a ticket is inherited from an event
+     * parent address for the asset state, e.g. a ticket is inherited from an
+     * event
      * </pre>
      *
      * <code>string parent = 9;</code>
@@ -3477,7 +3478,8 @@ public final class State {
     java.lang.String getParent();
     /**
      * <pre>
-     * parent address for the asset state, e.g. a ticket is inherited from an event
+     * parent address for the asset state, e.g. a ticket is inherited from an
+     * event
      * </pre>
      *
      * <code>string parent = 9;</code>
@@ -3899,7 +3901,8 @@ public final class State {
     private volatile java.lang.Object parent_;
     /**
      * <pre>
-     * parent address for the asset state, e.g. a ticket is inherited from an event
+     * parent address for the asset state, e.g. a ticket is inherited from an
+     * event
      * </pre>
      *
      * <code>string parent = 9;</code>
@@ -3918,7 +3921,8 @@ public final class State {
     }
     /**
      * <pre>
-     * parent address for the asset state, e.g. a ticket is inherited from an event
+     * parent address for the asset state, e.g. a ticket is inherited from an
+     * event
      * </pre>
      *
      * <code>string parent = 9;</code>
@@ -5040,7 +5044,8 @@ public final class State {
       private java.lang.Object parent_ = "";
       /**
        * <pre>
-       * parent address for the asset state, e.g. a ticket is inherited from an event
+       * parent address for the asset state, e.g. a ticket is inherited from an
+       * event
        * </pre>
        *
        * <code>string parent = 9;</code>
@@ -5059,7 +5064,8 @@ public final class State {
       }
       /**
        * <pre>
-       * parent address for the asset state, e.g. a ticket is inherited from an event
+       * parent address for the asset state, e.g. a ticket is inherited from an
+       * event
        * </pre>
        *
        * <code>string parent = 9;</code>
@@ -5079,7 +5085,8 @@ public final class State {
       }
       /**
        * <pre>
-       * parent address for the asset state, e.g. a ticket is inherited from an event
+       * parent address for the asset state, e.g. a ticket is inherited from an
+       * event
        * </pre>
        *
        * <code>string parent = 9;</code>
@@ -5096,7 +5103,8 @@ public final class State {
       }
       /**
        * <pre>
-       * parent address for the asset state, e.g. a ticket is inherited from an event
+       * parent address for the asset state, e.g. a ticket is inherited from an
+       * event
        * </pre>
        *
        * <code>string parent = 9;</code>
@@ -5109,7 +5117,8 @@ public final class State {
       }
       /**
        * <pre>
-       * parent address for the asset state, e.g. a ticket is inherited from an event
+       * parent address for the asset state, e.g. a ticket is inherited from an
+       * event
        * </pre>
        *
        * <code>string parent = 9;</code>
@@ -18233,7 +18242,7 @@ public final class State {
   /**
    * <pre>
    * TODO: [peiling] We have already defined this state in core protocols repo.
-   * The only reason we define this state here again is because the protobuf 
+   * The only reason we define this state here again is because the protobuf
    * definition ResponseGetSwapState needs to reference to this SwapState.
    * </pre>
    *
@@ -18870,7 +18879,7 @@ public final class State {
     /**
      * <pre>
      * TODO: [peiling] We have already defined this state in core protocols repo.
-     * The only reason we define this state here again is because the protobuf 
+     * The only reason we define this state here again is because the protobuf
      * definition ResponseGetSwapState needs to reference to this SwapState.
      * </pre>
      *
@@ -19829,6 +19838,2404 @@ public final class State {
 
   }
 
+  public interface DelegateOpStateOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.DelegateOpState)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * all the individual rules in DelegateTx will be concat into one per type_url
+     * by "AND"
+     * </pre>
+     *
+     * <code>string rule = 1;</code>
+     */
+    java.lang.String getRule();
+    /**
+     * <pre>
+     * all the individual rules in DelegateTx will be concat into one per type_url
+     * by "AND"
+     * </pre>
+     *
+     * <code>string rule = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getRuleBytes();
+
+    /**
+     * <code>uint64 num_txs = 2;</code>
+     */
+    long getNumTxs();
+
+    /**
+     * <code>uint64 num_txs_delta = 3;</code>
+     */
+    long getNumTxsDelta();
+
+    /**
+     * <code>.forge_abi.BigUint balance = 4;</code>
+     */
+    boolean hasBalance();
+    /**
+     * <code>.forge_abi.BigUint balance = 4;</code>
+     */
+    forge_abi.Type.BigUint getBalance();
+    /**
+     * <code>.forge_abi.BigUint balance = 4;</code>
+     */
+    forge_abi.Type.BigUintOrBuilder getBalanceOrBuilder();
+
+    /**
+     * <code>.forge_abi.BigUint balance_delta = 5;</code>
+     */
+    boolean hasBalanceDelta();
+    /**
+     * <code>.forge_abi.BigUint balance_delta = 5;</code>
+     */
+    forge_abi.Type.BigUint getBalanceDelta();
+    /**
+     * <code>.forge_abi.BigUint balance_delta = 5;</code>
+     */
+    forge_abi.Type.BigUintOrBuilder getBalanceDeltaOrBuilder();
+  }
+  /**
+   * <pre>
+   * a rule can check against the statistics values, e.g. state.num_txs &lt; 10000,
+   * state.balance_delta &lt; 50000, delta is calculated based on the
+   * configuration for interval.
+   * </pre>
+   *
+   * Protobuf type {@code forge_abi.DelegateOpState}
+   */
+  public  static final class DelegateOpState extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:forge_abi.DelegateOpState)
+      DelegateOpStateOrBuilder {
+    // Use DelegateOpState.newBuilder() to construct.
+    private DelegateOpState(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private DelegateOpState() {
+      rule_ = "";
+      numTxs_ = 0L;
+      numTxsDelta_ = 0L;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private DelegateOpState(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              rule_ = s;
+              break;
+            }
+            case 16: {
+
+              numTxs_ = input.readUInt64();
+              break;
+            }
+            case 24: {
+
+              numTxsDelta_ = input.readUInt64();
+              break;
+            }
+            case 34: {
+              forge_abi.Type.BigUint.Builder subBuilder = null;
+              if (balance_ != null) {
+                subBuilder = balance_.toBuilder();
+              }
+              balance_ = input.readMessage(forge_abi.Type.BigUint.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(balance_);
+                balance_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 42: {
+              forge_abi.Type.BigUint.Builder subBuilder = null;
+              if (balanceDelta_ != null) {
+                subBuilder = balanceDelta_.toBuilder();
+              }
+              balanceDelta_ = input.readMessage(forge_abi.Type.BigUint.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(balanceDelta_);
+                balanceDelta_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return forge_abi.State.internal_static_forge_abi_DelegateOpState_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return forge_abi.State.internal_static_forge_abi_DelegateOpState_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              forge_abi.State.DelegateOpState.class, forge_abi.State.DelegateOpState.Builder.class);
+    }
+
+    public static final int RULE_FIELD_NUMBER = 1;
+    private volatile java.lang.Object rule_;
+    /**
+     * <pre>
+     * all the individual rules in DelegateTx will be concat into one per type_url
+     * by "AND"
+     * </pre>
+     *
+     * <code>string rule = 1;</code>
+     */
+    public java.lang.String getRule() {
+      java.lang.Object ref = rule_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        rule_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * all the individual rules in DelegateTx will be concat into one per type_url
+     * by "AND"
+     * </pre>
+     *
+     * <code>string rule = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getRuleBytes() {
+      java.lang.Object ref = rule_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        rule_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int NUM_TXS_FIELD_NUMBER = 2;
+    private long numTxs_;
+    /**
+     * <code>uint64 num_txs = 2;</code>
+     */
+    public long getNumTxs() {
+      return numTxs_;
+    }
+
+    public static final int NUM_TXS_DELTA_FIELD_NUMBER = 3;
+    private long numTxsDelta_;
+    /**
+     * <code>uint64 num_txs_delta = 3;</code>
+     */
+    public long getNumTxsDelta() {
+      return numTxsDelta_;
+    }
+
+    public static final int BALANCE_FIELD_NUMBER = 4;
+    private forge_abi.Type.BigUint balance_;
+    /**
+     * <code>.forge_abi.BigUint balance = 4;</code>
+     */
+    public boolean hasBalance() {
+      return balance_ != null;
+    }
+    /**
+     * <code>.forge_abi.BigUint balance = 4;</code>
+     */
+    public forge_abi.Type.BigUint getBalance() {
+      return balance_ == null ? forge_abi.Type.BigUint.getDefaultInstance() : balance_;
+    }
+    /**
+     * <code>.forge_abi.BigUint balance = 4;</code>
+     */
+    public forge_abi.Type.BigUintOrBuilder getBalanceOrBuilder() {
+      return getBalance();
+    }
+
+    public static final int BALANCE_DELTA_FIELD_NUMBER = 5;
+    private forge_abi.Type.BigUint balanceDelta_;
+    /**
+     * <code>.forge_abi.BigUint balance_delta = 5;</code>
+     */
+    public boolean hasBalanceDelta() {
+      return balanceDelta_ != null;
+    }
+    /**
+     * <code>.forge_abi.BigUint balance_delta = 5;</code>
+     */
+    public forge_abi.Type.BigUint getBalanceDelta() {
+      return balanceDelta_ == null ? forge_abi.Type.BigUint.getDefaultInstance() : balanceDelta_;
+    }
+    /**
+     * <code>.forge_abi.BigUint balance_delta = 5;</code>
+     */
+    public forge_abi.Type.BigUintOrBuilder getBalanceDeltaOrBuilder() {
+      return getBalanceDelta();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getRuleBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, rule_);
+      }
+      if (numTxs_ != 0L) {
+        output.writeUInt64(2, numTxs_);
+      }
+      if (numTxsDelta_ != 0L) {
+        output.writeUInt64(3, numTxsDelta_);
+      }
+      if (balance_ != null) {
+        output.writeMessage(4, getBalance());
+      }
+      if (balanceDelta_ != null) {
+        output.writeMessage(5, getBalanceDelta());
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getRuleBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, rule_);
+      }
+      if (numTxs_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(2, numTxs_);
+      }
+      if (numTxsDelta_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(3, numTxsDelta_);
+      }
+      if (balance_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, getBalance());
+      }
+      if (balanceDelta_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, getBalanceDelta());
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof forge_abi.State.DelegateOpState)) {
+        return super.equals(obj);
+      }
+      forge_abi.State.DelegateOpState other = (forge_abi.State.DelegateOpState) obj;
+
+      boolean result = true;
+      result = result && getRule()
+          .equals(other.getRule());
+      result = result && (getNumTxs()
+          == other.getNumTxs());
+      result = result && (getNumTxsDelta()
+          == other.getNumTxsDelta());
+      result = result && (hasBalance() == other.hasBalance());
+      if (hasBalance()) {
+        result = result && getBalance()
+            .equals(other.getBalance());
+      }
+      result = result && (hasBalanceDelta() == other.hasBalanceDelta());
+      if (hasBalanceDelta()) {
+        result = result && getBalanceDelta()
+            .equals(other.getBalanceDelta());
+      }
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + RULE_FIELD_NUMBER;
+      hash = (53 * hash) + getRule().hashCode();
+      hash = (37 * hash) + NUM_TXS_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getNumTxs());
+      hash = (37 * hash) + NUM_TXS_DELTA_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getNumTxsDelta());
+      if (hasBalance()) {
+        hash = (37 * hash) + BALANCE_FIELD_NUMBER;
+        hash = (53 * hash) + getBalance().hashCode();
+      }
+      if (hasBalanceDelta()) {
+        hash = (37 * hash) + BALANCE_DELTA_FIELD_NUMBER;
+        hash = (53 * hash) + getBalanceDelta().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static forge_abi.State.DelegateOpState parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.State.DelegateOpState parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.State.DelegateOpState parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.State.DelegateOpState parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.State.DelegateOpState parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.State.DelegateOpState parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.State.DelegateOpState parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static forge_abi.State.DelegateOpState parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.State.DelegateOpState parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.State.DelegateOpState parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(forge_abi.State.DelegateOpState prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * a rule can check against the statistics values, e.g. state.num_txs &lt; 10000,
+     * state.balance_delta &lt; 50000, delta is calculated based on the
+     * configuration for interval.
+     * </pre>
+     *
+     * Protobuf type {@code forge_abi.DelegateOpState}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:forge_abi.DelegateOpState)
+        forge_abi.State.DelegateOpStateOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return forge_abi.State.internal_static_forge_abi_DelegateOpState_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return forge_abi.State.internal_static_forge_abi_DelegateOpState_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                forge_abi.State.DelegateOpState.class, forge_abi.State.DelegateOpState.Builder.class);
+      }
+
+      // Construct using forge_abi.State.DelegateOpState.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        rule_ = "";
+
+        numTxs_ = 0L;
+
+        numTxsDelta_ = 0L;
+
+        if (balanceBuilder_ == null) {
+          balance_ = null;
+        } else {
+          balance_ = null;
+          balanceBuilder_ = null;
+        }
+        if (balanceDeltaBuilder_ == null) {
+          balanceDelta_ = null;
+        } else {
+          balanceDelta_ = null;
+          balanceDeltaBuilder_ = null;
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return forge_abi.State.internal_static_forge_abi_DelegateOpState_descriptor;
+      }
+
+      public forge_abi.State.DelegateOpState getDefaultInstanceForType() {
+        return forge_abi.State.DelegateOpState.getDefaultInstance();
+      }
+
+      public forge_abi.State.DelegateOpState build() {
+        forge_abi.State.DelegateOpState result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public forge_abi.State.DelegateOpState buildPartial() {
+        forge_abi.State.DelegateOpState result = new forge_abi.State.DelegateOpState(this);
+        result.rule_ = rule_;
+        result.numTxs_ = numTxs_;
+        result.numTxsDelta_ = numTxsDelta_;
+        if (balanceBuilder_ == null) {
+          result.balance_ = balance_;
+        } else {
+          result.balance_ = balanceBuilder_.build();
+        }
+        if (balanceDeltaBuilder_ == null) {
+          result.balanceDelta_ = balanceDelta_;
+        } else {
+          result.balanceDelta_ = balanceDeltaBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof forge_abi.State.DelegateOpState) {
+          return mergeFrom((forge_abi.State.DelegateOpState)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(forge_abi.State.DelegateOpState other) {
+        if (other == forge_abi.State.DelegateOpState.getDefaultInstance()) return this;
+        if (!other.getRule().isEmpty()) {
+          rule_ = other.rule_;
+          onChanged();
+        }
+        if (other.getNumTxs() != 0L) {
+          setNumTxs(other.getNumTxs());
+        }
+        if (other.getNumTxsDelta() != 0L) {
+          setNumTxsDelta(other.getNumTxsDelta());
+        }
+        if (other.hasBalance()) {
+          mergeBalance(other.getBalance());
+        }
+        if (other.hasBalanceDelta()) {
+          mergeBalanceDelta(other.getBalanceDelta());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        forge_abi.State.DelegateOpState parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (forge_abi.State.DelegateOpState) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object rule_ = "";
+      /**
+       * <pre>
+       * all the individual rules in DelegateTx will be concat into one per type_url
+       * by "AND"
+       * </pre>
+       *
+       * <code>string rule = 1;</code>
+       */
+      public java.lang.String getRule() {
+        java.lang.Object ref = rule_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          rule_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * all the individual rules in DelegateTx will be concat into one per type_url
+       * by "AND"
+       * </pre>
+       *
+       * <code>string rule = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getRuleBytes() {
+        java.lang.Object ref = rule_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          rule_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * all the individual rules in DelegateTx will be concat into one per type_url
+       * by "AND"
+       * </pre>
+       *
+       * <code>string rule = 1;</code>
+       */
+      public Builder setRule(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        rule_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * all the individual rules in DelegateTx will be concat into one per type_url
+       * by "AND"
+       * </pre>
+       *
+       * <code>string rule = 1;</code>
+       */
+      public Builder clearRule() {
+        
+        rule_ = getDefaultInstance().getRule();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * all the individual rules in DelegateTx will be concat into one per type_url
+       * by "AND"
+       * </pre>
+       *
+       * <code>string rule = 1;</code>
+       */
+      public Builder setRuleBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        rule_ = value;
+        onChanged();
+        return this;
+      }
+
+      private long numTxs_ ;
+      /**
+       * <code>uint64 num_txs = 2;</code>
+       */
+      public long getNumTxs() {
+        return numTxs_;
+      }
+      /**
+       * <code>uint64 num_txs = 2;</code>
+       */
+      public Builder setNumTxs(long value) {
+        
+        numTxs_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint64 num_txs = 2;</code>
+       */
+      public Builder clearNumTxs() {
+        
+        numTxs_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long numTxsDelta_ ;
+      /**
+       * <code>uint64 num_txs_delta = 3;</code>
+       */
+      public long getNumTxsDelta() {
+        return numTxsDelta_;
+      }
+      /**
+       * <code>uint64 num_txs_delta = 3;</code>
+       */
+      public Builder setNumTxsDelta(long value) {
+        
+        numTxsDelta_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint64 num_txs_delta = 3;</code>
+       */
+      public Builder clearNumTxsDelta() {
+        
+        numTxsDelta_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private forge_abi.Type.BigUint balance_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder> balanceBuilder_;
+      /**
+       * <code>.forge_abi.BigUint balance = 4;</code>
+       */
+      public boolean hasBalance() {
+        return balanceBuilder_ != null || balance_ != null;
+      }
+      /**
+       * <code>.forge_abi.BigUint balance = 4;</code>
+       */
+      public forge_abi.Type.BigUint getBalance() {
+        if (balanceBuilder_ == null) {
+          return balance_ == null ? forge_abi.Type.BigUint.getDefaultInstance() : balance_;
+        } else {
+          return balanceBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.forge_abi.BigUint balance = 4;</code>
+       */
+      public Builder setBalance(forge_abi.Type.BigUint value) {
+        if (balanceBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          balance_ = value;
+          onChanged();
+        } else {
+          balanceBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint balance = 4;</code>
+       */
+      public Builder setBalance(
+          forge_abi.Type.BigUint.Builder builderForValue) {
+        if (balanceBuilder_ == null) {
+          balance_ = builderForValue.build();
+          onChanged();
+        } else {
+          balanceBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint balance = 4;</code>
+       */
+      public Builder mergeBalance(forge_abi.Type.BigUint value) {
+        if (balanceBuilder_ == null) {
+          if (balance_ != null) {
+            balance_ =
+              forge_abi.Type.BigUint.newBuilder(balance_).mergeFrom(value).buildPartial();
+          } else {
+            balance_ = value;
+          }
+          onChanged();
+        } else {
+          balanceBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint balance = 4;</code>
+       */
+      public Builder clearBalance() {
+        if (balanceBuilder_ == null) {
+          balance_ = null;
+          onChanged();
+        } else {
+          balance_ = null;
+          balanceBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint balance = 4;</code>
+       */
+      public forge_abi.Type.BigUint.Builder getBalanceBuilder() {
+        
+        onChanged();
+        return getBalanceFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.BigUint balance = 4;</code>
+       */
+      public forge_abi.Type.BigUintOrBuilder getBalanceOrBuilder() {
+        if (balanceBuilder_ != null) {
+          return balanceBuilder_.getMessageOrBuilder();
+        } else {
+          return balance_ == null ?
+              forge_abi.Type.BigUint.getDefaultInstance() : balance_;
+        }
+      }
+      /**
+       * <code>.forge_abi.BigUint balance = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder> 
+          getBalanceFieldBuilder() {
+        if (balanceBuilder_ == null) {
+          balanceBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder>(
+                  getBalance(),
+                  getParentForChildren(),
+                  isClean());
+          balance_ = null;
+        }
+        return balanceBuilder_;
+      }
+
+      private forge_abi.Type.BigUint balanceDelta_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder> balanceDeltaBuilder_;
+      /**
+       * <code>.forge_abi.BigUint balance_delta = 5;</code>
+       */
+      public boolean hasBalanceDelta() {
+        return balanceDeltaBuilder_ != null || balanceDelta_ != null;
+      }
+      /**
+       * <code>.forge_abi.BigUint balance_delta = 5;</code>
+       */
+      public forge_abi.Type.BigUint getBalanceDelta() {
+        if (balanceDeltaBuilder_ == null) {
+          return balanceDelta_ == null ? forge_abi.Type.BigUint.getDefaultInstance() : balanceDelta_;
+        } else {
+          return balanceDeltaBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.forge_abi.BigUint balance_delta = 5;</code>
+       */
+      public Builder setBalanceDelta(forge_abi.Type.BigUint value) {
+        if (balanceDeltaBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          balanceDelta_ = value;
+          onChanged();
+        } else {
+          balanceDeltaBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint balance_delta = 5;</code>
+       */
+      public Builder setBalanceDelta(
+          forge_abi.Type.BigUint.Builder builderForValue) {
+        if (balanceDeltaBuilder_ == null) {
+          balanceDelta_ = builderForValue.build();
+          onChanged();
+        } else {
+          balanceDeltaBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint balance_delta = 5;</code>
+       */
+      public Builder mergeBalanceDelta(forge_abi.Type.BigUint value) {
+        if (balanceDeltaBuilder_ == null) {
+          if (balanceDelta_ != null) {
+            balanceDelta_ =
+              forge_abi.Type.BigUint.newBuilder(balanceDelta_).mergeFrom(value).buildPartial();
+          } else {
+            balanceDelta_ = value;
+          }
+          onChanged();
+        } else {
+          balanceDeltaBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint balance_delta = 5;</code>
+       */
+      public Builder clearBalanceDelta() {
+        if (balanceDeltaBuilder_ == null) {
+          balanceDelta_ = null;
+          onChanged();
+        } else {
+          balanceDelta_ = null;
+          balanceDeltaBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint balance_delta = 5;</code>
+       */
+      public forge_abi.Type.BigUint.Builder getBalanceDeltaBuilder() {
+        
+        onChanged();
+        return getBalanceDeltaFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.BigUint balance_delta = 5;</code>
+       */
+      public forge_abi.Type.BigUintOrBuilder getBalanceDeltaOrBuilder() {
+        if (balanceDeltaBuilder_ != null) {
+          return balanceDeltaBuilder_.getMessageOrBuilder();
+        } else {
+          return balanceDelta_ == null ?
+              forge_abi.Type.BigUint.getDefaultInstance() : balanceDelta_;
+        }
+      }
+      /**
+       * <code>.forge_abi.BigUint balance_delta = 5;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder> 
+          getBalanceDeltaFieldBuilder() {
+        if (balanceDeltaBuilder_ == null) {
+          balanceDeltaBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder>(
+                  getBalanceDelta(),
+                  getParentForChildren(),
+                  isClean());
+          balanceDelta_ = null;
+        }
+        return balanceDeltaBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:forge_abi.DelegateOpState)
+    }
+
+    // @@protoc_insertion_point(class_scope:forge_abi.DelegateOpState)
+    private static final forge_abi.State.DelegateOpState DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new forge_abi.State.DelegateOpState();
+    }
+
+    public static forge_abi.State.DelegateOpState getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<DelegateOpState>
+        PARSER = new com.google.protobuf.AbstractParser<DelegateOpState>() {
+      public DelegateOpState parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new DelegateOpState(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<DelegateOpState> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<DelegateOpState> getParserForType() {
+      return PARSER;
+    }
+
+    public forge_abi.State.DelegateOpState getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface DelegateStateOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.DelegateState)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string address = 1;</code>
+     */
+    java.lang.String getAddress();
+    /**
+     * <code>string address = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getAddressBytes();
+
+    /**
+     * <code>map&lt;string, .forge_abi.DelegateOpState&gt; ops = 2;</code>
+     */
+    int getOpsCount();
+    /**
+     * <code>map&lt;string, .forge_abi.DelegateOpState&gt; ops = 2;</code>
+     */
+    boolean containsOps(
+        java.lang.String key);
+    /**
+     * Use {@link #getOpsMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.String, forge_abi.State.DelegateOpState>
+    getOps();
+    /**
+     * <code>map&lt;string, .forge_abi.DelegateOpState&gt; ops = 2;</code>
+     */
+    java.util.Map<java.lang.String, forge_abi.State.DelegateOpState>
+    getOpsMap();
+    /**
+     * <code>map&lt;string, .forge_abi.DelegateOpState&gt; ops = 2;</code>
+     */
+
+    forge_abi.State.DelegateOpState getOpsOrDefault(
+        java.lang.String key,
+        forge_abi.State.DelegateOpState defaultValue);
+    /**
+     * <code>map&lt;string, .forge_abi.DelegateOpState&gt; ops = 2;</code>
+     */
+
+    forge_abi.State.DelegateOpState getOpsOrThrow(
+        java.lang.String key);
+
+    /**
+     * <pre>
+     * state context, replace exiting fields
+     * </pre>
+     *
+     * <code>.forge_abi.StateContext context = 14;</code>
+     */
+    boolean hasContext();
+    /**
+     * <pre>
+     * state context, replace exiting fields
+     * </pre>
+     *
+     * <code>.forge_abi.StateContext context = 14;</code>
+     */
+    forge_abi.Type.StateContext getContext();
+    /**
+     * <pre>
+     * state context, replace exiting fields
+     * </pre>
+     *
+     * <code>.forge_abi.StateContext context = 14;</code>
+     */
+    forge_abi.Type.StateContextOrBuilder getContextOrBuilder();
+
+    /**
+     * <pre>
+     * forge app can extend this
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    boolean hasData();
+    /**
+     * <pre>
+     * forge app can extend this
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    com.google.protobuf.Any getData();
+    /**
+     * <pre>
+     * forge app can extend this
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    com.google.protobuf.AnyOrBuilder getDataOrBuilder();
+  }
+  /**
+   * Protobuf type {@code forge_abi.DelegateState}
+   */
+  public  static final class DelegateState extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:forge_abi.DelegateState)
+      DelegateStateOrBuilder {
+    // Use DelegateState.newBuilder() to construct.
+    private DelegateState(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private DelegateState() {
+      address_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private DelegateState(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              address_ = s;
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                ops_ = com.google.protobuf.MapField.newMapField(
+                    OpsDefaultEntryHolder.defaultEntry);
+                mutable_bitField0_ |= 0x00000002;
+              }
+              com.google.protobuf.MapEntry<java.lang.String, forge_abi.State.DelegateOpState>
+              ops__ = input.readMessage(
+                  OpsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              ops_.getMutableMap().put(
+                  ops__.getKey(), ops__.getValue());
+              break;
+            }
+            case 114: {
+              forge_abi.Type.StateContext.Builder subBuilder = null;
+              if (context_ != null) {
+                subBuilder = context_.toBuilder();
+              }
+              context_ = input.readMessage(forge_abi.Type.StateContext.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(context_);
+                context_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 122: {
+              com.google.protobuf.Any.Builder subBuilder = null;
+              if (data_ != null) {
+                subBuilder = data_.toBuilder();
+              }
+              data_ = input.readMessage(com.google.protobuf.Any.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(data_);
+                data_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return forge_abi.State.internal_static_forge_abi_DelegateState_descriptor;
+    }
+
+    @SuppressWarnings({"rawtypes"})
+    protected com.google.protobuf.MapField internalGetMapField(
+        int number) {
+      switch (number) {
+        case 2:
+          return internalGetOps();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return forge_abi.State.internal_static_forge_abi_DelegateState_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              forge_abi.State.DelegateState.class, forge_abi.State.DelegateState.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int ADDRESS_FIELD_NUMBER = 1;
+    private volatile java.lang.Object address_;
+    /**
+     * <code>string address = 1;</code>
+     */
+    public java.lang.String getAddress() {
+      java.lang.Object ref = address_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        address_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string address = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAddressBytes() {
+      java.lang.Object ref = address_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        address_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int OPS_FIELD_NUMBER = 2;
+    private static final class OpsDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.String, forge_abi.State.DelegateOpState> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.String, forge_abi.State.DelegateOpState>newDefaultInstance(
+                  forge_abi.State.internal_static_forge_abi_DelegateState_OpsEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.STRING,
+                  "",
+                  com.google.protobuf.WireFormat.FieldType.MESSAGE,
+                  forge_abi.State.DelegateOpState.getDefaultInstance());
+    }
+    private com.google.protobuf.MapField<
+        java.lang.String, forge_abi.State.DelegateOpState> ops_;
+    private com.google.protobuf.MapField<java.lang.String, forge_abi.State.DelegateOpState>
+    internalGetOps() {
+      if (ops_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            OpsDefaultEntryHolder.defaultEntry);
+      }
+      return ops_;
+    }
+
+    public int getOpsCount() {
+      return internalGetOps().getMap().size();
+    }
+    /**
+     * <code>map&lt;string, .forge_abi.DelegateOpState&gt; ops = 2;</code>
+     */
+
+    public boolean containsOps(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      return internalGetOps().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getOpsMap()} instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, forge_abi.State.DelegateOpState> getOps() {
+      return getOpsMap();
+    }
+    /**
+     * <code>map&lt;string, .forge_abi.DelegateOpState&gt; ops = 2;</code>
+     */
+
+    public java.util.Map<java.lang.String, forge_abi.State.DelegateOpState> getOpsMap() {
+      return internalGetOps().getMap();
+    }
+    /**
+     * <code>map&lt;string, .forge_abi.DelegateOpState&gt; ops = 2;</code>
+     */
+
+    public forge_abi.State.DelegateOpState getOpsOrDefault(
+        java.lang.String key,
+        forge_abi.State.DelegateOpState defaultValue) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, forge_abi.State.DelegateOpState> map =
+          internalGetOps().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <code>map&lt;string, .forge_abi.DelegateOpState&gt; ops = 2;</code>
+     */
+
+    public forge_abi.State.DelegateOpState getOpsOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, forge_abi.State.DelegateOpState> map =
+          internalGetOps().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
+    public static final int CONTEXT_FIELD_NUMBER = 14;
+    private forge_abi.Type.StateContext context_;
+    /**
+     * <pre>
+     * state context, replace exiting fields
+     * </pre>
+     *
+     * <code>.forge_abi.StateContext context = 14;</code>
+     */
+    public boolean hasContext() {
+      return context_ != null;
+    }
+    /**
+     * <pre>
+     * state context, replace exiting fields
+     * </pre>
+     *
+     * <code>.forge_abi.StateContext context = 14;</code>
+     */
+    public forge_abi.Type.StateContext getContext() {
+      return context_ == null ? forge_abi.Type.StateContext.getDefaultInstance() : context_;
+    }
+    /**
+     * <pre>
+     * state context, replace exiting fields
+     * </pre>
+     *
+     * <code>.forge_abi.StateContext context = 14;</code>
+     */
+    public forge_abi.Type.StateContextOrBuilder getContextOrBuilder() {
+      return getContext();
+    }
+
+    public static final int DATA_FIELD_NUMBER = 15;
+    private com.google.protobuf.Any data_;
+    /**
+     * <pre>
+     * forge app can extend this
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    public boolean hasData() {
+      return data_ != null;
+    }
+    /**
+     * <pre>
+     * forge app can extend this
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    public com.google.protobuf.Any getData() {
+      return data_ == null ? com.google.protobuf.Any.getDefaultInstance() : data_;
+    }
+    /**
+     * <pre>
+     * forge app can extend this
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    public com.google.protobuf.AnyOrBuilder getDataOrBuilder() {
+      return getData();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getAddressBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, address_);
+      }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetOps(),
+          OpsDefaultEntryHolder.defaultEntry,
+          2);
+      if (context_ != null) {
+        output.writeMessage(14, getContext());
+      }
+      if (data_ != null) {
+        output.writeMessage(15, getData());
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getAddressBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, address_);
+      }
+      for (java.util.Map.Entry<java.lang.String, forge_abi.State.DelegateOpState> entry
+           : internalGetOps().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.String, forge_abi.State.DelegateOpState>
+        ops__ = OpsDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(2, ops__);
+      }
+      if (context_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(14, getContext());
+      }
+      if (data_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(15, getData());
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof forge_abi.State.DelegateState)) {
+        return super.equals(obj);
+      }
+      forge_abi.State.DelegateState other = (forge_abi.State.DelegateState) obj;
+
+      boolean result = true;
+      result = result && getAddress()
+          .equals(other.getAddress());
+      result = result && internalGetOps().equals(
+          other.internalGetOps());
+      result = result && (hasContext() == other.hasContext());
+      if (hasContext()) {
+        result = result && getContext()
+            .equals(other.getContext());
+      }
+      result = result && (hasData() == other.hasData());
+      if (hasData()) {
+        result = result && getData()
+            .equals(other.getData());
+      }
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ADDRESS_FIELD_NUMBER;
+      hash = (53 * hash) + getAddress().hashCode();
+      if (!internalGetOps().getMap().isEmpty()) {
+        hash = (37 * hash) + OPS_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetOps().hashCode();
+      }
+      if (hasContext()) {
+        hash = (37 * hash) + CONTEXT_FIELD_NUMBER;
+        hash = (53 * hash) + getContext().hashCode();
+      }
+      if (hasData()) {
+        hash = (37 * hash) + DATA_FIELD_NUMBER;
+        hash = (53 * hash) + getData().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static forge_abi.State.DelegateState parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.State.DelegateState parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.State.DelegateState parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.State.DelegateState parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.State.DelegateState parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.State.DelegateState parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.State.DelegateState parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static forge_abi.State.DelegateState parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.State.DelegateState parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.State.DelegateState parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(forge_abi.State.DelegateState prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code forge_abi.DelegateState}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:forge_abi.DelegateState)
+        forge_abi.State.DelegateStateOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return forge_abi.State.internal_static_forge_abi_DelegateState_descriptor;
+      }
+
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapField internalGetMapField(
+          int number) {
+        switch (number) {
+          case 2:
+            return internalGetOps();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapField internalGetMutableMapField(
+          int number) {
+        switch (number) {
+          case 2:
+            return internalGetMutableOps();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return forge_abi.State.internal_static_forge_abi_DelegateState_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                forge_abi.State.DelegateState.class, forge_abi.State.DelegateState.Builder.class);
+      }
+
+      // Construct using forge_abi.State.DelegateState.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        address_ = "";
+
+        internalGetMutableOps().clear();
+        if (contextBuilder_ == null) {
+          context_ = null;
+        } else {
+          context_ = null;
+          contextBuilder_ = null;
+        }
+        if (dataBuilder_ == null) {
+          data_ = null;
+        } else {
+          data_ = null;
+          dataBuilder_ = null;
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return forge_abi.State.internal_static_forge_abi_DelegateState_descriptor;
+      }
+
+      public forge_abi.State.DelegateState getDefaultInstanceForType() {
+        return forge_abi.State.DelegateState.getDefaultInstance();
+      }
+
+      public forge_abi.State.DelegateState build() {
+        forge_abi.State.DelegateState result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public forge_abi.State.DelegateState buildPartial() {
+        forge_abi.State.DelegateState result = new forge_abi.State.DelegateState(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.address_ = address_;
+        result.ops_ = internalGetOps();
+        result.ops_.makeImmutable();
+        if (contextBuilder_ == null) {
+          result.context_ = context_;
+        } else {
+          result.context_ = contextBuilder_.build();
+        }
+        if (dataBuilder_ == null) {
+          result.data_ = data_;
+        } else {
+          result.data_ = dataBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof forge_abi.State.DelegateState) {
+          return mergeFrom((forge_abi.State.DelegateState)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(forge_abi.State.DelegateState other) {
+        if (other == forge_abi.State.DelegateState.getDefaultInstance()) return this;
+        if (!other.getAddress().isEmpty()) {
+          address_ = other.address_;
+          onChanged();
+        }
+        internalGetMutableOps().mergeFrom(
+            other.internalGetOps());
+        if (other.hasContext()) {
+          mergeContext(other.getContext());
+        }
+        if (other.hasData()) {
+          mergeData(other.getData());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        forge_abi.State.DelegateState parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (forge_abi.State.DelegateState) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object address_ = "";
+      /**
+       * <code>string address = 1;</code>
+       */
+      public java.lang.String getAddress() {
+        java.lang.Object ref = address_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          address_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string address = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAddressBytes() {
+        java.lang.Object ref = address_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          address_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string address = 1;</code>
+       */
+      public Builder setAddress(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        address_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string address = 1;</code>
+       */
+      public Builder clearAddress() {
+        
+        address_ = getDefaultInstance().getAddress();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string address = 1;</code>
+       */
+      public Builder setAddressBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        address_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.MapField<
+          java.lang.String, forge_abi.State.DelegateOpState> ops_;
+      private com.google.protobuf.MapField<java.lang.String, forge_abi.State.DelegateOpState>
+      internalGetOps() {
+        if (ops_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              OpsDefaultEntryHolder.defaultEntry);
+        }
+        return ops_;
+      }
+      private com.google.protobuf.MapField<java.lang.String, forge_abi.State.DelegateOpState>
+      internalGetMutableOps() {
+        onChanged();;
+        if (ops_ == null) {
+          ops_ = com.google.protobuf.MapField.newMapField(
+              OpsDefaultEntryHolder.defaultEntry);
+        }
+        if (!ops_.isMutable()) {
+          ops_ = ops_.copy();
+        }
+        return ops_;
+      }
+
+      public int getOpsCount() {
+        return internalGetOps().getMap().size();
+      }
+      /**
+       * <code>map&lt;string, .forge_abi.DelegateOpState&gt; ops = 2;</code>
+       */
+
+      public boolean containsOps(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        return internalGetOps().getMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getOpsMap()} instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, forge_abi.State.DelegateOpState> getOps() {
+        return getOpsMap();
+      }
+      /**
+       * <code>map&lt;string, .forge_abi.DelegateOpState&gt; ops = 2;</code>
+       */
+
+      public java.util.Map<java.lang.String, forge_abi.State.DelegateOpState> getOpsMap() {
+        return internalGetOps().getMap();
+      }
+      /**
+       * <code>map&lt;string, .forge_abi.DelegateOpState&gt; ops = 2;</code>
+       */
+
+      public forge_abi.State.DelegateOpState getOpsOrDefault(
+          java.lang.String key,
+          forge_abi.State.DelegateOpState defaultValue) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, forge_abi.State.DelegateOpState> map =
+            internalGetOps().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+      }
+      /**
+       * <code>map&lt;string, .forge_abi.DelegateOpState&gt; ops = 2;</code>
+       */
+
+      public forge_abi.State.DelegateOpState getOpsOrThrow(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, forge_abi.State.DelegateOpState> map =
+            internalGetOps().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return map.get(key);
+      }
+
+      public Builder clearOps() {
+        internalGetMutableOps().getMutableMap()
+            .clear();
+        return this;
+      }
+      /**
+       * <code>map&lt;string, .forge_abi.DelegateOpState&gt; ops = 2;</code>
+       */
+
+      public Builder removeOps(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        internalGetMutableOps().getMutableMap()
+            .remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, forge_abi.State.DelegateOpState>
+      getMutableOps() {
+        return internalGetMutableOps().getMutableMap();
+      }
+      /**
+       * <code>map&lt;string, .forge_abi.DelegateOpState&gt; ops = 2;</code>
+       */
+      public Builder putOps(
+          java.lang.String key,
+          forge_abi.State.DelegateOpState value) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        if (value == null) { throw new java.lang.NullPointerException(); }
+        internalGetMutableOps().getMutableMap()
+            .put(key, value);
+        return this;
+      }
+      /**
+       * <code>map&lt;string, .forge_abi.DelegateOpState&gt; ops = 2;</code>
+       */
+
+      public Builder putAllOps(
+          java.util.Map<java.lang.String, forge_abi.State.DelegateOpState> values) {
+        internalGetMutableOps().getMutableMap()
+            .putAll(values);
+        return this;
+      }
+
+      private forge_abi.Type.StateContext context_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.StateContext, forge_abi.Type.StateContext.Builder, forge_abi.Type.StateContextOrBuilder> contextBuilder_;
+      /**
+       * <pre>
+       * state context, replace exiting fields
+       * </pre>
+       *
+       * <code>.forge_abi.StateContext context = 14;</code>
+       */
+      public boolean hasContext() {
+        return contextBuilder_ != null || context_ != null;
+      }
+      /**
+       * <pre>
+       * state context, replace exiting fields
+       * </pre>
+       *
+       * <code>.forge_abi.StateContext context = 14;</code>
+       */
+      public forge_abi.Type.StateContext getContext() {
+        if (contextBuilder_ == null) {
+          return context_ == null ? forge_abi.Type.StateContext.getDefaultInstance() : context_;
+        } else {
+          return contextBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * state context, replace exiting fields
+       * </pre>
+       *
+       * <code>.forge_abi.StateContext context = 14;</code>
+       */
+      public Builder setContext(forge_abi.Type.StateContext value) {
+        if (contextBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          context_ = value;
+          onChanged();
+        } else {
+          contextBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * state context, replace exiting fields
+       * </pre>
+       *
+       * <code>.forge_abi.StateContext context = 14;</code>
+       */
+      public Builder setContext(
+          forge_abi.Type.StateContext.Builder builderForValue) {
+        if (contextBuilder_ == null) {
+          context_ = builderForValue.build();
+          onChanged();
+        } else {
+          contextBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * state context, replace exiting fields
+       * </pre>
+       *
+       * <code>.forge_abi.StateContext context = 14;</code>
+       */
+      public Builder mergeContext(forge_abi.Type.StateContext value) {
+        if (contextBuilder_ == null) {
+          if (context_ != null) {
+            context_ =
+              forge_abi.Type.StateContext.newBuilder(context_).mergeFrom(value).buildPartial();
+          } else {
+            context_ = value;
+          }
+          onChanged();
+        } else {
+          contextBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * state context, replace exiting fields
+       * </pre>
+       *
+       * <code>.forge_abi.StateContext context = 14;</code>
+       */
+      public Builder clearContext() {
+        if (contextBuilder_ == null) {
+          context_ = null;
+          onChanged();
+        } else {
+          context_ = null;
+          contextBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * state context, replace exiting fields
+       * </pre>
+       *
+       * <code>.forge_abi.StateContext context = 14;</code>
+       */
+      public forge_abi.Type.StateContext.Builder getContextBuilder() {
+        
+        onChanged();
+        return getContextFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       * state context, replace exiting fields
+       * </pre>
+       *
+       * <code>.forge_abi.StateContext context = 14;</code>
+       */
+      public forge_abi.Type.StateContextOrBuilder getContextOrBuilder() {
+        if (contextBuilder_ != null) {
+          return contextBuilder_.getMessageOrBuilder();
+        } else {
+          return context_ == null ?
+              forge_abi.Type.StateContext.getDefaultInstance() : context_;
+        }
+      }
+      /**
+       * <pre>
+       * state context, replace exiting fields
+       * </pre>
+       *
+       * <code>.forge_abi.StateContext context = 14;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.StateContext, forge_abi.Type.StateContext.Builder, forge_abi.Type.StateContextOrBuilder> 
+          getContextFieldBuilder() {
+        if (contextBuilder_ == null) {
+          contextBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Type.StateContext, forge_abi.Type.StateContext.Builder, forge_abi.Type.StateContextOrBuilder>(
+                  getContext(),
+                  getParentForChildren(),
+                  isClean());
+          context_ = null;
+        }
+        return contextBuilder_;
+      }
+
+      private com.google.protobuf.Any data_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> dataBuilder_;
+      /**
+       * <pre>
+       * forge app can extend this
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public boolean hasData() {
+        return dataBuilder_ != null || data_ != null;
+      }
+      /**
+       * <pre>
+       * forge app can extend this
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public com.google.protobuf.Any getData() {
+        if (dataBuilder_ == null) {
+          return data_ == null ? com.google.protobuf.Any.getDefaultInstance() : data_;
+        } else {
+          return dataBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * forge app can extend this
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public Builder setData(com.google.protobuf.Any value) {
+        if (dataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          data_ = value;
+          onChanged();
+        } else {
+          dataBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * forge app can extend this
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public Builder setData(
+          com.google.protobuf.Any.Builder builderForValue) {
+        if (dataBuilder_ == null) {
+          data_ = builderForValue.build();
+          onChanged();
+        } else {
+          dataBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * forge app can extend this
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public Builder mergeData(com.google.protobuf.Any value) {
+        if (dataBuilder_ == null) {
+          if (data_ != null) {
+            data_ =
+              com.google.protobuf.Any.newBuilder(data_).mergeFrom(value).buildPartial();
+          } else {
+            data_ = value;
+          }
+          onChanged();
+        } else {
+          dataBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * forge app can extend this
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public Builder clearData() {
+        if (dataBuilder_ == null) {
+          data_ = null;
+          onChanged();
+        } else {
+          data_ = null;
+          dataBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * forge app can extend this
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public com.google.protobuf.Any.Builder getDataBuilder() {
+        
+        onChanged();
+        return getDataFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       * forge app can extend this
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public com.google.protobuf.AnyOrBuilder getDataOrBuilder() {
+        if (dataBuilder_ != null) {
+          return dataBuilder_.getMessageOrBuilder();
+        } else {
+          return data_ == null ?
+              com.google.protobuf.Any.getDefaultInstance() : data_;
+        }
+      }
+      /**
+       * <pre>
+       * forge app can extend this
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> 
+          getDataFieldBuilder() {
+        if (dataBuilder_ == null) {
+          dataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder>(
+                  getData(),
+                  getParentForChildren(),
+                  isClean());
+          data_ = null;
+        }
+        return dataBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:forge_abi.DelegateState)
+    }
+
+    // @@protoc_insertion_point(class_scope:forge_abi.DelegateState)
+    private static final forge_abi.State.DelegateState DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new forge_abi.State.DelegateState();
+    }
+
+    public static forge_abi.State.DelegateState getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<DelegateState>
+        PARSER = new com.google.protobuf.AbstractParser<DelegateState>() {
+      public DelegateState parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new DelegateState(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<DelegateState> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<DelegateState> getParserForType() {
+      return PARSER;
+    }
+
+    public forge_abi.State.DelegateState getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_forge_abi_AccountState_descriptor;
   private static final 
@@ -19904,6 +22311,21 @@ public final class State {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_forge_abi_SwapState_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_forge_abi_DelegateOpState_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_forge_abi_DelegateOpState_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_forge_abi_DelegateState_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_forge_abi_DelegateState_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_forge_abi_DelegateState_OpsEntry_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_forge_abi_DelegateState_OpsEntry_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -19992,7 +22414,17 @@ public final class State {
       "\022\020\n\010receiver\030\005 \001(\t\022!\n\005value\030\006 \001(\0132\022.forg" +
       "e_abi.BigUint\022\016\n\006assets\030\007 \003(\t\022\020\n\010locktim" +
       "e\030\010 \001(\r\022\020\n\010hashlock\030\t \001(\014\022(\n\007context\030\n \001" +
-      "(\0132\027.forge_abi.StateContextb\006proto3"
+      "(\0132\027.forge_abi.StateContext\"\227\001\n\017Delegate",
+      "OpState\022\014\n\004rule\030\001 \001(\t\022\017\n\007num_txs\030\002 \001(\004\022\025" +
+      "\n\rnum_txs_delta\030\003 \001(\004\022#\n\007balance\030\004 \001(\0132\022" +
+      ".forge_abi.BigUint\022)\n\rbalance_delta\030\005 \001(" +
+      "\0132\022.forge_abi.BigUint\"\346\001\n\rDelegateState\022" +
+      "\017\n\007address\030\001 \001(\t\022.\n\003ops\030\002 \003(\0132!.forge_ab" +
+      "i.DelegateState.OpsEntry\022(\n\007context\030\016 \001(" +
+      "\0132\027.forge_abi.StateContext\022\"\n\004data\030\017 \001(\013" +
+      "2\024.google.protobuf.Any\032F\n\010OpsEntry\022\013\n\003ke" +
+      "y\030\001 \001(\t\022)\n\005value\030\002 \001(\0132\032.forge_abi.Deleg" +
+      "ateOpState:\0028\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -20101,6 +22533,24 @@ public final class State {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_SwapState_descriptor,
         new java.lang.String[] { "Hash", "Address", "Hashkey", "Sender", "Receiver", "Value", "Assets", "Locktime", "Hashlock", "Context", });
+    internal_static_forge_abi_DelegateOpState_descriptor =
+      getDescriptor().getMessageTypes().get(12);
+    internal_static_forge_abi_DelegateOpState_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_DelegateOpState_descriptor,
+        new java.lang.String[] { "Rule", "NumTxs", "NumTxsDelta", "Balance", "BalanceDelta", });
+    internal_static_forge_abi_DelegateState_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_forge_abi_DelegateState_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_DelegateState_descriptor,
+        new java.lang.String[] { "Address", "Ops", "Context", "Data", });
+    internal_static_forge_abi_DelegateState_OpsEntry_descriptor =
+      internal_static_forge_abi_DelegateState_descriptor.getNestedTypes().get(0);
+    internal_static_forge_abi_DelegateState_OpsEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_DelegateState_OpsEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
     com.google.protobuf.AnyProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
     forge_abi.Enum.getDescriptor();

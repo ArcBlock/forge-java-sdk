@@ -13790,6 +13790,24 @@ public final class Type {
 
     /**
      * <pre>
+     * delegator
+     * </pre>
+     *
+     * <code>string delegator = 4;</code>
+     */
+    java.lang.String getDelegator();
+    /**
+     * <pre>
+     * delegator
+     * </pre>
+     *
+     * <code>string delegator = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getDelegatorBytes();
+
+    /**
+     * <pre>
      * extra data
      * </pre>
      *
@@ -13828,6 +13846,7 @@ public final class Type {
       signer_ = "";
       pk_ = com.google.protobuf.ByteString.EMPTY;
       signature_ = com.google.protobuf.ByteString.EMPTY;
+      delegator_ = "";
     }
 
     @java.lang.Override
@@ -13869,6 +13888,12 @@ public final class Type {
             case 26: {
 
               signature_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              delegator_ = s;
               break;
             }
             case 122: {
@@ -13975,6 +14000,48 @@ public final class Type {
       return signature_;
     }
 
+    public static final int DELEGATOR_FIELD_NUMBER = 4;
+    private volatile java.lang.Object delegator_;
+    /**
+     * <pre>
+     * delegator
+     * </pre>
+     *
+     * <code>string delegator = 4;</code>
+     */
+    public java.lang.String getDelegator() {
+      java.lang.Object ref = delegator_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        delegator_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * delegator
+     * </pre>
+     *
+     * <code>string delegator = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDelegatorBytes() {
+      java.lang.Object ref = delegator_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        delegator_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     public static final int DATA_FIELD_NUMBER = 15;
     private com.google.protobuf.Any data_;
     /**
@@ -14029,6 +14096,9 @@ public final class Type {
       if (!signature_.isEmpty()) {
         output.writeBytes(3, signature_);
       }
+      if (!getDelegatorBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, delegator_);
+      }
       if (data_ != null) {
         output.writeMessage(15, getData());
       }
@@ -14049,6 +14119,9 @@ public final class Type {
       if (!signature_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, signature_);
+      }
+      if (!getDelegatorBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, delegator_);
       }
       if (data_ != null) {
         size += com.google.protobuf.CodedOutputStream
@@ -14076,6 +14149,8 @@ public final class Type {
           .equals(other.getPk());
       result = result && getSignature()
           .equals(other.getSignature());
+      result = result && getDelegator()
+          .equals(other.getDelegator());
       result = result && (hasData() == other.hasData());
       if (hasData()) {
         result = result && getData()
@@ -14097,6 +14172,8 @@ public final class Type {
       hash = (53 * hash) + getPk().hashCode();
       hash = (37 * hash) + SIGNATURE_FIELD_NUMBER;
       hash = (53 * hash) + getSignature().hashCode();
+      hash = (37 * hash) + DELEGATOR_FIELD_NUMBER;
+      hash = (53 * hash) + getDelegator().hashCode();
       if (hasData()) {
         hash = (37 * hash) + DATA_FIELD_NUMBER;
         hash = (53 * hash) + getData().hashCode();
@@ -14225,6 +14302,8 @@ public final class Type {
 
         signature_ = com.google.protobuf.ByteString.EMPTY;
 
+        delegator_ = "";
+
         if (dataBuilder_ == null) {
           data_ = null;
         } else {
@@ -14256,6 +14335,7 @@ public final class Type {
         result.signer_ = signer_;
         result.pk_ = pk_;
         result.signature_ = signature_;
+        result.delegator_ = delegator_;
         if (dataBuilder_ == null) {
           result.data_ = data_;
         } else {
@@ -14311,6 +14391,10 @@ public final class Type {
         }
         if (other.getSignature() != com.google.protobuf.ByteString.EMPTY) {
           setSignature(other.getSignature());
+        }
+        if (!other.getDelegator().isEmpty()) {
+          delegator_ = other.delegator_;
+          onChanged();
         }
         if (other.hasData()) {
           mergeData(other.getData());
@@ -14508,6 +14592,95 @@ public final class Type {
       public Builder clearSignature() {
         
         signature_ = getDefaultInstance().getSignature();
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object delegator_ = "";
+      /**
+       * <pre>
+       * delegator
+       * </pre>
+       *
+       * <code>string delegator = 4;</code>
+       */
+      public java.lang.String getDelegator() {
+        java.lang.Object ref = delegator_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          delegator_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * delegator
+       * </pre>
+       *
+       * <code>string delegator = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDelegatorBytes() {
+        java.lang.Object ref = delegator_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          delegator_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * delegator
+       * </pre>
+       *
+       * <code>string delegator = 4;</code>
+       */
+      public Builder setDelegator(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        delegator_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * delegator
+       * </pre>
+       *
+       * <code>string delegator = 4;</code>
+       */
+      public Builder clearDelegator() {
+        
+        delegator_ = getDefaultInstance().getDelegator();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * delegator
+       * </pre>
+       *
+       * <code>string delegator = 4;</code>
+       */
+      public Builder setDelegatorBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        delegator_ = value;
         onChanged();
         return this;
       }
@@ -14770,6 +14943,24 @@ public final class Type {
 
     /**
      * <pre>
+     * delegator
+     * </pre>
+     *
+     * <code>string delegator = 6;</code>
+     */
+    java.lang.String getDelegator();
+    /**
+     * <pre>
+     * delegator
+     * </pre>
+     *
+     * <code>string delegator = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getDelegatorBytes();
+
+    /**
+     * <pre>
      * signature of the transaction
      * </pre>
      *
@@ -14831,6 +15022,7 @@ public final class Type {
       chainId_ = "";
       pk_ = com.google.protobuf.ByteString.EMPTY;
       gas_ = 0;
+      delegator_ = "";
       signature_ = com.google.protobuf.ByteString.EMPTY;
       signatures_ = java.util.Collections.emptyList();
     }
@@ -14887,15 +15079,21 @@ public final class Type {
               gas_ = input.readUInt32();
               break;
             }
+            case 50: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              delegator_ = s;
+              break;
+            }
             case 106: {
 
               signature_ = input.readBytes();
               break;
             }
             case 114: {
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
                 signatures_ = new java.util.ArrayList<forge_abi.Type.Multisig>();
-                mutable_bitField0_ |= 0x00000040;
+                mutable_bitField0_ |= 0x00000080;
               }
               signatures_.add(
                   input.readMessage(forge_abi.Type.Multisig.parser(), extensionRegistry));
@@ -14922,7 +15120,7 @@ public final class Type {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
           signatures_ = java.util.Collections.unmodifiableList(signatures_);
         }
         makeExtensionsImmutable();
@@ -15052,6 +15250,48 @@ public final class Type {
       return gas_;
     }
 
+    public static final int DELEGATOR_FIELD_NUMBER = 6;
+    private volatile java.lang.Object delegator_;
+    /**
+     * <pre>
+     * delegator
+     * </pre>
+     *
+     * <code>string delegator = 6;</code>
+     */
+    public java.lang.String getDelegator() {
+      java.lang.Object ref = delegator_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        delegator_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * delegator
+     * </pre>
+     *
+     * <code>string delegator = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDelegatorBytes() {
+      java.lang.Object ref = delegator_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        delegator_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     public static final int SIGNATURE_FIELD_NUMBER = 13;
     private com.google.protobuf.ByteString signature_;
     /**
@@ -15148,6 +15388,9 @@ public final class Type {
       if (gas_ != 0) {
         output.writeUInt32(5, gas_);
       }
+      if (!getDelegatorBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, delegator_);
+      }
       if (!signature_.isEmpty()) {
         output.writeBytes(13, signature_);
       }
@@ -15181,6 +15424,9 @@ public final class Type {
       if (gas_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(5, gas_);
+      }
+      if (!getDelegatorBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, delegator_);
       }
       if (!signature_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
@@ -15220,6 +15466,8 @@ public final class Type {
           .equals(other.getPk());
       result = result && (getGas()
           == other.getGas());
+      result = result && getDelegator()
+          .equals(other.getDelegator());
       result = result && getSignature()
           .equals(other.getSignature());
       result = result && getSignaturesList()
@@ -15250,6 +15498,8 @@ public final class Type {
       hash = (53 * hash) + getPk().hashCode();
       hash = (37 * hash) + GAS_FIELD_NUMBER;
       hash = (53 * hash) + getGas();
+      hash = (37 * hash) + DELEGATOR_FIELD_NUMBER;
+      hash = (53 * hash) + getDelegator().hashCode();
       hash = (37 * hash) + SIGNATURE_FIELD_NUMBER;
       hash = (53 * hash) + getSignature().hashCode();
       if (getSignaturesCount() > 0) {
@@ -15389,11 +15639,13 @@ public final class Type {
 
         gas_ = 0;
 
+        delegator_ = "";
+
         signature_ = com.google.protobuf.ByteString.EMPTY;
 
         if (signaturesBuilder_ == null) {
           signatures_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000040);
+          bitField0_ = (bitField0_ & ~0x00000080);
         } else {
           signaturesBuilder_.clear();
         }
@@ -15432,11 +15684,12 @@ public final class Type {
         result.chainId_ = chainId_;
         result.pk_ = pk_;
         result.gas_ = gas_;
+        result.delegator_ = delegator_;
         result.signature_ = signature_;
         if (signaturesBuilder_ == null) {
-          if (((bitField0_ & 0x00000040) == 0x00000040)) {
+          if (((bitField0_ & 0x00000080) == 0x00000080)) {
             signatures_ = java.util.Collections.unmodifiableList(signatures_);
-            bitField0_ = (bitField0_ & ~0x00000040);
+            bitField0_ = (bitField0_ & ~0x00000080);
           }
           result.signatures_ = signatures_;
         } else {
@@ -15506,6 +15759,10 @@ public final class Type {
         if (other.getGas() != 0) {
           setGas(other.getGas());
         }
+        if (!other.getDelegator().isEmpty()) {
+          delegator_ = other.delegator_;
+          onChanged();
+        }
         if (other.getSignature() != com.google.protobuf.ByteString.EMPTY) {
           setSignature(other.getSignature());
         }
@@ -15513,7 +15770,7 @@ public final class Type {
           if (!other.signatures_.isEmpty()) {
             if (signatures_.isEmpty()) {
               signatures_ = other.signatures_;
-              bitField0_ = (bitField0_ & ~0x00000040);
+              bitField0_ = (bitField0_ & ~0x00000080);
             } else {
               ensureSignaturesIsMutable();
               signatures_.addAll(other.signatures_);
@@ -15526,7 +15783,7 @@ public final class Type {
               signaturesBuilder_.dispose();
               signaturesBuilder_ = null;
               signatures_ = other.signatures_;
-              bitField0_ = (bitField0_ & ~0x00000040);
+              bitField0_ = (bitField0_ & ~0x00000080);
               signaturesBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getSignaturesFieldBuilder() : null;
@@ -15828,6 +16085,95 @@ public final class Type {
         return this;
       }
 
+      private java.lang.Object delegator_ = "";
+      /**
+       * <pre>
+       * delegator
+       * </pre>
+       *
+       * <code>string delegator = 6;</code>
+       */
+      public java.lang.String getDelegator() {
+        java.lang.Object ref = delegator_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          delegator_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * delegator
+       * </pre>
+       *
+       * <code>string delegator = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDelegatorBytes() {
+        java.lang.Object ref = delegator_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          delegator_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * delegator
+       * </pre>
+       *
+       * <code>string delegator = 6;</code>
+       */
+      public Builder setDelegator(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        delegator_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * delegator
+       * </pre>
+       *
+       * <code>string delegator = 6;</code>
+       */
+      public Builder clearDelegator() {
+        
+        delegator_ = getDefaultInstance().getDelegator();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * delegator
+       * </pre>
+       *
+       * <code>string delegator = 6;</code>
+       */
+      public Builder setDelegatorBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        delegator_ = value;
+        onChanged();
+        return this;
+      }
+
       private com.google.protobuf.ByteString signature_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <pre>
@@ -15872,9 +16218,9 @@ public final class Type {
       private java.util.List<forge_abi.Type.Multisig> signatures_ =
         java.util.Collections.emptyList();
       private void ensureSignaturesIsMutable() {
-        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
           signatures_ = new java.util.ArrayList<forge_abi.Type.Multisig>(signatures_);
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000080;
          }
       }
 
@@ -16024,7 +16370,7 @@ public final class Type {
       public Builder clearSignatures() {
         if (signaturesBuilder_ == null) {
           signatures_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000040);
+          bitField0_ = (bitField0_ & ~0x00000080);
           onChanged();
         } else {
           signaturesBuilder_.clear();
@@ -16101,7 +16447,7 @@ public final class Type {
           signaturesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               forge_abi.Type.Multisig, forge_abi.Type.Multisig.Builder, forge_abi.Type.MultisigOrBuilder>(
                   signatures_,
-                  ((bitField0_ & 0x00000040) == 0x00000040),
+                  ((bitField0_ & 0x00000080) == 0x00000080),
                   getParentForChildren(),
                   isClean());
           signatures_ = null;
@@ -18249,6 +18595,717 @@ public final class Type {
 
   }
 
+  public interface DelegateConfigOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.DelegateConfig)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * the interval used for calculate the num_txs_delta / num_tokens_delta
+     * </pre>
+     *
+     * <code>uint32 delta_interval = 1;</code>
+     */
+    int getDeltaInterval();
+
+    /**
+     * <pre>
+     * a list of type_urls that are allowed for delegation
+     * </pre>
+     *
+     * <code>repeated string type_urls = 2;</code>
+     */
+    java.util.List<java.lang.String>
+        getTypeUrlsList();
+    /**
+     * <pre>
+     * a list of type_urls that are allowed for delegation
+     * </pre>
+     *
+     * <code>repeated string type_urls = 2;</code>
+     */
+    int getTypeUrlsCount();
+    /**
+     * <pre>
+     * a list of type_urls that are allowed for delegation
+     * </pre>
+     *
+     * <code>repeated string type_urls = 2;</code>
+     */
+    java.lang.String getTypeUrls(int index);
+    /**
+     * <pre>
+     * a list of type_urls that are allowed for delegation
+     * </pre>
+     *
+     * <code>repeated string type_urls = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getTypeUrlsBytes(int index);
+  }
+  /**
+   * Protobuf type {@code forge_abi.DelegateConfig}
+   */
+  public  static final class DelegateConfig extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:forge_abi.DelegateConfig)
+      DelegateConfigOrBuilder {
+    // Use DelegateConfig.newBuilder() to construct.
+    private DelegateConfig(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private DelegateConfig() {
+      deltaInterval_ = 0;
+      typeUrls_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private DelegateConfig(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              deltaInterval_ = input.readUInt32();
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                typeUrls_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              typeUrls_.add(s);
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          typeUrls_ = typeUrls_.getUnmodifiableView();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return forge_abi.Type.internal_static_forge_abi_DelegateConfig_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return forge_abi.Type.internal_static_forge_abi_DelegateConfig_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              forge_abi.Type.DelegateConfig.class, forge_abi.Type.DelegateConfig.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int DELTA_INTERVAL_FIELD_NUMBER = 1;
+    private int deltaInterval_;
+    /**
+     * <pre>
+     * the interval used for calculate the num_txs_delta / num_tokens_delta
+     * </pre>
+     *
+     * <code>uint32 delta_interval = 1;</code>
+     */
+    public int getDeltaInterval() {
+      return deltaInterval_;
+    }
+
+    public static final int TYPE_URLS_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList typeUrls_;
+    /**
+     * <pre>
+     * a list of type_urls that are allowed for delegation
+     * </pre>
+     *
+     * <code>repeated string type_urls = 2;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getTypeUrlsList() {
+      return typeUrls_;
+    }
+    /**
+     * <pre>
+     * a list of type_urls that are allowed for delegation
+     * </pre>
+     *
+     * <code>repeated string type_urls = 2;</code>
+     */
+    public int getTypeUrlsCount() {
+      return typeUrls_.size();
+    }
+    /**
+     * <pre>
+     * a list of type_urls that are allowed for delegation
+     * </pre>
+     *
+     * <code>repeated string type_urls = 2;</code>
+     */
+    public java.lang.String getTypeUrls(int index) {
+      return typeUrls_.get(index);
+    }
+    /**
+     * <pre>
+     * a list of type_urls that are allowed for delegation
+     * </pre>
+     *
+     * <code>repeated string type_urls = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTypeUrlsBytes(int index) {
+      return typeUrls_.getByteString(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (deltaInterval_ != 0) {
+        output.writeUInt32(1, deltaInterval_);
+      }
+      for (int i = 0; i < typeUrls_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, typeUrls_.getRaw(i));
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (deltaInterval_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, deltaInterval_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < typeUrls_.size(); i++) {
+          dataSize += computeStringSizeNoTag(typeUrls_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getTypeUrlsList().size();
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof forge_abi.Type.DelegateConfig)) {
+        return super.equals(obj);
+      }
+      forge_abi.Type.DelegateConfig other = (forge_abi.Type.DelegateConfig) obj;
+
+      boolean result = true;
+      result = result && (getDeltaInterval()
+          == other.getDeltaInterval());
+      result = result && getTypeUrlsList()
+          .equals(other.getTypeUrlsList());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + DELTA_INTERVAL_FIELD_NUMBER;
+      hash = (53 * hash) + getDeltaInterval();
+      if (getTypeUrlsCount() > 0) {
+        hash = (37 * hash) + TYPE_URLS_FIELD_NUMBER;
+        hash = (53 * hash) + getTypeUrlsList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static forge_abi.Type.DelegateConfig parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.Type.DelegateConfig parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.Type.DelegateConfig parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.Type.DelegateConfig parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.Type.DelegateConfig parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.Type.DelegateConfig parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.Type.DelegateConfig parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static forge_abi.Type.DelegateConfig parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.Type.DelegateConfig parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.Type.DelegateConfig parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(forge_abi.Type.DelegateConfig prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code forge_abi.DelegateConfig}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:forge_abi.DelegateConfig)
+        forge_abi.Type.DelegateConfigOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return forge_abi.Type.internal_static_forge_abi_DelegateConfig_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return forge_abi.Type.internal_static_forge_abi_DelegateConfig_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                forge_abi.Type.DelegateConfig.class, forge_abi.Type.DelegateConfig.Builder.class);
+      }
+
+      // Construct using forge_abi.Type.DelegateConfig.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        deltaInterval_ = 0;
+
+        typeUrls_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return forge_abi.Type.internal_static_forge_abi_DelegateConfig_descriptor;
+      }
+
+      public forge_abi.Type.DelegateConfig getDefaultInstanceForType() {
+        return forge_abi.Type.DelegateConfig.getDefaultInstance();
+      }
+
+      public forge_abi.Type.DelegateConfig build() {
+        forge_abi.Type.DelegateConfig result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public forge_abi.Type.DelegateConfig buildPartial() {
+        forge_abi.Type.DelegateConfig result = new forge_abi.Type.DelegateConfig(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.deltaInterval_ = deltaInterval_;
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          typeUrls_ = typeUrls_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.typeUrls_ = typeUrls_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof forge_abi.Type.DelegateConfig) {
+          return mergeFrom((forge_abi.Type.DelegateConfig)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(forge_abi.Type.DelegateConfig other) {
+        if (other == forge_abi.Type.DelegateConfig.getDefaultInstance()) return this;
+        if (other.getDeltaInterval() != 0) {
+          setDeltaInterval(other.getDeltaInterval());
+        }
+        if (!other.typeUrls_.isEmpty()) {
+          if (typeUrls_.isEmpty()) {
+            typeUrls_ = other.typeUrls_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureTypeUrlsIsMutable();
+            typeUrls_.addAll(other.typeUrls_);
+          }
+          onChanged();
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        forge_abi.Type.DelegateConfig parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (forge_abi.Type.DelegateConfig) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int deltaInterval_ ;
+      /**
+       * <pre>
+       * the interval used for calculate the num_txs_delta / num_tokens_delta
+       * </pre>
+       *
+       * <code>uint32 delta_interval = 1;</code>
+       */
+      public int getDeltaInterval() {
+        return deltaInterval_;
+      }
+      /**
+       * <pre>
+       * the interval used for calculate the num_txs_delta / num_tokens_delta
+       * </pre>
+       *
+       * <code>uint32 delta_interval = 1;</code>
+       */
+      public Builder setDeltaInterval(int value) {
+        
+        deltaInterval_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * the interval used for calculate the num_txs_delta / num_tokens_delta
+       * </pre>
+       *
+       * <code>uint32 delta_interval = 1;</code>
+       */
+      public Builder clearDeltaInterval() {
+        
+        deltaInterval_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList typeUrls_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureTypeUrlsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          typeUrls_ = new com.google.protobuf.LazyStringArrayList(typeUrls_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <pre>
+       * a list of type_urls that are allowed for delegation
+       * </pre>
+       *
+       * <code>repeated string type_urls = 2;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getTypeUrlsList() {
+        return typeUrls_.getUnmodifiableView();
+      }
+      /**
+       * <pre>
+       * a list of type_urls that are allowed for delegation
+       * </pre>
+       *
+       * <code>repeated string type_urls = 2;</code>
+       */
+      public int getTypeUrlsCount() {
+        return typeUrls_.size();
+      }
+      /**
+       * <pre>
+       * a list of type_urls that are allowed for delegation
+       * </pre>
+       *
+       * <code>repeated string type_urls = 2;</code>
+       */
+      public java.lang.String getTypeUrls(int index) {
+        return typeUrls_.get(index);
+      }
+      /**
+       * <pre>
+       * a list of type_urls that are allowed for delegation
+       * </pre>
+       *
+       * <code>repeated string type_urls = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTypeUrlsBytes(int index) {
+        return typeUrls_.getByteString(index);
+      }
+      /**
+       * <pre>
+       * a list of type_urls that are allowed for delegation
+       * </pre>
+       *
+       * <code>repeated string type_urls = 2;</code>
+       */
+      public Builder setTypeUrls(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureTypeUrlsIsMutable();
+        typeUrls_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * a list of type_urls that are allowed for delegation
+       * </pre>
+       *
+       * <code>repeated string type_urls = 2;</code>
+       */
+      public Builder addTypeUrls(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureTypeUrlsIsMutable();
+        typeUrls_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * a list of type_urls that are allowed for delegation
+       * </pre>
+       *
+       * <code>repeated string type_urls = 2;</code>
+       */
+      public Builder addAllTypeUrls(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureTypeUrlsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, typeUrls_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * a list of type_urls that are allowed for delegation
+       * </pre>
+       *
+       * <code>repeated string type_urls = 2;</code>
+       */
+      public Builder clearTypeUrls() {
+        typeUrls_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * a list of type_urls that are allowed for delegation
+       * </pre>
+       *
+       * <code>repeated string type_urls = 2;</code>
+       */
+      public Builder addTypeUrlsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureTypeUrlsIsMutable();
+        typeUrls_.add(value);
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:forge_abi.DelegateConfig)
+    }
+
+    // @@protoc_insertion_point(class_scope:forge_abi.DelegateConfig)
+    private static final forge_abi.Type.DelegateConfig DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new forge_abi.Type.DelegateConfig();
+    }
+
+    public static forge_abi.Type.DelegateConfig getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<DelegateConfig>
+        PARSER = new com.google.protobuf.AbstractParser<DelegateConfig>() {
+      public DelegateConfig parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new DelegateConfig(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<DelegateConfig> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<DelegateConfig> getParserForType() {
+      return PARSER;
+    }
+
+    public forge_abi.Type.DelegateConfig getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface TransactionConfigOrBuilder extends
       // @@protoc_insertion_point(interface_extends:forge_abi.TransactionConfig)
       com.google.protobuf.MessageOrBuilder {
@@ -18285,6 +19342,19 @@ public final class Type {
      * <code>.forge_abi.DeclareConfig declare = 5;</code>
      */
     forge_abi.Type.DeclareConfigOrBuilder getDeclareOrBuilder();
+
+    /**
+     * <code>.forge_abi.DelegateConfig delegate = 6;</code>
+     */
+    boolean hasDelegate();
+    /**
+     * <code>.forge_abi.DelegateConfig delegate = 6;</code>
+     */
+    forge_abi.Type.DelegateConfig getDelegate();
+    /**
+     * <code>.forge_abi.DelegateConfig delegate = 6;</code>
+     */
+    forge_abi.Type.DelegateConfigOrBuilder getDelegateOrBuilder();
   }
   /**
    * Protobuf type {@code forge_abi.TransactionConfig}
@@ -18358,6 +19428,19 @@ public final class Type {
               if (subBuilder != null) {
                 subBuilder.mergeFrom(declare_);
                 declare_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 50: {
+              forge_abi.Type.DelegateConfig.Builder subBuilder = null;
+              if (delegate_ != null) {
+                subBuilder = delegate_.toBuilder();
+              }
+              delegate_ = input.readMessage(forge_abi.Type.DelegateConfig.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(delegate_);
+                delegate_ = subBuilder.buildPartial();
               }
 
               break;
@@ -18442,6 +19525,27 @@ public final class Type {
       return getDeclare();
     }
 
+    public static final int DELEGATE_FIELD_NUMBER = 6;
+    private forge_abi.Type.DelegateConfig delegate_;
+    /**
+     * <code>.forge_abi.DelegateConfig delegate = 6;</code>
+     */
+    public boolean hasDelegate() {
+      return delegate_ != null;
+    }
+    /**
+     * <code>.forge_abi.DelegateConfig delegate = 6;</code>
+     */
+    public forge_abi.Type.DelegateConfig getDelegate() {
+      return delegate_ == null ? forge_abi.Type.DelegateConfig.getDefaultInstance() : delegate_;
+    }
+    /**
+     * <code>.forge_abi.DelegateConfig delegate = 6;</code>
+     */
+    public forge_abi.Type.DelegateConfigOrBuilder getDelegateOrBuilder() {
+      return getDelegate();
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -18469,6 +19573,9 @@ public final class Type {
       if (declare_ != null) {
         output.writeMessage(5, getDeclare());
       }
+      if (delegate_ != null) {
+        output.writeMessage(6, getDelegate());
+      }
     }
 
     public int getSerializedSize() {
@@ -18495,6 +19602,10 @@ public final class Type {
       if (declare_ != null) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, getDeclare());
+      }
+      if (delegate_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, getDelegate());
       }
       memoizedSize = size;
       return size;
@@ -18525,6 +19636,11 @@ public final class Type {
         result = result && getDeclare()
             .equals(other.getDeclare());
       }
+      result = result && (hasDelegate() == other.hasDelegate());
+      if (hasDelegate()) {
+        result = result && getDelegate()
+            .equals(other.getDelegate());
+      }
       return result;
     }
 
@@ -18547,6 +19663,10 @@ public final class Type {
       if (hasDeclare()) {
         hash = (37 * hash) + DECLARE_FIELD_NUMBER;
         hash = (53 * hash) + getDeclare().hashCode();
+      }
+      if (hasDelegate()) {
+        hash = (37 * hash) + DELEGATE_FIELD_NUMBER;
+        hash = (53 * hash) + getDelegate().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -18680,6 +19800,12 @@ public final class Type {
           declare_ = null;
           declareBuilder_ = null;
         }
+        if (delegateBuilder_ == null) {
+          delegate_ = null;
+        } else {
+          delegate_ = null;
+          delegateBuilder_ = null;
+        }
         return this;
       }
 
@@ -18710,6 +19836,11 @@ public final class Type {
           result.declare_ = declare_;
         } else {
           result.declare_ = declareBuilder_.build();
+        }
+        if (delegateBuilder_ == null) {
+          result.delegate_ = delegate_;
+        } else {
+          result.delegate_ = delegateBuilder_.build();
         }
         onBuilt();
         return result;
@@ -18766,6 +19897,9 @@ public final class Type {
         }
         if (other.hasDeclare()) {
           mergeDeclare(other.getDeclare());
+        }
+        if (other.hasDelegate()) {
+          mergeDelegate(other.getDelegate());
         }
         onChanged();
         return this;
@@ -19012,6 +20146,123 @@ public final class Type {
           declare_ = null;
         }
         return declareBuilder_;
+      }
+
+      private forge_abi.Type.DelegateConfig delegate_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.DelegateConfig, forge_abi.Type.DelegateConfig.Builder, forge_abi.Type.DelegateConfigOrBuilder> delegateBuilder_;
+      /**
+       * <code>.forge_abi.DelegateConfig delegate = 6;</code>
+       */
+      public boolean hasDelegate() {
+        return delegateBuilder_ != null || delegate_ != null;
+      }
+      /**
+       * <code>.forge_abi.DelegateConfig delegate = 6;</code>
+       */
+      public forge_abi.Type.DelegateConfig getDelegate() {
+        if (delegateBuilder_ == null) {
+          return delegate_ == null ? forge_abi.Type.DelegateConfig.getDefaultInstance() : delegate_;
+        } else {
+          return delegateBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.forge_abi.DelegateConfig delegate = 6;</code>
+       */
+      public Builder setDelegate(forge_abi.Type.DelegateConfig value) {
+        if (delegateBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          delegate_ = value;
+          onChanged();
+        } else {
+          delegateBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.DelegateConfig delegate = 6;</code>
+       */
+      public Builder setDelegate(
+          forge_abi.Type.DelegateConfig.Builder builderForValue) {
+        if (delegateBuilder_ == null) {
+          delegate_ = builderForValue.build();
+          onChanged();
+        } else {
+          delegateBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.DelegateConfig delegate = 6;</code>
+       */
+      public Builder mergeDelegate(forge_abi.Type.DelegateConfig value) {
+        if (delegateBuilder_ == null) {
+          if (delegate_ != null) {
+            delegate_ =
+              forge_abi.Type.DelegateConfig.newBuilder(delegate_).mergeFrom(value).buildPartial();
+          } else {
+            delegate_ = value;
+          }
+          onChanged();
+        } else {
+          delegateBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.DelegateConfig delegate = 6;</code>
+       */
+      public Builder clearDelegate() {
+        if (delegateBuilder_ == null) {
+          delegate_ = null;
+          onChanged();
+        } else {
+          delegate_ = null;
+          delegateBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.DelegateConfig delegate = 6;</code>
+       */
+      public forge_abi.Type.DelegateConfig.Builder getDelegateBuilder() {
+        
+        onChanged();
+        return getDelegateFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.DelegateConfig delegate = 6;</code>
+       */
+      public forge_abi.Type.DelegateConfigOrBuilder getDelegateOrBuilder() {
+        if (delegateBuilder_ != null) {
+          return delegateBuilder_.getMessageOrBuilder();
+        } else {
+          return delegate_ == null ?
+              forge_abi.Type.DelegateConfig.getDefaultInstance() : delegate_;
+        }
+      }
+      /**
+       * <code>.forge_abi.DelegateConfig delegate = 6;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.DelegateConfig, forge_abi.Type.DelegateConfig.Builder, forge_abi.Type.DelegateConfigOrBuilder> 
+          getDelegateFieldBuilder() {
+        if (delegateBuilder_ == null) {
+          delegateBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Type.DelegateConfig, forge_abi.Type.DelegateConfig.Builder, forge_abi.Type.DelegateConfigOrBuilder>(
+                  getDelegate(),
+                  getParentForChildren(),
+                  isClean());
+          delegate_ = null;
+        }
+        return delegateBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -45802,6 +47053,11 @@ public final class Type {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_forge_abi_DeclareConfig_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_forge_abi_DelegateConfig_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_forge_abi_DelegateConfig_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_forge_abi_TransactionConfig_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -45971,123 +47227,127 @@ public final class Type {
       "l_txs\030\004 \001(\004\022.\n\rtx_statistics\030\005 \001(\0132\027.for" +
       "ge_abi.TxStatistics\022\020\n\010tx_index\030\006 \001(\r\0223\n",
       "\017last_block_time\030\007 \001(\0132\032.google.protobuf" +
-      ".Timestamp\"]\n\010Multisig\022\016\n\006signer\030\001 \001(\t\022\n" +
-      "\n\002pk\030\002 \001(\014\022\021\n\tsignature\030\003 \001(\014\022\"\n\004data\030\017 " +
-      "\001(\0132\024.google.protobuf.Any\"\264\001\n\013Transactio" +
-      "n\022\014\n\004from\030\001 \001(\t\022\r\n\005nonce\030\002 \001(\004\022\020\n\010chain_" +
-      "id\030\003 \001(\t\022\n\n\002pk\030\004 \001(\014\022\013\n\003gas\030\005 \001(\r\022\021\n\tsig" +
-      "nature\030\r \001(\014\022\'\n\nsignatures\030\016 \003(\0132\023.forge" +
-      "_abi.Multisig\022!\n\003itx\030\017 \001(\0132\024.google.prot" +
-      "obuf.Any\"\324\001\n\017TransactionInfo\022\"\n\002tx\030\001 \001(\013" +
-      "2\026.forge_abi.Transaction\022\016\n\006height\030\002 \001(\004",
-      "\022\r\n\005index\030\003 \001(\r\022\014\n\004hash\030\004 \001(\t\022!\n\004tags\030\005 " +
-      "\003(\0132\023.abci_vendor.KVPair\022#\n\004code\030\006 \001(\0162\025" +
-      ".forge_abi.StatusCode\022(\n\004time\030\007 \001(\0132\032.go" +
-      "ogle.protobuf.Timestamp\"6\n\rDeclareConfig" +
-      "\022\022\n\nrestricted\030\001 \001(\010\022\021\n\thierarchy\030\002 \001(\r\"" +
-      "\232\001\n\021TransactionConfig\022\026\n\016max_asset_size\030" +
-      "\001 \001(\r\022\025\n\rmax_list_size\030\002 \001(\r\022\024\n\014max_mult" +
-      "isig\030\003 \001(\r\022\025\n\rminimum_stake\030\004 \001(\004\022)\n\007dec" +
-      "lare\030\005 \001(\0132\030.forge_abi.DeclareConfig\"\231\004\n" +
-      "\tBlockInfo\022\016\n\006height\030\001 \001(\004\022\017\n\007num_txs\030\002 ",
-      "\001(\r\022(\n\004time\030\003 \001(\0132\032.google.protobuf.Time" +
-      "stamp\022\020\n\010app_hash\030\004 \001(\014\022\020\n\010proposer\030\005 \001(" +
-      "\014\022\'\n\003txs\030\006 \003(\0132\032.forge_abi.TransactionIn" +
-      "fo\022\021\n\ttotal_txs\030\007 \001(\004\022/\n\013invalid_txs\030\010 \003" +
-      "(\0132\032.forge_abi.TransactionInfo\022\022\n\ntxs_ha" +
-      "shes\030\t \003(\t\022\032\n\022invalid_txs_hashes\030\n \003(\t\022\026" +
-      "\n\016consensus_hash\030\013 \001(\014\022\021\n\tdata_hash\030\014 \001(" +
-      "\014\022\025\n\revidence_hash\030\r \001(\014\022\030\n\020last_commit_" +
-      "hash\030\016 \001(\014\022\031\n\021last_results_hash\030\017 \001(\014\022\034\n" +
-      "\024next_validators_hash\030\020 \001(\014\022\027\n\017validator",
-      "s_hash\030\021 \001(\014\022%\n\007version\030\022 \001(\0132\024.abci_ven" +
-      "dor.Version\022+\n\rlast_block_id\030\023 \001(\0132\024.abc" +
-      "i_vendor.BlockID\"\305\003\n\017BlockInfoSimple\022\016\n\006" +
-      "height\030\001 \001(\004\022\017\n\007num_txs\030\002 \001(\r\022(\n\004time\030\003 " +
-      "\001(\0132\032.google.protobuf.Timestamp\022\020\n\010app_h" +
-      "ash\030\004 \001(\014\022\020\n\010proposer\030\005 \001(\014\022\021\n\ttotal_txs" +
-      "\030\006 \001(\004\022\022\n\ntxs_hashes\030\007 \003(\t\022\032\n\022invalid_tx" +
-      "s_hashes\030\010 \003(\t\022\026\n\016consensus_hash\030\t \001(\014\022\021" +
-      "\n\tdata_hash\030\n \001(\014\022\025\n\revidence_hash\030\013 \001(\014" +
-      "\022\030\n\020last_commit_hash\030\014 \001(\014\022\031\n\021last_resul",
-      "ts_hash\030\r \001(\014\022\034\n\024next_validators_hash\030\016 " +
-      "\001(\014\022\027\n\017validators_hash\030\017 \001(\014\022%\n\007version\030" +
-      "\020 \001(\0132\024.abci_vendor.Version\022+\n\rlast_bloc" +
-      "k_id\030\021 \001(\0132\024.abci_vendor.BlockID\"=\n\010TxSt" +
-      "atus\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCod" +
-      "e\022\014\n\004hash\030\002 \001(\t\"c\n\rCircularQueue\022\r\n\005item" +
-      "s\030\001 \003(\014\022\020\n\010type_url\030\002 \001(\t\022\021\n\tmax_items\030\003" +
-      " \001(\r\022\020\n\010circular\030\004 \001(\010\022\014\n\004fifo\030\005 \001(\010\"\242\001\n" +
-      "\014StateContext\022\022\n\ngenesis_tx\030\001 \001(\t\022\026\n\016ren" +
-      "aissance_tx\030\002 \001(\t\0220\n\014genesis_time\030\003 \001(\0132",
-      "\032.google.protobuf.Timestamp\0224\n\020renaissan" +
-      "ce_time\030\004 \001(\0132\032.google.protobuf.Timestam" +
-      "p\"\202\002\n\014StakeContext\022(\n\014total_stakes\030\001 \001(\013" +
-      "2\022.forge_abi.BigUint\022*\n\016total_unstakes\030\002" +
-      " \001(\0132\022.forge_abi.BigUint\0221\n\025total_receiv" +
-      "ed_stakes\030\003 \001(\0132\022.forge_abi.BigUint\022/\n\rr" +
-      "ecent_stakes\030\004 \001(\0132\030.forge_abi.CircularQ" +
-      "ueue\0228\n\026recent_received_stakes\030\017 \001(\0132\030.f" +
-      "orge_abi.CircularQueue\"\216\001\n\014StakeSummary\022" +
-      "(\n\014total_stakes\030\001 \001(\0132\022.forge_abi.BigUin",
-      "t\022*\n\016total_unstakes\030\002 \001(\0132\022.forge_abi.Bi" +
-      "gUint\022(\n\007context\030\003 \001(\0132\027.forge_abi.State" +
-      "Context\"F\n\013StakeConfig\022\027\n\017timeout_genera" +
-      "l\030\001 \001(\r\022\036\n\026timeout_stake_for_node\030\002 \001(\r\"" +
-      "D\n\016UnconfirmedTxs\022\r\n\005n_txs\030\001 \001(\r\022#\n\003txs\030" +
-      "\002 \003(\0132\026.forge_abi.Transaction\"d\n\007NetInfo" +
-      "\022\021\n\tlistening\030\001 \001(\010\022\021\n\tlisteners\030\002 \003(\t\022\017" +
-      "\n\007n_peers\030\003 \001(\r\022\"\n\005peers\030\004 \003(\0132\023.forge_a" +
-      "bi.PeerInfo\"M\n\007GeoInfo\022\014\n\004city\030\001 \001(\t\022\017\n\007" +
-      "country\030\002 \001(\t\022\020\n\010latitude\030\003 \001(\002\022\021\n\tlongi",
-      "tude\030\004 \001(\002\"\205\001\n\010PeerInfo\022\n\n\002id\030\001 \001(\t\022\017\n\007n" +
-      "etwork\030\002 \001(\t\022\031\n\021consensus_version\030\003 \001(\t\022" +
-      "\017\n\007moniker\030\004 \001(\t\022\n\n\002ip\030\005 \001(\t\022$\n\010geo_info" +
-      "\030\006 \001(\0132\022.forge_abi.GeoInfo\"T\n\016Validators" +
-      "Info\022\024\n\014block_height\030\001 \001(\004\022,\n\nvalidators" +
-      "\030\002 \003(\0132\030.forge_abi.ValidatorInfo\"\253\001\n\rVal" +
-      "idatorInfo\022\017\n\007address\030\001 \001(\t\022$\n\007pub_key\030\002" +
-      " \001(\0132\023.abci_vendor.PubKey\022\024\n\014voting_powe" +
-      "r\030\003 \001(\004\022\031\n\021proposer_priority\030\004 \001(\t\022\014\n\004na" +
-      "me\030\005 \001(\t\022$\n\010geo_info\030\006 \001(\0132\022.forge_abi.G",
-      "eoInfo\"\255\001\n\013GenesisInfo\022\024\n\014genesis_time\030\001" +
-      " \001(\t\022\020\n\010chain_id\030\002 \001(\t\0226\n\020consensus_para" +
-      "ms\030\003 \001(\0132\034.abci_vendor.ConsensusParams\022," +
-      "\n\nvalidators\030\004 \003(\0132\030.forge_abi.Validator" +
-      "Info\022\020\n\010app_hash\030\005 \001(\t\"\214\004\n\nForgeStats\022\022\n" +
-      "\nnum_blocks\030\001 \003(\004\022\017\n\007num_txs\030\002 \003(\004\022&\n\nnu" +
-      "m_stakes\030\003 \003(\0132\022.forge_abi.BigUint\022\026\n\016nu" +
-      "m_validators\030\004 \003(\r\022\037\n\027num_account_migrat" +
-      "e_txs\030\005 \003(\004\022\034\n\024num_create_asset_txs\030\006 \003(" +
-      "\004\022!\n\031num_consensus_upgrade_txs\030\007 \003(\r\022\027\n\017",
-      "num_declare_txs\030\010 \003(\004\022\034\n\024num_declare_fil" +
-      "e_txs\030\t \003(\004\022\030\n\020num_exchange_txs\030\n \003(\004\022\025\n" +
-      "\rnum_stake_txs\030\013 \003(\004\022\033\n\023num_sys_upgrade_" +
-      "txs\030\014 \003(\r\022\030\n\020num_transfer_txs\030\r \003(\004\022\034\n\024n" +
-      "um_update_asset_txs\030\016 \003(\004\022\035\n\025num_consume" +
-      "_asset_txs\030\017 \003(\004\022\024\n\014num_poke_txs\030\020 \003(\004\022\013" +
-      "\n\003tps\030\021 \003(\r\022\017\n\007max_tps\030\022 \001(\r\022\017\n\007avg_tps\030" +
-      "\023 \001(\r\022\026\n\016avg_block_time\030\024 \001(\002\"\342\002\n\014TxStat" +
-      "istics\022\037\n\027num_account_migrate_txs\030\001 \001(\004\022" +
-      "\034\n\024num_create_asset_txs\030\002 \001(\004\022!\n\031num_con",
-      "sensus_upgrade_txs\030\003 \001(\r\022\027\n\017num_declare_" +
-      "txs\030\004 \001(\004\022\034\n\024num_declare_file_txs\030\005 \001(\004\022" +
-      "\030\n\020num_exchange_txs\030\006 \001(\004\022\025\n\rnum_stake_t" +
-      "xs\030\007 \001(\004\022\033\n\023num_sys_upgrade_txs\030\010 \001(\r\022\030\n" +
-      "\020num_transfer_txs\030\t \001(\004\022\034\n\024num_update_as" +
-      "set_txs\030\n \001(\004\022\035\n\025num_consume_asset_txs\030\013" +
-      " \001(\004\022\024\n\014num_poke_txs\030\014 \001(\004\"\262\001\n\nForgeToke" +
-      "n\022\014\n\004name\030\001 \001(\t\022\016\n\006symbol\030\002 \001(\t\022\014\n\004unit\030" +
-      "\003 \001(\t\022\023\n\013description\030\004 \001(\t\022\014\n\004icon\030\005 \001(\014" +
-      "\022\017\n\007decimal\030\006 \001(\r\022\026\n\016initial_supply\030\007 \001(",
-      "\004\022\024\n\014total_supply\030\010 \001(\004\022\026\n\016inflation_rat" +
-      "e\030\t \001(\r\"}\n\010PokeInfo\022\'\n\013daily_limit\030\001 \001(\013" +
-      "2\022.forge_abi.BigUint\022$\n\010leftover\030\002 \001(\0132\022" +
-      ".forge_abi.BigUint\022\"\n\006amount\030\003 \001(\0132\022.for" +
-      "ge_abi.BigUint\"S\n\nPokeConfig\022\017\n\007address\030" +
-      "\001 \001(\t\022\023\n\013daily_limit\030\002 \001(\004\022\017\n\007balance\030\003 " +
-      "\001(\004\022\016\n\006amount\030\004 \001(\004\".\n\013UpgradeInfo\022\016\n\006he" +
-      "ight\030\001 \001(\004\022\017\n\007version\030\002 \001(\tb\006proto3"
+      ".Timestamp\"p\n\010Multisig\022\016\n\006signer\030\001 \001(\t\022\n" +
+      "\n\002pk\030\002 \001(\014\022\021\n\tsignature\030\003 \001(\014\022\021\n\tdelegat" +
+      "or\030\004 \001(\t\022\"\n\004data\030\017 \001(\0132\024.google.protobuf" +
+      ".Any\"\307\001\n\013Transaction\022\014\n\004from\030\001 \001(\t\022\r\n\005no" +
+      "nce\030\002 \001(\004\022\020\n\010chain_id\030\003 \001(\t\022\n\n\002pk\030\004 \001(\014\022" +
+      "\013\n\003gas\030\005 \001(\r\022\021\n\tdelegator\030\006 \001(\t\022\021\n\tsigna" +
+      "ture\030\r \001(\014\022\'\n\nsignatures\030\016 \003(\0132\023.forge_a" +
+      "bi.Multisig\022!\n\003itx\030\017 \001(\0132\024.google.protob" +
+      "uf.Any\"\324\001\n\017TransactionInfo\022\"\n\002tx\030\001 \001(\0132\026",
+      ".forge_abi.Transaction\022\016\n\006height\030\002 \001(\004\022\r" +
+      "\n\005index\030\003 \001(\r\022\014\n\004hash\030\004 \001(\t\022!\n\004tags\030\005 \003(" +
+      "\0132\023.abci_vendor.KVPair\022#\n\004code\030\006 \001(\0162\025.f" +
+      "orge_abi.StatusCode\022(\n\004time\030\007 \001(\0132\032.goog" +
+      "le.protobuf.Timestamp\"6\n\rDeclareConfig\022\022" +
+      "\n\nrestricted\030\001 \001(\010\022\021\n\thierarchy\030\002 \001(\r\";\n" +
+      "\016DelegateConfig\022\026\n\016delta_interval\030\001 \001(\r\022" +
+      "\021\n\ttype_urls\030\002 \003(\t\"\307\001\n\021TransactionConfig" +
+      "\022\026\n\016max_asset_size\030\001 \001(\r\022\025\n\rmax_list_siz" +
+      "e\030\002 \001(\r\022\024\n\014max_multisig\030\003 \001(\r\022\025\n\rminimum",
+      "_stake\030\004 \001(\004\022)\n\007declare\030\005 \001(\0132\030.forge_ab" +
+      "i.DeclareConfig\022+\n\010delegate\030\006 \001(\0132\031.forg" +
+      "e_abi.DelegateConfig\"\231\004\n\tBlockInfo\022\016\n\006he" +
+      "ight\030\001 \001(\004\022\017\n\007num_txs\030\002 \001(\r\022(\n\004time\030\003 \001(" +
+      "\0132\032.google.protobuf.Timestamp\022\020\n\010app_has" +
+      "h\030\004 \001(\014\022\020\n\010proposer\030\005 \001(\014\022\'\n\003txs\030\006 \003(\0132\032" +
+      ".forge_abi.TransactionInfo\022\021\n\ttotal_txs\030" +
+      "\007 \001(\004\022/\n\013invalid_txs\030\010 \003(\0132\032.forge_abi.T" +
+      "ransactionInfo\022\022\n\ntxs_hashes\030\t \003(\t\022\032\n\022in" +
+      "valid_txs_hashes\030\n \003(\t\022\026\n\016consensus_hash",
+      "\030\013 \001(\014\022\021\n\tdata_hash\030\014 \001(\014\022\025\n\revidence_ha" +
+      "sh\030\r \001(\014\022\030\n\020last_commit_hash\030\016 \001(\014\022\031\n\021la" +
+      "st_results_hash\030\017 \001(\014\022\034\n\024next_validators" +
+      "_hash\030\020 \001(\014\022\027\n\017validators_hash\030\021 \001(\014\022%\n\007" +
+      "version\030\022 \001(\0132\024.abci_vendor.Version\022+\n\rl" +
+      "ast_block_id\030\023 \001(\0132\024.abci_vendor.BlockID" +
+      "\"\305\003\n\017BlockInfoSimple\022\016\n\006height\030\001 \001(\004\022\017\n\007" +
+      "num_txs\030\002 \001(\r\022(\n\004time\030\003 \001(\0132\032.google.pro" +
+      "tobuf.Timestamp\022\020\n\010app_hash\030\004 \001(\014\022\020\n\010pro" +
+      "poser\030\005 \001(\014\022\021\n\ttotal_txs\030\006 \001(\004\022\022\n\ntxs_ha",
+      "shes\030\007 \003(\t\022\032\n\022invalid_txs_hashes\030\010 \003(\t\022\026" +
+      "\n\016consensus_hash\030\t \001(\014\022\021\n\tdata_hash\030\n \001(" +
+      "\014\022\025\n\revidence_hash\030\013 \001(\014\022\030\n\020last_commit_" +
+      "hash\030\014 \001(\014\022\031\n\021last_results_hash\030\r \001(\014\022\034\n" +
+      "\024next_validators_hash\030\016 \001(\014\022\027\n\017validator" +
+      "s_hash\030\017 \001(\014\022%\n\007version\030\020 \001(\0132\024.abci_ven" +
+      "dor.Version\022+\n\rlast_block_id\030\021 \001(\0132\024.abc" +
+      "i_vendor.BlockID\"=\n\010TxStatus\022#\n\004code\030\001 \001" +
+      "(\0162\025.forge_abi.StatusCode\022\014\n\004hash\030\002 \001(\t\"" +
+      "c\n\rCircularQueue\022\r\n\005items\030\001 \003(\014\022\020\n\010type_",
+      "url\030\002 \001(\t\022\021\n\tmax_items\030\003 \001(\r\022\020\n\010circular" +
+      "\030\004 \001(\010\022\014\n\004fifo\030\005 \001(\010\"\242\001\n\014StateContext\022\022\n" +
+      "\ngenesis_tx\030\001 \001(\t\022\026\n\016renaissance_tx\030\002 \001(" +
+      "\t\0220\n\014genesis_time\030\003 \001(\0132\032.google.protobu" +
+      "f.Timestamp\0224\n\020renaissance_time\030\004 \001(\0132\032." +
+      "google.protobuf.Timestamp\"\202\002\n\014StakeConte" +
+      "xt\022(\n\014total_stakes\030\001 \001(\0132\022.forge_abi.Big" +
+      "Uint\022*\n\016total_unstakes\030\002 \001(\0132\022.forge_abi" +
+      ".BigUint\0221\n\025total_received_stakes\030\003 \001(\0132" +
+      "\022.forge_abi.BigUint\022/\n\rrecent_stakes\030\004 \001",
+      "(\0132\030.forge_abi.CircularQueue\0228\n\026recent_r" +
+      "eceived_stakes\030\017 \001(\0132\030.forge_abi.Circula" +
+      "rQueue\"\216\001\n\014StakeSummary\022(\n\014total_stakes\030" +
+      "\001 \001(\0132\022.forge_abi.BigUint\022*\n\016total_unsta" +
+      "kes\030\002 \001(\0132\022.forge_abi.BigUint\022(\n\007context" +
+      "\030\003 \001(\0132\027.forge_abi.StateContext\"F\n\013Stake" +
+      "Config\022\027\n\017timeout_general\030\001 \001(\r\022\036\n\026timeo" +
+      "ut_stake_for_node\030\002 \001(\r\"D\n\016UnconfirmedTx" +
+      "s\022\r\n\005n_txs\030\001 \001(\r\022#\n\003txs\030\002 \003(\0132\026.forge_ab" +
+      "i.Transaction\"d\n\007NetInfo\022\021\n\tlistening\030\001 ",
+      "\001(\010\022\021\n\tlisteners\030\002 \003(\t\022\017\n\007n_peers\030\003 \001(\r\022" +
+      "\"\n\005peers\030\004 \003(\0132\023.forge_abi.PeerInfo\"M\n\007G" +
+      "eoInfo\022\014\n\004city\030\001 \001(\t\022\017\n\007country\030\002 \001(\t\022\020\n" +
+      "\010latitude\030\003 \001(\002\022\021\n\tlongitude\030\004 \001(\002\"\205\001\n\010P" +
+      "eerInfo\022\n\n\002id\030\001 \001(\t\022\017\n\007network\030\002 \001(\t\022\031\n\021" +
+      "consensus_version\030\003 \001(\t\022\017\n\007moniker\030\004 \001(\t" +
+      "\022\n\n\002ip\030\005 \001(\t\022$\n\010geo_info\030\006 \001(\0132\022.forge_a" +
+      "bi.GeoInfo\"T\n\016ValidatorsInfo\022\024\n\014block_he" +
+      "ight\030\001 \001(\004\022,\n\nvalidators\030\002 \003(\0132\030.forge_a" +
+      "bi.ValidatorInfo\"\253\001\n\rValidatorInfo\022\017\n\007ad",
+      "dress\030\001 \001(\t\022$\n\007pub_key\030\002 \001(\0132\023.abci_vend" +
+      "or.PubKey\022\024\n\014voting_power\030\003 \001(\004\022\031\n\021propo" +
+      "ser_priority\030\004 \001(\t\022\014\n\004name\030\005 \001(\t\022$\n\010geo_" +
+      "info\030\006 \001(\0132\022.forge_abi.GeoInfo\"\255\001\n\013Genes" +
+      "isInfo\022\024\n\014genesis_time\030\001 \001(\t\022\020\n\010chain_id" +
+      "\030\002 \001(\t\0226\n\020consensus_params\030\003 \001(\0132\034.abci_" +
+      "vendor.ConsensusParams\022,\n\nvalidators\030\004 \003" +
+      "(\0132\030.forge_abi.ValidatorInfo\022\020\n\010app_hash" +
+      "\030\005 \001(\t\"\214\004\n\nForgeStats\022\022\n\nnum_blocks\030\001 \003(" +
+      "\004\022\017\n\007num_txs\030\002 \003(\004\022&\n\nnum_stakes\030\003 \003(\0132\022",
+      ".forge_abi.BigUint\022\026\n\016num_validators\030\004 \003" +
+      "(\r\022\037\n\027num_account_migrate_txs\030\005 \003(\004\022\034\n\024n" +
+      "um_create_asset_txs\030\006 \003(\004\022!\n\031num_consens" +
+      "us_upgrade_txs\030\007 \003(\r\022\027\n\017num_declare_txs\030" +
+      "\010 \003(\004\022\034\n\024num_declare_file_txs\030\t \003(\004\022\030\n\020n" +
+      "um_exchange_txs\030\n \003(\004\022\025\n\rnum_stake_txs\030\013" +
+      " \003(\004\022\033\n\023num_sys_upgrade_txs\030\014 \003(\r\022\030\n\020num" +
+      "_transfer_txs\030\r \003(\004\022\034\n\024num_update_asset_" +
+      "txs\030\016 \003(\004\022\035\n\025num_consume_asset_txs\030\017 \003(\004" +
+      "\022\024\n\014num_poke_txs\030\020 \003(\004\022\013\n\003tps\030\021 \003(\r\022\017\n\007m",
+      "ax_tps\030\022 \001(\r\022\017\n\007avg_tps\030\023 \001(\r\022\026\n\016avg_blo" +
+      "ck_time\030\024 \001(\002\"\342\002\n\014TxStatistics\022\037\n\027num_ac" +
+      "count_migrate_txs\030\001 \001(\004\022\034\n\024num_create_as" +
+      "set_txs\030\002 \001(\004\022!\n\031num_consensus_upgrade_t" +
+      "xs\030\003 \001(\r\022\027\n\017num_declare_txs\030\004 \001(\004\022\034\n\024num" +
+      "_declare_file_txs\030\005 \001(\004\022\030\n\020num_exchange_" +
+      "txs\030\006 \001(\004\022\025\n\rnum_stake_txs\030\007 \001(\004\022\033\n\023num_" +
+      "sys_upgrade_txs\030\010 \001(\r\022\030\n\020num_transfer_tx" +
+      "s\030\t \001(\004\022\034\n\024num_update_asset_txs\030\n \001(\004\022\035\n" +
+      "\025num_consume_asset_txs\030\013 \001(\004\022\024\n\014num_poke",
+      "_txs\030\014 \001(\004\"\262\001\n\nForgeToken\022\014\n\004name\030\001 \001(\t\022" +
+      "\016\n\006symbol\030\002 \001(\t\022\014\n\004unit\030\003 \001(\t\022\023\n\013descrip" +
+      "tion\030\004 \001(\t\022\014\n\004icon\030\005 \001(\014\022\017\n\007decimal\030\006 \001(" +
+      "\r\022\026\n\016initial_supply\030\007 \001(\004\022\024\n\014total_suppl" +
+      "y\030\010 \001(\004\022\026\n\016inflation_rate\030\t \001(\r\"}\n\010PokeI" +
+      "nfo\022\'\n\013daily_limit\030\001 \001(\0132\022.forge_abi.Big" +
+      "Uint\022$\n\010leftover\030\002 \001(\0132\022.forge_abi.BigUi" +
+      "nt\022\"\n\006amount\030\003 \001(\0132\022.forge_abi.BigUint\"S" +
+      "\n\nPokeConfig\022\017\n\007address\030\001 \001(\t\022\023\n\013daily_l" +
+      "imit\030\002 \001(\004\022\017\n\007balance\030\003 \001(\004\022\016\n\006amount\030\004 ",
+      "\001(\004\".\n\013UpgradeInfo\022\016\n\006height\030\001 \001(\004\022\017\n\007ve" +
+      "rsion\030\002 \001(\tb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -46188,13 +47448,13 @@ public final class Type {
     internal_static_forge_abi_Multisig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_Multisig_descriptor,
-        new java.lang.String[] { "Signer", "Pk", "Signature", "Data", });
+        new java.lang.String[] { "Signer", "Pk", "Signature", "Delegator", "Data", });
     internal_static_forge_abi_Transaction_descriptor =
       getDescriptor().getMessageTypes().get(12);
     internal_static_forge_abi_Transaction_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_Transaction_descriptor,
-        new java.lang.String[] { "From", "Nonce", "ChainId", "Pk", "Gas", "Signature", "Signatures", "Itx", });
+        new java.lang.String[] { "From", "Nonce", "ChainId", "Pk", "Gas", "Delegator", "Signature", "Signatures", "Itx", });
     internal_static_forge_abi_TransactionInfo_descriptor =
       getDescriptor().getMessageTypes().get(13);
     internal_static_forge_abi_TransactionInfo_fieldAccessorTable = new
@@ -46207,134 +47467,140 @@ public final class Type {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_DeclareConfig_descriptor,
         new java.lang.String[] { "Restricted", "Hierarchy", });
-    internal_static_forge_abi_TransactionConfig_descriptor =
+    internal_static_forge_abi_DelegateConfig_descriptor =
       getDescriptor().getMessageTypes().get(15);
+    internal_static_forge_abi_DelegateConfig_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_DelegateConfig_descriptor,
+        new java.lang.String[] { "DeltaInterval", "TypeUrls", });
+    internal_static_forge_abi_TransactionConfig_descriptor =
+      getDescriptor().getMessageTypes().get(16);
     internal_static_forge_abi_TransactionConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_TransactionConfig_descriptor,
-        new java.lang.String[] { "MaxAssetSize", "MaxListSize", "MaxMultisig", "MinimumStake", "Declare", });
+        new java.lang.String[] { "MaxAssetSize", "MaxListSize", "MaxMultisig", "MinimumStake", "Declare", "Delegate", });
     internal_static_forge_abi_BlockInfo_descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(17);
     internal_static_forge_abi_BlockInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_BlockInfo_descriptor,
         new java.lang.String[] { "Height", "NumTxs", "Time", "AppHash", "Proposer", "Txs", "TotalTxs", "InvalidTxs", "TxsHashes", "InvalidTxsHashes", "ConsensusHash", "DataHash", "EvidenceHash", "LastCommitHash", "LastResultsHash", "NextValidatorsHash", "ValidatorsHash", "Version", "LastBlockId", });
     internal_static_forge_abi_BlockInfoSimple_descriptor =
-      getDescriptor().getMessageTypes().get(17);
+      getDescriptor().getMessageTypes().get(18);
     internal_static_forge_abi_BlockInfoSimple_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_BlockInfoSimple_descriptor,
         new java.lang.String[] { "Height", "NumTxs", "Time", "AppHash", "Proposer", "TotalTxs", "TxsHashes", "InvalidTxsHashes", "ConsensusHash", "DataHash", "EvidenceHash", "LastCommitHash", "LastResultsHash", "NextValidatorsHash", "ValidatorsHash", "Version", "LastBlockId", });
     internal_static_forge_abi_TxStatus_descriptor =
-      getDescriptor().getMessageTypes().get(18);
+      getDescriptor().getMessageTypes().get(19);
     internal_static_forge_abi_TxStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_TxStatus_descriptor,
         new java.lang.String[] { "Code", "Hash", });
     internal_static_forge_abi_CircularQueue_descriptor =
-      getDescriptor().getMessageTypes().get(19);
+      getDescriptor().getMessageTypes().get(20);
     internal_static_forge_abi_CircularQueue_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_CircularQueue_descriptor,
         new java.lang.String[] { "Items", "TypeUrl", "MaxItems", "Circular", "Fifo", });
     internal_static_forge_abi_StateContext_descriptor =
-      getDescriptor().getMessageTypes().get(20);
+      getDescriptor().getMessageTypes().get(21);
     internal_static_forge_abi_StateContext_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_StateContext_descriptor,
         new java.lang.String[] { "GenesisTx", "RenaissanceTx", "GenesisTime", "RenaissanceTime", });
     internal_static_forge_abi_StakeContext_descriptor =
-      getDescriptor().getMessageTypes().get(21);
+      getDescriptor().getMessageTypes().get(22);
     internal_static_forge_abi_StakeContext_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_StakeContext_descriptor,
         new java.lang.String[] { "TotalStakes", "TotalUnstakes", "TotalReceivedStakes", "RecentStakes", "RecentReceivedStakes", });
     internal_static_forge_abi_StakeSummary_descriptor =
-      getDescriptor().getMessageTypes().get(22);
+      getDescriptor().getMessageTypes().get(23);
     internal_static_forge_abi_StakeSummary_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_StakeSummary_descriptor,
         new java.lang.String[] { "TotalStakes", "TotalUnstakes", "Context", });
     internal_static_forge_abi_StakeConfig_descriptor =
-      getDescriptor().getMessageTypes().get(23);
+      getDescriptor().getMessageTypes().get(24);
     internal_static_forge_abi_StakeConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_StakeConfig_descriptor,
         new java.lang.String[] { "TimeoutGeneral", "TimeoutStakeForNode", });
     internal_static_forge_abi_UnconfirmedTxs_descriptor =
-      getDescriptor().getMessageTypes().get(24);
+      getDescriptor().getMessageTypes().get(25);
     internal_static_forge_abi_UnconfirmedTxs_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_UnconfirmedTxs_descriptor,
         new java.lang.String[] { "NTxs", "Txs", });
     internal_static_forge_abi_NetInfo_descriptor =
-      getDescriptor().getMessageTypes().get(25);
+      getDescriptor().getMessageTypes().get(26);
     internal_static_forge_abi_NetInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_NetInfo_descriptor,
         new java.lang.String[] { "Listening", "Listeners", "NPeers", "Peers", });
     internal_static_forge_abi_GeoInfo_descriptor =
-      getDescriptor().getMessageTypes().get(26);
+      getDescriptor().getMessageTypes().get(27);
     internal_static_forge_abi_GeoInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_GeoInfo_descriptor,
         new java.lang.String[] { "City", "Country", "Latitude", "Longitude", });
     internal_static_forge_abi_PeerInfo_descriptor =
-      getDescriptor().getMessageTypes().get(27);
+      getDescriptor().getMessageTypes().get(28);
     internal_static_forge_abi_PeerInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_PeerInfo_descriptor,
         new java.lang.String[] { "Id", "Network", "ConsensusVersion", "Moniker", "Ip", "GeoInfo", });
     internal_static_forge_abi_ValidatorsInfo_descriptor =
-      getDescriptor().getMessageTypes().get(28);
+      getDescriptor().getMessageTypes().get(29);
     internal_static_forge_abi_ValidatorsInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ValidatorsInfo_descriptor,
         new java.lang.String[] { "BlockHeight", "Validators", });
     internal_static_forge_abi_ValidatorInfo_descriptor =
-      getDescriptor().getMessageTypes().get(29);
+      getDescriptor().getMessageTypes().get(30);
     internal_static_forge_abi_ValidatorInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ValidatorInfo_descriptor,
         new java.lang.String[] { "Address", "PubKey", "VotingPower", "ProposerPriority", "Name", "GeoInfo", });
     internal_static_forge_abi_GenesisInfo_descriptor =
-      getDescriptor().getMessageTypes().get(30);
+      getDescriptor().getMessageTypes().get(31);
     internal_static_forge_abi_GenesisInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_GenesisInfo_descriptor,
         new java.lang.String[] { "GenesisTime", "ChainId", "ConsensusParams", "Validators", "AppHash", });
     internal_static_forge_abi_ForgeStats_descriptor =
-      getDescriptor().getMessageTypes().get(31);
+      getDescriptor().getMessageTypes().get(32);
     internal_static_forge_abi_ForgeStats_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ForgeStats_descriptor,
         new java.lang.String[] { "NumBlocks", "NumTxs", "NumStakes", "NumValidators", "NumAccountMigrateTxs", "NumCreateAssetTxs", "NumConsensusUpgradeTxs", "NumDeclareTxs", "NumDeclareFileTxs", "NumExchangeTxs", "NumStakeTxs", "NumSysUpgradeTxs", "NumTransferTxs", "NumUpdateAssetTxs", "NumConsumeAssetTxs", "NumPokeTxs", "Tps", "MaxTps", "AvgTps", "AvgBlockTime", });
     internal_static_forge_abi_TxStatistics_descriptor =
-      getDescriptor().getMessageTypes().get(32);
+      getDescriptor().getMessageTypes().get(33);
     internal_static_forge_abi_TxStatistics_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_TxStatistics_descriptor,
         new java.lang.String[] { "NumAccountMigrateTxs", "NumCreateAssetTxs", "NumConsensusUpgradeTxs", "NumDeclareTxs", "NumDeclareFileTxs", "NumExchangeTxs", "NumStakeTxs", "NumSysUpgradeTxs", "NumTransferTxs", "NumUpdateAssetTxs", "NumConsumeAssetTxs", "NumPokeTxs", });
     internal_static_forge_abi_ForgeToken_descriptor =
-      getDescriptor().getMessageTypes().get(33);
+      getDescriptor().getMessageTypes().get(34);
     internal_static_forge_abi_ForgeToken_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ForgeToken_descriptor,
         new java.lang.String[] { "Name", "Symbol", "Unit", "Description", "Icon", "Decimal", "InitialSupply", "TotalSupply", "InflationRate", });
     internal_static_forge_abi_PokeInfo_descriptor =
-      getDescriptor().getMessageTypes().get(34);
+      getDescriptor().getMessageTypes().get(35);
     internal_static_forge_abi_PokeInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_PokeInfo_descriptor,
         new java.lang.String[] { "DailyLimit", "Leftover", "Amount", });
     internal_static_forge_abi_PokeConfig_descriptor =
-      getDescriptor().getMessageTypes().get(35);
+      getDescriptor().getMessageTypes().get(36);
     internal_static_forge_abi_PokeConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_PokeConfig_descriptor,
         new java.lang.String[] { "Address", "DailyLimit", "Balance", "Amount", });
     internal_static_forge_abi_UpgradeInfo_descriptor =
-      getDescriptor().getMessageTypes().get(36);
+      getDescriptor().getMessageTypes().get(37);
     internal_static_forge_abi_UpgradeInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_UpgradeInfo_descriptor,

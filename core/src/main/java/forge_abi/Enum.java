@@ -201,6 +201,62 @@ public final class Enum {
      */
     invalid_expiry_date(49),
     /**
+     * <code>invalid_deposit = 50;</code>
+     */
+    invalid_deposit(50),
+    /**
+     * <code>invalid_custodian = 51;</code>
+     */
+    invalid_custodian(51),
+    /**
+     * <code>insufficient_gas = 52;</code>
+     */
+    insufficient_gas(52),
+    /**
+     * <code>invalid_swap = 53;</code>
+     */
+    invalid_swap(53),
+    /**
+     * <code>invalid_hashkey = 54;</code>
+     */
+    invalid_hashkey(54),
+    /**
+     * <code>invalid_delegation = 55;</code>
+     */
+    invalid_delegation(55),
+    /**
+     * <code>insufficient_delegation = 56;</code>
+     */
+    insufficient_delegation(56),
+    /**
+     * <code>invalid_delegation_rule = 57;</code>
+     */
+    invalid_delegation_rule(57),
+    /**
+     * <code>invalid_delegation_type_url = 58;</code>
+     */
+    invalid_delegation_type_url(58),
+    /**
+     * <code>sender_not_authorized = 59;</code>
+     */
+    sender_not_authorized(59),
+    /**
+     * <code>protocol_not_running = 60;</code>
+     */
+    protocol_not_running(60),
+    /**
+     * <code>protocol_not_paused = 61;</code>
+     */
+    protocol_not_paused(61),
+    /**
+     * <code>protocol_not_activated = 62;</code>
+     */
+    protocol_not_activated(62),
+    /**
+     * <code>invalid_deactivation = 63;</code>
+     */
+    invalid_deactivation(63),
+    /**
      * <code>forbidden = 403;</code>
      */
     forbidden(403),
@@ -397,6 +453,62 @@ public final class Enum {
      */
     public static final int invalid_expiry_date_VALUE = 49;
     /**
+     * <code>invalid_deposit = 50;</code>
+     */
+    public static final int invalid_deposit_VALUE = 50;
+    /**
+     * <code>invalid_custodian = 51;</code>
+     */
+    public static final int invalid_custodian_VALUE = 51;
+    /**
+     * <code>insufficient_gas = 52;</code>
+     */
+    public static final int insufficient_gas_VALUE = 52;
+    /**
+     * <code>invalid_swap = 53;</code>
+     */
+    public static final int invalid_swap_VALUE = 53;
+    /**
+     * <code>invalid_hashkey = 54;</code>
+     */
+    public static final int invalid_hashkey_VALUE = 54;
+    /**
+     * <code>invalid_delegation = 55;</code>
+     */
+    public static final int invalid_delegation_VALUE = 55;
+    /**
+     * <code>insufficient_delegation = 56;</code>
+     */
+    public static final int insufficient_delegation_VALUE = 56;
+    /**
+     * <code>invalid_delegation_rule = 57;</code>
+     */
+    public static final int invalid_delegation_rule_VALUE = 57;
+    /**
+     * <code>invalid_delegation_type_url = 58;</code>
+     */
+    public static final int invalid_delegation_type_url_VALUE = 58;
+    /**
+     * <code>sender_not_authorized = 59;</code>
+     */
+    public static final int sender_not_authorized_VALUE = 59;
+    /**
+     * <code>protocol_not_running = 60;</code>
+     */
+    public static final int protocol_not_running_VALUE = 60;
+    /**
+     * <code>protocol_not_paused = 61;</code>
+     */
+    public static final int protocol_not_paused_VALUE = 61;
+    /**
+     * <code>protocol_not_activated = 62;</code>
+     */
+    public static final int protocol_not_activated_VALUE = 62;
+    /**
+     * <code>invalid_deactivation = 63;</code>
+     */
+    public static final int invalid_deactivation_VALUE = 63;
+    /**
      * <code>forbidden = 403;</code>
      */
     public static final int forbidden_VALUE = 403;
@@ -471,6 +583,20 @@ public final class Enum {
         case 47: return invalid_withdrawer;
         case 48: return duplicate_tether;
         case 49: return invalid_expiry_date;
+        case 50: return invalid_deposit;
+        case 51: return invalid_custodian;
+        case 52: return insufficient_gas;
+        case 53: return invalid_swap;
+        case 54: return invalid_hashkey;
+        case 55: return invalid_delegation;
+        case 56: return insufficient_delegation;
+        case 57: return invalid_delegation_rule;
+        case 58: return invalid_delegation_type_url;
+        case 59: return sender_not_authorized;
+        case 60: return protocol_not_running;
+        case 61: return protocol_not_paused;
+        case 62: return protocol_not_activated;
+        case 63: return invalid_deactivation;
         case 403: return forbidden;
         case 500: return internal;
         case 504: return timeout;
@@ -524,294 +650,6 @@ public final class Enum {
     }
 
     // @@protoc_insertion_point(enum_scope:forge_abi.StatusCode)
-  }
-
-  /**
-   * <pre>
-   * event happened on Forge powered chain
-   * </pre>
-   *
-   * Protobuf enum {@code forge_abi.TopicType}
-   */
-  public enum TopicType
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <pre>
-     * most commonly used event
-     * </pre>
-     *
-     * <code>transfer = 0;</code>
-     */
-    transfer(0),
-    /**
-     * <pre>
-     * 1-15 fequently used event
-     * </pre>
-     *
-     * <code>exchange = 1;</code>
-     */
-    exchange(1),
-    /**
-     * <code>declare = 2;</code>
-     */
-    declare(2),
-    /**
-     * <code>create_asset = 3;</code>
-     */
-    create_asset(3),
-    /**
-     * <code>update_asset = 4;</code>
-     */
-    update_asset(4),
-    /**
-     * <code>stake = 5;</code>
-     */
-    stake(5),
-    /**
-     * <code>account_migrate = 6;</code>
-     */
-    account_migrate(6),
-    /**
-     * <pre>
-     * 16-2047 infrequently used event
-     * </pre>
-     *
-     * <code>begin_block = 16;</code>
-     */
-    begin_block(16),
-    /**
-     * <code>end_block = 17;</code>
-     */
-    end_block(17),
-    /**
-     * <code>consensus_upgrade = 21;</code>
-     */
-    consensus_upgrade(21),
-    /**
-     * <code>declare_file = 22;</code>
-     */
-    declare_file(22),
-    /**
-     * <code>sys_upgrade = 23;</code>
-     */
-    sys_upgrade(23),
-    /**
-     * <code>application = 24;</code>
-     */
-    application(24),
-    /**
-     * <code>consume_asset = 25;</code>
-     */
-    consume_asset(25),
-    /**
-     * <code>poke = 26;</code>
-     */
-    poke(26),
-    /**
-     * <code>account_state = 129;</code>
-     */
-    account_state(129),
-    /**
-     * <code>asset_state = 130;</code>
-     */
-    asset_state(130),
-    /**
-     * <code>forge_state = 131;</code>
-     */
-    forge_state(131),
-    /**
-     * <code>stake_state = 132;</code>
-     */
-    stake_state(132),
-    /**
-     * <code>protocol_state = 133;</code>
-     */
-    protocol_state(133),
-    UNRECOGNIZED(-1),
-    ;
-
-    /**
-     * <pre>
-     * most commonly used event
-     * </pre>
-     *
-     * <code>transfer = 0;</code>
-     */
-    public static final int transfer_VALUE = 0;
-    /**
-     * <pre>
-     * 1-15 fequently used event
-     * </pre>
-     *
-     * <code>exchange = 1;</code>
-     */
-    public static final int exchange_VALUE = 1;
-    /**
-     * <code>declare = 2;</code>
-     */
-    public static final int declare_VALUE = 2;
-    /**
-     * <code>create_asset = 3;</code>
-     */
-    public static final int create_asset_VALUE = 3;
-    /**
-     * <code>update_asset = 4;</code>
-     */
-    public static final int update_asset_VALUE = 4;
-    /**
-     * <code>stake = 5;</code>
-     */
-    public static final int stake_VALUE = 5;
-    /**
-     * <code>account_migrate = 6;</code>
-     */
-    public static final int account_migrate_VALUE = 6;
-    /**
-     * <pre>
-     * 16-2047 infrequently used event
-     * </pre>
-     *
-     * <code>begin_block = 16;</code>
-     */
-    public static final int begin_block_VALUE = 16;
-    /**
-     * <code>end_block = 17;</code>
-     */
-    public static final int end_block_VALUE = 17;
-    /**
-     * <code>consensus_upgrade = 21;</code>
-     */
-    public static final int consensus_upgrade_VALUE = 21;
-    /**
-     * <code>declare_file = 22;</code>
-     */
-    public static final int declare_file_VALUE = 22;
-    /**
-     * <code>sys_upgrade = 23;</code>
-     */
-    public static final int sys_upgrade_VALUE = 23;
-    /**
-     * <code>application = 24;</code>
-     */
-    public static final int application_VALUE = 24;
-    /**
-     * <code>consume_asset = 25;</code>
-     */
-    public static final int consume_asset_VALUE = 25;
-    /**
-     * <code>poke = 26;</code>
-     */
-    public static final int poke_VALUE = 26;
-    /**
-     * <code>account_state = 129;</code>
-     */
-    public static final int account_state_VALUE = 129;
-    /**
-     * <code>asset_state = 130;</code>
-     */
-    public static final int asset_state_VALUE = 130;
-    /**
-     * <code>forge_state = 131;</code>
-     */
-    public static final int forge_state_VALUE = 131;
-    /**
-     * <code>stake_state = 132;</code>
-     */
-    public static final int stake_state_VALUE = 132;
-    /**
-     * <code>protocol_state = 133;</code>
-     */
-    public static final int protocol_state_VALUE = 133;
-
-
-    public final int getNumber() {
-      if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
-            "Can't get the number of an unknown enum value.");
-      }
-      return value;
-    }
-
-    /**
-     * @deprecated Use {@link #forNumber(int)} instead.
-     */
-    @java.lang.Deprecated
-    public static TopicType valueOf(int value) {
-      return forNumber(value);
-    }
-
-    public static TopicType forNumber(int value) {
-      switch (value) {
-        case 0: return transfer;
-        case 1: return exchange;
-        case 2: return declare;
-        case 3: return create_asset;
-        case 4: return update_asset;
-        case 5: return stake;
-        case 6: return account_migrate;
-        case 16: return begin_block;
-        case 17: return end_block;
-        case 21: return consensus_upgrade;
-        case 22: return declare_file;
-        case 23: return sys_upgrade;
-        case 24: return application;
-        case 25: return consume_asset;
-        case 26: return poke;
-        case 129: return account_state;
-        case 130: return asset_state;
-        case 131: return forge_state;
-        case 132: return stake_state;
-        case 133: return protocol_state;
-        default: return null;
-      }
-    }
-
-    public static com.google.protobuf.Internal.EnumLiteMap<TopicType>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static final com.google.protobuf.Internal.EnumLiteMap<
-        TopicType> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<TopicType>() {
-            public TopicType findValueByNumber(int number) {
-              return TopicType.forNumber(number);
-            }
-          };
-
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      return getDescriptor().getValues().get(ordinal());
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return forge_abi.Enum.getDescriptor().getEnumTypes().get(1);
-    }
-
-    private static final TopicType[] VALUES = values();
-
-    public static TopicType valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      if (desc.getIndex() == -1) {
-        return UNRECOGNIZED;
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int value;
-
-    private TopicType(int value) {
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:forge_abi.TopicType)
   }
 
   /**
@@ -886,7 +724,7 @@ public final class Enum {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return forge_abi.Enum.getDescriptor().getEnumTypes().get(2);
+      return forge_abi.Enum.getDescriptor().getEnumTypes().get(1);
     }
 
     private static final KeyType[] VALUES = values();
@@ -1029,7 +867,7 @@ public final class Enum {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return forge_abi.Enum.getDescriptor().getEnumTypes().get(3);
+      return forge_abi.Enum.getDescriptor().getEnumTypes().get(2);
     }
 
     private static final HashType[] VALUES = values();
@@ -1127,7 +965,7 @@ public final class Enum {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return forge_abi.Enum.getDescriptor().getEnumTypes().get(4);
+      return forge_abi.Enum.getDescriptor().getEnumTypes().get(3);
     }
 
     private static final EncodingType[] VALUES = values();
@@ -1324,7 +1162,7 @@ public final class Enum {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return forge_abi.Enum.getDescriptor().getEnumTypes().get(5);
+      return forge_abi.Enum.getDescriptor().getEnumTypes().get(4);
     }
 
     private static final RoleType[] VALUES = values();
@@ -1510,7 +1348,7 @@ public final class Enum {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return forge_abi.Enum.getDescriptor().getEnumTypes().get(6);
+      return forge_abi.Enum.getDescriptor().getEnumTypes().get(5);
     }
 
     private static final UpgradeType[] VALUES = values();
@@ -1732,7 +1570,7 @@ public final class Enum {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return forge_abi.Enum.getDescriptor().getEnumTypes().get(7);
+      return forge_abi.Enum.getDescriptor().getEnumTypes().get(6);
     }
 
     private static final UpgradeAction[] VALUES = values();
@@ -1857,7 +1695,7 @@ public final class Enum {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return forge_abi.Enum.getDescriptor().getEnumTypes().get(8);
+      return forge_abi.Enum.getDescriptor().getEnumTypes().get(7);
     }
 
     private static final StateType[] VALUES = values();
@@ -1973,7 +1811,7 @@ public final class Enum {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return forge_abi.Enum.getDescriptor().getEnumTypes().get(9);
+      return forge_abi.Enum.getDescriptor().getEnumTypes().get(8);
     }
 
     private static final StakeType[] VALUES = values();
@@ -2080,7 +1918,7 @@ public final class Enum {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return forge_abi.Enum.getDescriptor().getEnumTypes().get(10);
+      return forge_abi.Enum.getDescriptor().getEnumTypes().get(9);
     }
 
     private static final ProtocolStatus[] VALUES = values();
@@ -2115,7 +1953,7 @@ public final class Enum {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nenum.proto\022\tforge_abi*\350\007\n\nStatusCode\022\006" +
+      "\n\nenum.proto\022\tforge_abi*\310\n\n\nStatusCode\022\006" +
       "\n\002ok\020\000\022\021\n\rinvalid_nonce\020\001\022\025\n\021invalid_sig" +
       "nature\020\002\022\030\n\024invalid_sender_state\020\003\022\032\n\026in" +
       "valid_receiver_state\020\004\022\025\n\021insufficient_d" +
@@ -2139,44 +1977,44 @@ public final class Enum {
       "xceed_deposit_cap\020,\022\032\n\026invalid_deposit_t" +
       "arget\020-\022\025\n\021invalid_depositor\020.\022\026\n\022invali" +
       "d_withdrawer\020/\022\024\n\020duplicate_tether\0200\022\027\n\023" +
-      "invalid_expiry_date\0201\022\016\n\tforbidden\020\223\003\022\r\n" +
-      "\010internal\020\364\003\022\014\n\007timeout\020\370\003*\337\002\n\tTopicType" +
-      "\022\014\n\010transfer\020\000\022\014\n\010exchange\020\001\022\013\n\007declare\020" +
-      "\002\022\020\n\014create_asset\020\003\022\020\n\014update_asset\020\004\022\t\n" +
-      "\005stake\020\005\022\023\n\017account_migrate\020\006\022\017\n\013begin_b" +
-      "lock\020\020\022\r\n\tend_block\020\021\022\025\n\021consensus_upgra",
-      "de\020\025\022\020\n\014declare_file\020\026\022\017\n\013sys_upgrade\020\027\022" +
-      "\017\n\013application\020\030\022\021\n\rconsume_asset\020\031\022\010\n\004p" +
-      "oke\020\032\022\022\n\raccount_state\020\201\001\022\020\n\013asset_state" +
-      "\020\202\001\022\020\n\013forge_state\020\203\001\022\020\n\013stake_state\020\204\001\022" +
-      "\023\n\016protocol_state\020\205\001*%\n\007KeyType\022\013\n\007ed255" +
-      "19\020\000\022\r\n\tsecp256k1\020\001*f\n\010HashType\022\n\n\006kecca" +
-      "k\020\000\022\010\n\004sha3\020\001\022\010\n\004sha2\020\002\022\016\n\nkeccak_384\020\006\022" +
-      "\014\n\010sha3_384\020\007\022\016\n\nkeccak_512\020\r\022\014\n\010sha3_51" +
-      "2\020\016*&\n\014EncodingType\022\n\n\006base16\020\000\022\n\n\006base5" +
-      "8\020\001*\351\001\n\010RoleType\022\020\n\014role_account\020\000\022\r\n\tro",
-      "le_node\020\001\022\017\n\013role_device\020\002\022\024\n\020role_appli" +
-      "cation\020\003\022\027\n\023role_smart_contract\020\004\022\014\n\010rol" +
-      "e_bot\020\005\022\016\n\nrole_asset\020\006\022\016\n\nrole_stake\020\007\022" +
-      "\022\n\016role_validator\020\010\022\016\n\nrole_group\020\t\022\013\n\007r" +
-      "ole_tx\020\n\022\017\n\013role_tether\020\013\022\014\n\010role_any\020?*" +
-      "\256\001\n\013UpgradeType\022\016\n\nconfig_app\020\000\022\020\n\014confi" +
-      "g_forge\020\001\022\016\n\nconfig_dfs\020\002\022\024\n\020config_cons" +
-      "ensus\020\003\022\016\n\nconfig_p2p\020\004\022\013\n\007exe_app\020\n\022\r\n\t" +
-      "exe_forge\020\013\022\013\n\007exe_dfs\020\014\022\021\n\rexe_consensu" +
-      "s\020\r\022\013\n\007exe_p2p\020\016*\352\001\n\rUpgradeAction\022\n\n\006ve",
-      "rify\020\000\022\n\n\006backup\020\001\022\013\n\007replace\020\002\022\017\n\013resta" +
-      "rt_app\020\n\022\017\n\013restart_dfs\020\013\022\025\n\021restart_con" +
-      "sensus\020\014\022\017\n\013restart_p2p\020\r\022\021\n\rrestart_for" +
-      "ge\020\016\022\024\n\020rollback_if_fail\020\036\022\027\n\023restart_al" +
-      "l_if_fail\020\037\022\021\n\rcrash_if_fail\020!\022\025\n\021drop_a" +
-      "ddress_book\0202*d\n\tStateType\022\021\n\rstate_acco" +
-      "unt\020\000\022\017\n\013state_asset\020\001\022\021\n\rstate_channel\020" +
-      "\002\022\017\n\013state_forge\020\003\022\017\n\013state_stake\020\004*M\n\tS" +
-      "takeType\022\016\n\nstake_node\020\000\022\016\n\nstake_user\020\001" +
-      "\022\017\n\013stake_asset\020\002\022\017\n\013stake_chain\020\003*9\n\016Pr",
-      "otocolStatus\022\013\n\007running\020\000\022\n\n\006paused\020\001\022\016\n" +
-      "\nterminated\020\002b\006proto3"
+      "invalid_expiry_date\0201\022\023\n\017invalid_deposit" +
+      "\0202\022\025\n\021invalid_custodian\0203\022\024\n\020insufficien" +
+      "t_gas\0204\022\020\n\014invalid_swap\0205\022\023\n\017invalid_has" +
+      "hkey\0206\022\026\n\022invalid_delegation\0207\022\033\n\027insuff" +
+      "icient_delegation\0208\022\033\n\027invalid_delegatio" +
+      "n_rule\0209\022\037\n\033invalid_delegation_type_url\020",
+      ":\022\031\n\025sender_not_authorized\020;\022\030\n\024protocol" +
+      "_not_running\020<\022\027\n\023protocol_not_paused\020=\022" +
+      "\032\n\026protocol_not_activated\020>\022\030\n\024invalid_d" +
+      "eactivation\020?\022\016\n\tforbidden\020\223\003\022\r\n\010interna" +
+      "l\020\364\003\022\014\n\007timeout\020\370\003*%\n\007KeyType\022\013\n\007ed25519" +
+      "\020\000\022\r\n\tsecp256k1\020\001*f\n\010HashType\022\n\n\006keccak\020" +
+      "\000\022\010\n\004sha3\020\001\022\010\n\004sha2\020\002\022\016\n\nkeccak_384\020\006\022\014\n" +
+      "\010sha3_384\020\007\022\016\n\nkeccak_512\020\r\022\014\n\010sha3_512\020" +
+      "\016*&\n\014EncodingType\022\n\n\006base16\020\000\022\n\n\006base58\020" +
+      "\001*\351\001\n\010RoleType\022\020\n\014role_account\020\000\022\r\n\trole",
+      "_node\020\001\022\017\n\013role_device\020\002\022\024\n\020role_applica" +
+      "tion\020\003\022\027\n\023role_smart_contract\020\004\022\014\n\010role_" +
+      "bot\020\005\022\016\n\nrole_asset\020\006\022\016\n\nrole_stake\020\007\022\022\n" +
+      "\016role_validator\020\010\022\016\n\nrole_group\020\t\022\013\n\007rol" +
+      "e_tx\020\n\022\017\n\013role_tether\020\013\022\014\n\010role_any\020?*\256\001" +
+      "\n\013UpgradeType\022\016\n\nconfig_app\020\000\022\020\n\014config_" +
+      "forge\020\001\022\016\n\nconfig_dfs\020\002\022\024\n\020config_consen" +
+      "sus\020\003\022\016\n\nconfig_p2p\020\004\022\013\n\007exe_app\020\n\022\r\n\tex" +
+      "e_forge\020\013\022\013\n\007exe_dfs\020\014\022\021\n\rexe_consensus\020" +
+      "\r\022\013\n\007exe_p2p\020\016*\352\001\n\rUpgradeAction\022\n\n\006veri",
+      "fy\020\000\022\n\n\006backup\020\001\022\013\n\007replace\020\002\022\017\n\013restart" +
+      "_app\020\n\022\017\n\013restart_dfs\020\013\022\025\n\021restart_conse" +
+      "nsus\020\014\022\017\n\013restart_p2p\020\r\022\021\n\rrestart_forge" +
+      "\020\016\022\024\n\020rollback_if_fail\020\036\022\027\n\023restart_all_" +
+      "if_fail\020\037\022\021\n\rcrash_if_fail\020!\022\025\n\021drop_add" +
+      "ress_book\0202*d\n\tStateType\022\021\n\rstate_accoun" +
+      "t\020\000\022\017\n\013state_asset\020\001\022\021\n\rstate_channel\020\002\022" +
+      "\017\n\013state_forge\020\003\022\017\n\013state_stake\020\004*M\n\tSta" +
+      "keType\022\016\n\nstake_node\020\000\022\016\n\nstake_user\020\001\022\017" +
+      "\n\013stake_asset\020\002\022\017\n\013stake_chain\020\003*9\n\016Prot",
+      "ocolStatus\022\013\n\007running\020\000\022\n\n\006paused\020\001\022\016\n\nt" +
+      "erminated\020\002b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

@@ -111,6 +111,18 @@ public final class StateRpcGrpc {
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               forge_abi.Rpc.ResponseGetSwapState.getDefaultInstance()))
           .build();
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestGetDelegateState,
+      forge_abi.Rpc.ResponseGetDelegateState> METHOD_GET_DELEGATE_STATE =
+      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestGetDelegateState, forge_abi.Rpc.ResponseGetDelegateState>newBuilder()
+          .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+          .setFullMethodName(generateFullMethodName(
+              "forge_abi.StateRpc", "get_delegate_state"))
+          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              forge_abi.Rpc.RequestGetDelegateState.getDefaultInstance()))
+          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              forge_abi.Rpc.ResponseGetDelegateState.getDefaultInstance()))
+          .build();
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -191,6 +203,13 @@ public final class StateRpcGrpc {
       return asyncUnimplementedStreamingCall(METHOD_GET_SWAP_STATE, responseObserver);
     }
 
+    /**
+     */
+    public io.grpc.stub.StreamObserver<forge_abi.Rpc.RequestGetDelegateState> getDelegateState(
+        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetDelegateState> responseObserver) {
+      return asyncUnimplementedStreamingCall(METHOD_GET_DELEGATE_STATE, responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -242,6 +261,13 @@ public final class StateRpcGrpc {
                 forge_abi.Rpc.RequestGetSwapState,
                 forge_abi.Rpc.ResponseGetSwapState>(
                   this, METHODID_GET_SWAP_STATE)))
+          .addMethod(
+            METHOD_GET_DELEGATE_STATE,
+            asyncBidiStreamingCall(
+              new MethodHandlers<
+                forge_abi.Rpc.RequestGetDelegateState,
+                forge_abi.Rpc.ResponseGetDelegateState>(
+                  this, METHODID_GET_DELEGATE_STATE)))
           .build();
     }
   }
@@ -322,6 +348,14 @@ public final class StateRpcGrpc {
       return asyncBidiStreamingCall(
           getChannel().newCall(METHOD_GET_SWAP_STATE, getCallOptions()), responseObserver);
     }
+
+    /**
+     */
+    public io.grpc.stub.StreamObserver<forge_abi.Rpc.RequestGetDelegateState> getDelegateState(
+        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetDelegateState> responseObserver) {
+      return asyncBidiStreamingCall(
+          getChannel().newCall(METHOD_GET_DELEGATE_STATE, getCallOptions()), responseObserver);
+    }
   }
 
   /**
@@ -384,6 +418,7 @@ public final class StateRpcGrpc {
   private static final int METHODID_GET_STAKE_STATE = 4;
   private static final int METHODID_GET_TETHER_STATE = 5;
   private static final int METHODID_GET_SWAP_STATE = 6;
+  private static final int METHODID_GET_DELEGATE_STATE = 7;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -434,6 +469,9 @@ public final class StateRpcGrpc {
         case METHODID_GET_SWAP_STATE:
           return (io.grpc.stub.StreamObserver<Req>) serviceImpl.getSwapState(
               (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetSwapState>) responseObserver);
+        case METHODID_GET_DELEGATE_STATE:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.getDelegateState(
+              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetDelegateState>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -464,6 +502,7 @@ public final class StateRpcGrpc {
               .addMethod(METHOD_GET_STAKE_STATE)
               .addMethod(METHOD_GET_TETHER_STATE)
               .addMethod(METHOD_GET_SWAP_STATE)
+              .addMethod(METHOD_GET_DELEGATE_STATE)
               .build();
         }
       }

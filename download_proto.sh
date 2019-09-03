@@ -12,8 +12,10 @@ LIST=(
 
 TLIST=(
   "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/account/account_migrate/protocol.proto" \
+  "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/account/delegate/protocol.proto" \
+  "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/account/revoke_delegate/protocol.proto" \
   "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/account/declare/protocol.proto" \
-   "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/asset/acquire_asset/protocol.proto" \
+  "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/asset/acquire_asset/protocol.proto" \
   "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/asset/consume_asset/protocol.proto" \
   "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/asset/create_asset/protocol.proto" \
   "https://api.github.com/repos/ArcBlock/forge-core-protocols/contents/lib/asset/update_asset/protocol.proto" \

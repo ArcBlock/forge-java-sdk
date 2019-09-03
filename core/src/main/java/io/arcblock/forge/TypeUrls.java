@@ -36,4 +36,6 @@ public class TypeUrls {
     public static final String TRANSACTION_INFO = "fg:x:tx_info";
     public static final String TX_STATUS = "fg:x:tx_status";
     public static final String ADDRESS = "fg:x:account_migrate";
+    public static final String DELEGATE = "fg:t:delegate";
+    public static final String REVOKE_DELEGATE= "fg:t:revoke_delegate";
 }
