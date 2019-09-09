@@ -2,9 +2,6 @@ package io.arcblock.forge.bip44;
 
 
 import com.google.common.io.BaseEncoding;
-import io.arcblock.forge.hash.ArcKeccakf1600Hasher;
-
-import java.security.SecureRandom;
 
 import org.bitcoinj.core.Base58;
 import org.bitcoinj.crypto.ChildNumber;
@@ -12,6 +9,10 @@ import org.bitcoinj.crypto.DeterministicKey;
 import org.bitcoinj.crypto.HDKeyDerivation;
 import org.bitcoinj.wallet.DeterministicSeed;
 import org.web3j.crypto.ECKeyPair;
+
+import java.security.SecureRandom;
+
+import io.arcblock.forge.hash.ArcKeccakf1600Hasher;
 
 /**
  *  Utils to generate BIP44 Wallet
@@ -21,10 +22,14 @@ public class Bip44Utils {
   /**
    * （imtoken jaxx Metamask myetherwallet）
    */
-  public static String ETH_JAXX_TYPE = "m/44'/60'/0'/0/0";
+  private static String ETH_JAXX_TYPE = "m/44'/60'/0'/0/0";
 
   private static final SecureRandom secureRandom = SecureRandomUtils.secureRandom();
 
+  /**
+   * Generate a secure seed for HD wallet
+   *
+   */
   public static DeterministicSeed genSeed(String secretCode, String recoverCode,
                                           String passphrase) {
     long creationTimeSeconds = System.currentTimeMillis() / 1000;
@@ -34,6 +39,10 @@ public class Bip44Utils {
       creationTimeSeconds);
   }
 
+  /**
+   * generate a recover code
+   * @return
+   */
   public static String genRecoverCode() {
     byte[] seed = new byte[16];
     secureRandom.nextBytes(seed);
@@ -50,10 +59,16 @@ public class Bip44Utils {
     return result.substring(0, 32).getBytes();
   }
 
+  /**
+   * Generate KeyPair by seed
+   */
   public static ECKeyPair genKeyPair(DeterministicSeed seed) {
     return genKeyPair(seed, ETH_JAXX_TYPE);
   }
 
+  /**
+   * Generate KeyPair by seed and custom path
+   */
   public static ECKeyPair genKeyPair(DeterministicSeed seed, String path) {
     String[] pathArray = path.split("/");
     DeterministicKey dkKey = HDKeyDerivation.createMasterPrivateKey(seed.getSeedBytes());
@@ -71,25 +86,4 @@ public class Bip44Utils {
     }
     return ECKeyPair.create(dkKey.getPrivKeyBytes());
   }
-
-//
-//  /**
-//   * recovery eckey by mnemonics
-//   *
-//   * @param path m/44/60/0/0/0
-//   * @param list mnemonics
-//   */
-//  public static ECKeyPair importMnemonic(String path, List<String> list) {
-//    if (!path.startsWith("m") && !path.startsWith("M")) {
-//      return null;
-//    }
-//    String[] pathArray = path.split("/");
-//    if (pathArray.length <= 1) {
-//      return null;
-//    }
-//    String passphrase = "";
-//    long creationTimeSeconds = System.currentTimeMillis() / 1000;
-//    DeterministicSeed ds = new DeterministicSeed(list, null, passphrase, creationTimeSeconds);
-//    return genKeyPair(ds);
-//  }
 }

@@ -1,6 +1,7 @@
 package io.arcblock.forge.hash
 
 import com.google.common.io.BaseEncoding
+import io.arcblock.forge.hash.ArcKeccakf1600Hasher
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith

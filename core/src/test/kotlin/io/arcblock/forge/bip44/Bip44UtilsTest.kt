@@ -1,5 +1,6 @@
 package io.arcblock.forge.bip44
 
+import io.arcblock.forge.bip44.Bip44Utils
 import org.junit.Assert
 import org.junit.Test
 

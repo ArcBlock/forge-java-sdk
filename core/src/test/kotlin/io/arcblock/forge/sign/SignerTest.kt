@@ -1,4 +1,4 @@
-package io.arcblock.forge.signer
+package io.arcblock.forge.sign
 
 import com.google.common.io.BaseEncoding
 import io.arcblock.forge.did.KeyType

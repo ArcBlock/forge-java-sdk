@@ -36,7 +36,7 @@ class LoginController : BaseController() {
                 .build()
         val jwt = SignedJWT(JWSHeader(JWSAlgorithm.HS256), jwtClaims)
 
-        // Create HMAC signer
+        // Create HMAC sign
         val signer = MACSigner(appDid.sk)
         jwt.sign(signer)
         return "{token: \"${jwt.serialize()}\"}"

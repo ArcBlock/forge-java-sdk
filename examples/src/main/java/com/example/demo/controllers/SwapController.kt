@@ -96,7 +96,7 @@ class SwapController {
   fun delegatePaper():String {
     val w = DIDGenerator.randomWallet()
     logger.info("address======>\n ${w.address}")
-    val declare = forge.forgeSDK.sendTx(Rpc.RequestSendTx.newBuilder().setTx(TransactionFactory.delare(app.chainId,w).signTx(w.sk)).build())
+    val declare = forge.forgeSDK.sendTx(Rpc.RequestSendTx.newBuilder().setTx(TransactionFactory.declare(app.chainId,w).signTx(w.sk)).build())
     logger.info("declare======>\n ${declare.toString()}")
     val forgeState = forge.forgeSDK
       .getForgeState(Rpc.RequestGetForgeState.newBuilder()

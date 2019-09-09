@@ -9,7 +9,7 @@ public class ForgeConfig {
 
     public ForgeSDK forgeSDK(){
         System.out.println("connect host");
-        ForgeSDK forge = ForgeSDK.connect("localhost",27210);
+        ForgeSDK forge = ForgeSDK.Companion.connect("localhost",27210);
         Rpc.ResponseGetChainInfo chainInfo = forge.getChainInfo(Rpc.RequestGetChainInfo.getDefaultInstance());
         System.out.println("xxx:"+chainInfo.getInfo().toString());
 

@@ -5,7 +5,7 @@ import forge_abi.Type
 import io.arcblock.forge.Hasher
 import io.arcblock.forge.did.HashType
 import io.arcblock.forge.did.KeyType
-import io.arcblock.forge.signer.Signer
+import io.arcblock.forge.sign.Signer
 import io.arcblock.forge.utils.Base58Btc
 import org.junit.Test
 
@@ -18,37 +18,6 @@ class DemoTest {
     val sig = Signer.sign(KeyType.ED25519, hash, Base58Btc.decode("z3KiejcE6nqEYhqMsmDLZCjjzPpSuEGNhvULwvgKNrfzX2VqSAVQnG3iSQKrc5JRVrEvo5ni4dLVpEUBkyxkB7xnq"))
     val multi = Type.Multisig.newBuilder().setSignature(ByteString.copyFrom(sig)).build()
     println("sig:${Base58Btc.encode(sig)}")
-  }
-
-  @Test
-  fun sum() {
-    //threeSumClosest(arrayOf(-1, 2, 1, -4).toIntArray(),1)
-  }
-
-  fun threeSumClosest(nums: IntArray, target: Int): Int {
-    nums.sort()
-    val ret = mutableSetOf<Int>()
-    for (y in 1 until nums.size - 1) {
-      var x = y - 1
-      var z = y + 1
-      var last = nums[x]+nums[y]+nums[z] -target >=0
-      while (x >0 && z < nums.size){
-        if (nums[x]+nums[y]+nums[z] -target >=0){
-          if (!last) {
-            ret.add(nums[x]+nums[y]+nums[z] -target)
-            break
-          }
-          x--
-        }else {
-          if (!last) {
-            ret.add(nums[x]+nums[y]+nums[z] -target)
-            break
-          }
-          z++
-        }
-      }
-    }
-    return ret.min()!!
   }
 
 }

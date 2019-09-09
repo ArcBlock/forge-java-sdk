@@ -4,13 +4,8 @@ import com.google.common.io.BaseEncoding
 import com.google.protobuf.Any
 import com.google.protobuf.ByteString
 import forge_abi.CreateAsset
-import io.arcblock.forge.Hasher
-import io.arcblock.forge.WalletUtils
+import io.arcblock.forge.*
 import io.arcblock.forge.bip44.Bip44Utils
-import io.arcblock.forge.deBase16
-import io.arcblock.forge.didToAddr
-import io.arcblock.forge.getPK
-import io.arcblock.forge.toHexString
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -118,12 +113,17 @@ class DIDGeneratorTest {
       .setTtl(0)
       .build()
     println("itx:$itx")
-    val address = DIDGenerator.genAssetDid("z1fAiQRmNDFSoFAFTq4R5UsaYpL6y4s8XSx",itx.toByteArray())
+    val address = DIDGenerator.genAssetDid("z1fAiQRmNDFSoFAFTq4R5UsaYpL6y4s8XSx", itx.toByteArray())
     Assert.assertEquals("zjdmmAWQDGgb68y6GAcoSx3n8exZC1hvxQ4H",address.didToAddr())
   }
+
   @Test
   fun genTxaddr(){
     val data =Any.newBuilder().setTypeUrl("test_asset").setValue(ByteString.copyFromUtf8("hello world")).build()
+    println("any_bin:")
+    data.toByteArray().forEach { print("$it,") }
+    println("")
+
     val itx = CreateAsset.CreateAssetTx.newBuilder().setData(data)
       .setMoniker("")
       .setReadonly(false)
@@ -132,6 +132,9 @@ class DIDGeneratorTest {
       .setTtl(0)
       .build()
     println("itx:$itx")
+    println("itx_bin:")
+    itx.toByteArray().forEach { print("$it,") }
+    println("")
     val address = DIDGenerator.toTxAddress(itx.toByteArray())
     Assert.assertEquals("z2E3v9oZB7LsX6vkTLzsDkNHM12vkVjhvavMS",address.didToAddr())
   }
@@ -141,7 +144,7 @@ class DIDGeneratorTest {
     val w1="z1Y2f7cwqSyR4c9azZLNAHimtbjLR3cxPnX"
     val rst="zrjq3G7UjWJ3etFjtP6LDjk3Aqabz3eh3n5w"
     val w2="z1fAiQRmNDFSoFAFTq4R5UsaYpL6y4s8XSx"
-    Assert.assertEquals(rst, DIDGenerator.toStakeAddress(w1,w2))
+    Assert.assertEquals(rst, DIDGenerator.toStakeAddress(w1, w2))
   }
 
   @Test

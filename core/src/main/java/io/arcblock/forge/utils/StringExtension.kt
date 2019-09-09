@@ -6,7 +6,7 @@ import com.google.protobuf.ByteString
 import io.arcblock.forge.Hasher
 import io.arcblock.forge.did.HashType
 import io.arcblock.forge.did.KeyType
-import io.arcblock.forge.signer.Signer
+import io.arcblock.forge.sign.Signer
 import java.math.BigDecimal
 import java.math.BigInteger
 import java.text.DecimalFormat

@@ -1,6 +1,7 @@
 package io.arcblock.forge.did
 
 import io.arcblock.forge.bip44.Bip44Utils
+import io.arcblock.forge.did.*
 import io.arcblock.forge.utils.Base58Btc
 import org.junit.Assert
 import org.junit.Test

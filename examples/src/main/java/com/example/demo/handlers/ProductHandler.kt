@@ -12,7 +12,7 @@ import forge_abi.Type
 import io.arcblock.forge.TypeUrls
 import io.arcblock.forge.did.DIDGenerator
 import io.arcblock.forge.did.KeyType
-import io.arcblock.forge.signer.Signer
+import io.arcblock.forge.sign.Signer
 import org.slf4j.LoggerFactory
 
 object ProductHandler {
