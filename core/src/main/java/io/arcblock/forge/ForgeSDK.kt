@@ -73,7 +73,7 @@ class ForgeSDK private constructor() {
    * .setWallet(wallet)//or set token
    * .build())
    *
-   * itx Inner transaction that should be included in this transaction
+   * itx:Inner transaction that should be included in this transaction
    * from: address of user responsible for sending this transactions
    * wallet: user wallet
    * token: token provided by forge for using wallets stored on forge
