@@ -56,11 +56,12 @@ upload-doc:
 	@aws s3 cp tools/index.html s3://docs.arcblock.io/forge/sdks/java/ --region us-west-2 --profile prod
 	@aws s3 sync core/docs s3://docs.arcblock.io/forge/sdks/java/${VERSION}/ --region us-west-2 --profile prod
 	@aws s3 sync core/docs s3://docs.arcblock.io/forge/sdks/java/latest/ --region us-west-2 --profile prod
-	
+
 precommit: dep build test
 
-travis: precommit
-
+travis:
+	@echo "Travis ..."
+	@echo $(AWS_S3_ACCESSKEY)
 
 travis-deploy: 
 	@echo "Deploy the software by travis"
