@@ -9,11 +9,12 @@ import io.arcblock.forge.did.WalletInfo
 import io.grpc.stub.StreamObserver
 import org.junit.Assert
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import java.math.BigInteger
 import java.util.concurrent.atomic.AtomicBoolean
 
-
+@Ignore
 class ForgeSDKTest {
 
   lateinit var forgeSDK: ForgeSDK
@@ -388,10 +389,8 @@ class ForgeSDKTest {
     val observer = forgeSDK.getAssetState(object : StreamObserver<Rpc.ResponseGetAssetState> {
       override fun onCompleted() {
       }
-
       override fun onError(t: Throwable?) {
       }
-
       override fun onNext(value: Rpc.ResponseGetAssetState?) {
         Assert.assertEquals("get account state", Enum.StatusCode.ok, value?.code)
         println("value:\n$value")
@@ -401,7 +400,6 @@ class ForgeSDKTest {
     observer.onNext(Rpc.RequestGetAssetState.newBuilder().setAddress(address).build())
     Thread.sleep(500)
     Assert.assertEquals("get account state", true, called.get())
-
   }
 
   @Test
