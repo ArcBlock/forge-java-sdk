@@ -1,11 +1,15 @@
 package io.arcblock.forge
 
 import com.google.common.util.concurrent.ListenableFuture
+import com.google.protobuf.ByteString
 import forge_abi.*
+import forge_abi.Enum
 import forge_abi.StatsRpcGrpc.StatsRpcStub
+import io.arcblock.forge.did.WalletInfo
 import io.grpc.ManagedChannel
 import io.grpc.ManagedChannelBuilder
 import io.grpc.stub.StreamObserver
+import java.math.BigInteger
 import java.util.concurrent.TimeUnit
 
 /**
@@ -17,43 +21,49 @@ import java.util.concurrent.TimeUnit
  *
  */
 class ForgeSDK private constructor() {
-  private var channel: ManagedChannel? = null
+  private lateinit var channel: ManagedChannel
 
-  private var chainRpcBlockingStub: ChainRpcGrpc.ChainRpcBlockingStub? = null
+  private lateinit var chainRpcBlockingStub: ChainRpcGrpc.ChainRpcBlockingStub
 
-  private var chainRpcStub: ChainRpcGrpc.ChainRpcStub? = null
+  private lateinit var chainRpcStub: ChainRpcGrpc.ChainRpcStub
 
-  private var chainRpcFutureStub: ChainRpcGrpc.ChainRpcFutureStub? = null
+  private lateinit var chainRpcFutureStub: ChainRpcGrpc.ChainRpcFutureStub
 
-  private var statsRpcBlockingStub: StatsRpcGrpc.StatsRpcBlockingStub? = null
+  private lateinit var statsRpcBlockingStub: StatsRpcGrpc.StatsRpcBlockingStub
 
-  private var statsRpcStub: StatsRpcStub? = null
+  private lateinit var statsRpcStub: StatsRpcStub
 
-  private var statsRpcFutureStub: StatsRpcGrpc.StatsRpcFutureStub? = null
+  private lateinit var statsRpcFutureStub: StatsRpcGrpc.StatsRpcFutureStub
 
-  private var eventRpcBlockingStub: EventRpcGrpc.EventRpcBlockingStub? = null
+  private lateinit var eventRpcBlockingStub: EventRpcGrpc.EventRpcBlockingStub
 
-  private var eventRpcStub: EventRpcGrpc.EventRpcStub? = null
+  private lateinit var eventRpcStub: EventRpcGrpc.EventRpcStub
 
-  private var eventRpcFutureStub: EventRpcGrpc.EventRpcFutureStub? = null
+  private lateinit var eventRpcFutureStub: EventRpcGrpc.EventRpcFutureStub
 
-  private var stateRpcBlockingStub: StateRpcGrpc.StateRpcBlockingStub? = null
+  private lateinit var stateRpcBlockingStub: StateRpcGrpc.StateRpcBlockingStub
 
-  private var stateRpcStub: StateRpcGrpc.StateRpcStub? = null
+  private lateinit var stateRpcStub: StateRpcGrpc.StateRpcStub
 
-  private var stateRpcFutureStub: StateRpcGrpc.StateRpcFutureStub? = null
+  private lateinit var stateRpcFutureStub: StateRpcGrpc.StateRpcFutureStub
 
-  private var walletRpcBlockingStub: WalletRpcGrpc.WalletRpcBlockingStub? = null
+  private lateinit var walletRpcBlockingStub: WalletRpcGrpc.WalletRpcBlockingStub
 
-  private var walletRpcStub: WalletRpcGrpc.WalletRpcStub? = null
+  private lateinit var walletRpcStub: WalletRpcGrpc.WalletRpcStub
 
-  private var walletRpcFutureStub: WalletRpcGrpc.WalletRpcFutureStub? = null
+  private lateinit var walletRpcFutureStub: WalletRpcGrpc.WalletRpcFutureStub
 
-  private var fileRpcBlockingStub: FileRpcGrpc.FileRpcBlockingStub? = null
+  private lateinit var fileRpcBlockingStub: FileRpcGrpc.FileRpcBlockingStub
 
-  private var fileRpcStub: FileRpcGrpc.FileRpcStub? = null
+  private lateinit var fileRpcStub: FileRpcGrpc.FileRpcStub
 
-  private var fileRpcFutureStub: FileRpcGrpc.FileRpcFutureStub? = null
+  private lateinit var fileRpcFutureStub: FileRpcGrpc.FileRpcFutureStub
+
+
+  val chainInfo = lazy {
+    chainRpcBlockingStub.getChainInfo(Rpc.RequestGetChainInfo.getDefaultInstance()).info
+  }
+
 
   /**
    * gRpc call to build a complete transaction, including sender's pk and sender's signature. <br></br>
@@ -89,14 +99,14 @@ class ForgeSDK private constructor() {
    *
    */
   fun createTx(request: Rpc.RequestCreateTx): Rpc.ResponseCreateTx {
-    return chainRpcBlockingStub!!.createTx(request)
+    return chainRpcBlockingStub.createTx(request)
   }
 
   /**
    * create transaction async interface, please read [createTx]
    */
   fun asyncCreateTx(request: Rpc.RequestCreateTx): ListenableFuture<Rpc.ResponseCreateTx> {
-    return chainRpcFutureStub!!.createTx(request)
+    return chainRpcFutureStub.createTx(request)
   }
 
   /**
@@ -121,7 +131,7 @@ class ForgeSDK private constructor() {
    *
    */
   fun multisig(request: Rpc.RequestMultisig): Rpc.ResponseMultisig {
-    return chainRpcBlockingStub!!.multisig(request)
+    return chainRpcBlockingStub.multisig(request)
   }
 
   /**
@@ -131,7 +141,7 @@ class ForgeSDK private constructor() {
    *
    */
   fun asyncMultisig(request: Rpc.RequestMultisig): ListenableFuture<Rpc.ResponseMultisig> {
-    return chainRpcFutureStub!!.multisig(request)
+    return chainRpcFutureStub.multisig(request)
   }
 
   /**
@@ -153,14 +163,36 @@ class ForgeSDK private constructor() {
    * @return code: ok or error. hash: transaction's hash
    */
   fun sendTx(request: Rpc.RequestSendTx): Rpc.ResponseSendTx {
-    return chainRpcBlockingStub!!.sendTx(request)
+    return chainRpcBlockingStub.sendTx(request)
   }
 
   /**
    * async  gRPC call to send the included transaction, please read [sendTx]
    */
   fun asyncSendTx(request: Rpc.RequestSendTx): ListenableFuture<Rpc.ResponseSendTx> {
-    return chainRpcFutureStub!!.sendTx(request)
+    return chainRpcFutureStub.sendTx(request)
+  }
+
+  /**
+   * Util to help developer to poke a account
+   */
+  fun poke(wallet: Type.WalletInfo, pokeConfig: Type.PokeConfig): Rpc.ResponseSendTx{
+    val tx = TransactionFactory.unsignPoke(pokeConfig.address, chainInfo.value.network, wallet = WalletInfo(wallet))
+      .signTx(wallet.sk.toByteArray())
+    return chainRpcBlockingStub.sendTx(Rpc.RequestSendTx.newBuilder().setTx(tx).build())
+  }
+
+  /**
+   * Util to help developer transfer money from a account to another
+   */
+  fun transfer(from: Type.WalletInfo, to: Type.WalletInfo, amount: BigInteger): Rpc.ResponseSendTx{
+    val transfer = Transfer.TransferTx.newBuilder()
+      .setTo(to.address)
+      .setValue(Type.BigUint.newBuilder().setValue(ByteString.copyFrom(amount.toByteArray())).build())
+      .build()
+    val tx = TransactionFactory.createTransaction(chainInfo.value.network, from.address, from.pk.toByteArray(), transfer.toByteString(), TypeUrls.TRANSFER)
+      .signTx(from.sk.toByteArray())
+    return sendTx(tx)
   }
 
   /**
@@ -185,7 +217,7 @@ class ForgeSDK private constructor() {
    *
    */
   fun getTx(observer: StreamObserver<Rpc.ResponseGetTx>): StreamObserver<Rpc.RequestGetTx> {
-    return chainRpcStub!!.getTx(observer)
+    return chainRpcStub.getTx(observer)
   }
 
   /**
@@ -213,7 +245,7 @@ class ForgeSDK private constructor() {
    */
 
   fun getBlock(observer: StreamObserver<Rpc.ResponseGetBlock>): StreamObserver<Rpc.RequestGetBlock> {
-    return chainRpcStub!!.getBlock(observer)
+    return chainRpcStub.getBlock(observer)
   }
 
   /**
@@ -237,7 +269,7 @@ class ForgeSDK private constructor() {
    *
    */
   fun getBlocks(request: Rpc.RequestGetBlocks): Rpc.ResponseGetBlocks {
-    return chainRpcBlockingStub!!.getBlocks(request)
+    return chainRpcBlockingStub.getBlocks(request)
   }
 
   /**
@@ -245,7 +277,7 @@ class ForgeSDK private constructor() {
    *
    */
   fun asyncGetBlocks(request: Rpc.RequestGetBlocks): ListenableFuture<Rpc.ResponseGetBlocks> {
-    return chainRpcFutureStub!!.getBlocks(request)
+    return chainRpcFutureStub.getBlocks(request)
   }
 
   /**
@@ -260,14 +292,14 @@ class ForgeSDK private constructor() {
    *
    */
   fun getUnconfirmedTxs(request: Rpc.RequestGetUnconfirmedTxs): Rpc.ResponseGetUnconfirmedTxs {
-    return chainRpcBlockingStub!!.getUnconfirmedTxs(request)
+    return chainRpcBlockingStub.getUnconfirmedTxs(request)
   }
 
   /**
    * async gRpc call to get currently unconfirmed transactions, please read [getUnconfirmedTxs]
    */
   fun asyncGetUnconfirmedTxs(request: Rpc.RequestGetUnconfirmedTxs): ListenableFuture<Rpc.ResponseGetUnconfirmedTxs> {
-    return chainRpcFutureStub!!.getUnconfirmedTxs(request)
+    return chainRpcFutureStub.getUnconfirmedTxs(request)
   }
 
   /**
@@ -297,21 +329,21 @@ class ForgeSDK private constructor() {
    *
    */
   fun getChainInfo(request: Rpc.RequestGetChainInfo): Rpc.ResponseGetChainInfo {
-    return chainRpcBlockingStub!!.getChainInfo(request)
+    return chainRpcBlockingStub.getChainInfo(request)
   }
 
   /**
    * async  gRPC call to get information about current chain, please read [getChainInfo]
    */
   fun asyncGetChainInfo(request: Rpc.RequestGetChainInfo): ListenableFuture<Rpc.ResponseGetChainInfo> {
-    return chainRpcFutureStub!!.getChainInfo(request)
+    return chainRpcFutureStub.getChainInfo(request)
   }
 
   /**
    * gRPC call to get information of current node
    */
   fun getNodeInfo(request: Rpc.RequestGetNodeInfo): Rpc.ResponseGetNodeInfo {
-    return chainRpcBlockingStub!!.getNodeInfo(request)
+    return chainRpcBlockingStub.getNodeInfo(request)
   }
 
   /**
@@ -319,7 +351,7 @@ class ForgeSDK private constructor() {
    *
    */
   fun asyncGetNodeInfo(request: Rpc.RequestGetNodeInfo): ListenableFuture<Rpc.ResponseGetNodeInfo> {
-    return chainRpcFutureStub!!.getNodeInfo(request)
+    return chainRpcFutureStub.getNodeInfo(request)
   }
 
   /**
@@ -335,7 +367,7 @@ class ForgeSDK private constructor() {
    *
    */
   fun search(request: Rpc.RequestSearch): Rpc.ResponseSearch {
-    return chainRpcBlockingStub!!.search(request)
+    return chainRpcBlockingStub.search(request)
   }
 
   /**
@@ -343,7 +375,7 @@ class ForgeSDK private constructor() {
    *
    */
   fun asyncSearch(request: Rpc.RequestSearch): ListenableFuture<Rpc.ResponseSearch> {
-    return chainRpcFutureStub!!.search(request)
+    return chainRpcFutureStub.search(request)
   }
 
   /**
@@ -351,7 +383,7 @@ class ForgeSDK private constructor() {
    *
    */
   fun getNetInfo(request: Rpc.RequestGetNetInfo): Rpc.ResponseGetNetInfo {
-    return chainRpcBlockingStub!!.getNetInfo(request)
+    return chainRpcBlockingStub.getNetInfo(request)
   }
 
   /**
@@ -359,7 +391,7 @@ class ForgeSDK private constructor() {
    **
    */
   fun asyncGetNetInfo(request: Rpc.RequestGetNetInfo): ListenableFuture<Rpc.ResponseGetNetInfo> {
-    return chainRpcFutureStub!!.getNetInfo(request)
+    return chainRpcFutureStub.getNetInfo(request)
   }
 
   /**
@@ -386,14 +418,14 @@ class ForgeSDK private constructor() {
    * ```
    */
   fun getValidatorsInfo(request: Rpc.RequestGetValidatorsInfo): Rpc.ResponseGetValidatorsInfo {
-    return chainRpcBlockingStub!!.getValidatorsInfo(request)
+    return chainRpcBlockingStub.getValidatorsInfo(request)
   }
 
   /**
    * gRPC call to get information about al current validators
    */
   fun asyncGetValidatorsInfo(request: Rpc.RequestGetValidatorsInfo): ListenableFuture<Rpc.ResponseGetValidatorsInfo> {
-    return chainRpcFutureStub!!.getValidatorsInfo(request)
+    return chainRpcFutureStub.getValidatorsInfo(request)
   }
 
   /**
@@ -416,7 +448,7 @@ class ForgeSDK private constructor() {
    *
    */
   fun getConfig(request: Rpc.RequestGetConfig): Rpc.ResponseGetConfig {
-    return chainRpcBlockingStub!!.getConfig(request)
+    return chainRpcBlockingStub.getConfig(request)
   }
 
   /**
@@ -424,7 +456,7 @@ class ForgeSDK private constructor() {
    *
    */
   fun asyncGetConfig(request: Rpc.RequestGetConfig): ListenableFuture<Rpc.ResponseGetConfig> {
-    return chainRpcFutureStub!!.getConfig(request)
+    return chainRpcFutureStub.getConfig(request)
   }
 
   /**
@@ -457,7 +489,7 @@ class ForgeSDK private constructor() {
    * ```
    */
   fun getForgeStats(request: Rpc.RequestGetForgeStats): Rpc.ResponseGetForgeStats {
-    return statsRpcBlockingStub!!.getForgeStats(request)
+    return statsRpcBlockingStub.getForgeStats(request)
   }
 
   /**
@@ -465,7 +497,7 @@ class ForgeSDK private constructor() {
    */
 
   fun asyncGetForgeStats(request: Rpc.RequestGetForgeStats): ListenableFuture<Rpc.ResponseGetForgeStats> {
-    return statsRpcFutureStub!!.getForgeStats(request)
+    return statsRpcFutureStub.getForgeStats(request)
   }
 
   /**
@@ -480,7 +512,7 @@ class ForgeSDK private constructor() {
    *
    */
   fun listTransactions(request: Rpc.RequestListTransactions): Rpc.ResponseListTransactions {
-    return statsRpcBlockingStub!!.listTransactions(request)
+    return statsRpcBlockingStub.listTransactions(request)
   }
 
   /**
@@ -489,7 +521,7 @@ class ForgeSDK private constructor() {
    */
   fun asyncListTransactions(
     request: Rpc.RequestListTransactions): ListenableFuture<Rpc.ResponseListTransactions> {
-    return statsRpcFutureStub!!.listTransactions(request)
+    return statsRpcFutureStub.listTransactions(request)
   }
 
   /**
@@ -499,28 +531,28 @@ class ForgeSDK private constructor() {
    *
    */
   fun listAssets(request: Rpc.RequestListAssets): Rpc.ResponseListAssets {
-    return statsRpcBlockingStub!!.listAssets(request)
+    return statsRpcBlockingStub.listAssets(request)
   }
 
   /**
    * async gRpc call to list all assets under the given account address, please read [listAssets]
    */
   fun asyncListAssets(request: Rpc.RequestListAssets): ListenableFuture<Rpc.ResponseListAssets> {
-    return statsRpcFutureStub!!.listAssets(request)
+    return statsRpcFutureStub.listAssets(request)
   }
 
   /**
    * list stakes at current chain
    */
   fun listStakes(request: Rpc.RequestListStakes): Rpc.ResponseListStakes {
-    return statsRpcBlockingStub!!.listStakes(request)
+    return statsRpcBlockingStub.listStakes(request)
   }
 
   /**
    * async list stakes at current chain
    */
   fun asyncListStakes(request: Rpc.RequestListStakes): ListenableFuture<Rpc.ResponseListStakes> {
-    return statsRpcFutureStub!!.listStakes(request)
+    return statsRpcFutureStub.listStakes(request)
   }
 
   /**
@@ -533,14 +565,14 @@ class ForgeSDK private constructor() {
    * ```
    */
   fun listAccount(request: Rpc.RequestListAccount): Rpc.ResponseListAccount {
-    return statsRpcBlockingStub!!.listAccount(request)
+    return statsRpcBlockingStub.listAccount(request)
   }
 
   /**
    * async list not account information
    */
   fun asyncListAccount(request: Rpc.RequestListAccount): ListenableFuture<Rpc.ResponseListAccount> {
-    return statsRpcFutureStub!!.listAccount(request)
+    return statsRpcFutureStub.listAccount(request)
   }
 
   /**
@@ -549,7 +581,7 @@ class ForgeSDK private constructor() {
    *      Page
    */
   fun listTopAccounts(request: Rpc.RequestListTopAccounts): Rpc.ResponseListTopAccounts {
-    return statsRpcBlockingStub!!.listTopAccounts(request)
+    return statsRpcBlockingStub.listTopAccounts(request)
   }
 
   /**
@@ -557,7 +589,7 @@ class ForgeSDK private constructor() {
    */
   fun asyncListTopAccounts(
     request: Rpc.RequestListTopAccounts): ListenableFuture<Rpc.ResponseListTopAccounts> {
-    return statsRpcFutureStub!!.listTopAccounts(request)
+    return statsRpcFutureStub.listTopAccounts(request)
   }
 
   /**
@@ -576,7 +608,7 @@ class ForgeSDK private constructor() {
    * ```
    */
   fun listAssetTransactions(request: Rpc.RequestListAssetTransactions): Rpc.ResponseListAssetTransactions {
-    return statsRpcBlockingStub!!.listAssetTransactions(request)
+    return statsRpcBlockingStub.listAssetTransactions(request)
   }
 
   /**
@@ -584,7 +616,7 @@ class ForgeSDK private constructor() {
    */
   fun asyncListAssetTransactions(
     request: Rpc.RequestListAssetTransactions): ListenableFuture<Rpc.ResponseListAssetTransactions> {
-    return statsRpcFutureStub!!.listAssetTransactions(request)
+    return statsRpcFutureStub.listAssetTransactions(request)
   }
 
   /**
@@ -596,21 +628,21 @@ class ForgeSDK private constructor() {
    *
    */
   fun listBlocks(request: Rpc.RequestListBlocks): Rpc.ResponseListBlocks {
-    return statsRpcBlockingStub!!.listBlocks(request)
+    return statsRpcBlockingStub.listBlocks(request)
   }
 
   /**
    * async gRPC call to get information of blocks, see [listBlocks]
    */
   fun asyncListBlocks(request: Rpc.RequestListBlocks): ListenableFuture<Rpc.ResponseListBlocks> {
-    return statsRpcFutureStub!!.listBlocks(request)
+    return statsRpcFutureStub.listBlocks(request)
   }
 
   /**
    * gRPC call to get Forge health status
    */
   fun getHealthStatus(request: Rpc.RequestGetHealthStatus): Rpc.ResponseGetHealthStatus {
-    return statsRpcBlockingStub!!.getHealthStatus(request)
+    return statsRpcBlockingStub.getHealthStatus(request)
   }
 
   /**
@@ -618,7 +650,7 @@ class ForgeSDK private constructor() {
    */
   fun asyncGetHealthStatus(
     request: Rpc.RequestGetHealthStatus): ListenableFuture<Rpc.ResponseGetHealthStatus> {
-    return statsRpcFutureStub!!.getHealthStatus(request)
+    return statsRpcFutureStub.getHealthStatus(request)
   }
 
   /**
@@ -628,7 +660,7 @@ class ForgeSDK private constructor() {
    *  tx_filter: filter for target transactions
    */
   fun subscribe(request: Rpc.RequestSubscribe, observer: StreamObserver<Rpc.ResponseSubscribe>) {
-    eventRpcStub!!.subscribe(request, observer)
+    eventRpcStub.subscribe(request, observer)
   }
 
   /**
@@ -637,7 +669,7 @@ class ForgeSDK private constructor() {
    *  topic: topic id return by subscribe
    */
   fun unsubscribe(request: Rpc.RequestUnsubscribe): Rpc.ResponseUnsubscribe {
-    return eventRpcBlockingStub!!.unsubscribe(request)
+    return eventRpcBlockingStub.unsubscribe(request)
   }
 
   /**
@@ -646,7 +678,7 @@ class ForgeSDK private constructor() {
    *  topic: topic id return by subscribe
    */
   fun asyncUnsubscribe(request: Rpc.RequestUnsubscribe): ListenableFuture<Rpc.ResponseUnsubscribe> {
-    return eventRpcFutureStub!!.unsubscribe(request)
+    return eventRpcFutureStub.unsubscribe(request)
   }
 
   /**
@@ -654,7 +686,7 @@ class ForgeSDK private constructor() {
    */
   fun getAccountState(
     observer: StreamObserver<Rpc.ResponseGetAccountState>): StreamObserver<Rpc.RequestGetAccountState> {
-    return stateRpcStub!!.getAccountState(observer)
+    return stateRpcStub.getAccountState(observer)
   }
 
   /**
@@ -662,7 +694,7 @@ class ForgeSDK private constructor() {
    */
   fun getAssetState(
     observer: StreamObserver<Rpc.ResponseGetAssetState>): StreamObserver<Rpc.RequestGetAssetState> {
-    return stateRpcStub!!.getAssetState(observer)
+    return stateRpcStub.getAssetState(observer)
   }
 
   /**
@@ -670,20 +702,26 @@ class ForgeSDK private constructor() {
    *
    */
   fun getForgeState(request: Rpc.RequestGetForgeState): Rpc.ResponseGetForgeState {
-    return stateRpcBlockingStub!!.getForgeState(request)
+    return stateRpcBlockingStub.getForgeState(request)
   }
 
+  /**
+   * gRPC to get forge state
+   */
+  fun getForgeState(): Rpc.ResponseGetForgeState {
+    return stateRpcBlockingStub.getForgeState(Rpc.RequestGetForgeState.getDefaultInstance())
+  }
   /**
    * async gRPC to get forge state
    */
   fun asyncGetForgeState(request: Rpc.RequestGetForgeState): ListenableFuture<Rpc.ResponseGetForgeState> {
-    return stateRpcFutureStub!!.getForgeState(request)
+    return stateRpcFutureStub.getForgeState(request)
   }
 
 //
 //  fun getProtocolState(
 //    observer: StreamObserver<ResponseGetProtocolState>): StreamObserver<RequestGetProtocolState> {
-//    return stateRpcStub!!.getProtocolState(observer)
+//    return stateRpcStub.getProtocolState(observer)
 //  }
 
 
@@ -692,13 +730,13 @@ class ForgeSDK private constructor() {
    */
   fun getStakeState(
     observer: StreamObserver<Rpc.ResponseGetStakeState>): StreamObserver<Rpc.RequestGetStakeState> {
-    return stateRpcStub!!.getStakeState(observer)
+    return stateRpcStub.getStakeState(observer)
   }
 
 
   fun getTetherState(
     observer: StreamObserver<Rpc.ResponseGetTetherState>): StreamObserver<Rpc.RequestGetTetherState> {
-    return stateRpcStub!!.getTetherState(observer)
+    return stateRpcStub.getTetherState(observer)
   }
 
   /**
@@ -712,14 +750,31 @@ class ForgeSDK private constructor() {
    * ```
    */
   fun createWallet(request: Rpc.RequestCreateWallet): Rpc.ResponseCreateWallet {
-    return walletRpcBlockingStub!!.createWallet(request)
+    return walletRpcBlockingStub.createWallet(request)
+  }
+
+  /**
+   * gRPC call to create a wallet on Forge, this wallet managed by chain node,
+   * you can reload it by address and password
+   *
+   * @param moniker user name
+   * @param password password
+   */
+  fun createWallet(moniker: String, password: String): Rpc.ResponseCreateWallet {
+    return walletRpcBlockingStub.createWallet(Rpc.RequestCreateWallet.newBuilder()
+      .setMoniker(moniker)
+      .setPassphrase(password)
+      .setType(Type.WalletType.newBuilder().setPk(Enum.KeyType.ed25519)
+        .setHash(Enum.HashType.sha3)
+        .setRole(Enum.RoleType.role_account).build())
+      .build())
   }
 
   /**
    * async gRPC call to create a wallet on Forge, please read [createWallet]
    */
   fun asyncCreateWallet(request: Rpc.RequestCreateWallet): ListenableFuture<Rpc.ResponseCreateWallet> {
-    return walletRpcFutureStub!!.createWallet(request)
+    return walletRpcFutureStub.createWallet(request)
   }
 
   /**
@@ -737,14 +792,14 @@ class ForgeSDK private constructor() {
    * ```
    */
   fun loadWallet(request: Rpc.RequestLoadWallet): Rpc.ResponseLoadWallet {
-    return walletRpcBlockingStub!!.loadWallet(request)
+    return walletRpcBlockingStub.loadWallet(request)
   }
 
   /**
    * async gRPC call to load your wallet managed by current node. please read [loadWallet]
    */
   fun asyncLoadWallet(request: Rpc.RequestLoadWallet): ListenableFuture<Rpc.ResponseLoadWallet> {
-    return walletRpcFutureStub!!.loadWallet(request)
+    return walletRpcFutureStub.loadWallet(request)
   }
 
   /**
@@ -756,7 +811,7 @@ class ForgeSDK private constructor() {
    *
    */
   fun recoverWallet(request: Rpc.RequestRecoverWallet): Rpc.ResponseRecoverWallet {
-    return walletRpcBlockingStub!!.recoverWallet(request)
+    return walletRpcBlockingStub.recoverWallet(request)
   }
 
   /**
@@ -764,14 +819,14 @@ class ForgeSDK private constructor() {
    *
    */
   fun asyncRecoverWallet(request: Rpc.RequestRecoverWallet): ListenableFuture<Rpc.ResponseRecoverWallet> {
-    return walletRpcFutureStub!!.recoverWallet(request)
+    return walletRpcFutureStub.recoverWallet(request)
   }
 
   /**
    * gRPC call to list al wallets on current Forge Node
    */
   fun listWallet(request: Rpc.RequestListWallet, observer: StreamObserver<Rpc.ResponseListWallet>) {
-    walletRpcStub!!.listWallet(request, observer)
+    walletRpcStub.listWallet(request, observer)
   }
 
   /**
@@ -779,7 +834,7 @@ class ForgeSDK private constructor() {
    *
    */
   fun removeWallet(request: Rpc.RequestRemoveWallet): Rpc.ResponseRemoveWallet {
-    return walletRpcBlockingStub!!.removeWallet(request)
+    return walletRpcBlockingStub.removeWallet(request)
   }
 
   /**
@@ -787,7 +842,7 @@ class ForgeSDK private constructor() {
    *
    */
   fun asyncRemoveWallet(request: Rpc.RequestRemoveWallet): ListenableFuture<Rpc.ResponseRemoveWallet> {
-    return walletRpcFutureStub!!.removeWallet(request)
+    return walletRpcFutureStub.removeWallet(request)
   }
 
   /**
@@ -795,7 +850,7 @@ class ForgeSDK private constructor() {
    *
    */
   fun declareNode(request: Rpc.RequestDeclareNode): Rpc.ResponseDeclareNode {
-    return walletRpcBlockingStub!!.declareNode(request)
+    return walletRpcBlockingStub.declareNode(request)
   }
 
   /**
@@ -803,7 +858,7 @@ class ForgeSDK private constructor() {
    *
    */
   fun asyncDeclareNode(request: Rpc.RequestDeclareNode): ListenableFuture<Rpc.ResponseDeclareNode> {
-    return walletRpcFutureStub!!.declareNode(request)
+    return walletRpcFutureStub.declareNode(request)
   }
 
   /**
@@ -812,7 +867,7 @@ class ForgeSDK private constructor() {
    *  chunk: file bytes to store
    */
   fun storeFile(observer: StreamObserver<Rpc.ResponseStoreFile>): StreamObserver<Rpc.RequestStoreFile> {
-    return fileRpcStub!!.storeFile(observer)
+    return fileRpcStub.storeFile(observer)
   }
 
   /**
@@ -821,7 +876,7 @@ class ForgeSDK private constructor() {
    *  file_hash: hash of stored file
    */
   fun loadFile(request: Rpc.RequestLoadFile, observer: StreamObserver<Rpc.ResponseLoadFile>) {
-    fileRpcStub!!.loadFile(request, observer)
+    fileRpcStub.loadFile(request, observer)
   }
 
   /**
@@ -830,12 +885,12 @@ class ForgeSDK private constructor() {
    *  file_hash: hash of file to pin
    */
   fun pinFile(request: Rpc.RequestPinFile): Rpc.ResponsePinFile {
-    return fileRpcBlockingStub!!.pinFile(request)
+    return fileRpcBlockingStub.pinFile(request)
   }
 
   /** async gRPC call to pin file so Forge will keep the file, please read [pinFile]    */
   fun asyncPinFile(request: Rpc.RequestPinFile): ListenableFuture<Rpc.ResponsePinFile> {
-    return fileRpcFutureStub!!.pinFile(request)
+    return fileRpcFutureStub.pinFile(request)
   }
 
   /**
@@ -868,8 +923,8 @@ class ForgeSDK private constructor() {
    * @param host forge node host
    * @param port forge node rpc port
    */
-  private fun init(host: String, port: Int?) {
-    init(ManagedChannelBuilder.forAddress(host, port!!).usePlaintext(true))
+  private fun init(host: String, port: Int) {
+    init(ManagedChannelBuilder.forAddress(host, port).usePlaintext(true))
   }
 
   /**
@@ -877,14 +932,14 @@ class ForgeSDK private constructor() {
    */
   @Throws(InterruptedException::class)
   fun shutdown() {
-    channel!!.awaitTermination(6, TimeUnit.SECONDS)
+    channel.awaitTermination(6, TimeUnit.SECONDS)
   }
 
   companion object {
     /**
      * connect to forge node, and get a forge client instance
      */
-    fun connect(host: String, port: Int?): ForgeSDK {
+    fun connect(host: String, port: Int): ForgeSDK {
       val forge = ForgeSDK().apply { this.init(host, port) }
       return forge
     }
