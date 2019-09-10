@@ -56,16 +56,9 @@ sourceCompatibility = 1.8
 
 sourceSets {
   main {
-    kotlin { srcDir "src/main/kotlin" }
-    java { srcDirs ("src/main/java",
-      "build/classes/java/main"
-    )
-    }
     proto { srcDir "src/main/proto"}
   }
   test {
-    kotlin { srcDir "src/test/kotlin" }
-    java { srcDir "src/test/java" }
     proto { srcDir "src/main/proto"}
   }
 }
@@ -93,15 +86,32 @@ protobuf {
 }
 
 dokka {
+  moduleName = 'core'
   outputFormat = 'javadoc'
   outputDirectory = "./docs/"
   jdkVersion = 8
+  includes = ['overview.md']
 
+//  linkMapping {
+//    dir = "src/main/java"
+//    url = "https://github.com/JetBrains/kotlin-examples/tree/master/gradle/dokka-gradle-example/src/main/kotlin"
+//    suffix = "#L"
+//  }
+//  packageOptions {
+//    prefix = "kotlin.internal" // will match kotlin.internal and all sub-packages of it
+//    suppress = true
+//  }
 
   packageOptions {
-    prefix = "kotlin.internal" // will match kotlin.internal and all sub-packages of it
+    prefix = "io.arcblock.forge.utils"
     suppress = true
   }
+
+  packageOptions {
+    prefix = "io.arcblock.forge.hash.sha"
+    suppress = true
+  }
+
   packageOptions {
     prefix = "abci_vendor"
     suppress = true
@@ -137,6 +147,7 @@ dependencies {
   api 'org.apache.commons:commons-lang3:3.4'
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
   testCompile group: 'junit', name: 'junit', version: '4.12'
+  testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
 
 //dependencyManagement {
@@ -179,7 +190,7 @@ task a_download_proto(type: Download) {
 
 
 
-
+@Deprecated
 class genForgeABI extends DefaultTask {
   File outdir = new File("${project.rootDir.path}/core/src/main/java/")
   def futureClazz =ClassName.get("com.google.common.util.concurrent","ListenableFuture")
@@ -459,6 +470,7 @@ class genForgeABI extends DefaultTask {
     return result.toString().trim();
   }
 }
+
 task genForgeSDK(type: genForgeABI){
 
 }

@@ -11,11 +11,15 @@ import java.util.*
 
 object TransactionFactory {
 
-  fun generateNonce(): Long {
+  private fun generateNonce(): Long {
     return System.currentTimeMillis()
   }
 
-  fun delare(chainID: String, wallet: WalletInfo, moniker: String? = null): Type.Transaction {
+
+  /**
+   * create a declare transaction without signature
+   */
+  fun declare(chainID: String, wallet: WalletInfo, moniker: String? = null): Type.Transaction {
     val itx = Declare.DeclareTx.newBuilder()
       .setMoniker(moniker
         ?: UUID.randomUUID().toString().replace("-", "")).setIssuer(wallet.address.address()).build()
@@ -23,12 +27,14 @@ object TransactionFactory {
   }
 
 
+  /**
+   * create a poke transaction without signature
+   */
   fun unsignPoke(pokeAddress: String, chainID: String, wallet: WalletInfo): Type.Transaction {
     val itx = Poke.PokeTx.newBuilder()
       .setAddress(pokeAddress)
       .setDate(LocalDate.now().toString())
       .build()
-
     return Type.Transaction.newBuilder()
       .setChainId(chainID).setFrom(wallet.address)
       .setPk(ByteString.copyFrom(wallet.pk))
@@ -37,9 +43,11 @@ object TransactionFactory {
         .setValue(itx.toByteString())
         .build())
       .build()
-
   }
 
+  /**
+   * create a delegate transaction without signature
+   */
   fun unsignDelegate(from: String, to: String, chainID: String, wallet: WalletInfo, rules: List<String>): Type.Transaction {
     val itx = Delegate.DelegateTx.newBuilder()
       .setAddress(DIDGenerator.genDelegateAddress(from, to))
@@ -52,7 +60,10 @@ object TransactionFactory {
     return createTransaction(chainID, wallet.address, wallet.pk, itx.toByteString(), TypeUrls.DELEGATE)
   }
 
-  fun unsignRevodeDelegate(from: String, to: String, chainID: String, wallet: WalletInfo, typeUrls: List<String>): Type.Transaction {
+  /**
+   * create a revoke delegate transaction without signature
+   */
+  fun unsignRevokeDelegate(from: String, to: String, chainID: String, wallet: WalletInfo, typeUrls: List<String>): Type.Transaction {
     val itx = RevokeDelegate.RevokeDelegationTx.newBuilder()
       .setAddress(DIDGenerator.genDelegateAddress(from, to))
       .addAllTypeUrls(typeUrls)
@@ -61,7 +72,9 @@ object TransactionFactory {
     return createTransaction(chainID, wallet.address, wallet.pk, itx.toByteString(), TypeUrls.REVOKE_DELEGATE)
   }
 
-
+  /**
+   * create a transaction structure
+   */
   fun createTransaction(chanId: String, from: String, pk: ByteArray, itx: ByteString, typeUrl: String): Type.Transaction {
     return Type.Transaction.newBuilder()
       .setChainId(chanId).setFrom(from)

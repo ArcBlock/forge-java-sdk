@@ -1,5 +1,6 @@
 package io.arcblock.forge.utils
 
+import io.arcblock.forge.utils.Base58Btc
 import org.junit.Assert
 import org.junit.Test
 

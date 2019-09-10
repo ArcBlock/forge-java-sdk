@@ -13,6 +13,8 @@ docs/_extensions
 docs/_templates
 docs/com
 docs/packages.rst
+docs/
+*/docs/
 \#*#
 /example/target
 /example/.idea

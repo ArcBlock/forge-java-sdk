@@ -6,17 +6,15 @@ import forge_abi.Rpc
 import forge_abi.Type
 import io.arcblock.forge.did.HashType
 import io.arcblock.forge.did.KeyType
-import io.arcblock.forge.signer.Signer
+import io.arcblock.forge.sign.Signer
 import org.spongycastle.asn1.ASN1Integer
 import org.spongycastle.asn1.DERSequenceGenerator
 import org.spongycastle.crypto.ec.CustomNamedCurves
-import org.spongycastle.crypto.params.ECDomainParameters
 import org.web3j.crypto.ECDSASignature
 import org.web3j.crypto.ECKeyPair
 import java.io.ByteArrayOutputStream
 
 private val CURVE_PARAMS = CustomNamedCurves.getByName("secp256k1")
-val CURVE = ECDomainParameters(CURVE_PARAMS.curve, CURVE_PARAMS.g, CURVE_PARAMS.n, CURVE_PARAMS.h)
 
 /**
  * binary to hex string
@@ -75,13 +73,30 @@ fun String.didToAddr(): String {
   return this.removePrefix("did:abt:")
 }
 
+/**
+ * Hash extension for bytes
+ */
 fun ByteArray.hash(type: HashType) = Hasher.hash(type, this)
+
+/**
+ * ED25519 Sign extension for bytes
+ */
 fun ByteArray.sign(sk: ByteArray) = Signer.sign(KeyType.ED25519, this, sk)
+
+/**
+ * Sign extension for bytes
+ */
 fun ByteArray.sign(sk: ByteArray, type: KeyType) = Signer.sign(type, this, sk)
+
+/**
+ * Bytes to byteString extension
+ */
 fun ByteArray.toByteString() = ByteString.copyFrom(this)
 
-fun Type.Transaction.signTx(sk: ByteArray) : Type.Transaction {
-  val sig = this.toByteArray().hash(HashType.SHA3).sign(sk)
-  return this.toBuilder().setSignature(sig.toByteString()).buildPartial()
+/**
+ * Extension of transaction for signature
+ */
+fun Type.Transaction.signTx(sk: ByteArray): Type.Transaction {
+  val sig = this.toBuilder().clearSignature().build().toByteArray().hash(HashType.SHA3).sign(sk)
+  return this.toBuilder().setSignature(sig.toByteString()).build()
 }
-

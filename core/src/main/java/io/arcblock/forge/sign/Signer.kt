@@ -1,4 +1,4 @@
-package io.arcblock.forge.signer
+package io.arcblock.forge.sign
 
 import com.google.crypto.tink.subtle.Ed25519Sign
 import com.google.crypto.tink.subtle.Ed25519Verify

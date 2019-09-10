@@ -9,7 +9,7 @@ import forge_abi.Type
 import io.arcblock.forge.Hasher
 import io.arcblock.forge.did.DidUtils
 import io.arcblock.forge.did.HashType
-import io.arcblock.forge.signer.Signer
+import io.arcblock.forge.sign.Signer
 import io.arcblock.forge.utils.Base58Btc
 import org.slf4j.LoggerFactory
 import com.google.protobuf.Any

@@ -6,7 +6,7 @@ import io.arcblock.forge.did.bean.AppInfo
 import io.arcblock.forge.did.bean.DIDTokenBody
 import io.arcblock.forge.did.bean.DIDTokenResponse
 import io.arcblock.forge.did.bean.IClaim
-import io.arcblock.forge.signer.Signer
+import io.arcblock.forge.sign.Signer
 import org.apache.commons.lang3.StringEscapeUtils
 import org.slf4j.LoggerFactory
 

@@ -91,7 +91,7 @@ class DelegateControler {
   @ResponseBody
   fun delegate():String {
     val w = DIDGenerator.randomWallet()
-    val declare = forge.forgeSDK.sendTx(Rpc.RequestSendTx.newBuilder().setTx(TransactionFactory.delare(app.chainId,w).signTx(w.sk)).build())
+    val declare = forge.forgeSDK.sendTx(Rpc.RequestSendTx.newBuilder().setTx(TransactionFactory.declare(app.chainId,w).signTx(w.sk)).build())
     logger.info("declare======>\n ${declare.toString()}")
     val tx=  TransactionFactory.unsignDelegate(addr,w.address.address(),app.chainId,wallet, listOf("itx.value <= 100000000000000")).signTx(wallet.sk)
     logger.info("delegate========>\n${tx.itx}")
@@ -109,7 +109,7 @@ class DelegateControler {
   @ResponseBody
   fun signDelegate(from: String):String {
     val w = DIDGenerator.randomWallet()
-    val declare = forge.forgeSDK.sendTx(Rpc.RequestSendTx.newBuilder().setTx(TransactionFactory.delare(app.chainId,w).signTx(w.sk)).build())
+    val declare = forge.forgeSDK.sendTx(Rpc.RequestSendTx.newBuilder().setTx(TransactionFactory.declare(app.chainId,w).signTx(w.sk)).build())
     logger.info("declare======>\n ${declare.toString()}")
     val tx=  TransactionFactory.unsignDelegate(from,w.address.address(),app.chainId,wallet, listOf("itx.value <= 100000000000000"))
 
@@ -127,7 +127,7 @@ class DelegateControler {
   @RequestMapping("/revoke", method = [RequestMethod.GET])
   @ResponseBody
   fun revokeDelegate(to: String):String {
-    val tx=  TransactionFactory.unsignRevodeDelegate(addr,to,app.chainId,wallet, listOf(TypeUrls.TRANSFER)).signTx(wallet.sk)
+    val tx=  TransactionFactory.unsignRevokeDelegate(addr,to,app.chainId,wallet, listOf(TypeUrls.TRANSFER)).signTx(wallet.sk)
     logger.debug("undelegate========>\n${tx.itx}")
     val rst = forge.forgeSDK.sendTx(Rpc.RequestSendTx.newBuilder().setTx(tx).setCommit(true).build())
     logger.debug("undelegate ->>>>>>> \n $rst")

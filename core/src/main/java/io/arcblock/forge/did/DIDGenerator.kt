@@ -18,7 +18,7 @@ import java.math.BigInteger
 import java.util.*
 
 /**
- *  @see <a href="https://github.com/ArcBlock/ABT-DID-Protocol">link</a>
+ * [ABT-DID-Protocol]("https://github.com/ArcBlock/ABT-DID-Protocol")
  *
  * This util help you to generate all kinds of DID, it like everything's ID card.
  * it will generate different DID for different Application
@@ -27,7 +27,7 @@ import java.util.*
 object DIDGenerator {
 
   /**
-   * @see <a href="https://github.com/ArcBlock/ABT-DID-Protocol">link</a>
+   * [ABT-DID-Protocol]("https://github.com/ArcBlock/ABT-DID-Protocol")
    *
    * Apply sha3 to the app_did
   Take the first 64 bits of the hash
@@ -139,7 +139,7 @@ object DIDGenerator {
     return hashToAddress(roleType, keyType, hashType, pkHash)
   }
 
-  fun hashToAddress(roleType: RoleType, keyType: KeyType = ED25519, hashType: HashType = SHA3, hash: ByteArray): String {
+  private fun hashToAddress(roleType: RoleType, keyType: KeyType = ED25519, hashType: HashType = SHA3, hash: ByteArray): String {
     val appendPk = preAppend(roleType, keyType, hashType) + hash.sliceArray(0..19)
     val suffix = appendPk + Hasher.hash(hashType, appendPk).sliceArray(0..3)
     return Base58Btc.encode(suffix)
