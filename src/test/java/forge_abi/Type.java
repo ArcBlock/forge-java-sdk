@@ -13754,25 +13754,25 @@ public final class Type {
 
     /**
      * <pre>
-     * sign address
+     * signer address
      * </pre>
      *
-     * <code>string sign = 1;</code>
+     * <code>string signer = 1;</code>
      */
     java.lang.String getSigner();
     /**
      * <pre>
-     * sign address
+     * signer address
      * </pre>
      *
-     * <code>string sign = 1;</code>
+     * <code>string signer = 1;</code>
      */
     com.google.protobuf.ByteString
         getSignerBytes();
 
     /**
      * <pre>
-     * public key for sign
+     * public key for signer
      * </pre>
      *
      * <code>bytes pk = 2;</code>
@@ -13936,10 +13936,10 @@ public final class Type {
     private volatile java.lang.Object signer_;
     /**
      * <pre>
-     * sign address
+     * signer address
      * </pre>
      *
-     * <code>string sign = 1;</code>
+     * <code>string signer = 1;</code>
      */
     public java.lang.String getSigner() {
       java.lang.Object ref = signer_;
@@ -13955,10 +13955,10 @@ public final class Type {
     }
     /**
      * <pre>
-     * sign address
+     * signer address
      * </pre>
      *
-     * <code>string sign = 1;</code>
+     * <code>string signer = 1;</code>
      */
     public com.google.protobuf.ByteString
         getSignerBytes() {
@@ -13978,7 +13978,7 @@ public final class Type {
     private com.google.protobuf.ByteString pk_;
     /**
      * <pre>
-     * public key for sign
+     * public key for signer
      * </pre>
      *
      * <code>bytes pk = 2;</code>
@@ -14428,10 +14428,10 @@ public final class Type {
       private java.lang.Object signer_ = "";
       /**
        * <pre>
-       * sign address
+       * signer address
        * </pre>
        *
-       * <code>string sign = 1;</code>
+       * <code>string signer = 1;</code>
        */
       public java.lang.String getSigner() {
         java.lang.Object ref = signer_;
@@ -14447,10 +14447,10 @@ public final class Type {
       }
       /**
        * <pre>
-       * sign address
+       * signer address
        * </pre>
        *
-       * <code>string sign = 1;</code>
+       * <code>string signer = 1;</code>
        */
       public com.google.protobuf.ByteString
           getSignerBytes() {
@@ -14467,10 +14467,10 @@ public final class Type {
       }
       /**
        * <pre>
-       * sign address
+       * signer address
        * </pre>
        *
-       * <code>string sign = 1;</code>
+       * <code>string signer = 1;</code>
        */
       public Builder setSigner(
           java.lang.String value) {
@@ -14484,10 +14484,10 @@ public final class Type {
       }
       /**
        * <pre>
-       * sign address
+       * signer address
        * </pre>
        *
-       * <code>string sign = 1;</code>
+       * <code>string signer = 1;</code>
        */
       public Builder clearSigner() {
         
@@ -14497,10 +14497,10 @@ public final class Type {
       }
       /**
        * <pre>
-       * sign address
+       * signer address
        * </pre>
        *
-       * <code>string sign = 1;</code>
+       * <code>string signer = 1;</code>
        */
       public Builder setSignerBytes(
           com.google.protobuf.ByteString value) {
@@ -14517,7 +14517,7 @@ public final class Type {
       private com.google.protobuf.ByteString pk_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <pre>
-       * public key for sign
+       * public key for signer
        * </pre>
        *
        * <code>bytes pk = 2;</code>
@@ -14527,7 +14527,7 @@ public final class Type {
       }
       /**
        * <pre>
-       * public key for sign
+       * public key for signer
        * </pre>
        *
        * <code>bytes pk = 2;</code>
@@ -14543,7 +14543,7 @@ public final class Type {
       }
       /**
        * <pre>
-       * public key for sign
+       * public key for signer
        * </pre>
        *
        * <code>bytes pk = 2;</code>
