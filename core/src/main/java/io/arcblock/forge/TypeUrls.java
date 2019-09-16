@@ -36,6 +36,7 @@ public class TypeUrls {
   public static final String STAKE_FOR_USER = "fg:x:stake_user";
   public static final String STAKE_FOR_ASSET = "fg:x:stake_asset";
   public static final String STAKE_FOR_CHAIN = "fg:x:stake_chain";
+  public static final String CONSUME_ASSET_ADDRESS = "fg:x:address";
 
   //
   public static final String TRANSACTION = "fg:x:tx";

@@ -58,6 +58,16 @@ fun ForgeSDK.sendTx(tx: Type.Transaction): Rpc.ResponseSendTx {
 }
 
 /**
+ * add delegatee ,must before sign
+ */
+fun Type.Transaction.delegatee(delegatee: String?) = delegatee?.let {
+    val from = this.from
+    this.toBuilder().setFrom(delegatee)
+      .setDelegator(from).clearSignature().build()
+  } ?: this
+
+
+/**
  * base58btc address to DID
  */
 fun String.addrToDID(): String {
@@ -100,3 +110,6 @@ fun Type.Transaction.signTx(sk: ByteArray): Type.Transaction {
   val sig = this.toBuilder().clearSignature().build().toByteArray().hash(HashType.SHA3).sign(sk)
   return this.toBuilder().setSignature(sig.toByteString()).build()
 }
+
+data class Result(val response: Rpc.ResponseSendTx, val address: String)
+

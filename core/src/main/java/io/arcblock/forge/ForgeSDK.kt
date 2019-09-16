@@ -1,15 +1,19 @@
 package io.arcblock.forge
 
 import com.google.common.util.concurrent.ListenableFuture
+import com.google.protobuf.Any
 import com.google.protobuf.ByteString
 import forge_abi.*
 import forge_abi.Enum
 import forge_abi.StatsRpcGrpc.StatsRpcStub
+import io.arcblock.forge.did.DIDGenerator
 import io.arcblock.forge.did.WalletInfo
 import io.grpc.ManagedChannel
 import io.grpc.ManagedChannelBuilder
 import io.grpc.stub.StreamObserver
 import java.math.BigInteger
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
@@ -174,9 +178,16 @@ class ForgeSDK private constructor() {
   }
 
   /**
+   * Declare your account on forge
+   */
+  fun declare(moniker: String, wallet: WalletInfo): Rpc.ResponseSendTx {
+    return sendTx(TransactionFactory.declare(chainInfo.value.network, wallet, moniker).signTx(wallet.sk))
+  }
+
+  /**
    * Util to help developer to poke a account
    */
-  fun poke(wallet: Type.WalletInfo, pokeConfig: Type.PokeConfig): Rpc.ResponseSendTx{
+  fun poke(wallet: Type.WalletInfo, pokeConfig: Type.PokeConfig): Rpc.ResponseSendTx {
     val tx = TransactionFactory.unsignPoke(pokeConfig.address, chainInfo.value.network, wallet = WalletInfo(wallet))
       .signTx(wallet.sk.toByteArray())
     return chainRpcBlockingStub.sendTx(Rpc.RequestSendTx.newBuilder().setTx(tx).build())
@@ -185,14 +196,113 @@ class ForgeSDK private constructor() {
   /**
    * Util to help developer transfer money from a account to another
    */
-  fun transfer(from: Type.WalletInfo, to: Type.WalletInfo, amount: BigInteger): Rpc.ResponseSendTx{
+  fun transfer(from: Type.WalletInfo, to: Type.WalletInfo, amount: BigInteger, delegatee: String? = null): Rpc.ResponseSendTx {
     val transfer = Transfer.TransferTx.newBuilder()
       .setTo(to.address)
       .setValue(Type.BigUint.newBuilder().setValue(ByteString.copyFrom(amount.toByteArray())).build())
       .build()
     val tx = TransactionFactory.createTransaction(chainInfo.value.network, from.address, from.pk.toByteArray(), transfer.toByteString(), TypeUrls.TRANSFER)
+      .delegatee(delegatee)
       .signTx(from.sk.toByteArray())
     return sendTx(tx)
+  }
+
+  /**
+   * Simple create a asset
+   */
+  fun createAsset(assetTypeUrl: String, assetData: ByteArray, assetMoniker: String, wallet: Type.WalletInfo, delegatee: String? = null, ttl: Int = 0, transferrable: Boolean = true, readOnly: Boolean = false): Result {
+    val data = Any.newBuilder().setTypeUrl(assetTypeUrl).setValue(assetData.toByteString()).build()
+    var itx = CreateAsset.CreateAssetTx.newBuilder().setData(data)
+      .setMoniker(assetMoniker)
+      .setReadonly(readOnly)
+      .setParent("")
+      .setTransferrable(transferrable)
+      .setTtl(ttl)
+      .build()
+    val address = DIDGenerator.genAssetDid(itx.toByteArray())
+    itx = itx.toBuilder().setAddress(address).build()
+    val tx = TransactionFactory.createTransaction(chainInfo.value.network, wallet.address, wallet.pk.toByteArray(), itx.toByteString(), TypeUrls.CREATE_ASSET)
+      .delegatee(delegatee)
+      .signTx(wallet.sk.toByteArray())
+    return Result(sendTx(tx), address)
+  }
+
+  /**
+   * update asset (not readOnly) by address
+   */
+  fun updateAsset(assetAddress: String, moniker: String, typeUrl: String, assetData: ByteArray, wallet: Type.WalletInfo, delegatee: String? = null): Rpc.ResponseSendTx{
+    val itx = UpdateAsset.UpdateAssetTx.newBuilder()
+      .setAddress(assetAddress).setMoniker(moniker).setData(Any.newBuilder().setTypeUrl(typeUrl).setValue(assetData.toByteString()).build()).build()
+    val tx = TransactionFactory.createTransaction(chainInfo.value.network, wallet.address, wallet.pk.toByteArray(), itx.toByteString(), TypeUrls.UPDATE_ASSET)
+      .delegatee(delegatee)
+      .signTx(wallet.sk.toByteArray())
+    return sendTx(tx)
+  }
+
+  /**
+   * consume asset to make it can't be transfer
+   */
+  fun consumeAsset(assetAddress: String, wallet: Type.WalletInfo, owner: Type.WalletInfo, delegatee: String? = null): Rpc.ResponseSendTx{
+    val itx = ConsumeAsset.ConsumeAssetTx.newBuilder().setAddress("").setIssuer(wallet.address).build()
+    val tx = TransactionFactory.createTransaction(chainInfo.value.network, wallet.address, wallet.pk.toByteArray(), itx.toByteString(), TypeUrls.CONSUME_ASSET)
+      .delegatee(delegatee)
+      .signTx(wallet.sk.toByteArray())
+    val re = multisig(Rpc.RequestMultisig.newBuilder().setTx(tx).setWallet(owner)
+      .setData(Any.newBuilder().setTypeUrl(TypeUrls.CONSUME_ASSET_ADDRESS)
+      .setValue(ByteString.copyFromUtf8(assetAddress)).build()
+      ).build())
+    return sendTx(re.tx)
+  }
+
+  /**
+   * create a unSign exchange transaction, you have to sign it by from and multisig by to.
+   */
+  fun createUnsignExchange(from: Type.WalletInfo, to: Type.WalletInfo, fromToken: BigInteger, assetAddress: String, delegatee: String? = null): Type.Transaction {
+    val exchange = Exchange.ExchangeTx.newBuilder()
+      .setSender(Exchange.ExchangeInfo.newBuilder()
+        .setValue(Type.BigUint.newBuilder()
+          .setValue(fromToken.toByteArray().toByteString())
+          .build())
+        .build())
+      .setReceiver(Exchange.ExchangeInfo.newBuilder()
+        .addAssets(assetAddress)
+        .build())
+      .setTo(to.address)
+      .build()
+    return TransactionFactory.createTransaction(chainInfo.value.network, from.address, from.pk.toByteArray(), exchange.toByteString(), TypeUrls.EXCHANGE)
+  }
+
+  /**
+   * Simple exchange from A to B, pay fromToken and get Asset
+   */
+  fun exchange(from: Type.WalletInfo, to: Type.WalletInfo, fromToken: BigInteger, assetAddress: String, delegateeFrom: String? = null, delegateeTo: String? = null): Rpc.ResponseSendTx {
+    val exchange = Exchange.ExchangeTx.newBuilder()
+      .setSender(Exchange.ExchangeInfo.newBuilder()
+        .setValue(Type.BigUint.newBuilder()
+          .setValue(fromToken.toByteArray().toByteString())
+          .build())
+        .build())
+      .setReceiver(Exchange.ExchangeInfo.newBuilder()
+        .addAssets(assetAddress)
+        .build())
+      .setTo(to.address)
+      .build()
+    val tx = TransactionFactory.createTransaction(chainInfo.value.network, from.address, from.pk.toByteArray(), exchange.toByteString(), TypeUrls.EXCHANGE)
+      .delegatee(delegateeFrom)
+      .signTx(from.sk.toByteArray())
+    val builder = Rpc.RequestMultisig.newBuilder()
+      .setTx(tx)
+      .setWallet(to)
+    delegateeTo?.let { builder.setDelegatee(delegateeTo) }
+    val multiSigResp = multisig(builder.build())
+    return sendTx(multiSigResp.tx)
+  }
+
+  /**
+   * delegate rules from to
+   */
+  fun createDelegate(from: Type.WalletInfo, to: Type.WalletInfo, rules: List<String>, typeUrl: String? = null): Rpc.ResponseSendTx {
+    return sendTx(TransactionFactory.unsignDelegate(from.address, to.address, chainInfo.value.network, WalletInfo(from), rules, typeUrl).signTx(from.sk.toByteArray()))
   }
 
   /**
@@ -265,7 +375,6 @@ class ForgeSDK private constructor() {
    *       .setEmptyExcluded(true)
    *       .build())
    * ```
-   *
    *
    */
   fun getBlocks(request: Rpc.RequestGetBlocks): Rpc.ResponseGetBlocks {
@@ -363,8 +472,6 @@ class ForgeSDK private constructor() {
    * value (string) -- value
    * @return
    * ResponseSearch
-   *
-   *
    */
   fun search(request: Rpc.RequestSearch): Rpc.ResponseSearch {
     return chainRpcBlockingStub.search(request)
@@ -452,6 +559,28 @@ class ForgeSDK private constructor() {
   }
 
   /**
+   * gRPC call to get detailed configuration current chain is using
+   *
+   * ```
+   *  [forge]
+   *  proto_version = 1
+   *  path = "/Users/paperhuang/.forge_chains/forge_default/forge_release/core"
+   *  logpath = "logs"
+   *  sock_grpc = "tcp://127.0.0.1:28210"
+   *  pub_sub_key = "ABTTOTHEMOON"
+   *
+   *  [forge.stake.timeout]
+   *  general = 10
+   *  stake_for_node = 60
+   *  ...
+   * ```
+   */
+  fun getConfig(): Rpc.ResponseGetConfig {
+    return chainRpcBlockingStub.getConfig(Rpc.RequestGetConfig.getDefaultInstance())
+  }
+
+
+  /**
    * async gRPC call to get detailed configuration current chain is using
    *
    */
@@ -492,10 +621,35 @@ class ForgeSDK private constructor() {
     return statsRpcBlockingStub.getForgeStats(request)
   }
 
+  private fun Date.toForgeDateString() = SimpleDateFormat("yyyy-MM-dd").format(this)
+
+  /**
+   * gRpc call to get analyze information ,more to see [getForgeStats]
+   *
+   * @param startDate start date of analyze
+   * @param endDate edn date of analyze
+   *
+   */
+  fun getForgeStats(startDate: Date, endDate: Date): Rpc.ResponseGetForgeStats {
+    return statsRpcBlockingStub.getForgeStats(Rpc.RequestGetForgeStats.newBuilder()
+      .setDayInfo(Rpc.ByDay.newBuilder().setStartDate(startDate.toForgeDateString()).setEndDate(endDate.toForgeDateString()).build())
+      .build())
+  }
+
+  /**
+   * gRpc call to get analyze information ,more to see [getForgeStats]
+   *
+   * @param someDay set target day of your want analyze by hours
+   */
+  fun getForgeStats(someDay: Date): Rpc.ResponseGetForgeStats {
+    return statsRpcBlockingStub.getForgeStats(Rpc.RequestGetForgeStats.newBuilder()
+      .setDate(Rpc.ByHour.newBuilder().setDate(someDay.toForgeDateString()).build())
+      .build())
+  }
+
   /**
    * gRpc call to get analyze information ,please read [getForgeStats]
    */
-
   fun asyncGetForgeStats(request: Rpc.RequestGetForgeStats): ListenableFuture<Rpc.ResponseGetForgeStats> {
     return statsRpcFutureStub.getForgeStats(request)
   }
@@ -711,6 +865,7 @@ class ForgeSDK private constructor() {
   fun getForgeState(): Rpc.ResponseGetForgeState {
     return stateRpcBlockingStub.getForgeState(Rpc.RequestGetForgeState.getDefaultInstance())
   }
+
   /**
    * async gRPC to get forge state
    */

@@ -12,6 +12,7 @@ import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
 import java.math.BigInteger
+import java.util.*
 import java.util.concurrent.atomic.AtomicBoolean
 
 @Ignore
@@ -260,7 +261,7 @@ class ForgeSDKTest {
   }
 
   private fun createAssset(who: Type.WalletInfo): String {
-    val data = Any.newBuilder().setTypeUrl("test_asset").setValue(ByteString.copyFromUtf8("hello world")).build()
+    val data = Any.newBuilder().setTypeUrl("test_asset").setValue(ByteString.copyFromUtf8(UUID.randomUUID().toString())).build()
     var itx = CreateAsset.CreateAssetTx.newBuilder().setData(data)
       .setMoniker("abcdef")
       .setReadonly(false)

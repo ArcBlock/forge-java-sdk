@@ -48,11 +48,11 @@ object TransactionFactory {
   /**
    * create a delegate transaction without signature
    */
-  fun unsignDelegate(from: String, to: String, chainID: String, wallet: WalletInfo, rules: List<String>): Type.Transaction {
+  fun unsignDelegate(from: String, to: String, chainID: String, wallet: WalletInfo, rules: List<String>, typeUrl: String? = null): Type.Transaction {
     val itx = Delegate.DelegateTx.newBuilder()
       .setAddress(DIDGenerator.genDelegateAddress(from, to))
       .addOps(Delegate.DelegateOp.newBuilder()
-        .setTypeUrl(TypeUrls.TRANSFER)
+        .setTypeUrl(typeUrl ?: TypeUrls.TRANSFER)
         .addAllRules(rules)
         .build())
       .setTo(to)
@@ -77,7 +77,8 @@ object TransactionFactory {
    */
   fun createTransaction(chanId: String, from: String, pk: ByteArray, itx: ByteString, typeUrl: String): Type.Transaction {
     return Type.Transaction.newBuilder()
-      .setChainId(chanId).setFrom(from)
+      .setChainId(chanId)
+      .setFrom(from)
       .setPk(ByteString.copyFrom(pk))
       .setNonce(generateNonce())
       .setItx(Any.getDefaultInstance().toBuilder().setTypeUrl(typeUrl)

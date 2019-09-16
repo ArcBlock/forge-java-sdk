@@ -129,6 +129,14 @@ object DIDGenerator {
   }
 
   /**
+   * Generate Asset Address for CreateAssetTX
+   */
+  fun genAssetDid(itx: ByteArray): String {
+    val itxNoAddress = CreateAsset.CreateAssetTx.newBuilder().mergeFrom(itx).clearAddress().build().toByteArray()
+    return hashToAddress(RoleType.ASSET, ED25519, SHA3, ArcSha3Hasher.sha(itxNoAddress))
+  }
+
+  /**
    * Generate address by user publicKey
    * @param roleType use enum RoleType, such as ACCOUNT or APPLICATION
    * @param keyType publicKey type ED25519 or SECP256K1
