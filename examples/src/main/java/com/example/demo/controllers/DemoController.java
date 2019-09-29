@@ -4,6 +4,17 @@ import com.example.demo.beans.AppDid;
 import com.example.demo.components.ForgeSDKComponent;
 import com.google.gson.Gson;
 import com.google.protobuf.Any;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.time.LocalDate;
+import java.util.HashMap;
+
+import javax.annotation.Resource;
+
 import forge_abi.Declare;
 import forge_abi.Enum;
 import forge_abi.Poke;
@@ -11,14 +22,6 @@ import forge_abi.Rpc;
 import io.arcblock.forge.ForgeSDK;
 import io.arcblock.forge.TypeUrls;
 import io.grpc.stub.StreamObserver;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.annotation.Resource;
-import java.time.LocalDate;
-import java.util.HashMap;
 
 @Controller
 public class DemoController extends BaseController {
@@ -81,7 +84,7 @@ public class DemoController extends BaseController {
         .build());
 
     Poke.PokeTx itx = Poke.PokeTx.newBuilder()
-      .setAddress(forgeState.getState().getPokeConfig().getAddress())
+      .setAddress("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
       .setDate(LocalDate.now().toString())
       .build();
     Rpc.RequestCreateTx createTx = Rpc.RequestCreateTx.newBuilder()

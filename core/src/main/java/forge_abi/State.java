@@ -178,10 +178,6 @@ public final class State {
         getMigratedFromBytes(int index);
 
     /**
-     * <pre>
-     * 16-49 reserve for future
-     * </pre>
-     *
      * <code>uint64 num_assets = 15;</code>
      */
     long getNumAssets();
@@ -252,6 +248,31 @@ public final class State {
      * <code>.forge_abi.BigUint deposit_received = 19;</code>
      */
     forge_abi.Type.BigUintOrBuilder getDepositReceivedOrBuilder();
+
+    /**
+     * <pre>
+     * 20-49 reserve for future
+     * </pre>
+     *
+     * <code>.forge_abi.CircularQueue withdraw_items = 20;</code>
+     */
+    boolean hasWithdrawItems();
+    /**
+     * <pre>
+     * 20-49 reserve for future
+     * </pre>
+     *
+     * <code>.forge_abi.CircularQueue withdraw_items = 20;</code>
+     */
+    forge_abi.Type.CircularQueue getWithdrawItems();
+    /**
+     * <pre>
+     * 20-49 reserve for future
+     * </pre>
+     *
+     * <code>.forge_abi.CircularQueue withdraw_items = 20;</code>
+     */
+    forge_abi.Type.CircularQueueOrBuilder getWithdrawItemsOrBuilder();
 
     /**
      * <code>.google.protobuf.Any data = 50;</code>
@@ -470,6 +491,19 @@ public final class State {
               if (subBuilder != null) {
                 subBuilder.mergeFrom(depositReceived_);
                 depositReceived_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 162: {
+              forge_abi.Type.CircularQueue.Builder subBuilder = null;
+              if (withdrawItems_ != null) {
+                subBuilder = withdrawItems_.toBuilder();
+              }
+              withdrawItems_ = input.readMessage(forge_abi.Type.CircularQueue.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(withdrawItems_);
+                withdrawItems_ = subBuilder.buildPartial();
               }
 
               break;
@@ -815,10 +849,6 @@ public final class State {
     public static final int NUM_ASSETS_FIELD_NUMBER = 15;
     private long numAssets_;
     /**
-     * <pre>
-     * 16-49 reserve for future
-     * </pre>
-     *
      * <code>uint64 num_assets = 15;</code>
      */
     public long getNumAssets() {
@@ -924,6 +954,39 @@ public final class State {
       return getDepositReceived();
     }
 
+    public static final int WITHDRAW_ITEMS_FIELD_NUMBER = 20;
+    private forge_abi.Type.CircularQueue withdrawItems_;
+    /**
+     * <pre>
+     * 20-49 reserve for future
+     * </pre>
+     *
+     * <code>.forge_abi.CircularQueue withdraw_items = 20;</code>
+     */
+    public boolean hasWithdrawItems() {
+      return withdrawItems_ != null;
+    }
+    /**
+     * <pre>
+     * 20-49 reserve for future
+     * </pre>
+     *
+     * <code>.forge_abi.CircularQueue withdraw_items = 20;</code>
+     */
+    public forge_abi.Type.CircularQueue getWithdrawItems() {
+      return withdrawItems_ == null ? forge_abi.Type.CircularQueue.getDefaultInstance() : withdrawItems_;
+    }
+    /**
+     * <pre>
+     * 20-49 reserve for future
+     * </pre>
+     *
+     * <code>.forge_abi.CircularQueue withdraw_items = 20;</code>
+     */
+    public forge_abi.Type.CircularQueueOrBuilder getWithdrawItemsOrBuilder() {
+      return getWithdrawItems();
+    }
+
     public static final int DATA_FIELD_NUMBER = 50;
     private com.google.protobuf.Any data_;
     /**
@@ -1008,6 +1071,9 @@ public final class State {
       if (depositReceived_ != null) {
         output.writeMessage(19, getDepositReceived());
       }
+      if (withdrawItems_ != null) {
+        output.writeMessage(20, getWithdrawItems());
+      }
       if (data_ != null) {
         output.writeMessage(50, getData());
       }
@@ -1091,6 +1157,10 @@ public final class State {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(19, getDepositReceived());
       }
+      if (withdrawItems_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(20, getWithdrawItems());
+      }
       if (data_ != null) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(50, getData());
@@ -1169,6 +1239,11 @@ public final class State {
         result = result && getDepositReceived()
             .equals(other.getDepositReceived());
       }
+      result = result && (hasWithdrawItems() == other.hasWithdrawItems());
+      if (hasWithdrawItems()) {
+        result = result && getWithdrawItems()
+            .equals(other.getWithdrawItems());
+      }
       result = result && (hasData() == other.hasData());
       if (hasData()) {
         result = result && getData()
@@ -1240,6 +1315,10 @@ public final class State {
       if (hasDepositReceived()) {
         hash = (37 * hash) + DEPOSIT_RECEIVED_FIELD_NUMBER;
         hash = (53 * hash) + getDepositReceived().hashCode();
+      }
+      if (hasWithdrawItems()) {
+        hash = (37 * hash) + WITHDRAW_ITEMS_FIELD_NUMBER;
+        hash = (53 * hash) + getWithdrawItems().hashCode();
       }
       if (hasData()) {
         hash = (37 * hash) + DATA_FIELD_NUMBER;
@@ -1429,6 +1508,12 @@ public final class State {
           depositReceived_ = null;
           depositReceivedBuilder_ = null;
         }
+        if (withdrawItemsBuilder_ == null) {
+          withdrawItems_ = null;
+        } else {
+          withdrawItems_ = null;
+          withdrawItemsBuilder_ = null;
+        }
         if (dataBuilder_ == null) {
           data_ = null;
         } else {
@@ -1515,6 +1600,11 @@ public final class State {
           result.depositReceived_ = depositReceived_;
         } else {
           result.depositReceived_ = depositReceivedBuilder_.build();
+        }
+        if (withdrawItemsBuilder_ == null) {
+          result.withdrawItems_ = withdrawItems_;
+        } else {
+          result.withdrawItems_ = withdrawItemsBuilder_.build();
         }
         if (dataBuilder_ == null) {
           result.data_ = data_;
@@ -1630,6 +1720,9 @@ public final class State {
         }
         if (other.hasDepositReceived()) {
           mergeDepositReceived(other.getDepositReceived());
+        }
+        if (other.hasWithdrawItems()) {
+          mergeWithdrawItems(other.getWithdrawItems());
         }
         if (other.hasData()) {
           mergeData(other.getData());
@@ -2661,20 +2754,12 @@ public final class State {
 
       private long numAssets_ ;
       /**
-       * <pre>
-       * 16-49 reserve for future
-       * </pre>
-       *
        * <code>uint64 num_assets = 15;</code>
        */
       public long getNumAssets() {
         return numAssets_;
       }
       /**
-       * <pre>
-       * 16-49 reserve for future
-       * </pre>
-       *
        * <code>uint64 num_assets = 15;</code>
        */
       public Builder setNumAssets(long value) {
@@ -2684,10 +2769,6 @@ public final class State {
         return this;
       }
       /**
-       * <pre>
-       * 16-49 reserve for future
-       * </pre>
-       *
        * <code>uint64 num_assets = 15;</code>
        */
       public Builder clearNumAssets() {
@@ -3208,6 +3289,159 @@ public final class State {
           depositReceived_ = null;
         }
         return depositReceivedBuilder_;
+      }
+
+      private forge_abi.Type.CircularQueue withdrawItems_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.CircularQueue, forge_abi.Type.CircularQueue.Builder, forge_abi.Type.CircularQueueOrBuilder> withdrawItemsBuilder_;
+      /**
+       * <pre>
+       * 20-49 reserve for future
+       * </pre>
+       *
+       * <code>.forge_abi.CircularQueue withdraw_items = 20;</code>
+       */
+      public boolean hasWithdrawItems() {
+        return withdrawItemsBuilder_ != null || withdrawItems_ != null;
+      }
+      /**
+       * <pre>
+       * 20-49 reserve for future
+       * </pre>
+       *
+       * <code>.forge_abi.CircularQueue withdraw_items = 20;</code>
+       */
+      public forge_abi.Type.CircularQueue getWithdrawItems() {
+        if (withdrawItemsBuilder_ == null) {
+          return withdrawItems_ == null ? forge_abi.Type.CircularQueue.getDefaultInstance() : withdrawItems_;
+        } else {
+          return withdrawItemsBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * 20-49 reserve for future
+       * </pre>
+       *
+       * <code>.forge_abi.CircularQueue withdraw_items = 20;</code>
+       */
+      public Builder setWithdrawItems(forge_abi.Type.CircularQueue value) {
+        if (withdrawItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          withdrawItems_ = value;
+          onChanged();
+        } else {
+          withdrawItemsBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * 20-49 reserve for future
+       * </pre>
+       *
+       * <code>.forge_abi.CircularQueue withdraw_items = 20;</code>
+       */
+      public Builder setWithdrawItems(
+          forge_abi.Type.CircularQueue.Builder builderForValue) {
+        if (withdrawItemsBuilder_ == null) {
+          withdrawItems_ = builderForValue.build();
+          onChanged();
+        } else {
+          withdrawItemsBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * 20-49 reserve for future
+       * </pre>
+       *
+       * <code>.forge_abi.CircularQueue withdraw_items = 20;</code>
+       */
+      public Builder mergeWithdrawItems(forge_abi.Type.CircularQueue value) {
+        if (withdrawItemsBuilder_ == null) {
+          if (withdrawItems_ != null) {
+            withdrawItems_ =
+              forge_abi.Type.CircularQueue.newBuilder(withdrawItems_).mergeFrom(value).buildPartial();
+          } else {
+            withdrawItems_ = value;
+          }
+          onChanged();
+        } else {
+          withdrawItemsBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * 20-49 reserve for future
+       * </pre>
+       *
+       * <code>.forge_abi.CircularQueue withdraw_items = 20;</code>
+       */
+      public Builder clearWithdrawItems() {
+        if (withdrawItemsBuilder_ == null) {
+          withdrawItems_ = null;
+          onChanged();
+        } else {
+          withdrawItems_ = null;
+          withdrawItemsBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * 20-49 reserve for future
+       * </pre>
+       *
+       * <code>.forge_abi.CircularQueue withdraw_items = 20;</code>
+       */
+      public forge_abi.Type.CircularQueue.Builder getWithdrawItemsBuilder() {
+        
+        onChanged();
+        return getWithdrawItemsFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       * 20-49 reserve for future
+       * </pre>
+       *
+       * <code>.forge_abi.CircularQueue withdraw_items = 20;</code>
+       */
+      public forge_abi.Type.CircularQueueOrBuilder getWithdrawItemsOrBuilder() {
+        if (withdrawItemsBuilder_ != null) {
+          return withdrawItemsBuilder_.getMessageOrBuilder();
+        } else {
+          return withdrawItems_ == null ?
+              forge_abi.Type.CircularQueue.getDefaultInstance() : withdrawItems_;
+        }
+      }
+      /**
+       * <pre>
+       * 20-49 reserve for future
+       * </pre>
+       *
+       * <code>.forge_abi.CircularQueue withdraw_items = 20;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.CircularQueue, forge_abi.Type.CircularQueue.Builder, forge_abi.Type.CircularQueueOrBuilder> 
+          getWithdrawItemsFieldBuilder() {
+        if (withdrawItemsBuilder_ == null) {
+          withdrawItemsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Type.CircularQueue, forge_abi.Type.CircularQueue.Builder, forge_abi.Type.CircularQueueOrBuilder>(
+                  getWithdrawItems(),
+                  getParentForChildren(),
+                  isClean());
+          withdrawItems_ = null;
+        }
+        return withdrawItemsBuilder_;
       }
 
       private com.google.protobuf.Any data_ = null;
@@ -6300,15 +6534,6 @@ public final class State {
         getVersionBytes();
 
     /**
-     * <pre>
-     * app state returned by forge app
-     * </pre>
-     *
-     * <code>bytes forge_app_hash = 7;</code>
-     */
-    com.google.protobuf.ByteString getForgeAppHash();
-
-    /**
      * <code>.forge_abi.ForgeToken token = 8;</code>
      */
     boolean hasToken();
@@ -6335,50 +6560,49 @@ public final class State {
     forge_abi.Type.TransactionConfigOrBuilder getTxConfigOrBuilder();
 
     /**
-     * <code>.forge_abi.StakeConfig stake_config = 10;</code>
-     */
-    boolean hasStakeConfig();
-    /**
-     * <code>.forge_abi.StakeConfig stake_config = 10;</code>
-     */
-    forge_abi.Type.StakeConfig getStakeConfig();
-    /**
-     * <code>.forge_abi.StakeConfig stake_config = 10;</code>
-     */
-    forge_abi.Type.StakeConfigOrBuilder getStakeConfigOrBuilder();
-
-    /**
-     * <code>.forge_abi.PokeConfig poke_config = 11;</code>
-     */
-    boolean hasPokeConfig();
-    /**
-     * <code>.forge_abi.PokeConfig poke_config = 11;</code>
-     */
-    forge_abi.Type.PokeConfig getPokeConfig();
-    /**
-     * <code>.forge_abi.PokeConfig poke_config = 11;</code>
-     */
-    forge_abi.Type.PokeConfigOrBuilder getPokeConfigOrBuilder();
-
-    /**
+     * <pre>
+     * StakeConfig stake_config = 10; deprecated
+     * PokeConfig poke_config = 11; deprecated
+     * </pre>
+     *
      * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
      */
     java.util.List<forge_abi.State.CoreProtocol> 
         getProtocolsList();
     /**
+     * <pre>
+     * StakeConfig stake_config = 10; deprecated
+     * PokeConfig poke_config = 11; deprecated
+     * </pre>
+     *
      * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
      */
     forge_abi.State.CoreProtocol getProtocols(int index);
     /**
+     * <pre>
+     * StakeConfig stake_config = 10; deprecated
+     * PokeConfig poke_config = 11; deprecated
+     * </pre>
+     *
      * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
      */
     int getProtocolsCount();
     /**
+     * <pre>
+     * StakeConfig stake_config = 10; deprecated
+     * PokeConfig poke_config = 11; deprecated
+     * </pre>
+     *
      * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
      */
     java.util.List<? extends forge_abi.State.CoreProtocolOrBuilder> 
         getProtocolsOrBuilderList();
     /**
+     * <pre>
+     * StakeConfig stake_config = 10; deprecated
+     * PokeConfig poke_config = 11; deprecated
+     * </pre>
+     *
      * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
      */
     forge_abi.State.CoreProtocolOrBuilder getProtocolsOrBuilder(
@@ -6432,11 +6656,58 @@ public final class State {
     forge_abi.Type.UpgradeInfoOrBuilder getUpgradeInfoOrBuilder();
 
     /**
+     * <code>map&lt;string, .forge_abi.AccountConfig&gt; account_config = 16;</code>
+     */
+    int getAccountConfigCount();
+    /**
+     * <code>map&lt;string, .forge_abi.AccountConfig&gt; account_config = 16;</code>
+     */
+    boolean containsAccountConfig(
+        java.lang.String key);
+    /**
+     * Use {@link #getAccountConfigMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.String, forge_abi.Type.AccountConfig>
+    getAccountConfig();
+    /**
+     * <code>map&lt;string, .forge_abi.AccountConfig&gt; account_config = 16;</code>
+     */
+    java.util.Map<java.lang.String, forge_abi.Type.AccountConfig>
+    getAccountConfigMap();
+    /**
+     * <code>map&lt;string, .forge_abi.AccountConfig&gt; account_config = 16;</code>
+     */
+
+    forge_abi.Type.AccountConfig getAccountConfigOrDefault(
+        java.lang.String key,
+        forge_abi.Type.AccountConfig defaultValue);
+    /**
+     * <code>map&lt;string, .forge_abi.AccountConfig&gt; account_config = 16;</code>
+     */
+
+    forge_abi.Type.AccountConfig getAccountConfigOrThrow(
+        java.lang.String key);
+
+    /**
+     * <code>.forge_abi.TokenSwapConfig token_swap_config = 17;</code>
+     */
+    boolean hasTokenSwapConfig();
+    /**
+     * <code>.forge_abi.TokenSwapConfig token_swap_config = 17;</code>
+     */
+    forge_abi.Type.TokenSwapConfig getTokenSwapConfig();
+    /**
+     * <code>.forge_abi.TokenSwapConfig token_swap_config = 17;</code>
+     */
+    forge_abi.Type.TokenSwapConfigOrBuilder getTokenSwapConfigOrBuilder();
+
+    /**
      * <pre>
      * forge app can define their own app state
      * </pre>
      *
-     * <code>.google.protobuf.Any data = 15;</code>
+     * <code>.google.protobuf.Any data = 2047;</code>
      */
     boolean hasData();
     /**
@@ -6444,7 +6715,7 @@ public final class State {
      * forge app can define their own app state
      * </pre>
      *
-     * <code>.google.protobuf.Any data = 15;</code>
+     * <code>.google.protobuf.Any data = 2047;</code>
      */
     com.google.protobuf.Any getData();
     /**
@@ -6452,7 +6723,7 @@ public final class State {
      * forge app can define their own app state
      * </pre>
      *
-     * <code>.google.protobuf.Any data = 15;</code>
+     * <code>.google.protobuf.Any data = 2047;</code>
      */
     com.google.protobuf.AnyOrBuilder getDataOrBuilder();
   }
@@ -6470,7 +6741,6 @@ public final class State {
     private ForgeState() {
       address_ = "";
       version_ = "";
-      forgeAppHash_ = com.google.protobuf.ByteString.EMPTY;
       protocols_ = java.util.Collections.emptyList();
     }
 
@@ -6550,11 +6820,6 @@ public final class State {
               version_ = s;
               break;
             }
-            case 58: {
-
-              forgeAppHash_ = input.readBytes();
-              break;
-            }
             case 66: {
               forge_abi.Type.ForgeToken.Builder subBuilder = null;
               if (token_ != null) {
@@ -6581,46 +6846,20 @@ public final class State {
 
               break;
             }
-            case 82: {
-              forge_abi.Type.StakeConfig.Builder subBuilder = null;
-              if (stakeConfig_ != null) {
-                subBuilder = stakeConfig_.toBuilder();
-              }
-              stakeConfig_ = input.readMessage(forge_abi.Type.StakeConfig.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(stakeConfig_);
-                stakeConfig_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 90: {
-              forge_abi.Type.PokeConfig.Builder subBuilder = null;
-              if (pokeConfig_ != null) {
-                subBuilder = pokeConfig_.toBuilder();
-              }
-              pokeConfig_ = input.readMessage(forge_abi.Type.PokeConfig.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(pokeConfig_);
-                pokeConfig_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
             case 98: {
-              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
                 protocols_ = new java.util.ArrayList<forge_abi.State.CoreProtocol>();
-                mutable_bitField0_ |= 0x00000400;
+                mutable_bitField0_ |= 0x00000080;
               }
               protocols_.add(
                   input.readMessage(forge_abi.State.CoreProtocol.parser(), extensionRegistry));
               break;
             }
             case 106: {
-              if (!((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
                 gas_ = com.google.protobuf.MapField.newMapField(
                     GasDefaultEntryHolder.defaultEntry);
-                mutable_bitField0_ |= 0x00000800;
+                mutable_bitField0_ |= 0x00000100;
               }
               com.google.protobuf.MapEntry<java.lang.String, java.lang.Integer>
               gas__ = input.readMessage(
@@ -6642,7 +6881,33 @@ public final class State {
 
               break;
             }
-            case 122: {
+            case 130: {
+              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+                accountConfig_ = com.google.protobuf.MapField.newMapField(
+                    AccountConfigDefaultEntryHolder.defaultEntry);
+                mutable_bitField0_ |= 0x00000400;
+              }
+              com.google.protobuf.MapEntry<java.lang.String, forge_abi.Type.AccountConfig>
+              accountConfig__ = input.readMessage(
+                  AccountConfigDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              accountConfig_.getMutableMap().put(
+                  accountConfig__.getKey(), accountConfig__.getValue());
+              break;
+            }
+            case 138: {
+              forge_abi.Type.TokenSwapConfig.Builder subBuilder = null;
+              if (tokenSwapConfig_ != null) {
+                subBuilder = tokenSwapConfig_.toBuilder();
+              }
+              tokenSwapConfig_ = input.readMessage(forge_abi.Type.TokenSwapConfig.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(tokenSwapConfig_);
+                tokenSwapConfig_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 16378: {
               com.google.protobuf.Any.Builder subBuilder = null;
               if (data_ != null) {
                 subBuilder = data_.toBuilder();
@@ -6663,7 +6928,7 @@ public final class State {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
           protocols_ = java.util.Collections.unmodifiableList(protocols_);
         }
         makeExtensionsImmutable();
@@ -6684,6 +6949,8 @@ public final class State {
           return internalGetStakeSummary();
         case 13:
           return internalGetGas();
+        case 16:
+          return internalGetAccountConfig();
         default:
           throw new RuntimeException(
               "Invalid map field number: " + number);
@@ -6958,19 +7225,6 @@ public final class State {
       }
     }
 
-    public static final int FORGE_APP_HASH_FIELD_NUMBER = 7;
-    private com.google.protobuf.ByteString forgeAppHash_;
-    /**
-     * <pre>
-     * app state returned by forge app
-     * </pre>
-     *
-     * <code>bytes forge_app_hash = 7;</code>
-     */
-    public com.google.protobuf.ByteString getForgeAppHash() {
-      return forgeAppHash_;
-    }
-
     public static final int TOKEN_FIELD_NUMBER = 8;
     private forge_abi.Type.ForgeToken token_;
     /**
@@ -7013,57 +7267,25 @@ public final class State {
       return getTxConfig();
     }
 
-    public static final int STAKE_CONFIG_FIELD_NUMBER = 10;
-    private forge_abi.Type.StakeConfig stakeConfig_;
-    /**
-     * <code>.forge_abi.StakeConfig stake_config = 10;</code>
-     */
-    public boolean hasStakeConfig() {
-      return stakeConfig_ != null;
-    }
-    /**
-     * <code>.forge_abi.StakeConfig stake_config = 10;</code>
-     */
-    public forge_abi.Type.StakeConfig getStakeConfig() {
-      return stakeConfig_ == null ? forge_abi.Type.StakeConfig.getDefaultInstance() : stakeConfig_;
-    }
-    /**
-     * <code>.forge_abi.StakeConfig stake_config = 10;</code>
-     */
-    public forge_abi.Type.StakeConfigOrBuilder getStakeConfigOrBuilder() {
-      return getStakeConfig();
-    }
-
-    public static final int POKE_CONFIG_FIELD_NUMBER = 11;
-    private forge_abi.Type.PokeConfig pokeConfig_;
-    /**
-     * <code>.forge_abi.PokeConfig poke_config = 11;</code>
-     */
-    public boolean hasPokeConfig() {
-      return pokeConfig_ != null;
-    }
-    /**
-     * <code>.forge_abi.PokeConfig poke_config = 11;</code>
-     */
-    public forge_abi.Type.PokeConfig getPokeConfig() {
-      return pokeConfig_ == null ? forge_abi.Type.PokeConfig.getDefaultInstance() : pokeConfig_;
-    }
-    /**
-     * <code>.forge_abi.PokeConfig poke_config = 11;</code>
-     */
-    public forge_abi.Type.PokeConfigOrBuilder getPokeConfigOrBuilder() {
-      return getPokeConfig();
-    }
-
     public static final int PROTOCOLS_FIELD_NUMBER = 12;
     private java.util.List<forge_abi.State.CoreProtocol> protocols_;
     /**
+     * <pre>
+     * StakeConfig stake_config = 10; deprecated
+     * PokeConfig poke_config = 11; deprecated
+     * </pre>
+     *
      * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
      */
     public java.util.List<forge_abi.State.CoreProtocol> getProtocolsList() {
       return protocols_;
     }
     /**
+     * <pre>
+     * StakeConfig stake_config = 10; deprecated
+     * PokeConfig poke_config = 11; deprecated
+     * </pre>
+     *
      * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
      */
     public java.util.List<? extends forge_abi.State.CoreProtocolOrBuilder> 
@@ -7071,18 +7293,33 @@ public final class State {
       return protocols_;
     }
     /**
+     * <pre>
+     * StakeConfig stake_config = 10; deprecated
+     * PokeConfig poke_config = 11; deprecated
+     * </pre>
+     *
      * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
      */
     public int getProtocolsCount() {
       return protocols_.size();
     }
     /**
+     * <pre>
+     * StakeConfig stake_config = 10; deprecated
+     * PokeConfig poke_config = 11; deprecated
+     * </pre>
+     *
      * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
      */
     public forge_abi.State.CoreProtocol getProtocols(int index) {
       return protocols_.get(index);
     }
     /**
+     * <pre>
+     * StakeConfig stake_config = 10; deprecated
+     * PokeConfig poke_config = 11; deprecated
+     * </pre>
+     *
      * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
      */
     public forge_abi.State.CoreProtocolOrBuilder getProtocolsOrBuilder(
@@ -7187,14 +7424,111 @@ public final class State {
       return getUpgradeInfo();
     }
 
-    public static final int DATA_FIELD_NUMBER = 15;
+    public static final int ACCOUNT_CONFIG_FIELD_NUMBER = 16;
+    private static final class AccountConfigDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.String, forge_abi.Type.AccountConfig> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.String, forge_abi.Type.AccountConfig>newDefaultInstance(
+                  forge_abi.State.internal_static_forge_abi_ForgeState_AccountConfigEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.STRING,
+                  "",
+                  com.google.protobuf.WireFormat.FieldType.MESSAGE,
+                  forge_abi.Type.AccountConfig.getDefaultInstance());
+    }
+    private com.google.protobuf.MapField<
+        java.lang.String, forge_abi.Type.AccountConfig> accountConfig_;
+    private com.google.protobuf.MapField<java.lang.String, forge_abi.Type.AccountConfig>
+    internalGetAccountConfig() {
+      if (accountConfig_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            AccountConfigDefaultEntryHolder.defaultEntry);
+      }
+      return accountConfig_;
+    }
+
+    public int getAccountConfigCount() {
+      return internalGetAccountConfig().getMap().size();
+    }
+    /**
+     * <code>map&lt;string, .forge_abi.AccountConfig&gt; account_config = 16;</code>
+     */
+
+    public boolean containsAccountConfig(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      return internalGetAccountConfig().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getAccountConfigMap()} instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, forge_abi.Type.AccountConfig> getAccountConfig() {
+      return getAccountConfigMap();
+    }
+    /**
+     * <code>map&lt;string, .forge_abi.AccountConfig&gt; account_config = 16;</code>
+     */
+
+    public java.util.Map<java.lang.String, forge_abi.Type.AccountConfig> getAccountConfigMap() {
+      return internalGetAccountConfig().getMap();
+    }
+    /**
+     * <code>map&lt;string, .forge_abi.AccountConfig&gt; account_config = 16;</code>
+     */
+
+    public forge_abi.Type.AccountConfig getAccountConfigOrDefault(
+        java.lang.String key,
+        forge_abi.Type.AccountConfig defaultValue) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, forge_abi.Type.AccountConfig> map =
+          internalGetAccountConfig().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <code>map&lt;string, .forge_abi.AccountConfig&gt; account_config = 16;</code>
+     */
+
+    public forge_abi.Type.AccountConfig getAccountConfigOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, forge_abi.Type.AccountConfig> map =
+          internalGetAccountConfig().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
+    public static final int TOKEN_SWAP_CONFIG_FIELD_NUMBER = 17;
+    private forge_abi.Type.TokenSwapConfig tokenSwapConfig_;
+    /**
+     * <code>.forge_abi.TokenSwapConfig token_swap_config = 17;</code>
+     */
+    public boolean hasTokenSwapConfig() {
+      return tokenSwapConfig_ != null;
+    }
+    /**
+     * <code>.forge_abi.TokenSwapConfig token_swap_config = 17;</code>
+     */
+    public forge_abi.Type.TokenSwapConfig getTokenSwapConfig() {
+      return tokenSwapConfig_ == null ? forge_abi.Type.TokenSwapConfig.getDefaultInstance() : tokenSwapConfig_;
+    }
+    /**
+     * <code>.forge_abi.TokenSwapConfig token_swap_config = 17;</code>
+     */
+    public forge_abi.Type.TokenSwapConfigOrBuilder getTokenSwapConfigOrBuilder() {
+      return getTokenSwapConfig();
+    }
+
+    public static final int DATA_FIELD_NUMBER = 2047;
     private com.google.protobuf.Any data_;
     /**
      * <pre>
      * forge app can define their own app state
      * </pre>
      *
-     * <code>.google.protobuf.Any data = 15;</code>
+     * <code>.google.protobuf.Any data = 2047;</code>
      */
     public boolean hasData() {
       return data_ != null;
@@ -7204,7 +7538,7 @@ public final class State {
      * forge app can define their own app state
      * </pre>
      *
-     * <code>.google.protobuf.Any data = 15;</code>
+     * <code>.google.protobuf.Any data = 2047;</code>
      */
     public com.google.protobuf.Any getData() {
       return data_ == null ? com.google.protobuf.Any.getDefaultInstance() : data_;
@@ -7214,7 +7548,7 @@ public final class State {
      * forge app can define their own app state
      * </pre>
      *
-     * <code>.google.protobuf.Any data = 15;</code>
+     * <code>.google.protobuf.Any data = 2047;</code>
      */
     public com.google.protobuf.AnyOrBuilder getDataOrBuilder() {
       return getData();
@@ -7253,20 +7587,11 @@ public final class State {
       if (!getVersionBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, version_);
       }
-      if (!forgeAppHash_.isEmpty()) {
-        output.writeBytes(7, forgeAppHash_);
-      }
       if (token_ != null) {
         output.writeMessage(8, getToken());
       }
       if (txConfig_ != null) {
         output.writeMessage(9, getTxConfig());
-      }
-      if (stakeConfig_ != null) {
-        output.writeMessage(10, getStakeConfig());
-      }
-      if (pokeConfig_ != null) {
-        output.writeMessage(11, getPokeConfig());
       }
       for (int i = 0; i < protocols_.size(); i++) {
         output.writeMessage(12, protocols_.get(i));
@@ -7280,8 +7605,17 @@ public final class State {
       if (upgradeInfo_ != null) {
         output.writeMessage(14, getUpgradeInfo());
       }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetAccountConfig(),
+          AccountConfigDefaultEntryHolder.defaultEntry,
+          16);
+      if (tokenSwapConfig_ != null) {
+        output.writeMessage(17, getTokenSwapConfig());
+      }
       if (data_ != null) {
-        output.writeMessage(15, getData());
+        output.writeMessage(2047, getData());
       }
     }
 
@@ -7320,10 +7654,6 @@ public final class State {
       if (!getVersionBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, version_);
       }
-      if (!forgeAppHash_.isEmpty()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(7, forgeAppHash_);
-      }
       if (token_ != null) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(8, getToken());
@@ -7331,14 +7661,6 @@ public final class State {
       if (txConfig_ != null) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(9, getTxConfig());
-      }
-      if (stakeConfig_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(10, getStakeConfig());
-      }
-      if (pokeConfig_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(11, getPokeConfig());
       }
       for (int i = 0; i < protocols_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -7358,9 +7680,23 @@ public final class State {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(14, getUpgradeInfo());
       }
+      for (java.util.Map.Entry<java.lang.String, forge_abi.Type.AccountConfig> entry
+           : internalGetAccountConfig().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.String, forge_abi.Type.AccountConfig>
+        accountConfig__ = AccountConfigDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(16, accountConfig__);
+      }
+      if (tokenSwapConfig_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(17, getTokenSwapConfig());
+      }
       if (data_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(15, getData());
+          .computeMessageSize(2047, getData());
       }
       memoizedSize = size;
       return size;
@@ -7391,8 +7727,6 @@ public final class State {
           other.internalGetStakeSummary());
       result = result && getVersion()
           .equals(other.getVersion());
-      result = result && getForgeAppHash()
-          .equals(other.getForgeAppHash());
       result = result && (hasToken() == other.hasToken());
       if (hasToken()) {
         result = result && getToken()
@@ -7403,16 +7737,6 @@ public final class State {
         result = result && getTxConfig()
             .equals(other.getTxConfig());
       }
-      result = result && (hasStakeConfig() == other.hasStakeConfig());
-      if (hasStakeConfig()) {
-        result = result && getStakeConfig()
-            .equals(other.getStakeConfig());
-      }
-      result = result && (hasPokeConfig() == other.hasPokeConfig());
-      if (hasPokeConfig()) {
-        result = result && getPokeConfig()
-            .equals(other.getPokeConfig());
-      }
       result = result && getProtocolsList()
           .equals(other.getProtocolsList());
       result = result && internalGetGas().equals(
@@ -7421,6 +7745,13 @@ public final class State {
       if (hasUpgradeInfo()) {
         result = result && getUpgradeInfo()
             .equals(other.getUpgradeInfo());
+      }
+      result = result && internalGetAccountConfig().equals(
+          other.internalGetAccountConfig());
+      result = result && (hasTokenSwapConfig() == other.hasTokenSwapConfig());
+      if (hasTokenSwapConfig()) {
+        result = result && getTokenSwapConfig()
+            .equals(other.getTokenSwapConfig());
       }
       result = result && (hasData() == other.hasData());
       if (hasData()) {
@@ -7453,8 +7784,6 @@ public final class State {
       }
       hash = (37 * hash) + VERSION_FIELD_NUMBER;
       hash = (53 * hash) + getVersion().hashCode();
-      hash = (37 * hash) + FORGE_APP_HASH_FIELD_NUMBER;
-      hash = (53 * hash) + getForgeAppHash().hashCode();
       if (hasToken()) {
         hash = (37 * hash) + TOKEN_FIELD_NUMBER;
         hash = (53 * hash) + getToken().hashCode();
@@ -7462,14 +7791,6 @@ public final class State {
       if (hasTxConfig()) {
         hash = (37 * hash) + TX_CONFIG_FIELD_NUMBER;
         hash = (53 * hash) + getTxConfig().hashCode();
-      }
-      if (hasStakeConfig()) {
-        hash = (37 * hash) + STAKE_CONFIG_FIELD_NUMBER;
-        hash = (53 * hash) + getStakeConfig().hashCode();
-      }
-      if (hasPokeConfig()) {
-        hash = (37 * hash) + POKE_CONFIG_FIELD_NUMBER;
-        hash = (53 * hash) + getPokeConfig().hashCode();
       }
       if (getProtocolsCount() > 0) {
         hash = (37 * hash) + PROTOCOLS_FIELD_NUMBER;
@@ -7482,6 +7803,14 @@ public final class State {
       if (hasUpgradeInfo()) {
         hash = (37 * hash) + UPGRADE_INFO_FIELD_NUMBER;
         hash = (53 * hash) + getUpgradeInfo().hashCode();
+      }
+      if (!internalGetAccountConfig().getMap().isEmpty()) {
+        hash = (37 * hash) + ACCOUNT_CONFIG_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetAccountConfig().hashCode();
+      }
+      if (hasTokenSwapConfig()) {
+        hash = (37 * hash) + TOKEN_SWAP_CONFIG_FIELD_NUMBER;
+        hash = (53 * hash) + getTokenSwapConfig().hashCode();
       }
       if (hasData()) {
         hash = (37 * hash) + DATA_FIELD_NUMBER;
@@ -7591,6 +7920,8 @@ public final class State {
             return internalGetStakeSummary();
           case 13:
             return internalGetGas();
+          case 16:
+            return internalGetAccountConfig();
           default:
             throw new RuntimeException(
                 "Invalid map field number: " + number);
@@ -7606,6 +7937,8 @@ public final class State {
             return internalGetMutableStakeSummary();
           case 13:
             return internalGetMutableGas();
+          case 16:
+            return internalGetMutableAccountConfig();
           default:
             throw new RuntimeException(
                 "Invalid map field number: " + number);
@@ -7648,8 +7981,6 @@ public final class State {
         internalGetMutableStakeSummary().clear();
         version_ = "";
 
-        forgeAppHash_ = com.google.protobuf.ByteString.EMPTY;
-
         if (tokenBuilder_ == null) {
           token_ = null;
         } else {
@@ -7662,21 +7993,9 @@ public final class State {
           txConfig_ = null;
           txConfigBuilder_ = null;
         }
-        if (stakeConfigBuilder_ == null) {
-          stakeConfig_ = null;
-        } else {
-          stakeConfig_ = null;
-          stakeConfigBuilder_ = null;
-        }
-        if (pokeConfigBuilder_ == null) {
-          pokeConfig_ = null;
-        } else {
-          pokeConfig_ = null;
-          pokeConfigBuilder_ = null;
-        }
         if (protocolsBuilder_ == null) {
           protocols_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000400);
+          bitField0_ = (bitField0_ & ~0x00000080);
         } else {
           protocolsBuilder_.clear();
         }
@@ -7686,6 +8005,13 @@ public final class State {
         } else {
           upgradeInfo_ = null;
           upgradeInfoBuilder_ = null;
+        }
+        internalGetMutableAccountConfig().clear();
+        if (tokenSwapConfigBuilder_ == null) {
+          tokenSwapConfig_ = null;
+        } else {
+          tokenSwapConfig_ = null;
+          tokenSwapConfigBuilder_ = null;
         }
         if (dataBuilder_ == null) {
           data_ = null;
@@ -7728,7 +8054,6 @@ public final class State {
         result.stakeSummary_ = internalGetStakeSummary();
         result.stakeSummary_.makeImmutable();
         result.version_ = version_;
-        result.forgeAppHash_ = forgeAppHash_;
         if (tokenBuilder_ == null) {
           result.token_ = token_;
         } else {
@@ -7739,20 +8064,10 @@ public final class State {
         } else {
           result.txConfig_ = txConfigBuilder_.build();
         }
-        if (stakeConfigBuilder_ == null) {
-          result.stakeConfig_ = stakeConfig_;
-        } else {
-          result.stakeConfig_ = stakeConfigBuilder_.build();
-        }
-        if (pokeConfigBuilder_ == null) {
-          result.pokeConfig_ = pokeConfig_;
-        } else {
-          result.pokeConfig_ = pokeConfigBuilder_.build();
-        }
         if (protocolsBuilder_ == null) {
-          if (((bitField0_ & 0x00000400) == 0x00000400)) {
+          if (((bitField0_ & 0x00000080) == 0x00000080)) {
             protocols_ = java.util.Collections.unmodifiableList(protocols_);
-            bitField0_ = (bitField0_ & ~0x00000400);
+            bitField0_ = (bitField0_ & ~0x00000080);
           }
           result.protocols_ = protocols_;
         } else {
@@ -7764,6 +8079,13 @@ public final class State {
           result.upgradeInfo_ = upgradeInfo_;
         } else {
           result.upgradeInfo_ = upgradeInfoBuilder_.build();
+        }
+        result.accountConfig_ = internalGetAccountConfig();
+        result.accountConfig_.makeImmutable();
+        if (tokenSwapConfigBuilder_ == null) {
+          result.tokenSwapConfig_ = tokenSwapConfig_;
+        } else {
+          result.tokenSwapConfig_ = tokenSwapConfigBuilder_.build();
         }
         if (dataBuilder_ == null) {
           result.data_ = data_;
@@ -7827,26 +8149,17 @@ public final class State {
           version_ = other.version_;
           onChanged();
         }
-        if (other.getForgeAppHash() != com.google.protobuf.ByteString.EMPTY) {
-          setForgeAppHash(other.getForgeAppHash());
-        }
         if (other.hasToken()) {
           mergeToken(other.getToken());
         }
         if (other.hasTxConfig()) {
           mergeTxConfig(other.getTxConfig());
         }
-        if (other.hasStakeConfig()) {
-          mergeStakeConfig(other.getStakeConfig());
-        }
-        if (other.hasPokeConfig()) {
-          mergePokeConfig(other.getPokeConfig());
-        }
         if (protocolsBuilder_ == null) {
           if (!other.protocols_.isEmpty()) {
             if (protocols_.isEmpty()) {
               protocols_ = other.protocols_;
-              bitField0_ = (bitField0_ & ~0x00000400);
+              bitField0_ = (bitField0_ & ~0x00000080);
             } else {
               ensureProtocolsIsMutable();
               protocols_.addAll(other.protocols_);
@@ -7859,7 +8172,7 @@ public final class State {
               protocolsBuilder_.dispose();
               protocolsBuilder_ = null;
               protocols_ = other.protocols_;
-              bitField0_ = (bitField0_ & ~0x00000400);
+              bitField0_ = (bitField0_ & ~0x00000080);
               protocolsBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getProtocolsFieldBuilder() : null;
@@ -7872,6 +8185,11 @@ public final class State {
             other.internalGetGas());
         if (other.hasUpgradeInfo()) {
           mergeUpgradeInfo(other.getUpgradeInfo());
+        }
+        internalGetMutableAccountConfig().mergeFrom(
+            other.internalGetAccountConfig());
+        if (other.hasTokenSwapConfig()) {
+          mergeTokenSwapConfig(other.getTokenSwapConfig());
         }
         if (other.hasData()) {
           mergeData(other.getData());
@@ -8460,47 +8778,6 @@ public final class State {
         return this;
       }
 
-      private com.google.protobuf.ByteString forgeAppHash_ = com.google.protobuf.ByteString.EMPTY;
-      /**
-       * <pre>
-       * app state returned by forge app
-       * </pre>
-       *
-       * <code>bytes forge_app_hash = 7;</code>
-       */
-      public com.google.protobuf.ByteString getForgeAppHash() {
-        return forgeAppHash_;
-      }
-      /**
-       * <pre>
-       * app state returned by forge app
-       * </pre>
-       *
-       * <code>bytes forge_app_hash = 7;</code>
-       */
-      public Builder setForgeAppHash(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        forgeAppHash_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * app state returned by forge app
-       * </pre>
-       *
-       * <code>bytes forge_app_hash = 7;</code>
-       */
-      public Builder clearForgeAppHash() {
-        
-        forgeAppHash_ = getDefaultInstance().getForgeAppHash();
-        onChanged();
-        return this;
-      }
-
       private forge_abi.Type.ForgeToken token_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
           forge_abi.Type.ForgeToken, forge_abi.Type.ForgeToken.Builder, forge_abi.Type.ForgeTokenOrBuilder> tokenBuilder_;
@@ -8735,246 +9012,12 @@ public final class State {
         return txConfigBuilder_;
       }
 
-      private forge_abi.Type.StakeConfig stakeConfig_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Type.StakeConfig, forge_abi.Type.StakeConfig.Builder, forge_abi.Type.StakeConfigOrBuilder> stakeConfigBuilder_;
-      /**
-       * <code>.forge_abi.StakeConfig stake_config = 10;</code>
-       */
-      public boolean hasStakeConfig() {
-        return stakeConfigBuilder_ != null || stakeConfig_ != null;
-      }
-      /**
-       * <code>.forge_abi.StakeConfig stake_config = 10;</code>
-       */
-      public forge_abi.Type.StakeConfig getStakeConfig() {
-        if (stakeConfigBuilder_ == null) {
-          return stakeConfig_ == null ? forge_abi.Type.StakeConfig.getDefaultInstance() : stakeConfig_;
-        } else {
-          return stakeConfigBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.forge_abi.StakeConfig stake_config = 10;</code>
-       */
-      public Builder setStakeConfig(forge_abi.Type.StakeConfig value) {
-        if (stakeConfigBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          stakeConfig_ = value;
-          onChanged();
-        } else {
-          stakeConfigBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.StakeConfig stake_config = 10;</code>
-       */
-      public Builder setStakeConfig(
-          forge_abi.Type.StakeConfig.Builder builderForValue) {
-        if (stakeConfigBuilder_ == null) {
-          stakeConfig_ = builderForValue.build();
-          onChanged();
-        } else {
-          stakeConfigBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.StakeConfig stake_config = 10;</code>
-       */
-      public Builder mergeStakeConfig(forge_abi.Type.StakeConfig value) {
-        if (stakeConfigBuilder_ == null) {
-          if (stakeConfig_ != null) {
-            stakeConfig_ =
-              forge_abi.Type.StakeConfig.newBuilder(stakeConfig_).mergeFrom(value).buildPartial();
-          } else {
-            stakeConfig_ = value;
-          }
-          onChanged();
-        } else {
-          stakeConfigBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.StakeConfig stake_config = 10;</code>
-       */
-      public Builder clearStakeConfig() {
-        if (stakeConfigBuilder_ == null) {
-          stakeConfig_ = null;
-          onChanged();
-        } else {
-          stakeConfig_ = null;
-          stakeConfigBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.StakeConfig stake_config = 10;</code>
-       */
-      public forge_abi.Type.StakeConfig.Builder getStakeConfigBuilder() {
-        
-        onChanged();
-        return getStakeConfigFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.forge_abi.StakeConfig stake_config = 10;</code>
-       */
-      public forge_abi.Type.StakeConfigOrBuilder getStakeConfigOrBuilder() {
-        if (stakeConfigBuilder_ != null) {
-          return stakeConfigBuilder_.getMessageOrBuilder();
-        } else {
-          return stakeConfig_ == null ?
-              forge_abi.Type.StakeConfig.getDefaultInstance() : stakeConfig_;
-        }
-      }
-      /**
-       * <code>.forge_abi.StakeConfig stake_config = 10;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Type.StakeConfig, forge_abi.Type.StakeConfig.Builder, forge_abi.Type.StakeConfigOrBuilder> 
-          getStakeConfigFieldBuilder() {
-        if (stakeConfigBuilder_ == null) {
-          stakeConfigBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.Type.StakeConfig, forge_abi.Type.StakeConfig.Builder, forge_abi.Type.StakeConfigOrBuilder>(
-                  getStakeConfig(),
-                  getParentForChildren(),
-                  isClean());
-          stakeConfig_ = null;
-        }
-        return stakeConfigBuilder_;
-      }
-
-      private forge_abi.Type.PokeConfig pokeConfig_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Type.PokeConfig, forge_abi.Type.PokeConfig.Builder, forge_abi.Type.PokeConfigOrBuilder> pokeConfigBuilder_;
-      /**
-       * <code>.forge_abi.PokeConfig poke_config = 11;</code>
-       */
-      public boolean hasPokeConfig() {
-        return pokeConfigBuilder_ != null || pokeConfig_ != null;
-      }
-      /**
-       * <code>.forge_abi.PokeConfig poke_config = 11;</code>
-       */
-      public forge_abi.Type.PokeConfig getPokeConfig() {
-        if (pokeConfigBuilder_ == null) {
-          return pokeConfig_ == null ? forge_abi.Type.PokeConfig.getDefaultInstance() : pokeConfig_;
-        } else {
-          return pokeConfigBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.forge_abi.PokeConfig poke_config = 11;</code>
-       */
-      public Builder setPokeConfig(forge_abi.Type.PokeConfig value) {
-        if (pokeConfigBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          pokeConfig_ = value;
-          onChanged();
-        } else {
-          pokeConfigBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.PokeConfig poke_config = 11;</code>
-       */
-      public Builder setPokeConfig(
-          forge_abi.Type.PokeConfig.Builder builderForValue) {
-        if (pokeConfigBuilder_ == null) {
-          pokeConfig_ = builderForValue.build();
-          onChanged();
-        } else {
-          pokeConfigBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.PokeConfig poke_config = 11;</code>
-       */
-      public Builder mergePokeConfig(forge_abi.Type.PokeConfig value) {
-        if (pokeConfigBuilder_ == null) {
-          if (pokeConfig_ != null) {
-            pokeConfig_ =
-              forge_abi.Type.PokeConfig.newBuilder(pokeConfig_).mergeFrom(value).buildPartial();
-          } else {
-            pokeConfig_ = value;
-          }
-          onChanged();
-        } else {
-          pokeConfigBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.PokeConfig poke_config = 11;</code>
-       */
-      public Builder clearPokeConfig() {
-        if (pokeConfigBuilder_ == null) {
-          pokeConfig_ = null;
-          onChanged();
-        } else {
-          pokeConfig_ = null;
-          pokeConfigBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.PokeConfig poke_config = 11;</code>
-       */
-      public forge_abi.Type.PokeConfig.Builder getPokeConfigBuilder() {
-        
-        onChanged();
-        return getPokeConfigFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.forge_abi.PokeConfig poke_config = 11;</code>
-       */
-      public forge_abi.Type.PokeConfigOrBuilder getPokeConfigOrBuilder() {
-        if (pokeConfigBuilder_ != null) {
-          return pokeConfigBuilder_.getMessageOrBuilder();
-        } else {
-          return pokeConfig_ == null ?
-              forge_abi.Type.PokeConfig.getDefaultInstance() : pokeConfig_;
-        }
-      }
-      /**
-       * <code>.forge_abi.PokeConfig poke_config = 11;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Type.PokeConfig, forge_abi.Type.PokeConfig.Builder, forge_abi.Type.PokeConfigOrBuilder> 
-          getPokeConfigFieldBuilder() {
-        if (pokeConfigBuilder_ == null) {
-          pokeConfigBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.Type.PokeConfig, forge_abi.Type.PokeConfig.Builder, forge_abi.Type.PokeConfigOrBuilder>(
-                  getPokeConfig(),
-                  getParentForChildren(),
-                  isClean());
-          pokeConfig_ = null;
-        }
-        return pokeConfigBuilder_;
-      }
-
       private java.util.List<forge_abi.State.CoreProtocol> protocols_ =
         java.util.Collections.emptyList();
       private void ensureProtocolsIsMutable() {
-        if (!((bitField0_ & 0x00000400) == 0x00000400)) {
+        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
           protocols_ = new java.util.ArrayList<forge_abi.State.CoreProtocol>(protocols_);
-          bitField0_ |= 0x00000400;
+          bitField0_ |= 0x00000080;
          }
       }
 
@@ -8982,6 +9025,11 @@ public final class State {
           forge_abi.State.CoreProtocol, forge_abi.State.CoreProtocol.Builder, forge_abi.State.CoreProtocolOrBuilder> protocolsBuilder_;
 
       /**
+       * <pre>
+       * StakeConfig stake_config = 10; deprecated
+       * PokeConfig poke_config = 11; deprecated
+       * </pre>
+       *
        * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
        */
       public java.util.List<forge_abi.State.CoreProtocol> getProtocolsList() {
@@ -8992,6 +9040,11 @@ public final class State {
         }
       }
       /**
+       * <pre>
+       * StakeConfig stake_config = 10; deprecated
+       * PokeConfig poke_config = 11; deprecated
+       * </pre>
+       *
        * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
        */
       public int getProtocolsCount() {
@@ -9002,6 +9055,11 @@ public final class State {
         }
       }
       /**
+       * <pre>
+       * StakeConfig stake_config = 10; deprecated
+       * PokeConfig poke_config = 11; deprecated
+       * </pre>
+       *
        * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
        */
       public forge_abi.State.CoreProtocol getProtocols(int index) {
@@ -9012,6 +9070,11 @@ public final class State {
         }
       }
       /**
+       * <pre>
+       * StakeConfig stake_config = 10; deprecated
+       * PokeConfig poke_config = 11; deprecated
+       * </pre>
+       *
        * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
        */
       public Builder setProtocols(
@@ -9029,6 +9092,11 @@ public final class State {
         return this;
       }
       /**
+       * <pre>
+       * StakeConfig stake_config = 10; deprecated
+       * PokeConfig poke_config = 11; deprecated
+       * </pre>
+       *
        * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
        */
       public Builder setProtocols(
@@ -9043,6 +9111,11 @@ public final class State {
         return this;
       }
       /**
+       * <pre>
+       * StakeConfig stake_config = 10; deprecated
+       * PokeConfig poke_config = 11; deprecated
+       * </pre>
+       *
        * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
        */
       public Builder addProtocols(forge_abi.State.CoreProtocol value) {
@@ -9059,6 +9132,11 @@ public final class State {
         return this;
       }
       /**
+       * <pre>
+       * StakeConfig stake_config = 10; deprecated
+       * PokeConfig poke_config = 11; deprecated
+       * </pre>
+       *
        * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
        */
       public Builder addProtocols(
@@ -9076,6 +9154,11 @@ public final class State {
         return this;
       }
       /**
+       * <pre>
+       * StakeConfig stake_config = 10; deprecated
+       * PokeConfig poke_config = 11; deprecated
+       * </pre>
+       *
        * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
        */
       public Builder addProtocols(
@@ -9090,6 +9173,11 @@ public final class State {
         return this;
       }
       /**
+       * <pre>
+       * StakeConfig stake_config = 10; deprecated
+       * PokeConfig poke_config = 11; deprecated
+       * </pre>
+       *
        * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
        */
       public Builder addProtocols(
@@ -9104,6 +9192,11 @@ public final class State {
         return this;
       }
       /**
+       * <pre>
+       * StakeConfig stake_config = 10; deprecated
+       * PokeConfig poke_config = 11; deprecated
+       * </pre>
+       *
        * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
        */
       public Builder addAllProtocols(
@@ -9119,12 +9212,17 @@ public final class State {
         return this;
       }
       /**
+       * <pre>
+       * StakeConfig stake_config = 10; deprecated
+       * PokeConfig poke_config = 11; deprecated
+       * </pre>
+       *
        * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
        */
       public Builder clearProtocols() {
         if (protocolsBuilder_ == null) {
           protocols_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000400);
+          bitField0_ = (bitField0_ & ~0x00000080);
           onChanged();
         } else {
           protocolsBuilder_.clear();
@@ -9132,6 +9230,11 @@ public final class State {
         return this;
       }
       /**
+       * <pre>
+       * StakeConfig stake_config = 10; deprecated
+       * PokeConfig poke_config = 11; deprecated
+       * </pre>
+       *
        * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
        */
       public Builder removeProtocols(int index) {
@@ -9145,6 +9248,11 @@ public final class State {
         return this;
       }
       /**
+       * <pre>
+       * StakeConfig stake_config = 10; deprecated
+       * PokeConfig poke_config = 11; deprecated
+       * </pre>
+       *
        * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
        */
       public forge_abi.State.CoreProtocol.Builder getProtocolsBuilder(
@@ -9152,6 +9260,11 @@ public final class State {
         return getProtocolsFieldBuilder().getBuilder(index);
       }
       /**
+       * <pre>
+       * StakeConfig stake_config = 10; deprecated
+       * PokeConfig poke_config = 11; deprecated
+       * </pre>
+       *
        * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
        */
       public forge_abi.State.CoreProtocolOrBuilder getProtocolsOrBuilder(
@@ -9162,6 +9275,11 @@ public final class State {
         }
       }
       /**
+       * <pre>
+       * StakeConfig stake_config = 10; deprecated
+       * PokeConfig poke_config = 11; deprecated
+       * </pre>
+       *
        * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
        */
       public java.util.List<? extends forge_abi.State.CoreProtocolOrBuilder> 
@@ -9173,6 +9291,11 @@ public final class State {
         }
       }
       /**
+       * <pre>
+       * StakeConfig stake_config = 10; deprecated
+       * PokeConfig poke_config = 11; deprecated
+       * </pre>
+       *
        * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
        */
       public forge_abi.State.CoreProtocol.Builder addProtocolsBuilder() {
@@ -9180,6 +9303,11 @@ public final class State {
             forge_abi.State.CoreProtocol.getDefaultInstance());
       }
       /**
+       * <pre>
+       * StakeConfig stake_config = 10; deprecated
+       * PokeConfig poke_config = 11; deprecated
+       * </pre>
+       *
        * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
        */
       public forge_abi.State.CoreProtocol.Builder addProtocolsBuilder(
@@ -9188,6 +9316,11 @@ public final class State {
             index, forge_abi.State.CoreProtocol.getDefaultInstance());
       }
       /**
+       * <pre>
+       * StakeConfig stake_config = 10; deprecated
+       * PokeConfig poke_config = 11; deprecated
+       * </pre>
+       *
        * <code>repeated .forge_abi.CoreProtocol protocols = 12;</code>
        */
       public java.util.List<forge_abi.State.CoreProtocol.Builder> 
@@ -9201,7 +9334,7 @@ public final class State {
           protocolsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               forge_abi.State.CoreProtocol, forge_abi.State.CoreProtocol.Builder, forge_abi.State.CoreProtocolOrBuilder>(
                   protocols_,
-                  ((bitField0_ & 0x00000400) == 0x00000400),
+                  ((bitField0_ & 0x00000080) == 0x00000080),
                   getParentForChildren(),
                   isClean());
           protocols_ = null;
@@ -9449,6 +9582,246 @@ public final class State {
         return upgradeInfoBuilder_;
       }
 
+      private com.google.protobuf.MapField<
+          java.lang.String, forge_abi.Type.AccountConfig> accountConfig_;
+      private com.google.protobuf.MapField<java.lang.String, forge_abi.Type.AccountConfig>
+      internalGetAccountConfig() {
+        if (accountConfig_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              AccountConfigDefaultEntryHolder.defaultEntry);
+        }
+        return accountConfig_;
+      }
+      private com.google.protobuf.MapField<java.lang.String, forge_abi.Type.AccountConfig>
+      internalGetMutableAccountConfig() {
+        onChanged();;
+        if (accountConfig_ == null) {
+          accountConfig_ = com.google.protobuf.MapField.newMapField(
+              AccountConfigDefaultEntryHolder.defaultEntry);
+        }
+        if (!accountConfig_.isMutable()) {
+          accountConfig_ = accountConfig_.copy();
+        }
+        return accountConfig_;
+      }
+
+      public int getAccountConfigCount() {
+        return internalGetAccountConfig().getMap().size();
+      }
+      /**
+       * <code>map&lt;string, .forge_abi.AccountConfig&gt; account_config = 16;</code>
+       */
+
+      public boolean containsAccountConfig(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        return internalGetAccountConfig().getMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getAccountConfigMap()} instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, forge_abi.Type.AccountConfig> getAccountConfig() {
+        return getAccountConfigMap();
+      }
+      /**
+       * <code>map&lt;string, .forge_abi.AccountConfig&gt; account_config = 16;</code>
+       */
+
+      public java.util.Map<java.lang.String, forge_abi.Type.AccountConfig> getAccountConfigMap() {
+        return internalGetAccountConfig().getMap();
+      }
+      /**
+       * <code>map&lt;string, .forge_abi.AccountConfig&gt; account_config = 16;</code>
+       */
+
+      public forge_abi.Type.AccountConfig getAccountConfigOrDefault(
+          java.lang.String key,
+          forge_abi.Type.AccountConfig defaultValue) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, forge_abi.Type.AccountConfig> map =
+            internalGetAccountConfig().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+      }
+      /**
+       * <code>map&lt;string, .forge_abi.AccountConfig&gt; account_config = 16;</code>
+       */
+
+      public forge_abi.Type.AccountConfig getAccountConfigOrThrow(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, forge_abi.Type.AccountConfig> map =
+            internalGetAccountConfig().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return map.get(key);
+      }
+
+      public Builder clearAccountConfig() {
+        internalGetMutableAccountConfig().getMutableMap()
+            .clear();
+        return this;
+      }
+      /**
+       * <code>map&lt;string, .forge_abi.AccountConfig&gt; account_config = 16;</code>
+       */
+
+      public Builder removeAccountConfig(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        internalGetMutableAccountConfig().getMutableMap()
+            .remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, forge_abi.Type.AccountConfig>
+      getMutableAccountConfig() {
+        return internalGetMutableAccountConfig().getMutableMap();
+      }
+      /**
+       * <code>map&lt;string, .forge_abi.AccountConfig&gt; account_config = 16;</code>
+       */
+      public Builder putAccountConfig(
+          java.lang.String key,
+          forge_abi.Type.AccountConfig value) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        if (value == null) { throw new java.lang.NullPointerException(); }
+        internalGetMutableAccountConfig().getMutableMap()
+            .put(key, value);
+        return this;
+      }
+      /**
+       * <code>map&lt;string, .forge_abi.AccountConfig&gt; account_config = 16;</code>
+       */
+
+      public Builder putAllAccountConfig(
+          java.util.Map<java.lang.String, forge_abi.Type.AccountConfig> values) {
+        internalGetMutableAccountConfig().getMutableMap()
+            .putAll(values);
+        return this;
+      }
+
+      private forge_abi.Type.TokenSwapConfig tokenSwapConfig_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.TokenSwapConfig, forge_abi.Type.TokenSwapConfig.Builder, forge_abi.Type.TokenSwapConfigOrBuilder> tokenSwapConfigBuilder_;
+      /**
+       * <code>.forge_abi.TokenSwapConfig token_swap_config = 17;</code>
+       */
+      public boolean hasTokenSwapConfig() {
+        return tokenSwapConfigBuilder_ != null || tokenSwapConfig_ != null;
+      }
+      /**
+       * <code>.forge_abi.TokenSwapConfig token_swap_config = 17;</code>
+       */
+      public forge_abi.Type.TokenSwapConfig getTokenSwapConfig() {
+        if (tokenSwapConfigBuilder_ == null) {
+          return tokenSwapConfig_ == null ? forge_abi.Type.TokenSwapConfig.getDefaultInstance() : tokenSwapConfig_;
+        } else {
+          return tokenSwapConfigBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.forge_abi.TokenSwapConfig token_swap_config = 17;</code>
+       */
+      public Builder setTokenSwapConfig(forge_abi.Type.TokenSwapConfig value) {
+        if (tokenSwapConfigBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          tokenSwapConfig_ = value;
+          onChanged();
+        } else {
+          tokenSwapConfigBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.TokenSwapConfig token_swap_config = 17;</code>
+       */
+      public Builder setTokenSwapConfig(
+          forge_abi.Type.TokenSwapConfig.Builder builderForValue) {
+        if (tokenSwapConfigBuilder_ == null) {
+          tokenSwapConfig_ = builderForValue.build();
+          onChanged();
+        } else {
+          tokenSwapConfigBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.TokenSwapConfig token_swap_config = 17;</code>
+       */
+      public Builder mergeTokenSwapConfig(forge_abi.Type.TokenSwapConfig value) {
+        if (tokenSwapConfigBuilder_ == null) {
+          if (tokenSwapConfig_ != null) {
+            tokenSwapConfig_ =
+              forge_abi.Type.TokenSwapConfig.newBuilder(tokenSwapConfig_).mergeFrom(value).buildPartial();
+          } else {
+            tokenSwapConfig_ = value;
+          }
+          onChanged();
+        } else {
+          tokenSwapConfigBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.TokenSwapConfig token_swap_config = 17;</code>
+       */
+      public Builder clearTokenSwapConfig() {
+        if (tokenSwapConfigBuilder_ == null) {
+          tokenSwapConfig_ = null;
+          onChanged();
+        } else {
+          tokenSwapConfig_ = null;
+          tokenSwapConfigBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.TokenSwapConfig token_swap_config = 17;</code>
+       */
+      public forge_abi.Type.TokenSwapConfig.Builder getTokenSwapConfigBuilder() {
+        
+        onChanged();
+        return getTokenSwapConfigFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.TokenSwapConfig token_swap_config = 17;</code>
+       */
+      public forge_abi.Type.TokenSwapConfigOrBuilder getTokenSwapConfigOrBuilder() {
+        if (tokenSwapConfigBuilder_ != null) {
+          return tokenSwapConfigBuilder_.getMessageOrBuilder();
+        } else {
+          return tokenSwapConfig_ == null ?
+              forge_abi.Type.TokenSwapConfig.getDefaultInstance() : tokenSwapConfig_;
+        }
+      }
+      /**
+       * <code>.forge_abi.TokenSwapConfig token_swap_config = 17;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.TokenSwapConfig, forge_abi.Type.TokenSwapConfig.Builder, forge_abi.Type.TokenSwapConfigOrBuilder> 
+          getTokenSwapConfigFieldBuilder() {
+        if (tokenSwapConfigBuilder_ == null) {
+          tokenSwapConfigBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Type.TokenSwapConfig, forge_abi.Type.TokenSwapConfig.Builder, forge_abi.Type.TokenSwapConfigOrBuilder>(
+                  getTokenSwapConfig(),
+                  getParentForChildren(),
+                  isClean());
+          tokenSwapConfig_ = null;
+        }
+        return tokenSwapConfigBuilder_;
+      }
+
       private com.google.protobuf.Any data_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> dataBuilder_;
@@ -9457,7 +9830,7 @@ public final class State {
        * forge app can define their own app state
        * </pre>
        *
-       * <code>.google.protobuf.Any data = 15;</code>
+       * <code>.google.protobuf.Any data = 2047;</code>
        */
       public boolean hasData() {
         return dataBuilder_ != null || data_ != null;
@@ -9467,7 +9840,7 @@ public final class State {
        * forge app can define their own app state
        * </pre>
        *
-       * <code>.google.protobuf.Any data = 15;</code>
+       * <code>.google.protobuf.Any data = 2047;</code>
        */
       public com.google.protobuf.Any getData() {
         if (dataBuilder_ == null) {
@@ -9481,7 +9854,7 @@ public final class State {
        * forge app can define their own app state
        * </pre>
        *
-       * <code>.google.protobuf.Any data = 15;</code>
+       * <code>.google.protobuf.Any data = 2047;</code>
        */
       public Builder setData(com.google.protobuf.Any value) {
         if (dataBuilder_ == null) {
@@ -9501,7 +9874,7 @@ public final class State {
        * forge app can define their own app state
        * </pre>
        *
-       * <code>.google.protobuf.Any data = 15;</code>
+       * <code>.google.protobuf.Any data = 2047;</code>
        */
       public Builder setData(
           com.google.protobuf.Any.Builder builderForValue) {
@@ -9519,7 +9892,7 @@ public final class State {
        * forge app can define their own app state
        * </pre>
        *
-       * <code>.google.protobuf.Any data = 15;</code>
+       * <code>.google.protobuf.Any data = 2047;</code>
        */
       public Builder mergeData(com.google.protobuf.Any value) {
         if (dataBuilder_ == null) {
@@ -9541,7 +9914,7 @@ public final class State {
        * forge app can define their own app state
        * </pre>
        *
-       * <code>.google.protobuf.Any data = 15;</code>
+       * <code>.google.protobuf.Any data = 2047;</code>
        */
       public Builder clearData() {
         if (dataBuilder_ == null) {
@@ -9559,7 +9932,7 @@ public final class State {
        * forge app can define their own app state
        * </pre>
        *
-       * <code>.google.protobuf.Any data = 15;</code>
+       * <code>.google.protobuf.Any data = 2047;</code>
        */
       public com.google.protobuf.Any.Builder getDataBuilder() {
         
@@ -9571,7 +9944,7 @@ public final class State {
        * forge app can define their own app state
        * </pre>
        *
-       * <code>.google.protobuf.Any data = 15;</code>
+       * <code>.google.protobuf.Any data = 2047;</code>
        */
       public com.google.protobuf.AnyOrBuilder getDataOrBuilder() {
         if (dataBuilder_ != null) {
@@ -9586,7 +9959,7 @@ public final class State {
        * forge app can define their own app state
        * </pre>
        *
-       * <code>.google.protobuf.Any data = 15;</code>
+       * <code>.google.protobuf.Any data = 2047;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> 
@@ -22272,6 +22645,11 @@ public final class State {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_forge_abi_ForgeState_GasEntry_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_forge_abi_ForgeState_AccountConfigEntry_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_forge_abi_ForgeState_AccountConfigEntry_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_forge_abi_RootState_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -22338,7 +22716,7 @@ public final class State {
       "\n\013state.proto\022\tforge_abi\032\031google/protobu" +
       "f/any.proto\032\037google/protobuf/timestamp.p" +
       "roto\032\nenum.proto\032\ntype.proto\032\025deploy_pro" +
-      "tocol.proto\"\232\004\n\014AccountState\022#\n\007balance\030" +
+      "tocol.proto\"\314\004\n\014AccountState\022#\n\007balance\030" +
       "\001 \001(\0132\022.forge_abi.BigUint\022\r\n\005nonce\030\002 \001(\004" +
       "\022\017\n\007num_txs\030\003 \001(\004\022\017\n\007address\030\004 \001(\t\022\n\n\002pk" +
       "\030\005 \001(\014\022\'\n\004type\030\006 \001(\0132\025.forge_abi.WalletT" +
@@ -22350,81 +22728,84 @@ public final class State {
       "(\0132\027.forge_abi.StakeContext\022.\n\014pinned_fi" +
       "les\030\021 \001(\0132\030.forge_abi.CircularQueue\022!\n\004p" +
       "oke\030\022 \001(\0132\023.forge_abi.PokeInfo\022,\n\020deposi" +
-      "t_received\030\023 \001(\0132\022.forge_abi.BigUint\022\"\n\004" +
-      "data\0302 \001(\0132\024.google.protobuf.Any\"\274\002\n\nAss" +
-      "etState\022\017\n\007address\030\001 \001(\t\022\r\n\005owner\030\002 \001(\t\022" +
-      "\017\n\007moniker\030\003 \001(\t\022\020\n\010readonly\030\004 \001(\010\022\025\n\rtr" +
-      "ansferrable\030\005 \001(\010\022\013\n\003ttl\030\006 \001(\r\0221\n\rconsum",
-      "ed_time\030\007 \001(\0132\032.google.protobuf.Timestam" +
-      "p\022\016\n\006issuer\030\010 \001(\t\022\016\n\006parent\030\t \001(\t\022&\n\005sta" +
-      "ke\030\r \001(\0132\027.forge_abi.StakeContext\022(\n\007con" +
-      "text\030\016 \001(\0132\027.forge_abi.StateContext\022\"\n\004d" +
-      "ata\0302 \001(\0132\024.google.protobuf.Any\"-\n\014CoreP" +
-      "rotocol\022\014\n\004name\030\001 \001(\t\022\017\n\007address\030\002 \001(\t\"\203" +
-      "\006\n\nForgeState\022\017\n\007address\030\001 \001(\t\022-\n\tconsen" +
-      "sus\030\002 \001(\0132\032.forge_abi.ConsensusParams\022/\n" +
-      "\005tasks\030\003 \003(\0132 .forge_abi.ForgeState.Task" +
-      "sEntry\022>\n\rstake_summary\030\004 \003(\0132\'.forge_ab",
-      "i.ForgeState.StakeSummaryEntry\022\017\n\007versio" +
-      "n\030\005 \001(\t\022\026\n\016forge_app_hash\030\007 \001(\014\022$\n\005token" +
-      "\030\010 \001(\0132\025.forge_abi.ForgeToken\022/\n\ttx_conf" +
-      "ig\030\t \001(\0132\034.forge_abi.TransactionConfig\022," +
-      "\n\014stake_config\030\n \001(\0132\026.forge_abi.StakeCo" +
-      "nfig\022*\n\013poke_config\030\013 \001(\0132\025.forge_abi.Po" +
-      "keConfig\022*\n\tprotocols\030\014 \003(\0132\027.forge_abi." +
-      "CoreProtocol\022+\n\003gas\030\r \003(\0132\036.forge_abi.Fo" +
-      "rgeState.GasEntry\022,\n\014upgrade_info\030\016 \001(\0132" +
-      "\026.forge_abi.UpgradeInfo\022\"\n\004data\030\017 \001(\0132\024.",
-      "google.protobuf.Any\032E\n\nTasksEntry\022\013\n\003key" +
-      "\030\001 \001(\004\022&\n\005value\030\002 \001(\0132\027.forge_abi.Upgrad" +
-      "eTasks:\0028\001\032L\n\021StakeSummaryEntry\022\013\n\003key\030\001" +
-      " \001(\r\022&\n\005value\030\002 \001(\0132\027.forge_abi.StakeSum" +
-      "mary:\0028\001\032*\n\010GasEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005val" +
-      "ue\030\002 \001(\r:\0028\001\"\203\001\n\tRootState\022\017\n\007address\030\001 " +
-      "\001(\t\022\017\n\007account\030\002 \001(\014\022\r\n\005asset\030\003 \001(\014\022\017\n\007r" +
-      "eceipt\030\004 \001(\014\022\020\n\010protocol\030\005 \001(\014\022\022\n\ngovern" +
-      "ance\030\006 \001(\014\022\016\n\006custom\030\007 \001(\014\"\273\001\n\nStakeStat" +
-      "e\022\017\n\007address\030\001 \001(\t\022\014\n\004from\030\002 \001(\t\022\n\n\002to\030\003",
-      " \001(\t\022#\n\007balance\030\004 \001(\0132\022.forge_abi.BigUin" +
-      "t\022\017\n\007message\030\005 \001(\t\022(\n\007context\030\016 \001(\0132\027.fo" +
-      "rge_abi.StateContext\022\"\n\004data\030\017 \001(\0132\024.goo" +
-      "gle.protobuf.Any\"\267\001\n\017StatisticsState\022\017\n\007" +
-      "address\030\001 \001(\t\022\022\n\nnum_blocks\030\002 \001(\004\022\017\n\007num" +
-      "_txs\030\003 \001(\004\022&\n\nnum_stakes\030\004 \001(\0132\022.forge_a" +
-      "bi.BigUint\022\026\n\016num_validators\030\005 \001(\r\022.\n\rtx" +
-      "_statistics\030\006 \001(\0132\027.forge_abi.TxStatisti" +
-      "cs\"!\n\016BlacklistState\022\017\n\007address\030\001 \003(\t\"\202\002" +
-      "\n\rProtocolState\022\017\n\007address\030\001 \001(\t\022(\n\003itx\030",
-      "\002 \001(\0132\033.forge_abi.DeployProtocolTx\022\021\n\tro" +
-      "ot_hash\030\003 \001(\014\022)\n\006status\030\004 \001(\0162\031.forge_ab" +
-      "i.ProtocolStatus\022\023\n\013migrated_to\030\014 \003(\t\022\025\n" +
-      "\rmigrated_from\030\r \003(\t\022(\n\007context\030\016 \001(\0132\027." +
-      "forge_abi.StateContext\022\"\n\004data\030\017 \001(\0132\024.g" +
-      "oogle.protobuf.Any\"\246\002\n\013TetherState\022\014\n\004ha" +
-      "sh\030\001 \001(\t\022\021\n\tavailable\030\002 \001(\010\022\021\n\tcustodian" +
-      "\030\003 \001(\t\022\021\n\tdepositor\030\004 \001(\t\022\022\n\nwithdrawer\030" +
-      "\005 \001(\t\022!\n\005value\030\006 \001(\0132\022.forge_abi.BigUint" +
-      "\022&\n\ncommission\030\007 \001(\0132\022.forge_abi.BigUint",
-      "\022\"\n\006charge\030\010 \001(\0132\022.forge_abi.BigUint\022\016\n\006" +
-      "target\030\t \001(\t\022,\n\010locktime\030\n \001(\0132\032.google." +
-      "protobuf.Timestamp\022\017\n\007address\030\013 \001(\t\"-\n\nT" +
-      "etherInfo\022\021\n\tavailable\030\001 \001(\010\022\014\n\004hash\030\002 \001" +
-      "(\t\"\336\001\n\tSwapState\022\014\n\004hash\030\001 \001(\t\022\017\n\007addres" +
-      "s\030\002 \001(\t\022\017\n\007hashkey\030\003 \001(\014\022\016\n\006sender\030\004 \001(\t" +
-      "\022\020\n\010receiver\030\005 \001(\t\022!\n\005value\030\006 \001(\0132\022.forg" +
-      "e_abi.BigUint\022\016\n\006assets\030\007 \003(\t\022\020\n\010locktim" +
-      "e\030\010 \001(\r\022\020\n\010hashlock\030\t \001(\014\022(\n\007context\030\n \001" +
-      "(\0132\027.forge_abi.StateContext\"\227\001\n\017Delegate",
-      "OpState\022\014\n\004rule\030\001 \001(\t\022\017\n\007num_txs\030\002 \001(\004\022\025" +
-      "\n\rnum_txs_delta\030\003 \001(\004\022#\n\007balance\030\004 \001(\0132\022" +
-      ".forge_abi.BigUint\022)\n\rbalance_delta\030\005 \001(" +
-      "\0132\022.forge_abi.BigUint\"\346\001\n\rDelegateState\022" +
-      "\017\n\007address\030\001 \001(\t\022.\n\003ops\030\002 \003(\0132!.forge_ab" +
-      "i.DelegateState.OpsEntry\022(\n\007context\030\016 \001(" +
-      "\0132\027.forge_abi.StateContext\022\"\n\004data\030\017 \001(\013" +
-      "2\024.google.protobuf.Any\032F\n\010OpsEntry\022\013\n\003ke" +
-      "y\030\001 \001(\t\022)\n\005value\030\002 \001(\0132\032.forge_abi.Deleg" +
-      "ateOpState:\0028\001b\006proto3"
+      "t_received\030\023 \001(\0132\022.forge_abi.BigUint\0220\n\016" +
+      "withdraw_items\030\024 \001(\0132\030.forge_abi.Circula" +
+      "rQueue\022\"\n\004data\0302 \001(\0132\024.google.protobuf.A" +
+      "ny\"\274\002\n\nAssetState\022\017\n\007address\030\001 \001(\t\022\r\n\005ow" +
+      "ner\030\002 \001(\t\022\017\n\007moniker\030\003 \001(\t\022\020\n\010readonly\030\004",
+      " \001(\010\022\025\n\rtransferrable\030\005 \001(\010\022\013\n\003ttl\030\006 \001(\r" +
+      "\0221\n\rconsumed_time\030\007 \001(\0132\032.google.protobu" +
+      "f.Timestamp\022\016\n\006issuer\030\010 \001(\t\022\016\n\006parent\030\t " +
+      "\001(\t\022&\n\005stake\030\r \001(\0132\027.forge_abi.StakeCont" +
+      "ext\022(\n\007context\030\016 \001(\0132\027.forge_abi.StateCo" +
+      "ntext\022\"\n\004data\0302 \001(\0132\024.google.protobuf.An" +
+      "y\"-\n\014CoreProtocol\022\014\n\004name\030\001 \001(\t\022\017\n\007addre" +
+      "ss\030\002 \001(\t\"\333\006\n\nForgeState\022\017\n\007address\030\001 \001(\t" +
+      "\022-\n\tconsensus\030\002 \001(\0132\032.forge_abi.Consensu" +
+      "sParams\022/\n\005tasks\030\003 \003(\0132 .forge_abi.Forge",
+      "State.TasksEntry\022>\n\rstake_summary\030\004 \003(\0132" +
+      "\'.forge_abi.ForgeState.StakeSummaryEntry" +
+      "\022\017\n\007version\030\005 \001(\t\022$\n\005token\030\010 \001(\0132\025.forge" +
+      "_abi.ForgeToken\022/\n\ttx_config\030\t \001(\0132\034.for" +
+      "ge_abi.TransactionConfig\022*\n\tprotocols\030\014 " +
+      "\003(\0132\027.forge_abi.CoreProtocol\022+\n\003gas\030\r \003(" +
+      "\0132\036.forge_abi.ForgeState.GasEntry\022,\n\014upg" +
+      "rade_info\030\016 \001(\0132\026.forge_abi.UpgradeInfo\022" +
+      "@\n\016account_config\030\020 \003(\0132(.forge_abi.Forg" +
+      "eState.AccountConfigEntry\0225\n\021token_swap_",
+      "config\030\021 \001(\0132\032.forge_abi.TokenSwapConfig" +
+      "\022#\n\004data\030\377\017 \001(\0132\024.google.protobuf.Any\032E\n" +
+      "\nTasksEntry\022\013\n\003key\030\001 \001(\004\022&\n\005value\030\002 \001(\0132" +
+      "\027.forge_abi.UpgradeTasks:\0028\001\032L\n\021StakeSum" +
+      "maryEntry\022\013\n\003key\030\001 \001(\r\022&\n\005value\030\002 \001(\0132\027." +
+      "forge_abi.StakeSummary:\0028\001\032*\n\010GasEntry\022\013" +
+      "\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\r:\0028\001\032N\n\022Accoun" +
+      "tConfigEntry\022\013\n\003key\030\001 \001(\t\022\'\n\005value\030\002 \001(\013" +
+      "2\030.forge_abi.AccountConfig:\0028\001\"\203\001\n\tRootS" +
+      "tate\022\017\n\007address\030\001 \001(\t\022\017\n\007account\030\002 \001(\014\022\r",
+      "\n\005asset\030\003 \001(\014\022\017\n\007receipt\030\004 \001(\014\022\020\n\010protoc" +
+      "ol\030\005 \001(\014\022\022\n\ngovernance\030\006 \001(\014\022\016\n\006custom\030\007" +
+      " \001(\014\"\273\001\n\nStakeState\022\017\n\007address\030\001 \001(\t\022\014\n\004" +
+      "from\030\002 \001(\t\022\n\n\002to\030\003 \001(\t\022#\n\007balance\030\004 \001(\0132" +
+      "\022.forge_abi.BigUint\022\017\n\007message\030\005 \001(\t\022(\n\007" +
+      "context\030\016 \001(\0132\027.forge_abi.StateContext\022\"" +
+      "\n\004data\030\017 \001(\0132\024.google.protobuf.Any\"\267\001\n\017S" +
+      "tatisticsState\022\017\n\007address\030\001 \001(\t\022\022\n\nnum_b" +
+      "locks\030\002 \001(\004\022\017\n\007num_txs\030\003 \001(\004\022&\n\nnum_stak" +
+      "es\030\004 \001(\0132\022.forge_abi.BigUint\022\026\n\016num_vali",
+      "dators\030\005 \001(\r\022.\n\rtx_statistics\030\006 \001(\0132\027.fo" +
+      "rge_abi.TxStatistics\"!\n\016BlacklistState\022\017" +
+      "\n\007address\030\001 \003(\t\"\202\002\n\rProtocolState\022\017\n\007add" +
+      "ress\030\001 \001(\t\022(\n\003itx\030\002 \001(\0132\033.forge_abi.Depl" +
+      "oyProtocolTx\022\021\n\troot_hash\030\003 \001(\014\022)\n\006statu" +
+      "s\030\004 \001(\0162\031.forge_abi.ProtocolStatus\022\023\n\013mi" +
+      "grated_to\030\014 \003(\t\022\025\n\rmigrated_from\030\r \003(\t\022(" +
+      "\n\007context\030\016 \001(\0132\027.forge_abi.StateContext" +
+      "\022\"\n\004data\030\017 \001(\0132\024.google.protobuf.Any\"\246\002\n" +
+      "\013TetherState\022\014\n\004hash\030\001 \001(\t\022\021\n\tavailable\030",
+      "\002 \001(\010\022\021\n\tcustodian\030\003 \001(\t\022\021\n\tdepositor\030\004 " +
+      "\001(\t\022\022\n\nwithdrawer\030\005 \001(\t\022!\n\005value\030\006 \001(\0132\022" +
+      ".forge_abi.BigUint\022&\n\ncommission\030\007 \001(\0132\022" +
+      ".forge_abi.BigUint\022\"\n\006charge\030\010 \001(\0132\022.for" +
+      "ge_abi.BigUint\022\016\n\006target\030\t \001(\t\022,\n\010lockti" +
+      "me\030\n \001(\0132\032.google.protobuf.Timestamp\022\017\n\007" +
+      "address\030\013 \001(\t\"-\n\nTetherInfo\022\021\n\tavailable" +
+      "\030\001 \001(\010\022\014\n\004hash\030\002 \001(\t\"\336\001\n\tSwapState\022\014\n\004ha" +
+      "sh\030\001 \001(\t\022\017\n\007address\030\002 \001(\t\022\017\n\007hashkey\030\003 \001" +
+      "(\014\022\016\n\006sender\030\004 \001(\t\022\020\n\010receiver\030\005 \001(\t\022!\n\005",
+      "value\030\006 \001(\0132\022.forge_abi.BigUint\022\016\n\006asset" +
+      "s\030\007 \003(\t\022\020\n\010locktime\030\010 \001(\r\022\020\n\010hashlock\030\t " +
+      "\001(\014\022(\n\007context\030\n \001(\0132\027.forge_abi.StateCo" +
+      "ntext\"\227\001\n\017DelegateOpState\022\014\n\004rule\030\001 \001(\t\022" +
+      "\017\n\007num_txs\030\002 \001(\004\022\025\n\rnum_txs_delta\030\003 \001(\004\022" +
+      "#\n\007balance\030\004 \001(\0132\022.forge_abi.BigUint\022)\n\r" +
+      "balance_delta\030\005 \001(\0132\022.forge_abi.BigUint\"" +
+      "\346\001\n\rDelegateState\022\017\n\007address\030\001 \001(\t\022.\n\003op" +
+      "s\030\002 \003(\0132!.forge_abi.DelegateState.OpsEnt" +
+      "ry\022(\n\007context\030\016 \001(\0132\027.forge_abi.StateCon",
+      "text\022\"\n\004data\030\017 \001(\0132\024.google.protobuf.Any" +
+      "\032F\n\010OpsEntry\022\013\n\003key\030\001 \001(\t\022)\n\005value\030\002 \001(\013" +
+      "2\032.forge_abi.DelegateOpState:\0028\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -22448,7 +22829,7 @@ public final class State {
     internal_static_forge_abi_AccountState_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_AccountState_descriptor,
-        new java.lang.String[] { "Balance", "Nonce", "NumTxs", "Address", "Pk", "Type", "Moniker", "Context", "Issuer", "GasBalance", "MigratedTo", "MigratedFrom", "NumAssets", "Stake", "PinnedFiles", "Poke", "DepositReceived", "Data", });
+        new java.lang.String[] { "Balance", "Nonce", "NumTxs", "Address", "Pk", "Type", "Moniker", "Context", "Issuer", "GasBalance", "MigratedTo", "MigratedFrom", "NumAssets", "Stake", "PinnedFiles", "Poke", "DepositReceived", "WithdrawItems", "Data", });
     internal_static_forge_abi_AssetState_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_forge_abi_AssetState_fieldAccessorTable = new
@@ -22466,7 +22847,7 @@ public final class State {
     internal_static_forge_abi_ForgeState_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ForgeState_descriptor,
-        new java.lang.String[] { "Address", "Consensus", "Tasks", "StakeSummary", "Version", "ForgeAppHash", "Token", "TxConfig", "StakeConfig", "PokeConfig", "Protocols", "Gas", "UpgradeInfo", "Data", });
+        new java.lang.String[] { "Address", "Consensus", "Tasks", "StakeSummary", "Version", "Token", "TxConfig", "Protocols", "Gas", "UpgradeInfo", "AccountConfig", "TokenSwapConfig", "Data", });
     internal_static_forge_abi_ForgeState_TasksEntry_descriptor =
       internal_static_forge_abi_ForgeState_descriptor.getNestedTypes().get(0);
     internal_static_forge_abi_ForgeState_TasksEntry_fieldAccessorTable = new
@@ -22484,6 +22865,12 @@ public final class State {
     internal_static_forge_abi_ForgeState_GasEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ForgeState_GasEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_forge_abi_ForgeState_AccountConfigEntry_descriptor =
+      internal_static_forge_abi_ForgeState_descriptor.getNestedTypes().get(3);
+    internal_static_forge_abi_ForgeState_AccountConfigEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_ForgeState_AccountConfigEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_forge_abi_RootState_descriptor =
       getDescriptor().getMessageTypes().get(4);

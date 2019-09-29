@@ -1,3 +1,8 @@
+## 0.38.0 (September 29, 2019)
+  - add proto
+  - remove poke config
+  - add token swap protocol
+
 ## 0.37.2 (September 16, 2019)
   - Add delegate method
   - Add delegatee parameter for some interface

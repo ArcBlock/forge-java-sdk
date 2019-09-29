@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit
  *
  */
 class ForgeSDK private constructor() {
+  val pokeAddress = "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
   private lateinit var channel: ManagedChannel
 
   private lateinit var chainRpcBlockingStub: ChainRpcGrpc.ChainRpcBlockingStub
@@ -187,8 +188,8 @@ class ForgeSDK private constructor() {
   /**
    * Util to help developer to poke a account
    */
-  fun poke(wallet: Type.WalletInfo, pokeConfig: Type.PokeConfig): Rpc.ResponseSendTx {
-    val tx = TransactionFactory.unsignPoke(pokeConfig.address, chainInfo.value.network, wallet = WalletInfo(wallet))
+  fun poke(wallet: Type.WalletInfo): Rpc.ResponseSendTx {
+    val tx = TransactionFactory.unsignPoke(chainInfo.value.network, wallet = WalletInfo(wallet))
       .signTx(wallet.sk.toByteArray())
     return chainRpcBlockingStub.sendTx(Rpc.RequestSendTx.newBuilder().setTx(tx).build())
   }

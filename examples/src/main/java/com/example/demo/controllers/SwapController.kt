@@ -9,20 +9,11 @@ import forge_abi.Type
 import io.arcblock.forge.TransactionFactory
 import io.arcblock.forge.did.DidAuthUtils
 import io.arcblock.forge.did.WalletInfo
-import io.arcblock.forge.did.bean.AppInfo
-import io.arcblock.forge.did.bean.DidRequestBody
-import io.arcblock.forge.did.bean.IClaim
-import io.arcblock.forge.did.bean.MetaInfo
-import io.arcblock.forge.did.bean.ProfileClaim
-import io.arcblock.forge.did.bean.SignatureClaim
+import io.arcblock.forge.did.bean.*
 import io.arcblock.forge.utils.Base58Btc
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.ResponseBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 
 
@@ -115,7 +106,7 @@ class SwapController {
       .getForgeState(Rpc.RequestGetForgeState.newBuilder()
         .build())
     val tmp = WalletInfo(userDid.removePrefix("did:abt:"),Base58Btc.decode(userPk), ByteArray(0))
-    val tx = TransactionFactory.unsignPoke(forgeState.state.pokeConfig.address,app.chainId,tmp)
+    val tx = TransactionFactory.unsignPoke(app.chainId,tmp)
     val claim = SignatureClaim(MetaInfo("Poke",""),
       "",Base58Btc.encode(tx.toByteArray()),"")
 
