@@ -30,9 +30,9 @@ object TransactionFactory {
   /**
    * create a poke transaction without signature
    */
-  fun unsignPoke(pokeAddress: String, chainID: String, wallet: WalletInfo): Type.Transaction {
+  fun unsignPoke( chainID: String, wallet: WalletInfo): Type.Transaction {
     val itx = Poke.PokeTx.newBuilder()
-      .setAddress(pokeAddress)
+      .setAddress("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
       .setDate(LocalDate.now().toString())
       .build()
     return Type.Transaction.newBuilder()

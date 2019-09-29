@@ -23,6 +23,11 @@ public class TypeUrls {
   public static final String DELEGATE = "fg:t:delegate";
   public static final String REVOKE_DELEGATE = "fg:t:revoke_delegate";
 
+  public static final String APPROVE_WITHDRAW= "fg:t:approve_withdraw";
+  public static final String DEPOSIT_TOKEN= "fg:t:deposit_token";
+  public static final String REVOKE_WITHDRAW= "fg:t:revoke_withdraw";
+  public static final String WITHDRAW_TOKEN= "fg:t:withdraw_token";
+
 
   // forge state
   public static final String ACCOUNT_STATE = "fg:s:account";

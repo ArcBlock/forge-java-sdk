@@ -1,0 +1,8 @@
+syntax = "proto3";
+package forge_abi;
+
+import "type.proto";
+
+message RevokeWithdrawTx {
+  string withdraw_tx_hash = 1;  // the hash of withdraw tx
+}

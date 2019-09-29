@@ -257,6 +257,22 @@ public final class Enum {
      */
     invalid_deactivation(63),
     /**
+     * <code>sender_withdraw_items_full = 64;</code>
+     */
+    sender_withdraw_items_full(64),
+    /**
+     * <code>withdraw_item_missing = 65;</code>
+     */
+    withdraw_item_missing(65),
+    /**
+     * <code>invalid_withdraw_tx = 66;</code>
+     */
+    invalid_withdraw_tx(66),
+    /**
+     * <code>invalid_chain_type = 67;</code>
+     */
+    invalid_chain_type(67),
+    /**
      * <code>forbidden = 403;</code>
      */
     forbidden(403),
@@ -509,6 +525,22 @@ public final class Enum {
      */
     public static final int invalid_deactivation_VALUE = 63;
     /**
+     * <code>sender_withdraw_items_full = 64;</code>
+     */
+    public static final int sender_withdraw_items_full_VALUE = 64;
+    /**
+     * <code>withdraw_item_missing = 65;</code>
+     */
+    public static final int withdraw_item_missing_VALUE = 65;
+    /**
+     * <code>invalid_withdraw_tx = 66;</code>
+     */
+    public static final int invalid_withdraw_tx_VALUE = 66;
+    /**
+     * <code>invalid_chain_type = 67;</code>
+     */
+    public static final int invalid_chain_type_VALUE = 67;
+    /**
      * <code>forbidden = 403;</code>
      */
     public static final int forbidden_VALUE = 403;
@@ -597,6 +629,10 @@ public final class Enum {
         case 61: return protocol_not_paused;
         case 62: return protocol_not_activated;
         case 63: return invalid_deactivation;
+        case 64: return sender_withdraw_items_full;
+        case 65: return withdraw_item_missing;
+        case 66: return invalid_withdraw_tx;
+        case 67: return invalid_chain_type;
         case 403: return forbidden;
         case 500: return internal;
         case 504: return timeout;
@@ -1953,7 +1989,7 @@ public final class Enum {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nenum.proto\022\tforge_abi*\310\n\n\nStatusCode\022\006" +
+      "\n\nenum.proto\022\tforge_abi*\264\013\n\nStatusCode\022\006" +
       "\n\002ok\020\000\022\021\n\rinvalid_nonce\020\001\022\025\n\021invalid_sig" +
       "nature\020\002\022\030\n\024invalid_sender_state\020\003\022\032\n\026in" +
       "valid_receiver_state\020\004\022\025\n\021insufficient_d" +
@@ -1986,35 +2022,38 @@ public final class Enum {
       ":\022\031\n\025sender_not_authorized\020;\022\030\n\024protocol" +
       "_not_running\020<\022\027\n\023protocol_not_paused\020=\022" +
       "\032\n\026protocol_not_activated\020>\022\030\n\024invalid_d" +
-      "eactivation\020?\022\016\n\tforbidden\020\223\003\022\r\n\010interna" +
-      "l\020\364\003\022\014\n\007timeout\020\370\003*%\n\007KeyType\022\013\n\007ed25519" +
-      "\020\000\022\r\n\tsecp256k1\020\001*f\n\010HashType\022\n\n\006keccak\020" +
-      "\000\022\010\n\004sha3\020\001\022\010\n\004sha2\020\002\022\016\n\nkeccak_384\020\006\022\014\n" +
-      "\010sha3_384\020\007\022\016\n\nkeccak_512\020\r\022\014\n\010sha3_512\020" +
-      "\016*&\n\014EncodingType\022\n\n\006base16\020\000\022\n\n\006base58\020" +
-      "\001*\351\001\n\010RoleType\022\020\n\014role_account\020\000\022\r\n\trole",
-      "_node\020\001\022\017\n\013role_device\020\002\022\024\n\020role_applica" +
-      "tion\020\003\022\027\n\023role_smart_contract\020\004\022\014\n\010role_" +
-      "bot\020\005\022\016\n\nrole_asset\020\006\022\016\n\nrole_stake\020\007\022\022\n" +
-      "\016role_validator\020\010\022\016\n\nrole_group\020\t\022\013\n\007rol" +
-      "e_tx\020\n\022\017\n\013role_tether\020\013\022\014\n\010role_any\020?*\256\001" +
-      "\n\013UpgradeType\022\016\n\nconfig_app\020\000\022\020\n\014config_" +
-      "forge\020\001\022\016\n\nconfig_dfs\020\002\022\024\n\020config_consen" +
-      "sus\020\003\022\016\n\nconfig_p2p\020\004\022\013\n\007exe_app\020\n\022\r\n\tex" +
-      "e_forge\020\013\022\013\n\007exe_dfs\020\014\022\021\n\rexe_consensus\020" +
-      "\r\022\013\n\007exe_p2p\020\016*\352\001\n\rUpgradeAction\022\n\n\006veri",
-      "fy\020\000\022\n\n\006backup\020\001\022\013\n\007replace\020\002\022\017\n\013restart" +
-      "_app\020\n\022\017\n\013restart_dfs\020\013\022\025\n\021restart_conse" +
-      "nsus\020\014\022\017\n\013restart_p2p\020\r\022\021\n\rrestart_forge" +
-      "\020\016\022\024\n\020rollback_if_fail\020\036\022\027\n\023restart_all_" +
-      "if_fail\020\037\022\021\n\rcrash_if_fail\020!\022\025\n\021drop_add" +
-      "ress_book\0202*d\n\tStateType\022\021\n\rstate_accoun" +
-      "t\020\000\022\017\n\013state_asset\020\001\022\021\n\rstate_channel\020\002\022" +
-      "\017\n\013state_forge\020\003\022\017\n\013state_stake\020\004*M\n\tSta" +
-      "keType\022\016\n\nstake_node\020\000\022\016\n\nstake_user\020\001\022\017" +
-      "\n\013stake_asset\020\002\022\017\n\013stake_chain\020\003*9\n\016Prot",
-      "ocolStatus\022\013\n\007running\020\000\022\n\n\006paused\020\001\022\016\n\nt" +
-      "erminated\020\002b\006proto3"
+      "eactivation\020?\022\036\n\032sender_withdraw_items_f" +
+      "ull\020@\022\031\n\025withdraw_item_missing\020A\022\027\n\023inva" +
+      "lid_withdraw_tx\020B\022\026\n\022invalid_chain_type\020" +
+      "C\022\016\n\tforbidden\020\223\003\022\r\n\010internal\020\364\003\022\014\n\007time" +
+      "out\020\370\003*%\n\007KeyType\022\013\n\007ed25519\020\000\022\r\n\tsecp25" +
+      "6k1\020\001*f\n\010HashType\022\n\n\006keccak\020\000\022\010\n\004sha3\020\001\022" +
+      "\010\n\004sha2\020\002\022\016\n\nkeccak_384\020\006\022\014\n\010sha3_384\020\007\022",
+      "\016\n\nkeccak_512\020\r\022\014\n\010sha3_512\020\016*&\n\014Encodin" +
+      "gType\022\n\n\006base16\020\000\022\n\n\006base58\020\001*\351\001\n\010RoleTy" +
+      "pe\022\020\n\014role_account\020\000\022\r\n\trole_node\020\001\022\017\n\013r" +
+      "ole_device\020\002\022\024\n\020role_application\020\003\022\027\n\023ro" +
+      "le_smart_contract\020\004\022\014\n\010role_bot\020\005\022\016\n\nrol" +
+      "e_asset\020\006\022\016\n\nrole_stake\020\007\022\022\n\016role_valida" +
+      "tor\020\010\022\016\n\nrole_group\020\t\022\013\n\007role_tx\020\n\022\017\n\013ro" +
+      "le_tether\020\013\022\014\n\010role_any\020?*\256\001\n\013UpgradeTyp" +
+      "e\022\016\n\nconfig_app\020\000\022\020\n\014config_forge\020\001\022\016\n\nc" +
+      "onfig_dfs\020\002\022\024\n\020config_consensus\020\003\022\016\n\ncon",
+      "fig_p2p\020\004\022\013\n\007exe_app\020\n\022\r\n\texe_forge\020\013\022\013\n" +
+      "\007exe_dfs\020\014\022\021\n\rexe_consensus\020\r\022\013\n\007exe_p2p" +
+      "\020\016*\352\001\n\rUpgradeAction\022\n\n\006verify\020\000\022\n\n\006back" +
+      "up\020\001\022\013\n\007replace\020\002\022\017\n\013restart_app\020\n\022\017\n\013re" +
+      "start_dfs\020\013\022\025\n\021restart_consensus\020\014\022\017\n\013re" +
+      "start_p2p\020\r\022\021\n\rrestart_forge\020\016\022\024\n\020rollba" +
+      "ck_if_fail\020\036\022\027\n\023restart_all_if_fail\020\037\022\021\n" +
+      "\rcrash_if_fail\020!\022\025\n\021drop_address_book\0202*" +
+      "d\n\tStateType\022\021\n\rstate_account\020\000\022\017\n\013state" +
+      "_asset\020\001\022\021\n\rstate_channel\020\002\022\017\n\013state_for",
+      "ge\020\003\022\017\n\013state_stake\020\004*M\n\tStakeType\022\016\n\nst" +
+      "ake_node\020\000\022\016\n\nstake_user\020\001\022\017\n\013stake_asse" +
+      "t\020\002\022\017\n\013stake_chain\020\003*9\n\016ProtocolStatus\022\013" +
+      "\n\007running\020\000\022\n\n\006paused\020\001\022\016\n\nterminated\020\002b" +
+      "\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

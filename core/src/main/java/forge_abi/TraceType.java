@@ -8157,6 +8157,59 @@ public final class TraceType {
      * <code>bool readonly = 6;</code>
      */
     boolean getReadonly();
+
+    /**
+     * <code>string consumed_time = 7;</code>
+     */
+    java.lang.String getConsumedTime();
+    /**
+     * <code>string consumed_time = 7;</code>
+     */
+    com.google.protobuf.ByteString
+        getConsumedTimeBytes();
+
+    /**
+     * <code>string issuer = 8;</code>
+     */
+    java.lang.String getIssuer();
+    /**
+     * <code>string issuer = 8;</code>
+     */
+    com.google.protobuf.ByteString
+        getIssuerBytes();
+
+    /**
+     * <code>string parent = 9;</code>
+     */
+    java.lang.String getParent();
+    /**
+     * <code>string parent = 9;</code>
+     */
+    com.google.protobuf.ByteString
+        getParentBytes();
+
+    /**
+     * <code>bool transferrable = 10;</code>
+     */
+    boolean getTransferrable();
+
+    /**
+     * <code>uint64 ttl = 11;</code>
+     */
+    long getTtl();
+
+    /**
+     * <code>.google.protobuf.Any data = 50;</code>
+     */
+    boolean hasData();
+    /**
+     * <code>.google.protobuf.Any data = 50;</code>
+     */
+    com.google.protobuf.Any getData();
+    /**
+     * <code>.google.protobuf.Any data = 50;</code>
+     */
+    com.google.protobuf.AnyOrBuilder getDataOrBuilder();
   }
   /**
    * Protobuf type {@code forge_abi.IndexedAssetState}
@@ -8176,6 +8229,11 @@ public final class TraceType {
       renaissanceTime_ = "";
       moniker_ = "";
       readonly_ = false;
+      consumedTime_ = "";
+      issuer_ = "";
+      parent_ = "";
+      transferrable_ = false;
+      ttl_ = 0L;
     }
 
     @java.lang.Override
@@ -8236,6 +8294,47 @@ public final class TraceType {
             case 48: {
 
               readonly_ = input.readBool();
+              break;
+            }
+            case 58: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              consumedTime_ = s;
+              break;
+            }
+            case 66: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              issuer_ = s;
+              break;
+            }
+            case 74: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              parent_ = s;
+              break;
+            }
+            case 80: {
+
+              transferrable_ = input.readBool();
+              break;
+            }
+            case 88: {
+
+              ttl_ = input.readUInt64();
+              break;
+            }
+            case 402: {
+              com.google.protobuf.Any.Builder subBuilder = null;
+              if (data_ != null) {
+                subBuilder = data_.toBuilder();
+              }
+              data_ = input.readMessage(com.google.protobuf.Any.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(data_);
+                data_ = subBuilder.buildPartial();
+              }
+
               break;
             }
           }
@@ -8440,6 +8539,147 @@ public final class TraceType {
       return readonly_;
     }
 
+    public static final int CONSUMED_TIME_FIELD_NUMBER = 7;
+    private volatile java.lang.Object consumedTime_;
+    /**
+     * <code>string consumed_time = 7;</code>
+     */
+    public java.lang.String getConsumedTime() {
+      java.lang.Object ref = consumedTime_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        consumedTime_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string consumed_time = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+        getConsumedTimeBytes() {
+      java.lang.Object ref = consumedTime_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        consumedTime_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ISSUER_FIELD_NUMBER = 8;
+    private volatile java.lang.Object issuer_;
+    /**
+     * <code>string issuer = 8;</code>
+     */
+    public java.lang.String getIssuer() {
+      java.lang.Object ref = issuer_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        issuer_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string issuer = 8;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIssuerBytes() {
+      java.lang.Object ref = issuer_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        issuer_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PARENT_FIELD_NUMBER = 9;
+    private volatile java.lang.Object parent_;
+    /**
+     * <code>string parent = 9;</code>
+     */
+    public java.lang.String getParent() {
+      java.lang.Object ref = parent_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        parent_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string parent = 9;</code>
+     */
+    public com.google.protobuf.ByteString
+        getParentBytes() {
+      java.lang.Object ref = parent_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        parent_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TRANSFERRABLE_FIELD_NUMBER = 10;
+    private boolean transferrable_;
+    /**
+     * <code>bool transferrable = 10;</code>
+     */
+    public boolean getTransferrable() {
+      return transferrable_;
+    }
+
+    public static final int TTL_FIELD_NUMBER = 11;
+    private long ttl_;
+    /**
+     * <code>uint64 ttl = 11;</code>
+     */
+    public long getTtl() {
+      return ttl_;
+    }
+
+    public static final int DATA_FIELD_NUMBER = 50;
+    private com.google.protobuf.Any data_;
+    /**
+     * <code>.google.protobuf.Any data = 50;</code>
+     */
+    public boolean hasData() {
+      return data_ != null;
+    }
+    /**
+     * <code>.google.protobuf.Any data = 50;</code>
+     */
+    public com.google.protobuf.Any getData() {
+      return data_ == null ? com.google.protobuf.Any.getDefaultInstance() : data_;
+    }
+    /**
+     * <code>.google.protobuf.Any data = 50;</code>
+     */
+    public com.google.protobuf.AnyOrBuilder getDataOrBuilder() {
+      return getData();
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -8470,6 +8710,24 @@ public final class TraceType {
       if (readonly_ != false) {
         output.writeBool(6, readonly_);
       }
+      if (!getConsumedTimeBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, consumedTime_);
+      }
+      if (!getIssuerBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, issuer_);
+      }
+      if (!getParentBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 9, parent_);
+      }
+      if (transferrable_ != false) {
+        output.writeBool(10, transferrable_);
+      }
+      if (ttl_ != 0L) {
+        output.writeUInt64(11, ttl_);
+      }
+      if (data_ != null) {
+        output.writeMessage(50, getData());
+      }
     }
 
     public int getSerializedSize() {
@@ -8495,6 +8753,27 @@ public final class TraceType {
       if (readonly_ != false) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(6, readonly_);
+      }
+      if (!getConsumedTimeBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, consumedTime_);
+      }
+      if (!getIssuerBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, issuer_);
+      }
+      if (!getParentBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, parent_);
+      }
+      if (transferrable_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(10, transferrable_);
+      }
+      if (ttl_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(11, ttl_);
+      }
+      if (data_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(50, getData());
       }
       memoizedSize = size;
       return size;
@@ -8524,6 +8803,21 @@ public final class TraceType {
           .equals(other.getMoniker());
       result = result && (getReadonly()
           == other.getReadonly());
+      result = result && getConsumedTime()
+          .equals(other.getConsumedTime());
+      result = result && getIssuer()
+          .equals(other.getIssuer());
+      result = result && getParent()
+          .equals(other.getParent());
+      result = result && (getTransferrable()
+          == other.getTransferrable());
+      result = result && (getTtl()
+          == other.getTtl());
+      result = result && (hasData() == other.hasData());
+      if (hasData()) {
+        result = result && getData()
+            .equals(other.getData());
+      }
       return result;
     }
 
@@ -8547,6 +8841,22 @@ public final class TraceType {
       hash = (37 * hash) + READONLY_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getReadonly());
+      hash = (37 * hash) + CONSUMED_TIME_FIELD_NUMBER;
+      hash = (53 * hash) + getConsumedTime().hashCode();
+      hash = (37 * hash) + ISSUER_FIELD_NUMBER;
+      hash = (53 * hash) + getIssuer().hashCode();
+      hash = (37 * hash) + PARENT_FIELD_NUMBER;
+      hash = (53 * hash) + getParent().hashCode();
+      hash = (37 * hash) + TRANSFERRABLE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getTransferrable());
+      hash = (37 * hash) + TTL_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getTtl());
+      if (hasData()) {
+        hash = (37 * hash) + DATA_FIELD_NUMBER;
+        hash = (53 * hash) + getData().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -8677,6 +8987,22 @@ public final class TraceType {
 
         readonly_ = false;
 
+        consumedTime_ = "";
+
+        issuer_ = "";
+
+        parent_ = "";
+
+        transferrable_ = false;
+
+        ttl_ = 0L;
+
+        if (dataBuilder_ == null) {
+          data_ = null;
+        } else {
+          data_ = null;
+          dataBuilder_ = null;
+        }
         return this;
       }
 
@@ -8705,6 +9031,16 @@ public final class TraceType {
         result.renaissanceTime_ = renaissanceTime_;
         result.moniker_ = moniker_;
         result.readonly_ = readonly_;
+        result.consumedTime_ = consumedTime_;
+        result.issuer_ = issuer_;
+        result.parent_ = parent_;
+        result.transferrable_ = transferrable_;
+        result.ttl_ = ttl_;
+        if (dataBuilder_ == null) {
+          result.data_ = data_;
+        } else {
+          result.data_ = dataBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -8768,6 +9104,27 @@ public final class TraceType {
         }
         if (other.getReadonly() != false) {
           setReadonly(other.getReadonly());
+        }
+        if (!other.getConsumedTime().isEmpty()) {
+          consumedTime_ = other.consumedTime_;
+          onChanged();
+        }
+        if (!other.getIssuer().isEmpty()) {
+          issuer_ = other.issuer_;
+          onChanged();
+        }
+        if (!other.getParent().isEmpty()) {
+          parent_ = other.parent_;
+          onChanged();
+        }
+        if (other.getTransferrable() != false) {
+          setTransferrable(other.getTransferrable());
+        }
+        if (other.getTtl() != 0L) {
+          setTtl(other.getTtl());
+        }
+        if (other.hasData()) {
+          mergeData(other.getData());
         }
         onChanged();
         return this;
@@ -9164,6 +9521,382 @@ public final class TraceType {
         readonly_ = false;
         onChanged();
         return this;
+      }
+
+      private java.lang.Object consumedTime_ = "";
+      /**
+       * <code>string consumed_time = 7;</code>
+       */
+      public java.lang.String getConsumedTime() {
+        java.lang.Object ref = consumedTime_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          consumedTime_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string consumed_time = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+          getConsumedTimeBytes() {
+        java.lang.Object ref = consumedTime_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          consumedTime_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string consumed_time = 7;</code>
+       */
+      public Builder setConsumedTime(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        consumedTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string consumed_time = 7;</code>
+       */
+      public Builder clearConsumedTime() {
+        
+        consumedTime_ = getDefaultInstance().getConsumedTime();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string consumed_time = 7;</code>
+       */
+      public Builder setConsumedTimeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        consumedTime_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object issuer_ = "";
+      /**
+       * <code>string issuer = 8;</code>
+       */
+      public java.lang.String getIssuer() {
+        java.lang.Object ref = issuer_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          issuer_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string issuer = 8;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIssuerBytes() {
+        java.lang.Object ref = issuer_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          issuer_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string issuer = 8;</code>
+       */
+      public Builder setIssuer(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        issuer_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string issuer = 8;</code>
+       */
+      public Builder clearIssuer() {
+        
+        issuer_ = getDefaultInstance().getIssuer();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string issuer = 8;</code>
+       */
+      public Builder setIssuerBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        issuer_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object parent_ = "";
+      /**
+       * <code>string parent = 9;</code>
+       */
+      public java.lang.String getParent() {
+        java.lang.Object ref = parent_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          parent_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string parent = 9;</code>
+       */
+      public com.google.protobuf.ByteString
+          getParentBytes() {
+        java.lang.Object ref = parent_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          parent_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string parent = 9;</code>
+       */
+      public Builder setParent(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        parent_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string parent = 9;</code>
+       */
+      public Builder clearParent() {
+        
+        parent_ = getDefaultInstance().getParent();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string parent = 9;</code>
+       */
+      public Builder setParentBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        parent_ = value;
+        onChanged();
+        return this;
+      }
+
+      private boolean transferrable_ ;
+      /**
+       * <code>bool transferrable = 10;</code>
+       */
+      public boolean getTransferrable() {
+        return transferrable_;
+      }
+      /**
+       * <code>bool transferrable = 10;</code>
+       */
+      public Builder setTransferrable(boolean value) {
+        
+        transferrable_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool transferrable = 10;</code>
+       */
+      public Builder clearTransferrable() {
+        
+        transferrable_ = false;
+        onChanged();
+        return this;
+      }
+
+      private long ttl_ ;
+      /**
+       * <code>uint64 ttl = 11;</code>
+       */
+      public long getTtl() {
+        return ttl_;
+      }
+      /**
+       * <code>uint64 ttl = 11;</code>
+       */
+      public Builder setTtl(long value) {
+        
+        ttl_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint64 ttl = 11;</code>
+       */
+      public Builder clearTtl() {
+        
+        ttl_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.Any data_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> dataBuilder_;
+      /**
+       * <code>.google.protobuf.Any data = 50;</code>
+       */
+      public boolean hasData() {
+        return dataBuilder_ != null || data_ != null;
+      }
+      /**
+       * <code>.google.protobuf.Any data = 50;</code>
+       */
+      public com.google.protobuf.Any getData() {
+        if (dataBuilder_ == null) {
+          return data_ == null ? com.google.protobuf.Any.getDefaultInstance() : data_;
+        } else {
+          return dataBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.google.protobuf.Any data = 50;</code>
+       */
+      public Builder setData(com.google.protobuf.Any value) {
+        if (dataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          data_ = value;
+          onChanged();
+        } else {
+          dataBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Any data = 50;</code>
+       */
+      public Builder setData(
+          com.google.protobuf.Any.Builder builderForValue) {
+        if (dataBuilder_ == null) {
+          data_ = builderForValue.build();
+          onChanged();
+        } else {
+          dataBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Any data = 50;</code>
+       */
+      public Builder mergeData(com.google.protobuf.Any value) {
+        if (dataBuilder_ == null) {
+          if (data_ != null) {
+            data_ =
+              com.google.protobuf.Any.newBuilder(data_).mergeFrom(value).buildPartial();
+          } else {
+            data_ = value;
+          }
+          onChanged();
+        } else {
+          dataBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Any data = 50;</code>
+       */
+      public Builder clearData() {
+        if (dataBuilder_ == null) {
+          data_ = null;
+          onChanged();
+        } else {
+          data_ = null;
+          dataBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Any data = 50;</code>
+       */
+      public com.google.protobuf.Any.Builder getDataBuilder() {
+        
+        onChanged();
+        return getDataFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.google.protobuf.Any data = 50;</code>
+       */
+      public com.google.protobuf.AnyOrBuilder getDataOrBuilder() {
+        if (dataBuilder_ != null) {
+          return dataBuilder_.getMessageOrBuilder();
+        } else {
+          return data_ == null ?
+              com.google.protobuf.Any.getDefaultInstance() : data_;
+        }
+      }
+      /**
+       * <code>.google.protobuf.Any data = 50;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> 
+          getDataFieldBuilder() {
+        if (dataBuilder_ == null) {
+          dataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder>(
+                  getData(),
+                  getParentForChildren(),
+                  isClean());
+          data_ = null;
+        }
+        return dataBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -17821,64 +18554,68 @@ public final class TraceType {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\020trace_type.proto\022\tforge_abi\032\ntype.prot" +
-      "o\032\nenum.proto\"(\n\tPageOrder\022\r\n\005field\030\001 \001(" +
-      "\t\022\014\n\004type\030\002 \001(\t\"N\n\tPageInput\022\016\n\006cursor\030\001" +
-      " \001(\t\022\014\n\004size\030\002 \001(\r\022#\n\005order\030\003 \003(\0132\024.forg" +
-      "e_abi.PageOrder\"\033\n\nTypeFilter\022\r\n\005types\030\001" +
-      " \003(\t\"<\n\nTimeFilter\022\027\n\017start_date_time\030\001 " +
-      "\001(\t\022\025\n\rend_date_time\030\002 \001(\t\"Z\n\rAddressFil" +
-      "ter\022\016\n\006sender\030\001 \001(\t\022\020\n\010receiver\030\002 \001(\t\022\'\n" +
-      "\tdirection\030\003 \001(\0162\024.forge_abi.Direction\"7" +
-      "\n\010PageInfo\022\016\n\006cursor\030\001 \001(\t\022\014\n\004next\030\002 \001(\010",
-      "\022\r\n\005total\030\003 \001(\r\"\270\001\n\022IndexedTransaction\022\014" +
-      "\n\004hash\030\001 \001(\t\022\016\n\006sender\030\002 \001(\t\022\020\n\010receiver" +
-      "\030\003 \001(\t\022\014\n\004time\030\004 \001(\t\022\014\n\004type\030\005 \001(\t\022\"\n\002tx" +
-      "\030\006 \001(\0132\026.forge_abi.Transaction\022\r\n\005valid\030" +
-      "\024 \001(\010\022#\n\004code\030\025 \001(\0162\025.forge_abi.StatusCo" +
-      "de\"\215\003\n\023IndexedAccountState\022\017\n\007address\030\001 " +
-      "\001(\t\022#\n\007balance\030\002 \001(\0132\022.forge_abi.BigUint" +
-      "\022\022\n\nnum_assets\030\003 \001(\004\022\017\n\007num_txs\030\004 \001(\004\022\r\n" +
-      "\005nonce\030\005 \001(\004\022\024\n\014genesis_time\030\006 \001(\t\022\030\n\020re" +
-      "naissance_time\030\007 \001(\t\022\017\n\007moniker\030\010 \001(\t\022\025\n",
-      "\rmigrated_from\030\t \001(\t\022\023\n\013migrated_to\030\n \001(" +
-      "\t\0221\n\025total_received_stakes\030\013 \001(\0132\022.forge" +
-      "_abi.BigUint\022(\n\014total_stakes\030\014 \001(\0132\022.for" +
-      "ge_abi.BigUint\022*\n\016total_unstakes\030\r \001(\0132\022" +
-      ".forge_abi.BigUint\022\026\n\016recent_num_txs\030\016 \003" +
-      "(\004\"\206\001\n\021IndexedAssetState\022\017\n\007address\030\001 \001(" +
-      "\t\022\r\n\005owner\030\002 \001(\t\022\024\n\014genesis_time\030\003 \001(\t\022\030" +
-      "\n\020renaissance_time\030\004 \001(\t\022\017\n\007moniker\030\005 \001(" +
-      "\t\022\020\n\010readonly\030\006 \001(\010\"\272\001\n\021IndexedStakeStat" +
-      "e\022\017\n\007address\030\001 \001(\t\022#\n\007balance\030\002 \001(\0132\022.fo",
-      "rge_abi.BigUint\022\016\n\006sender\030\003 \001(\t\022\020\n\010recei" +
-      "ver\030\004 \001(\t\022\024\n\014genesis_time\030\005 \001(\t\022\030\n\020renai" +
-      "ssance_time\030\006 \001(\t\022\017\n\007message\030\007 \001(\t\022\014\n\004ty" +
-      "pe\030\010 \001(\r\"h\n\014IndexedBlock\022\016\n\006height\030\001 \001(\004" +
-      "\022\014\n\004time\030\002 \001(\t\022\020\n\010proposer\030\003 \001(\t\022\017\n\007num_" +
-      "txs\030\004 \001(\004\022\027\n\017num_invalid_txs\030\005 \001(\004\"\272\001\n\014H" +
-      "ealthStatus\022-\n\tconsensus\030\001 \001(\0132\032.forge_a" +
-      "bi.ConsensusStatus\022)\n\007network\030\002 \001(\0132\030.fo" +
-      "rge_abi.NetworkStatus\022)\n\007storage\030\003 \001(\0132\030" +
-      ".forge_abi.StorageStatus\022%\n\005forge\030\004 \001(\0132",
-      "\026.forge_abi.ForgeStatus\"G\n\017ConsensusStat" +
-      "us\022\016\n\006health\030\001 \001(\010\022\016\n\006synced\030\002 \001(\010\022\024\n\014bl" +
-      "ock_height\030\003 \001(\004\"2\n\rNetworkStatus\022\016\n\006hea" +
-      "lth\030\001 \001(\010\022\021\n\tnum_peers\030\002 \001(\r\"y\n\rStorageS" +
-      "tatus\022\016\n\006health\030\001 \001(\010\022\026\n\016indexer_server\030" +
-      "\002 \001(\t\022\020\n\010state_db\030\003 \001(\t\022.\n\ndisk_space\030\004 " +
-      "\001(\0132\032.forge_abi.DiskSpaceStatus\"5\n\017DiskS" +
-      "paceStatus\022\023\n\013forge_usage\030\001 \001(\t\022\r\n\005total" +
-      "\030\002 \001(\t\"v\n\013ForgeStatus\022\016\n\006health\030\001 \001(\010\022\022\n" +
-      "\nabi_server\030\002 \001(\t\022\021\n\tforge_web\030\003 \001(\t\0220\n\013",
-      "abci_server\030\004 \001(\0132\033.forge_abi.AbciServer" +
-      "Status\"=\n\020AbciServerStatus\022\026\n\016abci_conse" +
-      "nsus\030\001 \001(\t\022\021\n\tabci_info\030\002 \001(\t\"7\n\016Validit" +
-      "yFilter\022%\n\010validity\030\001 \001(\0162\023.forge_abi.Va" +
-      "lidity\"\'\n\013RangeFilter\022\014\n\004from\030\001 \001(\004\022\n\n\002t" +
-      "o\030\002 \001(\004*/\n\tDirection\022\n\n\006mutual\020\000\022\013\n\007one_" +
-      "way\020\001\022\t\n\005union\020\002*,\n\010Validity\022\010\n\004both\020\000\022\t" +
-      "\n\005valid\020\001\022\013\n\007invalid\020\002b\006proto3"
+      "\n\020trace_type.proto\022\tforge_abi\032\031google/pr" +
+      "otobuf/any.proto\032\ntype.proto\032\nenum.proto" +
+      "\"(\n\tPageOrder\022\r\n\005field\030\001 \001(\t\022\014\n\004type\030\002 \001" +
+      "(\t\"N\n\tPageInput\022\016\n\006cursor\030\001 \001(\t\022\014\n\004size\030" +
+      "\002 \001(\r\022#\n\005order\030\003 \003(\0132\024.forge_abi.PageOrd" +
+      "er\"\033\n\nTypeFilter\022\r\n\005types\030\001 \003(\t\"<\n\nTimeF" +
+      "ilter\022\027\n\017start_date_time\030\001 \001(\t\022\025\n\rend_da" +
+      "te_time\030\002 \001(\t\"Z\n\rAddressFilter\022\016\n\006sender" +
+      "\030\001 \001(\t\022\020\n\010receiver\030\002 \001(\t\022\'\n\tdirection\030\003 " +
+      "\001(\0162\024.forge_abi.Direction\"7\n\010PageInfo\022\016\n",
+      "\006cursor\030\001 \001(\t\022\014\n\004next\030\002 \001(\010\022\r\n\005total\030\003 \001" +
+      "(\r\"\270\001\n\022IndexedTransaction\022\014\n\004hash\030\001 \001(\t\022" +
+      "\016\n\006sender\030\002 \001(\t\022\020\n\010receiver\030\003 \001(\t\022\014\n\004tim" +
+      "e\030\004 \001(\t\022\014\n\004type\030\005 \001(\t\022\"\n\002tx\030\006 \001(\0132\026.forg" +
+      "e_abi.Transaction\022\r\n\005valid\030\024 \001(\010\022#\n\004code" +
+      "\030\025 \001(\0162\025.forge_abi.StatusCode\"\215\003\n\023Indexe" +
+      "dAccountState\022\017\n\007address\030\001 \001(\t\022#\n\007balanc" +
+      "e\030\002 \001(\0132\022.forge_abi.BigUint\022\022\n\nnum_asset" +
+      "s\030\003 \001(\004\022\017\n\007num_txs\030\004 \001(\004\022\r\n\005nonce\030\005 \001(\004\022" +
+      "\024\n\014genesis_time\030\006 \001(\t\022\030\n\020renaissance_tim",
+      "e\030\007 \001(\t\022\017\n\007moniker\030\010 \001(\t\022\025\n\rmigrated_fro" +
+      "m\030\t \001(\t\022\023\n\013migrated_to\030\n \001(\t\0221\n\025total_re" +
+      "ceived_stakes\030\013 \001(\0132\022.forge_abi.BigUint\022" +
+      "(\n\014total_stakes\030\014 \001(\0132\022.forge_abi.BigUin" +
+      "t\022*\n\016total_unstakes\030\r \001(\0132\022.forge_abi.Bi" +
+      "gUint\022\026\n\016recent_num_txs\030\016 \003(\004\"\205\002\n\021Indexe" +
+      "dAssetState\022\017\n\007address\030\001 \001(\t\022\r\n\005owner\030\002 " +
+      "\001(\t\022\024\n\014genesis_time\030\003 \001(\t\022\030\n\020renaissance" +
+      "_time\030\004 \001(\t\022\017\n\007moniker\030\005 \001(\t\022\020\n\010readonly" +
+      "\030\006 \001(\010\022\025\n\rconsumed_time\030\007 \001(\t\022\016\n\006issuer\030",
+      "\010 \001(\t\022\016\n\006parent\030\t \001(\t\022\025\n\rtransferrable\030\n" +
+      " \001(\010\022\013\n\003ttl\030\013 \001(\004\022\"\n\004data\0302 \001(\0132\024.google" +
+      ".protobuf.Any\"\272\001\n\021IndexedStakeState\022\017\n\007a" +
+      "ddress\030\001 \001(\t\022#\n\007balance\030\002 \001(\0132\022.forge_ab" +
+      "i.BigUint\022\016\n\006sender\030\003 \001(\t\022\020\n\010receiver\030\004 " +
+      "\001(\t\022\024\n\014genesis_time\030\005 \001(\t\022\030\n\020renaissance" +
+      "_time\030\006 \001(\t\022\017\n\007message\030\007 \001(\t\022\014\n\004type\030\010 \001" +
+      "(\r\"h\n\014IndexedBlock\022\016\n\006height\030\001 \001(\004\022\014\n\004ti" +
+      "me\030\002 \001(\t\022\020\n\010proposer\030\003 \001(\t\022\017\n\007num_txs\030\004 " +
+      "\001(\004\022\027\n\017num_invalid_txs\030\005 \001(\004\"\272\001\n\014HealthS",
+      "tatus\022-\n\tconsensus\030\001 \001(\0132\032.forge_abi.Con" +
+      "sensusStatus\022)\n\007network\030\002 \001(\0132\030.forge_ab" +
+      "i.NetworkStatus\022)\n\007storage\030\003 \001(\0132\030.forge" +
+      "_abi.StorageStatus\022%\n\005forge\030\004 \001(\0132\026.forg" +
+      "e_abi.ForgeStatus\"G\n\017ConsensusStatus\022\016\n\006" +
+      "health\030\001 \001(\010\022\016\n\006synced\030\002 \001(\010\022\024\n\014block_he" +
+      "ight\030\003 \001(\004\"2\n\rNetworkStatus\022\016\n\006health\030\001 " +
+      "\001(\010\022\021\n\tnum_peers\030\002 \001(\r\"y\n\rStorageStatus\022" +
+      "\016\n\006health\030\001 \001(\010\022\026\n\016indexer_server\030\002 \001(\t\022" +
+      "\020\n\010state_db\030\003 \001(\t\022.\n\ndisk_space\030\004 \001(\0132\032.",
+      "forge_abi.DiskSpaceStatus\"5\n\017DiskSpaceSt" +
+      "atus\022\023\n\013forge_usage\030\001 \001(\t\022\r\n\005total\030\002 \001(\t" +
+      "\"v\n\013ForgeStatus\022\016\n\006health\030\001 \001(\010\022\022\n\nabi_s" +
+      "erver\030\002 \001(\t\022\021\n\tforge_web\030\003 \001(\t\0220\n\013abci_s" +
+      "erver\030\004 \001(\0132\033.forge_abi.AbciServerStatus" +
+      "\"=\n\020AbciServerStatus\022\026\n\016abci_consensus\030\001" +
+      " \001(\t\022\021\n\tabci_info\030\002 \001(\t\"7\n\016ValidityFilte" +
+      "r\022%\n\010validity\030\001 \001(\0162\023.forge_abi.Validity" +
+      "\"\'\n\013RangeFilter\022\014\n\004from\030\001 \001(\004\022\n\n\002to\030\002 \001(" +
+      "\004*/\n\tDirection\022\n\n\006mutual\020\000\022\013\n\007one_way\020\001\022",
+      "\t\n\005union\020\002*,\n\010Validity\022\010\n\004both\020\000\022\t\n\005vali" +
+      "d\020\001\022\013\n\007invalid\020\002b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -17891,6 +18628,7 @@ public final class TraceType {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.google.protobuf.AnyProto.getDescriptor(),
           forge_abi.Type.getDescriptor(),
           forge_abi.Enum.getDescriptor(),
         }, assigner);
@@ -17947,7 +18685,7 @@ public final class TraceType {
     internal_static_forge_abi_IndexedAssetState_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_IndexedAssetState_descriptor,
-        new java.lang.String[] { "Address", "Owner", "GenesisTime", "RenaissanceTime", "Moniker", "Readonly", });
+        new java.lang.String[] { "Address", "Owner", "GenesisTime", "RenaissanceTime", "Moniker", "Readonly", "ConsumedTime", "Issuer", "Parent", "Transferrable", "Ttl", "Data", });
     internal_static_forge_abi_IndexedStakeState_descriptor =
       getDescriptor().getMessageTypes().get(9);
     internal_static_forge_abi_IndexedStakeState_fieldAccessorTable = new
@@ -18014,6 +18752,7 @@ public final class TraceType {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RangeFilter_descriptor,
         new java.lang.String[] { "From", "To", });
+    com.google.protobuf.AnyProto.getDescriptor();
     forge_abi.Type.getDescriptor();
     forge_abi.Enum.getDescriptor();
   }

@@ -5,12 +5,7 @@ import com.google.common.io.BaseEncoding
 import forge_abi.Rpc
 import io.arcblock.forge.TransactionFactory
 import io.arcblock.forge.WalletUtils
-import io.arcblock.forge.did.DIDGenerator
-import io.arcblock.forge.did.DidAuthUtils
-import io.arcblock.forge.did.HashType
-import io.arcblock.forge.did.KeyType
-import io.arcblock.forge.did.RoleType
-import io.arcblock.forge.did.WalletInfo
+import io.arcblock.forge.did.*
 import io.arcblock.forge.did.bean.AppInfo
 import io.arcblock.forge.did.bean.MetaInfo
 import io.arcblock.forge.did.bean.ProfileClaim
@@ -113,7 +108,7 @@ class SwapSvcController {
         .build())
 
     val tmp = WalletInfo(did.removePrefix("did:abt:"),pk,sk)
-    val tx = TransactionFactory.unsignPoke(forgeState.state.pokeConfig.address,app.chainId,tmp).signTx(sk)
+    val tx = TransactionFactory.unsignPoke(app.chainId,tmp).signTx(sk)
     val rst = forge.forgeSDK.sendTx(Rpc.RequestSendTx.newBuilder().setTx(tx).build())
 
     return "{${rst.hash}}"

@@ -25,7 +25,6 @@ import java.util.*
  * Edited Time  :
  * Description  :
  **/
-
 @Ignore
 class TransferTest {
 
@@ -38,7 +37,8 @@ class TransferTest {
     forge = ForgeSDK.connect("localhost", 28210)
     alice = forge.createWallet("alice", "123qweASD").wallet
     bob = forge.createWallet("bobbb", "123qweASD").wallet
-    forge.poke(alice, forge.getForgeState().state.pokeConfig)
+    forge.poke(alice)
+
   }
 
   @Test
