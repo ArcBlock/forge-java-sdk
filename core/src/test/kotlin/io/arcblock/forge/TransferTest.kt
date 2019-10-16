@@ -1,13 +1,19 @@
 package io.arcblock.forge
 
+import com.google.protobuf.Any
+import com.google.protobuf.ByteString
 import forge_abi.Enum
 import forge_abi.Rpc
+import forge_abi.SetupSwap
 import forge_abi.Type
+import io.arcblock.forge.did.DIDGenerator
+import io.arcblock.forge.did.HashType
 import io.grpc.stub.StreamObserver
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
+import java.math.BigDecimal
 import java.math.BigInteger
 import java.util.*
 
@@ -43,8 +49,10 @@ class TransferTest {
 
   @Test
   fun testTranser() {
-    val response = forge.transfer(alice, bob, BigInteger.ONE)
-    Assert.assertEquals(" send multi sig transaction:", Enum.StatusCode.ok, response.code)
+    for (x in 0..30){
+      val response = forge.transfer(alice, bob, BigInteger.ONE)
+      Assert.assertEquals(" send multi sig transaction:", Enum.StatusCode.ok, response.code)
+    }
   }
 
   @Test
@@ -128,6 +136,27 @@ class TransferTest {
     Assert.assertEquals(" test delegate transfer:", Enum.StatusCode.ok, sendR.code)
   }
 
+ @Test
+ fun testSwap(){
+   var mByteArray = ByteArray(128)
+   Random().nextBytes(mByteArray)
+   val tx = setup_swap("1", 40000, mByteArray,bob.address,forge.chainInfo.value.network,alice.pk.toByteArray(),alice.address).signTx(alice.sk.toByteArray())
+   val hash = forge.sendTx(tx).hash
+   val addr = DIDGenerator.toSwapAddress(hash = hash.deBase16())
+
+   println("address:$addr")
+ }
+
+  fun setup_swap(demandToken:String, blockHeight: Int,hashKey: ByteArray,receiver: String,chainId:String, pk: ByteArray,addr: String): Type.Transaction {
+    val itx = SetupSwap.SetupSwapTx.newBuilder()
+      .setValue(Type.BigUint.getDefaultInstance().toBuilder().setValue(BigDecimal(demandToken).toBigInteger().toByteArray().toByteString()).buildPartial())
+      .setLocktime(blockHeight).setHashlock(Hasher.hash(HashType.SHA3, hashKey).toByteString()).setReceiver(receiver).buildPartial()
+    return Type.Transaction.getDefaultInstance().toBuilder().setChainId(chainId).setPk(ByteString.copyFrom(pk)).setFrom(addr)
+      .setNonce(System.currentTimeMillis()).setItx(Any.getDefaultInstance().toBuilder().setTypeUrl("fg:t:setup_swap").setValue(itx.toByteString())
+        .buildPartial())
+      .buildPartial()
+
+  }
 
 
 }

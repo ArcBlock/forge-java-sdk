@@ -6,6 +6,7 @@ import com.google.protobuf.ByteString
 import forge_abi.CreateAsset
 import io.arcblock.forge.*
 import io.arcblock.forge.bip44.Bip44Utils
+import io.arcblock.forge.utils.decodeB16
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -149,7 +150,10 @@ class DIDGeneratorTest {
 
   @Test
   fun toTether(){
-        //val rst = DIDGenerator.toTetherAddress(BaseEncoding.base16().decode("5D9394E3BBFF052548876A7420E6F5B32C3855995511DEC7A5539CD2C56BD396"))
+    val test = DIDGenerator.toSwapAddress("0D89743C7F7F4EEFFCC9DEBB0C2487261F377F9A8F0E4E0304A9054DEFC94B3C".decodeB16())
+    println("swap:$test")
+
+    //val rst = DIDGenerator.toTetherAddress(BaseEncoding.base16().decode("5D9394E3BBFF052548876A7420E6F5B32C3855995511DEC7A5539CD2C56BD396"))
 // do not work now
     //Assert.assertEquals("z2MBxdfRmeozARcnPvPi42fndxmhn7rLi9D7g",rst)
 
