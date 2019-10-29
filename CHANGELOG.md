@@ -1,3 +1,13 @@
+## 0.38.0 (September 29, 2019)
+  - add proto
+  - remove poke config
+  - add token swap protocol
+
+## 0.37.2 (September 16, 2019)
+  - Add delegate method
+  - Add delegatee parameter for some interface
+  - Add Unit Test
+
 ## 0.35.0 (September 03, 2019)
   - update protocal to support delegate
   - Merge branch 'version/0.32' into feature/delegate

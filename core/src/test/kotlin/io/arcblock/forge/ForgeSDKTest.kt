@@ -9,13 +9,12 @@ import io.arcblock.forge.did.WalletInfo
 import io.grpc.stub.StreamObserver
 import org.junit.Assert
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import java.math.BigInteger
 import java.util.*
 import java.util.concurrent.atomic.AtomicBoolean
 
-@Ignore
+
 class ForgeSDKTest {
 
   lateinit var forgeSDK: ForgeSDK
@@ -41,15 +40,15 @@ class ForgeSDKTest {
       .setType(walletType)
       .build()).wallet
     chainInfo = forgeSDK.getChainInfo(Rpc.RequestGetChainInfo.getDefaultInstance()).info
-    val pokeConfig = forgeSDK.getForgeState(Rpc.RequestGetForgeState.getDefaultInstance()).state.pokeConfig
-    poke(pokeConfig, alice)
-    poke(pokeConfig, bob)
+    val pokeConfig = forgeSDK.getForgeState(Rpc.RequestGetForgeState.getDefaultInstance()).state
+    poke( alice)
+    poke( bob)
 
   }
 
 
-  private fun poke(pokeConfig: Type.PokeConfig, who: Type.WalletInfo) {
-    val tx = TransactionFactory.unsignPoke(pokeConfig.address, chainInfo.network, wallet = WalletInfo(who))
+  private fun poke( who: Type.WalletInfo) {
+    val tx = TransactionFactory.unsignPoke(chainInfo.network, wallet = WalletInfo(who))
       .signTx(who.sk.toByteArray())
     val response = forgeSDK.sendTx(Rpc.RequestSendTx.newBuilder().setTx(tx).build())
     Assert.assertEquals("poke transaction:", Enum.StatusCode.ok, response.code)

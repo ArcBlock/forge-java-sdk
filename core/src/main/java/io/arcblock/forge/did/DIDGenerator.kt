@@ -232,4 +232,9 @@ object DIDGenerator {
     return hashToAddress(RoleType.DELEGATE, hash = data.hash(SHA3))
   }
 
+  fun toSwapAddress(hash: ByteArray): String {
+    return hashToAddress(RoleType.SWAP,ED25519, SHA2,hash = hash)
+  }
+
+
 }

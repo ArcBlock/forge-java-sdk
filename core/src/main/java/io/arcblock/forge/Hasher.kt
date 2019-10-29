@@ -23,22 +23,22 @@ object Hasher {
         ArcSha3Hasher.sha256(contents, 1)
       }
       HashType.KECCAK -> {
-        ArcKeccakf1600Hasher.sha(contents)
+        ArcKeccakf1600Hasher.sha256(contents, 1)
       }
       HashType.KECCAK_384 -> {
-        ArcKeccakf1600Hasher.sha384(contents)
+        ArcKeccakf1600Hasher.sha384(contents, 1)
       }
       HashType.KECCAK_512 -> {
-        ArcKeccakf1600Hasher.sha512(contents)
+        ArcKeccakf1600Hasher.sha512(contents, 1)
       }
       HashType.SHA3_384 -> {
-        ArcKeccakf1600Hasher.sha384(contents)
+        ArcKeccakf1600Hasher.sha384(contents, 1)
       }
       HashType.SHA3_512 -> {
-        ArcKeccakf1600Hasher.sha512(contents)
+        ArcKeccakf1600Hasher.sha512(contents, 1)
       }
       HashType.SHA2 ->{
-        ArcSha2Hasher.sha(contents)
+        ArcSha2Hasher.sha256(contents, 1)
       }
       else -> {
         HashUtils.sha3(contents)
