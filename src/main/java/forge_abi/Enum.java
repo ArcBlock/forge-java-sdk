@@ -257,22 +257,6 @@ public final class Enum {
      */
     invalid_deactivation(63),
     /**
-     * <code>sender_withdraw_items_full = 64;</code>
-     */
-    sender_withdraw_items_full(64),
-    /**
-     * <code>withdraw_item_missing = 65;</code>
-     */
-    withdraw_item_missing(65),
-    /**
-     * <code>invalid_withdraw_tx = 66;</code>
-     */
-    invalid_withdraw_tx(66),
-    /**
-     * <code>invalid_chain_type = 67;</code>
-     */
-    invalid_chain_type(67),
-    /**
      * <code>forbidden = 403;</code>
      */
     forbidden(403),
@@ -525,22 +509,6 @@ public final class Enum {
      */
     public static final int invalid_deactivation_VALUE = 63;
     /**
-     * <code>sender_withdraw_items_full = 64;</code>
-     */
-    public static final int sender_withdraw_items_full_VALUE = 64;
-    /**
-     * <code>withdraw_item_missing = 65;</code>
-     */
-    public static final int withdraw_item_missing_VALUE = 65;
-    /**
-     * <code>invalid_withdraw_tx = 66;</code>
-     */
-    public static final int invalid_withdraw_tx_VALUE = 66;
-    /**
-     * <code>invalid_chain_type = 67;</code>
-     */
-    public static final int invalid_chain_type_VALUE = 67;
-    /**
      * <code>forbidden = 403;</code>
      */
     public static final int forbidden_VALUE = 403;
@@ -629,10 +597,6 @@ public final class Enum {
         case 61: return protocol_not_paused;
         case 62: return protocol_not_activated;
         case 63: return invalid_deactivation;
-        case 64: return sender_withdraw_items_full;
-        case 65: return withdraw_item_missing;
-        case 66: return invalid_withdraw_tx;
-        case 67: return invalid_chain_type;
         case 403: return forbidden;
         case 500: return internal;
         case 504: return timeout;
@@ -2277,7 +2241,7 @@ public final class Enum {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nenum.proto\022\tforge_abi*\264\013\n\nStatusCode\022\006" +
+      "\n\nenum.proto\022\tforge_abi*\310\n\n\nStatusCode\022\006" +
       "\n\002ok\020\000\022\021\n\rinvalid_nonce\020\001\022\025\n\021invalid_sig" +
       "nature\020\002\022\030\n\024invalid_sender_state\020\003\022\032\n\026in" +
       "valid_receiver_state\020\004\022\025\n\021insufficient_d" +
