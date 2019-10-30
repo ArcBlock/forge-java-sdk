@@ -5,7 +5,7 @@ import com.google.protobuf.ByteString
 import forge_abi.*
 import io.arcblock.forge.did.DIDGenerator
 import io.arcblock.forge.did.WalletInfo
-import io.arcblock.forge.utils.address
+import io.arcblock.forge.extension.address
 import java.time.LocalDate
 import java.util.*
 
@@ -85,7 +85,6 @@ object TransactionFactory {
         .setValue(itx)
         .build())
       .build()
-
   }
 
 

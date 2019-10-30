@@ -1,6 +1,7 @@
 package io.arcblock.forge.sign
 
 import com.google.common.io.BaseEncoding
+import io.arcblock.forge.WalletUtils
 import io.arcblock.forge.did.KeyType
 import org.junit.Assert
 import org.junit.Before
@@ -39,5 +40,32 @@ class SignerTest {
 
     val sigSecp = BaseEncoding.base64Url().decode("MEQCIH_qbkbkPFEBejYUyaUujBJGajp1GNxKJ-oRnxUKl7kyAiBgxuxfCqFK8_Tem3Aw5cszOj5-K8dkKJZCTt7v5OGhWQ==")
     Assert.assertTrue(Signer.verify(KeyType.SECP256K1, hash.toByteArray(), sePk, sigSecp))
+
+  }
+
+  @Test
+  fun sepcialKey(){
+//    var sk = "v9_-BPhwLUgz6-KI6vD0xWgtwicqMGjjT4Y7qjQHO2rkTaCRuEc19zPVCp0MpCoD4EZCh-3fnKoBkRc8ItO-zg".decodeB64Url()
+//    var pk = WalletUtils.sk2pk(KeyType.ED25519, sk)
+//    val sig = Signer.sign(KeyType.ED25519, hash.toByteArray(),sk)
+//    Assert.assertTrue(Signer.verify(KeyType.ED25519, hash.toByteArray(), pk, sig))
+
+
+
+    val sk = BaseEncoding
+      .base64Url().decode("v9_-BPhwLUgz6-KI6vD0xWgtwicqMGjjT4Y7qjQHO2rkTaCRuEc19zPVCp0MpCoD4EZCh-3fnKoBkRc8ItO-zg")
+    //val pk = ByteString.copyFrom(BaseEncoding.base64Url().decode("5E2gkbhHNfcz1QqdDKQqA-BGQoft35yqAZEXPCLTvs4"))
+    //Type.WalletInfo walletInfo = Type.WalletInfo.newBuilder().setSk(sk).setPk(pk).setAddress("z119LLxgzRqMd3W9LK92TyW6Y9q8kF1nu2dy").build();
+
+
+    //WalletInfo wallet = DIDGenerator.INSTANCE.randomWallet();
+//    val wallet = WalletInfo(DIDGenerator.sk2did(sk).substring(8), sk,
+//      WalletUtils.sk2pk(KeyType.ED25519,
+//        sk))
+    val content = "abcdsfsdfsdf"
+    //val pkS = WalletUtils.sk2pk(KeyType.ED25519,sk).encodeB64Url()
+    val signature =  Signer.sign(KeyType.ED25519,content.toByteArray(),sk)
+    val rst = Signer.verify(KeyType.ED25519,content.toByteArray(), WalletUtils.sk2pk(KeyType.ED25519,sk), signature)
+    Assert.assertTrue(rst)
   }
 }

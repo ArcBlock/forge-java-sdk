@@ -4,9 +4,13 @@ import com.google.common.io.BaseEncoding
 import com.google.protobuf.Any
 import com.google.protobuf.ByteString
 import forge_abi.CreateAsset
-import io.arcblock.forge.*
+import io.arcblock.forge.Hasher
+import io.arcblock.forge.WalletUtils
 import io.arcblock.forge.bip44.Bip44Utils
-import io.arcblock.forge.utils.decodeB16
+import io.arcblock.forge.extension.decodeB16
+import io.arcblock.forge.extension.didToAddr
+import io.arcblock.forge.extension.toHexString
+import io.arcblock.forge.getPK
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -50,14 +54,14 @@ class DIDGeneratorTest {
 
   @Test
   fun sk2did1() {
-    val sk = "26954E19E8781905E2CF91A18AE4F36A954C142176EE1BC27C2635520C49BC55".deBase16()
+    val sk = "26954E19E8781905E2CF91A18AE4F36A954C142176EE1BC27C2635520C49BC55".decodeB16()
     val did = DIDGenerator.sk2did(RoleType.ACCOUNT, KeyType.SECP256K1, HashType.SHA3, sk)
     Assert.assertEquals("did:abt:z1Ee1H8g248HqroacmEnZzMYgbhjz1Z2WSvv", did)
   }
 
   @Test
   fun pk2did() {
-    val sk = "26954E19E8781905E2CF91A18AE4F36A954C142176EE1BC27C2635520C49BC55".deBase16()
+    val sk = "26954E19E8781905E2CF91A18AE4F36A954C142176EE1BC27C2635520C49BC55".decodeB16()
     val did = DIDGenerator.pk2did(RoleType.ACCOUNT, KeyType.SECP256K1, HashType.SHA3, WalletUtils.sk2pk(KeyType.SECP256K1, sk))
     Assert.assertEquals("did:abt:z1Ee1H8g248HqroacmEnZzMYgbhjz1Z2WSvv", did)
   }

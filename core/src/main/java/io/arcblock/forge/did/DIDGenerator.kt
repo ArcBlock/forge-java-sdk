@@ -1,17 +1,19 @@
 package io.arcblock.forge.did
 
 import forge_abi.CreateAsset
+import forge_abi.Enum
+import forge_abi.Type
 import io.arcblock.forge.Hasher
 import io.arcblock.forge.WalletUtils
 import io.arcblock.forge.bip44.Bip44Utils
 import io.arcblock.forge.did.HashType.SHA2
 import io.arcblock.forge.did.HashType.SHA3
 import io.arcblock.forge.did.KeyType.ED25519
-import io.arcblock.forge.hash
+import io.arcblock.forge.extension.address
+import io.arcblock.forge.extension.hash
 import io.arcblock.forge.hash.ArcSha2Hasher
 import io.arcblock.forge.hash.ArcSha3Hasher
 import io.arcblock.forge.utils.Base58Btc
-import io.arcblock.forge.utils.address
 import org.bitcoinj.crypto.ChildNumber
 import org.bitcoinj.crypto.HDKeyDerivation
 import java.math.BigInteger
@@ -115,6 +117,7 @@ object DIDGenerator {
     return pk2did(roleType, keyType, hashType, pk)
   }
 
+
   /**
    * Generate Asset Address for CreateAssetTX
    * @param senderAddress Assert Creator 's address ,like :z1cserc3KL1cL..
@@ -177,10 +180,15 @@ object DIDGenerator {
   /**
    * random wallet
    */
-  fun randomWallet(): WalletInfo {
+  fun randomWallet(walletType: Type.WalletType? = Type.WalletType.newBuilder().setHash(Enum.HashType.sha3).setPk(Enum.KeyType.ed25519).setRole(Enum.RoleType
+    .role_account).build()):
+    WalletInfo {
+    val type = if (walletType == null) Type.WalletType.newBuilder().setHash(Enum.HashType.sha3).setPk(Enum.KeyType.ed25519).setRole(Enum.RoleType
+      .role_account).build() else walletType
     val seed =Bip44Utils.genSeed(UUID.randomUUID().toString(),UUID.randomUUID().toString(),UUID.randomUUID().toString())
     val sk= Bip44Utils.genKeyPair(seed).privateKey.toByteArray()
-    return WalletInfo(sk=sk,pk = WalletUtils.sk2pk(sk= sk),address = sk2did(sk).address())
+    return WalletInfo(sk=sk,pk = WalletUtils.sk2pk(sk= sk, keyType = type.pk),address = sk2did( RoleType.fromInt(type.roleValue),KeyType.fromInt(type.pkValue),
+      HashType.fromInt(type.hashValue),sk).address())
   }
 
   /**

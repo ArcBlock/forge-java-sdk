@@ -8,11 +8,17 @@ import forge_abi.SetupSwap
 import forge_abi.Type
 import io.arcblock.forge.did.DIDGenerator
 import io.arcblock.forge.did.HashType
+import io.arcblock.forge.did.WalletInfo
+import io.arcblock.forge.extension.decodeB16
+import io.arcblock.forge.extension.signTx
+import io.arcblock.forge.extension.toByteString
 import io.grpc.stub.StreamObserver
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 import java.math.BigDecimal
 import java.math.BigInteger
 import java.util.*
@@ -32,19 +38,21 @@ import java.util.*
  * Description  :
  **/
 @Ignore
+@RunWith(JUnit4::class)
 class TransferTest {
 
-  private lateinit var bob: Type.WalletInfo
-  private lateinit var alice: Type.WalletInfo
+  private lateinit var bob: WalletInfo
+  private lateinit var alice: WalletInfo
   private lateinit var forge: ForgeSDK
 
   @Before
   fun setUp() {
-    forge = ForgeSDK.connect("localhost", 28210)
-    alice = forge.createWallet("alice", "123qweASD").wallet
-    bob = forge.createWallet("bobbb", "123qweASD").wallet
+    forge = ForgeSDK.connect("localhost", 28211)
+    alice = forge.createWallet()
+    bob = forge.createWallet()
+    forge.declare("alice",alice)
+    forge.declare("Bobb",bob)
     forge.poke(alice)
-
   }
 
   @Test
@@ -109,14 +117,16 @@ class TransferTest {
    */
   @Test
   fun testDelegateExchange() {
-    val celliy = forge.createWallet("celliy", "123qweASD").wallet
-    forge.createDelegate(alice,celliy, listOf(""), TypeUrls.EXCHANGE)
+    val celliy = forge.createWallet()
+    forge.declare("Celliy",celliy)
+    forge.createDelegate(alice,celliy, listOf("itx.value <= 100000000000000"), TypeUrls.EXCHANGE)
 
-    val dendy = forge.createWallet("denddi", "123qweASD").wallet
-    forge.createDelegate(bob, dendy, listOf(""),TypeUrls.EXCHANGE)
+    val dendy = forge.createWallet()
+    forge.declare("Dendy", dendy)
+    forge.createDelegate(bob, dendy, listOf("itx.value <= 100000000000000"),TypeUrls.EXCHANGE)
 
     val (_, address) = forge.createAsset("string", UUID.randomUUID().toString().toByteArray(), "assetMoniker", bob)
-    val response = forge.exchange(celliy, dendy, BigInteger.ONE, address,alice.address, bob.address)
+    val response = forge.exchange(celliy, dendy, BigInteger.ONE, address,delegateeFrom = alice.address)
     println("response:\n$response")
     Assert.assertEquals(" test exchange:", Enum.StatusCode.ok, response.code)
     Thread.sleep(5000)
@@ -129,7 +139,8 @@ class TransferTest {
 
   @Test
   fun testDelegate(){
-    val celliy = forge.createWallet("celliy", "123qweASD").wallet
+    val celliy = forge.createWallet()
+    forge.declare("Celliy",celliy)
     val response = forge.createDelegate(alice,celliy, listOf("itx.value <= 100000000000000"))
     Assert.assertEquals(" test delegate:", Enum.StatusCode.ok, response.code)
     val sendR = forge.transfer(celliy, bob, BigInteger.ZERO, delegatee = alice.address)
@@ -140,9 +151,9 @@ class TransferTest {
  fun testSwap(){
    var mByteArray = ByteArray(128)
    Random().nextBytes(mByteArray)
-   val tx = setup_swap("1", 40000, mByteArray,bob.address,forge.chainInfo.value.network,alice.pk.toByteArray(),alice.address).signTx(alice.sk.toByteArray())
+   val tx = setup_swap("1", 40000, mByteArray,bob.address,forge.chainInfo.value.network,alice.pk,alice.address).signTx(alice.sk)
    val hash = forge.sendTx(tx).hash
-   val addr = DIDGenerator.toSwapAddress(hash = hash.deBase16())
+   val addr = DIDGenerator.toSwapAddress(hash = hash.decodeB16())
 
    println("address:$addr")
  }

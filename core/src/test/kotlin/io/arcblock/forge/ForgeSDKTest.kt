@@ -6,6 +6,7 @@ import forge_abi.*
 import forge_abi.Enum
 import io.arcblock.forge.did.DIDGenerator
 import io.arcblock.forge.did.WalletInfo
+import io.arcblock.forge.extension.signTx
 import io.grpc.stub.StreamObserver
 import org.junit.Assert
 import org.junit.Before
@@ -29,16 +30,8 @@ class ForgeSDKTest {
   @Before
   fun setup() {
     forgeSDK = ForgeSDK.connect("localhost", 28210)
-    forgeSDK.createWallet(Rpc.RequestCreateWallet.newBuilder()
-      .setMoniker("Alice").setPassphrase("abc123")
-      .setType(walletType)
-      .build()).let {
-      alice = it.wallet
-      aliceToken = it.token
-    }
-    bob = forgeSDK.createWallet(Rpc.RequestCreateWallet.newBuilder().setMoniker("BBBBob").setPassphrase("abc123")
-      .setType(walletType)
-      .build()).wallet
+    alice = forgeSDK.createWallet().toTypeWalletInfo()
+    bob = forgeSDK.createWallet().toTypeWalletInfo()
     chainInfo = forgeSDK.getChainInfo(Rpc.RequestGetChainInfo.getDefaultInstance()).info
     val pokeConfig = forgeSDK.getForgeState(Rpc.RequestGetForgeState.getDefaultInstance()).state
     poke( alice)
@@ -76,34 +69,34 @@ class ForgeSDKTest {
    * @param  request  transaction request
    * @return  result
    */
+//
+//  @Test
+//  fun createTx() {
+//    val response = forgeSDK.createTx(Rpc.RequestCreateTx.newBuilder()
+//      .setFrom(alice.address)
+//      .setItx(Any.newBuilder()
+//        .setValue(Declare.DeclareTx.newBuilder()
+//          .setIssuer(alice.address)
+//          .setMoniker("Aliccce").build().toByteString())
+//        .setTypeUrl(TypeUrls.DECLARE)
+//        .build())
+//      .setNonce(System.currentTimeMillis())
+//      .setWallet(alice)
+//      .build())
+//    Assert.assertEquals("create declare transaction:", Enum.StatusCode.ok, response.code)
+//  }
 
-  @Test
-  fun createTx() {
-    val response = forgeSDK.createTx(Rpc.RequestCreateTx.newBuilder()
-      .setFrom(alice.address)
-      .setItx(Any.newBuilder()
-        .setValue(Declare.DeclareTx.newBuilder()
-          .setIssuer(alice.address)
-          .setMoniker("Aliccce").build().toByteString())
-        .setTypeUrl(TypeUrls.DECLARE)
-        .build())
-      .setNonce(System.currentTimeMillis())
-      .setWallet(alice)
-      .build())
-    Assert.assertEquals("create declare transaction:", Enum.StatusCode.ok, response.code)
-  }
-
-  @Test
-  fun multisig() {
-    val tx = createExchange()
-    val response = forgeSDK.multisig(Rpc.RequestMultisig.newBuilder()
-      .setTx(tx)
-      .setWallet(bob)
-      .build())
-    Assert.assertEquals("multi sig transaction:", Enum.StatusCode.ok, response.code)
-    val sendResponse = forgeSDK.sendTx(response.tx)
-    Assert.assertEquals(" send multi sig transaction:", Enum.StatusCode.ok, sendResponse.code)
-  }
+//  @Test
+//  fun multisig() {
+//    val tx = createExchange()
+//    val response = forgeSDK.multisig(Rpc.RequestMultisig.newBuilder()
+//      .setTx(tx)
+//      .setWallet(bob)
+//      .build())
+//    Assert.assertEquals("multi sig transaction:", Enum.StatusCode.ok, response.code)
+//    val sendResponse = forgeSDK.sendTx(response.tx)
+//    Assert.assertEquals(" send multi sig transaction:", Enum.StatusCode.ok, sendResponse.code)
+//  }
 
   private fun createExchange(): Type.Transaction {
     val exchange = Exchange.ExchangeTx.newBuilder()
@@ -431,83 +424,80 @@ class ForgeSDKTest {
   fun getTetherState() {
   }
 
-  @Test
-  fun createWallet() {
-    val resposne = forgeSDK.createWallet(Rpc.RequestCreateWallet.newBuilder()
-      .setMoniker("Cappuccino").setPassphrase("abc123")
-      .setType(walletType)
-      .build())
-    Assert.assertEquals("Create wallet", Enum.StatusCode.ok, resposne.code)
-  }
-
-  @Test
-  fun loadWallet() {
-    val w = forgeSDK.createWallet(Rpc.RequestCreateWallet.newBuilder()
-      .setMoniker("Cappuccino").setPassphrase("abc123")
-      .setType(walletType)
-      .build()).wallet
-
-    val response = forgeSDK.loadWallet(Rpc.RequestLoadWallet.newBuilder()
-      .setAddress(w.address)
-      .setPassphrase("abc123")
-      .build())
-    Assert.assertEquals("load wallet", Enum.StatusCode.ok, response.code)
-    Assert.assertEquals("load wallet", 0, response.wallet.sk.size())
-
-  }
+//  @Test
+//  fun createWallet() {
+//    val resposne = forgeSDK.createWallet(Rpc.RequestCreateWallet.newBuilder()
+//      .setMoniker("Cappuccino").setPassphrase("abc123")
+//      .setType(walletType)
+//      .build())
+//    Assert.assertEquals("Create wallet", Enum.StatusCode.ok, resposne.code)
+//  }
+//
+//  @Test
+//  fun loadWallet() {
+//    val w = forgeSDK.createWallet(Rpc.RequestCreateWallet.newBuilder()
+//      .setMoniker("Cappuccino").setPassphrase("abc123")
+//      .setType(walletType)
+//      .build()).wallet
+//
+//    val response = forgeSDK.loadWallet(Rpc.RequestLoadWallet.newBuilder()
+//      .setAddress(w.address)
+//      .setPassphrase("abc123")
+//      .build())
+//    Assert.assertEquals("load wallet", Enum.StatusCode.ok, response.code)
+//    Assert.assertEquals("load wallet", 0, response.wallet.sk.size())
+//
+//  }
 
   //data is sk
-  @Test
-  fun recoverWallet() {
-    val w = forgeSDK.createWallet(Rpc.RequestCreateWallet.newBuilder()
-      .setMoniker("Cappuccino").setPassphrase("abc123")
-      .setType(walletType)
-      .build()).wallet
+//  @Test
+//  fun recoverWallet() {
+//    val w = forgeSDK.createWallet(Rpc.RequestCreateWallet.newBuilder()
+//      .setMoniker("Cappuccino").setPassphrase("abc123")
+//      .setType(walletType)
+//      .build()).wallet
+//
+//    val response = forgeSDK.recoverWallet(Rpc.RequestRecoverWallet.newBuilder().setPassphrase("abc123").setData(w.sk)
+//      .setType(Type.WalletType.newBuilder().setHash(Enum.HashType.sha3).setRole(Enum.RoleType.role_account).setPk(Enum.KeyType.ed25519))
+//      .setMoniker("Cappuc")
+//      .build())
+//
+//    Assert.assertEquals("recover wallet", Enum.StatusCode.ok, response.code)
+//    println("wallet:\n${response.wallet}")
+//  }
 
-    val response = forgeSDK.recoverWallet(Rpc.RequestRecoverWallet.newBuilder().setPassphrase("abc123").setData(w.sk)
-      .setType(Type.WalletType.newBuilder().setHash(Enum.HashType.sha3).setRole(Enum.RoleType.role_account).setPk(Enum.KeyType.ed25519))
-      .setMoniker("Cappuc")
-      .build())
-
-    Assert.assertEquals("recover wallet", Enum.StatusCode.ok, response.code)
-    println("wallet:\n${response.wallet}")
-  }
-
-  @Test
-  fun listWallet() {
-    forgeSDK.listWallet(Rpc.RequestListWallet.newBuilder().build(), object : StreamObserver<Rpc.ResponseListWallet> {
-      override fun onNext(value: Rpc.ResponseListWallet?) {
-        println("List Wallet:\n$value")
-      }
-
-      override fun onError(t: Throwable?) {}
-      override fun onCompleted() {}
-    })
-    Thread.sleep(5000)
-  }
-
-  @Test
-  fun removeWallet() {
-    val w = forgeSDK.createWallet(Rpc.RequestCreateWallet.newBuilder()
-      .setMoniker("Cappuccino").setPassphrase("abc123")
-      .setType(walletType)
-      .build()).wallet
-    val loadBefore = forgeSDK.loadWallet(Rpc.RequestLoadWallet.newBuilder()
-      .setPassphrase("abc123")
-      .setAddress(w.address)
-      .build())
-    Assert.assertEquals("remove wallet", Enum.StatusCode.ok, loadBefore.code)
-
-    val response = forgeSDK.removeWallet(Rpc.RequestRemoveWallet.newBuilder()
-      .setAddress(w.address)
-      .build())
-    Assert.assertEquals("remove wallet", Enum.StatusCode.ok, response.code)
-    val load = forgeSDK.loadWallet(Rpc.RequestLoadWallet.newBuilder()
-      .setPassphrase("abc123")
-      .setAddress(w.address)
-      .build())
-    Assert.assertEquals("remove wallet", Enum.StatusCode.invalid_wallet, load.code)
-  }
+//  @Test
+//  fun listWallet() {
+//    forgeSDK.listWallet(Rpc.RequestListWallet.newBuilder().build(), object : StreamObserver<Rpc.ResponseListWallet> {
+//      override fun onNext(value: Rpc.ResponseListWallet?) {
+//        println("List Wallet:\n$value")
+//      }
+//
+//      override fun onError(t: Throwable?) {}
+//      override fun onCompleted() {}
+//    })
+//    Thread.sleep(5000)
+//  }
+//
+//  @Test
+//  fun removeWallet() {
+//    val w = forgeSDK.createWallet).wallet
+//    val loadBefore = forgeSDK.loadWallet(Rpc.RequestLoadWallet.newBuilder()
+//      .setPassphrase("abc123")
+//      .setAddress(w.address)
+//      .build())
+//    Assert.assertEquals("remove wallet", Enum.StatusCode.ok, loadBefore.code)
+//
+//    val response = forgeSDK.removeWallet(Rpc.RequestRemoveWallet.newBuilder()
+//      .setAddress(w.address)
+//      .build())
+//    Assert.assertEquals("remove wallet", Enum.StatusCode.ok, response.code)
+//    val load = forgeSDK.loadWallet(Rpc.RequestLoadWallet.newBuilder()
+//      .setPassphrase("abc123")
+//      .setAddress(w.address)
+//      .build())
+//    Assert.assertEquals("remove wallet", Enum.StatusCode.invalid_wallet, load.code)
+//  }
 
   @Test
   fun declareNode() {

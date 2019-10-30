@@ -3,7 +3,7 @@ package forge_abi;
 
 import "google/protobuf/any.proto";
 
-message RevokeDelegationTx {
+message RevokeDelegateTx {
   string address = 1; // address of the delegation between sender and receiver
   string to = 2;      // delegatee's address
   repeated string type_urls = 3;
