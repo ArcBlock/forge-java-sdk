@@ -1,3 +1,37 @@
+## 0.39.0 (October 31, 2019)
+- deprecated interface use token
+- create a wallet locally
+- multisig locally
+- transer add parameter `assets`
+- wallet need declare at first time to use
+- Reformat extention method
+
+### Simple Usage
+
+```kotlin
+forge = ForgeSDK.connect("localhost", 28212)
+alice = forge.createWallet()
+bob = forge.createWallet()
+forge.declare("alice",alice)
+forge.declare("Bobb",bob)
+forge.poke(alice)
+forge.transfer(alice, bob, BigInteger.ONE)
+
+```
+
+### For java user
+
+Java user can use kotlin object like below:
+
+```java
+ForgeSDK.Companion.connect("localhost",28210)
+```
+
+and use kotlin extention like below:
+
+```
+TransactionExtKt.multiSig(tx, alice)
+```
 ## 0.38.0 (September 29, 2019)
   - add proto
   - remove poke config
