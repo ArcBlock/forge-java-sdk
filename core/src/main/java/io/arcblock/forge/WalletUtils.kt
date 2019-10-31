@@ -1,6 +1,7 @@
 package io.arcblock.forge
 
 import com.google.crypto.tink.subtle.Ed25519Sign
+import forge_abi.Enum
 import io.arcblock.forge.did.KeyType
 import org.web3j.crypto.ECKeyPair
 
@@ -23,6 +24,20 @@ object WalletUtils {
       }
       KeyType.SECP256K1 -> {
         ECKeyPair.create(sk).getPK()
+      }
+    }
+  }
+  fun sk2pk(keyType: Enum.KeyType = Enum.KeyType.ed25519, sk: ByteArray): ByteArray {
+    return when (keyType) {
+      Enum.KeyType.secp256k1 -> {
+        ECKeyPair.create(sk).getPK()
+      }
+    //Enum.KeyType.ed25519-> {
+      else -> {
+        val signer = Ed25519Sign(sk.sliceArray(0..31))
+        val pkField = signer.javaClass.getDeclaredField("publicKey")
+        pkField.isAccessible = true
+        pkField.get(signer) as ByteArray
       }
     }
   }

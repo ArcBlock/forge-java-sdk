@@ -1,8 +1,7 @@
 package io.arcblock.forge.hash
 
 import com.google.common.io.BaseEncoding
-import io.arcblock.forge.hash.ArcSha2Hasher
-import io.arcblock.forge.toHexString
+import io.arcblock.forge.extension.toHexString
 import org.junit.Assert
 import org.junit.Test
 

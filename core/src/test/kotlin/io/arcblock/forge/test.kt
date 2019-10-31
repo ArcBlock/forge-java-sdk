@@ -4,8 +4,9 @@ import com.google.common.io.BaseEncoding
 import com.google.protobuf.Any
 import com.google.protobuf.ByteString
 import io.arcblock.forge.did.HashType
-import io.arcblock.forge.utils.encodeB16
-import io.arcblock.forge.utils.encodeB58
+import io.arcblock.forge.extension.decodeB16
+import io.arcblock.forge.extension.encodeB16
+import io.arcblock.forge.extension.encodeB58
 import org.junit.Test
 
 class test {
@@ -18,8 +19,8 @@ class test {
 
   @Test
   fun calulateCode(){
-    val p = "75CB8DA37D1FBE381AD7190ACE1C87E4D1312A689B2605F4C27A2C9E1CE63CC5".deBase16().encodeB58()
-    val s = "B4C1FED5090DD64518C20EAF5F1636CB4C2A68456A945161192635EFB83C675275CB8DA37D1FBE381AD7190ACE1C87E4D1312A689B2605F4C27A2C9E1CE63CC5".deBase16().encodeB58()
+    val p = "75CB8DA37D1FBE381AD7190ACE1C87E4D1312A689B2605F4C27A2C9E1CE63CC5".decodeB16().encodeB58()
+    val s = "B4C1FED5090DD64518C20EAF5F1636CB4C2A68456A945161192635EFB83C675275CB8DA37D1FBE381AD7190ACE1C87E4D1312A689B2605F4C27A2C9E1CE63CC5".decodeB16().encodeB58()
     println("rst:$p")
     println("rst:$s")
 
