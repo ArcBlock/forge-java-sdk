@@ -28,6 +28,10 @@ public class TypeUrls {
   public static final String REVOKE_WITHDRAW= "fg:t:revoke_withdraw";
   public static final String WITHDRAW_TOKEN= "fg:t:withdraw_token";
 
+  //atomic swap
+  public static final String SETUP_SWAP= "fg:t:setup_swap";
+  public static final String RETRIEVE_SWAP= "fg:t:retrieve_swap";
+  public static final String REVOKE_SWAP=  "fg:t:revoke_swap";
 
   // forge state
   public static final String ACCOUNT_STATE = "fg:s:account";

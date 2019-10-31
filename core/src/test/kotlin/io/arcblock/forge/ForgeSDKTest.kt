@@ -32,7 +32,7 @@ class ForgeSDKTest {
     forgeSDK = ForgeSDK.connect("localhost", 28210)
     alice = forgeSDK.createWallet().toTypeWalletInfo()
     bob = forgeSDK.createWallet().toTypeWalletInfo()
-    chainInfo = forgeSDK.getChainInfo(Rpc.RequestGetChainInfo.getDefaultInstance()).info
+    chainInfo = forgeSDK.getChainInfo().info
     val pokeConfig = forgeSDK.getForgeState(Rpc.RequestGetForgeState.getDefaultInstance()).state
     poke( alice)
     poke( bob)
@@ -197,14 +197,14 @@ class ForgeSDKTest {
 
   @Test
   fun getChainInfo() {
-    val response = forgeSDK.getChainInfo(Rpc.RequestGetChainInfo.getDefaultInstance())
+    val response = forgeSDK.getChainInfo()
     Assert.assertEquals("get chain info", Enum.StatusCode.ok, response.code)
     println("ChainInfo:\n${response.info}")
   }
 
   @Test
   fun getNodeInfo() {
-    val response = forgeSDK.getNodeInfo(Rpc.RequestGetNodeInfo.getDefaultInstance())
+    val response = forgeSDK.getNodeInfo()
     Assert.assertEquals("get Node info", Enum.StatusCode.ok, response.code)
     println("NodeInfo:\n${response.info}")
   }
@@ -217,28 +217,28 @@ class ForgeSDKTest {
 
   @Test
   fun getNetInfo() {
-    val response = forgeSDK.getNetInfo(Rpc.RequestGetNetInfo.getDefaultInstance())
+    val response = forgeSDK.getNetInfo()
     Assert.assertEquals("get Net info", Enum.StatusCode.ok, response.code)
     println("NetInfo:\n${response.netInfo}")
   }
 
   @Test
   fun getValidatorsInfo() {
-    val response = forgeSDK.getValidatorsInfo(Rpc.RequestGetValidatorsInfo.getDefaultInstance())
+    val response = forgeSDK.getValidatorsInfo()
     Assert.assertEquals("get validators info", Enum.StatusCode.ok, response.code)
     println("Validator Info:\n${response.validatorsInfo}")
   }
 
   @Test
   fun getConfig() {
-    val response = forgeSDK.getConfig(Rpc.RequestGetConfig.getDefaultInstance())
+    val response = forgeSDK.getConfig()
     Assert.assertEquals("get Net info", Enum.StatusCode.ok, response.code)
     println("Config:\n${response.config}")
   }
 
   @Test
   fun getForgeStats() {
-    val response = forgeSDK.getForgeStats(Rpc.RequestGetForgeStats.getDefaultInstance())
+    val response = forgeSDK.getForgeStats()
     Assert.assertEquals("get Forge stats", Enum.StatusCode.ok, response.code)
     println("Stats:\n${response.forgeStats}")
   }

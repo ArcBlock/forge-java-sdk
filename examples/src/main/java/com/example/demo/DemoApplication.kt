@@ -27,9 +27,9 @@ class InitLine : CommandLineRunner {
 	var logger = LoggerFactory.getLogger("Forge Init")
 	override fun run(vararg args: String?) {
 		// Connect forge chain node
-		val forge = ForgeSDK.connect("localhost",28211)
+		val forge = ForgeSDK.connect("localhost",28210)
 		// Query Chain info
-		val chainInfo = forge.getChainInfo(RequestGetChainInfo.getDefaultInstance()).info
+		val chainInfo = forge.getChainInfo().info
 		logger.info("\nchain info:\n$chainInfo\n\n\n")
 
 		// create two wallet

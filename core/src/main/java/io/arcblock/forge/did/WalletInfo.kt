@@ -2,10 +2,10 @@ package io.arcblock.forge.did
 
 import forge_abi.Rpc
 import forge_abi.Type
-import io.arcblock.forge.utils.Base58Btc
 import io.arcblock.forge.extension.toByteString
+import io.arcblock.forge.utils.Base58Btc
 
-class WalletInfo(val address: String, val pk: ByteArray,val sk: ByteArray) {
+data class WalletInfo(val address: String, val pk: ByteArray,val sk: ByteArray) {
 
   constructor(response: Rpc.ResponseCreateWallet):this(response.wallet.address,response.wallet.pk.toByteArray()
     ,response.wallet.sk.toByteArray())

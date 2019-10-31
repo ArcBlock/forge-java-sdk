@@ -3,18 +3,17 @@ package io.arcblock.forge
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.protobuf.Any
 import com.google.protobuf.ByteString
+import com.jcabi.aspects.Loggable
 import forge_abi.*
 import forge_abi.Enum
 import forge_abi.StatsRpcGrpc.StatsRpcStub
 import io.arcblock.forge.did.DIDGenerator
 import io.arcblock.forge.did.WalletInfo
-import io.arcblock.forge.extension.delegatee
-import io.arcblock.forge.extension.multiSig
-import io.arcblock.forge.extension.signTx
-import io.arcblock.forge.extension.toByteString
+import io.arcblock.forge.extension.*
 import io.grpc.ManagedChannel
 import io.grpc.ManagedChannelBuilder
 import io.grpc.stub.StreamObserver
+import org.slf4j.LoggerFactory
 import java.math.BigInteger
 import java.text.SimpleDateFormat
 import java.util.*
@@ -30,6 +29,7 @@ import java.util.concurrent.TimeUnit
  */
 class ForgeSDK private constructor() {
   val pokeAddress = "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+  val logger = LoggerFactory.getLogger(ForgeSDK::class.java)
   private lateinit var channel: ManagedChannel
 
   private lateinit var chainRpcBlockingStub: ChainRpcGrpc.ChainRpcBlockingStub
@@ -171,12 +171,19 @@ class ForgeSDK private constructor() {
    * @param request request structure
    * @return code: ok or error. hash: transaction's hash
    */
+  @Loggable
   fun sendTx(request: Rpc.RequestSendTx): Rpc.ResponseSendTx {
+    logger.info("sendTx: ${request.tx.toByteArray().encodeB64Url()}")
+    logger.debug("tx:\n${request.tx}")
     return chainRpcBlockingStub.sendTx(request)
   }
 
   fun sendTx(tx: Type.Transaction): Rpc.ResponseSendTx {
     return sendTx(Rpc.RequestSendTx.newBuilder().setTx(tx).build())
+  }
+
+  fun sendTx(wallet: WalletInfo,itx: ByteString, typeUrl: String): Rpc.ResponseSendTx {
+    return sendTx(TransactionFactory.createTransaction(chainInfo.value.network,wallet.address,wallet.pk,itx,typeUrl).signTx(wallet.sk))
   }
 
 
@@ -295,24 +302,24 @@ class ForgeSDK private constructor() {
       .setValue(ByteString.copyFromUtf8(assetAddress)).build()))
   }
 
-  /**
-   * create a unSign exchange transaction, you have to sign it by from and multisig by to.
-   */
-  fun createUnsignExchange(from: WalletInfo, to: WalletInfo, fromToken: BigInteger, assetAddress: String,
-                           delegatee: String? = null): Type.Transaction {
-    val exchange = Exchange.ExchangeTx.newBuilder()
-      .setSender(Exchange.ExchangeInfo.newBuilder()
-        .setValue(Type.BigUint.newBuilder()
-          .setValue(fromToken.toByteArray().toByteString())
-          .build())
-        .build())
-      .setReceiver(Exchange.ExchangeInfo.newBuilder()
-        .addAssets(assetAddress)
-        .build())
-      .setTo(to.address)
-      .build()
-    return TransactionFactory.createTransaction(chainInfo.value.network, from.address, from.pk, exchange.toByteString(), TypeUrls.EXCHANGE)
-  }
+//  /**
+//   * create a unSign exchange transaction, you have to sign it by from and multisig by to.
+//   */
+//  fun createUnsignExchange(from: WalletInfo, to: WalletInfo, fromToken: BigInteger, assetAddress: String,
+//                           delegatee: String? = null): Type.Transaction {
+//    val exchange = Exchange.ExchangeTx.newBuilder()
+//      .setSender(Exchange.ExchangeInfo.newBuilder()
+//        .setValue(Type.BigUint.newBuilder()
+//          .setValue(fromToken.toByteArray().toByteString())
+//          .build())
+//        .build())
+//      .setReceiver(Exchange.ExchangeInfo.newBuilder()
+//        .addAssets(assetAddress)
+//        .build())
+//      .setTo(to.address)
+//      .build()
+//    return TransactionFactory.createTransaction(chainInfo.value.network, from.address, from.pk, exchange.toByteString(), TypeUrls.EXCHANGE)
+//  }
 
   /**
    * Simple exchange from A to B, pay fromToken and get Asset
@@ -328,16 +335,12 @@ class ForgeSDK private constructor() {
       .setReceiver(Exchange.ExchangeInfo.newBuilder()
         .addAssets(assetAddress)
         .build())
-      .setTo(to.address)
+      .setTo(delegateeTo ?: to.address)
       .build()
+    logger.debug("exchange:\n$exchange")
     val tx = TransactionFactory.createTransaction(chainInfo.value.network, from.address, from.pk, exchange.toByteString(), TypeUrls.EXCHANGE)
       .delegatee(delegateeFrom)
       .signTx(from.sk)
-//    val builder = Rpc.RequestMultisig.newBuilder()
-//      .setTx(tx)
-//      .setWallet(to.toTypeWalletInfo())
-//    delegateeTo?.let { builder.setDelegatee(delegateeTo) }
-
     return sendTx(tx.multiSig(to, delegator = delegateeTo))
   }
 
@@ -347,6 +350,26 @@ class ForgeSDK private constructor() {
   fun createDelegate(from: WalletInfo, to: WalletInfo, rules: List<String>, typeUrl: String? = null): Rpc.ResponseSendTx {
     return sendTx(
       TransactionFactory.unsignDelegate(from.address, to.address, chainInfo.value.network, from, rules, typeUrl).signTx(from.sk))
+  }
+
+
+  /**
+   * setup a swap for atomic swap, it can exchange asset or token with other chain build by forge
+   */
+  fun setupSwap(from: WalletInfo,receiver: String, amount: BigInteger, blockHeight: Int, hashKey: ByteArray): Rpc.ResponseSendTx{
+    return sendTx(TransactionFactory.setup_swap(chainInfo.value.network, from, receiver, blockHeight, hashKey, amount).signTx(from.sk))
+  }
+
+  fun setupSwap(from: WalletInfo,receiver: String, assets: List<String>, blockHeight: Int, hashKey: ByteArray): Rpc.ResponseSendTx{
+    return sendTx(TransactionFactory.setup_swap(chainInfo.value.network, from, receiver, blockHeight, hashKey, assets).signTx(from.sk))
+  }
+
+  fun revokeSwap(wallet: WalletInfo, swapAddress: String): Rpc.ResponseSendTx{
+    return sendTx(TransactionFactory.revoke_swap(chainInfo.value.network, wallet, swapAddress).signTx(wallet.sk))
+  }
+
+  fun retrieveSwap(wallet: WalletInfo, swapAddress: String, hashKey: ByteArray): Rpc.ResponseSendTx{
+    return sendTx(TransactionFactory.retrieve_swap(chainInfo.value.network, wallet, swapAddress, hashKey).signTx(wallet.sk))
   }
 
   /**
@@ -481,30 +504,30 @@ class ForgeSDK private constructor() {
    * supported_txs: "fg:t:create_asset"
    *
    */
-  fun getChainInfo(request: Rpc.RequestGetChainInfo): Rpc.ResponseGetChainInfo {
-    return chainRpcBlockingStub.getChainInfo(request)
+  fun getChainInfo(): Rpc.ResponseGetChainInfo {
+    return chainRpcBlockingStub.getChainInfo(Rpc.RequestGetChainInfo.getDefaultInstance())
   }
 
   /**
    * async  gRPC call to get information about current chain, please read [getChainInfo]
    */
-  fun asyncGetChainInfo(request: Rpc.RequestGetChainInfo): ListenableFuture<Rpc.ResponseGetChainInfo> {
-    return chainRpcFutureStub.getChainInfo(request)
+  fun asyncGetChainInfo(): ListenableFuture<Rpc.ResponseGetChainInfo> {
+    return chainRpcFutureStub.getChainInfo(Rpc.RequestGetChainInfo.getDefaultInstance())
   }
 
   /**
    * gRPC call to get information of current node
    */
-  fun getNodeInfo(request: Rpc.RequestGetNodeInfo): Rpc.ResponseGetNodeInfo {
-    return chainRpcBlockingStub.getNodeInfo(request)
+  fun getNodeInfo(): Rpc.ResponseGetNodeInfo {
+    return chainRpcBlockingStub.getNodeInfo(Rpc.RequestGetNodeInfo.getDefaultInstance())
   }
 
   /**
    * async gRPC call to get information of current node, please read [getNetInfo]
    *
    */
-  fun asyncGetNodeInfo(request: Rpc.RequestGetNodeInfo): ListenableFuture<Rpc.ResponseGetNodeInfo> {
-    return chainRpcFutureStub.getNodeInfo(request)
+  fun asyncGetNodeInfo(): ListenableFuture<Rpc.ResponseGetNodeInfo> {
+    return chainRpcFutureStub.getNodeInfo(Rpc.RequestGetNodeInfo.getDefaultInstance())
   }
 
   /**
@@ -533,16 +556,16 @@ class ForgeSDK private constructor() {
    * gRPC call to get information of the net
    *
    */
-  fun getNetInfo(request: Rpc.RequestGetNetInfo): Rpc.ResponseGetNetInfo {
-    return chainRpcBlockingStub.getNetInfo(request)
+  fun getNetInfo(): Rpc.ResponseGetNetInfo {
+    return chainRpcBlockingStub.getNetInfo(Rpc.RequestGetNetInfo.getDefaultInstance())
   }
 
   /**
    * gRPC call to get information of the net， please read [getNetInfo]
    **
    */
-  fun asyncGetNetInfo(request: Rpc.RequestGetNetInfo): ListenableFuture<Rpc.ResponseGetNetInfo> {
-    return chainRpcFutureStub.getNetInfo(request)
+  fun asyncGetNetInfo(): ListenableFuture<Rpc.ResponseGetNetInfo> {
+    return chainRpcFutureStub.getNetInfo(Rpc.RequestGetNetInfo.getDefaultInstance())
   }
 
   /**
@@ -568,15 +591,15 @@ class ForgeSDK private constructor() {
    * }
    * ```
    */
-  fun getValidatorsInfo(request: Rpc.RequestGetValidatorsInfo): Rpc.ResponseGetValidatorsInfo {
-    return chainRpcBlockingStub.getValidatorsInfo(request)
+  fun getValidatorsInfo(): Rpc.ResponseGetValidatorsInfo {
+    return chainRpcBlockingStub.getValidatorsInfo(Rpc.RequestGetValidatorsInfo.getDefaultInstance())
   }
 
   /**
    * gRPC call to get information about al current validators
    */
-  fun asyncGetValidatorsInfo(request: Rpc.RequestGetValidatorsInfo): ListenableFuture<Rpc.ResponseGetValidatorsInfo> {
-    return chainRpcFutureStub.getValidatorsInfo(request)
+  fun asyncGetValidatorsInfo(): ListenableFuture<Rpc.ResponseGetValidatorsInfo> {
+    return chainRpcFutureStub.getValidatorsInfo(Rpc.RequestGetValidatorsInfo.getDefaultInstance())
   }
 
   /**
@@ -628,8 +651,8 @@ class ForgeSDK private constructor() {
    * async gRPC call to get detailed configuration current chain is using
    *
    */
-  fun asyncGetConfig(request: Rpc.RequestGetConfig): ListenableFuture<Rpc.ResponseGetConfig> {
-    return chainRpcFutureStub.getConfig(request)
+  fun asyncGetConfig(): ListenableFuture<Rpc.ResponseGetConfig> {
+    return chainRpcFutureStub.getConfig(Rpc.RequestGetConfig.getDefaultInstance())
   }
 
   /**
@@ -661,8 +684,8 @@ class ForgeSDK private constructor() {
    * avg_block_time: 5.0
    * ```
    */
-  fun getForgeStats(request: Rpc.RequestGetForgeStats): Rpc.ResponseGetForgeStats {
-    return statsRpcBlockingStub.getForgeStats(request)
+  fun getForgeStats(): Rpc.ResponseGetForgeStats {
+    return statsRpcBlockingStub.getForgeStats(Rpc.RequestGetForgeStats.getDefaultInstance())
   }
 
   private fun Date.toForgeDateString() = SimpleDateFormat("yyyy-MM-dd").format(this)
