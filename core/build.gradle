@@ -164,6 +164,10 @@ jar {
 //  configurations.compileClasspath.forEach{ it.isDirectory() ? from(it) : from(zipTree(it)) }
 
 }
+shadowJar{
+  baseName = "core"
+  version =  project.file("../version").readLines().first()
+}
 
 
 //dependencyManagement {

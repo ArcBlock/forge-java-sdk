@@ -975,6 +975,7 @@ class ForgeSDK private constructor() {
     .role_account).build()): WalletInfo {
     return DIDGenerator.randomWallet(type)
   }
+  fun createWallet()= createWallet(null)
 
 
   /**
