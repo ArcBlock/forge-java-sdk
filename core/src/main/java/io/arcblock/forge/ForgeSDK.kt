@@ -182,8 +182,8 @@ class ForgeSDK private constructor() {
     return sendTx(Rpc.RequestSendTx.newBuilder().setTx(tx).build())
   }
 
-  fun sendTx(wallet: WalletInfo,itx: ByteString, typeUrl: String): Rpc.ResponseSendTx {
-    return sendTx(TransactionFactory.createTransaction(chainInfo.value.network,wallet.address,wallet.pk,itx,typeUrl).signTx(wallet.sk))
+  fun sendTx(wallet: WalletInfo, itx: ByteString, typeUrl: String): Rpc.ResponseSendTx {
+    return sendTx(TransactionFactory.createTransaction(chainInfo.value.network, wallet.address, wallet.pk, itx, typeUrl).signTx(wallet.sk))
   }
 
 
@@ -205,6 +205,7 @@ class ForgeSDK private constructor() {
    * Util to help developer to poke a account
    */
   fun poke(wallet: Type.WalletInfo): Rpc.ResponseSendTx = poke(WalletInfo(wallet))
+
   fun checkin(wallet: Type.WalletInfo): Rpc.ResponseSendTx = poke(WalletInfo(wallet))
   fun checkin(wallet: WalletInfo): Rpc.ResponseSendTx = poke(wallet)
 
@@ -217,24 +218,24 @@ class ForgeSDK private constructor() {
     return chainRpcBlockingStub.sendTx(Rpc.RequestSendTx.newBuilder().setTx(tx).build())
   }
 
-  fun transfer(from: WalletInfo, to: WalletInfo, assets: List<String>) = transfer(from, to, amount = null, assets = assets, delegatee = null)
-  fun transfer(from: WalletInfo, to: WalletInfo, amount: BigInteger) = transfer(from, to, amount = amount, assets = null, delegatee = null)
-  fun transfer(from: WalletInfo, to: WalletInfo, amount: BigInteger, assets: List<String>) = transfer(from, to, amount = amount, assets = assets,
+  fun transfer(from: WalletInfo, toAddress: String, assets: List<String>) = transfer(from, toAddress, amount = null, assets = assets, delegatee = null)
+  fun transfer(from: WalletInfo, toAddress: String, amount: BigInteger) = transfer(from, toAddress, amount = amount, assets = null, delegatee = null)
+  fun transfer(from: WalletInfo, toAddress: String, amount: BigInteger, assets: List<String>) = transfer(from, toAddress, amount = amount, assets = assets,
     delegatee
     = null)
 
   /**
    * Util to help developer transfer money from a account to another
    * @param from: sender of transfer transaction
-   * @param to: receiver of transfer transaction
+   * @param toAddress: receiver of transfer transaction
    * @param amount: amount of transfer transaction
    * @param assets: assets of transfer transaction, nullable
    * @param delegatee: sender delegatee if have
    */
-  fun transfer(from: WalletInfo, to: WalletInfo, amount: BigInteger? = null, assets: List<String>? = null, delegatee: String? = null): Rpc
+  fun transfer(from: WalletInfo, toAddress: String, amount: BigInteger? = null, assets: List<String>? = null, delegatee: String? = null): Rpc
   .ResponseSendTx {
     val builder = Transfer.TransferTx.newBuilder()
-      .setTo(to.address)
+      .setTo(toAddress)
     amount?.let { builder.setValue(Type.BigUint.newBuilder().setValue(ByteString.copyFrom(it.toByteArray())).build()) }
     assets?.forEach { builder.addAssets(it) }
     val transfer = builder.build()
@@ -298,7 +299,7 @@ class ForgeSDK private constructor() {
     val tx = TransactionFactory.createTransaction(chainInfo.value.network, wallet.address, wallet.pk, itx.toByteString(), TypeUrls.CONSUME_ASSET)
       .delegatee(delegatee)
       .signTx(wallet.sk)
-    return sendTx(tx.multiSig(owner,Any.newBuilder().setTypeUrl(TypeUrls.CONSUME_ASSET_ADDRESS)
+    return sendTx(tx.multiSig(owner, Any.newBuilder().setTypeUrl(TypeUrls.CONSUME_ASSET_ADDRESS)
       .setValue(ByteString.copyFromUtf8(assetAddress)).build()))
   }
 
@@ -356,19 +357,19 @@ class ForgeSDK private constructor() {
   /**
    * setup a swap for atomic swap, it can exchange asset or token with other chain build by forge
    */
-  fun setupSwap(from: WalletInfo,receiver: String, amount: BigInteger, blockHeight: Int, hashKey: ByteArray): Rpc.ResponseSendTx{
+  fun setupSwap(from: WalletInfo, receiver: String, amount: BigInteger, blockHeight: Int, hashKey: ByteArray): Rpc.ResponseSendTx {
     return sendTx(TransactionFactory.setup_swap(chainInfo.value.network, from, receiver, blockHeight, hashKey, amount).signTx(from.sk))
   }
 
-  fun setupSwap(from: WalletInfo,receiver: String, assets: List<String>, blockHeight: Int, hashKey: ByteArray): Rpc.ResponseSendTx{
+  fun setupSwap(from: WalletInfo, receiver: String, assets: List<String>, blockHeight: Int, hashKey: ByteArray): Rpc.ResponseSendTx {
     return sendTx(TransactionFactory.setup_swap(chainInfo.value.network, from, receiver, blockHeight, hashKey, assets).signTx(from.sk))
   }
 
-  fun revokeSwap(wallet: WalletInfo, swapAddress: String): Rpc.ResponseSendTx{
+  fun revokeSwap(wallet: WalletInfo, swapAddress: String): Rpc.ResponseSendTx {
     return sendTx(TransactionFactory.revoke_swap(chainInfo.value.network, wallet, swapAddress).signTx(wallet.sk))
   }
 
-  fun retrieveSwap(wallet: WalletInfo, swapAddress: String, hashKey: ByteArray): Rpc.ResponseSendTx{
+  fun retrieveSwap(wallet: WalletInfo, swapAddress: String, hashKey: ByteArray): Rpc.ResponseSendTx {
     return sendTx(TransactionFactory.retrieve_swap(chainInfo.value.network, wallet, swapAddress, hashKey).signTx(wallet.sk))
   }
 
@@ -956,11 +957,6 @@ class ForgeSDK private constructor() {
   }
 
 
-  fun getTetherState(
-    observer: StreamObserver<Rpc.ResponseGetTetherState>): StreamObserver<Rpc.RequestGetTetherState> {
-    return stateRpcStub.getTetherState(observer)
-  }
-
   /**
    * create a wallet on local
    * Example:
@@ -975,7 +971,8 @@ class ForgeSDK private constructor() {
     .role_account).build()): WalletInfo {
     return DIDGenerator.randomWallet(type)
   }
-  fun createWallet()= createWallet(null)
+
+  fun createWallet() = createWallet(null)
 
 
   /**
