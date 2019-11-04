@@ -567,9 +567,9 @@ public final class RevokeWithdraw {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\025revoke_withdraw.proto\022\tforge_abi\032\ntype" +
-      ".proto\",\n\020RevokeWithdrawTx\022\030\n\020withdraw_t" +
-      "x_hash\030\001 \001(\tb\006proto3"
+      "\n\025revoke_withdraw.proto\022\tforge_abi\",\n\020Re" +
+      "vokeWithdrawTx\022\030\n\020withdraw_tx_hash\030\001 \001(\t" +
+      "b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -582,7 +582,6 @@ public final class RevokeWithdraw {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          forge_abi.Type.getDescriptor(),
         }, assigner);
     internal_static_forge_abi_RevokeWithdrawTx_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -590,7 +589,6 @@ public final class RevokeWithdraw {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_RevokeWithdrawTx_descriptor,
         new java.lang.String[] { "WithdrawTxHash", });
-    forge_abi.Type.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

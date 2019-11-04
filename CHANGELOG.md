@@ -1,3 +1,7 @@
+## 0.39.1 (November 01, 2019)
+  - creat wallet add default method for java user
+  - support fat jar
+
 ## 0.39.0 (October 31, 2019)
 - deprecated interface use token
 - create a wallet locally

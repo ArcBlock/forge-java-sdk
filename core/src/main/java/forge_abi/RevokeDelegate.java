@@ -14,8 +14,8 @@ public final class RevokeDelegate {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface RevokeDelegationTxOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:forge_abi.RevokeDelegationTx)
+  public interface RevokeDelegateTxOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.RevokeDelegateTx)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -87,17 +87,17 @@ public final class RevokeDelegate {
     com.google.protobuf.AnyOrBuilder getDataOrBuilder();
   }
   /**
-   * Protobuf type {@code forge_abi.RevokeDelegationTx}
+   * Protobuf type {@code forge_abi.RevokeDelegateTx}
    */
-  public  static final class RevokeDelegationTx extends
+  public  static final class RevokeDelegateTx extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:forge_abi.RevokeDelegationTx)
-      RevokeDelegationTxOrBuilder {
-    // Use RevokeDelegationTx.newBuilder() to construct.
-    private RevokeDelegationTx(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:forge_abi.RevokeDelegateTx)
+      RevokeDelegateTxOrBuilder {
+    // Use RevokeDelegateTx.newBuilder() to construct.
+    private RevokeDelegateTx(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private RevokeDelegationTx() {
+    private RevokeDelegateTx() {
       address_ = "";
       to_ = "";
       typeUrls_ = com.google.protobuf.LazyStringArrayList.EMPTY;
@@ -108,7 +108,7 @@ public final class RevokeDelegate {
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
-    private RevokeDelegationTx(
+    private RevokeDelegateTx(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -178,14 +178,14 @@ public final class RevokeDelegate {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return forge_abi.RevokeDelegate.internal_static_forge_abi_RevokeDelegationTx_descriptor;
+      return forge_abi.RevokeDelegate.internal_static_forge_abi_RevokeDelegateTx_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return forge_abi.RevokeDelegate.internal_static_forge_abi_RevokeDelegationTx_fieldAccessorTable
+      return forge_abi.RevokeDelegate.internal_static_forge_abi_RevokeDelegateTx_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              forge_abi.RevokeDelegate.RevokeDelegationTx.class, forge_abi.RevokeDelegate.RevokeDelegationTx.Builder.class);
+              forge_abi.RevokeDelegate.RevokeDelegateTx.class, forge_abi.RevokeDelegate.RevokeDelegateTx.Builder.class);
     }
 
     private int bitField0_;
@@ -382,10 +382,10 @@ public final class RevokeDelegate {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof forge_abi.RevokeDelegate.RevokeDelegationTx)) {
+      if (!(obj instanceof forge_abi.RevokeDelegate.RevokeDelegateTx)) {
         return super.equals(obj);
       }
-      forge_abi.RevokeDelegate.RevokeDelegationTx other = (forge_abi.RevokeDelegate.RevokeDelegationTx) obj;
+      forge_abi.RevokeDelegate.RevokeDelegateTx other = (forge_abi.RevokeDelegate.RevokeDelegateTx) obj;
 
       boolean result = true;
       result = result && getAddress()
@@ -426,58 +426,58 @@ public final class RevokeDelegate {
       return hash;
     }
 
-    public static forge_abi.RevokeDelegate.RevokeDelegationTx parseFrom(
+    public static forge_abi.RevokeDelegate.RevokeDelegateTx parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static forge_abi.RevokeDelegate.RevokeDelegationTx parseFrom(
+    public static forge_abi.RevokeDelegate.RevokeDelegateTx parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static forge_abi.RevokeDelegate.RevokeDelegationTx parseFrom(byte[] data)
+    public static forge_abi.RevokeDelegate.RevokeDelegateTx parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static forge_abi.RevokeDelegate.RevokeDelegationTx parseFrom(
+    public static forge_abi.RevokeDelegate.RevokeDelegateTx parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static forge_abi.RevokeDelegate.RevokeDelegationTx parseFrom(java.io.InputStream input)
+    public static forge_abi.RevokeDelegate.RevokeDelegateTx parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static forge_abi.RevokeDelegate.RevokeDelegationTx parseFrom(
+    public static forge_abi.RevokeDelegate.RevokeDelegateTx parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static forge_abi.RevokeDelegate.RevokeDelegationTx parseDelimitedFrom(java.io.InputStream input)
+    public static forge_abi.RevokeDelegate.RevokeDelegateTx parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static forge_abi.RevokeDelegate.RevokeDelegationTx parseDelimitedFrom(
+    public static forge_abi.RevokeDelegate.RevokeDelegateTx parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static forge_abi.RevokeDelegate.RevokeDelegationTx parseFrom(
+    public static forge_abi.RevokeDelegate.RevokeDelegateTx parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static forge_abi.RevokeDelegate.RevokeDelegationTx parseFrom(
+    public static forge_abi.RevokeDelegate.RevokeDelegateTx parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -489,7 +489,7 @@ public final class RevokeDelegate {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(forge_abi.RevokeDelegate.RevokeDelegationTx prototype) {
+    public static Builder newBuilder(forge_abi.RevokeDelegate.RevokeDelegateTx prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -504,25 +504,25 @@ public final class RevokeDelegate {
       return builder;
     }
     /**
-     * Protobuf type {@code forge_abi.RevokeDelegationTx}
+     * Protobuf type {@code forge_abi.RevokeDelegateTx}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:forge_abi.RevokeDelegationTx)
-        forge_abi.RevokeDelegate.RevokeDelegationTxOrBuilder {
+        // @@protoc_insertion_point(builder_implements:forge_abi.RevokeDelegateTx)
+        forge_abi.RevokeDelegate.RevokeDelegateTxOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return forge_abi.RevokeDelegate.internal_static_forge_abi_RevokeDelegationTx_descriptor;
+        return forge_abi.RevokeDelegate.internal_static_forge_abi_RevokeDelegateTx_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return forge_abi.RevokeDelegate.internal_static_forge_abi_RevokeDelegationTx_fieldAccessorTable
+        return forge_abi.RevokeDelegate.internal_static_forge_abi_RevokeDelegateTx_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                forge_abi.RevokeDelegate.RevokeDelegationTx.class, forge_abi.RevokeDelegate.RevokeDelegationTx.Builder.class);
+                forge_abi.RevokeDelegate.RevokeDelegateTx.class, forge_abi.RevokeDelegate.RevokeDelegateTx.Builder.class);
       }
 
-      // Construct using forge_abi.RevokeDelegate.RevokeDelegationTx.newBuilder()
+      // Construct using forge_abi.RevokeDelegate.RevokeDelegateTx.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -556,23 +556,23 @@ public final class RevokeDelegate {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return forge_abi.RevokeDelegate.internal_static_forge_abi_RevokeDelegationTx_descriptor;
+        return forge_abi.RevokeDelegate.internal_static_forge_abi_RevokeDelegateTx_descriptor;
       }
 
-      public forge_abi.RevokeDelegate.RevokeDelegationTx getDefaultInstanceForType() {
-        return forge_abi.RevokeDelegate.RevokeDelegationTx.getDefaultInstance();
+      public forge_abi.RevokeDelegate.RevokeDelegateTx getDefaultInstanceForType() {
+        return forge_abi.RevokeDelegate.RevokeDelegateTx.getDefaultInstance();
       }
 
-      public forge_abi.RevokeDelegate.RevokeDelegationTx build() {
-        forge_abi.RevokeDelegate.RevokeDelegationTx result = buildPartial();
+      public forge_abi.RevokeDelegate.RevokeDelegateTx build() {
+        forge_abi.RevokeDelegate.RevokeDelegateTx result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public forge_abi.RevokeDelegate.RevokeDelegationTx buildPartial() {
-        forge_abi.RevokeDelegate.RevokeDelegationTx result = new forge_abi.RevokeDelegate.RevokeDelegationTx(this);
+      public forge_abi.RevokeDelegate.RevokeDelegateTx buildPartial() {
+        forge_abi.RevokeDelegate.RevokeDelegateTx result = new forge_abi.RevokeDelegate.RevokeDelegateTx(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         result.address_ = address_;
@@ -619,16 +619,16 @@ public final class RevokeDelegate {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof forge_abi.RevokeDelegate.RevokeDelegationTx) {
-          return mergeFrom((forge_abi.RevokeDelegate.RevokeDelegationTx)other);
+        if (other instanceof forge_abi.RevokeDelegate.RevokeDelegateTx) {
+          return mergeFrom((forge_abi.RevokeDelegate.RevokeDelegateTx)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(forge_abi.RevokeDelegate.RevokeDelegationTx other) {
-        if (other == forge_abi.RevokeDelegate.RevokeDelegationTx.getDefaultInstance()) return this;
+      public Builder mergeFrom(forge_abi.RevokeDelegate.RevokeDelegateTx other) {
+        if (other == forge_abi.RevokeDelegate.RevokeDelegateTx.getDefaultInstance()) return this;
         if (!other.getAddress().isEmpty()) {
           address_ = other.address_;
           onChanged();
@@ -662,11 +662,11 @@ public final class RevokeDelegate {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        forge_abi.RevokeDelegate.RevokeDelegationTx parsedMessage = null;
+        forge_abi.RevokeDelegate.RevokeDelegateTx parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (forge_abi.RevokeDelegate.RevokeDelegationTx) e.getUnfinishedMessage();
+          parsedMessage = (forge_abi.RevokeDelegate.RevokeDelegateTx) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -1076,49 +1076,49 @@ public final class RevokeDelegate {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:forge_abi.RevokeDelegationTx)
+      // @@protoc_insertion_point(builder_scope:forge_abi.RevokeDelegateTx)
     }
 
-    // @@protoc_insertion_point(class_scope:forge_abi.RevokeDelegationTx)
-    private static final forge_abi.RevokeDelegate.RevokeDelegationTx DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:forge_abi.RevokeDelegateTx)
+    private static final forge_abi.RevokeDelegate.RevokeDelegateTx DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new forge_abi.RevokeDelegate.RevokeDelegationTx();
+      DEFAULT_INSTANCE = new forge_abi.RevokeDelegate.RevokeDelegateTx();
     }
 
-    public static forge_abi.RevokeDelegate.RevokeDelegationTx getDefaultInstance() {
+    public static forge_abi.RevokeDelegate.RevokeDelegateTx getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<RevokeDelegationTx>
-        PARSER = new com.google.protobuf.AbstractParser<RevokeDelegationTx>() {
-      public RevokeDelegationTx parsePartialFrom(
+    private static final com.google.protobuf.Parser<RevokeDelegateTx>
+        PARSER = new com.google.protobuf.AbstractParser<RevokeDelegateTx>() {
+      public RevokeDelegateTx parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new RevokeDelegationTx(input, extensionRegistry);
+          return new RevokeDelegateTx(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<RevokeDelegationTx> parser() {
+    public static com.google.protobuf.Parser<RevokeDelegateTx> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<RevokeDelegationTx> getParserForType() {
+    public com.google.protobuf.Parser<RevokeDelegateTx> getParserForType() {
       return PARSER;
     }
 
-    public forge_abi.RevokeDelegate.RevokeDelegationTx getDefaultInstanceForType() {
+    public forge_abi.RevokeDelegate.RevokeDelegateTx getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_forge_abi_RevokeDelegationTx_descriptor;
+    internal_static_forge_abi_RevokeDelegateTx_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_forge_abi_RevokeDelegationTx_fieldAccessorTable;
+      internal_static_forge_abi_RevokeDelegateTx_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1129,10 +1129,10 @@ public final class RevokeDelegate {
   static {
     java.lang.String[] descriptorData = {
       "\n\025revoke_delegate.proto\022\tforge_abi\032\031goog" +
-      "le/protobuf/any.proto\"h\n\022RevokeDelegatio" +
-      "nTx\022\017\n\007address\030\001 \001(\t\022\n\n\002to\030\002 \001(\t\022\021\n\ttype" +
-      "_urls\030\003 \003(\t\022\"\n\004data\030\017 \001(\0132\024.google.proto" +
-      "buf.Anyb\006proto3"
+      "le/protobuf/any.proto\"f\n\020RevokeDelegateT" +
+      "x\022\017\n\007address\030\001 \001(\t\022\n\n\002to\030\002 \001(\t\022\021\n\ttype_u" +
+      "rls\030\003 \003(\t\022\"\n\004data\030\017 \001(\0132\024.google.protobu" +
+      "f.Anyb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1147,11 +1147,11 @@ public final class RevokeDelegate {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.AnyProto.getDescriptor(),
         }, assigner);
-    internal_static_forge_abi_RevokeDelegationTx_descriptor =
+    internal_static_forge_abi_RevokeDelegateTx_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_forge_abi_RevokeDelegationTx_fieldAccessorTable = new
+    internal_static_forge_abi_RevokeDelegateTx_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_forge_abi_RevokeDelegationTx_descriptor,
+        internal_static_forge_abi_RevokeDelegateTx_descriptor,
         new java.lang.String[] { "Address", "To", "TypeUrls", "Data", });
     com.google.protobuf.AnyProto.getDescriptor();
   }

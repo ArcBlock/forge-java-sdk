@@ -39172,6 +39172,51 @@ public final class Rpc {
     forge_abi.Type.TransactionOrBuilder getDeactivateProtocolOrBuilder();
 
     /**
+     * <code>.forge_abi.Transaction revoke_delegate = 28;</code>
+     */
+    forge_abi.Type.Transaction getRevokeDelegate();
+    /**
+     * <code>.forge_abi.Transaction revoke_delegate = 28;</code>
+     */
+    forge_abi.Type.TransactionOrBuilder getRevokeDelegateOrBuilder();
+
+    /**
+     * <code>.forge_abi.Transaction deposit_token = 29;</code>
+     */
+    forge_abi.Type.Transaction getDepositToken();
+    /**
+     * <code>.forge_abi.Transaction deposit_token = 29;</code>
+     */
+    forge_abi.Type.TransactionOrBuilder getDepositTokenOrBuilder();
+
+    /**
+     * <code>.forge_abi.Transaction withdraw_token = 30;</code>
+     */
+    forge_abi.Type.Transaction getWithdrawToken();
+    /**
+     * <code>.forge_abi.Transaction withdraw_token = 30;</code>
+     */
+    forge_abi.Type.TransactionOrBuilder getWithdrawTokenOrBuilder();
+
+    /**
+     * <code>.forge_abi.Transaction approve_withdraw = 31;</code>
+     */
+    forge_abi.Type.Transaction getApproveWithdraw();
+    /**
+     * <code>.forge_abi.Transaction approve_withdraw = 31;</code>
+     */
+    forge_abi.Type.TransactionOrBuilder getApproveWithdrawOrBuilder();
+
+    /**
+     * <code>.forge_abi.Transaction revoke_withdraw = 32;</code>
+     */
+    forge_abi.Type.Transaction getRevokeWithdraw();
+    /**
+     * <code>.forge_abi.Transaction revoke_withdraw = 32;</code>
+     */
+    forge_abi.Type.TransactionOrBuilder getRevokeWithdrawOrBuilder();
+
+    /**
      * <code>.forge_abi.AccountState account_state = 129;</code>
      */
     forge_abi.State.AccountState getAccountState();
@@ -39517,6 +39562,76 @@ public final class Rpc {
               valueCase_ = 27;
               break;
             }
+            case 226: {
+              forge_abi.Type.Transaction.Builder subBuilder = null;
+              if (valueCase_ == 28) {
+                subBuilder = ((forge_abi.Type.Transaction) value_).toBuilder();
+              }
+              value_ =
+                  input.readMessage(forge_abi.Type.Transaction.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((forge_abi.Type.Transaction) value_);
+                value_ = subBuilder.buildPartial();
+              }
+              valueCase_ = 28;
+              break;
+            }
+            case 234: {
+              forge_abi.Type.Transaction.Builder subBuilder = null;
+              if (valueCase_ == 29) {
+                subBuilder = ((forge_abi.Type.Transaction) value_).toBuilder();
+              }
+              value_ =
+                  input.readMessage(forge_abi.Type.Transaction.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((forge_abi.Type.Transaction) value_);
+                value_ = subBuilder.buildPartial();
+              }
+              valueCase_ = 29;
+              break;
+            }
+            case 242: {
+              forge_abi.Type.Transaction.Builder subBuilder = null;
+              if (valueCase_ == 30) {
+                subBuilder = ((forge_abi.Type.Transaction) value_).toBuilder();
+              }
+              value_ =
+                  input.readMessage(forge_abi.Type.Transaction.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((forge_abi.Type.Transaction) value_);
+                value_ = subBuilder.buildPartial();
+              }
+              valueCase_ = 30;
+              break;
+            }
+            case 250: {
+              forge_abi.Type.Transaction.Builder subBuilder = null;
+              if (valueCase_ == 31) {
+                subBuilder = ((forge_abi.Type.Transaction) value_).toBuilder();
+              }
+              value_ =
+                  input.readMessage(forge_abi.Type.Transaction.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((forge_abi.Type.Transaction) value_);
+                value_ = subBuilder.buildPartial();
+              }
+              valueCase_ = 31;
+              break;
+            }
+            case 258: {
+              forge_abi.Type.Transaction.Builder subBuilder = null;
+              if (valueCase_ == 32) {
+                subBuilder = ((forge_abi.Type.Transaction) value_).toBuilder();
+              }
+              value_ =
+                  input.readMessage(forge_abi.Type.Transaction.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((forge_abi.Type.Transaction) value_);
+                value_ = subBuilder.buildPartial();
+              }
+              valueCase_ = 32;
+              break;
+            }
             case 1034: {
               forge_abi.State.AccountState.Builder subBuilder = null;
               if (valueCase_ == 129) {
@@ -39646,6 +39761,11 @@ public final class Rpc {
       DELEGATE(25),
       ACTIVATE_PROTOCOL(26),
       DEACTIVATE_PROTOCOL(27),
+      REVOKE_DELEGATE(28),
+      DEPOSIT_TOKEN(29),
+      WITHDRAW_TOKEN(30),
+      APPROVE_WITHDRAW(31),
+      REVOKE_WITHDRAW(32),
       ACCOUNT_STATE(129),
       ASSET_STATE(130),
       FORGE_STATE(131),
@@ -39685,6 +39805,11 @@ public final class Rpc {
           case 25: return DELEGATE;
           case 26: return ACTIVATE_PROTOCOL;
           case 27: return DEACTIVATE_PROTOCOL;
+          case 28: return REVOKE_DELEGATE;
+          case 29: return DEPOSIT_TOKEN;
+          case 30: return WITHDRAW_TOKEN;
+          case 31: return APPROVE_WITHDRAW;
+          case 32: return REVOKE_WITHDRAW;
           case 129: return ACCOUNT_STATE;
           case 130: return ASSET_STATE;
           case 131: return FORGE_STATE;
@@ -40105,6 +40230,106 @@ public final class Rpc {
       return forge_abi.Type.Transaction.getDefaultInstance();
     }
 
+    public static final int REVOKE_DELEGATE_FIELD_NUMBER = 28;
+    /**
+     * <code>.forge_abi.Transaction revoke_delegate = 28;</code>
+     */
+    public forge_abi.Type.Transaction getRevokeDelegate() {
+      if (valueCase_ == 28) {
+         return (forge_abi.Type.Transaction) value_;
+      }
+      return forge_abi.Type.Transaction.getDefaultInstance();
+    }
+    /**
+     * <code>.forge_abi.Transaction revoke_delegate = 28;</code>
+     */
+    public forge_abi.Type.TransactionOrBuilder getRevokeDelegateOrBuilder() {
+      if (valueCase_ == 28) {
+         return (forge_abi.Type.Transaction) value_;
+      }
+      return forge_abi.Type.Transaction.getDefaultInstance();
+    }
+
+    public static final int DEPOSIT_TOKEN_FIELD_NUMBER = 29;
+    /**
+     * <code>.forge_abi.Transaction deposit_token = 29;</code>
+     */
+    public forge_abi.Type.Transaction getDepositToken() {
+      if (valueCase_ == 29) {
+         return (forge_abi.Type.Transaction) value_;
+      }
+      return forge_abi.Type.Transaction.getDefaultInstance();
+    }
+    /**
+     * <code>.forge_abi.Transaction deposit_token = 29;</code>
+     */
+    public forge_abi.Type.TransactionOrBuilder getDepositTokenOrBuilder() {
+      if (valueCase_ == 29) {
+         return (forge_abi.Type.Transaction) value_;
+      }
+      return forge_abi.Type.Transaction.getDefaultInstance();
+    }
+
+    public static final int WITHDRAW_TOKEN_FIELD_NUMBER = 30;
+    /**
+     * <code>.forge_abi.Transaction withdraw_token = 30;</code>
+     */
+    public forge_abi.Type.Transaction getWithdrawToken() {
+      if (valueCase_ == 30) {
+         return (forge_abi.Type.Transaction) value_;
+      }
+      return forge_abi.Type.Transaction.getDefaultInstance();
+    }
+    /**
+     * <code>.forge_abi.Transaction withdraw_token = 30;</code>
+     */
+    public forge_abi.Type.TransactionOrBuilder getWithdrawTokenOrBuilder() {
+      if (valueCase_ == 30) {
+         return (forge_abi.Type.Transaction) value_;
+      }
+      return forge_abi.Type.Transaction.getDefaultInstance();
+    }
+
+    public static final int APPROVE_WITHDRAW_FIELD_NUMBER = 31;
+    /**
+     * <code>.forge_abi.Transaction approve_withdraw = 31;</code>
+     */
+    public forge_abi.Type.Transaction getApproveWithdraw() {
+      if (valueCase_ == 31) {
+         return (forge_abi.Type.Transaction) value_;
+      }
+      return forge_abi.Type.Transaction.getDefaultInstance();
+    }
+    /**
+     * <code>.forge_abi.Transaction approve_withdraw = 31;</code>
+     */
+    public forge_abi.Type.TransactionOrBuilder getApproveWithdrawOrBuilder() {
+      if (valueCase_ == 31) {
+         return (forge_abi.Type.Transaction) value_;
+      }
+      return forge_abi.Type.Transaction.getDefaultInstance();
+    }
+
+    public static final int REVOKE_WITHDRAW_FIELD_NUMBER = 32;
+    /**
+     * <code>.forge_abi.Transaction revoke_withdraw = 32;</code>
+     */
+    public forge_abi.Type.Transaction getRevokeWithdraw() {
+      if (valueCase_ == 32) {
+         return (forge_abi.Type.Transaction) value_;
+      }
+      return forge_abi.Type.Transaction.getDefaultInstance();
+    }
+    /**
+     * <code>.forge_abi.Transaction revoke_withdraw = 32;</code>
+     */
+    public forge_abi.Type.TransactionOrBuilder getRevokeWithdrawOrBuilder() {
+      if (valueCase_ == 32) {
+         return (forge_abi.Type.Transaction) value_;
+      }
+      return forge_abi.Type.Transaction.getDefaultInstance();
+    }
+
     public static final int ACCOUNT_STATE_FIELD_NUMBER = 129;
     /**
      * <code>.forge_abi.AccountState account_state = 129;</code>
@@ -40294,6 +40519,21 @@ public final class Rpc {
       if (valueCase_ == 27) {
         output.writeMessage(27, (forge_abi.Type.Transaction) value_);
       }
+      if (valueCase_ == 28) {
+        output.writeMessage(28, (forge_abi.Type.Transaction) value_);
+      }
+      if (valueCase_ == 29) {
+        output.writeMessage(29, (forge_abi.Type.Transaction) value_);
+      }
+      if (valueCase_ == 30) {
+        output.writeMessage(30, (forge_abi.Type.Transaction) value_);
+      }
+      if (valueCase_ == 31) {
+        output.writeMessage(31, (forge_abi.Type.Transaction) value_);
+      }
+      if (valueCase_ == 32) {
+        output.writeMessage(32, (forge_abi.Type.Transaction) value_);
+      }
       if (valueCase_ == 129) {
         output.writeMessage(129, (forge_abi.State.AccountState) value_);
       }
@@ -40393,6 +40633,26 @@ public final class Rpc {
       if (valueCase_ == 27) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(27, (forge_abi.Type.Transaction) value_);
+      }
+      if (valueCase_ == 28) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(28, (forge_abi.Type.Transaction) value_);
+      }
+      if (valueCase_ == 29) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(29, (forge_abi.Type.Transaction) value_);
+      }
+      if (valueCase_ == 30) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(30, (forge_abi.Type.Transaction) value_);
+      }
+      if (valueCase_ == 31) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(31, (forge_abi.Type.Transaction) value_);
+      }
+      if (valueCase_ == 32) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(32, (forge_abi.Type.Transaction) value_);
       }
       if (valueCase_ == 129) {
         size += com.google.protobuf.CodedOutputStream
@@ -40511,6 +40771,26 @@ public final class Rpc {
           result = result && getDeactivateProtocol()
               .equals(other.getDeactivateProtocol());
           break;
+        case 28:
+          result = result && getRevokeDelegate()
+              .equals(other.getRevokeDelegate());
+          break;
+        case 29:
+          result = result && getDepositToken()
+              .equals(other.getDepositToken());
+          break;
+        case 30:
+          result = result && getWithdrawToken()
+              .equals(other.getWithdrawToken());
+          break;
+        case 31:
+          result = result && getApproveWithdraw()
+              .equals(other.getApproveWithdraw());
+          break;
+        case 32:
+          result = result && getRevokeWithdraw()
+              .equals(other.getRevokeWithdraw());
+          break;
         case 129:
           result = result && getAccountState()
               .equals(other.getAccountState());
@@ -40622,6 +40902,26 @@ public final class Rpc {
         case 27:
           hash = (37 * hash) + DEACTIVATE_PROTOCOL_FIELD_NUMBER;
           hash = (53 * hash) + getDeactivateProtocol().hashCode();
+          break;
+        case 28:
+          hash = (37 * hash) + REVOKE_DELEGATE_FIELD_NUMBER;
+          hash = (53 * hash) + getRevokeDelegate().hashCode();
+          break;
+        case 29:
+          hash = (37 * hash) + DEPOSIT_TOKEN_FIELD_NUMBER;
+          hash = (53 * hash) + getDepositToken().hashCode();
+          break;
+        case 30:
+          hash = (37 * hash) + WITHDRAW_TOKEN_FIELD_NUMBER;
+          hash = (53 * hash) + getWithdrawToken().hashCode();
+          break;
+        case 31:
+          hash = (37 * hash) + APPROVE_WITHDRAW_FIELD_NUMBER;
+          hash = (53 * hash) + getApproveWithdraw().hashCode();
+          break;
+        case 32:
+          hash = (37 * hash) + REVOKE_WITHDRAW_FIELD_NUMBER;
+          hash = (53 * hash) + getRevokeWithdraw().hashCode();
           break;
         case 129:
           hash = (37 * hash) + ACCOUNT_STATE_FIELD_NUMBER;
@@ -40917,6 +41217,41 @@ public final class Rpc {
             result.value_ = deactivateProtocolBuilder_.build();
           }
         }
+        if (valueCase_ == 28) {
+          if (revokeDelegateBuilder_ == null) {
+            result.value_ = value_;
+          } else {
+            result.value_ = revokeDelegateBuilder_.build();
+          }
+        }
+        if (valueCase_ == 29) {
+          if (depositTokenBuilder_ == null) {
+            result.value_ = value_;
+          } else {
+            result.value_ = depositTokenBuilder_.build();
+          }
+        }
+        if (valueCase_ == 30) {
+          if (withdrawTokenBuilder_ == null) {
+            result.value_ = value_;
+          } else {
+            result.value_ = withdrawTokenBuilder_.build();
+          }
+        }
+        if (valueCase_ == 31) {
+          if (approveWithdrawBuilder_ == null) {
+            result.value_ = value_;
+          } else {
+            result.value_ = approveWithdrawBuilder_.build();
+          }
+        }
+        if (valueCase_ == 32) {
+          if (revokeWithdrawBuilder_ == null) {
+            result.value_ = value_;
+          } else {
+            result.value_ = revokeWithdrawBuilder_.build();
+          }
+        }
         if (valueCase_ == 129) {
           if (accountStateBuilder_ == null) {
             result.value_ = value_;
@@ -41077,6 +41412,26 @@ public final class Rpc {
           }
           case DEACTIVATE_PROTOCOL: {
             mergeDeactivateProtocol(other.getDeactivateProtocol());
+            break;
+          }
+          case REVOKE_DELEGATE: {
+            mergeRevokeDelegate(other.getRevokeDelegate());
+            break;
+          }
+          case DEPOSIT_TOKEN: {
+            mergeDepositToken(other.getDepositToken());
+            break;
+          }
+          case WITHDRAW_TOKEN: {
+            mergeWithdrawToken(other.getWithdrawToken());
+            break;
+          }
+          case APPROVE_WITHDRAW: {
+            mergeApproveWithdraw(other.getApproveWithdraw());
+            break;
+          }
+          case REVOKE_WITHDRAW: {
+            mergeRevokeWithdraw(other.getRevokeWithdraw());
             break;
           }
           case ACCOUNT_STATE: {
@@ -43480,6 +43835,656 @@ public final class Rpc {
         valueCase_ = 27;
         onChanged();;
         return deactivateProtocolBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> revokeDelegateBuilder_;
+      /**
+       * <code>.forge_abi.Transaction revoke_delegate = 28;</code>
+       */
+      public forge_abi.Type.Transaction getRevokeDelegate() {
+        if (revokeDelegateBuilder_ == null) {
+          if (valueCase_ == 28) {
+            return (forge_abi.Type.Transaction) value_;
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        } else {
+          if (valueCase_ == 28) {
+            return revokeDelegateBuilder_.getMessage();
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.forge_abi.Transaction revoke_delegate = 28;</code>
+       */
+      public Builder setRevokeDelegate(forge_abi.Type.Transaction value) {
+        if (revokeDelegateBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          value_ = value;
+          onChanged();
+        } else {
+          revokeDelegateBuilder_.setMessage(value);
+        }
+        valueCase_ = 28;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction revoke_delegate = 28;</code>
+       */
+      public Builder setRevokeDelegate(
+          forge_abi.Type.Transaction.Builder builderForValue) {
+        if (revokeDelegateBuilder_ == null) {
+          value_ = builderForValue.build();
+          onChanged();
+        } else {
+          revokeDelegateBuilder_.setMessage(builderForValue.build());
+        }
+        valueCase_ = 28;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction revoke_delegate = 28;</code>
+       */
+      public Builder mergeRevokeDelegate(forge_abi.Type.Transaction value) {
+        if (revokeDelegateBuilder_ == null) {
+          if (valueCase_ == 28 &&
+              value_ != forge_abi.Type.Transaction.getDefaultInstance()) {
+            value_ = forge_abi.Type.Transaction.newBuilder((forge_abi.Type.Transaction) value_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            value_ = value;
+          }
+          onChanged();
+        } else {
+          if (valueCase_ == 28) {
+            revokeDelegateBuilder_.mergeFrom(value);
+          }
+          revokeDelegateBuilder_.setMessage(value);
+        }
+        valueCase_ = 28;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction revoke_delegate = 28;</code>
+       */
+      public Builder clearRevokeDelegate() {
+        if (revokeDelegateBuilder_ == null) {
+          if (valueCase_ == 28) {
+            valueCase_ = 0;
+            value_ = null;
+            onChanged();
+          }
+        } else {
+          if (valueCase_ == 28) {
+            valueCase_ = 0;
+            value_ = null;
+          }
+          revokeDelegateBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction revoke_delegate = 28;</code>
+       */
+      public forge_abi.Type.Transaction.Builder getRevokeDelegateBuilder() {
+        return getRevokeDelegateFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.Transaction revoke_delegate = 28;</code>
+       */
+      public forge_abi.Type.TransactionOrBuilder getRevokeDelegateOrBuilder() {
+        if ((valueCase_ == 28) && (revokeDelegateBuilder_ != null)) {
+          return revokeDelegateBuilder_.getMessageOrBuilder();
+        } else {
+          if (valueCase_ == 28) {
+            return (forge_abi.Type.Transaction) value_;
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.forge_abi.Transaction revoke_delegate = 28;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> 
+          getRevokeDelegateFieldBuilder() {
+        if (revokeDelegateBuilder_ == null) {
+          if (!(valueCase_ == 28)) {
+            value_ = forge_abi.Type.Transaction.getDefaultInstance();
+          }
+          revokeDelegateBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder>(
+                  (forge_abi.Type.Transaction) value_,
+                  getParentForChildren(),
+                  isClean());
+          value_ = null;
+        }
+        valueCase_ = 28;
+        onChanged();;
+        return revokeDelegateBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> depositTokenBuilder_;
+      /**
+       * <code>.forge_abi.Transaction deposit_token = 29;</code>
+       */
+      public forge_abi.Type.Transaction getDepositToken() {
+        if (depositTokenBuilder_ == null) {
+          if (valueCase_ == 29) {
+            return (forge_abi.Type.Transaction) value_;
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        } else {
+          if (valueCase_ == 29) {
+            return depositTokenBuilder_.getMessage();
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.forge_abi.Transaction deposit_token = 29;</code>
+       */
+      public Builder setDepositToken(forge_abi.Type.Transaction value) {
+        if (depositTokenBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          value_ = value;
+          onChanged();
+        } else {
+          depositTokenBuilder_.setMessage(value);
+        }
+        valueCase_ = 29;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction deposit_token = 29;</code>
+       */
+      public Builder setDepositToken(
+          forge_abi.Type.Transaction.Builder builderForValue) {
+        if (depositTokenBuilder_ == null) {
+          value_ = builderForValue.build();
+          onChanged();
+        } else {
+          depositTokenBuilder_.setMessage(builderForValue.build());
+        }
+        valueCase_ = 29;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction deposit_token = 29;</code>
+       */
+      public Builder mergeDepositToken(forge_abi.Type.Transaction value) {
+        if (depositTokenBuilder_ == null) {
+          if (valueCase_ == 29 &&
+              value_ != forge_abi.Type.Transaction.getDefaultInstance()) {
+            value_ = forge_abi.Type.Transaction.newBuilder((forge_abi.Type.Transaction) value_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            value_ = value;
+          }
+          onChanged();
+        } else {
+          if (valueCase_ == 29) {
+            depositTokenBuilder_.mergeFrom(value);
+          }
+          depositTokenBuilder_.setMessage(value);
+        }
+        valueCase_ = 29;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction deposit_token = 29;</code>
+       */
+      public Builder clearDepositToken() {
+        if (depositTokenBuilder_ == null) {
+          if (valueCase_ == 29) {
+            valueCase_ = 0;
+            value_ = null;
+            onChanged();
+          }
+        } else {
+          if (valueCase_ == 29) {
+            valueCase_ = 0;
+            value_ = null;
+          }
+          depositTokenBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction deposit_token = 29;</code>
+       */
+      public forge_abi.Type.Transaction.Builder getDepositTokenBuilder() {
+        return getDepositTokenFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.Transaction deposit_token = 29;</code>
+       */
+      public forge_abi.Type.TransactionOrBuilder getDepositTokenOrBuilder() {
+        if ((valueCase_ == 29) && (depositTokenBuilder_ != null)) {
+          return depositTokenBuilder_.getMessageOrBuilder();
+        } else {
+          if (valueCase_ == 29) {
+            return (forge_abi.Type.Transaction) value_;
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.forge_abi.Transaction deposit_token = 29;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> 
+          getDepositTokenFieldBuilder() {
+        if (depositTokenBuilder_ == null) {
+          if (!(valueCase_ == 29)) {
+            value_ = forge_abi.Type.Transaction.getDefaultInstance();
+          }
+          depositTokenBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder>(
+                  (forge_abi.Type.Transaction) value_,
+                  getParentForChildren(),
+                  isClean());
+          value_ = null;
+        }
+        valueCase_ = 29;
+        onChanged();;
+        return depositTokenBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> withdrawTokenBuilder_;
+      /**
+       * <code>.forge_abi.Transaction withdraw_token = 30;</code>
+       */
+      public forge_abi.Type.Transaction getWithdrawToken() {
+        if (withdrawTokenBuilder_ == null) {
+          if (valueCase_ == 30) {
+            return (forge_abi.Type.Transaction) value_;
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        } else {
+          if (valueCase_ == 30) {
+            return withdrawTokenBuilder_.getMessage();
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.forge_abi.Transaction withdraw_token = 30;</code>
+       */
+      public Builder setWithdrawToken(forge_abi.Type.Transaction value) {
+        if (withdrawTokenBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          value_ = value;
+          onChanged();
+        } else {
+          withdrawTokenBuilder_.setMessage(value);
+        }
+        valueCase_ = 30;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction withdraw_token = 30;</code>
+       */
+      public Builder setWithdrawToken(
+          forge_abi.Type.Transaction.Builder builderForValue) {
+        if (withdrawTokenBuilder_ == null) {
+          value_ = builderForValue.build();
+          onChanged();
+        } else {
+          withdrawTokenBuilder_.setMessage(builderForValue.build());
+        }
+        valueCase_ = 30;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction withdraw_token = 30;</code>
+       */
+      public Builder mergeWithdrawToken(forge_abi.Type.Transaction value) {
+        if (withdrawTokenBuilder_ == null) {
+          if (valueCase_ == 30 &&
+              value_ != forge_abi.Type.Transaction.getDefaultInstance()) {
+            value_ = forge_abi.Type.Transaction.newBuilder((forge_abi.Type.Transaction) value_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            value_ = value;
+          }
+          onChanged();
+        } else {
+          if (valueCase_ == 30) {
+            withdrawTokenBuilder_.mergeFrom(value);
+          }
+          withdrawTokenBuilder_.setMessage(value);
+        }
+        valueCase_ = 30;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction withdraw_token = 30;</code>
+       */
+      public Builder clearWithdrawToken() {
+        if (withdrawTokenBuilder_ == null) {
+          if (valueCase_ == 30) {
+            valueCase_ = 0;
+            value_ = null;
+            onChanged();
+          }
+        } else {
+          if (valueCase_ == 30) {
+            valueCase_ = 0;
+            value_ = null;
+          }
+          withdrawTokenBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction withdraw_token = 30;</code>
+       */
+      public forge_abi.Type.Transaction.Builder getWithdrawTokenBuilder() {
+        return getWithdrawTokenFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.Transaction withdraw_token = 30;</code>
+       */
+      public forge_abi.Type.TransactionOrBuilder getWithdrawTokenOrBuilder() {
+        if ((valueCase_ == 30) && (withdrawTokenBuilder_ != null)) {
+          return withdrawTokenBuilder_.getMessageOrBuilder();
+        } else {
+          if (valueCase_ == 30) {
+            return (forge_abi.Type.Transaction) value_;
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.forge_abi.Transaction withdraw_token = 30;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> 
+          getWithdrawTokenFieldBuilder() {
+        if (withdrawTokenBuilder_ == null) {
+          if (!(valueCase_ == 30)) {
+            value_ = forge_abi.Type.Transaction.getDefaultInstance();
+          }
+          withdrawTokenBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder>(
+                  (forge_abi.Type.Transaction) value_,
+                  getParentForChildren(),
+                  isClean());
+          value_ = null;
+        }
+        valueCase_ = 30;
+        onChanged();;
+        return withdrawTokenBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> approveWithdrawBuilder_;
+      /**
+       * <code>.forge_abi.Transaction approve_withdraw = 31;</code>
+       */
+      public forge_abi.Type.Transaction getApproveWithdraw() {
+        if (approveWithdrawBuilder_ == null) {
+          if (valueCase_ == 31) {
+            return (forge_abi.Type.Transaction) value_;
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        } else {
+          if (valueCase_ == 31) {
+            return approveWithdrawBuilder_.getMessage();
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.forge_abi.Transaction approve_withdraw = 31;</code>
+       */
+      public Builder setApproveWithdraw(forge_abi.Type.Transaction value) {
+        if (approveWithdrawBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          value_ = value;
+          onChanged();
+        } else {
+          approveWithdrawBuilder_.setMessage(value);
+        }
+        valueCase_ = 31;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction approve_withdraw = 31;</code>
+       */
+      public Builder setApproveWithdraw(
+          forge_abi.Type.Transaction.Builder builderForValue) {
+        if (approveWithdrawBuilder_ == null) {
+          value_ = builderForValue.build();
+          onChanged();
+        } else {
+          approveWithdrawBuilder_.setMessage(builderForValue.build());
+        }
+        valueCase_ = 31;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction approve_withdraw = 31;</code>
+       */
+      public Builder mergeApproveWithdraw(forge_abi.Type.Transaction value) {
+        if (approveWithdrawBuilder_ == null) {
+          if (valueCase_ == 31 &&
+              value_ != forge_abi.Type.Transaction.getDefaultInstance()) {
+            value_ = forge_abi.Type.Transaction.newBuilder((forge_abi.Type.Transaction) value_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            value_ = value;
+          }
+          onChanged();
+        } else {
+          if (valueCase_ == 31) {
+            approveWithdrawBuilder_.mergeFrom(value);
+          }
+          approveWithdrawBuilder_.setMessage(value);
+        }
+        valueCase_ = 31;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction approve_withdraw = 31;</code>
+       */
+      public Builder clearApproveWithdraw() {
+        if (approveWithdrawBuilder_ == null) {
+          if (valueCase_ == 31) {
+            valueCase_ = 0;
+            value_ = null;
+            onChanged();
+          }
+        } else {
+          if (valueCase_ == 31) {
+            valueCase_ = 0;
+            value_ = null;
+          }
+          approveWithdrawBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction approve_withdraw = 31;</code>
+       */
+      public forge_abi.Type.Transaction.Builder getApproveWithdrawBuilder() {
+        return getApproveWithdrawFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.Transaction approve_withdraw = 31;</code>
+       */
+      public forge_abi.Type.TransactionOrBuilder getApproveWithdrawOrBuilder() {
+        if ((valueCase_ == 31) && (approveWithdrawBuilder_ != null)) {
+          return approveWithdrawBuilder_.getMessageOrBuilder();
+        } else {
+          if (valueCase_ == 31) {
+            return (forge_abi.Type.Transaction) value_;
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.forge_abi.Transaction approve_withdraw = 31;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> 
+          getApproveWithdrawFieldBuilder() {
+        if (approveWithdrawBuilder_ == null) {
+          if (!(valueCase_ == 31)) {
+            value_ = forge_abi.Type.Transaction.getDefaultInstance();
+          }
+          approveWithdrawBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder>(
+                  (forge_abi.Type.Transaction) value_,
+                  getParentForChildren(),
+                  isClean());
+          value_ = null;
+        }
+        valueCase_ = 31;
+        onChanged();;
+        return approveWithdrawBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> revokeWithdrawBuilder_;
+      /**
+       * <code>.forge_abi.Transaction revoke_withdraw = 32;</code>
+       */
+      public forge_abi.Type.Transaction getRevokeWithdraw() {
+        if (revokeWithdrawBuilder_ == null) {
+          if (valueCase_ == 32) {
+            return (forge_abi.Type.Transaction) value_;
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        } else {
+          if (valueCase_ == 32) {
+            return revokeWithdrawBuilder_.getMessage();
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.forge_abi.Transaction revoke_withdraw = 32;</code>
+       */
+      public Builder setRevokeWithdraw(forge_abi.Type.Transaction value) {
+        if (revokeWithdrawBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          value_ = value;
+          onChanged();
+        } else {
+          revokeWithdrawBuilder_.setMessage(value);
+        }
+        valueCase_ = 32;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction revoke_withdraw = 32;</code>
+       */
+      public Builder setRevokeWithdraw(
+          forge_abi.Type.Transaction.Builder builderForValue) {
+        if (revokeWithdrawBuilder_ == null) {
+          value_ = builderForValue.build();
+          onChanged();
+        } else {
+          revokeWithdrawBuilder_.setMessage(builderForValue.build());
+        }
+        valueCase_ = 32;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction revoke_withdraw = 32;</code>
+       */
+      public Builder mergeRevokeWithdraw(forge_abi.Type.Transaction value) {
+        if (revokeWithdrawBuilder_ == null) {
+          if (valueCase_ == 32 &&
+              value_ != forge_abi.Type.Transaction.getDefaultInstance()) {
+            value_ = forge_abi.Type.Transaction.newBuilder((forge_abi.Type.Transaction) value_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            value_ = value;
+          }
+          onChanged();
+        } else {
+          if (valueCase_ == 32) {
+            revokeWithdrawBuilder_.mergeFrom(value);
+          }
+          revokeWithdrawBuilder_.setMessage(value);
+        }
+        valueCase_ = 32;
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction revoke_withdraw = 32;</code>
+       */
+      public Builder clearRevokeWithdraw() {
+        if (revokeWithdrawBuilder_ == null) {
+          if (valueCase_ == 32) {
+            valueCase_ = 0;
+            value_ = null;
+            onChanged();
+          }
+        } else {
+          if (valueCase_ == 32) {
+            valueCase_ = 0;
+            value_ = null;
+          }
+          revokeWithdrawBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.forge_abi.Transaction revoke_withdraw = 32;</code>
+       */
+      public forge_abi.Type.Transaction.Builder getRevokeWithdrawBuilder() {
+        return getRevokeWithdrawFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.Transaction revoke_withdraw = 32;</code>
+       */
+      public forge_abi.Type.TransactionOrBuilder getRevokeWithdrawOrBuilder() {
+        if ((valueCase_ == 32) && (revokeWithdrawBuilder_ != null)) {
+          return revokeWithdrawBuilder_.getMessageOrBuilder();
+        } else {
+          if (valueCase_ == 32) {
+            return (forge_abi.Type.Transaction) value_;
+          }
+          return forge_abi.Type.Transaction.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.forge_abi.Transaction revoke_withdraw = 32;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder> 
+          getRevokeWithdrawFieldBuilder() {
+        if (revokeWithdrawBuilder_ == null) {
+          if (!(valueCase_ == 32)) {
+            value_ = forge_abi.Type.Transaction.getDefaultInstance();
+          }
+          revokeWithdrawBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Type.Transaction, forge_abi.Type.Transaction.Builder, forge_abi.Type.TransactionOrBuilder>(
+                  (forge_abi.Type.Transaction) value_,
+                  getParentForChildren(),
+                  isClean());
+          value_ = null;
+        }
+        valueCase_ = 32;
+        onChanged();;
+        return revokeWithdrawBuilder_;
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
@@ -67321,7 +68326,7 @@ public final class Rpc {
       "\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\0222\n\017v" +
       "alidators_info\030\002 \001(\0132\031.forge_abi.Validat",
       "orsInfo\"1\n\020RequestSubscribe\022\r\n\005topic\030\001 \001" +
-      "(\t\022\016\n\006filter\030\002 \001(\t\"\246\t\n\021ResponseSubscribe" +
+      "(\t\022\016\n\006filter\030\002 \001(\t\"\243\013\n\021ResponseSubscribe" +
       "\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022\017\n" +
       "\005topic\030\002 \001(\tH\000\022*\n\010transfer\030\003 \001(\0132\026.forge" +
       "_abi.TransactionH\000\0221\n\017account_migrate\030\004 " +
@@ -67343,91 +68348,97 @@ public final class Rpc {
       "gate\030\031 \001(\0132\026.forge_abi.TransactionH\000\0223\n\021" +
       "activate_protocol\030\032 \001(\0132\026.forge_abi.Tran" +
       "sactionH\000\0225\n\023deactivate_protocol\030\033 \001(\0132\026" +
-      ".forge_abi.TransactionH\000\0221\n\raccount_stat" +
-      "e\030\201\001 \001(\0132\027.forge_abi.AccountStateH\000\022-\n\013a" +
-      "sset_state\030\202\001 \001(\0132\025.forge_abi.AssetState" +
-      "H\000\022-\n\013forge_state\030\203\001 \001(\0132\025.forge_abi.For" +
-      "geStateH\000\022-\n\013stake_state\030\204\001 \001(\0132\025.forge_" +
-      "abi.StakeStateH\000\0223\n\016protocol_state\030\205\001 \001(" +
-      "\0132\030.forge_abi.ProtocolStateH\000\0223\n\016delegat",
-      "e_state\030\206\001 \001(\0132\030.forge_abi.DelegateState" +
-      "H\000B\007\n\005value\"#\n\022RequestUnsubscribe\022\r\n\005top" +
-      "ic\030\001 \001(\t\":\n\023ResponseUnsubscribe\022#\n\004code\030" +
-      "\001 \001(\0162\025.forge_abi.StatusCode\"\"\n\020RequestG" +
-      "etConfig\022\016\n\006parsed\030\001 \001(\010\"H\n\021ResponseGetC" +
-      "onfig\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCo" +
-      "de\022\016\n\006config\030\002 \001(\t\"-\n\005ByDay\022\022\n\nstart_dat" +
-      "e\030\001 \001(\t\022\020\n\010end_date\030\002 \001(\t\"\026\n\006ByHour\022\014\n\004d" +
-      "ate\030\001 \001(\t\"h\n\024RequestGetForgeStats\022$\n\010day" +
-      "_info\030\001 \001(\0132\020.forge_abi.ByDayH\000\022!\n\004date\030",
-      "\002 \001(\0132\021.forge_abi.ByHourH\000B\007\n\005value\"h\n\025R" +
-      "esponseGetForgeStats\022#\n\004code\030\001 \001(\0162\025.for" +
-      "ge_abi.StatusCode\022*\n\013forge_stats\030\002 \001(\0132\025" +
-      ".forge_abi.ForgeStats\"\375\001\n\027RequestListTra" +
-      "nsactions\022$\n\006paging\030\001 \001(\0132\024.forge_abi.Pa" +
-      "geInput\022*\n\013time_filter\030\002 \001(\0132\025.forge_abi" +
-      ".TimeFilter\0220\n\016address_filter\030\003 \001(\0132\030.fo" +
-      "rge_abi.AddressFilter\022*\n\013type_filter\030\004 \001" +
-      "(\0132\025.forge_abi.TypeFilter\0222\n\017validity_fi" +
-      "lter\030\005 \001(\0132\031.forge_abi.ValidityFilter\"\227\001",
-      "\n\030ResponseListTransactions\022#\n\004code\030\001 \001(\016" +
-      "2\025.forge_abi.StatusCode\022!\n\004page\030\002 \001(\0132\023." +
-      "forge_abi.PageInfo\0223\n\014transactions\030\003 \003(\013" +
-      "2\035.forge_abi.IndexedTransaction\"P\n\021Reque" +
-      "stListAssets\022$\n\006paging\030\001 \001(\0132\024.forge_abi" +
-      ".PageInput\022\025\n\rowner_address\030\002 \001(\t\"\212\001\n\022Re" +
-      "sponseListAssets\022#\n\004code\030\001 \001(\0162\025.forge_a" +
-      "bi.StatusCode\022!\n\004page\030\002 \001(\0132\023.forge_abi." +
-      "PageInfo\022,\n\006assets\030\003 \003(\0132\034.forge_abi.Ind" +
-      "exedAssetState\"k\n\021RequestListStakes\022$\n\006p",
-      "aging\030\001 \001(\0132\024.forge_abi.PageInput\0220\n\016add" +
-      "ress_filter\030\002 \001(\0132\030.forge_abi.AddressFil" +
-      "ter\"\212\001\n\022ResponseListStakes\022#\n\004code\030\001 \001(\016" +
-      "2\025.forge_abi.StatusCode\022!\n\004page\030\002 \001(\0132\023." +
-      "forge_abi.PageInfo\022,\n\006stakes\030\003 \003(\0132\034.for" +
-      "ge_abi.IndexedStakeState\"+\n\022RequestListA" +
-      "ccount\022\025\n\rowner_address\030\001 \001(\t\"k\n\023Respons" +
-      "eListAccount\022#\n\004code\030\001 \001(\0162\025.forge_abi.S" +
-      "tatusCode\022/\n\007account\030\002 \001(\0132\036.forge_abi.I" +
-      "ndexedAccountState\">\n\026RequestListTopAcco",
-      "unts\022$\n\006paging\030\001 \001(\0132\024.forge_abi.PageInp" +
-      "ut\"\223\001\n\027ResponseListTopAccounts\022#\n\004code\030\001" +
-      " \001(\0162\025.forge_abi.StatusCode\022!\n\004page\030\002 \001(" +
-      "\0132\023.forge_abi.PageInfo\0220\n\010accounts\030\003 \003(\013" +
-      "2\036.forge_abi.IndexedAccountState\"U\n\034Requ" +
-      "estListAssetTransactions\022$\n\006paging\030\001 \001(\013" +
-      "2\024.forge_abi.PageInput\022\017\n\007address\030\002 \001(\t\"" +
-      "\234\001\n\035ResponseListAssetTransactions\022#\n\004cod" +
-      "e\030\001 \001(\0162\025.forge_abi.StatusCode\022!\n\004page\030\002" +
-      " \001(\0132\023.forge_abi.PageInfo\0223\n\014transaction",
-      "s\030\003 \003(\0132\035.forge_abi.IndexedTransaction\"\216" +
-      "\002\n\021RequestListBlocks\022$\n\006paging\030\001 \001(\0132\024.f" +
-      "orge_abi.PageInput\022\020\n\010proposer\030\002 \001(\t\022*\n\013" +
-      "time_filter\030\003 \001(\0132\025.forge_abi.TimeFilter" +
-      "\022-\n\rheight_filter\030\004 \001(\0132\026.forge_abi.Rang" +
-      "eFilter\022.\n\016num_txs_filter\030\005 \001(\0132\026.forge_" +
-      "abi.RangeFilter\0226\n\026num_invalid_txs_filte" +
-      "r\030\006 \001(\0132\026.forge_abi.RangeFilter\"\205\001\n\022Resp" +
-      "onseListBlocks\022#\n\004code\030\001 \001(\0162\025.forge_abi" +
-      ".StatusCode\022!\n\004page\030\002 \001(\0132\023.forge_abi.Pa",
-      "geInfo\022\'\n\006blocks\030\003 \003(\0132\027.forge_abi.Index" +
-      "edBlock\"\207\001\n\022RequestListTethers\022$\n\006paging" +
-      "\030\001 \001(\0132\024.forge_abi.PageInput\022\021\n\tdeposito" +
-      "r\030\002 \001(\t\022\022\n\nwithdrawer\030\003 \001(\t\022\021\n\tcustodian" +
-      "\030\004 \001(\t\022\021\n\tavailable\030\005 \001(\010\"\206\001\n\023ResponseLi" +
-      "stTethers\022#\n\004code\030\001 \001(\0162\025.forge_abi.Stat" +
-      "usCode\022!\n\004page\030\002 \001(\0132\023.forge_abi.PageInf" +
-      "o\022\'\n\007tethers\030\003 \003(\0132\026.forge_abi.TetherSta" +
-      "te\"l\n\017RequestListSwap\022$\n\006paging\030\001 \001(\0132\024." +
-      "forge_abi.PageInput\022\016\n\006sender\030\002 \001(\t\022\020\n\010r",
-      "eceiver\030\003 \001(\t\022\021\n\tavailable\030\004 \001(\010\"~\n\020Resp" +
-      "onseListSwap\022#\n\004code\030\001 \001(\0162\025.forge_abi.S" +
-      "tatusCode\022!\n\004page\030\002 \001(\0132\023.forge_abi.Page" +
-      "Info\022\"\n\004swap\030\003 \003(\0132\024.forge_abi.SwapState" +
-      "\"\030\n\026RequestGetHealthStatus\"n\n\027ResponseGe" +
-      "tHealthStatus\022#\n\004code\030\001 \001(\0162\025.forge_abi." +
-      "StatusCode\022.\n\rhealth_status\030\002 \001(\0132\027.forg" +
-      "e_abi.HealthStatusb\006proto3"
+      ".forge_abi.TransactionH\000\0221\n\017revoke_deleg" +
+      "ate\030\034 \001(\0132\026.forge_abi.TransactionH\000\022/\n\rd" +
+      "eposit_token\030\035 \001(\0132\026.forge_abi.Transacti" +
+      "onH\000\0220\n\016withdraw_token\030\036 \001(\0132\026.forge_abi" +
+      ".TransactionH\000\0222\n\020approve_withdraw\030\037 \001(\013" +
+      "2\026.forge_abi.TransactionH\000\0221\n\017revoke_wit" +
+      "hdraw\030  \001(\0132\026.forge_abi.TransactionH\000\0221\n",
+      "\raccount_state\030\201\001 \001(\0132\027.forge_abi.Accoun" +
+      "tStateH\000\022-\n\013asset_state\030\202\001 \001(\0132\025.forge_a" +
+      "bi.AssetStateH\000\022-\n\013forge_state\030\203\001 \001(\0132\025." +
+      "forge_abi.ForgeStateH\000\022-\n\013stake_state\030\204\001" +
+      " \001(\0132\025.forge_abi.StakeStateH\000\0223\n\016protoco" +
+      "l_state\030\205\001 \001(\0132\030.forge_abi.ProtocolState" +
+      "H\000\0223\n\016delegate_state\030\206\001 \001(\0132\030.forge_abi." +
+      "DelegateStateH\000B\007\n\005value\"#\n\022RequestUnsub" +
+      "scribe\022\r\n\005topic\030\001 \001(\t\":\n\023ResponseUnsubsc" +
+      "ribe\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCod",
+      "e\"\"\n\020RequestGetConfig\022\016\n\006parsed\030\001 \001(\010\"H\n" +
+      "\021ResponseGetConfig\022#\n\004code\030\001 \001(\0162\025.forge" +
+      "_abi.StatusCode\022\016\n\006config\030\002 \001(\t\"-\n\005ByDay" +
+      "\022\022\n\nstart_date\030\001 \001(\t\022\020\n\010end_date\030\002 \001(\t\"\026" +
+      "\n\006ByHour\022\014\n\004date\030\001 \001(\t\"h\n\024RequestGetForg" +
+      "eStats\022$\n\010day_info\030\001 \001(\0132\020.forge_abi.ByD" +
+      "ayH\000\022!\n\004date\030\002 \001(\0132\021.forge_abi.ByHourH\000B" +
+      "\007\n\005value\"h\n\025ResponseGetForgeStats\022#\n\004cod" +
+      "e\030\001 \001(\0162\025.forge_abi.StatusCode\022*\n\013forge_" +
+      "stats\030\002 \001(\0132\025.forge_abi.ForgeStats\"\375\001\n\027R",
+      "equestListTransactions\022$\n\006paging\030\001 \001(\0132\024" +
+      ".forge_abi.PageInput\022*\n\013time_filter\030\002 \001(" +
+      "\0132\025.forge_abi.TimeFilter\0220\n\016address_filt" +
+      "er\030\003 \001(\0132\030.forge_abi.AddressFilter\022*\n\013ty" +
+      "pe_filter\030\004 \001(\0132\025.forge_abi.TypeFilter\0222" +
+      "\n\017validity_filter\030\005 \001(\0132\031.forge_abi.Vali" +
+      "dityFilter\"\227\001\n\030ResponseListTransactions\022" +
+      "#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022!\n\004" +
+      "page\030\002 \001(\0132\023.forge_abi.PageInfo\0223\n\014trans" +
+      "actions\030\003 \003(\0132\035.forge_abi.IndexedTransac",
+      "tion\"P\n\021RequestListAssets\022$\n\006paging\030\001 \001(" +
+      "\0132\024.forge_abi.PageInput\022\025\n\rowner_address" +
+      "\030\002 \001(\t\"\212\001\n\022ResponseListAssets\022#\n\004code\030\001 " +
+      "\001(\0162\025.forge_abi.StatusCode\022!\n\004page\030\002 \001(\013" +
+      "2\023.forge_abi.PageInfo\022,\n\006assets\030\003 \003(\0132\034." +
+      "forge_abi.IndexedAssetState\"k\n\021RequestLi" +
+      "stStakes\022$\n\006paging\030\001 \001(\0132\024.forge_abi.Pag" +
+      "eInput\0220\n\016address_filter\030\002 \001(\0132\030.forge_a" +
+      "bi.AddressFilter\"\212\001\n\022ResponseListStakes\022" +
+      "#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode\022!\n\004",
+      "page\030\002 \001(\0132\023.forge_abi.PageInfo\022,\n\006stake" +
+      "s\030\003 \003(\0132\034.forge_abi.IndexedStakeState\"+\n" +
+      "\022RequestListAccount\022\025\n\rowner_address\030\001 \001" +
+      "(\t\"k\n\023ResponseListAccount\022#\n\004code\030\001 \001(\0162" +
+      "\025.forge_abi.StatusCode\022/\n\007account\030\002 \001(\0132" +
+      "\036.forge_abi.IndexedAccountState\">\n\026Reque" +
+      "stListTopAccounts\022$\n\006paging\030\001 \001(\0132\024.forg" +
+      "e_abi.PageInput\"\223\001\n\027ResponseListTopAccou" +
+      "nts\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusCode" +
+      "\022!\n\004page\030\002 \001(\0132\023.forge_abi.PageInfo\0220\n\010a",
+      "ccounts\030\003 \003(\0132\036.forge_abi.IndexedAccount" +
+      "State\"U\n\034RequestListAssetTransactions\022$\n" +
+      "\006paging\030\001 \001(\0132\024.forge_abi.PageInput\022\017\n\007a" +
+      "ddress\030\002 \001(\t\"\234\001\n\035ResponseListAssetTransa" +
+      "ctions\022#\n\004code\030\001 \001(\0162\025.forge_abi.StatusC" +
+      "ode\022!\n\004page\030\002 \001(\0132\023.forge_abi.PageInfo\0223" +
+      "\n\014transactions\030\003 \003(\0132\035.forge_abi.Indexed" +
+      "Transaction\"\216\002\n\021RequestListBlocks\022$\n\006pag" +
+      "ing\030\001 \001(\0132\024.forge_abi.PageInput\022\020\n\010propo" +
+      "ser\030\002 \001(\t\022*\n\013time_filter\030\003 \001(\0132\025.forge_a",
+      "bi.TimeFilter\022-\n\rheight_filter\030\004 \001(\0132\026.f" +
+      "orge_abi.RangeFilter\022.\n\016num_txs_filter\030\005" +
+      " \001(\0132\026.forge_abi.RangeFilter\0226\n\026num_inva" +
+      "lid_txs_filter\030\006 \001(\0132\026.forge_abi.RangeFi" +
+      "lter\"\205\001\n\022ResponseListBlocks\022#\n\004code\030\001 \001(" +
+      "\0162\025.forge_abi.StatusCode\022!\n\004page\030\002 \001(\0132\023" +
+      ".forge_abi.PageInfo\022\'\n\006blocks\030\003 \003(\0132\027.fo" +
+      "rge_abi.IndexedBlock\"\207\001\n\022RequestListTeth" +
+      "ers\022$\n\006paging\030\001 \001(\0132\024.forge_abi.PageInpu" +
+      "t\022\021\n\tdepositor\030\002 \001(\t\022\022\n\nwithdrawer\030\003 \001(\t",
+      "\022\021\n\tcustodian\030\004 \001(\t\022\021\n\tavailable\030\005 \001(\010\"\206" +
+      "\001\n\023ResponseListTethers\022#\n\004code\030\001 \001(\0162\025.f" +
+      "orge_abi.StatusCode\022!\n\004page\030\002 \001(\0132\023.forg" +
+      "e_abi.PageInfo\022\'\n\007tethers\030\003 \003(\0132\026.forge_" +
+      "abi.TetherState\"l\n\017RequestListSwap\022$\n\006pa" +
+      "ging\030\001 \001(\0132\024.forge_abi.PageInput\022\016\n\006send" +
+      "er\030\002 \001(\t\022\020\n\010receiver\030\003 \001(\t\022\021\n\tavailable\030" +
+      "\004 \001(\010\"~\n\020ResponseListSwap\022#\n\004code\030\001 \001(\0162" +
+      "\025.forge_abi.StatusCode\022!\n\004page\030\002 \001(\0132\023.f" +
+      "orge_abi.PageInfo\022\"\n\004swap\030\003 \003(\0132\024.forge_",
+      "abi.SwapState\"\030\n\026RequestGetHealthStatus\"" +
+      "n\n\027ResponseGetHealthStatus\022#\n\004code\030\001 \001(\016" +
+      "2\025.forge_abi.StatusCode\022.\n\rhealth_status" +
+      "\030\002 \001(\0132\027.forge_abi.HealthStatusb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -67806,7 +68817,7 @@ public final class Rpc {
     internal_static_forge_abi_ResponseSubscribe_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_ResponseSubscribe_descriptor,
-        new java.lang.String[] { "Code", "Topic", "Transfer", "AccountMigrate", "Confirm", "CreateAsset", "Exchange", "Revoke", "BeginBlock", "EndBlock", "Declare", "UpdateAsset", "ConsensusUpgrade", "DeclareFile", "SysUpgrade", "Stake", "Delegate", "ActivateProtocol", "DeactivateProtocol", "AccountState", "AssetState", "ForgeState", "StakeState", "ProtocolState", "DelegateState", "Value", });
+        new java.lang.String[] { "Code", "Topic", "Transfer", "AccountMigrate", "Confirm", "CreateAsset", "Exchange", "Revoke", "BeginBlock", "EndBlock", "Declare", "UpdateAsset", "ConsensusUpgrade", "DeclareFile", "SysUpgrade", "Stake", "Delegate", "ActivateProtocol", "DeactivateProtocol", "RevokeDelegate", "DepositToken", "WithdrawToken", "ApproveWithdraw", "RevokeWithdraw", "AccountState", "AssetState", "ForgeState", "StakeState", "ProtocolState", "DelegateState", "Value", });
     internal_static_forge_abi_RequestUnsubscribe_descriptor =
       getDescriptor().getMessageTypes().get(60);
     internal_static_forge_abi_RequestUnsubscribe_fieldAccessorTable = new

@@ -7,11 +7,11 @@ import forge_abi.Rpc
 import io.arcblock.forge.did.DIDGenerator
 import io.arcblock.forge.did.WalletInfo
 import io.arcblock.forge.extension.decodeB16
+import io.arcblock.forge.extension.encodeB58
 import io.arcblock.forge.extension.unSign
 import io.grpc.stub.StreamObserver
 import org.junit.Assert
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -35,7 +35,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  * Edited Time  :
  * Description  :
  **/
-@Ignore
+//@Ignore
 @RunWith(JUnit4::class)
 class TransferTest {
 
@@ -174,6 +174,8 @@ class TransferTest {
   fun testDelegate(){
     val celliy = forge.createWallet()
     forge.declare("Celliy",celliy)
+    println("appId:${alice.pkBase58()}")
+    println("secId:${celliy.sk.encodeB58()}")
     val response = forge.createDelegate(alice,celliy, listOf("itx.value <= 100000000000000"))
     Assert.assertEquals(" test delegate:", Enum.StatusCode.ok, response.code)
     val sendR = forge.transfer(celliy, bob, BigInteger.ZERO, delegatee = alice.address)

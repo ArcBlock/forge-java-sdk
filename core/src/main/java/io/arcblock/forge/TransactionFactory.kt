@@ -70,7 +70,7 @@ object TransactionFactory {
    * create a revoke delegate transaction without signature
    */
   fun unsignRevokeDelegate(from: String, to: String, chainID: String, wallet: WalletInfo, typeUrls: List<String>): Type.Transaction {
-    val itx = RevokeDelegate.RevokeDelegationTx.newBuilder()
+    val itx = RevokeDelegate.RevokeDelegateTx.newBuilder()
       .setAddress(DIDGenerator.genDelegateAddress(from, to))
       .addAllTypeUrls(typeUrls)
       .setTo(to)
