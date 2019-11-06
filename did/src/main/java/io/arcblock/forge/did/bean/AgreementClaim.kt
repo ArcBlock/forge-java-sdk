@@ -5,7 +5,7 @@ package io.arcblock.forge.did.bean
  * @uri document uri
  * @hash document hash info
   */
-class AgreementClaim(override val meta: MetaInfo, var uri: String, var hash: AgreementClaim) : IClaim {
+class AgreementClaim(override val meta: MetaInfo, var uri: String, var hash: AgreementHash) : IClaim {
   val type = ClaimType.AGREEMENT.toString()
 }
 

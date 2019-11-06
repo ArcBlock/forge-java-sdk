@@ -6,8 +6,7 @@ import forge_abi.*
 import io.arcblock.forge.did.DIDGenerator
 import io.arcblock.forge.did.HashType
 import io.arcblock.forge.did.WalletInfo
-import io.arcblock.forge.extension.address
-import io.arcblock.forge.extension.toByteString
+import io.arcblock.forge.extension.*
 import java.math.BigInteger
 import java.time.LocalDate
 import java.util.*
@@ -50,6 +49,39 @@ object TransactionFactory {
         .build())
       .build()
   }
+
+
+
+  fun unsignTransfer(chainID: String, from: String, fromPk: ByteArray,to: String, token: BigInteger? = null ,assets: List<String>? = null) :Type.Transaction {
+    val builder = Transfer.TransferTx.newBuilder().setTo(to)
+    token?.apply { builder.setValue(Type.BigUint.newBuilder().setValue(this.toByteArray().toByteString())) }
+    assets?.apply { builder.addAllAssets(this) }
+    return createTransaction(chainID, from, fromPk, builder.build().toByteString(), TypeUrls.TRANSFER)
+  }
+
+
+  fun preExchange(chainId: String, from: WalletInfo, to: String, fromToken: BigInteger, assetAddress: String, delegateeFrom: String? = null,
+                 delegateeTo: String? = null): Type.Transaction{
+      val exchange = Exchange.ExchangeTx.newBuilder()
+        .setSender(Exchange.ExchangeInfo.newBuilder()
+          .setValue(Type.BigUint.newBuilder()
+            .setValue(fromToken.toByteArray().toByteString())
+            .build())
+          .build())
+        .setReceiver(Exchange.ExchangeInfo.newBuilder()
+          .addAssets(assetAddress)
+          .build())
+        .setTo(delegateeTo ?: to)
+        .build()
+      return createTransaction(chainId, from.address, from.pk, exchange.toByteString(), TypeUrls.EXCHANGE)
+        .delegatee(delegateeFrom)
+        .signTx(from.sk)
+    }
+
+  fun finalizeExchange(tx: Type.Transaction, to: WalletInfo, delegateeTo: String?): Type.Transaction{
+    return tx.multiSig(to, delegator = delegateeTo)
+  }
+
 
   /**
    * create a delegate transaction without signature

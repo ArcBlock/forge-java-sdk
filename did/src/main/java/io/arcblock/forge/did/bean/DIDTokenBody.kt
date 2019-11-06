@@ -9,7 +9,7 @@ import io.arcblock.forge.utils.Base58Btc
 class DIDTokenBody(
   var action: String,
   var appInfo: AppInfo,
-  var requestedClaims: Array<IClaim>,
+  var requestedClaims: Array<out IClaim>,
   var url: String,
   var exp: String,
   var iat: String,

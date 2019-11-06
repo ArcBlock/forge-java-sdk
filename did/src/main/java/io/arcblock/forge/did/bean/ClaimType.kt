@@ -6,6 +6,18 @@ package io.arcblock.forge.did.bean
 enum class ClaimType {
 
   /**
+   * This is the first claim to ask by the DAPP, it is used to informing the WALLET to set the authentication principal for the entire authentication process.
+   * The authentication principal is the iss field of the JWT payload sent from the WALLET.
+   */
+  AUTHPRINCIPAL {
+    override fun toString(): String {
+      return "authprincipal"
+    }
+  },
+
+
+
+  /**
    * profile type can require client return user's profile such as: username, phone or avatar
    */
   PROFILE {
