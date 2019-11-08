@@ -69,7 +69,7 @@ class InitLine : CommandLineRunner {
 
 
 		//create a transfer tx and send
-		forge.transfer(alice, bob, BigDecimal("2E18").toBigInteger())
+		forge.transfer(alice, bob.address, BigDecimal("2E18").toBigInteger())
 
 		Thread.sleep(5000) //wait for block to commit
 		//Query account balance again
