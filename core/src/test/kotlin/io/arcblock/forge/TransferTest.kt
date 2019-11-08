@@ -12,6 +12,7 @@ import io.arcblock.forge.extension.unSign
 import io.grpc.stub.StreamObserver
 import org.junit.Assert
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -35,7 +36,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  * Edited Time  :
  * Description  :
  **/
-//@Ignore
+@Ignore
 @RunWith(JUnit4::class)
 class TransferTest {
 
@@ -48,7 +49,7 @@ class TransferTest {
     (LoggerFactory.getILoggerFactory() as LoggerContext).getLogger("io.arcblock").level = Level.INFO
     (LoggerFactory.getILoggerFactory() as LoggerContext).getLogger("io.grpc").level = Level.OFF
     (LoggerFactory.getILoggerFactory() as LoggerContext).getLogger("io.netty").level = Level.OFF
-    forge = ForgeSDK.connect("localhost", 28212)
+    forge = ForgeSDK.connect("182.92.167.126", 28211)
     alice = forge.createWallet()
     bob = forge.createWallet()
     forge.declare("alice",alice)
@@ -61,7 +62,7 @@ class TransferTest {
   @Test
   fun testTranser() {
     for (x in 0..30){
-      val response = forge.transfer(alice, bob, BigInteger.ONE)
+      val response = forge.transfer(alice, bob.address, BigInteger.ONE)
       Assert.assertEquals(" send multi sig transaction:", Enum.StatusCode.ok, response.code)
     }
   }
@@ -176,11 +177,18 @@ class TransferTest {
     forge.declare("Celliy",celliy)
     println("appId:${alice.pkBase58()}")
     println("secId:${celliy.sk.encodeB58()}")
-    val response = forge.createDelegate(alice,celliy, listOf("itx.value <= 100000000000000"))
+    var response = forge.createDelegate(alice,celliy, listOf())
     Assert.assertEquals(" test delegate:", Enum.StatusCode.ok, response.code)
-    val sendR = forge.transfer(celliy, bob, BigInteger.ZERO, delegatee = alice.address)
+    var sendR = forge.transfer(celliy, bob.address, BigInteger.ZERO, delegatee = alice.address)
     Assert.assertEquals(" test delegate transfer:", Enum.StatusCode.ok, sendR.code)
 
+    response = forge.createDelegate(alice,celliy, listOf(),typeUrl = TypeUrls.SETUP_SWAP)
+    Assert.assertEquals(" test delegate:", Enum.StatusCode.ok, response.code)
+    val mByteArray = ByteArray(128)
+    Random().nextBytes(mByteArray)
+
+    sendR = forge.setupSwap(alice, celliy.address, BigInteger.ZERO, 50000, mByteArray)
+    Assert.assertEquals(" test delegate setup swap:", Enum.StatusCode.ok, sendR.code)
   }
 
  @Test

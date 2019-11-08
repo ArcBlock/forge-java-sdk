@@ -1,3 +1,6 @@
+## 0.39.3 (November 08, 2019)
+
+
 ## 0.39.1 (November 01, 2019)
   - creat wallet add default method for java user
   - support fat jar

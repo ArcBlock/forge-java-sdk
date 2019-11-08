@@ -2,10 +2,14 @@ package io.arcblock.forge.did
 
 import com.google.common.io.BaseEncoding
 import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import io.arcblock.forge.did.bean.AppInfo
 import io.arcblock.forge.did.bean.DIDTokenBody
 import io.arcblock.forge.did.bean.DIDTokenResponse
 import io.arcblock.forge.did.bean.IClaim
+import io.arcblock.forge.extension.did
+import io.arcblock.forge.extension.encodeB64Url
 import io.arcblock.forge.sign.Signer
 import org.apache.commons.lang3.StringEscapeUtils
 import org.slf4j.LoggerFactory
@@ -21,20 +25,25 @@ object DidAuthUtils {
    * @param currentTimestamp: current time .
    * @param wallet: application key info .
    */
-  fun createDidAuthToken(authClaims: Array<IClaim>, appInfo: AppInfo, currentTimestamp: Long, wallet: WalletInfo,url :String= ""): String {
-    val exp = (currentTimestamp + 60 * 1000).toString()
-    val body = DIDTokenBody(action = "responseAuth", appInfo = appInfo, requestedClaims = authClaims, url = url, exp = exp,
-      iat = currentTimestamp.toString(), iss = appInfo.publisher, nbf = currentTimestamp.toString()
-    )
+  fun createDidAuthToken(authClaims: Array<out IClaim>, appInfo: AppInfo, currentTimestamp: Long, wallet: WalletInfo,url :String= ""): String {
+    val exp = (currentTimestamp + 60 ).toString()
+          val body = gs.toJsonTree(DIDTokenBody(action = "responseAuth", appInfo = appInfo, requestedClaims = authClaims, url = url, exp = exp,
+        iat = currentTimestamp.toString(), iss = wallet.address.did(), nbf = currentTimestamp.toString()
+            )).asJsonObject
+        val chainInfo = JsonObject().let { it.addProperty("host",appInfo.chainHost)
+            it
+         }
+        body.add("chainInfo", JsonParser().parse(chainInfo.toString()))
 
     val jsonHeader = Header(wallet.getSignType().toString().toUpperCase(), "JWT")
-    val content = BaseEncoding.base64Url().encode(gs.toJson(jsonHeader).toByteArray()).replace("=", "")
+    val content = gs.toJson(jsonHeader).toByteArray().encodeB64Url().replace("=", "")
       .plus(".")
-      .plus(BaseEncoding.base64Url().encode(gs.toJson(body).toByteArray()).replace("=", ""))
+       .plus(body.toString().toByteArray().encodeB64Url().replace("=", ""))
 
     val signature = Signer.sign(KeyType.ED25519, content.toByteArray(), wallet.sk)
-    return content.plus(".").plus(StringEscapeUtils.unescapeJava(BaseEncoding.base64Url().encode(signature)))
+    return content.plus(".").plus(StringEscapeUtils.unescapeJava(signature.encodeB64Url()))
       .replace("=", "")
+
   }
 
   fun parseJWT(token: String): DIDTokenResponse {
