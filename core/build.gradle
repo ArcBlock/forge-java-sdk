@@ -75,6 +75,7 @@ protobuf {
       }
     }
   }
+
 }
 
 dokka {
@@ -83,27 +84,14 @@ dokka {
   outputDirectory = "./docs/"
   jdkVersion = 8
   includes = ['overview.md']
-
-//  linkMapping {
-//    dir = "src/main/java"
-//    url = "https://github.com/JetBrains/kotlin-examples/tree/master/gradle/dokka-gradle-example/src/main/kotlin"
-//    suffix = "#L"
-//  }
-//  packageOptions {
-//    prefix = "kotlin.internal" // will match kotlin.internal and all sub-packages of it
-//    suppress = true
-//  }
-
   packageOptions {
     prefix = "io.arcblock.forge.utils"
     suppress = true
   }
-
   packageOptions {
     prefix = "io.arcblock.forge.hash.sha"
     suppress = true
   }
-
   packageOptions {
     prefix = "abci_vendor"
     suppress = true
@@ -155,13 +143,6 @@ jar {
   manifest {
     attributes "Main-Class": "io.arcblock.forge.ForgeSDK"
   }
-  // This line of code recursively collects and copies all of a project's files
-  // and adds them to the JAR itself. One can extend this task, to skip certain
-  // files or particular types at will
-//  from(sourceSets {
-//    mainClasses
-//  })
-//  configurations.compileClasspath.forEach{ it.isDirectory() ? from(it) : from(zipTree(it)) }
 
 }
 shadowJar{
