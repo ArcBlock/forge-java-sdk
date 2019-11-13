@@ -49,7 +49,7 @@ class TransferTest {
     (LoggerFactory.getILoggerFactory() as LoggerContext).getLogger("io.arcblock").level = Level.INFO
     (LoggerFactory.getILoggerFactory() as LoggerContext).getLogger("io.grpc").level = Level.OFF
     (LoggerFactory.getILoggerFactory() as LoggerContext).getLogger("io.netty").level = Level.OFF
-    forge = ForgeSDK.connect("182.92.167.126", 28211)
+    forge = ForgeSDK.connect("localhost", 28212)
     alice = forge.createWallet()
     bob = forge.createWallet()
     forge.declare("alice",alice)
@@ -179,7 +179,7 @@ class TransferTest {
     println("secId:${celliy.sk.encodeB58()}")
     var response = forge.createDelegate(alice,celliy, listOf())
     Assert.assertEquals(" test delegate:", Enum.StatusCode.ok, response.code)
-    var sendR = forge.transfer(celliy, bob.address, BigInteger.ZERO, delegatee = alice.address)
+    var sendR = forge.transfer(celliy, bob.address, BigInteger.TEN, delegatee = alice.address)
     Assert.assertEquals(" test delegate transfer:", Enum.StatusCode.ok, sendR.code)
 
     response = forge.createDelegate(alice,celliy, listOf(),typeUrl = TypeUrls.SETUP_SWAP)

@@ -61,12 +61,12 @@ precommit: dep build test
 
 travis:
 	@echo "Travis ..."
-	@echo $(AWS_S3_ACCESSKEY)
 
 travis-deploy: 
 	@echo "Deploy the software by travis"
 	@make release
 	@./gradlew build
+	@./gradlew shadowJar
 	@./gradlew publish
 
 clean:
