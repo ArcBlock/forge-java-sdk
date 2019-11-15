@@ -1,22 +1,24 @@
 # Java-SDK
 
-## forge-java-sdk
+## Forge-java-sdk
 
 forge sdk for java development.
 For Forge-related setup, please checkout [Forge](https://github.com/ArcBlock/forge)
-A detailed reference manual for forge-python-sdk can be found [here](../../../forge-java-sdk).
+
+A detailed reference manual for forge-java-sdk can be found [here](https://docs.arcblock.io/forge/sdks/java/).
 
 ## Installation
 
 if you are using gradle ,you have to add url to your repositories
 
-``` gradle
+```gradle
  repositories {
-    maven { url "http://android-docs.arcblock.io/release" }
+      maven { url "http://android-docs.arcblock.io/release" }
  }
 
  dependencies {
-    implementation("io.arcblock.forge:core:${forge_version}")
+     implementation("io.arcblock.forge:core:${forge_version}")
+     implementation 'io.grpc:grpc-netty:1.20.0'
  }
 ```
 
@@ -26,61 +28,66 @@ and java version must >= 8.
 
 ### Step 0
 
-First get your Forge running on local with [Forge CLI](../tools/forge_cli.md).
+First get your Forge running on local with [Forge CLI](../../tools/forge_cli).
 Or you know another's node config info.
 
 ### Step 1
 
-Find the config your forge is using by `forge config`, find forge section, and get sock_grpc.
+Find the config your forge is using by `forge ps`, find forge section, and get endpoint.
+
+![forge-ps](./arts/forge-ps.png)
 
 ## Tutorials
 
 ### Step 0: create a project.
 
-Create a SpringBoot gradle project. and add forge-java-sdk to it's dependencies.
+Create a SpringBoot gradle project. and ZX forge-java-sdk to it's dependencies.
+
+```bash
+brew install springboot
+spring init --build=gradle --language=kotlin {project_name}
+```
 
 ### Step 1: connect to Forge Node.
 
-add forge.host and forge.port to your application.properties.
-
-```
-forge.host="127.0.0.1"
-forge.port=28210
+```kotlin
+val forge = ForgeSDK.connect("localhost",28210)
 ```
 
-and add `forge = ForgeSDK.connectTo(host, port);` when you application init
+when you want to connect with forge node.
 
 ### Step 2: create a wallet.
 
 ```kotlin
-val Alice = forge.createWallet(Rpc.RequestCreateWallet.newBuilder()
-                        .setMoniker(usr)
-                        .setPassphrase(pass)
-                        .setType(Type.WalletType.getDefaultInstance())
-                        .build())
-// Alice contains:
-
+val chainInfo = forge.getChainInfo().info //get chain info
+val alice = forge.createWallet()
+forge.declare("Alice",alice)
 ```
 
-::: tip Notes
-`moniker` is a nickname for this wallet on Forge. `passphrase` is used by Forge to encrypt the wallet into a keystore file. More details about wallet declaration rules are [here](../intro/concepts).
-:::
+you have to declare your account like sign up your account on chain.
 
 ### Step 3: Query your account information.
 
-``` kotlin
-forge.getForgeSDK().getAccountState()
+```kotlin
+// create a stream to listen account state
+val accountRequest = forge.getAccountState(object : StreamObserver<ResponseGetAccountState> {
+	override fun onNext(value: ResponseGetAccountState?) {
+		logger.info("\nAccountState balance:\n${BigInteger(value?.state?.balance?.unSign?.value?.toByteArray())}")
+	}
+	override fun onError(t: Throwable?) {}
+	override fun onCompleted() {}
+	})
+	accountRequest.onNext(RequestGetAccountState.newBuilder().setAddress(alice.address).build())
 ```
 
-### Step 4: Poke your wallet to get some token.
+this interface is a gRPC stream
+
+### Step 4: CheckIn/Poke your wallet to get some token.
 
 ```kotlin
-forge.
-val tx = WalletKit.poke(WalletInfo(Alice), forge)
-val response = forge.sendTx(Rpc.RequestSendTx.newBuilder()
-                    .setToken(appDid.getToken())
-                    .setTx(createTxResp.getTx())
-                    .build());
+forge.poke(alice)
+Thread.sleep(5000) //wait for block to commit
+accountRequest.onNext(RequestGetAccountState.newBuilder().setAddress(alice.address).build())
 ```
 
 wait some seconds, check your account balance .
@@ -89,28 +96,119 @@ wait some seconds, check your account balance .
 
 create another wallet (suppose: Bob) as step 2.
 
-``` kotlin
-//create TransferTx
-val sendToken = BigInteger.valueOf(1L).plus(BigDecimal("1e$decimal").toBigInteger())
-val itx = Transfer.TransferTx.newBuilder()
-                .setValue(Type.BigUint.newBuilder().setValue(ByteString.copyFrom(sendToken.toByteArray())).build())
-                .setTo(Bob.address)
-                .build()
-val tx = WalletKit.createTx(Alice, 123L, chainId, itx)
-val response = forge.sendTx(Rpc.RequestSendTx.newBuilder()
-                    .setToken(appDid.getToken())
-                    .setTx(createTxResp.getTx())
-                    .build());
+```kotlin
+//create a transfer tx and send
+forge.transfer(alice, bob.address, BigDecimal("2E18").toBigInteger())
 ```
 
 if it works, response will return a hash string. you can query this hash use forgeSDK,or query it in forgeWeb. After this tx confirmed, check Alice and Bob 's accounts to confirm if this transaction successfully.
 
-::: tip Notes
-**TBA** is the default currency on Forge Chain. 1 TBA has 16 digits, so it shows as `10000000000000000`.
-and decimal is 16.
+## More usage
+
+### Create wallet by existing private key
+
+```kotlin
+val wallet = WalletInfo.fromSk(yourPrivateKey)
+```
+
+### Sign a transaction
+
+```kotlin
+//create inner transaction ,you can custom inner transaction by custom protocol
+val innerTx = Transfer.TransferTx.newBuilder()
+		.setValue(Type.BigUint.newBuilder().setValue("100".toByteArray().toByteString()))
+    .build()
+//create transaction
+transaction = TransactionFactory.createTransaction(chanId = "forge",from = alice.address, pk = alice.pk,itx = innerTx.toByteString(), typeUrl = TypeUrls.TRANSFER)
+//sign a transaction
+val tx = transaction.signTx(alice.sk) //In java : TransactionExtKt.signTx(transaction, alice.sk)
+//send a transaction
+val response = forge.sendTx(tx)
+```
+
+### MultiSig a transaction
+
+[What is Multisig?](https://docs.arcblock.io/en/docs/intro/concepts/multisig)
+
+```kotlin
+//inner transaction need multiSig
+val exchange = Exchange.ExchangeTx.newBuilder()
+        .setSender(Exchange.ExchangeInfo.newBuilder()
+          .setValue(Type.BigUint.newBuilder()
+            .setValue(fromToken.toByteArray().toByteString())
+            .build())
+          .build())
+        .setReceiver(Exchange.ExchangeInfo.newBuilder()
+          .addAssets(assetAddress)
+          .build())
+        .setTo(delegateeTo ?: to)
+        .build()
+//create exchange tranaction and sender sign it				
+var transaction = TransactionFactory.createTransaction(chainId, from.address, from.pk, exchange.toByteString(), TypeUrls.EXCHANGE).signTx(from.sk)
+
+//multiSig this transaction
+transaction = transaction.multiSig(toWallet)
+```
+
+`What MultiSig actually do`
+
+```kotlin
+// create a multiSig instance by wallet 
+val multisigBuilder = Type.Multisig.newBuilder()
+    .setPk(wallet.pk.toByteString())
+    .setSigner(wallet.address)
+    .setData(data ?: Any.getDefaultInstance())
+		.setSigner(wallet.address)
+// add multiSig to origin transaction		
+val transaction = originTx.toBuilder().addSignatures(0, multisigBuilder.build()).build()
+// sign tx.
+val sig = Signer.sign(wallet.getSignType(), Hasher.hash(wallet.getHashType(), transaction.toByteArray()), wallet.sk)
+val multiSig = multisigBuilder.setSignature(sig.toByteString()).builder()
+// add multiSig to origin transaction ,then send it.
+val finalTx = originTx.toBuilder().addSignatures(0, multiSig).build()  
+
+```
+
+### Delegation
+
+[What's delegation](https://docs.arcblock.io/en/docs/reference/txs/account/delegate)
+
+```kotlin
+// Alice create a delegation to Bob, rules is limit string, such as 'itx.value < 100',then
+// If transfer value is more than 100, Bob signed transfer will fail
+var response = forge.createDelegate(from = alice, to = bob, rules= listOf(), typeUrl)
+
+//create a transfer transaction by Bob
+var transferTx = TransactionFactory.unsignTransfer("forge",bob.address, bob.pk, "otherAddress", BigInteger.TEN.unSign())
+
+//set a delegatee an then signed by Bob
+transferTx = transferTx.delegatee(alice).signTx(Bob.sk)
+
+//send tx , and alice balance reduce
+val response = forge.sendTx(transferTx)
+```
+
+::: tip
+**TBA** is the default currency on Forge Chain. 1 TBA has 18 digits, so it shows as `1000000000000000000`.
+and decimal is 18.
 :::
 
+## For java user
+
+Java user can use kotlin object like below:
+
+```java
+ForgeSDK.Companion.connect("localhost",28210)
+```
+
+and use kotlin extention like below:
+
+```
+TransactionExtKt.multiSig(tx, alice)
+```
+
 🎉 Congratulations! You have finished the tutorial! Now you should have a general sense about how Forge works. Now continue to explore !
+[simple demo project](https://github.com/ArcBlock/forge-java-sdk/blob/master/examples/src/main/java/com/example/demo/DemoApplication.kt)
 
 ## Welcome contribution
 

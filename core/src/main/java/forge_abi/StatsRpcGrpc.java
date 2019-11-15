@@ -136,18 +136,6 @@ public final class StatsRpcGrpc {
               forge_abi.Rpc.ResponseGetHealthStatus.getDefaultInstance()))
           .build();
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestListTethers,
-      forge_abi.Rpc.ResponseListTethers> METHOD_LIST_TETHERS =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestListTethers, forge_abi.Rpc.ResponseListTethers>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName(generateFullMethodName(
-              "forge_abi.StatsRpc", "list_tethers"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestListTethers.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseListTethers.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestListSwap,
       forge_abi.Rpc.ResponseListSwap> METHOD_LIST_SWAP =
       io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestListSwap, forge_abi.Rpc.ResponseListSwap>newBuilder()
@@ -252,13 +240,6 @@ public final class StatsRpcGrpc {
 
     /**
      */
-    public void listTethers(forge_abi.Rpc.RequestListTethers request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListTethers> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_LIST_TETHERS, responseObserver);
-    }
-
-    /**
-     */
     public void listSwap(forge_abi.Rpc.RequestListSwap request,
         io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListSwap> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_LIST_SWAP, responseObserver);
@@ -329,13 +310,6 @@ public final class StatsRpcGrpc {
                 forge_abi.Rpc.RequestGetHealthStatus,
                 forge_abi.Rpc.ResponseGetHealthStatus>(
                   this, METHODID_GET_HEALTH_STATUS)))
-          .addMethod(
-            METHOD_LIST_TETHERS,
-            asyncUnaryCall(
-              new MethodHandlers<
-                forge_abi.Rpc.RequestListTethers,
-                forge_abi.Rpc.ResponseListTethers>(
-                  this, METHODID_LIST_TETHERS)))
           .addMethod(
             METHOD_LIST_SWAP,
             asyncUnaryCall(
@@ -439,14 +413,6 @@ public final class StatsRpcGrpc {
 
     /**
      */
-    public void listTethers(forge_abi.Rpc.RequestListTethers request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListTethers> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_LIST_TETHERS, getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
     public void listSwap(forge_abi.Rpc.RequestListSwap request,
         io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListSwap> responseObserver) {
       asyncUnaryCall(
@@ -533,13 +499,6 @@ public final class StatsRpcGrpc {
     public forge_abi.Rpc.ResponseGetHealthStatus getHealthStatus(forge_abi.Rpc.RequestGetHealthStatus request) {
       return blockingUnaryCall(
           getChannel(), METHOD_GET_HEALTH_STATUS, getCallOptions(), request);
-    }
-
-    /**
-     */
-    public forge_abi.Rpc.ResponseListTethers listTethers(forge_abi.Rpc.RequestListTethers request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_LIST_TETHERS, getCallOptions(), request);
     }
 
     /**
@@ -642,14 +601,6 @@ public final class StatsRpcGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseListTethers> listTethers(
-        forge_abi.Rpc.RequestListTethers request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_LIST_TETHERS, getCallOptions()), request);
-    }
-
-    /**
-     */
     public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseListSwap> listSwap(
         forge_abi.Rpc.RequestListSwap request) {
       return futureUnaryCall(
@@ -666,8 +617,7 @@ public final class StatsRpcGrpc {
   private static final int METHODID_LIST_ASSET_TRANSACTIONS = 6;
   private static final int METHODID_LIST_BLOCKS = 7;
   private static final int METHODID_GET_HEALTH_STATUS = 8;
-  private static final int METHODID_LIST_TETHERS = 9;
-  private static final int METHODID_LIST_SWAP = 10;
+  private static final int METHODID_LIST_SWAP = 9;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -722,10 +672,6 @@ public final class StatsRpcGrpc {
           serviceImpl.getHealthStatus((forge_abi.Rpc.RequestGetHealthStatus) request,
               (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetHealthStatus>) responseObserver);
           break;
-        case METHODID_LIST_TETHERS:
-          serviceImpl.listTethers((forge_abi.Rpc.RequestListTethers) request,
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListTethers>) responseObserver);
-          break;
         case METHODID_LIST_SWAP:
           serviceImpl.listSwap((forge_abi.Rpc.RequestListSwap) request,
               (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListSwap>) responseObserver);
@@ -772,7 +718,6 @@ public final class StatsRpcGrpc {
               .addMethod(METHOD_LIST_ASSET_TRANSACTIONS)
               .addMethod(METHOD_LIST_BLOCKS)
               .addMethod(METHOD_GET_HEALTH_STATUS)
-              .addMethod(METHOD_LIST_TETHERS)
               .addMethod(METHOD_LIST_SWAP)
               .build();
         }

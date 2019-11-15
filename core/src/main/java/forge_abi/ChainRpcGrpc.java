@@ -28,30 +28,6 @@ public final class ChainRpcGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestCreateTx,
-      forge_abi.Rpc.ResponseCreateTx> METHOD_CREATE_TX =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestCreateTx, forge_abi.Rpc.ResponseCreateTx>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName(generateFullMethodName(
-              "forge_abi.ChainRpc", "create_tx"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestCreateTx.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseCreateTx.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestMultisig,
-      forge_abi.Rpc.ResponseMultisig> METHOD_MULTISIG =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestMultisig, forge_abi.Rpc.ResponseMultisig>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName(generateFullMethodName(
-              "forge_abi.ChainRpc", "multisig"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestMultisig.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseMultisig.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestSendTx,
       forge_abi.Rpc.ResponseSendTx> METHOD_SEND_TX =
       io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestSendTx, forge_abi.Rpc.ResponseSendTx>newBuilder()
@@ -216,20 +192,6 @@ public final class ChainRpcGrpc {
      * tx related
      * </pre>
      */
-    public void createTx(forge_abi.Rpc.RequestCreateTx request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseCreateTx> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_CREATE_TX, responseObserver);
-    }
-
-    /**
-     */
-    public void multisig(forge_abi.Rpc.RequestMultisig request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseMultisig> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_MULTISIG, responseObserver);
-    }
-
-    /**
-     */
     public void sendTx(forge_abi.Rpc.RequestSendTx request,
         io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseSendTx> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_SEND_TX, responseObserver);
@@ -310,20 +272,6 @@ public final class ChainRpcGrpc {
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
-          .addMethod(
-            METHOD_CREATE_TX,
-            asyncUnaryCall(
-              new MethodHandlers<
-                forge_abi.Rpc.RequestCreateTx,
-                forge_abi.Rpc.ResponseCreateTx>(
-                  this, METHODID_CREATE_TX)))
-          .addMethod(
-            METHOD_MULTISIG,
-            asyncUnaryCall(
-              new MethodHandlers<
-                forge_abi.Rpc.RequestMultisig,
-                forge_abi.Rpc.ResponseMultisig>(
-                  this, METHODID_MULTISIG)))
           .addMethod(
             METHOD_SEND_TX,
             asyncUnaryCall(
@@ -427,22 +375,6 @@ public final class ChainRpcGrpc {
      * <pre>
      * tx related
      * </pre>
-     */
-    public void createTx(forge_abi.Rpc.RequestCreateTx request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseCreateTx> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_CREATE_TX, getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void multisig(forge_abi.Rpc.RequestMultisig request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseMultisig> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_MULTISIG, getCallOptions()), request, responseObserver);
-    }
-
-    /**
      */
     public void sendTx(forge_abi.Rpc.RequestSendTx request,
         io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseSendTx> responseObserver) {
@@ -557,20 +489,6 @@ public final class ChainRpcGrpc {
      * tx related
      * </pre>
      */
-    public forge_abi.Rpc.ResponseCreateTx createTx(forge_abi.Rpc.RequestCreateTx request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_CREATE_TX, getCallOptions(), request);
-    }
-
-    /**
-     */
-    public forge_abi.Rpc.ResponseMultisig multisig(forge_abi.Rpc.RequestMultisig request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_MULTISIG, getCallOptions(), request);
-    }
-
-    /**
-     */
     public forge_abi.Rpc.ResponseSendTx sendTx(forge_abi.Rpc.RequestSendTx request) {
       return blockingUnaryCall(
           getChannel(), METHOD_SEND_TX, getCallOptions(), request);
@@ -659,22 +577,6 @@ public final class ChainRpcGrpc {
      * tx related
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseCreateTx> createTx(
-        forge_abi.Rpc.RequestCreateTx request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_CREATE_TX, getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseMultisig> multisig(
-        forge_abi.Rpc.RequestMultisig request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_MULTISIG, getCallOptions()), request);
-    }
-
-    /**
-     */
     public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseSendTx> sendTx(
         forge_abi.Rpc.RequestSendTx request) {
       return futureUnaryCall(
@@ -749,19 +651,17 @@ public final class ChainRpcGrpc {
     }
   }
 
-  private static final int METHODID_CREATE_TX = 0;
-  private static final int METHODID_MULTISIG = 1;
-  private static final int METHODID_SEND_TX = 2;
-  private static final int METHODID_GET_BLOCKS = 3;
-  private static final int METHODID_GET_UNCONFIRMED_TXS = 4;
-  private static final int METHODID_GET_CHAIN_INFO = 5;
-  private static final int METHODID_GET_NODE_INFO = 6;
-  private static final int METHODID_SEARCH = 7;
-  private static final int METHODID_GET_NET_INFO = 8;
-  private static final int METHODID_GET_VALIDATORS_INFO = 9;
-  private static final int METHODID_GET_CONFIG = 10;
-  private static final int METHODID_GET_TX = 11;
-  private static final int METHODID_GET_BLOCK = 12;
+  private static final int METHODID_SEND_TX = 0;
+  private static final int METHODID_GET_BLOCKS = 1;
+  private static final int METHODID_GET_UNCONFIRMED_TXS = 2;
+  private static final int METHODID_GET_CHAIN_INFO = 3;
+  private static final int METHODID_GET_NODE_INFO = 4;
+  private static final int METHODID_SEARCH = 5;
+  private static final int METHODID_GET_NET_INFO = 6;
+  private static final int METHODID_GET_VALIDATORS_INFO = 7;
+  private static final int METHODID_GET_CONFIG = 8;
+  private static final int METHODID_GET_TX = 9;
+  private static final int METHODID_GET_BLOCK = 10;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -780,14 +680,6 @@ public final class ChainRpcGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_CREATE_TX:
-          serviceImpl.createTx((forge_abi.Rpc.RequestCreateTx) request,
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseCreateTx>) responseObserver);
-          break;
-        case METHODID_MULTISIG:
-          serviceImpl.multisig((forge_abi.Rpc.RequestMultisig) request,
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseMultisig>) responseObserver);
-          break;
         case METHODID_SEND_TX:
           serviceImpl.sendTx((forge_abi.Rpc.RequestSendTx) request,
               (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseSendTx>) responseObserver);
@@ -863,8 +755,6 @@ public final class ChainRpcGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new ChainRpcDescriptorSupplier())
-              .addMethod(METHOD_CREATE_TX)
-              .addMethod(METHOD_MULTISIG)
               .addMethod(METHOD_SEND_TX)
               .addMethod(METHOD_GET_TX)
               .addMethod(METHOD_GET_BLOCK)

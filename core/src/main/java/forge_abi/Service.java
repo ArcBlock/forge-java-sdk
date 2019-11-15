@@ -23,97 +23,79 @@ public final class Service {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\rservice.proto\022\tforge_abi\032\trpc.proto2\345\007" +
-      "\n\010ChainRpc\022D\n\tcreate_tx\022\032.forge_abi.Requ" +
-      "estCreateTx\032\033.forge_abi.ResponseCreateTx" +
-      "\022C\n\010multisig\022\032.forge_abi.RequestMultisig" +
-      "\032\033.forge_abi.ResponseMultisig\022>\n\007send_tx" +
-      "\022\030.forge_abi.RequestSendTx\032\031.forge_abi.R" +
-      "esponseSendTx\022?\n\006get_tx\022\027.forge_abi.Requ" +
-      "estGetTx\032\030.forge_abi.ResponseGetTx(\0010\001\022H" +
-      "\n\tget_block\022\032.forge_abi.RequestGetBlock\032" +
-      "\033.forge_abi.ResponseGetBlock(\0010\001\022G\n\nget_",
-      "blocks\022\033.forge_abi.RequestGetBlocks\032\034.fo" +
-      "rge_abi.ResponseGetBlocks\022`\n\023get_unconfi" +
-      "rmed_txs\022#.forge_abi.RequestGetUnconfirm" +
-      "edTxs\032$.forge_abi.ResponseGetUnconfirmed" +
-      "Txs\022Q\n\016get_chain_info\022\036.forge_abi.Reques" +
-      "tGetChainInfo\032\037.forge_abi.ResponseGetCha" +
-      "inInfo\022N\n\rget_node_info\022\035.forge_abi.Requ" +
-      "estGetNodeInfo\032\036.forge_abi.ResponseGetNo" +
-      "deInfo\022=\n\006search\022\030.forge_abi.RequestSear" +
-      "ch\032\031.forge_abi.ResponseSearch\022K\n\014get_net",
-      "_info\022\034.forge_abi.RequestGetNetInfo\032\035.fo" +
-      "rge_abi.ResponseGetNetInfo\022`\n\023get_valida" +
-      "tors_info\022#.forge_abi.RequestGetValidato" +
-      "rsInfo\032$.forge_abi.ResponseGetValidators" +
-      "Info\022G\n\nget_config\022\033.forge_abi.RequestGe" +
-      "tConfig\032\034.forge_abi.ResponseGetConfig2\242\001" +
-      "\n\010EventRpc\022H\n\tsubscribe\022\033.forge_abi.Requ" +
-      "estSubscribe\032\034.forge_abi.ResponseSubscri" +
-      "be0\001\022L\n\013unsubscribe\022\035.forge_abi.RequestU" +
-      "nsubscribe\032\036.forge_abi.ResponseUnsubscri",
-      "be2\337\001\n\007FileRpc\022I\n\nstore_file\022\033.forge_abi" +
-      ".RequestStoreFile\032\034.forge_abi.ResponseSt" +
-      "oreFile(\001\022F\n\tload_file\022\032.forge_abi.Reque" +
-      "stLoadFile\032\033.forge_abi.ResponseLoadFile0" +
-      "\001\022A\n\010pin_file\022\031.forge_abi.RequestPinFile" +
-      "\032\032.forge_abi.ResponsePinFile2\356\005\n\010StateRp" +
-      "c\022^\n\021get_account_state\022!.forge_abi.Reque" +
-      "stGetAccountState\032\".forge_abi.ResponseGe" +
-      "tAccountState(\0010\001\022X\n\017get_asset_state\022\037.f" +
-      "orge_abi.RequestGetAssetState\032 .forge_ab",
-      "i.ResponseGetAssetState(\0010\001\022T\n\017get_forge" +
-      "_state\022\037.forge_abi.RequestGetForgeState\032" +
-      " .forge_abi.ResponseGetForgeState\022a\n\022get" +
-      "_protocol_state\022\".forge_abi.RequestGetPr" +
-      "otocolState\032#.forge_abi.ResponseGetProto" +
-      "colState(\0010\001\022X\n\017get_stake_state\022\037.forge_" +
-      "abi.RequestGetStakeState\032 .forge_abi.Res" +
-      "ponseGetStakeState(\0010\001\022[\n\020get_tether_sta" +
-      "te\022 .forge_abi.RequestGetTetherState\032!.f" +
-      "orge_abi.ResponseGetTetherState(\0010\001\022U\n\016g",
-      "et_swap_state\022\036.forge_abi.RequestGetSwap" +
-      "State\032\037.forge_abi.ResponseGetSwapState(\001" +
-      "0\001\022a\n\022get_delegate_state\022\".forge_abi.Req" +
-      "uestGetDelegateState\032#.forge_abi.Respons" +
-      "eGetDelegateState(\0010\0012\355\003\n\tWalletRpc\022P\n\rc" +
-      "reate_wallet\022\036.forge_abi.RequestCreateWa" +
-      "llet\032\037.forge_abi.ResponseCreateWallet\022J\n" +
-      "\013load_wallet\022\034.forge_abi.RequestLoadWall" +
-      "et\032\035.forge_abi.ResponseLoadWallet\022S\n\016rec" +
-      "over_wallet\022\037.forge_abi.RequestRecoverWa",
-      "llet\032 .forge_abi.ResponseRecoverWallet\022L" +
-      "\n\013list_wallet\022\034.forge_abi.RequestListWal" +
-      "let\032\035.forge_abi.ResponseListWallet0\001\022P\n\r" +
-      "remove_wallet\022\036.forge_abi.RequestRemoveW" +
-      "allet\032\037.forge_abi.ResponseRemoveWallet\022M" +
-      "\n\014declare_node\022\035.forge_abi.RequestDeclar" +
-      "eNode\032\036.forge_abi.ResponseDeclareNode2\254\007" +
-      "\n\010StatsRpc\022T\n\017get_forge_stats\022\037.forge_ab" +
-      "i.RequestGetForgeStats\032 .forge_abi.Respo" +
-      "nseGetForgeStats\022\\\n\021list_transactions\022\".",
-      "forge_abi.RequestListTransactions\032#.forg" +
-      "e_abi.ResponseListTransactions\022J\n\013list_a" +
-      "ssets\022\034.forge_abi.RequestListAssets\032\035.fo" +
-      "rge_abi.ResponseListAssets\022J\n\013list_stake" +
-      "s\022\034.forge_abi.RequestListStakes\032\035.forge_" +
-      "abi.ResponseListStakes\022M\n\014list_account\022\035" +
-      ".forge_abi.RequestListAccount\032\036.forge_ab" +
-      "i.ResponseListAccount\022Z\n\021list_top_accoun" +
-      "ts\022!.forge_abi.RequestListTopAccounts\032\"." +
-      "forge_abi.ResponseListTopAccounts\022l\n\027lis",
-      "t_asset_transactions\022\'.forge_abi.Request" +
-      "ListAssetTransactions\032(.forge_abi.Respon" +
-      "seListAssetTransactions\022J\n\013list_blocks\022\034" +
-      ".forge_abi.RequestListBlocks\032\035.forge_abi" +
-      ".ResponseListBlocks\022Z\n\021get_health_status" +
-      "\022!.forge_abi.RequestGetHealthStatus\032\".fo" +
-      "rge_abi.ResponseGetHealthStatus\022M\n\014list_" +
-      "tethers\022\035.forge_abi.RequestListTethers\032\036" +
-      ".forge_abi.ResponseListTethers\022D\n\tlist_s" +
-      "wap\022\032.forge_abi.RequestListSwap\032\033.forge_",
-      "abi.ResponseListSwapb\006proto3"
+      "\n\rservice.proto\022\tforge_abi\032\trpc.proto2\332\006" +
+      "\n\010ChainRpc\022>\n\007send_tx\022\030.forge_abi.Reques" +
+      "tSendTx\032\031.forge_abi.ResponseSendTx\022?\n\006ge" +
+      "t_tx\022\027.forge_abi.RequestGetTx\032\030.forge_ab" +
+      "i.ResponseGetTx(\0010\001\022H\n\tget_block\022\032.forge" +
+      "_abi.RequestGetBlock\032\033.forge_abi.Respons" +
+      "eGetBlock(\0010\001\022G\n\nget_blocks\022\033.forge_abi." +
+      "RequestGetBlocks\032\034.forge_abi.ResponseGet" +
+      "Blocks\022`\n\023get_unconfirmed_txs\022#.forge_ab" +
+      "i.RequestGetUnconfirmedTxs\032$.forge_abi.R",
+      "esponseGetUnconfirmedTxs\022Q\n\016get_chain_in" +
+      "fo\022\036.forge_abi.RequestGetChainInfo\032\037.for" +
+      "ge_abi.ResponseGetChainInfo\022N\n\rget_node_" +
+      "info\022\035.forge_abi.RequestGetNodeInfo\032\036.fo" +
+      "rge_abi.ResponseGetNodeInfo\022=\n\006search\022\030." +
+      "forge_abi.RequestSearch\032\031.forge_abi.Resp" +
+      "onseSearch\022K\n\014get_net_info\022\034.forge_abi.R" +
+      "equestGetNetInfo\032\035.forge_abi.ResponseGet" +
+      "NetInfo\022`\n\023get_validators_info\022#.forge_a" +
+      "bi.RequestGetValidatorsInfo\032$.forge_abi.",
+      "ResponseGetValidatorsInfo\022G\n\nget_config\022" +
+      "\033.forge_abi.RequestGetConfig\032\034.forge_abi" +
+      ".ResponseGetConfig2\242\001\n\010EventRpc\022H\n\tsubsc" +
+      "ribe\022\033.forge_abi.RequestSubscribe\032\034.forg" +
+      "e_abi.ResponseSubscribe0\001\022L\n\013unsubscribe" +
+      "\022\035.forge_abi.RequestUnsubscribe\032\036.forge_" +
+      "abi.ResponseUnsubscribe2\337\001\n\007FileRpc\022I\n\ns" +
+      "tore_file\022\033.forge_abi.RequestStoreFile\032\034" +
+      ".forge_abi.ResponseStoreFile(\001\022F\n\tload_f" +
+      "ile\022\032.forge_abi.RequestLoadFile\032\033.forge_",
+      "abi.ResponseLoadFile0\001\022A\n\010pin_file\022\031.for" +
+      "ge_abi.RequestPinFile\032\032.forge_abi.Respon" +
+      "sePinFile2\221\005\n\010StateRpc\022^\n\021get_account_st" +
+      "ate\022!.forge_abi.RequestGetAccountState\032\"" +
+      ".forge_abi.ResponseGetAccountState(\0010\001\022X" +
+      "\n\017get_asset_state\022\037.forge_abi.RequestGet" +
+      "AssetState\032 .forge_abi.ResponseGetAssetS" +
+      "tate(\0010\001\022T\n\017get_forge_state\022\037.forge_abi." +
+      "RequestGetForgeState\032 .forge_abi.Respons" +
+      "eGetForgeState\022a\n\022get_protocol_state\022\".f",
+      "orge_abi.RequestGetProtocolState\032#.forge" +
+      "_abi.ResponseGetProtocolState(\0010\001\022X\n\017get" +
+      "_stake_state\022\037.forge_abi.RequestGetStake" +
+      "State\032 .forge_abi.ResponseGetStakeState(" +
+      "\0010\001\022U\n\016get_swap_state\022\036.forge_abi.Reques" +
+      "tGetSwapState\032\037.forge_abi.ResponseGetSwa" +
+      "pState(\0010\001\022a\n\022get_delegate_state\022\".forge" +
+      "_abi.RequestGetDelegateState\032#.forge_abi" +
+      ".ResponseGetDelegateState(\0010\0012Z\n\tWalletR" +
+      "pc\022M\n\014declare_node\022\035.forge_abi.RequestDe",
+      "clareNode\032\036.forge_abi.ResponseDeclareNod" +
+      "e2\335\006\n\010StatsRpc\022T\n\017get_forge_stats\022\037.forg" +
+      "e_abi.RequestGetForgeStats\032 .forge_abi.R" +
+      "esponseGetForgeStats\022\\\n\021list_transaction" +
+      "s\022\".forge_abi.RequestListTransactions\032#." +
+      "forge_abi.ResponseListTransactions\022J\n\013li" +
+      "st_assets\022\034.forge_abi.RequestListAssets\032" +
+      "\035.forge_abi.ResponseListAssets\022J\n\013list_s" +
+      "takes\022\034.forge_abi.RequestListStakes\032\035.fo" +
+      "rge_abi.ResponseListStakes\022M\n\014list_accou",
+      "nt\022\035.forge_abi.RequestListAccount\032\036.forg" +
+      "e_abi.ResponseListAccount\022Z\n\021list_top_ac" +
+      "counts\022!.forge_abi.RequestListTopAccount" +
+      "s\032\".forge_abi.ResponseListTopAccounts\022l\n" +
+      "\027list_asset_transactions\022\'.forge_abi.Req" +
+      "uestListAssetTransactions\032(.forge_abi.Re" +
+      "sponseListAssetTransactions\022J\n\013list_bloc" +
+      "ks\022\034.forge_abi.RequestListBlocks\032\035.forge" +
+      "_abi.ResponseListBlocks\022Z\n\021get_health_st" +
+      "atus\022!.forge_abi.RequestGetHealthStatus\032",
+      "\".forge_abi.ResponseGetHealthStatus\022D\n\tl" +
+      "ist_swap\022\032.forge_abi.RequestListSwap\032\033.f" +
+      "orge_abi.ResponseListSwapb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

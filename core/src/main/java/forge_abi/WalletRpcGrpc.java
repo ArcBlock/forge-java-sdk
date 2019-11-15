@@ -28,66 +28,6 @@ public final class WalletRpcGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestCreateWallet,
-      forge_abi.Rpc.ResponseCreateWallet> METHOD_CREATE_WALLET =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestCreateWallet, forge_abi.Rpc.ResponseCreateWallet>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName(generateFullMethodName(
-              "forge_abi.WalletRpc", "create_wallet"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestCreateWallet.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseCreateWallet.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestLoadWallet,
-      forge_abi.Rpc.ResponseLoadWallet> METHOD_LOAD_WALLET =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestLoadWallet, forge_abi.Rpc.ResponseLoadWallet>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName(generateFullMethodName(
-              "forge_abi.WalletRpc", "load_wallet"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestLoadWallet.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseLoadWallet.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestRecoverWallet,
-      forge_abi.Rpc.ResponseRecoverWallet> METHOD_RECOVER_WALLET =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestRecoverWallet, forge_abi.Rpc.ResponseRecoverWallet>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName(generateFullMethodName(
-              "forge_abi.WalletRpc", "recover_wallet"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestRecoverWallet.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseRecoverWallet.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestListWallet,
-      forge_abi.Rpc.ResponseListWallet> METHOD_LIST_WALLET =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestListWallet, forge_abi.Rpc.ResponseListWallet>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-          .setFullMethodName(generateFullMethodName(
-              "forge_abi.WalletRpc", "list_wallet"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestListWallet.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseListWallet.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestRemoveWallet,
-      forge_abi.Rpc.ResponseRemoveWallet> METHOD_REMOVE_WALLET =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestRemoveWallet, forge_abi.Rpc.ResponseRemoveWallet>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName(generateFullMethodName(
-              "forge_abi.WalletRpc", "remove_wallet"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestRemoveWallet.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseRemoveWallet.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestDeclareNode,
       forge_abi.Rpc.ResponseDeclareNode> METHOD_DECLARE_NODE =
       io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestDeclareNode, forge_abi.Rpc.ResponseDeclareNode>newBuilder()
@@ -132,41 +72,6 @@ public final class WalletRpcGrpc {
      * wallet related
      * </pre>
      */
-    public void createWallet(forge_abi.Rpc.RequestCreateWallet request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseCreateWallet> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_CREATE_WALLET, responseObserver);
-    }
-
-    /**
-     */
-    public void loadWallet(forge_abi.Rpc.RequestLoadWallet request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseLoadWallet> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_LOAD_WALLET, responseObserver);
-    }
-
-    /**
-     */
-    public void recoverWallet(forge_abi.Rpc.RequestRecoverWallet request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseRecoverWallet> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_RECOVER_WALLET, responseObserver);
-    }
-
-    /**
-     */
-    public void listWallet(forge_abi.Rpc.RequestListWallet request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListWallet> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_LIST_WALLET, responseObserver);
-    }
-
-    /**
-     */
-    public void removeWallet(forge_abi.Rpc.RequestRemoveWallet request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseRemoveWallet> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_REMOVE_WALLET, responseObserver);
-    }
-
-    /**
-     */
     public void declareNode(forge_abi.Rpc.RequestDeclareNode request,
         io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseDeclareNode> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_DECLARE_NODE, responseObserver);
@@ -174,41 +79,6 @@ public final class WalletRpcGrpc {
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
-          .addMethod(
-            METHOD_CREATE_WALLET,
-            asyncUnaryCall(
-              new MethodHandlers<
-                forge_abi.Rpc.RequestCreateWallet,
-                forge_abi.Rpc.ResponseCreateWallet>(
-                  this, METHODID_CREATE_WALLET)))
-          .addMethod(
-            METHOD_LOAD_WALLET,
-            asyncUnaryCall(
-              new MethodHandlers<
-                forge_abi.Rpc.RequestLoadWallet,
-                forge_abi.Rpc.ResponseLoadWallet>(
-                  this, METHODID_LOAD_WALLET)))
-          .addMethod(
-            METHOD_RECOVER_WALLET,
-            asyncUnaryCall(
-              new MethodHandlers<
-                forge_abi.Rpc.RequestRecoverWallet,
-                forge_abi.Rpc.ResponseRecoverWallet>(
-                  this, METHODID_RECOVER_WALLET)))
-          .addMethod(
-            METHOD_LIST_WALLET,
-            asyncServerStreamingCall(
-              new MethodHandlers<
-                forge_abi.Rpc.RequestListWallet,
-                forge_abi.Rpc.ResponseListWallet>(
-                  this, METHODID_LIST_WALLET)))
-          .addMethod(
-            METHOD_REMOVE_WALLET,
-            asyncUnaryCall(
-              new MethodHandlers<
-                forge_abi.Rpc.RequestRemoveWallet,
-                forge_abi.Rpc.ResponseRemoveWallet>(
-                  this, METHODID_REMOVE_WALLET)))
           .addMethod(
             METHOD_DECLARE_NODE,
             asyncUnaryCall(
@@ -243,46 +113,6 @@ public final class WalletRpcGrpc {
      * wallet related
      * </pre>
      */
-    public void createWallet(forge_abi.Rpc.RequestCreateWallet request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseCreateWallet> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_CREATE_WALLET, getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void loadWallet(forge_abi.Rpc.RequestLoadWallet request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseLoadWallet> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_LOAD_WALLET, getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void recoverWallet(forge_abi.Rpc.RequestRecoverWallet request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseRecoverWallet> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_RECOVER_WALLET, getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void listWallet(forge_abi.Rpc.RequestListWallet request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListWallet> responseObserver) {
-      asyncServerStreamingCall(
-          getChannel().newCall(METHOD_LIST_WALLET, getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void removeWallet(forge_abi.Rpc.RequestRemoveWallet request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseRemoveWallet> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_REMOVE_WALLET, getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
     public void declareNode(forge_abi.Rpc.RequestDeclareNode request,
         io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseDeclareNode> responseObserver) {
       asyncUnaryCall(
@@ -313,42 +143,6 @@ public final class WalletRpcGrpc {
      * wallet related
      * </pre>
      */
-    public forge_abi.Rpc.ResponseCreateWallet createWallet(forge_abi.Rpc.RequestCreateWallet request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_CREATE_WALLET, getCallOptions(), request);
-    }
-
-    /**
-     */
-    public forge_abi.Rpc.ResponseLoadWallet loadWallet(forge_abi.Rpc.RequestLoadWallet request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_LOAD_WALLET, getCallOptions(), request);
-    }
-
-    /**
-     */
-    public forge_abi.Rpc.ResponseRecoverWallet recoverWallet(forge_abi.Rpc.RequestRecoverWallet request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_RECOVER_WALLET, getCallOptions(), request);
-    }
-
-    /**
-     */
-    public java.util.Iterator<forge_abi.Rpc.ResponseListWallet> listWallet(
-        forge_abi.Rpc.RequestListWallet request) {
-      return blockingServerStreamingCall(
-          getChannel(), METHOD_LIST_WALLET, getCallOptions(), request);
-    }
-
-    /**
-     */
-    public forge_abi.Rpc.ResponseRemoveWallet removeWallet(forge_abi.Rpc.RequestRemoveWallet request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_REMOVE_WALLET, getCallOptions(), request);
-    }
-
-    /**
-     */
     public forge_abi.Rpc.ResponseDeclareNode declareNode(forge_abi.Rpc.RequestDeclareNode request) {
       return blockingUnaryCall(
           getChannel(), METHOD_DECLARE_NODE, getCallOptions(), request);
@@ -378,38 +172,6 @@ public final class WalletRpcGrpc {
      * wallet related
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseCreateWallet> createWallet(
-        forge_abi.Rpc.RequestCreateWallet request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_CREATE_WALLET, getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseLoadWallet> loadWallet(
-        forge_abi.Rpc.RequestLoadWallet request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_LOAD_WALLET, getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseRecoverWallet> recoverWallet(
-        forge_abi.Rpc.RequestRecoverWallet request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_RECOVER_WALLET, getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseRemoveWallet> removeWallet(
-        forge_abi.Rpc.RequestRemoveWallet request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_REMOVE_WALLET, getCallOptions()), request);
-    }
-
-    /**
-     */
     public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseDeclareNode> declareNode(
         forge_abi.Rpc.RequestDeclareNode request) {
       return futureUnaryCall(
@@ -417,12 +179,7 @@ public final class WalletRpcGrpc {
     }
   }
 
-  private static final int METHODID_CREATE_WALLET = 0;
-  private static final int METHODID_LOAD_WALLET = 1;
-  private static final int METHODID_RECOVER_WALLET = 2;
-  private static final int METHODID_LIST_WALLET = 3;
-  private static final int METHODID_REMOVE_WALLET = 4;
-  private static final int METHODID_DECLARE_NODE = 5;
+  private static final int METHODID_DECLARE_NODE = 0;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -441,26 +198,6 @@ public final class WalletRpcGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_CREATE_WALLET:
-          serviceImpl.createWallet((forge_abi.Rpc.RequestCreateWallet) request,
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseCreateWallet>) responseObserver);
-          break;
-        case METHODID_LOAD_WALLET:
-          serviceImpl.loadWallet((forge_abi.Rpc.RequestLoadWallet) request,
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseLoadWallet>) responseObserver);
-          break;
-        case METHODID_RECOVER_WALLET:
-          serviceImpl.recoverWallet((forge_abi.Rpc.RequestRecoverWallet) request,
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseRecoverWallet>) responseObserver);
-          break;
-        case METHODID_LIST_WALLET:
-          serviceImpl.listWallet((forge_abi.Rpc.RequestListWallet) request,
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListWallet>) responseObserver);
-          break;
-        case METHODID_REMOVE_WALLET:
-          serviceImpl.removeWallet((forge_abi.Rpc.RequestRemoveWallet) request,
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseRemoveWallet>) responseObserver);
-          break;
         case METHODID_DECLARE_NODE:
           serviceImpl.declareNode((forge_abi.Rpc.RequestDeclareNode) request,
               (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseDeclareNode>) responseObserver);
@@ -498,11 +235,6 @@ public final class WalletRpcGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new WalletRpcDescriptorSupplier())
-              .addMethod(METHOD_CREATE_WALLET)
-              .addMethod(METHOD_LOAD_WALLET)
-              .addMethod(METHOD_RECOVER_WALLET)
-              .addMethod(METHOD_LIST_WALLET)
-              .addMethod(METHOD_REMOVE_WALLET)
               .addMethod(METHOD_DECLARE_NODE)
               .build();
         }

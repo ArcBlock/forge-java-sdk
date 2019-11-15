@@ -50,23 +50,27 @@ fun Type.Transaction.delegatee(delegatee: String?) = delegatee?.let {
     .build()
 } ?: this
 
-fun Type.Transaction.multiSig(wallet: WalletInfo) = multiSig(wallet, data = null, delegator = null)
-fun Type.Transaction.multiSig(wallet: WalletInfo, delegator: String) = multiSig(wallet, data = null, delegator = delegator)
-fun Type.Transaction.multiSig(wallet: WalletInfo, data: Any) = multiSig(wallet, data = data, delegator = null)
 
+fun Type.Transaction.multiSig(wallet: WalletInfo, delegator: String) = multiSig(wallet, data = null, delegator = delegator)
+
+/**
+ * MultiSig a transaction
+ * @param wallet multiSig wallet
+ * @param data other data in multisig
+ * @param delegator delegator of multisig
+ */
+@JvmOverloads
 fun Type.Transaction.multiSig(wallet: WalletInfo, data: Any? = null, delegator: String? = null): Type.Transaction {
-  val mulsigBuilder = Type.Multisig.newBuilder()
+  val multisigBuilder = Type.Multisig.newBuilder()
     .setPk(wallet.pk.toByteString())
     .setSigner(wallet.address)
     .setData(data ?: Any.getDefaultInstance())
   delegator?.let {
-    mulsigBuilder.setDelegator(wallet.address)
+    multisigBuilder.setDelegator(wallet.address)
       .setSigner(it)
   }
-
   val newTx = this.toBuilder()
-    .clearSignatures()
-    .addSignatures(mulsigBuilder.build())
+    .addSignatures(0, multisigBuilder.build())
     .build()
 
   val sig = Signer.sign(wallet.getSignType(), Hasher.hash(wallet.getHashType(), newTx.toByteArray()), wallet.sk)
@@ -76,7 +80,7 @@ fun Type.Transaction.multiSig(wallet: WalletInfo, data: Any? = null, delegator: 
     .setSignature(sig.toByteString())
     .build()
   return this.toBuilder()
-    .addSignatures(multiSig)
+    .addSignatures(0, multiSig)
     .build()
 }
 
