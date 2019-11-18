@@ -21,11 +21,12 @@ object TransactionFactory {
   /**
    * create a declare transaction without signature
    */
-  fun declare(chainID: String, wallet: WalletInfo, moniker: String? = null): Type.Transaction {
+  @JvmOverloads
+  fun declare(chainID: String, wallet: WalletInfo, moniker: String? = null, issuer: String? = null): Type.Transaction {
     val itx = Declare.DeclareTx.newBuilder()
       .setMoniker(moniker
         ?: UUID.randomUUID().toString().replace("-", ""))
-      .setIssuer(wallet.address.address())
+      .setIssuer(issuer ?: wallet.address.address())
       .build()
     return createTransaction(chainID, wallet.address, wallet.pk, itx.toByteString(), TypeUrls.DECLARE)
   }
@@ -51,7 +52,17 @@ object TransactionFactory {
   }
 
 
-
+  /**
+   * create a unsigned transfer transaction
+   * @param chainID forge chain info network
+   * @param from sender address
+   * @param fromPk sender Pk
+   * @param to receiver address
+   * @param token send amount
+   * @param assets send asset addresses
+   *
+   * @return Transaction
+   */
   fun unsignTransfer(chainID: String, from: String, fromPk: ByteArray,to: String, token: BigInteger? = null ,assets: List<String>? = null) :Type.Transaction {
     val builder = Transfer.TransferTx.newBuilder().setTo(to)
     token?.apply { builder.setValue(Type.BigUint.newBuilder().setValue(this.toByteArray().toByteString())) }
@@ -60,6 +71,17 @@ object TransactionFactory {
   }
 
 
+  /**
+   * create a pre exchange
+   * @param chainID forge chain info network
+   * @param from sender wallet
+   * @param to receiver address
+   * @param fromToken sender pay token
+   * @param assetAddress receiver provide asset address
+   *
+   * @return Transaction
+   */
+  @JvmOverloads
   fun preExchange(chainId: String, from: WalletInfo, to: String, fromToken: BigInteger, assetAddress: String, delegateeFrom: String? = null,
                  delegateeTo: String? = null): Type.Transaction{
       val exchange = Exchange.ExchangeTx.newBuilder()
@@ -78,9 +100,37 @@ object TransactionFactory {
         .signTx(from.sk)
     }
 
-  fun finalizeExchange(tx: Type.Transaction, to: WalletInfo, delegateeTo: String?): Type.Transaction{
-    return tx.multiSig(to, delegator = delegateeTo)
+
+
+  /**
+   * create a pre exchange
+   * @param chainID forge chain info network
+   * @param from sender wallet
+   * @param to receiver address
+   * @param fromToken sender pay token
+   * @param assetAddress receiver provide asset address
+   *
+   * @return Transaction
+   */
+  @JvmOverloads
+  fun preConusmeAsset(chainId: String, checker: WalletInfo, issuer: String? = null, delegatee: String? = null): Type.Transaction{
+    val consumeAsset = ConsumeAsset.ConsumeAssetTx.newBuilder()
+      .setIssuer(issuer ?: checker.address)
+      .build()
+    return createTransaction(chainId , checker.address, checker.pk, consumeAsset.toByteString(), TypeUrls.CONSUME_ASSET)
+      .delegatee(delegatee)
+      .signTx(checker.sk)
   }
+
+
+
+  /**
+   * finaize
+   */
+  fun finalizeMultiSig(tx: Type.Transaction, to: WalletInfo, delegateeTo: String? = null, data: Any? = null ): Type.Transaction{
+    return tx.multiSig(to, delegator = delegateeTo, data = data)
+  }
+
 
 
   /**

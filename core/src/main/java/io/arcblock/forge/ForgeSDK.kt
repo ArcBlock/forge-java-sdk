@@ -160,8 +160,9 @@ class ForgeSDK private constructor() {
    * Declare your account on forge
    * tip: moniker length must >=4
    */
-  fun declare(moniker: String, wallet: WalletInfo): Rpc.ResponseSendTx {
-    return sendTx(TransactionFactory.declare(chainInfo.value.network, wallet, moniker).signTx(wallet.sk))
+  @JvmOverloads
+  fun declare(moniker: String, wallet: WalletInfo, issuer: String? = null): Rpc.ResponseSendTx {
+    return sendTx(TransactionFactory.declare(chainInfo.value.network, wallet, moniker, issuer).signTx(wallet.sk))
   }
   /**
    * Util to help developer to poke a account

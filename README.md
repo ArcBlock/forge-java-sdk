@@ -143,30 +143,63 @@ val exchange = Exchange.ExchangeTx.newBuilder()
           .build())
         .setTo(delegateeTo ?: to)
         .build()
-//create exchange tranaction and sender sign it				
+//create exchange tranaction and sender sign it
 var transaction = TransactionFactory.createTransaction(chainId, from.address, from.pk, exchange.toByteString(), TypeUrls.EXCHANGE).signTx(from.sk)
 
 //multiSig this transaction
 transaction = transaction.multiSig(toWallet)
+
 ```
 
 `What MultiSig actually do`
 
 ```kotlin
-// create a multiSig instance by wallet 
+// create a multiSig instance by wallet
 val multisigBuilder = Type.Multisig.newBuilder()
     .setPk(wallet.pk.toByteString())
     .setSigner(wallet.address)
     .setData(data ?: Any.getDefaultInstance())
 		.setSigner(wallet.address)
-// add multiSig to origin transaction		
+// add multiSig to origin transaction
 val transaction = originTx.toBuilder().addSignatures(0, multisigBuilder.build()).build()
 // sign tx.
 val sig = Signer.sign(wallet.getSignType(), Hasher.hash(wallet.getHashType(), transaction.toByteArray()), wallet.sk)
 val multiSig = multisigBuilder.setSignature(sig.toByteString()).builder()
 // add multiSig to origin transaction ,then send it.
-val finalTx = originTx.toBuilder().addSignatures(0, multiSig).build()  
+val finalTx = originTx.toBuilder().addSignatures(0, multiSig).build()
 
+```
+
+### Asset
+
+[What's asset](https://docs.arcblock.io/en/docs/reference/txs/asset/create_asset)
+
+create asset: response is send transaction response and address is asset address, if transaction send successfully
+
+```kotlin
+val (response, address) = forge.createAsset("your asset binary type", assetBinary, "assetMoniker", wallet)
+```
+
+common consume asset: if asset creator sell asset to others ,and others want to consume asset
+
+```kotlin
+val response = forge.consumeAsset(assetAddress, assetCreator , assetOwner)
+```
+
+child account consume asset: if application want to others to check asset.
+
+```kotlin
+//create pre Tx for ticket owner to multiSign and consume asset
+val preTx = TransactionFactory.preConusmeAsset(forge.chainInfo.value.network, gateKeeper, issuer.address)
+
+//consume multiSig tx
+val finalTx = TransactionFactory.finalizeMultiSig(preTx, consumer, data = Any.newBuilder()
+      .setValue(address.toByteArray().toByteString())
+      .setTypeUrl(TypeUrls.CONSUME_ASSET_ADDRESS)
+      .build())
+
+//send tx ,you can check it at
+val rsp = forge.sendTx(finalTx)
 ```
 
 ### Delegation

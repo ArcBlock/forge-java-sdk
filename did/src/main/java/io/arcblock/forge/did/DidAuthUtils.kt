@@ -25,23 +25,31 @@ object DidAuthUtils {
    * @param currentTimestamp: current time .
    * @param wallet: application key info .
    */
-  fun createDidAuthToken(authClaims: Array<out IClaim>, appInfo: AppInfo, currentTimestamp: Long, wallet: WalletInfo,url :String= ""): String {
-    val exp = (currentTimestamp + 60 ).toString()
-          val body = gs.toJsonTree(DIDTokenBody(action = "responseAuth", appInfo = appInfo, requestedClaims = authClaims, url = url, exp = exp,
-        iat = currentTimestamp.toString(), iss = wallet.address.did(), nbf = currentTimestamp.toString()
-            )).asJsonObject
-        val chainInfo = JsonObject().let { it.addProperty("host",appInfo.chainHost)
-            it
-         }
-        body.add("chainInfo", JsonParser().parse(chainInfo.toString()))
-
+  @JvmOverloads
+  fun createDidAuthToken(authClaims: Array<out IClaim>, appInfo: AppInfo, currentTimestamp: Long, wallet: WalletInfo, url: String = "",
+                         others: JsonObject? = null): String {
+    val exp = (currentTimestamp + 60).toString()
+    val body = gs.toJsonTree(DIDTokenBody(action = "responseAuth", appInfo = appInfo, requestedClaims = authClaims, url = url, exp = exp,
+      iat = currentTimestamp.toString(), iss = wallet.address.did(), nbf = currentTimestamp.toString()
+    ))
+      .asJsonObject
+    val chainInfo = JsonObject().let {
+      it.addProperty("host", appInfo.chainHost)
+      it
+    }
+    body.add("chainInfo", JsonParser().parse(chainInfo.toString()))
+    others?.keySet()?.forEach { body.add(it, others[it]) }
     val jsonHeader = Header(wallet.getSignType().toString().toUpperCase(), "JWT")
-    val content = gs.toJson(jsonHeader).toByteArray().encodeB64Url().replace("=", "")
+    val content = gs.toJson(jsonHeader)
+      .toByteArray()
+      .encodeB64Url()
+      .replace("=", "")
       .plus(".")
-       .plus(body.toString().toByteArray().encodeB64Url().replace("=", ""))
+      .plus(body.toString().toByteArray().encodeB64Url().replace("=", ""))
 
     val signature = Signer.sign(KeyType.ED25519, content.toByteArray(), wallet.sk)
-    return content.plus(".").plus(StringEscapeUtils.unescapeJava(signature.encodeB64Url()))
+    return content.plus(".")
+      .plus(StringEscapeUtils.unescapeJava(signature.encodeB64Url()))
       .replace("=", "")
 
   }
