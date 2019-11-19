@@ -28,8 +28,8 @@ import java.util.concurrent.TimeUnit
  *
  */
 class ForgeSDK private constructor() {
-  val pokeAddress = "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
-  val logger = LoggerFactory.getLogger(ForgeSDK::class.java)
+  private val logger = LoggerFactory.getLogger(ForgeSDK::class.java)
+
   private lateinit var channel: ManagedChannel
 
   private lateinit var chainRpcBlockingStub: ChainRpcGrpc.ChainRpcBlockingStub
@@ -68,91 +68,19 @@ class ForgeSDK private constructor() {
 
   private lateinit var fileRpcFutureStub: FileRpcGrpc.FileRpcFutureStub
 
-
+  /**
+   * Chain info lazy get, must after connect with chain node
+   */
   val chainInfo = lazy {
-    chainRpcBlockingStub.getChainInfo(Rpc.RequestGetChainInfo.getDefaultInstance())
-      .info
+    chainRpcBlockingStub.getChainInfo(Rpc.RequestGetChainInfo.getDefaultInstance()).info
   }
 
+  /**
+   * default checkin address
+   */
+  val checkInAddress = "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
 
-//  /**
-//   * gRpc call to build a complete transaction, including sender's pk and sender's signature. <br></br>
-//   *
-//   *
-//   *  To sign a transaction successfully, either a wallet with private key or a token should
-//   * be provided. However, this practice is not recommended for safety concern. Users should keep
-//   * their own private keys and sign transactions locally.  <br></br>
-//   *
-//   *
-//   * Example:
-//   * ```
-//   * forgeSdk.createTx(Rpc.RequestCreateTx.newBuilder()
-//   * .setItx(Any.newBuilder().build())
-//   * .setFrom("z")
-//   * .setNonce(123L)
-//   * .setWallet(wallet)//or set token
-//   * .build())
-//   *
-//   * itx:Inner transaction that should be included in this transaction
-//   * from: address of user responsible for sending this transactions
-//   * wallet: user wallet
-//   * token: token provided by forge for using wallets stored on forge
-//   * nonce: optional, number of tx this account has sent
-//   * ```
-//   *
-//   *
-//   *
-//   * @param request transaction request
-//   * @return code: ok or reason, tx: transaction created by forge core
-//   *
-//   *
-//   *
-//   */
-//  fun createTx(request: Rpc.RequestCreateTx): Rpc.ResponseCreateTx {
-//    return chainRpcBlockingStub.createTx(request)
-//  }
-//
-//  /**
-//   * create transaction async interface, please read [createTx]
-//   */
-//  fun asyncCreateTx(request: Rpc.RequestCreateTx): ListenableFuture<Rpc.ResponseCreateTx> {
-//    return chainRpcFutureStub.createTx(request)
-//  }
-//
-//  /**
-//   *
-//   * gRPC call to get multi-signature of a transaction. When executing this transactions, Forge <br>
-//   * will insert the address to signatures field as Multisig.sign, then create a signature of the <br>
-//   * entire transaction <br>
-//   *
-//   *
-//   * Example: <br></br>
-//   * ```
-//   *     val tx = createExchange()
-//   *     val response = forgeSDK.multisig(Rpc.RequestMultisig.newBuilder()
-//   *         .setTx(tx)
-//   *         .setWallet(bob)
-//   *         .build())
-//   * ```
-//   * <br></br>
-//   *
-//   * @param request itx: inner transaction,
-//   * @return code: ok or error ,tx: transaction with multi sig
-//   *
-//   */
-//
-//
-//
-//  /**
-//   * async gRPC call to get multi-signature of a transaction. When executing this transactions, Forge
-//   * will insert the address to signatures field as Multisig.sign, then create a signature of the
-//   * entire transaction ,please read [multisig]
-//   *
-//   */
-//  fun asyncMultisig(request: Rpc.RequestMultisig): ListenableFuture<Rpc.ResponseMultisig> {
-//    return chainRpcFutureStub.multisig(request)
-//  }
-//
+
   /**
    * gRPC call to send the included transaction, more information about forge transaction, please read [here](https://docs.arcblock.io/forge/latest/txs/)
    *
@@ -178,10 +106,44 @@ class ForgeSDK private constructor() {
     return chainRpcBlockingStub.sendTx(request)
   }
 
+  /**
+   * gRPC call to send the included transaction, more information about forge transaction, please read [here](https://docs.arcblock.io/forge/latest/txs/)
+   *
+   * Example:
+   *
+   * ```
+   *     val transfer = Transfer.TransferTx.newBuilder()
+   *       .setTo(bob.address)
+   *       .setValue(Type.BigUint.newBuilder().setValue(ByteString.copyFrom(BigInteger.ONE.toByteArray())).build())
+   *       .build()
+   *     val tx = TransactionFactory.createTransaction(chainInfo.network,alice.address,alice.pk.toByteArray(),transfer.toByteString(),TypeUrls.TRANSFER)
+   *       .signTx(alice.sk.toByteArray())
+   *     val response =  forgeSDK.sendTx(tx)
+   * ```
+   *
+   * @param request request structure
+   * @return code: ok or error. hash: transaction's hash
+   */
   fun sendTx(tx: Type.Transaction): Rpc.ResponseSendTx {
     return sendTx(Rpc.RequestSendTx.newBuilder().setTx(tx).build())
   }
 
+  /**
+   * gRPC call to send the included transaction, more information about forge transaction, please read [here](https://docs.arcblock.io/forge/latest/txs/)
+   *
+   * Example:
+   *
+   * ```
+   *     val transfer = Transfer.TransferTx.newBuilder()
+   *       .setTo(bob.address)
+   *       .setValue(Type.BigUint.newBuilder().setValue(ByteString.copyFrom(BigInteger.ONE.toByteArray())).build())
+   *       .build()
+   *     val response =  forgeSDK.sendTx(alice, transfer.toByteString(), TypeUrls.Transfer)
+   * ```
+   *
+   * @param request request structure
+   * @return code: ok or error. hash: transaction's hash
+   */
   fun sendTx(wallet: WalletInfo, itx: ByteString, typeUrl: String): Rpc.ResponseSendTx {
     return sendTx(TransactionFactory.createTransaction(chainInfo.value.network, wallet.address, wallet.pk, itx, typeUrl).signTx(wallet.sk))
   }
@@ -196,21 +158,31 @@ class ForgeSDK private constructor() {
 
   /**
    * Declare your account on forge
+   * tip: moniker length must >=4
    */
-  fun declare(moniker: String, wallet: WalletInfo): Rpc.ResponseSendTx {
-    return sendTx(TransactionFactory.declare(chainInfo.value.network, wallet, moniker).signTx(wallet.sk))
+  @JvmOverloads
+  fun declare(moniker: String, wallet: WalletInfo, issuer: String? = null): Rpc.ResponseSendTx {
+    return sendTx(TransactionFactory.declare(chainInfo.value.network, wallet, moniker, issuer).signTx(wallet.sk))
   }
-
   /**
    * Util to help developer to poke a account
+   *
+   * Usage:
+   * ```
+   * forgeSdk.checkin(alice)
+   * ```
+   * @return code: ok or error. hash: transaction's hash
    */
-  fun poke(wallet: Type.WalletInfo): Rpc.ResponseSendTx = poke(WalletInfo(wallet))
-
-  fun checkin(wallet: Type.WalletInfo): Rpc.ResponseSendTx = poke(WalletInfo(wallet))
   fun checkin(wallet: WalletInfo): Rpc.ResponseSendTx = poke(wallet)
 
   /**
    * Util to help developer to poke a account
+   *
+   * Usage:
+   * ```
+   * forgeSdk.poke(alice)
+   * ```
+   * @return code: ok or error. hash: transaction's hash
    */
   fun poke(wallet: WalletInfo): Rpc.ResponseSendTx {
     val tx = TransactionFactory.unsignPoke(chainInfo.value.network, wallet = wallet)
@@ -218,11 +190,8 @@ class ForgeSDK private constructor() {
     return chainRpcBlockingStub.sendTx(Rpc.RequestSendTx.newBuilder().setTx(tx).build())
   }
 
-  fun transfer(from: WalletInfo, toAddress: String, assets: List<String>) = transfer(from, toAddress, amount = null, assets = assets, delegatee = null)
-  fun transfer(from: WalletInfo, toAddress: String, amount: BigInteger) = transfer(from, toAddress, amount = amount, assets = null, delegatee = null)
-  fun transfer(from: WalletInfo, toAddress: String, amount: BigInteger, assets: List<String>) = transfer(from, toAddress, amount = amount, assets = assets,
-    delegatee
-    = null)
+//  fun transfer(from: WalletInfo, toAddress: String, assets: List<String>) = transfer(from, toAddress, amount = null, assets = assets, delegatee = null)
+
 
   /**
    * Util to help developer transfer money from a account to another
@@ -231,7 +200,10 @@ class ForgeSDK private constructor() {
    * @param amount: amount of transfer transaction
    * @param assets: assets of transfer transaction, nullable
    * @param delegatee: sender delegatee if have
+   *
+   * @return code: ok or error. hash: transaction's hash
    */
+  @JvmOverloads
   fun transfer(from: WalletInfo, toAddress: String, amount: BigInteger? = null, assets: List<String>? = null, delegatee: String? = null): Rpc
   .ResponseSendTx {
     val builder = Transfer.TransferTx.newBuilder()
@@ -247,7 +219,18 @@ class ForgeSDK private constructor() {
 
   /**
    * Simple create a asset
+   * @param assetTypeUrl Asset byte array decode type, you can customize it, such as: json, utf-8 or protobuf typeUrl
+   * @param assetData asset bytes
+   * @param assetMoniker asset name
+   * @param wallet asset creator
+   * @param delegatee transaction delegatee if you have create a delegation
+   * @param ttl time to live , live time after asset be consumed
+   * @param transferrable if asset can be transfer
+   * @param readOnly if it's true, asset can't be update
+   *
+   * @return sendTx response and asset address if create successfully
    */
+  @JvmOverloads
   fun createAsset(assetTypeUrl: String, assetData: ByteArray, assetMoniker: String, wallet: WalletInfo, delegatee: String? = null, ttl: Int = 0,
                   transferrable: Boolean = true, readOnly: Boolean = false): Result {
     val data = Any.newBuilder()
@@ -275,6 +258,7 @@ class ForgeSDK private constructor() {
   /**
    * update asset (not readOnly) by address
    */
+  @JvmOverloads
   fun updateAsset(assetAddress: String, moniker: String, typeUrl: String, assetData: ByteArray, wallet: WalletInfo,
                   delegatee: String? = null): Rpc.ResponseSendTx {
     val itx = UpdateAsset.UpdateAssetTx.newBuilder()
@@ -290,41 +274,26 @@ class ForgeSDK private constructor() {
 
   /**
    * consume asset to make it can't be transfer
+   * @param
    */
-  fun consumeAsset(assetAddress: String, wallet: WalletInfo, owner: WalletInfo, delegatee: String? = null): Rpc.ResponseSendTx {
+  @JvmOverloads
+  fun consumeAsset(assetAddress: String, creator: WalletInfo, owner: WalletInfo, delegatee: String? = null): Rpc.ResponseSendTx {
     val itx = ConsumeAsset.ConsumeAssetTx.newBuilder()
       .setAddress("")
-      .setIssuer(wallet.address)
+      .setIssuer(creator.address)
       .build()
-    val tx = TransactionFactory.createTransaction(chainInfo.value.network, wallet.address, wallet.pk, itx.toByteString(), TypeUrls.CONSUME_ASSET)
+    val tx = TransactionFactory.createTransaction(chainInfo.value.network, creator.address, creator.pk, itx.toByteString(), TypeUrls.CONSUME_ASSET)
       .delegatee(delegatee)
-      .signTx(wallet.sk)
+      .signTx(creator.sk)
     return sendTx(tx.multiSig(owner, Any.newBuilder().setTypeUrl(TypeUrls.CONSUME_ASSET_ADDRESS)
       .setValue(ByteString.copyFromUtf8(assetAddress)).build()))
   }
 
-//  /**
-//   * create a unSign exchange transaction, you have to sign it by from and multisig by to.
-//   */
-//  fun createUnsignExchange(from: WalletInfo, to: WalletInfo, fromToken: BigInteger, assetAddress: String,
-//                           delegatee: String? = null): Type.Transaction {
-//    val exchange = Exchange.ExchangeTx.newBuilder()
-//      .setSender(Exchange.ExchangeInfo.newBuilder()
-//        .setValue(Type.BigUint.newBuilder()
-//          .setValue(fromToken.toByteArray().toByteString())
-//          .build())
-//        .build())
-//      .setReceiver(Exchange.ExchangeInfo.newBuilder()
-//        .addAssets(assetAddress)
-//        .build())
-//      .setTo(to.address)
-//      .build()
-//    return TransactionFactory.createTransaction(chainInfo.value.network, from.address, from.pk, exchange.toByteString(), TypeUrls.EXCHANGE)
-//  }
 
   /**
    * Simple exchange from A to B, pay fromToken and get Asset
    */
+  @JvmOverloads
   fun exchange(from: WalletInfo, to: WalletInfo, fromToken: BigInteger, assetAddress: String, delegateeFrom: String? = null,
                delegateeTo: String? = null): Rpc.ResponseSendTx {
     val exchange = Exchange.ExchangeTx.newBuilder()
@@ -338,7 +307,6 @@ class ForgeSDK private constructor() {
         .build())
       .setTo(delegateeTo ?: to.address)
       .build()
-    logger.debug("exchange:\n$exchange")
     val tx = TransactionFactory.createTransaction(chainInfo.value.network, from.address, from.pk, exchange.toByteString(), TypeUrls.EXCHANGE)
       .delegatee(delegateeFrom)
       .signTx(from.sk)
@@ -347,7 +315,14 @@ class ForgeSDK private constructor() {
 
   /**
    * delegate rules from to
+   * @param from delegatee
+   * @param to who will sign tx represent delegatee
+   * @param rules the itx rules that allow to sign by others
+   * @param typeUrl support itx typeUrl
+   *
+   * @return sentTx response
    */
+  @JvmOverloads
   fun createDelegate(from: WalletInfo, to: WalletInfo, rules: List<String>, typeUrl: String? = null): Rpc.ResponseSendTx {
     return sendTx(
       TransactionFactory.unsignDelegate(from.address, to.address, chainInfo.value.network, from, rules, typeUrl).signTx(from.sk))
@@ -356,19 +331,38 @@ class ForgeSDK private constructor() {
 
   /**
    * setup a swap for atomic swap, it can exchange asset or token with other chain build by forge
+   * @param from setup wallet
+   * @param receiver who will get this swap asset
+   * @param amount swap amount to others
+   * @param blockHeight you can't revoke this swap before this block height
+   * @param hashKey random key to keep your asset safety
    */
   fun setupSwap(from: WalletInfo, receiver: String, amount: BigInteger, blockHeight: Int, hashKey: ByteArray): Rpc.ResponseSendTx {
     return sendTx(TransactionFactory.setup_swap(chainInfo.value.network, from, receiver, blockHeight, hashKey, amount).signTx(from.sk))
   }
 
+  /**
+   * setup a swap for atomic swap, it can exchange asset or token with other chain build by forge
+   * @param from setup wallet
+   * @param receiver who will get this swap asset
+   * @param assets swap assets to others
+   * @param blockHeight you can't revoke this swap before this block height
+   * @param hashKey random key to keep your asset safety
+   */
   fun setupSwap(from: WalletInfo, receiver: String, assets: List<String>, blockHeight: Int, hashKey: ByteArray): Rpc.ResponseSendTx {
     return sendTx(TransactionFactory.setup_swap(chainInfo.value.network, from, receiver, blockHeight, hashKey, assets).signTx(from.sk))
   }
 
+  /**
+   * cancel your swap that you have setup
+   */
   fun revokeSwap(wallet: WalletInfo, swapAddress: String): Rpc.ResponseSendTx {
     return sendTx(TransactionFactory.revoke_swap(chainInfo.value.network, wallet, swapAddress).signTx(wallet.sk))
   }
 
+  /**
+   * retrieve other's asset or amount by your hash key that you setup your asset
+   */
   fun retrieveSwap(wallet: WalletInfo, swapAddress: String, hashKey: ByteArray): Rpc.ResponseSendTx {
     return sendTx(TransactionFactory.retrieve_swap(chainInfo.value.network, wallet, swapAddress, hashKey).signTx(wallet.sk))
   }

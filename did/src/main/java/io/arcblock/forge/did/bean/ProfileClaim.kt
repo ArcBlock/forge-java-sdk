@@ -1,5 +1,7 @@
 package io.arcblock.forge.did.bean
 
-class ProfileClaim(override val meta: MetaInfo, var items: List<String>) : IClaim {
+import com.google.gson.JsonObject
+
+class ProfileClaim  @JvmOverloads constructor(override val meta: JsonObject? = null, var items: List<String>, override val description: String, override val typeUrl: String? = null) : IClaim {
   val type = ClaimType.PROFILE.toString()
 }

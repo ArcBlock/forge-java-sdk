@@ -38,7 +38,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  **/
 @Ignore
 @RunWith(JUnit4::class)
-class TransferTest {
+class ForgeSdkTest {
 
   private lateinit var bob: WalletInfo
   private lateinit var alice: WalletInfo

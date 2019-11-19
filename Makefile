@@ -20,7 +20,6 @@ dep:
 	@echo "Install dependencies required for this repo..."
 	@./gradlew buildDependents
 
-
 all: build
 
 test:

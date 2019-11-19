@@ -1,7 +1,11 @@
 package io.arcblock.forge.did.bean
 
-class AuthPrincipalClaim(override val meta: MetaInfo, target: String? = null) : IClaim {
+import com.google.gson.JsonObject
+
+class AuthPrincipalClaim  @JvmOverloads constructor(override val meta: JsonObject? = null,target: String? = null, override val
+typeUrl: String?) : IClaim {
   val type = ClaimType.AUTHPRINCIPAL.toString()
-  val description = "Please set the authentication principal."
+
+  override val description = "Please set the authentication principal."
 
 }
