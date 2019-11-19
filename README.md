@@ -186,7 +186,7 @@ common consume asset: if asset creator sell asset to others ,and others want to 
 val response = forge.consumeAsset(assetAddress, assetCreator , assetOwner)
 ```
 
-child account consume asset: if application want to others to check asset.
+child account consume asset: if application want others to check asset.
 
 ```kotlin
 //create pre Tx for ticket owner to multiSign and consume asset
