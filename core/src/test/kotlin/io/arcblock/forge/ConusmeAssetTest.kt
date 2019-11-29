@@ -5,6 +5,7 @@ import ch.qos.logback.classic.LoggerContext
 import com.google.protobuf.Any
 import forge_abi.Enum
 import io.arcblock.forge.did.WalletInfo
+import io.arcblock.forge.extension.signTx
 import io.arcblock.forge.extension.toByteString
 import org.junit.Before
 import org.junit.Ignore
@@ -63,18 +64,16 @@ class ConusmeAssetTest {
     println("rspTransfer:\n$rspTransfer")
 
     //create pre Tx for ticket owner to multiSign and consume asset
-    val preTx = TransactionFactory.preConusmeAsset(forge.chainInfo.value.network, gateKeeper, issuer.address)
+    val preTx = TransactionFactory.preUnsignConusmeAsset(forge.LazyChainInfo.value.network, gateKeeper.address, gateKeeper.pk, issuer.address).signTx(gateKeeper.sk)
 
     //consume multiSig tx
     val finalTx = TransactionFactory.finalizeMultiSig(preTx, consumer, data = Any.newBuilder()
       .setValue(address.toByteArray().toByteString())
       .setTypeUrl(TypeUrls.CONSUME_ASSET_ADDRESS)
       .build())
-
     //send tx ,you can check it at
     val rsp = forge.sendTx(finalTx)
     println("consume asset:\n $rsp")
     assertEquals(Enum.StatusCode.ok, rsp.code)
   }
-
 }

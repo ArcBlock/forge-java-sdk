@@ -37,7 +37,7 @@ object DidAuthUtils {
       it.addProperty("host", appInfo.chainHost)
       it
     }
-    body.add("chainInfo", JsonParser().parse(chainInfo.toString()))
+    body.add("LazyChainInfo", JsonParser().parse(chainInfo.toString()))
     others?.keySet()?.forEach { body.add(it, others[it]) }
     val jsonHeader = Header(wallet.getSignType().toString().toUpperCase(), "JWT")
     val content = gs.toJson(jsonHeader)

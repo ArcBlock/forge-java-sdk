@@ -1,3 +1,6 @@
+## 1.0.2 (November 29, 2019)
+
+
 ## 1.0.1 (November 19, 2019)
   - remove auth protocol claim: meta
   - consume asset
