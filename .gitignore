@@ -5,6 +5,9 @@ node_modules
 .DS_Store
 /.idea
 /target
+examples/javademo/.idea
+examples/javademo/logs
+examples/javademo/target
 *~
 *.iml
 *.orig
