@@ -88,7 +88,7 @@ object TransactionFactory {
    */
   @JvmOverloads
   fun preExchange(chainId: String, fromAddress: String, fromPk: ByteArray , to: String, fromToken: BigInteger, assetAddress: String, delegateeFrom: String? =
-    null, delegateeTo: String? = null): Type.Transaction {
+    null): Type.Transaction {
     val exchange = Exchange.ExchangeTx.newBuilder()
       .setSender(Exchange.ExchangeInfo.newBuilder()
         .setValue(Type.BigUint.newBuilder()
@@ -98,7 +98,7 @@ object TransactionFactory {
       .setReceiver(Exchange.ExchangeInfo.newBuilder()
         .addAssets(assetAddress)
         .build())
-      .setTo(delegateeTo ?: to)
+      .setTo(to)
       .build()
     return createTransaction(chainId, fromAddress, fromPk, exchange.toByteString(), TypeUrls.EXCHANGE)
       .delegatee(delegateeFrom)

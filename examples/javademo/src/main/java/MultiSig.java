@@ -43,11 +43,11 @@ class MultiSig extends BaseConfig {
     //prepare Transaction
     Type.Transaction preTx = TransactionFactory.INSTANCE.preExchange("default",alice.getAddress(), alice.getPk(), Thomas.getAddress(), BigInteger.TEN, assetAddress);
     preTx = TransactionExtKt.signTx(preTx, alice.getSk());
+
     //MultiSig Transaction
     Type.Transaction finalTx = TransactionFactory.INSTANCE.finalizeMultiSig(preTx, Thomas);
 
     response = forge.sendTx(finalTx);
-
     logger.info(response.toString());
 
   }

@@ -228,6 +228,8 @@ and decimal is 18.
 
 ## For java user
 
+[There is some usecase](./examples/javademo/src)
+
 Java user can use kotlin object like below:
 
 ```java
