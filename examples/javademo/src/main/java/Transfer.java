@@ -26,7 +26,7 @@ class Transfer extends BaseConfig {
     WalletInfo bob = forge.createWallet();
     forge.declare("Bobby", bob);
 
-    forge.poke(alice);
+    forge.checkin(alice);
     Rpc.ResponseSendTx response = forge.transfer(alice, bob.getAddress(), BigInteger.TEN);
     logger.info(response.toString());
   }

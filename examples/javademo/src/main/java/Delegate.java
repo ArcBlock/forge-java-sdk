@@ -32,7 +32,7 @@ class Delegate extends BaseConfig {
     WalletInfo Bruce = forge.createWallet();
     response=forge.declare("Bruce", Bruce);
 
-    forge.poke(alice);
+    forge.checkin(alice);
 
     response = forge.createDelegate(alice, Thomas ,new ArrayList<String>(), TypeUrls.TRANSFER);
 
