@@ -46,7 +46,7 @@ class DelegateWithMultiSig extends BaseConfig {
     response = forge.createDelegate(Thomas, ThomasDele ,new ArrayList<String>(), TypeUrls.EXCHANGE);
 
     // alice get money
-    forge.poke(alice);
+    forge.checkin(alice);
     //create Asset for Thomas
     Result result = forge.createAsset("json",("{\"a\":"+ UUID
       .randomUUID().toString() +"}").getBytes(), "testAsset", Thomas);

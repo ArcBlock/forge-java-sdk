@@ -28,45 +28,35 @@ import io.arcblock.forge.extension.TransactionExtKt;
  * Description  :
  **/
 class ComsumeAssetGateKeeper extends BaseConfig {
-  public static void main(String[] args){
+  public static void main(String[] args) {
     ForgeSDK forge = ForgeSDK.Companion.connect("localhost", BaseConfig.serverPort);
     Rpc.ResponseSendTx response;
-    Type.ChainInfo chainInfo = forge.getChainInfo().getInfo();
+    Type.ChainInfo chainInfo = forge
+      .getChainInfo()
+      .getInfo();
 
     WalletInfo Issuer = forge.createWallet();
     response = forge.declare("Issuer", Issuer);
     WalletInfo GateKeeper = forge.createWallet();
-    response =forge.declare("GateKeeper", GateKeeper, Issuer.getAddress());
+    response = forge.declare("GateKeeper", GateKeeper, Issuer.getAddress());
     WalletInfo Consumer = forge.createWallet();
-    response =forge.declare("Consumer", Consumer);
+    response = forge.declare("Consumer", Consumer);
 
-    forge.poke(Consumer);// consumer get money
+    forge.checkin(Consumer);// consumer get money
 
     //create Asset for Thomas
-    Result result = forge.createAsset("json",("{\"a\":"+ UUID
-      .randomUUID().toString() +"}").getBytes(), "testAsset", Issuer);
+    Result result = forge.createAsset("json", ("{\"a\":" + UUID
+      .randomUUID()
+      .toString() + "}").getBytes(), "testAsset", Issuer);
     response = result.getResponse();//create asset transaction response
     String assetAddress = result.getAddress();
 
-
-    //wait for block commit
-    try {
-      Thread.sleep(5000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+    waitForBlockCommit();
 
     //Conusmer buy the asset
     response = forge.exchange(Consumer, Issuer, BigIntegerExtKt.unSign(new BigDecimal("10E18").toBigInteger()), assetAddress);
 
-    //wait for block commit
-    try {
-      Thread.sleep(5000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-
-
+    waitForBlockCommit();
 
     //Prepare unsigned consume asset Transaction, wait for asset Holder to finalize signature
     Type.Transaction tx = TransactionFactory.INSTANCE.preUnsignConusmeAsset(chainInfo.getNetwork(), GateKeeper.getAddress(), GateKeeper.getPk(),
@@ -75,7 +65,8 @@ class ComsumeAssetGateKeeper extends BaseConfig {
 
 
     //ConsumeAsset multiSig must add asset address to data ,so any asset holder can use prepared un finalize Transaction to finalize it.
-    Any data = Any.newBuilder()
+    Any data = Any
+      .newBuilder()
       .setValue(ByteString.copyFrom(assetAddress.getBytes()))
       .setTypeUrl(TypeUrls.CONSUME_ASSET_ADDRESS)
       .build();
@@ -86,5 +77,14 @@ class ComsumeAssetGateKeeper extends BaseConfig {
     logger.info(response.toString());
 
 
+  }
+
+  //wait for block commit
+  private static void waitForBlockCommit() {
+    try {
+      Thread.sleep(5000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 }

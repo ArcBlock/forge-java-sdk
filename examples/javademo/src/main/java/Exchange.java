@@ -31,7 +31,7 @@ class Exchange extends BaseConfig{
     WalletInfo Thomas = forge.createWallet();
     response=forge.declare("Thomas", Thomas);
 
-    forge.poke(alice);
+    forge.checkin(alice);
 
     //create Asset for Thomas
     Result result = forge.createAsset("json",("{\"a\":"+ UUID.randomUUID().toString() +"}").getBytes(), "testAsset", Thomas);
