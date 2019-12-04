@@ -53,6 +53,9 @@ fun Type.Transaction.delegatee(delegatee: String?) = delegatee?.let {
 
 fun Type.Transaction.multiSig(wallet: WalletInfo, delegator: String) = multiSig(wallet, data = null, delegator = delegator)
 
+
+
+
 /**
  * MultiSig a transaction
  * @param wallet multiSig wallet

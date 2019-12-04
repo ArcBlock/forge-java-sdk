@@ -4,10 +4,9 @@ import com.google.common.io.BaseEncoding
 import com.google.protobuf.Any
 import com.google.protobuf.ByteString
 import io.arcblock.forge.did.HashType
-import io.arcblock.forge.extension.decodeB16
-import io.arcblock.forge.extension.encodeB16
-import io.arcblock.forge.extension.encodeB58
+import io.arcblock.forge.extension.*
 import org.junit.Test
+import java.math.BigDecimal
 
 class test {
   @Test
@@ -16,6 +15,18 @@ class test {
     val ed = BaseEncoding.base64().encode(x)
     println("xxx:$ed")
   }
+
+  @Test
+  fun testBigInteger() {
+    val amout = 3.3
+    val decimal = 18
+    val bi = BigDecimal("${amout}E${decimal}").toBigInteger().unSign()
+    println("xxx:$bi")
+    val ci = BigIntegerExt.createWithDecimal(3.3, 18)
+    println("xxx:$ci")
+    assert(bi == ci)
+  }
+
 
   @Test
   fun calulateCode(){

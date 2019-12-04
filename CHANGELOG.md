@@ -1,3 +1,9 @@
+## 1.0.2 (December 02, 2019)
+  - BigIntegerExt.createWithDecimal(amount, decimal) to easy create big integer
+  - TransactionFactory no need to pass wallet sk
+  - rename lazy chainInfo
+  - add a examples mvn and Java.
+
 ## 1.0.1 (November 19, 2019)
   - remove auth protocol claim: meta
   - consume asset

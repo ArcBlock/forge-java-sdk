@@ -1,5 +1,6 @@
 package io.arcblock.forge.extension
 
+import java.math.BigDecimal
 import java.math.BigInteger
 
 /**
@@ -27,3 +28,11 @@ fun BigInteger.unSign(): BigInteger {
   System.arraycopy(a1, 0, a2, 1, a1.size)
   return BigInteger(a2)
 }
+
+/**
+ * generate a un signal BigInteger like 180000000000000000000
+ */
+object BigIntegerExt {
+  fun createWithDecimal(amount: Number, decimal: Int) = BigDecimal("${amount}E${decimal}").toBigInteger().unSign()
+}
+

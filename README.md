@@ -59,7 +59,7 @@ when you want to connect with forge node.
 ### Step 2: create a wallet.
 
 ```kotlin
-val chainInfo = forge.getChainInfo().info //get chain info
+val chainInfo = forge.getLazyChainInfo().info //get chain info
 val alice = forge.createWallet()
 forge.declare("Alice",alice)
 ```
@@ -186,7 +186,7 @@ common consume asset: if asset creator sell asset to others ,and others want to 
 val response = forge.consumeAsset(assetAddress, assetCreator , assetOwner)
 ```
 
-child account consume asset: if application want others to check asset.
+child account consume asset: if application want to others to check asset.
 
 ```kotlin
 //create pre Tx for ticket owner to multiSign and consume asset
@@ -227,6 +227,8 @@ and decimal is 18.
 :::
 
 ## For java user
+
+[There is some usecase](./examples/javademo/src)
 
 Java user can use kotlin object like below:
 

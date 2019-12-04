@@ -71,7 +71,7 @@ class ForgeSDK private constructor() {
   /**
    * Chain info lazy get, must after connect with chain node
    */
-  val chainInfo = lazy {
+  val LazyChainInfo = lazy {
     chainRpcBlockingStub.getChainInfo(Rpc.RequestGetChainInfo.getDefaultInstance()).info
   }
 
@@ -91,7 +91,7 @@ class ForgeSDK private constructor() {
    *       .setTo(bob.address)
    *       .setValue(Type.BigUint.newBuilder().setValue(ByteString.copyFrom(BigInteger.ONE.toByteArray())).build())
    *       .build()
-   *     val tx = TransactionFactory.createTransaction(chainInfo.network,alice.address,alice.pk.toByteArray(),transfer.toByteString(),TypeUrls.TRANSFER)
+   *     val tx = TransactionFactory.createTransaction(LazyChainInfo.network,alice.address,alice.pk.toByteArray(),transfer.toByteString(),TypeUrls.TRANSFER)
    *       .signTx(alice.sk.toByteArray())
    *     val response =  forgeSDK.sendTx(tx)
    * ```
@@ -116,7 +116,7 @@ class ForgeSDK private constructor() {
    *       .setTo(bob.address)
    *       .setValue(Type.BigUint.newBuilder().setValue(ByteString.copyFrom(BigInteger.ONE.toByteArray())).build())
    *       .build()
-   *     val tx = TransactionFactory.createTransaction(chainInfo.network,alice.address,alice.pk.toByteArray(),transfer.toByteString(),TypeUrls.TRANSFER)
+   *     val tx = TransactionFactory.createTransaction(LazyChainInfo.network,alice.address,alice.pk.toByteArray(),transfer.toByteString(),TypeUrls.TRANSFER)
    *       .signTx(alice.sk.toByteArray())
    *     val response =  forgeSDK.sendTx(tx)
    * ```
@@ -145,7 +145,7 @@ class ForgeSDK private constructor() {
    * @return code: ok or error. hash: transaction's hash
    */
   fun sendTx(wallet: WalletInfo, itx: ByteString, typeUrl: String): Rpc.ResponseSendTx {
-    return sendTx(TransactionFactory.createTransaction(chainInfo.value.network, wallet.address, wallet.pk, itx, typeUrl).signTx(wallet.sk))
+    return sendTx(TransactionFactory.createTransaction(LazyChainInfo.value.network, wallet.address, wallet.pk, itx, typeUrl).signTx(wallet.sk))
   }
 
 
@@ -162,7 +162,7 @@ class ForgeSDK private constructor() {
    */
   @JvmOverloads
   fun declare(moniker: String, wallet: WalletInfo, issuer: String? = null): Rpc.ResponseSendTx {
-    return sendTx(TransactionFactory.declare(chainInfo.value.network, wallet, moniker, issuer).signTx(wallet.sk))
+    return sendTx(TransactionFactory.declare(LazyChainInfo.value.network, wallet.address, wallet.pk, moniker, issuer).signTx(wallet.sk))
   }
   /**
    * Util to help developer to poke a account
@@ -185,7 +185,7 @@ class ForgeSDK private constructor() {
    * @return code: ok or error. hash: transaction's hash
    */
   fun poke(wallet: WalletInfo): Rpc.ResponseSendTx {
-    val tx = TransactionFactory.unsignPoke(chainInfo.value.network, wallet = wallet)
+    val tx = TransactionFactory.unsignPoke(LazyChainInfo.value.network, wallet.address, wallet.pk)
       .signTx(wallet.sk)
     return chainRpcBlockingStub.sendTx(Rpc.RequestSendTx.newBuilder().setTx(tx).build())
   }
@@ -211,7 +211,7 @@ class ForgeSDK private constructor() {
     amount?.let { builder.setValue(Type.BigUint.newBuilder().setValue(ByteString.copyFrom(it.toByteArray())).build()) }
     assets?.forEach { builder.addAssets(it) }
     val transfer = builder.build()
-    val tx = TransactionFactory.createTransaction(chainInfo.value.network, from.address, from.pk, transfer.toByteString(), TypeUrls.TRANSFER)
+    val tx = TransactionFactory.createTransaction(LazyChainInfo.value.network, from.address, from.pk, transfer.toByteString(), TypeUrls.TRANSFER)
       .delegatee(delegatee)
       .signTx(from.sk)
     return sendTx(tx)
@@ -249,7 +249,7 @@ class ForgeSDK private constructor() {
     itx = itx.toBuilder()
       .setAddress(address)
       .build()
-    val tx = TransactionFactory.createTransaction(chainInfo.value.network, wallet.address, wallet.pk, itx.toByteString(), TypeUrls.CREATE_ASSET)
+    val tx = TransactionFactory.createTransaction(LazyChainInfo.value.network, wallet.address, wallet.pk, itx.toByteString(), TypeUrls.CREATE_ASSET)
       .delegatee(delegatee)
       .signTx(wallet.sk)
     return Result(sendTx(tx), address)
@@ -266,7 +266,7 @@ class ForgeSDK private constructor() {
       .setMoniker(moniker)
       .setData(Any.newBuilder().setTypeUrl(typeUrl).setValue(assetData.toByteString()).build())
       .build()
-    val tx = TransactionFactory.createTransaction(chainInfo.value.network, wallet.address, wallet.pk, itx.toByteString(), TypeUrls.UPDATE_ASSET)
+    val tx = TransactionFactory.createTransaction(LazyChainInfo.value.network, wallet.address, wallet.pk, itx.toByteString(), TypeUrls.UPDATE_ASSET)
       .delegatee(delegatee)
       .signTx(wallet.sk)
     return sendTx(tx)
@@ -282,7 +282,7 @@ class ForgeSDK private constructor() {
       .setAddress("")
       .setIssuer(creator.address)
       .build()
-    val tx = TransactionFactory.createTransaction(chainInfo.value.network, creator.address, creator.pk, itx.toByteString(), TypeUrls.CONSUME_ASSET)
+    val tx = TransactionFactory.createTransaction(LazyChainInfo.value.network, creator.address, creator.pk, itx.toByteString(), TypeUrls.CONSUME_ASSET)
       .delegatee(delegatee)
       .signTx(creator.sk)
     return sendTx(tx.multiSig(owner, Any.newBuilder().setTypeUrl(TypeUrls.CONSUME_ASSET_ADDRESS)
@@ -307,7 +307,7 @@ class ForgeSDK private constructor() {
         .build())
       .setTo(delegateeTo ?: to.address)
       .build()
-    val tx = TransactionFactory.createTransaction(chainInfo.value.network, from.address, from.pk, exchange.toByteString(), TypeUrls.EXCHANGE)
+    val tx = TransactionFactory.createTransaction(LazyChainInfo.value.network, from.address, from.pk, exchange.toByteString(), TypeUrls.EXCHANGE)
       .delegatee(delegateeFrom)
       .signTx(from.sk)
     return sendTx(tx.multiSig(to, delegator = delegateeTo))
@@ -325,7 +325,7 @@ class ForgeSDK private constructor() {
   @JvmOverloads
   fun createDelegate(from: WalletInfo, to: WalletInfo, rules: List<String>, typeUrl: String? = null): Rpc.ResponseSendTx {
     return sendTx(
-      TransactionFactory.unsignDelegate(from.address, to.address, chainInfo.value.network, from, rules, typeUrl).signTx(from.sk))
+      TransactionFactory.unsignDelegate(from.address, to.address, LazyChainInfo.value.network, from.pk, rules, typeUrl).signTx(from.sk))
   }
 
 
@@ -338,7 +338,7 @@ class ForgeSDK private constructor() {
    * @param hashKey random key to keep your asset safety
    */
   fun setupSwap(from: WalletInfo, receiver: String, amount: BigInteger, blockHeight: Int, hashKey: ByteArray): Rpc.ResponseSendTx {
-    return sendTx(TransactionFactory.setup_swap(chainInfo.value.network, from, receiver, blockHeight, hashKey, amount).signTx(from.sk))
+    return sendTx(TransactionFactory.setupSwap(LazyChainInfo.value.network, from.address, from.pk, receiver, blockHeight, hashKey, amount).signTx(from.sk))
   }
 
   /**
@@ -350,21 +350,21 @@ class ForgeSDK private constructor() {
    * @param hashKey random key to keep your asset safety
    */
   fun setupSwap(from: WalletInfo, receiver: String, assets: List<String>, blockHeight: Int, hashKey: ByteArray): Rpc.ResponseSendTx {
-    return sendTx(TransactionFactory.setup_swap(chainInfo.value.network, from, receiver, blockHeight, hashKey, assets).signTx(from.sk))
+    return sendTx(TransactionFactory.setupSwap(LazyChainInfo.value.network, from.address, from.pk, receiver, blockHeight, hashKey, assets).signTx(from.sk))
   }
 
   /**
    * cancel your swap that you have setup
    */
   fun revokeSwap(wallet: WalletInfo, swapAddress: String): Rpc.ResponseSendTx {
-    return sendTx(TransactionFactory.revoke_swap(chainInfo.value.network, wallet, swapAddress).signTx(wallet.sk))
+    return sendTx(TransactionFactory.revokeSwap(LazyChainInfo.value.network, wallet.address, wallet.pk, swapAddress).signTx(wallet.sk))
   }
 
   /**
    * retrieve other's asset or amount by your hash key that you setup your asset
    */
   fun retrieveSwap(wallet: WalletInfo, swapAddress: String, hashKey: ByteArray): Rpc.ResponseSendTx {
-    return sendTx(TransactionFactory.retrieve_swap(chainInfo.value.network, wallet, swapAddress, hashKey).signTx(wallet.sk))
+    return sendTx(TransactionFactory.retrieve_swap(LazyChainInfo.value.network, wallet.address, wallet.pk, swapAddress, hashKey).signTx(wallet.sk))
   }
 
   /**
@@ -478,7 +478,7 @@ class ForgeSDK private constructor() {
    *
    * Example:
    * ```
-   * forgeSDK.getChainInfo(Rpc.RequestGetChainInfo.getDefaultInstance())
+   * forgeSDK.getLazyChainInfo(Rpc.RequestGetChainInfo.getDefaultInstance())
    *
    * ```
    * id: "fc7df9d10a320124e8a1dde021552579faf60f0a"
