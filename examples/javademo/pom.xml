@@ -14,6 +14,10 @@
             <url>http://android-docs.arcblock.io/release</url>
         </repository>
         <repository>
+            <id>bintray-americanexpress-maven</id>
+            <url>https://dl.bintray.com/americanexpress/maven</url>
+        </repository>
+        <repository>
             <id>jsoftlocal-mvn-repo</id>
             <url>file:~/.m2/repository</url>
         </repository>
@@ -29,6 +33,17 @@
             <artifactId>did</artifactId>
             <version>1.0.2</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.aexp.nodes.graphql</groupId>-->
+<!--            <artifactId>nodes</artifactId>-->
+<!--            <version>0.5.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+            <groupId>io.arcblock.forge</groupId>
+            <artifactId>graphql</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
         <dependency>
             <groupId>com.madgag.spongycastle</groupId>
             <artifactId>prov</artifactId>

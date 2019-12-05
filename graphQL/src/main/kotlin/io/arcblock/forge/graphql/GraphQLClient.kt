@@ -51,6 +51,7 @@ class GraphQLClient(val url: String) {
   fun getConfig(): GraphQLResponseEntity<ResponseGetConfig> =
     gqlTemp.query(queryBuilder.request(ResponseGetConfig::class.java).build(), ResponseGetConfig::class.java)
 
+  @JvmOverloads
   fun getDelegationState(address: String, height: Long?= null): GraphQLResponseEntity<ResponseGetDelegateState> {
     val args = Arguments("getDelegateState", Argument("address", address))
     height?.apply { args.arguments.add(Argument("height", height)) }
@@ -158,10 +159,7 @@ class GraphQLClient(val url: String) {
     timeFilter?.apply { args.arguments.add(Argument("timeFilter", timeFilter)) }
     return gqlTemp.query(queryBuilder.request(ResponseListBlocks::class.java)
       .arguments(args)
-      .build().let {
-        println("query:${it.request}")
-        it
-      }, ResponseListBlocks::class.java)
+      .build(), ResponseListBlocks::class.java)
   }
 
   fun listStakes(addressFilter: AddressFilter, paging: PageInput? = null): GraphQLResponseEntity<ResponseListStakes> {
@@ -223,6 +221,7 @@ class MF : ObjectMapperFactory {
 
   override fun newDeserializerMapper(): ObjectMapper {
     val mapper = ObjectMapper()
+    mapper.writerWithDefaultPrettyPrinter()
     mapper.registerModule(JavaTimeModule())
     mapper.registerModule(JsonModule())
     mapper.disable(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS)

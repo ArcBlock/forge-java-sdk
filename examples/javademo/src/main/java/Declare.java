@@ -5,6 +5,7 @@ import io.arcblock.forge.TransactionFactory;
 import io.arcblock.forge.did.WalletInfo;
 import io.arcblock.forge.extension.StringExtensionKt;
 import io.arcblock.forge.extension.TransactionExtKt;
+import io.arcblock.forge.graphql.TransactionInfo;
 
 /**
  * █████╗ ██████╗  ██████╗██████╗ ██╗      ██████╗  ██████╗██╗  ██╗
@@ -22,12 +23,16 @@ import io.arcblock.forge.extension.TransactionExtKt;
 class Declare extends BaseConfig {
 
   public static void main(String[] args){
+
     ForgeSDK forge = ForgeSDK.Companion.connect("localhost", BaseConfig.serverPort);
     Rpc.ResponseSendTx response;
+
 
     //Random wallet declare
     WalletInfo alice = forge.createWallet();
     response=forge.declare("Alice", alice);
+
+
 
     //Random wallet from custom Private Key
     //send second time will failed because it has been declared
@@ -43,6 +48,10 @@ class Declare extends BaseConfig {
     Type.Transaction signedTx = TransactionExtKt.signTx(declare, Mark.getSk());
     response = forge.sendTx(signedTx);
     logger.info(response.toString());
+
+    waitForBlockCommit();
+    TransactionInfo info = gql.getTx(response.getHash()).getResponse().getInfo();
+    logger.info(info.toString());
 
   }
 }

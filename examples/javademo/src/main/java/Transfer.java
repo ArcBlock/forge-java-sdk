@@ -1,8 +1,6 @@
-import java.math.BigInteger;
-
 import forge_abi.Rpc;
-import io.arcblock.forge.ForgeSDK;
 import io.arcblock.forge.did.WalletInfo;
+import io.arcblock.forge.extension.BigIntegerExt;
 
 /**
  * █████╗ ██████╗  ██████╗██████╗ ██╗      ██████╗  ██████╗██╗  ██╗
@@ -19,15 +17,22 @@ import io.arcblock.forge.did.WalletInfo;
  **/
 class Transfer extends BaseConfig {
   public static void main(String[] args){
-
-    ForgeSDK forge = ForgeSDK.Companion.connect("localhost",BaseConfig.serverPort);
     WalletInfo alice = forge.createWallet();
     forge.declare("Alice", alice);
     WalletInfo bob = forge.createWallet();
     forge.declare("Bobby", bob);
 
+    printAccountBalance(alice.getAddress());
+    printAccountBalance(bob.getAddress());
+
     forge.checkin(alice);
-    Rpc.ResponseSendTx response = forge.transfer(alice, bob.getAddress(), BigInteger.TEN);
+    waitForBlockCommit();
+    printAccountBalance(alice.getAddress());
+    Rpc.ResponseSendTx response = forge.transfer(alice, bob.getAddress(), BigIntegerExt.INSTANCE.createWithDecimal(9, 18));
     logger.info(response.toString());
+
+    waitForBlockCommit();
+    printAccountBalance(alice.getAddress());
+    printAccountBalance(bob.getAddress());
   }
 }
