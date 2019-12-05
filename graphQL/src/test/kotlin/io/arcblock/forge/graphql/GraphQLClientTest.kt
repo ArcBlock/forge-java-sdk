@@ -187,9 +187,9 @@ class GraphQLClientTest {
 
   @Test
   fun listBlocks() {
-//    val response = gql.listBlocks(RangeFilter("1","2"))
-//    println("response:$response")
-//    assert(response.errors.isNullOrEmpty())
+    val response = gql.listBlocks(RangeFilter(1,2))
+    println("response:$response")
+    assert(response.errors.isNullOrEmpty())
   }
 
   @Test
@@ -214,7 +214,7 @@ class GraphQLClientTest {
 
   @Test
   fun listTransactions() {
-    val response = gql.listTransactions()
+    val response = gql.listTransactions(AddressFilter(sender = "z1TpSH9n6JfJto3hx1z7wJQ8zSMZvU9xFWa"),typeFilter = TypeFilter(listOf("transfer","poke")))
     println("response:$response")
     assert(response.errors.isNullOrEmpty())
 

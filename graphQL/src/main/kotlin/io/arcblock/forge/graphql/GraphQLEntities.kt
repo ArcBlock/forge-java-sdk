@@ -16,11 +16,6 @@ data class ResponseSendTx @JvmOverloads constructor(
   val hash: String? = null
 )
 
-data class TimeFilter @JvmOverloads constructor(
-  val endDateTime: String? = null,
-  val startDateTime: String? = null
-)
-
 @GraphQLProperty(
   name="getValidatorsInfo",
   arguments=arrayOf()
@@ -305,11 +300,6 @@ data class ResponseGetBlock @JvmOverloads constructor(
   val code: String? = null
 )
 
-data class PageOrder @JvmOverloads constructor(
-  val field: String? = null,
-  val type: String? = null
-)
-
 data class ForgeStats @JvmOverloads constructor(
   val avgBlockTime: Float? = null,
   val avgTps: Int? = null,
@@ -413,10 +403,6 @@ enum class EncodingType {
   BASE58
 }
 
-data class TypeFilter @JvmOverloads constructor(
-  val types: List<String>? = null
-)
-
 @GraphQLProperty(
   name="getAccountState",
   arguments=arrayOf(GraphQLArgument(name="address", optional = true ),GraphQLArgument(name="height",
@@ -462,15 +448,10 @@ data class ResponseGetNodeInfo @JvmOverloads constructor(
   val info: NodeInfo? = null
 )
 
-data class RangeFilter @JvmOverloads constructor(
-  val from: String? = null,
-  val to: String? = null
-)
-
 data class NetInfo @JvmOverloads constructor(
   val listeners: List<String>? = null,
   val listening: Boolean? = null,
-
+  val nPeers: Int? = null,
   val peers: List<PeerInfo>? = null
 )
 
@@ -802,12 +783,6 @@ data class ResponseGetSwapState @JvmOverloads constructor(
   val state: SwapState? = null
 )
 
-data class AddressFilter @JvmOverloads constructor(
-  val direction: Direction? = null,
-  val receiver: String? = null,
-  val sender: String? = null
-)
-
 data class TokenSwapConfig @JvmOverloads constructor(
   val commission: String? = null,
   val commissionHolderAddress: String? = null,
@@ -1000,7 +975,7 @@ data class ForgeStatus @JvmOverloads constructor(
 )
 
 data class UnconfirmedTxs @JvmOverloads constructor(
-  //val nTxs: Int? = null,
+  val nTxs: Int? = null,
   val txs: List<Transaction>? = null
 )
 
@@ -1127,12 +1102,6 @@ enum class Direction {
 
   UNION
 }
-
-data class PageInput @JvmOverloads constructor(
-  val cursor: String? = null,
-  val order: List<PageOrder>? = null,
-  val size: Int? = null
-)
 
 data class Multisig @JvmOverloads constructor(
   val data: Any? = null,
@@ -1391,8 +1360,4 @@ data class ResponseListBlocks @JvmOverloads constructor(
   val blocks: List<IndexedBlock>? = null,
   val code: String? = null,
   val page: PageInfo? = null
-)
-
-data class ValidityFilter @JvmOverloads constructor(
-  val validity: Validity? = null
 )

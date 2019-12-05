@@ -48,6 +48,7 @@ repositories {
 dependencies {
   implementation(kotlin("stdlib-jdk8"))
   implementation("com.google.code.gson:gson:2.3.1")
+  implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.1")
   compile("io.aexp.nodes.graphql:nodes:0.5.0")
   testCompile(group = "junit", name = "junit", version = "4.12")
 }
@@ -169,7 +170,7 @@ open class GenerateGQLQuery : DefaultTask() {
    */
   fun generateBaseBean(js: JsonObject): List<TypeSpec>? {
 
-    if (js["kind"].asString in listOf("OBJECT", "INPUT_OBJECT")) {
+    if (js["kind"].asString in listOf("OBJECT")) {
       val className = js["name"].asString
       //val tsb = TypeSpec.classBuilder(className)
       val primaryFun = FunSpec.constructorBuilder()
