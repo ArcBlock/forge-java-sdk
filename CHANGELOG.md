@@ -1,3 +1,7 @@
+## 1.0.3 (December 05, 2019)
+ - add graphQL interface support
+ - add a pure Java and Maven example
+
 ## 1.0.2 (December 02, 2019)
   - BigIntegerExt.createWithDecimal(amount, decimal) to easy create big integer
   - TransactionFactory no need to pass wallet sk
