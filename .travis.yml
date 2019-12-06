@@ -24,6 +24,7 @@ deploy:
   file:
   - core/build/libs/*
   - did/build/libs/*
+  - graphQL/build/libs/*
   skip_cleanup: true
   on:
     repo: ArcBlock/forge-java-sdk
