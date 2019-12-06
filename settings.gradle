@@ -2,5 +2,6 @@ rootProject.name = 'io.arcblock.forge'
 include 'core'
 include 'did'
 include 'examples'
-
+include 'graphQL'
+findProject(':graphQL')?.name = 'graphql'
 

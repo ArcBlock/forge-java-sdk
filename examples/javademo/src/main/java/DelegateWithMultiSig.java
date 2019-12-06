@@ -53,6 +53,13 @@ class DelegateWithMultiSig extends BaseConfig {
     response = result.getResponse();//create asset transaction response
     String assetAddress = result.getAddress();
 
+
+    waitForBlockCommit();
+    printAccountBalance(alice.getAddress());
+    printAccountBalance(Thomas.getAddress());
+
+
+
     //prepare Transaction
     Type.Transaction preTx = TransactionFactory.INSTANCE.preExchange("default", AliceDele.getAddress(), AliceDele.getPk(), Thomas.getAddress(),
       BigInteger.TEN, assetAddress, alice.getAddress());
@@ -63,7 +70,13 @@ class DelegateWithMultiSig extends BaseConfig {
     Type.Transaction finalTx = TransactionFactory.INSTANCE.finalizeMultiSig(preTx, ThomasDele, Thomas.getAddress());
 
     response = forge.sendTx(finalTx);
-    logger.info(response.toString());
+
+
+    waitForBlockCommit();
+    printAccountBalance(alice.getAddress());
+    printAccountBalance(Thomas.getAddress());
+
+
 
   }
 

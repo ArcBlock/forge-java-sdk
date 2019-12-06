@@ -2,7 +2,6 @@ import java.util.UUID;
 
 import forge_abi.Enum;
 import forge_abi.Rpc;
-import io.arcblock.forge.ForgeSDK;
 import io.arcblock.forge.Result;
 import io.arcblock.forge.did.WalletInfo;
 
@@ -22,7 +21,6 @@ import io.arcblock.forge.did.WalletInfo;
 class Asset extends BaseConfig{
 
   public static void main(String[] args){
-    ForgeSDK forge = ForgeSDK.Companion.connect("localhost", BaseConfig.serverPort);
     Rpc.ResponseSendTx response;
 
     WalletInfo Thomas = forge.createWallet();
@@ -34,12 +32,7 @@ class Asset extends BaseConfig{
     response = result.getResponse();//create asset transaction response
     String assetAddress = result.getAddress();
 
-    //wait for block commit
-    try {
-      Thread.sleep(5000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+    waitForBlockCommit();
 
     if (response.getCode() == Enum.StatusCode.ok){
       logger.info("assetAddress:"+assetAddress);

@@ -3,11 +3,12 @@ import java.util.UUID;
 
 import forge_abi.Rpc;
 import forge_abi.Type;
-import io.arcblock.forge.ForgeSDK;
 import io.arcblock.forge.Result;
 import io.arcblock.forge.TransactionFactory;
 import io.arcblock.forge.did.WalletInfo;
 import io.arcblock.forge.extension.TransactionExtKt;
+import io.arcblock.forge.graphql.AssetState;
+import io.arcblock.forge.graphql.TransactionInfo;
 
 /**
  * █████╗ ██████╗  ██████╗██████╗ ██╗      ██████╗  ██████╗██╗  ██╗
@@ -24,7 +25,7 @@ import io.arcblock.forge.extension.TransactionExtKt;
  **/
 class MultiSig extends BaseConfig {
   public static void main(String[] args) {
-    ForgeSDK forge = ForgeSDK.Companion.connect("localhost", BaseConfig.serverPort);
+
     Rpc.ResponseSendTx response;
 
 
@@ -34,11 +35,19 @@ class MultiSig extends BaseConfig {
     response = forge.declare("Thomas", Thomas);
 
     forge.checkin(alice);
+
     //create Asset for Thomas
     Result result = forge.createAsset("json",("{\"a\":"+ UUID
       .randomUUID().toString() +"}").getBytes(), "testAsset", Thomas);
     response = result.getResponse();//create asset transaction response
     String assetAddress = result.getAddress();
+
+    waitForBlockCommit();
+    printAccountBalance(alice.getAddress());
+    printAccountBalance(Thomas.getAddress());
+    AssetState asset = gql.getAssetState(assetAddress).getResponse().getState();
+    System.out.println("\n\nAsset:"+asset.toString()+"\n\n");
+
 
     //prepare Transaction
     Type.Transaction preTx = TransactionFactory.INSTANCE.preExchange("default",alice.getAddress(), alice.getPk(), Thomas.getAddress(), BigInteger.TEN, assetAddress);
@@ -48,7 +57,13 @@ class MultiSig extends BaseConfig {
     Type.Transaction finalTx = TransactionFactory.INSTANCE.finalizeMultiSig(preTx, Thomas);
 
     response = forge.sendTx(finalTx);
-    logger.info(response.toString());
+
+    waitForBlockCommit();
+    printAccountBalance(alice.getAddress());
+    printAccountBalance(Thomas.getAddress());
+
+    TransactionInfo info = gql.getTx(response.getHash()).getResponse().getInfo();
+    logPretty(info);
 
   }
 }
