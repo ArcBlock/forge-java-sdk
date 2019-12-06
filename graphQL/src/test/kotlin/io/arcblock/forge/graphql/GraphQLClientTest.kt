@@ -1,6 +1,8 @@
 package io.arcblock.forge.graphql
 
 import org.junit.Test
+import org.junit.Ignore
+
 
 /**
  * Author       : shan@arcblock.io
@@ -9,6 +11,7 @@ import org.junit.Test
  * Edited Time  :
  * Description  :
  */
+@Ignore
 class GraphQLClientTest {
   val gql = GraphQLClient("http://localhost:8212/api")
   @Test
