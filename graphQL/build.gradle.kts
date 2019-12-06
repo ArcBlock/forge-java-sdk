@@ -20,7 +20,7 @@ buildscript {
 
   dependencies {
     classpath("com.github.jengelman.gradle.plugins:shadow:5.1.0")
-
+    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.21")
     classpath("io.aexp.nodes.graphql:nodes:0.5.0")
     classpath("com.squareup.okhttp3:okhttp:4.0.1")
     classpath("com.squareup:kotlinpoet:1.4.4")
@@ -31,13 +31,17 @@ buildscript {
 plugins {
   kotlin("jvm") version "1.3.31"
   `maven-publish`
-  id("org.jetbrains.dokka") version ("0.10.0")
+//  id("org.jetbrains.dokka") version ("0.10.0")
   id("com.github.johnrengelman.shadow") version ("5.1.0")
-
 }
 //apply(plugin = "maven-publish")
 group = "io.arcblock.forge"
 version = "1.0.2"
+
+
+tasks.withType<Javadoc>{
+  enabled = false
+}
 
 
 repositories {
