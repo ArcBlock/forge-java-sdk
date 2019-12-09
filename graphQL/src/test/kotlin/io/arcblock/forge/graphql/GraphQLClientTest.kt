@@ -3,6 +3,7 @@ package io.arcblock.forge.graphql
 import io.arcblock.forge.TransactionFactory
 import io.arcblock.forge.did.DIDGenerator
 import io.arcblock.forge.extension.signTx
+import org.junit.Ignore
 import org.junit.Test
 
 
@@ -13,7 +14,7 @@ import org.junit.Test
  * Edited Time  :
  * Description  :
  */
-
+@Ignore
 class GraphQLClientTest {
   val gql = GraphQLClient("http://localhost:8212/api")
   @Test
