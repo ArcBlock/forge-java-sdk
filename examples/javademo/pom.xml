@@ -14,10 +14,6 @@
             <url>http://android-docs.arcblock.io/release</url>
         </repository>
         <repository>
-            <id>bintray-americanexpress-maven</id>
-            <url>https://dl.bintray.com/americanexpress/maven</url>
-        </repository>
-        <repository>
             <id>jsoftlocal-mvn-repo</id>
             <url>file:~/.m2/repository</url>
         </repository>
@@ -26,29 +22,24 @@
         <dependency>
             <groupId>io.arcblock.forge</groupId>
             <artifactId>core</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.4</version>
         </dependency>
         <dependency>
             <groupId>io.arcblock.forge</groupId>
             <artifactId>did</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.4</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>io.aexp.nodes.graphql</groupId>-->
-<!--            <artifactId>nodes</artifactId>-->
-<!--            <version>0.5.0</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>io.aexp.nodes.graphql</groupId>-->
+        <!--            <artifactId>nodes</artifactId>-->
+        <!--            <version>0.5.0</version>-->
+        <!--        </dependency>-->
+        <dependency>
             <groupId>io.arcblock.forge</groupId>
             <artifactId>graphql</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.4</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.madgag.spongycastle</groupId>
-            <artifactId>prov</artifactId>
-            <version>1.58.0.0</version>
-        </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>

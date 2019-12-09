@@ -64,18 +64,22 @@ enum StatusCode {
   invalid_delegation_rule = 57;
   invalid_delegation_type_url = 58;
 
-  sender_not_authorized =59;
-  protocol_not_running=60;
-  protocol_not_paused=61;
-  protocol_not_activated=62;
-  invalid_deactivation=63;
+  sender_not_authorized = 59;
+  protocol_not_running = 60;
+  protocol_not_paused = 61;
+  protocol_not_activated = 62;
+  invalid_deactivation = 63;
 
-  sender_withdraw_items_full=64;
-  withdraw_item_missing=65;
-  invalid_withdraw_tx=66;
-  invalid_chain_type=67;
-  invalid_time=68;
-  invalid_subscribe=69;
+  sender_withdraw_items_full = 64;
+  withdraw_item_missing = 65;
+  invalid_withdraw_tx = 66;
+  invalid_chain_type = 67;
+  invalid_time = 68;
+  invalid_subscribe = 69;
+  invalid_did_type = 70;
+  invalid_candidate_state = 71;
+  validator_not_found = 72;
+  validator_not_changed = 73;
 
   forbidden = 403;
   internal = 500;

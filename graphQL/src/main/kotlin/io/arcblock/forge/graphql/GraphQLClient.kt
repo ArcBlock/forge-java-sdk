@@ -6,7 +6,9 @@ import com.fasterxml.jackson.databind.deser.std.StdScalarDeserializer
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.KotlinModule
+import forge_abi.Type
 import io.aexp.nodes.graphql.*
+import java.util.*
 
 /**
  * Author       : shan@arcblock.io
@@ -294,6 +296,20 @@ class GraphQLClient(val url: String) {
       .build(), ResponseListTransactions::class.java)
   }
 
+  fun customQuery(query: String) = gqlTemp.query(queryBuilder.request(query).build(), JsonNode::class.java)
+  
+  fun sendTx(tx: Type.Transaction)
+    = gqlTemp.mutate(queryBuilder.request("mutation {\n" +
+      "  sendTx(tx: \"${base64url(tx.toByteArray())}\") {\n" +
+      "    code\n" +
+      "    hash\n" +
+      "  }}\n").build().let {
+    println(it.request)
+    it
+  },ResponseSendTx::class.java)
+
+
+  private fun base64url(tx: ByteArray) = Base64.getUrlEncoder().encodeToString(tx)
 }
 
 
@@ -427,7 +443,6 @@ class CustomDeserialize : StdScalarDeserializer<Transaction>(Transaction::class.
       .asText()
     val itxJson = node.get("itxJson")
       .toString()
-    println("itxJson node:" + node.get("itxJson").toString())
     val nonce = node.get("nonce")
       .asText()
     val pk = node.get("pk")

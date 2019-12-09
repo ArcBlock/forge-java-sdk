@@ -14212,11 +14212,11 @@ public final class State {
     /**
      * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
      */
-    forge_abi.DeployProtocol.DeployProtocolTx getItx();
+    forge_abi.Tx.DeployProtocolTx getItx();
     /**
      * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
      */
-    forge_abi.DeployProtocol.DeployProtocolTxOrBuilder getItxOrBuilder();
+    forge_abi.Tx.DeployProtocolTxOrBuilder getItxOrBuilder();
 
     /**
      * <pre>
@@ -14363,11 +14363,11 @@ public final class State {
               break;
             }
             case 18: {
-              forge_abi.DeployProtocol.DeployProtocolTx.Builder subBuilder = null;
+              forge_abi.Tx.DeployProtocolTx.Builder subBuilder = null;
               if (itx_ != null) {
                 subBuilder = itx_.toBuilder();
               }
-              itx_ = input.readMessage(forge_abi.DeployProtocol.DeployProtocolTx.parser(), extensionRegistry);
+              itx_ = input.readMessage(forge_abi.Tx.DeployProtocolTx.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(itx_);
                 itx_ = subBuilder.buildPartial();
@@ -14495,7 +14495,7 @@ public final class State {
     }
 
     public static final int ITX_FIELD_NUMBER = 2;
-    private forge_abi.DeployProtocol.DeployProtocolTx itx_;
+    private forge_abi.Tx.DeployProtocolTx itx_;
     /**
      * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
      */
@@ -14505,13 +14505,13 @@ public final class State {
     /**
      * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
      */
-    public forge_abi.DeployProtocol.DeployProtocolTx getItx() {
-      return itx_ == null ? forge_abi.DeployProtocol.DeployProtocolTx.getDefaultInstance() : itx_;
+    public forge_abi.Tx.DeployProtocolTx getItx() {
+      return itx_ == null ? forge_abi.Tx.DeployProtocolTx.getDefaultInstance() : itx_;
     }
     /**
      * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
      */
-    public forge_abi.DeployProtocol.DeployProtocolTxOrBuilder getItxOrBuilder() {
+    public forge_abi.Tx.DeployProtocolTxOrBuilder getItxOrBuilder() {
       return getItx();
     }
 
@@ -15189,9 +15189,9 @@ public final class State {
         return this;
       }
 
-      private forge_abi.DeployProtocol.DeployProtocolTx itx_ = null;
+      private forge_abi.Tx.DeployProtocolTx itx_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.DeployProtocol.DeployProtocolTx, forge_abi.DeployProtocol.DeployProtocolTx.Builder, forge_abi.DeployProtocol.DeployProtocolTxOrBuilder> itxBuilder_;
+          forge_abi.Tx.DeployProtocolTx, forge_abi.Tx.DeployProtocolTx.Builder, forge_abi.Tx.DeployProtocolTxOrBuilder> itxBuilder_;
       /**
        * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
        */
@@ -15201,9 +15201,9 @@ public final class State {
       /**
        * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
        */
-      public forge_abi.DeployProtocol.DeployProtocolTx getItx() {
+      public forge_abi.Tx.DeployProtocolTx getItx() {
         if (itxBuilder_ == null) {
-          return itx_ == null ? forge_abi.DeployProtocol.DeployProtocolTx.getDefaultInstance() : itx_;
+          return itx_ == null ? forge_abi.Tx.DeployProtocolTx.getDefaultInstance() : itx_;
         } else {
           return itxBuilder_.getMessage();
         }
@@ -15211,7 +15211,7 @@ public final class State {
       /**
        * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
        */
-      public Builder setItx(forge_abi.DeployProtocol.DeployProtocolTx value) {
+      public Builder setItx(forge_abi.Tx.DeployProtocolTx value) {
         if (itxBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -15228,7 +15228,7 @@ public final class State {
        * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
        */
       public Builder setItx(
-          forge_abi.DeployProtocol.DeployProtocolTx.Builder builderForValue) {
+          forge_abi.Tx.DeployProtocolTx.Builder builderForValue) {
         if (itxBuilder_ == null) {
           itx_ = builderForValue.build();
           onChanged();
@@ -15241,11 +15241,11 @@ public final class State {
       /**
        * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
        */
-      public Builder mergeItx(forge_abi.DeployProtocol.DeployProtocolTx value) {
+      public Builder mergeItx(forge_abi.Tx.DeployProtocolTx value) {
         if (itxBuilder_ == null) {
           if (itx_ != null) {
             itx_ =
-              forge_abi.DeployProtocol.DeployProtocolTx.newBuilder(itx_).mergeFrom(value).buildPartial();
+              forge_abi.Tx.DeployProtocolTx.newBuilder(itx_).mergeFrom(value).buildPartial();
           } else {
             itx_ = value;
           }
@@ -15273,7 +15273,7 @@ public final class State {
       /**
        * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
        */
-      public forge_abi.DeployProtocol.DeployProtocolTx.Builder getItxBuilder() {
+      public forge_abi.Tx.DeployProtocolTx.Builder getItxBuilder() {
         
         onChanged();
         return getItxFieldBuilder().getBuilder();
@@ -15281,23 +15281,23 @@ public final class State {
       /**
        * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
        */
-      public forge_abi.DeployProtocol.DeployProtocolTxOrBuilder getItxOrBuilder() {
+      public forge_abi.Tx.DeployProtocolTxOrBuilder getItxOrBuilder() {
         if (itxBuilder_ != null) {
           return itxBuilder_.getMessageOrBuilder();
         } else {
           return itx_ == null ?
-              forge_abi.DeployProtocol.DeployProtocolTx.getDefaultInstance() : itx_;
+              forge_abi.Tx.DeployProtocolTx.getDefaultInstance() : itx_;
         }
       }
       /**
        * <code>.forge_abi.DeployProtocolTx itx = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.DeployProtocol.DeployProtocolTx, forge_abi.DeployProtocol.DeployProtocolTx.Builder, forge_abi.DeployProtocol.DeployProtocolTxOrBuilder> 
+          forge_abi.Tx.DeployProtocolTx, forge_abi.Tx.DeployProtocolTx.Builder, forge_abi.Tx.DeployProtocolTxOrBuilder> 
           getItxFieldBuilder() {
         if (itxBuilder_ == null) {
           itxBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.DeployProtocol.DeployProtocolTx, forge_abi.DeployProtocol.DeployProtocolTx.Builder, forge_abi.DeployProtocol.DeployProtocolTxOrBuilder>(
+              forge_abi.Tx.DeployProtocolTx, forge_abi.Tx.DeployProtocolTx.Builder, forge_abi.Tx.DeployProtocolTxOrBuilder>(
                   getItx(),
                   getParentForChildren(),
                   isClean());
@@ -20094,89 +20094,89 @@ public final class State {
     java.lang.String[] descriptorData = {
       "\n\013state.proto\022\tforge_abi\032\031google/protobu" +
       "f/any.proto\032\037google/protobuf/timestamp.p" +
-      "roto\032\nenum.proto\032\ntype.proto\032\025deploy_pro" +
-      "tocol.proto\"\314\004\n\014AccountState\022#\n\007balance\030" +
-      "\001 \001(\0132\022.forge_abi.BigUint\022\r\n\005nonce\030\002 \001(\004" +
-      "\022\017\n\007num_txs\030\003 \001(\004\022\017\n\007address\030\004 \001(\t\022\n\n\002pk" +
-      "\030\005 \001(\014\022\'\n\004type\030\006 \001(\0132\025.forge_abi.WalletT" +
-      "ypeB\002\030\001\022\017\n\007moniker\030\007 \001(\t\022(\n\007context\030\010 \001(" +
-      "\0132\027.forge_abi.StateContext\022\016\n\006issuer\030\t \001" +
-      "(\t\022\'\n\013gas_balance\030\n \001(\0132\022.forge_abi.BigU",
-      "int\022\023\n\013migrated_to\030\r \003(\t\022\025\n\rmigrated_fro" +
-      "m\030\016 \003(\t\022\022\n\nnum_assets\030\017 \001(\004\022&\n\005stake\030\020 \001" +
-      "(\0132\027.forge_abi.StakeContext\022.\n\014pinned_fi" +
-      "les\030\021 \001(\0132\030.forge_abi.CircularQueue\022!\n\004p" +
-      "oke\030\022 \001(\0132\023.forge_abi.PokeInfo\022,\n\020deposi" +
-      "t_received\030\023 \001(\0132\022.forge_abi.BigUint\0220\n\016" +
-      "withdraw_items\030\024 \001(\0132\030.forge_abi.Circula" +
-      "rQueue\022\"\n\004data\0302 \001(\0132\024.google.protobuf.A" +
-      "ny\"\274\002\n\nAssetState\022\017\n\007address\030\001 \001(\t\022\r\n\005ow" +
-      "ner\030\002 \001(\t\022\017\n\007moniker\030\003 \001(\t\022\020\n\010readonly\030\004",
-      " \001(\010\022\025\n\rtransferrable\030\005 \001(\010\022\013\n\003ttl\030\006 \001(\r" +
-      "\0221\n\rconsumed_time\030\007 \001(\0132\032.google.protobu" +
-      "f.Timestamp\022\016\n\006issuer\030\010 \001(\t\022\016\n\006parent\030\t " +
-      "\001(\t\022&\n\005stake\030\r \001(\0132\027.forge_abi.StakeCont" +
-      "ext\022(\n\007context\030\016 \001(\0132\027.forge_abi.StateCo" +
-      "ntext\022\"\n\004data\0302 \001(\0132\024.google.protobuf.An" +
-      "y\"-\n\014CoreProtocol\022\014\n\004name\030\001 \001(\t\022\017\n\007addre" +
-      "ss\030\002 \001(\t\"\333\006\n\nForgeState\022\017\n\007address\030\001 \001(\t" +
-      "\022-\n\tconsensus\030\002 \001(\0132\032.forge_abi.Consensu" +
-      "sParams\022/\n\005tasks\030\003 \003(\0132 .forge_abi.Forge",
-      "State.TasksEntry\022>\n\rstake_summary\030\004 \003(\0132" +
-      "\'.forge_abi.ForgeState.StakeSummaryEntry" +
-      "\022\017\n\007version\030\005 \001(\t\022$\n\005token\030\010 \001(\0132\025.forge" +
-      "_abi.ForgeToken\022/\n\ttx_config\030\t \001(\0132\034.for" +
-      "ge_abi.TransactionConfig\022*\n\tprotocols\030\014 " +
-      "\003(\0132\027.forge_abi.CoreProtocol\022+\n\003gas\030\r \003(" +
-      "\0132\036.forge_abi.ForgeState.GasEntry\022,\n\014upg" +
-      "rade_info\030\016 \001(\0132\026.forge_abi.UpgradeInfo\022" +
-      "@\n\016account_config\030\020 \003(\0132(.forge_abi.Forg" +
-      "eState.AccountConfigEntry\0225\n\021token_swap_",
-      "config\030\021 \001(\0132\032.forge_abi.TokenSwapConfig" +
-      "\022#\n\004data\030\377\017 \001(\0132\024.google.protobuf.Any\032E\n" +
-      "\nTasksEntry\022\013\n\003key\030\001 \001(\004\022&\n\005value\030\002 \001(\0132" +
-      "\027.forge_abi.UpgradeTasks:\0028\001\032L\n\021StakeSum" +
-      "maryEntry\022\013\n\003key\030\001 \001(\r\022&\n\005value\030\002 \001(\0132\027." +
-      "forge_abi.StakeSummary:\0028\001\032*\n\010GasEntry\022\013" +
-      "\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\r:\0028\001\032N\n\022Accoun" +
-      "tConfigEntry\022\013\n\003key\030\001 \001(\t\022\'\n\005value\030\002 \001(\013" +
-      "2\030.forge_abi.AccountConfig:\0028\001\"\203\001\n\tRootS" +
-      "tate\022\017\n\007address\030\001 \001(\t\022\017\n\007account\030\002 \001(\014\022\r",
-      "\n\005asset\030\003 \001(\014\022\017\n\007receipt\030\004 \001(\014\022\020\n\010protoc" +
-      "ol\030\005 \001(\014\022\022\n\ngovernance\030\006 \001(\014\022\016\n\006custom\030\007" +
-      " \001(\014\"\273\001\n\nStakeState\022\017\n\007address\030\001 \001(\t\022\014\n\004" +
-      "from\030\002 \001(\t\022\n\n\002to\030\003 \001(\t\022#\n\007balance\030\004 \001(\0132" +
-      "\022.forge_abi.BigUint\022\017\n\007message\030\005 \001(\t\022(\n\007" +
-      "context\030\016 \001(\0132\027.forge_abi.StateContext\022\"" +
-      "\n\004data\030\017 \001(\0132\024.google.protobuf.Any\"\267\001\n\017S" +
-      "tatisticsState\022\017\n\007address\030\001 \001(\t\022\022\n\nnum_b" +
-      "locks\030\002 \001(\004\022\017\n\007num_txs\030\003 \001(\004\022&\n\nnum_stak" +
-      "es\030\004 \001(\0132\022.forge_abi.BigUint\022\026\n\016num_vali",
-      "dators\030\005 \001(\r\022.\n\rtx_statistics\030\006 \001(\0132\027.fo" +
-      "rge_abi.TxStatistics\"!\n\016BlacklistState\022\017" +
-      "\n\007address\030\001 \003(\t\"\202\002\n\rProtocolState\022\017\n\007add" +
-      "ress\030\001 \001(\t\022(\n\003itx\030\002 \001(\0132\033.forge_abi.Depl" +
-      "oyProtocolTx\022\021\n\troot_hash\030\003 \001(\014\022)\n\006statu" +
-      "s\030\004 \001(\0162\031.forge_abi.ProtocolStatus\022\023\n\013mi" +
-      "grated_to\030\014 \003(\t\022\025\n\rmigrated_from\030\r \003(\t\022(" +
-      "\n\007context\030\016 \001(\0132\027.forge_abi.StateContext" +
-      "\022\"\n\004data\030\017 \001(\0132\024.google.protobuf.Any\"\336\001\n" +
-      "\tSwapState\022\014\n\004hash\030\001 \001(\t\022\017\n\007address\030\002 \001(",
-      "\t\022\017\n\007hashkey\030\003 \001(\014\022\016\n\006sender\030\004 \001(\t\022\020\n\010re" +
-      "ceiver\030\005 \001(\t\022!\n\005value\030\006 \001(\0132\022.forge_abi." +
-      "BigUint\022\016\n\006assets\030\007 \003(\t\022\020\n\010locktime\030\010 \001(" +
-      "\r\022\020\n\010hashlock\030\t \001(\014\022(\n\007context\030\n \001(\0132\027.f" +
-      "orge_abi.StateContext\"\227\001\n\017DelegateOpStat" +
-      "e\022\014\n\004rule\030\001 \001(\t\022\017\n\007num_txs\030\002 \001(\004\022\025\n\rnum_" +
-      "txs_delta\030\003 \001(\004\022#\n\007balance\030\004 \001(\0132\022.forge" +
-      "_abi.BigUint\022)\n\rbalance_delta\030\005 \001(\0132\022.fo" +
-      "rge_abi.BigUint\"\346\001\n\rDelegateState\022\017\n\007add" +
-      "ress\030\001 \001(\t\022.\n\003ops\030\002 \003(\0132!.forge_abi.Dele",
-      "gateState.OpsEntry\022(\n\007context\030\016 \001(\0132\027.fo" +
-      "rge_abi.StateContext\022\"\n\004data\030\017 \001(\0132\024.goo" +
-      "gle.protobuf.Any\032F\n\010OpsEntry\022\013\n\003key\030\001 \001(" +
-      "\t\022)\n\005value\030\002 \001(\0132\032.forge_abi.DelegateOpS" +
-      "tate:\0028\001b\006proto3"
+      "roto\032\nenum.proto\032\ntype.proto\032\010tx.proto\"\314" +
+      "\004\n\014AccountState\022#\n\007balance\030\001 \001(\0132\022.forge" +
+      "_abi.BigUint\022\r\n\005nonce\030\002 \001(\004\022\017\n\007num_txs\030\003" +
+      " \001(\004\022\017\n\007address\030\004 \001(\t\022\n\n\002pk\030\005 \001(\014\022\'\n\004typ" +
+      "e\030\006 \001(\0132\025.forge_abi.WalletTypeB\002\030\001\022\017\n\007mo" +
+      "niker\030\007 \001(\t\022(\n\007context\030\010 \001(\0132\027.forge_abi" +
+      ".StateContext\022\016\n\006issuer\030\t \001(\t\022\'\n\013gas_bal" +
+      "ance\030\n \001(\0132\022.forge_abi.BigUint\022\023\n\013migrat",
+      "ed_to\030\r \003(\t\022\025\n\rmigrated_from\030\016 \003(\t\022\022\n\nnu" +
+      "m_assets\030\017 \001(\004\022&\n\005stake\030\020 \001(\0132\027.forge_ab" +
+      "i.StakeContext\022.\n\014pinned_files\030\021 \001(\0132\030.f" +
+      "orge_abi.CircularQueue\022!\n\004poke\030\022 \001(\0132\023.f" +
+      "orge_abi.PokeInfo\022,\n\020deposit_received\030\023 " +
+      "\001(\0132\022.forge_abi.BigUint\0220\n\016withdraw_item" +
+      "s\030\024 \001(\0132\030.forge_abi.CircularQueue\022\"\n\004dat" +
+      "a\0302 \001(\0132\024.google.protobuf.Any\"\274\002\n\nAssetS" +
+      "tate\022\017\n\007address\030\001 \001(\t\022\r\n\005owner\030\002 \001(\t\022\017\n\007" +
+      "moniker\030\003 \001(\t\022\020\n\010readonly\030\004 \001(\010\022\025\n\rtrans",
+      "ferrable\030\005 \001(\010\022\013\n\003ttl\030\006 \001(\r\0221\n\rconsumed_" +
+      "time\030\007 \001(\0132\032.google.protobuf.Timestamp\022\016" +
+      "\n\006issuer\030\010 \001(\t\022\016\n\006parent\030\t \001(\t\022&\n\005stake\030" +
+      "\r \001(\0132\027.forge_abi.StakeContext\022(\n\007contex" +
+      "t\030\016 \001(\0132\027.forge_abi.StateContext\022\"\n\004data" +
+      "\0302 \001(\0132\024.google.protobuf.Any\"-\n\014CoreProt" +
+      "ocol\022\014\n\004name\030\001 \001(\t\022\017\n\007address\030\002 \001(\t\"\333\006\n\n" +
+      "ForgeState\022\017\n\007address\030\001 \001(\t\022-\n\tconsensus" +
+      "\030\002 \001(\0132\032.forge_abi.ConsensusParams\022/\n\005ta" +
+      "sks\030\003 \003(\0132 .forge_abi.ForgeState.TasksEn",
+      "try\022>\n\rstake_summary\030\004 \003(\0132\'.forge_abi.F" +
+      "orgeState.StakeSummaryEntry\022\017\n\007version\030\005" +
+      " \001(\t\022$\n\005token\030\010 \001(\0132\025.forge_abi.ForgeTok" +
+      "en\022/\n\ttx_config\030\t \001(\0132\034.forge_abi.Transa" +
+      "ctionConfig\022*\n\tprotocols\030\014 \003(\0132\027.forge_a" +
+      "bi.CoreProtocol\022+\n\003gas\030\r \003(\0132\036.forge_abi" +
+      ".ForgeState.GasEntry\022,\n\014upgrade_info\030\016 \001" +
+      "(\0132\026.forge_abi.UpgradeInfo\022@\n\016account_co" +
+      "nfig\030\020 \003(\0132(.forge_abi.ForgeState.Accoun" +
+      "tConfigEntry\0225\n\021token_swap_config\030\021 \001(\0132",
+      "\032.forge_abi.TokenSwapConfig\022#\n\004data\030\377\017 \001" +
+      "(\0132\024.google.protobuf.Any\032E\n\nTasksEntry\022\013" +
+      "\n\003key\030\001 \001(\004\022&\n\005value\030\002 \001(\0132\027.forge_abi.U" +
+      "pgradeTasks:\0028\001\032L\n\021StakeSummaryEntry\022\013\n\003" +
+      "key\030\001 \001(\r\022&\n\005value\030\002 \001(\0132\027.forge_abi.Sta" +
+      "keSummary:\0028\001\032*\n\010GasEntry\022\013\n\003key\030\001 \001(\t\022\r" +
+      "\n\005value\030\002 \001(\r:\0028\001\032N\n\022AccountConfigEntry\022" +
+      "\013\n\003key\030\001 \001(\t\022\'\n\005value\030\002 \001(\0132\030.forge_abi." +
+      "AccountConfig:\0028\001\"\203\001\n\tRootState\022\017\n\007addre" +
+      "ss\030\001 \001(\t\022\017\n\007account\030\002 \001(\014\022\r\n\005asset\030\003 \001(\014",
+      "\022\017\n\007receipt\030\004 \001(\014\022\020\n\010protocol\030\005 \001(\014\022\022\n\ng" +
+      "overnance\030\006 \001(\014\022\016\n\006custom\030\007 \001(\014\"\273\001\n\nStak" +
+      "eState\022\017\n\007address\030\001 \001(\t\022\014\n\004from\030\002 \001(\t\022\n\n" +
+      "\002to\030\003 \001(\t\022#\n\007balance\030\004 \001(\0132\022.forge_abi.B" +
+      "igUint\022\017\n\007message\030\005 \001(\t\022(\n\007context\030\016 \001(\013" +
+      "2\027.forge_abi.StateContext\022\"\n\004data\030\017 \001(\0132" +
+      "\024.google.protobuf.Any\"\267\001\n\017StatisticsStat" +
+      "e\022\017\n\007address\030\001 \001(\t\022\022\n\nnum_blocks\030\002 \001(\004\022\017" +
+      "\n\007num_txs\030\003 \001(\004\022&\n\nnum_stakes\030\004 \001(\0132\022.fo" +
+      "rge_abi.BigUint\022\026\n\016num_validators\030\005 \001(\r\022",
+      ".\n\rtx_statistics\030\006 \001(\0132\027.forge_abi.TxSta" +
+      "tistics\"!\n\016BlacklistState\022\017\n\007address\030\001 \003" +
+      "(\t\"\202\002\n\rProtocolState\022\017\n\007address\030\001 \001(\t\022(\n" +
+      "\003itx\030\002 \001(\0132\033.forge_abi.DeployProtocolTx\022" +
+      "\021\n\troot_hash\030\003 \001(\014\022)\n\006status\030\004 \001(\0162\031.for" +
+      "ge_abi.ProtocolStatus\022\023\n\013migrated_to\030\014 \003" +
+      "(\t\022\025\n\rmigrated_from\030\r \003(\t\022(\n\007context\030\016 \001" +
+      "(\0132\027.forge_abi.StateContext\022\"\n\004data\030\017 \001(" +
+      "\0132\024.google.protobuf.Any\"\336\001\n\tSwapState\022\014\n" +
+      "\004hash\030\001 \001(\t\022\017\n\007address\030\002 \001(\t\022\017\n\007hashkey\030",
+      "\003 \001(\014\022\016\n\006sender\030\004 \001(\t\022\020\n\010receiver\030\005 \001(\t\022" +
+      "!\n\005value\030\006 \001(\0132\022.forge_abi.BigUint\022\016\n\006as" +
+      "sets\030\007 \003(\t\022\020\n\010locktime\030\010 \001(\r\022\020\n\010hashlock" +
+      "\030\t \001(\014\022(\n\007context\030\n \001(\0132\027.forge_abi.Stat" +
+      "eContext\"\227\001\n\017DelegateOpState\022\014\n\004rule\030\001 \001" +
+      "(\t\022\017\n\007num_txs\030\002 \001(\004\022\025\n\rnum_txs_delta\030\003 \001" +
+      "(\004\022#\n\007balance\030\004 \001(\0132\022.forge_abi.BigUint\022" +
+      ")\n\rbalance_delta\030\005 \001(\0132\022.forge_abi.BigUi" +
+      "nt\"\346\001\n\rDelegateState\022\017\n\007address\030\001 \001(\t\022.\n" +
+      "\003ops\030\002 \003(\0132!.forge_abi.DelegateState.Ops",
+      "Entry\022(\n\007context\030\016 \001(\0132\027.forge_abi.State" +
+      "Context\022\"\n\004data\030\017 \001(\0132\024.google.protobuf." +
+      "Any\032F\n\010OpsEntry\022\013\n\003key\030\001 \001(\t\022)\n\005value\030\002 " +
+      "\001(\0132\032.forge_abi.DelegateOpState:\0028\001b\006pro" +
+      "to3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -20193,7 +20193,7 @@ public final class State {
           com.google.protobuf.TimestampProto.getDescriptor(),
           forge_abi.Enum.getDescriptor(),
           forge_abi.Type.getDescriptor(),
-          forge_abi.DeployProtocol.getDescriptor(),
+          forge_abi.Tx.getDescriptor(),
         }, assigner);
     internal_static_forge_abi_AccountState_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -20301,7 +20301,7 @@ public final class State {
     com.google.protobuf.TimestampProto.getDescriptor();
     forge_abi.Enum.getDescriptor();
     forge_abi.Type.getDescriptor();
-    forge_abi.DeployProtocol.getDescriptor();
+    forge_abi.Tx.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

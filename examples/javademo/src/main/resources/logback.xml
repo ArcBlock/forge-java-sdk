@@ -10,10 +10,10 @@ configuration 子节点为 appender、logger、root
 
             -->
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
-    <!--用于区分不同应用程序的记录-->
-    <contextName>edu-cloud</contextName>
-    <!--日志文件所在目录，如果是tomcat，如下写法日志文件会在则为${TOMCAT_HOME}/bin/logs/目录下-->
-    <property name="LOG_HOME" value="logs"/>
+<!--    &lt;!&ndash;用于区分不同应用程序的记录&ndash;&gt;-->
+<!--    <contextName>edu-cloud</contextName>-->
+<!--    &lt;!&ndash;日志文件所在目录，如果是tomcat，如下写法日志文件会在则为${TOMCAT_HOME}/bin/logs/目录下&ndash;&gt;-->
+    <property name="LOG_HOME" value="logs"/>-->
 
     <!--控制台-->
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">

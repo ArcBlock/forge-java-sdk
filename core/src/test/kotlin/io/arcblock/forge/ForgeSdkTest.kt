@@ -6,9 +6,7 @@ import forge_abi.Enum
 import forge_abi.Rpc
 import io.arcblock.forge.did.DIDGenerator
 import io.arcblock.forge.did.WalletInfo
-import io.arcblock.forge.extension.decodeB16
-import io.arcblock.forge.extension.encodeB58
-import io.arcblock.forge.extension.unSign
+import io.arcblock.forge.extension.*
 import io.grpc.stub.StreamObserver
 import org.junit.Assert
 import org.junit.Before
@@ -54,10 +52,14 @@ class ForgeSdkTest {
 
   @Test
   fun testTranser() {
-    for (x in 0..30){
-      val response = forge.transfer(alice, bob.address, BigInteger.ONE)
-      Assert.assertEquals(" send multi sig transaction:", Enum.StatusCode.ok, response.code)
-    }
+
+    val state = forge.getForgeState().state
+    println("State: $state")
+//
+//    for (x in 0..30){
+//      val response = forge.transfer(alice, bob.address, BigInteger.ONE)
+//      Assert.assertEquals(" send multi sig transaction:", Enum.StatusCode.ok, response.code)
+//    }
   }
 
 
@@ -260,6 +262,12 @@ class ForgeSdkTest {
     }
     return balance
 
+  }
+
+  @Test
+  fun sendTxTest(){
+    val tx = TransactionFactory.unsignTransfer("default",alice.address, alice.pk, bob.address, BigIntegerExt.createWithDecimal(5,18)).signTx(alice.sk)
+    println("tx: ${tx.toByteArray().encodeB64Url()}")
   }
 
 

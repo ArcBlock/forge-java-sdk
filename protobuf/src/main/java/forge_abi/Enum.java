@@ -285,6 +285,22 @@ public final class Enum {
      */
     invalid_subscribe(69),
     /**
+     * <code>invalid_did_type = 70;</code>
+     */
+    invalid_did_type(70),
+    /**
+     * <code>invalid_candidate_state = 71;</code>
+     */
+    invalid_candidate_state(71),
+    /**
+     * <code>validator_not_found = 72;</code>
+     */
+    validator_not_found(72),
+    /**
+     * <code>validator_not_changed = 73;</code>
+     */
+    validator_not_changed(73),
+    /**
      * <code>forbidden = 403;</code>
      */
     forbidden(403),
@@ -565,6 +581,22 @@ public final class Enum {
      */
     public static final int invalid_subscribe_VALUE = 69;
     /**
+     * <code>invalid_did_type = 70;</code>
+     */
+    public static final int invalid_did_type_VALUE = 70;
+    /**
+     * <code>invalid_candidate_state = 71;</code>
+     */
+    public static final int invalid_candidate_state_VALUE = 71;
+    /**
+     * <code>validator_not_found = 72;</code>
+     */
+    public static final int validator_not_found_VALUE = 72;
+    /**
+     * <code>validator_not_changed = 73;</code>
+     */
+    public static final int validator_not_changed_VALUE = 73;
+    /**
      * <code>forbidden = 403;</code>
      */
     public static final int forbidden_VALUE = 403;
@@ -659,6 +691,10 @@ public final class Enum {
         case 67: return invalid_chain_type;
         case 68: return invalid_time;
         case 69: return invalid_subscribe;
+        case 70: return invalid_did_type;
+        case 71: return invalid_candidate_state;
+        case 72: return validator_not_found;
+        case 73: return validator_not_changed;
         case 403: return forbidden;
         case 500: return internal;
         case 504: return timeout;
@@ -2014,7 +2050,7 @@ public final class Enum {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nenum.proto\022\tforge_abi*\341\013\n\nStatusCode\022\006" +
+      "\n\nenum.proto\022\tforge_abi*\310\014\n\nStatusCode\022\006" +
       "\n\002ok\020\000\022\021\n\rinvalid_nonce\020\001\022\025\n\021invalid_sig" +
       "nature\020\002\022\030\n\024invalid_sender_state\020\003\022\032\n\026in" +
       "valid_receiver_state\020\004\022\025\n\021insufficient_d" +
@@ -2051,34 +2087,37 @@ public final class Enum {
       "ms_full\020@\022\031\n\025withdraw_item_missing\020A\022\027\n\023" +
       "invalid_withdraw_tx\020B\022\026\n\022invalid_chain_t" +
       "ype\020C\022\020\n\014invalid_time\020D\022\025\n\021invalid_subsc" +
-      "ribe\020E\022\016\n\tforbidden\020\223\003\022\r\n\010internal\020\364\003\022\014\n" +
-      "\007timeout\020\370\003*%\n\007KeyType\022\013\n\007ed25519\020\000\022\r\n\ts" +
-      "ecp256k1\020\001*f\n\010HashType\022\n\n\006keccak\020\000\022\010\n\004sh",
-      "a3\020\001\022\010\n\004sha2\020\002\022\016\n\nkeccak_384\020\006\022\014\n\010sha3_3" +
-      "84\020\007\022\016\n\nkeccak_512\020\r\022\014\n\010sha3_512\020\016*&\n\014En" +
-      "codingType\022\n\n\006base16\020\000\022\n\n\006base58\020\001*\330\001\n\010R" +
-      "oleType\022\020\n\014role_account\020\000\022\r\n\trole_node\020\001" +
-      "\022\017\n\013role_device\020\002\022\024\n\020role_application\020\003\022" +
-      "\027\n\023role_smart_contract\020\004\022\014\n\010role_bot\020\005\022\016" +
-      "\n\nrole_asset\020\006\022\016\n\nrole_stake\020\007\022\022\n\016role_v" +
-      "alidator\020\010\022\016\n\nrole_group\020\t\022\013\n\007role_tx\020\n\022" +
-      "\014\n\010role_any\020?*\256\001\n\013UpgradeType\022\016\n\nconfig_" +
-      "app\020\000\022\020\n\014config_forge\020\001\022\016\n\nconfig_dfs\020\002\022",
-      "\024\n\020config_consensus\020\003\022\016\n\nconfig_p2p\020\004\022\013\n" +
-      "\007exe_app\020\n\022\r\n\texe_forge\020\013\022\013\n\007exe_dfs\020\014\022\021" +
-      "\n\rexe_consensus\020\r\022\013\n\007exe_p2p\020\016*\352\001\n\rUpgra" +
-      "deAction\022\n\n\006verify\020\000\022\n\n\006backup\020\001\022\013\n\007repl" +
-      "ace\020\002\022\017\n\013restart_app\020\n\022\017\n\013restart_dfs\020\013\022" +
-      "\025\n\021restart_consensus\020\014\022\017\n\013restart_p2p\020\r\022" +
-      "\021\n\rrestart_forge\020\016\022\024\n\020rollback_if_fail\020\036" +
-      "\022\027\n\023restart_all_if_fail\020\037\022\021\n\rcrash_if_fa" +
-      "il\020!\022\025\n\021drop_address_book\0202*d\n\tStateType" +
-      "\022\021\n\rstate_account\020\000\022\017\n\013state_asset\020\001\022\021\n\r",
-      "state_channel\020\002\022\017\n\013state_forge\020\003\022\017\n\013stat" +
-      "e_stake\020\004*M\n\tStakeType\022\016\n\nstake_node\020\000\022\016" +
-      "\n\nstake_user\020\001\022\017\n\013stake_asset\020\002\022\017\n\013stake" +
-      "_chain\020\003*9\n\016ProtocolStatus\022\013\n\007running\020\000\022" +
-      "\n\n\006paused\020\001\022\016\n\nterminated\020\002b\006proto3"
+      "ribe\020E\022\024\n\020invalid_did_type\020F\022\033\n\027invalid_" +
+      "candidate_state\020G\022\027\n\023validator_not_found" +
+      "\020H\022\031\n\025validator_not_changed\020I\022\016\n\tforbidd",
+      "en\020\223\003\022\r\n\010internal\020\364\003\022\014\n\007timeout\020\370\003*%\n\007Ke" +
+      "yType\022\013\n\007ed25519\020\000\022\r\n\tsecp256k1\020\001*f\n\010Has" +
+      "hType\022\n\n\006keccak\020\000\022\010\n\004sha3\020\001\022\010\n\004sha2\020\002\022\016\n" +
+      "\nkeccak_384\020\006\022\014\n\010sha3_384\020\007\022\016\n\nkeccak_51" +
+      "2\020\r\022\014\n\010sha3_512\020\016*&\n\014EncodingType\022\n\n\006bas" +
+      "e16\020\000\022\n\n\006base58\020\001*\330\001\n\010RoleType\022\020\n\014role_a" +
+      "ccount\020\000\022\r\n\trole_node\020\001\022\017\n\013role_device\020\002" +
+      "\022\024\n\020role_application\020\003\022\027\n\023role_smart_con" +
+      "tract\020\004\022\014\n\010role_bot\020\005\022\016\n\nrole_asset\020\006\022\016\n" +
+      "\nrole_stake\020\007\022\022\n\016role_validator\020\010\022\016\n\nrol",
+      "e_group\020\t\022\013\n\007role_tx\020\n\022\014\n\010role_any\020?*\256\001\n" +
+      "\013UpgradeType\022\016\n\nconfig_app\020\000\022\020\n\014config_f" +
+      "orge\020\001\022\016\n\nconfig_dfs\020\002\022\024\n\020config_consens" +
+      "us\020\003\022\016\n\nconfig_p2p\020\004\022\013\n\007exe_app\020\n\022\r\n\texe" +
+      "_forge\020\013\022\013\n\007exe_dfs\020\014\022\021\n\rexe_consensus\020\r" +
+      "\022\013\n\007exe_p2p\020\016*\352\001\n\rUpgradeAction\022\n\n\006verif" +
+      "y\020\000\022\n\n\006backup\020\001\022\013\n\007replace\020\002\022\017\n\013restart_" +
+      "app\020\n\022\017\n\013restart_dfs\020\013\022\025\n\021restart_consen" +
+      "sus\020\014\022\017\n\013restart_p2p\020\r\022\021\n\rrestart_forge\020" +
+      "\016\022\024\n\020rollback_if_fail\020\036\022\027\n\023restart_all_i",
+      "f_fail\020\037\022\021\n\rcrash_if_fail\020!\022\025\n\021drop_addr" +
+      "ess_book\0202*d\n\tStateType\022\021\n\rstate_account" +
+      "\020\000\022\017\n\013state_asset\020\001\022\021\n\rstate_channel\020\002\022\017" +
+      "\n\013state_forge\020\003\022\017\n\013state_stake\020\004*M\n\tStak" +
+      "eType\022\016\n\nstake_node\020\000\022\016\n\nstake_user\020\001\022\017\n" +
+      "\013stake_asset\020\002\022\017\n\013stake_chain\020\003*9\n\016Proto" +
+      "colStatus\022\013\n\007running\020\000\022\n\n\006paused\020\001\022\016\n\nte" +
+      "rminated\020\002b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

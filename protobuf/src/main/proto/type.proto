@@ -163,6 +163,7 @@ message TransactionInfo {
 message DeclareConfig {
   bool restricted = 1;
   uint32 hierarchy = 2;
+  BigUint cost = 3;
 }
 
 message DelegateConfig {
@@ -397,7 +398,7 @@ message UpgradeInfo {
   string version = 2;
 }
 
-message WithdrawItem{
+message WithdrawItem {
   string hash = 1;
   BigUint value = 2;
 }
@@ -417,9 +418,10 @@ message TokenSwapConfig {
 }
 
 message Evidence {
-  string hash = 1;        // tx hash from a foreign chain
-  string chain_type = 2;  // type of the chain, currently only "eth"
-  string chain_id = 3;    // chain id of the chain. Could be testnet or mainnet.
-  bytes original_tx = 4;  // the binary for the original tx
-  string receiver_address = 5; // the address of the receiver (can only be controlled account)
+  string hash = 1;       // tx hash from a foreign chain
+  string chain_type = 2; // type of the chain, currently only "eth"
+  string chain_id = 3;   // chain id of the chain. Could be testnet or mainnet.
+  bytes original_tx = 4; // the binary for the original tx
+  string receiver_address =
+      5; // the address of the receiver (can only be controlled account)
 }

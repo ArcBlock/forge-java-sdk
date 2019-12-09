@@ -36,7 +36,7 @@ plugins {
 }
 //apply(plugin = "maven-publish")
 group = "io.arcblock.forge"
-version = "1.0.2"
+version = project.file("../version").readLines().first()
 
 
 tasks.withType<Javadoc>{
@@ -46,15 +46,20 @@ tasks.withType<Javadoc>{
 
 repositories {
   mavenCentral()
-  maven(url = "https://dl.bintray.com/americanexpress/maven/")
+  //maven(url = "https://dl.bintray.com/americanexpress/maven/")
 }
 
 dependencies {
+  compile(project(":protobuf"))
+  compile(files("../libs/nodes-0.5.0.jar"))
   implementation(kotlin("stdlib-jdk8"))
   implementation("com.google.code.gson:gson:2.3.1")
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.1")
-  compile("io.aexp.nodes.graphql:nodes:0.5.0")
+  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.10.1")
+
+//  compile("io.aexp.nodes.graphql:nodes:0.5.0")
   testCompile(group = "junit", name = "junit", version = "4.12")
+  testCompile(project(":core"))
 }
 
 tasks.withType<KotlinCompile> {
@@ -111,9 +116,9 @@ open class GenerateGQLQuery : DefaultTask() {
     val fileBuilder = FileSpec.builder("${project.group}.graphql", "GraphQLEntities")
       .addImport("io.aexp.nodes.graphql.annotations", "GraphQLArgument")
     json.getAsJsonArray("types")
-      .find { it.asJsonObject["name"].asString == "RootQueryType" }
-      ?.apply {
-        generateQuery(this.asJsonObject["fields"].asJsonArray)
+      .filter { it.asJsonObject["name"].asString in listOf("RootQueryType","RootMutationType") }
+      ?.forEach{
+        generateQuery(it.asJsonObject["fields"].asJsonArray)
       }
     json.getAsJsonArray("types")
       .filter {

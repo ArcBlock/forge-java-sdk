@@ -1,3 +1,7 @@
+## 1.0.4 (December 09, 2019)
+  - add mutation support for gql
+  
+
 ## 1.0.3 (December 05, 2019)
  - add graphQL interface support
  - add a pure Java and Maven example
