@@ -1,7 +1,9 @@
 package io.arcblock.forge.graphql
 
+import io.arcblock.forge.TransactionFactory
+import io.arcblock.forge.did.DIDGenerator
+import io.arcblock.forge.extension.signTx
 import org.junit.Test
-import org.junit.Ignore
 
 
 /**
@@ -11,7 +13,7 @@ import org.junit.Ignore
  * Edited Time  :
  * Description  :
  */
-@Ignore
+
 class GraphQLClientTest {
   val gql = GraphQLClient("http://localhost:8212/api")
   @Test
@@ -221,5 +223,28 @@ class GraphQLClientTest {
     println("response:$response")
     assert(response.errors.isNullOrEmpty())
 
+  }
+
+  @Test
+  fun testCustomQuery(){
+    val x = gql.customQuery("{\n" +
+      "  getBlocks(heightFilter: {from: \"1\", to: \"2\"}) {\n" +
+      "    code\n" +
+      "    blocks {\n" +
+      "      appHash\n" +
+      "      consensusHash\n" +
+      "      numTxs\n" +
+      "    }\n" +
+      "  }\n" +
+      "}")
+    println("response:${x.response.toPrettyString()}")
+  }
+
+  @Test
+  fun testSendTx(){
+    val wallet = DIDGenerator.randomWallet()
+    val tx = TransactionFactory.unsignPoke("default",wallet.address, wallet.pk).signTx(wallet.sk)
+    val rsp = gql.sendTx(tx)
+    println("rsp:$rsp")
   }
 }

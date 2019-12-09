@@ -1507,12 +1507,11 @@ public final class SetupSwap {
   static {
     java.lang.String[] descriptorData = {
       "\n\020setup_swap.proto\022\tforge_abi\032\031google/pr" +
-      "otobuf/any.proto\032\ntype.proto\032\013state.prot" +
-      "o\"\232\001\n\013SetupSwapTx\022!\n\005value\030\001 \001(\0132\022.forge" +
-      "_abi.BigUint\022\016\n\006assets\030\002 \003(\t\022\020\n\010receiver" +
-      "\030\003 \001(\t\022\020\n\010hashlock\030\004 \001(\014\022\020\n\010locktime\030\005 \001" +
-      "(\r\022\"\n\004data\030\017 \001(\0132\024.google.protobuf.Anyb\006" +
-      "proto3"
+      "otobuf/any.proto\032\ntype.proto\"\232\001\n\013SetupSw" +
+      "apTx\022!\n\005value\030\001 \001(\0132\022.forge_abi.BigUint\022" +
+      "\016\n\006assets\030\002 \003(\t\022\020\n\010receiver\030\003 \001(\t\022\020\n\010has" +
+      "hlock\030\004 \001(\014\022\020\n\010locktime\030\005 \001(\r\022\"\n\004data\030\017 " +
+      "\001(\0132\024.google.protobuf.Anyb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1527,7 +1526,6 @@ public final class SetupSwap {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.AnyProto.getDescriptor(),
           forge_abi.Type.getDescriptor(),
-          forge_abi.State.getDescriptor(),
         }, assigner);
     internal_static_forge_abi_SetupSwapTx_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -1537,7 +1535,6 @@ public final class SetupSwap {
         new java.lang.String[] { "Value", "Assets", "Receiver", "Hashlock", "Locktime", "Data", });
     com.google.protobuf.AnyProto.getDescriptor();
     forge_abi.Type.getDescriptor();
-    forge_abi.State.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

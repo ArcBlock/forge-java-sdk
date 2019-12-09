@@ -1,0 +1,84 @@
+buildscript {
+  repositories {
+    mavenCentral()
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.10'
+  }
+}
+
+plugins {
+  id 'java'
+}
+apply plugin: 'maven-publish'
+apply plugin: 'com.google.protobuf'
+
+
+group 'io.arcblock.forge'
+version = project.file("../version").readLines().first()
+
+sourceCompatibility = 1.8
+
+repositories {
+  mavenCentral()
+}
+
+
+protobuf {
+  protoc {
+    artifact = "com.google.protobuf:protoc:3.2.0"
+  }
+  plugins {
+    grpc {
+      artifact = 'io.grpc:protoc-gen-grpc-java:1.4.0'
+    }
+  }
+  generatedFilesBaseDir = "src"
+
+  generateProtoTasks {
+    all()*.plugins {
+      grpc {
+        outputSubDir = "java"
+      }
+    }
+  }
+
+}
+
+
+dependencies {
+  compile 'io.grpc:grpc-netty:1.4.0'
+  compile 'io.grpc:grpc-protobuf:1.4.0'
+  compile 'io.grpc:grpc-stub:1.4.0'
+  compile 'com.google.protobuf:protobuf-java:3.6.1'
+  testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+//task
+
+publishing {
+  repositories {
+    maven {
+      def releaseUrl = "s3://android-docs.arcblock.io.s3.amazonaws.com/release"
+      def snapshotUrl = "s3://android-docs.arcblock.io.s3.amazonaws.com/snapshot"
+      url releaseUrl
+
+      credentials(AwsCredentials) {
+        accessKey project.hasProperty("AWS_S3_ACCESSKEY") ? AWS_S3_ACCESSKEY : System.getenv("AWS_S3_ACCESSKEY")
+        secretKey project.hasProperty("AWS_S3_SECRETKEY") ? AWS_S3_SECRETKEY : System.getenv("AWS_S3_SECRETKEY")
+      }
+    }
+  }
+
+  publications {
+    mavenJava(MavenPublication) {
+      groupId rootProject.group
+      artifactId 'protobuf'
+      version rootProject.version
+      from components.java
+    }
+  }
+
+}
+

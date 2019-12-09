@@ -180,6 +180,7 @@ object DIDGenerator {
   /**
    * random wallet
    */
+  @JvmOverloads
   fun randomWallet(walletType: Type.WalletType? = Type.WalletType.newBuilder().setHash(Enum.HashType.sha3).setPk(Enum.KeyType.ed25519).setRole(Enum.RoleType
     .role_account).build()):
     WalletInfo {
