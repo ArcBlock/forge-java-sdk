@@ -7,17 +7,6 @@
     <artifactId>java-demo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <repositories>
-        <repository>
-            <id>forge-release</id>
-            <name>Forge-java</name>
-            <url>http://android-docs.arcblock.io/release</url>
-        </repository>
-        <repository>
-            <id>jsoftlocal-mvn-repo</id>
-            <url>file:~/.m2/repository</url>
-        </repository>
-    </repositories>
     <dependencies>
         <dependency>
             <groupId>io.arcblock.forge</groupId>
@@ -29,11 +18,6 @@
             <artifactId>did</artifactId>
             <version>1.0.4</version>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>io.aexp.nodes.graphql</groupId>-->
-        <!--            <artifactId>nodes</artifactId>-->
-        <!--            <version>0.5.0</version>-->
-        <!--        </dependency>-->
         <dependency>
             <groupId>io.arcblock.forge</groupId>
             <artifactId>graphql</artifactId>

@@ -22,6 +22,7 @@ buildscript {
     classpath("com.github.jengelman.gradle.plugins:shadow:5.1.0")
     classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.21")
     classpath("io.aexp.nodes.graphql:nodes:0.5.0")
+    classpath("com.fasterxml.jackson.core:jackson-databind:2.10.1")
     classpath("com.squareup.okhttp3:okhttp:4.0.1")
     classpath("com.squareup:kotlinpoet:1.4.4")
     classpath("com.google.code.gson:gson:2.3.1")
@@ -31,6 +32,7 @@ buildscript {
 plugins {
   kotlin("jvm") version "1.3.31"
   `maven-publish`
+  signing
 //  id("org.jetbrains.dokka") version ("0.10.0")
   id("com.github.johnrengelman.shadow") version ("5.1.0")
 }
@@ -46,14 +48,14 @@ tasks.withType<Javadoc>{
 
 repositories {
   mavenCentral()
-  //maven(url = "https://dl.bintray.com/americanexpress/maven/")
 }
 
 dependencies {
   compile(project(":protobuf"))
-  compile(files("../libs/nodes-0.5.0.jar"))
+  //compile(files("../libs/nodes-0.5.0.jar"))
   implementation(kotlin("stdlib-jdk8"))
   implementation("com.google.code.gson:gson:2.3.1")
+
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.1")
   implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.10.1")
 
@@ -74,35 +76,93 @@ tasks.withType<ShadowJar> {
     .first()
 }
 
-publishing {
-  repositories {
-    maven {
-      val releaseUrl = "s3://android-docs.arcblock.io.s3.amazonaws.com/release"
-      val snapshotUrl = "s3://android-docs.arcblock.io.s3.amazonaws.com/snapshot"
-      this.setUrl(releaseUrl)
-      this.credentials(AwsCredentials::class.java, Action<AwsCredentials> {
-        this.accessKey = if (project.hasProperty("AWS_S3_ACCESSKEY")) project.properties["AWS_S3_ACCESSKEY"].toString() else System.getenv("AWS_S3_ACCESSKEY")
-        this.secretKey = if (project.hasProperty("AWS_S3_SECRETKEY")) project.properties["AWS_S3_SECRETKEY"].toString() else System.getenv("AWS_S3_SECRETKEY")
-      })
-    }
-  }
-  publications {
-    create<MavenPublication>("mavenJava") {
-      this.groupId = project.group.toString()
-      this.artifactId = "graphql"
-      this.version = project.version.toString()
-      this.from(components.findByName("java"))
-    }
-  }
+val javadocJar by tasks.registering(Jar::class) {
+  archiveClassifier.set("javadoc")
+  from(tasks.javadoc)
+}
+
+val sourcesJar by tasks.registering(Jar::class) {
+  archiveClassifier.set("sources")
+  from(sourceSets["main"].allSource)
 
 }
 
+artifacts {
+
+  this.add("archives",sourcesJar.get())
+
+//  archives sourceJar
+//  archives javadocJar
+}
+
+val mavenPublication = publishing.publications.create<MavenPublication>("mavenJava") {
+
+  artifact(javadocJar.get())
+  artifact(sourcesJar.get())
+
+  pom {
+    name.set(project.group.toString())
+    description.set("forge sdk for java development")
+    url.set("https://github.com/Arcblock/Forge-java-sdk")
+    licenses {
+      license {
+        name.set("The Apache License, Version 2.0")
+        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+      }
+    }
+    developers {
+      developer {
+        name.set("Arcblock")
+        email.set("shan@arcblock.io")
+      }
+    }
+    scm {
+      connection.set("scm:git:git://github.com/ArcBlock/forge-java-sdk.git")
+      developerConnection.set("scm:git:ssh://git@github.com:ArcBlock/forge-java-sdk.git")
+      url.set("https://github.com/ArcBlock/forge-java-sdk")
+    }
+  }
+  this.groupId = project.group.toString()
+  this.artifactId = "graphql"
+  this.version = project.version.toString()
+  this.from(components.findByName("java"))
+//  pom.withXml{
+//    //val pomFile = file("${project.buildDir}/generated-pom.xml")
+////        pomFile.
+//    ////writeTo(pomFile)
+//    val pomAscFile = signing.sign(pomFile).signatureFiles.first()
+//    artifact(pomAscFile) {
+//      this.classifier = null
+//      this.extension = "pom.asc"
+//    }
+//  }
 
 
+}
+
+val sonatypeRepository = publishing.repositories.maven {
+  name = "sonatype"
+  url = if (isSnapshot) {
+    uri("https://oss.sonatype.org/content/repositories/snapshots/")
+  } else {
+    uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+  }
+  credentials {
+    username = (project.findProperty("sonatypeUsername") as? String)?:""
+    password = (project.findProperty("sonatypePassword") as? String)?:""
+  }
+}
+
+signing {
+  sign(mavenPublication)
+}
+tasks.withType<PublishToMavenRepository>().configureEach {
+  onlyIf { if (repository == sonatypeRepository) publication == mavenPublication else true }
+}
 
 
-
-
+inline val Project.isSnapshot
+  get() = version.toString().endsWith("-SNAPSHOT")
 
 /**
  * auto generate gql data structure
@@ -141,7 +201,7 @@ open class GenerateGQLQuery : DefaultTask() {
     val bodyStr = "query IntrospectionQuery {__schema { queryType { name } mutationType { name } subscriptionType { name } types { ...FullType } directives {" +
       " name description locations args { ...InputValue } } } } fragment FullType on __Type { kind name description fields(includeDeprecated: true) { name description args { ...InputValue } type { ...TypeRef } isDeprecated deprecationReason } inputFields { ...InputValue } interfaces { ...TypeRef } enumValues(includeDeprecated: true) { name description isDeprecated deprecationReason } possibleTypes { ...TypeRef } } fragment InputValue on __InputValue { name description type { ...TypeRef } defaultValue } fragment TypeRef on __Type { kind name ofType { kind name ofType { kind name ofType { kind name ofType { kind name ofType { kind name ofType { kind name ofType { kind name } } } } } } } } "
     val schemaJson = OkHttpClient().newCall(Request.Builder()
-      .url("http://localhost:8212/api")
+      .url("http://localhost:8210/api")
       .header("Content-Type", "text/plain")
       .post(bodyStr.toRequestBody())
       .build())
@@ -284,7 +344,8 @@ open class GenerateGQLQuery : DefaultTask() {
     }
 
     return when (name) {
-      in listOf("String", "DateTime", "StatusCode", "Json") -> STRING
+      in listOf("String", "DateTime", "StatusCode") -> STRING
+      in listOf("Json") -> ClassName("com.fasterxml.jackson.databind","JsonNode")
 //      in listOf("Int","EncodingType","HashType","KeyType","RoleType") -> INT
       else -> ClassName("${project.group}.graphql", name)
     }

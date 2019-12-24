@@ -21,6 +21,7 @@ plugins {
 
 
 group 'io.arcblock.forge'
+version project.file("../version").readLines().first()
 compileKotlin {
   kotlinOptions.jvmTarget = "1.8"
 }
@@ -35,7 +36,7 @@ compileTestKotlin {
 apply plugin: 'jacoco'
 apply plugin: 'maven-publish'
 apply plugin: 'com.google.protobuf'
-
+apply plugin: 'signing'
 ext { springBootVersion = '2.1.4.RELEASE' }
 
 
@@ -71,37 +72,122 @@ javadoc {
 repositories {
   jcenter()
   mavenCentral()
+  mavenLocal()
 }
 
 dependencies {
   api project(':core')
+  //implementation "io.arcblock.forge:core:$project.version"
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
   testCompile group: 'junit', name: 'junit', version: '4.12'
 }
-
+artifacts {
+  archives jar
+//  archives sourceJar
+//  archives javadocJar
+}
+signing {
+  sign configurations.archives
+}
 publishing {
   repositories {
     maven {
-      def releaseUrl = "s3://android-docs.arcblock.io.s3.amazonaws.com/release"
-      def snapshotUrl = "s3://android-docs.arcblock.io.s3.amazonaws.com/snapshot"
+      def releaseUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"//"s3://android-docs.arcblock.io.s3.amazonaws.com/release"
+      def snapshotUrl = "https://oss.sonatype.org/content/repositories/snapshots"
       url releaseUrl
-
-      credentials(AwsCredentials) {
-        accessKey project.hasProperty("AWS_S3_ACCESSKEY") ? AWS_S3_ACCESSKEY : System.getenv("AWS_S3_ACCESSKEY")
-        secretKey project.hasProperty("AWS_S3_SECRETKEY") ? AWS_S3_SECRETKEY : System.getenv("AWS_S3_SECRETKEY")
+      def un = (properties.hasProperty("sonatypeUsername"))?properties.get("sonatypeUsername").toString():""
+      def pw = (properties.hasProperty("sonatypePassword"))?properties.get("sonatypePassword").toString():""
+      credentials {
+        username un
+        password pw
       }
     }
+
   }
 
   publications {
     mavenJava(MavenPublication) {
+      customizePom(pom)
       groupId rootProject.group
       artifactId 'did'
       version rootProject.version
       from components.java
+      // create the sign pom artifact
+      pom.withXml {
+        def pomFile = file("${project.buildDir}/generated-pom.xml")
+        writeTo(pomFile)
+        def pomAscFile = signing.sign(pomFile).signatureFiles[0]
+        artifact(pomAscFile) {
+          classifier = null
+          extension = 'pom.asc'
+        }
+      }
+// create the signed artifacts
+      project.tasks.signArchives.signatureFiles.each {
+        artifact(it) {
+          def matcher = it.file =~ /-(sources|javadoc)\.jar\.asc$/
+          if (matcher.find()) {
+            classifier = matcher.group(1)
+          } else {
+            classifier = null
+          }
+          extension = 'jar.asc'
+        }
+      }
+
     }
   }
+}
+def customizePom(pom) {
+  pom.withXml {
+    def root = asNode()
+    // add all items necessary for maven central publication
+    root.children().last() + {
+      resolveStrategy = Closure.DELEGATE_FIRST
 
+      description 'Serialize and Deserialize Json-LD into Java entities'
+      name 'Forge Java SDK '
+      url 'https://github.com/Arcblock/Forge-java-sdk'
+      organization {
+        name 'Arcblock.io'
+        url 'https://github.com/Arcblock'
+      }
+      issueManagement {
+        system 'GitHub'
+        url 'https://github.com/Arcblock/Forge-java-sdk/issues'
+      }
+      licenses {
+        license {
+          name 'Apache License 2.0'
+          url 'https://github.com/ArcBlock/forge-java-sdk/blob/master/LICENSE'
+          distribution 'repo'
+        }
+      }
+      scm {
+        url 'https://github.com/ArcBlock/forge-java-sdk'
+        connection 'scm:git:git://github.com/ArcBlock/forge-java-sdk.git'
+        developerConnection 'scm:git:ssh://git@github.com:ArcBlock/forge-java-sdk.git'
+      }
+      developers {
+        developer {
+          name 'Arcblock'
+        }
+      }
+    }
+  }
+}
+
+
+model {
+  tasks.generatePomFileForMavenJavaPublication {
+    destination = file("$buildDir/generated-pom.xml")
+  }
+  tasks.publishMavenJavaPublicationToMavenLocal {
+    dependsOn project.tasks.signArchives
+  }
+  tasks.publishMavenJavaPublicationToMavenRepository {
+    dependsOn project.tasks.signArchives
+  }
 }
 
 

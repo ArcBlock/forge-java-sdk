@@ -1,3 +1,7 @@
+## 1.0.5 (December 24, 2019)
+  - fix bug: gql cache remove
+  - change itx type from string to json
+
 ## 1.0.4 (December 09, 2019)
   - add mutation support for gql
   

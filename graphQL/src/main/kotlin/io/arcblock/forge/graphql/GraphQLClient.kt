@@ -20,14 +20,12 @@ import java.util.*
 
 class GraphQLClient(val url: String) {
   private val gqlTemp = GraphQLTemplate(MF())
-  private var queryBuilder: GraphQLRequestEntity.RequestBuilder = GraphQLRequestEntity.Builder()
-    .url(url)
 
   /**
    * query account state
    */
   fun getAccountState(address: String): GraphQLResponseEntity<ResponseGetAccountState> {
-    return gqlTemp.query(queryBuilder.request(ResponseGetAccountState::class.java)
+    return gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetAccountState::class.java)
       .arguments(Arguments("getAccountState", Argument("address", address)))
       .build(), ResponseGetAccountState::class.java)
   }
@@ -36,7 +34,7 @@ class GraphQLClient(val url: String) {
    * query asset state
    */
   fun getAssetState(address: String): GraphQLResponseEntity<ResponseGetAssetState> {
-    return gqlTemp.query(queryBuilder.request(ResponseGetAssetState::class.java)
+    return gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetAssetState::class.java)
       .arguments(Arguments("getAssetState", Argument("address", address)))
       .build(), ResponseGetAssetState::class.java)
   }
@@ -45,7 +43,7 @@ class GraphQLClient(val url: String) {
    * get block info at height
    */
   fun getBlock(height: Long): GraphQLResponseEntity<ResponseGetBlock> {
-    return gqlTemp.query(queryBuilder.request(ResponseGetBlock::class.java)
+    return gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetBlock::class.java)
       .arguments(Arguments("getBlock", Argument("height", height.toString()))).build()
       , ResponseGetBlock::class.java)
   }
@@ -54,7 +52,7 @@ class GraphQLClient(val url: String) {
    * get blocks info from one height to another height
    */
   fun getBlocks(heightFilter: RangeFilter): GraphQLResponseEntity<ResponseGetBlocks> {
-    return gqlTemp.query(queryBuilder.request(ResponseGetBlocks::class.java)
+    return gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetBlocks::class.java)
       .arguments(Arguments("getBlocks", Argument("heightFilter", heightFilter))).build()
       , ResponseGetBlocks::class.java)
   }
@@ -63,13 +61,13 @@ class GraphQLClient(val url: String) {
    * get chain info
    */
   fun getChainInfo(): GraphQLResponseEntity<ResponseGetChainInfo> =
-    gqlTemp.query(queryBuilder.request(ResponseGetChainInfo::class.java).build(), ResponseGetChainInfo::class.java)
+    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetChainInfo::class.java).build(), ResponseGetChainInfo::class.java)
 
   /**
    * get chain and node config
    */
   fun getConfig(): GraphQLResponseEntity<ResponseGetConfig> =
-    gqlTemp.query(queryBuilder.request(ResponseGetConfig::class.java).build(), ResponseGetConfig::class.java)
+    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetConfig::class.java).build(), ResponseGetConfig::class.java)
 
   /**
    * get delegation info
@@ -79,7 +77,7 @@ class GraphQLClient(val url: String) {
   fun getDelegationState(address: String, height: Long?= null): GraphQLResponseEntity<ResponseGetDelegateState> {
     val args = Arguments("getDelegateState", Argument("address", address))
     height?.apply {args.arguments.toMutableList().add(Argument("height", height)) }
-    return gqlTemp.query(queryBuilder.request(ResponseGetDelegateState::class.java)
+    return gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetDelegateState::class.java)
       .arguments(args)
       .build(), ResponseGetDelegateState::class.java)
 
@@ -90,7 +88,7 @@ class GraphQLClient(val url: String) {
    * get forge state include: token info and protocol info
    */
   fun getForgeState(): GraphQLResponseEntity<ResponseGetForgeState> =
-    gqlTemp.query(queryBuilder.request(ResponseGetForgeState::class.java)
+    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetForgeState::class.java)
       //.arguments(Arguments("getForgeState", Argument("height", height)))
       .build(), ResponseGetForgeState::class.java)
 
@@ -98,14 +96,14 @@ class GraphQLClient(val url: String) {
    * get statistics info
    */
   fun getForgeStats(): GraphQLResponseEntity<GetForgeStats> =
-    gqlTemp.query(queryBuilder.request(GetForgeStats::class.java)
+    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(GetForgeStats::class.java)
       .build(), GetForgeStats::class.java)
 
   /**
    * get statistics info by day
    */
   fun getForgeStatsByDay(startDate: String, endDate: String): GraphQLResponseEntity<GetForgeStatsByDay> =
-    gqlTemp.query(queryBuilder.request(GetForgeStatsByDay::class.java)
+    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(GetForgeStatsByDay::class.java)
       .arguments(Arguments("getForgeStatsByDay", Argument("startDate", startDate), Argument("endDate", endDate)))
       .build(), GetForgeStatsByDay::class.java)
 
@@ -113,28 +111,28 @@ class GraphQLClient(val url: String) {
    * check node health info
    */
   fun getHealthStatus(): GraphQLResponseEntity<ResponseGetHealthStatus> =
-    gqlTemp.query(queryBuilder.request(ResponseGetHealthStatus::class.java)
+    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetHealthStatus::class.java)
       .build(), ResponseGetHealthStatus::class.java)
 
   /**
    * get chain net info, number of peers
    */
   fun getNetInfo(): GraphQLResponseEntity<ResponseGetNetInfo> =
-    gqlTemp.query(queryBuilder.request(ResponseGetNetInfo::class.java)
+    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetNetInfo::class.java)
       .build(), ResponseGetNetInfo::class.java)
 
   /**
    * get node info
    */
   fun getNodeInfo(): GraphQLResponseEntity<ResponseGetNodeInfo> =
-    gqlTemp.query(queryBuilder.request(ResponseGetNodeInfo::class.java)
+    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetNodeInfo::class.java)
       .build(), ResponseGetNodeInfo::class.java)
 
   /**
    * get protocal state
    */
   fun getProtocolState(address: String): GraphQLResponseEntity<ResponseGetProtocolState> =
-    gqlTemp.query(queryBuilder.request(ResponseGetProtocolState::class.java)
+    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetProtocolState::class.java)
       .arguments(Arguments("getProtocolState", Argument("address", address)))
       .build(), ResponseGetProtocolState::class.java)
 
@@ -142,19 +140,19 @@ class GraphQLClient(val url: String) {
    * get all protocols have deployed
    */
   fun getProtocols(): GraphQLResponseEntity<ResponseGetProtocols> =
-    gqlTemp.query(queryBuilder.request(ResponseGetProtocols::class.java)
+    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetProtocols::class.java)
       .build(), ResponseGetProtocols::class.java)
 
 
   fun getSimulatorStatus(): GraphQLResponseEntity<ResponseGetSimulatorStatus> =
-    gqlTemp.query(queryBuilder.request(ResponseGetSimulatorStatus::class.java)
+    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetSimulatorStatus::class.java)
       .build(), ResponseGetSimulatorStatus::class.java)
 
   /**
    * get account stake info
    */
   fun getStakeState(address: String): GraphQLResponseEntity<ResponseGetStakeState> =
-    gqlTemp.query(queryBuilder.request(ResponseGetStakeState::class.java)
+    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetStakeState::class.java)
       .arguments(Arguments("getStakeState", Argument("address", address)))
       .build(), ResponseGetStakeState::class.java)
 
@@ -163,7 +161,7 @@ class GraphQLClient(val url: String) {
    * @param address swap address , DIDGenerator.INSTANCE.toSwapAddress(hash)
    */
   fun getSwapState(address: String): GraphQLResponseEntity<ResponseGetSwapState> =
-    gqlTemp.query(queryBuilder.request(ResponseGetSwapState::class.java)
+    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetSwapState::class.java)
       .arguments(Arguments("getSwapState", Argument("address", address)))
       .build(), ResponseGetSwapState::class.java)
 
@@ -171,7 +169,7 @@ class GraphQLClient(val url: String) {
    * get a transaction info
    */
   fun getTx(hash: String): GraphQLResponseEntity<ResponseGetTx> =
-    gqlTemp.query(queryBuilder.request(ResponseGetTx::class.java)
+    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetTx::class.java)
       .arguments(Arguments("getTx", Argument("hash", hash)))
       .build(), ResponseGetTx::class.java)
 
@@ -182,7 +180,7 @@ class GraphQLClient(val url: String) {
   fun getUnconfirmedTxs(paging: PageInput?= null): GraphQLResponseEntity<ResponseGetUnconfirmedTxs>{
     val args = Arguments("getUnconfirmedTxs")
     paging?.apply {args.arguments.toMutableList().add(Argument("paging", paging)) }
-    return gqlTemp.query(queryBuilder.request(ResponseGetUnconfirmedTxs::class.java)
+    return gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetUnconfirmedTxs::class.java)
       .arguments(args)
       .build(), ResponseGetUnconfirmedTxs::class.java)
   }
@@ -191,7 +189,7 @@ class GraphQLClient(val url: String) {
    * get validators
    */
   fun getValidatorsInfo(): GraphQLResponseEntity<ResponseGetValidatorsInfo> =
-    gqlTemp.query(queryBuilder.request(ResponseGetValidatorsInfo::class.java)
+    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetValidatorsInfo::class.java)
       .build(), ResponseGetValidatorsInfo::class.java)
 
   /**
@@ -202,7 +200,7 @@ class GraphQLClient(val url: String) {
   fun listAssetTransactions(address: String, paging: PageInput? = null): GraphQLResponseEntity<ResponseListAssetTransactions> {
     val args = Arguments("listAssetTransactions", Argument("address", address))
     paging?.apply {args.arguments.toMutableList().add(Argument("paging", paging)) }
-    return gqlTemp.query(queryBuilder.request(ResponseListAssetTransactions::class.java)
+    return gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseListAssetTransactions::class.java)
       .arguments(args)
       .build(), ResponseListAssetTransactions::class.java)
   }
@@ -214,7 +212,7 @@ class GraphQLClient(val url: String) {
   fun listAssets(ownerAddress: String, paging: PageInput? = null): GraphQLResponseEntity<ResponseListAssets> {
     val args = Arguments("listAssets", Argument("ownerAddress", ownerAddress))
     paging?.apply {args.arguments.toMutableList().add(Argument("paging", paging)) }
-    return gqlTemp.query(queryBuilder.request(ResponseListAssets::class.java)
+    return gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseListAssets::class.java)
       .arguments(args)
       .build(), ResponseListAssets::class.java)
   }
@@ -232,7 +230,7 @@ class GraphQLClient(val url: String) {
     proposer?.apply {args.arguments.toMutableList().add(Argument("proposer", proposer)) }
     paging?.apply {args.arguments.toMutableList().add(Argument("paging", paging)) }
     timeFilter?.apply {args.arguments.toMutableList().add(Argument("timeFilter", timeFilter)) }
-    return gqlTemp.query(queryBuilder.request(ResponseListBlocks::class.java)
+    return gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseListBlocks::class.java)
       .arguments(args)
       .build(), ResponseListBlocks::class.java)
   }
@@ -244,7 +242,7 @@ class GraphQLClient(val url: String) {
   fun listStakes(addressFilter: AddressFilter, paging: PageInput? = null): GraphQLResponseEntity<ResponseListStakes> {
     val args = Arguments("listStakes", Argument("addressFilter", addressFilter))
     paging?.apply {args.arguments.toMutableList().add(Argument("paging", paging)) }
-    return gqlTemp.query(queryBuilder.request(ResponseListStakes::class.java)
+    return gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseListStakes::class.java)
       .arguments(args)
       .build(), ResponseListStakes::class.java)
   }
@@ -260,7 +258,7 @@ class GraphQLClient(val url: String) {
     paging?.apply {args.arguments.toMutableList().add(Argument("paging", paging)) }
     receiver?.apply {args.arguments.toMutableList().add(Argument("receiver", receiver)) }
     sender?.apply {args.arguments.toMutableList().add(Argument("sender", sender)) }
-    return gqlTemp.query(queryBuilder.request(ResponseListSwap::class.java)
+    return gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseListSwap::class.java)
       .arguments()
       .build(), ResponseListSwap::class.java)
 
@@ -273,7 +271,7 @@ class GraphQLClient(val url: String) {
   fun listTopAccounts(paging: PageInput? = null): GraphQLResponseEntity<ResponseListTopAccounts> {
     val args = Arguments("listTopAccounts")
     paging?.apply {args.arguments.toMutableList().add(Argument("paging", paging)) }
-    return gqlTemp.query(queryBuilder.request(ResponseListTopAccounts::class.java)
+    return gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseListTopAccounts::class.java)
       .arguments()
       .build(), ResponseListTopAccounts::class.java)
   }
@@ -291,15 +289,15 @@ class GraphQLClient(val url: String) {
     timeFilter?.apply { args.arguments.toMutableList().add(Argument("timeFilter", timeFilter)) }
     typeFilter?.apply { args.arguments.toMutableList().add(Argument("typeFilter", typeFilter)) }
     validityFilter?.apply { args.arguments.toMutableList().add(Argument("validityFilter", validityFilter)) }
-    return gqlTemp.query(queryBuilder.request(ResponseListTransactions::class.java)
+    return gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseListTransactions::class.java)
       .arguments(args)
       .build(), ResponseListTransactions::class.java)
   }
 
-  fun customQuery(query: String) = gqlTemp.query(queryBuilder.request(query).build(), JsonNode::class.java)
+  fun customQuery(query: String) = gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(query).build(), JsonNode::class.java)
   
   fun sendTx(tx: Type.Transaction)
-    = gqlTemp.mutate(queryBuilder.request("mutation {\n" +
+    = gqlTemp.mutate(GraphQLRequestEntity.Builder().url(url).request("mutation {\n" +
       "  sendTx(tx: \"${base64url(tx.toByteArray())}\") {\n" +
       "    code\n" +
       "    hash\n" +
@@ -442,7 +440,7 @@ class CustomDeserialize : StdScalarDeserializer<Transaction>(Transaction::class.
     val from = node.get("from")
       .asText()
     val itxJson = node.get("itxJson")
-      .toString()
+      
     val nonce = node.get("nonce")
       .asText()
     val pk = node.get("pk")
