@@ -22,6 +22,7 @@ buildscript {
     classpath("com.github.jengelman.gradle.plugins:shadow:5.1.0")
     classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.21")
     classpath("io.aexp.nodes.graphql:nodes:0.5.0")
+    classpath("com.fasterxml.jackson.core:jackson-databind:2.10.1")
     classpath("com.squareup.okhttp3:okhttp:4.0.1")
     classpath("com.squareup:kotlinpoet:1.4.4")
     classpath("com.google.code.gson:gson:2.3.1")
@@ -54,6 +55,7 @@ dependencies {
   //compile(files("../libs/nodes-0.5.0.jar"))
   implementation(kotlin("stdlib-jdk8"))
   implementation("com.google.code.gson:gson:2.3.1")
+
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.1")
   implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.10.1")
 
@@ -199,7 +201,7 @@ open class GenerateGQLQuery : DefaultTask() {
     val bodyStr = "query IntrospectionQuery {__schema { queryType { name } mutationType { name } subscriptionType { name } types { ...FullType } directives {" +
       " name description locations args { ...InputValue } } } } fragment FullType on __Type { kind name description fields(includeDeprecated: true) { name description args { ...InputValue } type { ...TypeRef } isDeprecated deprecationReason } inputFields { ...InputValue } interfaces { ...TypeRef } enumValues(includeDeprecated: true) { name description isDeprecated deprecationReason } possibleTypes { ...TypeRef } } fragment InputValue on __InputValue { name description type { ...TypeRef } defaultValue } fragment TypeRef on __Type { kind name ofType { kind name ofType { kind name ofType { kind name ofType { kind name ofType { kind name ofType { kind name ofType { kind name } } } } } } } } "
     val schemaJson = OkHttpClient().newCall(Request.Builder()
-      .url("http://localhost:8212/api")
+      .url("http://localhost:8210/api")
       .header("Content-Type", "text/plain")
       .post(bodyStr.toRequestBody())
       .build())
@@ -342,7 +344,8 @@ open class GenerateGQLQuery : DefaultTask() {
     }
 
     return when (name) {
-      in listOf("String", "DateTime", "StatusCode", "Json") -> STRING
+      in listOf("String", "DateTime", "StatusCode") -> STRING
+      in listOf("Json") -> ClassName("com.fasterxml.jackson.databind","JsonNode")
 //      in listOf("Int","EncodingType","HashType","KeyType","RoleType") -> INT
       else -> ClassName("${project.group}.graphql", name)
     }

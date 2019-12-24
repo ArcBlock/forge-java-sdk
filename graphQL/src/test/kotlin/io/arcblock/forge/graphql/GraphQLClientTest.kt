@@ -1,5 +1,7 @@
 package io.arcblock.forge.graphql
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature
 import io.arcblock.forge.TransactionFactory
 import io.arcblock.forge.did.DIDGenerator
 import io.arcblock.forge.extension.signTx
@@ -16,7 +18,7 @@ import org.junit.Test
  */
 @Ignore
 class GraphQLClientTest {
-  val gql = GraphQLClient("http://localhost:8212/api")
+  val gql = GraphQLClient("http://localhost:8210/api")
   @Test
   fun getAccountState() {
     val response = gql.getAccountState("z1iQgZWLMZRE8nTNVr82My53xETtaxEnKJE")
@@ -154,7 +156,7 @@ class GraphQLClientTest {
 
   @Test
   fun getTx() {
-    val response = gql.getTx("9FA8F707D01BBC6994E82BA6D45DB54244B49C83BC3790CE50EB9CD4AC9DF448")
+    val response = gql.getTx("A88975EF7B03A75512380C94E5A0706670835D2F6B784145E912D988C3626B01")
     println("response:$response")
     assert(response.errors.isNullOrEmpty())
 
@@ -247,5 +249,10 @@ class GraphQLClientTest {
     val tx = TransactionFactory.unsignPoke("default",wallet.address, wallet.pk).signTx(wallet.sk)
     val rsp = gql.sendTx(tx)
     println("rsp:$rsp")
+    Thread.sleep(5000)
+    val txHash = rsp.response.hash ?:""
+    val txDetail = gql.getTx(txHash)
+    val pretty = ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT).writerWithDefaultPrettyPrinter().writeValueAsString(txDetail.response.info)
+    println("tx:\n ${pretty}")
   }
 }
