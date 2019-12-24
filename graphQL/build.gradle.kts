@@ -148,8 +148,8 @@ val sonatypeRepository = publishing.repositories.maven {
     uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
   }
   credentials {
-    username = project.findProperty("sonatypeUsername") as? String
-    password = project.findProperty("sonatypePassword") as? String
+    username = (project.findProperty("sonatypeUsername") as? String)?:""
+    password = (project.findProperty("sonatypePassword") as? String)?:""
   }
 }
 

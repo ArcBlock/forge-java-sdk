@@ -76,9 +76,11 @@ publishing {
       }else {
         url releaseUrl
       }
+      def un = (properties.hasProperty("sonatypeUsername"))?properties.get("sonatypeUsername").toString():""
+      def pw = (properties.hasProperty("sonatypePassword"))?properties.get("sonatypePassword").toString():""
       credentials {
-        username sonatypeUsername
-        password sonatypePassword
+        username un
+        password pw
       }
     }
   }

@@ -173,10 +173,12 @@ publishing {
     maven {
       def releaseUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"//"s3://android-docs.arcblock.io.s3.amazonaws.com/release"
       def snapshotUrl = "https://oss.sonatype.org/content/repositories/snapshots"
+      def un = (properties.hasProperty("sonatypeUsername"))?properties.get("sonatypeUsername").toString():""
+      def pw = (properties.hasProperty("sonatypePassword"))?properties.get("sonatypePassword").toString():""
       url releaseUrl
       credentials {
-        username sonatypeUsername
-        password sonatypePassword
+        username un
+        password pw
       }
     }
   }
