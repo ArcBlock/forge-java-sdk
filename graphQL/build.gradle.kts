@@ -11,7 +11,6 @@ import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-
 buildscript {
   repositories {
     mavenCentral()
@@ -27,6 +26,8 @@ buildscript {
     classpath("com.squareup:kotlinpoet:1.4.4")
     classpath("com.google.code.gson:gson:2.3.1")
   }
+
+
 }
 
 plugins {
@@ -156,6 +157,11 @@ val sonatypeRepository = publishing.repositories.maven {
 signing {
   sign(mavenPublication)
 }
+
+  
+
+
+
 tasks.withType<PublishToMavenRepository>().configureEach {
   onlyIf { if (repository == sonatypeRepository) publication == mavenPublication else true }
 }

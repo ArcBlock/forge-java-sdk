@@ -1,18 +1,8 @@
-buildscript {
-  repositories {
-    mavenCentral()
-    jcenter()
-  }
-  dependencies {
-    classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.10'
-  }
-}
-
 plugins {
   id 'java'
 }
-apply plugin: 'maven-publish'
-apply plugin: 'signing'
+
+
 apply plugin: 'com.google.protobuf'
 
 
@@ -63,9 +53,12 @@ artifacts {
 //  archives sourceJar
 //  archives javadocJar
 }
+
+
 signing {
   sign configurations.archives
 }
+
 publishing {
   repositories {
     maven {
@@ -76,11 +69,9 @@ publishing {
       }else {
         url releaseUrl
       }
-      def un = (properties.hasProperty("sonatypeUsername"))?properties.get("sonatypeUsername").toString():""
-      def pw = (properties.hasProperty("sonatypePassword"))?properties.get("sonatypePassword").toString():""
       credentials {
-        username un
-        password pw
+        username sonatypeUsername
+        password sonatypePassword
       }
     }
   }
