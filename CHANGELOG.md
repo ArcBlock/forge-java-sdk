@@ -1,3 +1,6 @@
+## 1.0.6 (December 31, 2019)
+  - fix bug: random wallet generate error
+
 ## 1.0.5 (December 24, 2019)
   - fix bug: gql cache remove
   - change itx type from string to json
