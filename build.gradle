@@ -1,5 +1,5 @@
 buildscript{
-  if (!System.getenv("SONATYPE_USERNAME").isEmpty()){
+  if (System.getenv("SONATYPE_USERNAME") != null){
     ext."sonatypeUsername" = System.getenv("SONATYPE_USERNAME")
     ext."sonatypePassword" = System.getenv("SONATYPE_PASSWORD")
   }
@@ -33,7 +33,7 @@ allprojects {
 
 
   gradle.taskGraph.whenReady { taskGraph ->
-    if (!System.getenv('GPG_KEY_ID').isEmpty() && taskGraph.allTasks.any { it instanceof Sign }) {
+    if (System.getenv('GPG_KEY_ID') != null && taskGraph.allTasks.any { it instanceof Sign }) {
       // Use Java's console to read from the console (no good for
       // a CI environment)
       def id = System.getenv('GPG_KEY_ID')
@@ -56,15 +56,6 @@ allprojects {
 }
 apply plugin: 'signing'
 
-subprojects {
-
-
-//  signing.keyId=System.getenv('GPG_KEY_ID')
-//  signing.password=System.getenv('GPG_KEY_PASSPHRASE')
-//  signing.secretKeyRingFile="/Users/paperhuang/.gnupg/secring.gpg"
-
-
-}
 
 
 
