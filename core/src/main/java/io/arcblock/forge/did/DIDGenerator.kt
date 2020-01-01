@@ -186,8 +186,11 @@ object DIDGenerator {
     WalletInfo {
     val type = if (walletType == null) Type.WalletType.newBuilder().setHash(Enum.HashType.sha3).setPk(Enum.KeyType.ed25519).setRole(Enum.RoleType
       .role_account).build() else walletType
-    val seed =Bip44Utils.genSeed(UUID.randomUUID().toString(),UUID.randomUUID().toString(),UUID.randomUUID().toString())
-    val sk= Bip44Utils.genKeyPair(seed).privateKey.toByteArray()
+    var sk :ByteArray = ByteArray(0)
+    while (sk.size < 32){
+      val seed =Bip44Utils.genSeed(UUID.randomUUID().toString(),UUID.randomUUID().toString(),UUID.randomUUID().toString())
+      sk= Bip44Utils.genKeyPair(seed).privateKey.toByteArray()
+    }
     return WalletInfo(sk=sk,pk = WalletUtils.sk2pk(sk= sk, keyType = type.pk),address = sk2did( RoleType.fromInt(type.roleValue),KeyType.fromInt(type.pkValue),
       HashType.fromInt(type.hashValue),sk).address())
   }

@@ -4,6 +4,7 @@ import com.google.common.io.BaseEncoding
 import com.google.protobuf.Any
 import com.google.protobuf.ByteString
 import forge_abi.CreateAsset
+
 import io.arcblock.forge.Hasher
 import io.arcblock.forge.WalletUtils
 import io.arcblock.forge.bip44.Bip44Utils
@@ -14,8 +15,10 @@ import io.arcblock.forge.getPK
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 import org.web3j.crypto.ECKeyPair
-
+@RunWith(JUnit4::class)
 class DIDGeneratorTest {
   lateinit var kp: DidKeyPair
 
@@ -164,6 +167,13 @@ class DIDGeneratorTest {
 //    val rst = DIDGenerator.toTetherAddress(BaseEncoding.base16().decode("CE922DEDAA0E2C141B040BB8034AF17BF9962266F1EF179E05B46FC5FAD43258"))
   //  Assert.assertEquals("z2MC8w872CYeZ3zZSERMkaKSmiDrHHr7vDxYE",rst)
 
+  }
+
+  @Test
+  fun testRandomWallet(){
+    (0..5000).forEach {
+      DIDGenerator.randomWallet()
+    }
   }
 
 }
