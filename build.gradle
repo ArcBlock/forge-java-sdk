@@ -3,6 +3,10 @@ buildscript{
     ext."sonatypeUsername" = System.getenv("SONATYPE_USERNAME")
     ext."sonatypePassword" = System.getenv("SONATYPE_PASSWORD")
   }
+  if(project.findProperty("sonatypeUsername") == null){
+    ext.sonatypeUsername = ""
+    ext.sonatypePassword = ""
+  }
 }
 allprojects {
   buildscript {
@@ -33,22 +37,25 @@ allprojects {
 
 
   gradle.taskGraph.whenReady { taskGraph ->
-    if (System.getenv('GPG_KEY_ID') != null && taskGraph.allTasks.any { it instanceof Sign }) {
+    if (taskGraph.allTasks.any { it instanceof Sign }) {
       // Use Java's console to read from the console (no good for
       // a CI environment)
-      def id = System.getenv('GPG_KEY_ID')
-      def file = "../secring.gpg"
-      def password = System.getenv('GPG_KEY_PASSPHRASE')
+      if(System.getenv('GPG_KEY_ID') != null){
+        def id = System.getenv('GPG_KEY_ID')
+        def file = "../secring.gpg"
+        def password = System.getenv('GPG_KEY_PASSPHRASE')
 
-      allprojects {
-        ext."signing.keyId" = id
-        ext."signing.secretKeyRingFile" = file
-        ext."signing.password" = password
+        allprojects {
+          ext."signing.keyId" = id
+          ext."signing.secretKeyRingFile" = file
+          ext."signing.password" = password
 
-        ext.sonatypeUsername = System.getenv("SONATYPE_USERNAME")
-        ext.sonatypePassword = System.getenv("SONATYPE_PASSWORD")
-
+          ext.sonatypeUsername = System.getenv("SONATYPE_USERNAME")
+          ext.sonatypePassword = System.getenv("SONATYPE_PASSWORD")
+        }
       }
+
+
     }
   }
 
