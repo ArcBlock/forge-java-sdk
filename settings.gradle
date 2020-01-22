@@ -5,4 +5,5 @@ include 'examples'
 include 'graphQL'
 findProject(':graphQL')?.name = 'graphql'
 include 'protobuf'
+include 'abtdid-spring-boot-starter'
 

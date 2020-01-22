@@ -12,6 +12,14 @@ class AppInfo() {
   var description: String = ""
   var publisher: String = ""
   var subtitle: String = ""
+
+  constructor(chainHost:String,name: String, logo: String, desc: String, pk: String ): this(){
+    this.chainHost = chainHost
+    this.icon = logo
+    this.description = desc
+    this.name = name
+    this.publisher= pk
+  }
 }
 
 

@@ -12,17 +12,17 @@
         <dependency>
             <groupId>io.arcblock.forge</groupId>
             <artifactId>core</artifactId>
-            <version>1.0.5</version>
+            <version>1.0.6</version>
         </dependency>
         <dependency>
             <groupId>io.arcblock.forge</groupId>
             <artifactId>did</artifactId>
-            <version>1.0.5</version>
+            <version>1.0.6</version>
         </dependency>
         <dependency>
             <groupId>io.arcblock.forge</groupId>
             <artifactId>graphql</artifactId>
-            <version>1.0.5</version>
+            <version>1.0.6</version>
         </dependency>
         <dependency>
             <groupId>com.madgag.spongycastle</groupId>
