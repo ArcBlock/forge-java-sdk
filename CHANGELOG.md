@@ -1,3 +1,6 @@
+## 1.0.7 (January 22, 2020)
+  - add spring boot starter
+
 ## 1.0.6 (December 31, 2019)
   - fix bug: random wallet generate error
 
