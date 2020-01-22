@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.arcblock.forge.ForgeSDK;
-import io.arcblock.forge.graphql.AccountState;
 import io.arcblock.forge.graphql.GraphQLClient;
 
 /**
@@ -25,10 +24,10 @@ import io.arcblock.forge.graphql.GraphQLClient;
 class BaseConfig {
 
  public static Logger logger = LoggerFactory.getLogger("Forge");
- public static Integer serverPort= 27210;
+ public static Integer serverPort= 28211;
  static ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
- static GraphQLClient gql = new  GraphQLClient("http://localhost:8210/api");
- static ForgeSDK forge = ForgeSDK.Companion.connect("localhost", BaseConfig.serverPort);
+ static GraphQLClient gql = new  GraphQLClient("http://211.159.155.66:8210/api");
+ static ForgeSDK forge = ForgeSDK.Companion.connect("211.159.155.66", BaseConfig.serverPort);
  //wait for block commit
  static void waitForBlockCommit() {
   try {
@@ -39,10 +38,10 @@ class BaseConfig {
  }
 
  static void printAccountBalance(String address){
-  AccountState account = gql.getAccountState(address).getResponse().getState();
-  if (account != null)
-   logger.info("\n\n\t"+ account.getMoniker() +" \n\t\tbalance\t\t\t\t:"+account.getBalance()+"\n\t\tAssets count\t:"+account.getNumAssets() +"\n\n");
-  else logger.error("account is null");
+//  AccountState account = gql.getAccountState(address).getResponse().getState();
+//  if (account != null)
+//   logger.info("\n\n\t"+ account.getMoniker() +" \n\t\tbalance\t\t\t\t:"+account.getBalance()+"\n\t\tAssets count\t:"+account.getNumAssets() +"\n\n");
+//  else logger.error("account is null");
  }
 
  static void logPretty(Object any){

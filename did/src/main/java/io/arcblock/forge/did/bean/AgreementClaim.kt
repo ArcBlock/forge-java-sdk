@@ -7,8 +7,8 @@ import com.google.gson.JsonObject
  * @uri document uri
  * @hash document hash info
   */
-class AgreementClaim @JvmOverloads constructor(override val meta: JsonObject? = null, var uri: String, var hash: AgreementHash, override val description: String, override
-val typeUrl: String?) : IClaim {
+class AgreementClaim @JvmOverloads constructor(var uri: String, var hash: AgreementHash, override val description: String, override
+val typeUrl: String? = null,override val meta: JsonObject? = null) : IClaim {
   val type = ClaimType.AGREEMENT.toString()
 }
 

@@ -11,7 +11,8 @@ import io.arcblock.forge.did.bean.IClaim
 import io.arcblock.forge.extension.did
 import io.arcblock.forge.extension.encodeB64Url
 import io.arcblock.forge.sign.Signer
-import org.apache.commons.lang3.StringEscapeUtils
+import org.apache.commons.text.StringEscapeUtils
+
 import org.slf4j.LoggerFactory
 
 object DidAuthUtils {
@@ -37,7 +38,7 @@ object DidAuthUtils {
       it.addProperty("host", appInfo.chainHost)
       it
     }
-    body.add("LazyChainInfo", JsonParser().parse(chainInfo.toString()))
+    body.add("chainInfo", JsonParser().parse(chainInfo.toString()))
     others?.keySet()?.forEach { body.add(it, others[it]) }
     val jsonHeader = Header(wallet.getSignType().toString().toUpperCase(), "JWT")
     val content = gs.toJson(jsonHeader)
@@ -45,7 +46,7 @@ object DidAuthUtils {
       .encodeB64Url()
       .replace("=", "")
       .plus(".")
-      .plus(body.toString().toByteArray().encodeB64Url().replace("=", ""))
+      .plus(StringEscapeUtils.unescapeJson(body.toString()).toByteArray().encodeB64Url().replace("=", ""))
 
     val signature = Signer.sign(KeyType.ED25519, content.toByteArray(), wallet.sk)
     return content.plus(".")

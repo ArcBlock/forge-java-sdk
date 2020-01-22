@@ -49,4 +49,11 @@ class test {
     println("any:${data.toByteArray().encodeB16()}")
   }
 
+
+  @Test
+  fun testHashSize(){
+    println("0123456789012345678901234567890123456789".toByteArray().encodeB64().length)
+    println("0123456789012345678901234567890123456789".toByteArray().encodeB64Url().length)
+    println("0123456789012345678901234567890123456789".toByteArray().encodeB16().length)
+  }
 }

@@ -1,57 +1,25 @@
-
 plugins {
-  id 'java'
-  id 'org.jetbrains.kotlin.jvm' version '1.3.21'
-  id "de.undercouch.download" version "3.4.3"
-  id 'org.jetbrains.dokka' version '0.9.18'
+  id 'java-library'
+  id 'org.jetbrains.kotlin.jvm' version '1.3.31'
+  id "org.springframework.boot" version "2.1.8.RELEASE" apply(false)
 }
+apply plugin: 'io.spring.dependency-management'
 
 
 group 'io.arcblock.forge'
 version project.file("../version").readLines().first()
-compileKotlin {
-  kotlinOptions.jvmTarget = "1.8"
-}
-compileTestKotlin {
-  kotlinOptions.jvmTarget = "1.8"
-}
-
-
-apply plugin: 'jacoco'
-apply plugin: 'maven-publish'
-apply plugin: 'com.google.protobuf'
-
-ext { springBootVersion = '2.1.4.RELEASE' }
-
-
 jar {
-  baseName = "did"
+  baseName = "abtdid-spring-boot-starter"
   version = project.file("../version").readLines().first()
 }
 
+dependencyManagement {
+  imports {
+    mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+  }
+}
 
 sourceCompatibility = 1.8
-
-
-sourceSets {
-  main {
-    kotlin { srcDir "src/main/kotlin" }
-    java {
-      srcDirs("src/main/java",
-        "build/classes/java/main"
-      )
-    }
-  }
-  test {
-    kotlin { srcDir "src/test/kotlin" }
-    java { srcDir "src/test/java" }
-  }
-}
-
-
-javadoc {
-  enabled = false
-}
 
 repositories {
   jcenter()
@@ -60,12 +28,42 @@ repositories {
 }
 
 dependencies {
-  compile project(':core')
-  //implementation "io.arcblock.forge:core:$project.version"
+  api project(":did")
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
   implementation "org.apache.commons:commons-text:1.8"
+  implementation "org.springframework.boot:spring-boot-autoconfigure"
+  //implementation "org.springframework.boot:spring-boot-configuration-processor"
   testCompile group: 'junit', name: 'junit', version: '4.12'
 }
+
+
+sourceSets {
+  main {
+
+    java { srcDirs ("src/main/java",) }
+
+  }
+  test {
+
+    java { srcDir "src/test/java" }
+
+  }
+}
+
+
+compileKotlin {
+  kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+  kotlinOptions.jvmTarget = "1.8"
+}
+
+javadoc {
+  enabled = false
+}
+
+
+
 artifacts {
   archives jar
 //  archives sourceJar
@@ -97,7 +95,7 @@ publishing {
     mavenJava(MavenPublication) {
       customizePom(pom)
       groupId rootProject.group
-      artifactId 'did'
+      artifactId 'abtdid-spring-boot-starter'
       version rootProject.version
       from components.java
       // create the sign pom artifact

@@ -8,7 +8,7 @@ import com.google.gson.JsonObject
  * @param target asset name you wanted
  * @param did_type account or asset
  */
-class DIDClaim  @JvmOverloads constructor(override val meta: JsonObject? = null, var did_type: String, var target: String, override val description: String, override val typeUrl: String? =
-  null) : IClaim {
+class DIDClaim  @JvmOverloads constructor(var did_type: String, var target: String, override val description: String, override val typeUrl: String? =
+  null,override val meta: JsonObject? = null) : IClaim {
   val type = "did"
 }
