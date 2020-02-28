@@ -20,7 +20,7 @@ class VerifiedCredential {
 
   fun stringtifyVC(sig: String? = null): String {
     val map = hashMapOf<String, Any>(
-      "@context" to "",
+      "@context" to "https://schema.arcblock.io/v0.1/context.jsonld",
       "id" to id,
       "type" to type,
       "issuer" to issuer,
@@ -60,11 +60,11 @@ class VerifiedCredential {
         this.type = om.readValue(node["type"].toString(), object : TypeReference<Array<String>>() {})
         this.issuanceDate = node["issuanceDate"].asText()
         this.credentialSubject = when {
-          this.type.contains(CredentialSubjectType.EMAILAUTHENTICATED.toString())
+          this.type.contains(CredentialSubjectType.EMAIL_VERIFiED.toString())
           -> EmailVerifiedCredential(node["credentialSubject"]["id"].asText(), node["credentialSubject"]["emailVerifiedDigest"].asText())
-          this.type.contains(CredentialSubjectType.RBACVERIFIEDCREDENTIAL.toString())
+          this.type.contains(CredentialSubjectType.RBAC_VERIFIEDCREDENTIAL.toString())
           -> RBACVerifiedCredential(node["credentialSubject"]["id"].asText(), node["credentialSubject"]["resource"].asText(), om.readValue(node["credentialSubject"]["scope"].toString(), object : TypeReference<MutableList<String>>() {}))
-          this.type.contains(CredentialSubjectType.DIDCONNECTAUTHORIZATIONVERIFIEDCREDENTIAL.toString())
+          this.type.contains(CredentialSubjectType.DID_CONNECT_AUTHORIZATION_VERIFIEDCREDENTIAL.toString())
           -> DIDConnectAuthorizationVerifiedCredential(node["credentialSubject"]["issuer"].asText(), om.readValue(node["credentialSubject"]["ops"].toString(), object : TypeReference<MutableList<String>>() {}))
           else -> throw ParseVCException(VCError.UNSUPPORT_CREDENTIAL, "un support type")
         }
