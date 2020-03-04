@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import io.arcblock.forge.did.bean.AppInfo;
+import io.arcblock.forge.graphql.ChainInfo;
+import io.arcblock.forge.graphql.GraphQLClient;
 
 /**
  * Author       : shan@arcblock.io
@@ -28,7 +30,8 @@ public class AbtDidConfigure {
   @ConditionalOnMissingBean
   @ConditionalOnProperty(prefix = "abt.did", value = "enabled", havingValue = "true")
   AbtDidService provideAbtService() {
+    ChainInfo chainInfo = new GraphQLClient(properties.getChainHost()).getChainInfo().getResponse().getInfo();
     return new AbtDidService(new AppInfo(properties.getChainHost(),properties.getName(),properties.getLogo(),properties.getDesc(),properties.getPublisher()),
-      properties.getHost());
+      properties.getHost(), new io.arcblock.forge.did.bean.ChainInfo(properties.getChainHost(), chainInfo.getNetwork()));
   }
 }
