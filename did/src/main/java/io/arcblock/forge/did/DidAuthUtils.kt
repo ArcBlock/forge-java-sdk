@@ -3,16 +3,11 @@ package io.arcblock.forge.did
 import com.google.common.io.BaseEncoding
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.google.gson.JsonParser
-import io.arcblock.forge.did.bean.AppInfo
-import io.arcblock.forge.did.bean.DIDTokenBody
-import io.arcblock.forge.did.bean.DIDTokenResponse
-import io.arcblock.forge.did.bean.IClaim
+import io.arcblock.forge.did.bean.*
 import io.arcblock.forge.extension.did
 import io.arcblock.forge.extension.encodeB64Url
 import io.arcblock.forge.sign.Signer
 import org.apache.commons.text.StringEscapeUtils
-
 import org.slf4j.LoggerFactory
 
 object DidAuthUtils {
@@ -27,19 +22,17 @@ object DidAuthUtils {
    * @param wallet: application key info .
    */
   @JvmOverloads
-  fun createDidAuthToken(authClaims: Array<out IClaim>, appInfo: AppInfo, currentTimestamp: Long, wallet: WalletInfo, url: String = "",
+  fun createDidAuthToken(authClaims: Array<out IClaim>, appInfo: AppInfo, chainInfo: ChainInfo, currentTimestamp: Long, wallet: WalletInfo, url: String =
+    "",
                          others: JsonObject? = null): String {
     val exp = (currentTimestamp + 60).toString()
     val body = gs.toJsonTree(DIDTokenBody(action = "responseAuth", appInfo = appInfo, requestedClaims = authClaims, url = url, exp = exp,
       iat = currentTimestamp.toString(), iss = wallet.address.did(), nbf = currentTimestamp.toString()
     ))
       .asJsonObject
-    val chainInfo = JsonObject().let {
-      it.addProperty("host", appInfo.chainHost)
-      it
-    }
-    body.add("chainInfo", JsonParser().parse(chainInfo.toString()))
-    others?.keySet()?.forEach { body.add(it, others[it]) }
+    body.add("chainInfo", gs.toJsonTree(chainInfo))
+    others?.keySet()
+      ?.forEach { body.add(it, others[it]) }
     val jsonHeader = Header(wallet.getSignType().toString().toUpperCase(), "JWT")
     val content = gs.toJson(jsonHeader)
       .toByteArray()
