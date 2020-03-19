@@ -1,3 +1,6 @@
+## 1.0.8 (March 04, 2020)
+
+
 ## 1.0.7 (January 22, 2020)
   - add spring boot starter
 
