@@ -41,7 +41,7 @@ class VerifiedCredential {
         "type" to "Ed25519Signature",
         "created" to SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(Date().time),
         "proofPurpose" to "assertionMethod",
-        "jws" to "sig"
+        "jws" to sig
       )
     }
     val om = ObjectMapper()
