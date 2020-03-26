@@ -48927,32 +48927,45 @@ public final class Type {
         getCommissionHolderAddressBytes();
 
     /**
-     * <code>uint32 withdraw_interval = 2;</code>
-     */
-    int getWithdrawInterval();
-
-    /**
-     * <code>.forge_abi.BigUint commission = 3;</code>
-     */
-    boolean hasCommission();
-    /**
-     * <code>.forge_abi.BigUint commission = 3;</code>
-     */
-    forge_abi.Type.BigUint getCommission();
-    /**
-     * <code>.forge_abi.BigUint commission = 3;</code>
-     */
-    forge_abi.Type.BigUintOrBuilder getCommissionOrBuilder();
-
-    /**
+     * <pre>
+     * uint32 withdraw_interval = 2 [ deprecated = true ];
+     * BigUint commission = 3 [ deprecated = true ];
+     * </pre>
+     *
      * <code>uint32 commission_rate = 4;</code>
      */
     int getCommissionRate();
 
     /**
-     * <code>uint32 revoke_commission = 5;</code>
+     * <code>uint32 revoke_commission_rate = 5;</code>
      */
-    int getRevokeCommission();
+    int getRevokeCommissionRate();
+
+    /**
+     * <code>.forge_abi.BigUint min_commission = 6;</code>
+     */
+    boolean hasMinCommission();
+    /**
+     * <code>.forge_abi.BigUint min_commission = 6;</code>
+     */
+    forge_abi.Type.BigUint getMinCommission();
+    /**
+     * <code>.forge_abi.BigUint min_commission = 6;</code>
+     */
+    forge_abi.Type.BigUintOrBuilder getMinCommissionOrBuilder();
+
+    /**
+     * <code>.forge_abi.BigUint max_commission = 7;</code>
+     */
+    boolean hasMaxCommission();
+    /**
+     * <code>.forge_abi.BigUint max_commission = 7;</code>
+     */
+    forge_abi.Type.BigUint getMaxCommission();
+    /**
+     * <code>.forge_abi.BigUint max_commission = 7;</code>
+     */
+    forge_abi.Type.BigUintOrBuilder getMaxCommissionOrBuilder();
   }
   /**
    * Protobuf type {@code forge_abi.TokenSwapConfig}
@@ -48967,9 +48980,8 @@ public final class Type {
     }
     private TokenSwapConfig() {
       commissionHolderAddress_ = "";
-      withdrawInterval_ = 0;
       commissionRate_ = 0;
-      revokeCommission_ = 0;
+      revokeCommissionRate_ = 0;
     }
 
     @java.lang.Override
@@ -49003,24 +49015,6 @@ public final class Type {
               commissionHolderAddress_ = s;
               break;
             }
-            case 16: {
-
-              withdrawInterval_ = input.readUInt32();
-              break;
-            }
-            case 26: {
-              forge_abi.Type.BigUint.Builder subBuilder = null;
-              if (commission_ != null) {
-                subBuilder = commission_.toBuilder();
-              }
-              commission_ = input.readMessage(forge_abi.Type.BigUint.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(commission_);
-                commission_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
             case 32: {
 
               commissionRate_ = input.readUInt32();
@@ -49028,7 +49022,33 @@ public final class Type {
             }
             case 40: {
 
-              revokeCommission_ = input.readUInt32();
+              revokeCommissionRate_ = input.readUInt32();
+              break;
+            }
+            case 50: {
+              forge_abi.Type.BigUint.Builder subBuilder = null;
+              if (minCommission_ != null) {
+                subBuilder = minCommission_.toBuilder();
+              }
+              minCommission_ = input.readMessage(forge_abi.Type.BigUint.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(minCommission_);
+                minCommission_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 58: {
+              forge_abi.Type.BigUint.Builder subBuilder = null;
+              if (maxCommission_ != null) {
+                subBuilder = maxCommission_.toBuilder();
+              }
+              maxCommission_ = input.readMessage(forge_abi.Type.BigUint.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(maxCommission_);
+                maxCommission_ = subBuilder.buildPartial();
+              }
+
               break;
             }
           }
@@ -49088,52 +49108,69 @@ public final class Type {
       }
     }
 
-    public static final int WITHDRAW_INTERVAL_FIELD_NUMBER = 2;
-    private int withdrawInterval_;
-    /**
-     * <code>uint32 withdraw_interval = 2;</code>
-     */
-    public int getWithdrawInterval() {
-      return withdrawInterval_;
-    }
-
-    public static final int COMMISSION_FIELD_NUMBER = 3;
-    private forge_abi.Type.BigUint commission_;
-    /**
-     * <code>.forge_abi.BigUint commission = 3;</code>
-     */
-    public boolean hasCommission() {
-      return commission_ != null;
-    }
-    /**
-     * <code>.forge_abi.BigUint commission = 3;</code>
-     */
-    public forge_abi.Type.BigUint getCommission() {
-      return commission_ == null ? forge_abi.Type.BigUint.getDefaultInstance() : commission_;
-    }
-    /**
-     * <code>.forge_abi.BigUint commission = 3;</code>
-     */
-    public forge_abi.Type.BigUintOrBuilder getCommissionOrBuilder() {
-      return getCommission();
-    }
-
     public static final int COMMISSION_RATE_FIELD_NUMBER = 4;
     private int commissionRate_;
     /**
+     * <pre>
+     * uint32 withdraw_interval = 2 [ deprecated = true ];
+     * BigUint commission = 3 [ deprecated = true ];
+     * </pre>
+     *
      * <code>uint32 commission_rate = 4;</code>
      */
     public int getCommissionRate() {
       return commissionRate_;
     }
 
-    public static final int REVOKE_COMMISSION_FIELD_NUMBER = 5;
-    private int revokeCommission_;
+    public static final int REVOKE_COMMISSION_RATE_FIELD_NUMBER = 5;
+    private int revokeCommissionRate_;
     /**
-     * <code>uint32 revoke_commission = 5;</code>
+     * <code>uint32 revoke_commission_rate = 5;</code>
      */
-    public int getRevokeCommission() {
-      return revokeCommission_;
+    public int getRevokeCommissionRate() {
+      return revokeCommissionRate_;
+    }
+
+    public static final int MIN_COMMISSION_FIELD_NUMBER = 6;
+    private forge_abi.Type.BigUint minCommission_;
+    /**
+     * <code>.forge_abi.BigUint min_commission = 6;</code>
+     */
+    public boolean hasMinCommission() {
+      return minCommission_ != null;
+    }
+    /**
+     * <code>.forge_abi.BigUint min_commission = 6;</code>
+     */
+    public forge_abi.Type.BigUint getMinCommission() {
+      return minCommission_ == null ? forge_abi.Type.BigUint.getDefaultInstance() : minCommission_;
+    }
+    /**
+     * <code>.forge_abi.BigUint min_commission = 6;</code>
+     */
+    public forge_abi.Type.BigUintOrBuilder getMinCommissionOrBuilder() {
+      return getMinCommission();
+    }
+
+    public static final int MAX_COMMISSION_FIELD_NUMBER = 7;
+    private forge_abi.Type.BigUint maxCommission_;
+    /**
+     * <code>.forge_abi.BigUint max_commission = 7;</code>
+     */
+    public boolean hasMaxCommission() {
+      return maxCommission_ != null;
+    }
+    /**
+     * <code>.forge_abi.BigUint max_commission = 7;</code>
+     */
+    public forge_abi.Type.BigUint getMaxCommission() {
+      return maxCommission_ == null ? forge_abi.Type.BigUint.getDefaultInstance() : maxCommission_;
+    }
+    /**
+     * <code>.forge_abi.BigUint max_commission = 7;</code>
+     */
+    public forge_abi.Type.BigUintOrBuilder getMaxCommissionOrBuilder() {
+      return getMaxCommission();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -49151,17 +49188,17 @@ public final class Type {
       if (!getCommissionHolderAddressBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, commissionHolderAddress_);
       }
-      if (withdrawInterval_ != 0) {
-        output.writeUInt32(2, withdrawInterval_);
-      }
-      if (commission_ != null) {
-        output.writeMessage(3, getCommission());
-      }
       if (commissionRate_ != 0) {
         output.writeUInt32(4, commissionRate_);
       }
-      if (revokeCommission_ != 0) {
-        output.writeUInt32(5, revokeCommission_);
+      if (revokeCommissionRate_ != 0) {
+        output.writeUInt32(5, revokeCommissionRate_);
+      }
+      if (minCommission_ != null) {
+        output.writeMessage(6, getMinCommission());
+      }
+      if (maxCommission_ != null) {
+        output.writeMessage(7, getMaxCommission());
       }
     }
 
@@ -49173,21 +49210,21 @@ public final class Type {
       if (!getCommissionHolderAddressBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, commissionHolderAddress_);
       }
-      if (withdrawInterval_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, withdrawInterval_);
-      }
-      if (commission_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getCommission());
-      }
       if (commissionRate_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(4, commissionRate_);
       }
-      if (revokeCommission_ != 0) {
+      if (revokeCommissionRate_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(5, revokeCommission_);
+          .computeUInt32Size(5, revokeCommissionRate_);
+      }
+      if (minCommission_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, getMinCommission());
+      }
+      if (maxCommission_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, getMaxCommission());
       }
       memoizedSize = size;
       return size;
@@ -49207,17 +49244,20 @@ public final class Type {
       boolean result = true;
       result = result && getCommissionHolderAddress()
           .equals(other.getCommissionHolderAddress());
-      result = result && (getWithdrawInterval()
-          == other.getWithdrawInterval());
-      result = result && (hasCommission() == other.hasCommission());
-      if (hasCommission()) {
-        result = result && getCommission()
-            .equals(other.getCommission());
-      }
       result = result && (getCommissionRate()
           == other.getCommissionRate());
-      result = result && (getRevokeCommission()
-          == other.getRevokeCommission());
+      result = result && (getRevokeCommissionRate()
+          == other.getRevokeCommissionRate());
+      result = result && (hasMinCommission() == other.hasMinCommission());
+      if (hasMinCommission()) {
+        result = result && getMinCommission()
+            .equals(other.getMinCommission());
+      }
+      result = result && (hasMaxCommission() == other.hasMaxCommission());
+      if (hasMaxCommission()) {
+        result = result && getMaxCommission()
+            .equals(other.getMaxCommission());
+      }
       return result;
     }
 
@@ -49230,16 +49270,18 @@ public final class Type {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + COMMISSION_HOLDER_ADDRESS_FIELD_NUMBER;
       hash = (53 * hash) + getCommissionHolderAddress().hashCode();
-      hash = (37 * hash) + WITHDRAW_INTERVAL_FIELD_NUMBER;
-      hash = (53 * hash) + getWithdrawInterval();
-      if (hasCommission()) {
-        hash = (37 * hash) + COMMISSION_FIELD_NUMBER;
-        hash = (53 * hash) + getCommission().hashCode();
-      }
       hash = (37 * hash) + COMMISSION_RATE_FIELD_NUMBER;
       hash = (53 * hash) + getCommissionRate();
-      hash = (37 * hash) + REVOKE_COMMISSION_FIELD_NUMBER;
-      hash = (53 * hash) + getRevokeCommission();
+      hash = (37 * hash) + REVOKE_COMMISSION_RATE_FIELD_NUMBER;
+      hash = (53 * hash) + getRevokeCommissionRate();
+      if (hasMinCommission()) {
+        hash = (37 * hash) + MIN_COMMISSION_FIELD_NUMBER;
+        hash = (53 * hash) + getMinCommission().hashCode();
+      }
+      if (hasMaxCommission()) {
+        hash = (37 * hash) + MAX_COMMISSION_FIELD_NUMBER;
+        hash = (53 * hash) + getMaxCommission().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -49360,18 +49402,22 @@ public final class Type {
         super.clear();
         commissionHolderAddress_ = "";
 
-        withdrawInterval_ = 0;
-
-        if (commissionBuilder_ == null) {
-          commission_ = null;
-        } else {
-          commission_ = null;
-          commissionBuilder_ = null;
-        }
         commissionRate_ = 0;
 
-        revokeCommission_ = 0;
+        revokeCommissionRate_ = 0;
 
+        if (minCommissionBuilder_ == null) {
+          minCommission_ = null;
+        } else {
+          minCommission_ = null;
+          minCommissionBuilder_ = null;
+        }
+        if (maxCommissionBuilder_ == null) {
+          maxCommission_ = null;
+        } else {
+          maxCommission_ = null;
+          maxCommissionBuilder_ = null;
+        }
         return this;
       }
 
@@ -49395,14 +49441,18 @@ public final class Type {
       public forge_abi.Type.TokenSwapConfig buildPartial() {
         forge_abi.Type.TokenSwapConfig result = new forge_abi.Type.TokenSwapConfig(this);
         result.commissionHolderAddress_ = commissionHolderAddress_;
-        result.withdrawInterval_ = withdrawInterval_;
-        if (commissionBuilder_ == null) {
-          result.commission_ = commission_;
-        } else {
-          result.commission_ = commissionBuilder_.build();
-        }
         result.commissionRate_ = commissionRate_;
-        result.revokeCommission_ = revokeCommission_;
+        result.revokeCommissionRate_ = revokeCommissionRate_;
+        if (minCommissionBuilder_ == null) {
+          result.minCommission_ = minCommission_;
+        } else {
+          result.minCommission_ = minCommissionBuilder_.build();
+        }
+        if (maxCommissionBuilder_ == null) {
+          result.maxCommission_ = maxCommission_;
+        } else {
+          result.maxCommission_ = maxCommissionBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -49448,17 +49498,17 @@ public final class Type {
           commissionHolderAddress_ = other.commissionHolderAddress_;
           onChanged();
         }
-        if (other.getWithdrawInterval() != 0) {
-          setWithdrawInterval(other.getWithdrawInterval());
-        }
-        if (other.hasCommission()) {
-          mergeCommission(other.getCommission());
-        }
         if (other.getCommissionRate() != 0) {
           setCommissionRate(other.getCommissionRate());
         }
-        if (other.getRevokeCommission() != 0) {
-          setRevokeCommission(other.getRevokeCommission());
+        if (other.getRevokeCommissionRate() != 0) {
+          setRevokeCommissionRate(other.getRevokeCommissionRate());
+        }
+        if (other.hasMinCommission()) {
+          mergeMinCommission(other.getMinCommission());
+        }
+        if (other.hasMaxCommission()) {
+          mergeMaxCommission(other.getMaxCommission());
         }
         onChanged();
         return this;
@@ -49555,157 +49605,24 @@ public final class Type {
         return this;
       }
 
-      private int withdrawInterval_ ;
-      /**
-       * <code>uint32 withdraw_interval = 2;</code>
-       */
-      public int getWithdrawInterval() {
-        return withdrawInterval_;
-      }
-      /**
-       * <code>uint32 withdraw_interval = 2;</code>
-       */
-      public Builder setWithdrawInterval(int value) {
-        
-        withdrawInterval_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 withdraw_interval = 2;</code>
-       */
-      public Builder clearWithdrawInterval() {
-        
-        withdrawInterval_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private forge_abi.Type.BigUint commission_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder> commissionBuilder_;
-      /**
-       * <code>.forge_abi.BigUint commission = 3;</code>
-       */
-      public boolean hasCommission() {
-        return commissionBuilder_ != null || commission_ != null;
-      }
-      /**
-       * <code>.forge_abi.BigUint commission = 3;</code>
-       */
-      public forge_abi.Type.BigUint getCommission() {
-        if (commissionBuilder_ == null) {
-          return commission_ == null ? forge_abi.Type.BigUint.getDefaultInstance() : commission_;
-        } else {
-          return commissionBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.forge_abi.BigUint commission = 3;</code>
-       */
-      public Builder setCommission(forge_abi.Type.BigUint value) {
-        if (commissionBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          commission_ = value;
-          onChanged();
-        } else {
-          commissionBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.BigUint commission = 3;</code>
-       */
-      public Builder setCommission(
-          forge_abi.Type.BigUint.Builder builderForValue) {
-        if (commissionBuilder_ == null) {
-          commission_ = builderForValue.build();
-          onChanged();
-        } else {
-          commissionBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.BigUint commission = 3;</code>
-       */
-      public Builder mergeCommission(forge_abi.Type.BigUint value) {
-        if (commissionBuilder_ == null) {
-          if (commission_ != null) {
-            commission_ =
-              forge_abi.Type.BigUint.newBuilder(commission_).mergeFrom(value).buildPartial();
-          } else {
-            commission_ = value;
-          }
-          onChanged();
-        } else {
-          commissionBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.BigUint commission = 3;</code>
-       */
-      public Builder clearCommission() {
-        if (commissionBuilder_ == null) {
-          commission_ = null;
-          onChanged();
-        } else {
-          commission_ = null;
-          commissionBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.forge_abi.BigUint commission = 3;</code>
-       */
-      public forge_abi.Type.BigUint.Builder getCommissionBuilder() {
-        
-        onChanged();
-        return getCommissionFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.forge_abi.BigUint commission = 3;</code>
-       */
-      public forge_abi.Type.BigUintOrBuilder getCommissionOrBuilder() {
-        if (commissionBuilder_ != null) {
-          return commissionBuilder_.getMessageOrBuilder();
-        } else {
-          return commission_ == null ?
-              forge_abi.Type.BigUint.getDefaultInstance() : commission_;
-        }
-      }
-      /**
-       * <code>.forge_abi.BigUint commission = 3;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder> 
-          getCommissionFieldBuilder() {
-        if (commissionBuilder_ == null) {
-          commissionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder>(
-                  getCommission(),
-                  getParentForChildren(),
-                  isClean());
-          commission_ = null;
-        }
-        return commissionBuilder_;
-      }
-
       private int commissionRate_ ;
       /**
+       * <pre>
+       * uint32 withdraw_interval = 2 [ deprecated = true ];
+       * BigUint commission = 3 [ deprecated = true ];
+       * </pre>
+       *
        * <code>uint32 commission_rate = 4;</code>
        */
       public int getCommissionRate() {
         return commissionRate_;
       }
       /**
+       * <pre>
+       * uint32 withdraw_interval = 2 [ deprecated = true ];
+       * BigUint commission = 3 [ deprecated = true ];
+       * </pre>
+       *
        * <code>uint32 commission_rate = 4;</code>
        */
       public Builder setCommissionRate(int value) {
@@ -49715,6 +49632,11 @@ public final class Type {
         return this;
       }
       /**
+       * <pre>
+       * uint32 withdraw_interval = 2 [ deprecated = true ];
+       * BigUint commission = 3 [ deprecated = true ];
+       * </pre>
+       *
        * <code>uint32 commission_rate = 4;</code>
        */
       public Builder clearCommissionRate() {
@@ -49724,30 +49646,264 @@ public final class Type {
         return this;
       }
 
-      private int revokeCommission_ ;
+      private int revokeCommissionRate_ ;
       /**
-       * <code>uint32 revoke_commission = 5;</code>
+       * <code>uint32 revoke_commission_rate = 5;</code>
        */
-      public int getRevokeCommission() {
-        return revokeCommission_;
+      public int getRevokeCommissionRate() {
+        return revokeCommissionRate_;
       }
       /**
-       * <code>uint32 revoke_commission = 5;</code>
+       * <code>uint32 revoke_commission_rate = 5;</code>
        */
-      public Builder setRevokeCommission(int value) {
+      public Builder setRevokeCommissionRate(int value) {
         
-        revokeCommission_ = value;
+        revokeCommissionRate_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>uint32 revoke_commission = 5;</code>
+       * <code>uint32 revoke_commission_rate = 5;</code>
        */
-      public Builder clearRevokeCommission() {
+      public Builder clearRevokeCommissionRate() {
         
-        revokeCommission_ = 0;
+        revokeCommissionRate_ = 0;
         onChanged();
         return this;
+      }
+
+      private forge_abi.Type.BigUint minCommission_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder> minCommissionBuilder_;
+      /**
+       * <code>.forge_abi.BigUint min_commission = 6;</code>
+       */
+      public boolean hasMinCommission() {
+        return minCommissionBuilder_ != null || minCommission_ != null;
+      }
+      /**
+       * <code>.forge_abi.BigUint min_commission = 6;</code>
+       */
+      public forge_abi.Type.BigUint getMinCommission() {
+        if (minCommissionBuilder_ == null) {
+          return minCommission_ == null ? forge_abi.Type.BigUint.getDefaultInstance() : minCommission_;
+        } else {
+          return minCommissionBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.forge_abi.BigUint min_commission = 6;</code>
+       */
+      public Builder setMinCommission(forge_abi.Type.BigUint value) {
+        if (minCommissionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          minCommission_ = value;
+          onChanged();
+        } else {
+          minCommissionBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint min_commission = 6;</code>
+       */
+      public Builder setMinCommission(
+          forge_abi.Type.BigUint.Builder builderForValue) {
+        if (minCommissionBuilder_ == null) {
+          minCommission_ = builderForValue.build();
+          onChanged();
+        } else {
+          minCommissionBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint min_commission = 6;</code>
+       */
+      public Builder mergeMinCommission(forge_abi.Type.BigUint value) {
+        if (minCommissionBuilder_ == null) {
+          if (minCommission_ != null) {
+            minCommission_ =
+              forge_abi.Type.BigUint.newBuilder(minCommission_).mergeFrom(value).buildPartial();
+          } else {
+            minCommission_ = value;
+          }
+          onChanged();
+        } else {
+          minCommissionBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint min_commission = 6;</code>
+       */
+      public Builder clearMinCommission() {
+        if (minCommissionBuilder_ == null) {
+          minCommission_ = null;
+          onChanged();
+        } else {
+          minCommission_ = null;
+          minCommissionBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint min_commission = 6;</code>
+       */
+      public forge_abi.Type.BigUint.Builder getMinCommissionBuilder() {
+        
+        onChanged();
+        return getMinCommissionFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.BigUint min_commission = 6;</code>
+       */
+      public forge_abi.Type.BigUintOrBuilder getMinCommissionOrBuilder() {
+        if (minCommissionBuilder_ != null) {
+          return minCommissionBuilder_.getMessageOrBuilder();
+        } else {
+          return minCommission_ == null ?
+              forge_abi.Type.BigUint.getDefaultInstance() : minCommission_;
+        }
+      }
+      /**
+       * <code>.forge_abi.BigUint min_commission = 6;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder> 
+          getMinCommissionFieldBuilder() {
+        if (minCommissionBuilder_ == null) {
+          minCommissionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder>(
+                  getMinCommission(),
+                  getParentForChildren(),
+                  isClean());
+          minCommission_ = null;
+        }
+        return minCommissionBuilder_;
+      }
+
+      private forge_abi.Type.BigUint maxCommission_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder> maxCommissionBuilder_;
+      /**
+       * <code>.forge_abi.BigUint max_commission = 7;</code>
+       */
+      public boolean hasMaxCommission() {
+        return maxCommissionBuilder_ != null || maxCommission_ != null;
+      }
+      /**
+       * <code>.forge_abi.BigUint max_commission = 7;</code>
+       */
+      public forge_abi.Type.BigUint getMaxCommission() {
+        if (maxCommissionBuilder_ == null) {
+          return maxCommission_ == null ? forge_abi.Type.BigUint.getDefaultInstance() : maxCommission_;
+        } else {
+          return maxCommissionBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.forge_abi.BigUint max_commission = 7;</code>
+       */
+      public Builder setMaxCommission(forge_abi.Type.BigUint value) {
+        if (maxCommissionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          maxCommission_ = value;
+          onChanged();
+        } else {
+          maxCommissionBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint max_commission = 7;</code>
+       */
+      public Builder setMaxCommission(
+          forge_abi.Type.BigUint.Builder builderForValue) {
+        if (maxCommissionBuilder_ == null) {
+          maxCommission_ = builderForValue.build();
+          onChanged();
+        } else {
+          maxCommissionBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint max_commission = 7;</code>
+       */
+      public Builder mergeMaxCommission(forge_abi.Type.BigUint value) {
+        if (maxCommissionBuilder_ == null) {
+          if (maxCommission_ != null) {
+            maxCommission_ =
+              forge_abi.Type.BigUint.newBuilder(maxCommission_).mergeFrom(value).buildPartial();
+          } else {
+            maxCommission_ = value;
+          }
+          onChanged();
+        } else {
+          maxCommissionBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint max_commission = 7;</code>
+       */
+      public Builder clearMaxCommission() {
+        if (maxCommissionBuilder_ == null) {
+          maxCommission_ = null;
+          onChanged();
+        } else {
+          maxCommission_ = null;
+          maxCommissionBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint max_commission = 7;</code>
+       */
+      public forge_abi.Type.BigUint.Builder getMaxCommissionBuilder() {
+        
+        onChanged();
+        return getMaxCommissionFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.BigUint max_commission = 7;</code>
+       */
+      public forge_abi.Type.BigUintOrBuilder getMaxCommissionOrBuilder() {
+        if (maxCommissionBuilder_ != null) {
+          return maxCommissionBuilder_.getMessageOrBuilder();
+        } else {
+          return maxCommission_ == null ?
+              forge_abi.Type.BigUint.getDefaultInstance() : maxCommission_;
+        }
+      }
+      /**
+       * <code>.forge_abi.BigUint max_commission = 7;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder> 
+          getMaxCommissionFieldBuilder() {
+        if (maxCommissionBuilder_ == null) {
+          maxCommissionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder>(
+                  getMaxCommission(),
+                  getParentForChildren(),
+                  isClean());
+          maxCommission_ = null;
+        }
+        return maxCommissionBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -51348,14 +51504,15 @@ public final class Type {
       "\022\014\n\004hash\030\001 \001(\t\022!\n\005value\030\002 \001(\0132\022.forge_ab" +
       "i.BigUint\"Q\n\rAccountConfig\022\017\n\007address\030\001 " +
       "\001(\t\022\n\n\002pk\030\002 \001(\014\022#\n\007balance\030\003 \001(\0132\022.forge" +
-      "_abi.BigUint\"\253\001\n\017TokenSwapConfig\022!\n\031comm" +
-      "ission_holder_address\030\001 \001(\t\022\031\n\021withdraw_" +
-      "interval\030\002 \001(\r\022&\n\ncommission\030\003 \001(\0132\022.for",
-      "ge_abi.BigUint\022\027\n\017commission_rate\030\004 \001(\r\022" +
-      "\031\n\021revoke_commission\030\005 \001(\r\"m\n\010Evidence\022\014" +
-      "\n\004hash\030\001 \001(\t\022\022\n\nchain_type\030\002 \001(\t\022\020\n\010chai" +
-      "n_id\030\003 \001(\t\022\023\n\013original_tx\030\004 \001(\014\022\030\n\020recei" +
-      "ver_address\030\005 \001(\tb\006proto3"
+      "_abi.BigUint\"\305\001\n\017TokenSwapConfig\022!\n\031comm" +
+      "ission_holder_address\030\001 \001(\t\022\027\n\017commissio" +
+      "n_rate\030\004 \001(\r\022\036\n\026revoke_commission_rate\030\005",
+      " \001(\r\022*\n\016min_commission\030\006 \001(\0132\022.forge_abi" +
+      ".BigUint\022*\n\016max_commission\030\007 \001(\0132\022.forge" +
+      "_abi.BigUint\"m\n\010Evidence\022\014\n\004hash\030\001 \001(\t\022\022" +
+      "\n\nchain_type\030\002 \001(\t\022\020\n\010chain_id\030\003 \001(\t\022\023\n\013" +
+      "original_tx\030\004 \001(\014\022\030\n\020receiver_address\030\005 " +
+      "\001(\tb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -51630,7 +51787,7 @@ public final class Type {
     internal_static_forge_abi_TokenSwapConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_TokenSwapConfig_descriptor,
-        new java.lang.String[] { "CommissionHolderAddress", "WithdrawInterval", "Commission", "CommissionRate", "RevokeCommission", });
+        new java.lang.String[] { "CommissionHolderAddress", "CommissionRate", "RevokeCommissionRate", "MinCommission", "MaxCommission", });
     internal_static_forge_abi_Evidence_descriptor =
       getDescriptor().getMessageTypes().get(41);
     internal_static_forge_abi_Evidence_fieldAccessorTable = new

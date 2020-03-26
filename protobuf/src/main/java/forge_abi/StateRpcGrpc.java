@@ -64,30 +64,6 @@ public final class StateRpcGrpc {
               forge_abi.Rpc.ResponseGetForgeState.getDefaultInstance()))
           .build();
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestGetProtocolState,
-      forge_abi.Rpc.ResponseGetProtocolState> METHOD_GET_PROTOCOL_STATE =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestGetProtocolState, forge_abi.Rpc.ResponseGetProtocolState>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
-          .setFullMethodName(generateFullMethodName(
-              "forge_abi.StateRpc", "get_protocol_state"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestGetProtocolState.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseGetProtocolState.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestGetStakeState,
-      forge_abi.Rpc.ResponseGetStakeState> METHOD_GET_STAKE_STATE =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestGetStakeState, forge_abi.Rpc.ResponseGetStakeState>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
-          .setFullMethodName(generateFullMethodName(
-              "forge_abi.StateRpc", "get_stake_state"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestGetStakeState.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseGetStakeState.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestGetSwapState,
       forge_abi.Rpc.ResponseGetSwapState> METHOD_GET_SWAP_STATE =
       io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestGetSwapState, forge_abi.Rpc.ResponseGetSwapState>newBuilder()
@@ -164,20 +140,12 @@ public final class StateRpcGrpc {
     }
 
     /**
-     */
-    public io.grpc.stub.StreamObserver<forge_abi.Rpc.RequestGetProtocolState> getProtocolState(
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetProtocolState> responseObserver) {
-      return asyncUnimplementedStreamingCall(METHOD_GET_PROTOCOL_STATE, responseObserver);
-    }
-
-    /**
-     */
-    public io.grpc.stub.StreamObserver<forge_abi.Rpc.RequestGetStakeState> getStakeState(
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetStakeState> responseObserver) {
-      return asyncUnimplementedStreamingCall(METHOD_GET_STAKE_STATE, responseObserver);
-    }
-
-    /**
+     * <pre>
+     * rpc get_protocol_state(stream RequestGetProtocolState) returns (stream
+     * ResponseGetProtocolState);
+     * rpc get_stake_state(stream RequestGetStakeState)
+     * returns (stream ResponseGetStakeState);
+     * </pre>
      */
     public io.grpc.stub.StreamObserver<forge_abi.Rpc.RequestGetSwapState> getSwapState(
         io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetSwapState> responseObserver) {
@@ -214,20 +182,6 @@ public final class StateRpcGrpc {
                 forge_abi.Rpc.RequestGetForgeState,
                 forge_abi.Rpc.ResponseGetForgeState>(
                   this, METHODID_GET_FORGE_STATE)))
-          .addMethod(
-            METHOD_GET_PROTOCOL_STATE,
-            asyncBidiStreamingCall(
-              new MethodHandlers<
-                forge_abi.Rpc.RequestGetProtocolState,
-                forge_abi.Rpc.ResponseGetProtocolState>(
-                  this, METHODID_GET_PROTOCOL_STATE)))
-          .addMethod(
-            METHOD_GET_STAKE_STATE,
-            asyncBidiStreamingCall(
-              new MethodHandlers<
-                forge_abi.Rpc.RequestGetStakeState,
-                forge_abi.Rpc.ResponseGetStakeState>(
-                  this, METHODID_GET_STAKE_STATE)))
           .addMethod(
             METHOD_GET_SWAP_STATE,
             asyncBidiStreamingCall(
@@ -292,22 +246,12 @@ public final class StateRpcGrpc {
     }
 
     /**
-     */
-    public io.grpc.stub.StreamObserver<forge_abi.Rpc.RequestGetProtocolState> getProtocolState(
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetProtocolState> responseObserver) {
-      return asyncBidiStreamingCall(
-          getChannel().newCall(METHOD_GET_PROTOCOL_STATE, getCallOptions()), responseObserver);
-    }
-
-    /**
-     */
-    public io.grpc.stub.StreamObserver<forge_abi.Rpc.RequestGetStakeState> getStakeState(
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetStakeState> responseObserver) {
-      return asyncBidiStreamingCall(
-          getChannel().newCall(METHOD_GET_STAKE_STATE, getCallOptions()), responseObserver);
-    }
-
-    /**
+     * <pre>
+     * rpc get_protocol_state(stream RequestGetProtocolState) returns (stream
+     * ResponseGetProtocolState);
+     * rpc get_stake_state(stream RequestGetStakeState)
+     * returns (stream ResponseGetStakeState);
+     * </pre>
      */
     public io.grpc.stub.StreamObserver<forge_abi.Rpc.RequestGetSwapState> getSwapState(
         io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetSwapState> responseObserver) {
@@ -380,10 +324,8 @@ public final class StateRpcGrpc {
   private static final int METHODID_GET_FORGE_STATE = 0;
   private static final int METHODID_GET_ACCOUNT_STATE = 1;
   private static final int METHODID_GET_ASSET_STATE = 2;
-  private static final int METHODID_GET_PROTOCOL_STATE = 3;
-  private static final int METHODID_GET_STAKE_STATE = 4;
-  private static final int METHODID_GET_SWAP_STATE = 5;
-  private static final int METHODID_GET_DELEGATE_STATE = 6;
+  private static final int METHODID_GET_SWAP_STATE = 3;
+  private static final int METHODID_GET_DELEGATE_STATE = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -422,12 +364,6 @@ public final class StateRpcGrpc {
         case METHODID_GET_ASSET_STATE:
           return (io.grpc.stub.StreamObserver<Req>) serviceImpl.getAssetState(
               (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetAssetState>) responseObserver);
-        case METHODID_GET_PROTOCOL_STATE:
-          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.getProtocolState(
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetProtocolState>) responseObserver);
-        case METHODID_GET_STAKE_STATE:
-          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.getStakeState(
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetStakeState>) responseObserver);
         case METHODID_GET_SWAP_STATE:
           return (io.grpc.stub.StreamObserver<Req>) serviceImpl.getSwapState(
               (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetSwapState>) responseObserver);
@@ -460,8 +396,6 @@ public final class StateRpcGrpc {
               .addMethod(METHOD_GET_ACCOUNT_STATE)
               .addMethod(METHOD_GET_ASSET_STATE)
               .addMethod(METHOD_GET_FORGE_STATE)
-              .addMethod(METHOD_GET_PROTOCOL_STATE)
-              .addMethod(METHOD_GET_STAKE_STATE)
               .addMethod(METHOD_GET_SWAP_STATE)
               .addMethod(METHOD_GET_DELEGATE_STATE)
               .build();

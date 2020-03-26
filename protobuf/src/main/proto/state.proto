@@ -29,7 +29,6 @@ message AccountState {
 
   uint64 num_assets = 15;
 
-
   StakeContext stake = 16;
   CircularQueue pinned_files = 17;
   PokeInfo poke = 18;
@@ -169,6 +168,17 @@ message SwapState {
   StateContext context = 10;
 }
 
+// TODO: [peiling] We have already defined this state in core protocols repo.
+// The only reason we define this state here again is because the protobuf
+// definition ResponseGetSwapStatistics needs to reference to this.
+message SwapStatistics {
+  string address = 1;
+  BigUint locked_value_out = 2;
+  BigUint locked_value_in = 3;
+  uint32 locked_assets_out = 4;
+  uint32 locked_assets_in = 5;
+}
+
 // a rule can check against the statistics values, e.g. state.num_txs < 10000,
 // state.balance_delta < 50000, delta is calculated based on the
 // configuration for interval.
@@ -191,5 +201,20 @@ message DelegateState {
   // state context, replace exiting fields
   StateContext context = 14;
   // forge app can extend this
+  google.protobuf.Any data = 15;
+}
+
+message AssetFactoryState {
+  string description = 1;
+  uint32 limit = 2;
+  BigUint price = 3;
+  string template = 4;
+  repeated string allowed_spec_args = 5;
+  string asset_name = 6;
+  AssetAttributes attributes = 7;
+
+  uint32 num_created = 8;
+
+  // extra context that user
   google.protobuf.Any data = 15;
 }

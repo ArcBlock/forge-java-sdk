@@ -1,6 +1,0 @@
-syntax = "proto3";
-package forge_abi;
-
-message RevokeWithdrawTx {
-  string withdraw_tx_hash = 1;  // the hash of withdraw tx
-}

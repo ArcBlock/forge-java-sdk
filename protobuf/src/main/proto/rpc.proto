@@ -12,8 +12,8 @@ import "trace_type.proto";
 // send_tx(tx, wallet, token, commit \\ false)
 message RequestSendTx {
   Transaction tx = 1;
-  WalletInfo wallet = 2;
-  string token = 3;
+  WalletInfo wallet = 2 [ deprecated = true ];
+  string token = 3 [ deprecated = true ];
   bool commit = 4;
 }
 
@@ -50,11 +50,15 @@ message ResponseGetBlocks {
   repeated BlockInfoSimple blocks = 3;
 }
 
-message RequestDeclareNode { bool validator = 1; }
+message RequestDeclareNode {
+  bool validator = 1;
+  string issuer = 2;
+}
 
 message ResponseDeclareNode {
   StatusCode code = 1;
   WalletInfo wallet = 3;
+  Transaction tx = 4;
 }
 
 // get_account_state(address, key): retrieve the current state from a list of
@@ -80,28 +84,6 @@ message RequestGetAssetState {
 message ResponseGetAssetState {
   StatusCode code = 1;
   AssetState state = 2;
-}
-
-message RequestGetProtocolState {
-  string address = 1;
-  repeated string keys = 2;
-  uint64 height = 3;
-}
-
-message ResponseGetProtocolState {
-  StatusCode code = 1;
-  ProtocolState state = 2;
-}
-
-message RequestGetStakeState {
-  string address = 1;
-  repeated string keys = 2;
-  uint64 height = 3;
-}
-
-message ResponseGetStakeState {
-  StatusCode code = 1;
-  StakeState state = 2;
 }
 
 // get_forge_state(key): retrieve Forge state by key. If key is omitted, return
@@ -137,27 +119,6 @@ message ResponseGetDelegateState {
   StatusCode code = 1;
   DelegateState state = 2;
 }
-
-// store_file(chunk): store a piece of data into ipfs, return its hash address
-message RequestStoreFile { bytes chunk = 1; }
-
-message ResponseStoreFile {
-  StatusCode code = 1;
-  string hash = 2;
-}
-
-// load_file(hash): load a hash address from ipfs and return the file content
-message RequestLoadFile { string hash = 1; }
-
-message ResponseLoadFile {
-  StatusCode code = 1;
-  bytes chunk = 2;
-}
-
-// pin_file(hash): pin a hash address into ipfs, return ok if success
-message RequestPinFile { string hash = 1; }
-
-message ResponsePinFile { StatusCode code = 1; }
 
 // get_chain_info(): retrieve the current chain information
 message RequestGetChainInfo {}
@@ -226,7 +187,7 @@ message ResponseSubscribe {
     Transaction confirm = 5;
     Transaction create_asset = 6;
     Transaction exchange = 7;
-    Transaction revoke = 8 [deprecated = true];
+    // Transaction revoke = 8 [ deprecated = true ];
 
     abci_vendor.RequestBeginBlock begin_block = 16;
     abci_vendor.RequestEndBlock end_block = 17;
@@ -234,12 +195,12 @@ message ResponseSubscribe {
     Transaction declare = 19;
     Transaction update_asset = 20;
     Transaction consensus_upgrade = 21;
-    Transaction declare_file = 22 [deprecated = true];
+    // Transaction declare_file = 22 [ deprecated = true ];
     Transaction sys_upgrade = 23;
     Transaction stake = 24;
     Transaction delegate = 25;
-    Transaction activate_protocol = 26;
-    Transaction deactivate_protocol = 27;
+    // Transaction activate_protocol = 26 [ deprecated = true ];
+    // Transaction deactivate_protocol = 27 [ deprecated = true ];
     Transaction revoke_delegate = 28;
     Transaction deposit_token = 29;
     Transaction withdraw_token = 30;
@@ -249,17 +210,18 @@ message ResponseSubscribe {
     Transaction revoke_swap = 34;
     Transaction retrieve_swap = 35;
     Transaction poke = 36;
-    Transaction deploy_protocol = 37;
+    // Transaction deploy_protocol = 37 [ deprecated = true ];
     Transaction consume_asset = 38;
     Transaction acquire_asset = 39;
     Transaction upgrade_node = 40;
-
+    Transaction update_validator = 41;
+    Transaction update_consensus_params = 42;
 
     AccountState account_state = 129;
     AssetState asset_state = 130;
     ForgeState forge_state = 131;
-    StakeState stake_state = 132;
-    ProtocolState protocol_state = 133;
+    // StakeState stake_state = 132 [ deprecated = true ];
+    // ProtocolState protocol_state = 133 [ deprecated = true ];
     DelegateState delegate_state = 134;
     SwapState swap_state = 135;
   }
@@ -383,6 +345,13 @@ message ResponseListSwap {
   StatusCode code = 1;
   PageInfo page = 2;
   repeated SwapState swap = 3;
+}
+
+message RequestGetSwapStatistics { string address = 1; }
+
+message ResponseGetSwapStatistics {
+  StatusCode code = 1;
+  SwapStatistics statistics = 2;
 }
 
 message RequestGetHealthStatus {}

@@ -147,6 +147,18 @@ public final class StatsRpcGrpc {
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               forge_abi.Rpc.ResponseListSwap.getDefaultInstance()))
           .build();
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestGetSwapStatistics,
+      forge_abi.Rpc.ResponseGetSwapStatistics> METHOD_GET_SWAP_STATISTICS =
+      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestGetSwapStatistics, forge_abi.Rpc.ResponseGetSwapStatistics>newBuilder()
+          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName(generateFullMethodName(
+              "forge_abi.StatsRpc", "get_swap_statistics"))
+          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              forge_abi.Rpc.RequestGetSwapStatistics.getDefaultInstance()))
+          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              forge_abi.Rpc.ResponseGetSwapStatistics.getDefaultInstance()))
+          .build();
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -245,6 +257,13 @@ public final class StatsRpcGrpc {
       asyncUnimplementedUnaryCall(METHOD_LIST_SWAP, responseObserver);
     }
 
+    /**
+     */
+    public void getSwapStatistics(forge_abi.Rpc.RequestGetSwapStatistics request,
+        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetSwapStatistics> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_GET_SWAP_STATISTICS, responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -317,6 +336,13 @@ public final class StatsRpcGrpc {
                 forge_abi.Rpc.RequestListSwap,
                 forge_abi.Rpc.ResponseListSwap>(
                   this, METHODID_LIST_SWAP)))
+          .addMethod(
+            METHOD_GET_SWAP_STATISTICS,
+            asyncUnaryCall(
+              new MethodHandlers<
+                forge_abi.Rpc.RequestGetSwapStatistics,
+                forge_abi.Rpc.ResponseGetSwapStatistics>(
+                  this, METHODID_GET_SWAP_STATISTICS)))
           .build();
     }
   }
@@ -418,6 +444,14 @@ public final class StatsRpcGrpc {
       asyncUnaryCall(
           getChannel().newCall(METHOD_LIST_SWAP, getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void getSwapStatistics(forge_abi.Rpc.RequestGetSwapStatistics request,
+        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetSwapStatistics> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_GET_SWAP_STATISTICS, getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -506,6 +540,13 @@ public final class StatsRpcGrpc {
     public forge_abi.Rpc.ResponseListSwap listSwap(forge_abi.Rpc.RequestListSwap request) {
       return blockingUnaryCall(
           getChannel(), METHOD_LIST_SWAP, getCallOptions(), request);
+    }
+
+    /**
+     */
+    public forge_abi.Rpc.ResponseGetSwapStatistics getSwapStatistics(forge_abi.Rpc.RequestGetSwapStatistics request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_GET_SWAP_STATISTICS, getCallOptions(), request);
     }
   }
 
@@ -606,6 +647,14 @@ public final class StatsRpcGrpc {
       return futureUnaryCall(
           getChannel().newCall(METHOD_LIST_SWAP, getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponseGetSwapStatistics> getSwapStatistics(
+        forge_abi.Rpc.RequestGetSwapStatistics request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_GET_SWAP_STATISTICS, getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_GET_FORGE_STATS = 0;
@@ -618,6 +667,7 @@ public final class StatsRpcGrpc {
   private static final int METHODID_LIST_BLOCKS = 7;
   private static final int METHODID_GET_HEALTH_STATUS = 8;
   private static final int METHODID_LIST_SWAP = 9;
+  private static final int METHODID_GET_SWAP_STATISTICS = 10;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -676,6 +726,10 @@ public final class StatsRpcGrpc {
           serviceImpl.listSwap((forge_abi.Rpc.RequestListSwap) request,
               (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseListSwap>) responseObserver);
           break;
+        case METHODID_GET_SWAP_STATISTICS:
+          serviceImpl.getSwapStatistics((forge_abi.Rpc.RequestGetSwapStatistics) request,
+              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseGetSwapStatistics>) responseObserver);
+          break;
         default:
           throw new AssertionError();
       }
@@ -719,6 +773,7 @@ public final class StatsRpcGrpc {
               .addMethod(METHOD_LIST_BLOCKS)
               .addMethod(METHOD_GET_HEALTH_STATUS)
               .addMethod(METHOD_LIST_SWAP)
+              .addMethod(METHOD_GET_SWAP_STATISTICS)
               .build();
         }
       }

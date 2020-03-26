@@ -1,7 +1,8 @@
 package io.arcblock.forge.did
 
-import forge_abi.CreateAsset
+
 import forge_abi.Enum
+import forge_abi.Tx
 import forge_abi.Type
 import io.arcblock.forge.Hasher
 import io.arcblock.forge.WalletUtils
@@ -127,7 +128,7 @@ object DIDGenerator {
   fun genAssetDid(senderAddress: String, itx: ByteArray): String {
 //    val hashType = DidUtils.decodeDidHashType(senderAddress)
 //    val keyType = DidUtils.decodeDidSignType(senderAddress)
-    val itxNoAddress = CreateAsset.CreateAssetTx.newBuilder().mergeFrom(itx).clearAddress().build().toByteArray()
+    val itxNoAddress = Tx.CreateAssetTx.newBuilder().mergeFrom(itx).clearAddress().build().toByteArray()
     return hashToAddress(RoleType.ASSET, ED25519, SHA3, ArcSha3Hasher.sha(itxNoAddress))
   }
 
@@ -135,7 +136,7 @@ object DIDGenerator {
    * Generate Asset Address for CreateAssetTX
    */
   fun genAssetDid(itx: ByteArray): String {
-    val itxNoAddress = CreateAsset.CreateAssetTx.newBuilder().mergeFrom(itx).clearAddress().build().toByteArray()
+    val itxNoAddress = Tx.CreateAssetTx.newBuilder().mergeFrom(itx).clearAddress().build().toByteArray()
     return hashToAddress(RoleType.ASSET, ED25519, SHA3, ArcSha3Hasher.sha(itxNoAddress))
   }
 

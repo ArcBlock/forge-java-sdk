@@ -45,15 +45,15 @@ do
   curl -H "Authorization: token $GITHUB_TOKEN" -H 'Accept: application/vnd.github.v4.raw' -O -L $f
 done
 
-for f in ${TLIST[@]}
-do
-  echo $f
-  tmp=${f##*lib/}
-  tmp=${tmp%/*}
-  tmp=${tmp##*/}.proto
-  echo $tmp
-  curl -H "Authorization: token $GITHUB_TOKEN" -H 'Accept: application/vnd.github.v4.raw' -o ${tmp//\//_}  -O -L $f
-done
+#for f in ${TLIST[@]}
+#do
+#  echo $f
+#  tmp=${f##*lib/}
+#  tmp=${tmp%/*}
+#  tmp=${tmp##*/}.proto
+#  echo $tmp
+#  curl -H "Authorization: token $GITHUB_TOKEN" -H 'Accept: application/vnd.github.v4.raw' -o ${tmp//\//_}  -O -L $f
+#done
 
 
 echo "finish"
