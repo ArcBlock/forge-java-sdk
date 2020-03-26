@@ -3,7 +3,8 @@ package io.arcblock.forge.did
 import com.google.common.io.BaseEncoding
 import com.google.protobuf.Any
 import com.google.protobuf.ByteString
-import forge_abi.CreateAsset
+import forge_abi.Tx
+
 
 import io.arcblock.forge.Hasher
 import io.arcblock.forge.WalletUtils
@@ -113,7 +114,7 @@ class DIDGeneratorTest {
   @Test
   fun genAssetDid(){
     val data =Any.newBuilder().setTypeUrl("test_asset").setValue(ByteString.copyFromUtf8("hello world")).build()
-    val itx = CreateAsset.CreateAssetTx.newBuilder().setData(data)
+    val itx = Tx.CreateAssetTx.newBuilder().setData(data)
       .setMoniker("")
       .setReadonly(false)
       .setParent("")
@@ -132,7 +133,7 @@ class DIDGeneratorTest {
     data.toByteArray().forEach { print("$it,") }
     println("")
 
-    val itx = CreateAsset.CreateAssetTx.newBuilder().setData(data)
+    val itx = Tx.CreateAssetTx.newBuilder().setData(data)
       .setMoniker("")
       .setReadonly(false)
       .setParent("")

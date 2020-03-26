@@ -17600,6 +17600,1035 @@ public final class State {
 
   }
 
+  public interface SwapStatisticsOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.SwapStatistics)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string address = 1;</code>
+     */
+    java.lang.String getAddress();
+    /**
+     * <code>string address = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getAddressBytes();
+
+    /**
+     * <code>.forge_abi.BigUint locked_value_out = 2;</code>
+     */
+    boolean hasLockedValueOut();
+    /**
+     * <code>.forge_abi.BigUint locked_value_out = 2;</code>
+     */
+    forge_abi.Type.BigUint getLockedValueOut();
+    /**
+     * <code>.forge_abi.BigUint locked_value_out = 2;</code>
+     */
+    forge_abi.Type.BigUintOrBuilder getLockedValueOutOrBuilder();
+
+    /**
+     * <code>.forge_abi.BigUint locked_value_in = 3;</code>
+     */
+    boolean hasLockedValueIn();
+    /**
+     * <code>.forge_abi.BigUint locked_value_in = 3;</code>
+     */
+    forge_abi.Type.BigUint getLockedValueIn();
+    /**
+     * <code>.forge_abi.BigUint locked_value_in = 3;</code>
+     */
+    forge_abi.Type.BigUintOrBuilder getLockedValueInOrBuilder();
+
+    /**
+     * <code>uint32 locked_assets_out = 4;</code>
+     */
+    int getLockedAssetsOut();
+
+    /**
+     * <code>uint32 locked_assets_in = 5;</code>
+     */
+    int getLockedAssetsIn();
+  }
+  /**
+   * <pre>
+   * TODO: [peiling] We have already defined this state in core protocols repo.
+   * The only reason we define this state here again is because the protobuf
+   * definition ResponseGetSwapStatistics needs to reference to this.
+   * </pre>
+   *
+   * Protobuf type {@code forge_abi.SwapStatistics}
+   */
+  public  static final class SwapStatistics extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:forge_abi.SwapStatistics)
+      SwapStatisticsOrBuilder {
+    // Use SwapStatistics.newBuilder() to construct.
+    private SwapStatistics(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private SwapStatistics() {
+      address_ = "";
+      lockedAssetsOut_ = 0;
+      lockedAssetsIn_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private SwapStatistics(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              address_ = s;
+              break;
+            }
+            case 18: {
+              forge_abi.Type.BigUint.Builder subBuilder = null;
+              if (lockedValueOut_ != null) {
+                subBuilder = lockedValueOut_.toBuilder();
+              }
+              lockedValueOut_ = input.readMessage(forge_abi.Type.BigUint.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(lockedValueOut_);
+                lockedValueOut_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 26: {
+              forge_abi.Type.BigUint.Builder subBuilder = null;
+              if (lockedValueIn_ != null) {
+                subBuilder = lockedValueIn_.toBuilder();
+              }
+              lockedValueIn_ = input.readMessage(forge_abi.Type.BigUint.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(lockedValueIn_);
+                lockedValueIn_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 32: {
+
+              lockedAssetsOut_ = input.readUInt32();
+              break;
+            }
+            case 40: {
+
+              lockedAssetsIn_ = input.readUInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return forge_abi.State.internal_static_forge_abi_SwapStatistics_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return forge_abi.State.internal_static_forge_abi_SwapStatistics_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              forge_abi.State.SwapStatistics.class, forge_abi.State.SwapStatistics.Builder.class);
+    }
+
+    public static final int ADDRESS_FIELD_NUMBER = 1;
+    private volatile java.lang.Object address_;
+    /**
+     * <code>string address = 1;</code>
+     */
+    public java.lang.String getAddress() {
+      java.lang.Object ref = address_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        address_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string address = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAddressBytes() {
+      java.lang.Object ref = address_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        address_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int LOCKED_VALUE_OUT_FIELD_NUMBER = 2;
+    private forge_abi.Type.BigUint lockedValueOut_;
+    /**
+     * <code>.forge_abi.BigUint locked_value_out = 2;</code>
+     */
+    public boolean hasLockedValueOut() {
+      return lockedValueOut_ != null;
+    }
+    /**
+     * <code>.forge_abi.BigUint locked_value_out = 2;</code>
+     */
+    public forge_abi.Type.BigUint getLockedValueOut() {
+      return lockedValueOut_ == null ? forge_abi.Type.BigUint.getDefaultInstance() : lockedValueOut_;
+    }
+    /**
+     * <code>.forge_abi.BigUint locked_value_out = 2;</code>
+     */
+    public forge_abi.Type.BigUintOrBuilder getLockedValueOutOrBuilder() {
+      return getLockedValueOut();
+    }
+
+    public static final int LOCKED_VALUE_IN_FIELD_NUMBER = 3;
+    private forge_abi.Type.BigUint lockedValueIn_;
+    /**
+     * <code>.forge_abi.BigUint locked_value_in = 3;</code>
+     */
+    public boolean hasLockedValueIn() {
+      return lockedValueIn_ != null;
+    }
+    /**
+     * <code>.forge_abi.BigUint locked_value_in = 3;</code>
+     */
+    public forge_abi.Type.BigUint getLockedValueIn() {
+      return lockedValueIn_ == null ? forge_abi.Type.BigUint.getDefaultInstance() : lockedValueIn_;
+    }
+    /**
+     * <code>.forge_abi.BigUint locked_value_in = 3;</code>
+     */
+    public forge_abi.Type.BigUintOrBuilder getLockedValueInOrBuilder() {
+      return getLockedValueIn();
+    }
+
+    public static final int LOCKED_ASSETS_OUT_FIELD_NUMBER = 4;
+    private int lockedAssetsOut_;
+    /**
+     * <code>uint32 locked_assets_out = 4;</code>
+     */
+    public int getLockedAssetsOut() {
+      return lockedAssetsOut_;
+    }
+
+    public static final int LOCKED_ASSETS_IN_FIELD_NUMBER = 5;
+    private int lockedAssetsIn_;
+    /**
+     * <code>uint32 locked_assets_in = 5;</code>
+     */
+    public int getLockedAssetsIn() {
+      return lockedAssetsIn_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getAddressBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, address_);
+      }
+      if (lockedValueOut_ != null) {
+        output.writeMessage(2, getLockedValueOut());
+      }
+      if (lockedValueIn_ != null) {
+        output.writeMessage(3, getLockedValueIn());
+      }
+      if (lockedAssetsOut_ != 0) {
+        output.writeUInt32(4, lockedAssetsOut_);
+      }
+      if (lockedAssetsIn_ != 0) {
+        output.writeUInt32(5, lockedAssetsIn_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getAddressBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, address_);
+      }
+      if (lockedValueOut_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getLockedValueOut());
+      }
+      if (lockedValueIn_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, getLockedValueIn());
+      }
+      if (lockedAssetsOut_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(4, lockedAssetsOut_);
+      }
+      if (lockedAssetsIn_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(5, lockedAssetsIn_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof forge_abi.State.SwapStatistics)) {
+        return super.equals(obj);
+      }
+      forge_abi.State.SwapStatistics other = (forge_abi.State.SwapStatistics) obj;
+
+      boolean result = true;
+      result = result && getAddress()
+          .equals(other.getAddress());
+      result = result && (hasLockedValueOut() == other.hasLockedValueOut());
+      if (hasLockedValueOut()) {
+        result = result && getLockedValueOut()
+            .equals(other.getLockedValueOut());
+      }
+      result = result && (hasLockedValueIn() == other.hasLockedValueIn());
+      if (hasLockedValueIn()) {
+        result = result && getLockedValueIn()
+            .equals(other.getLockedValueIn());
+      }
+      result = result && (getLockedAssetsOut()
+          == other.getLockedAssetsOut());
+      result = result && (getLockedAssetsIn()
+          == other.getLockedAssetsIn());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ADDRESS_FIELD_NUMBER;
+      hash = (53 * hash) + getAddress().hashCode();
+      if (hasLockedValueOut()) {
+        hash = (37 * hash) + LOCKED_VALUE_OUT_FIELD_NUMBER;
+        hash = (53 * hash) + getLockedValueOut().hashCode();
+      }
+      if (hasLockedValueIn()) {
+        hash = (37 * hash) + LOCKED_VALUE_IN_FIELD_NUMBER;
+        hash = (53 * hash) + getLockedValueIn().hashCode();
+      }
+      hash = (37 * hash) + LOCKED_ASSETS_OUT_FIELD_NUMBER;
+      hash = (53 * hash) + getLockedAssetsOut();
+      hash = (37 * hash) + LOCKED_ASSETS_IN_FIELD_NUMBER;
+      hash = (53 * hash) + getLockedAssetsIn();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static forge_abi.State.SwapStatistics parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.State.SwapStatistics parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.State.SwapStatistics parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.State.SwapStatistics parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.State.SwapStatistics parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.State.SwapStatistics parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.State.SwapStatistics parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static forge_abi.State.SwapStatistics parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.State.SwapStatistics parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.State.SwapStatistics parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(forge_abi.State.SwapStatistics prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * TODO: [peiling] We have already defined this state in core protocols repo.
+     * The only reason we define this state here again is because the protobuf
+     * definition ResponseGetSwapStatistics needs to reference to this.
+     * </pre>
+     *
+     * Protobuf type {@code forge_abi.SwapStatistics}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:forge_abi.SwapStatistics)
+        forge_abi.State.SwapStatisticsOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return forge_abi.State.internal_static_forge_abi_SwapStatistics_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return forge_abi.State.internal_static_forge_abi_SwapStatistics_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                forge_abi.State.SwapStatistics.class, forge_abi.State.SwapStatistics.Builder.class);
+      }
+
+      // Construct using forge_abi.State.SwapStatistics.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        address_ = "";
+
+        if (lockedValueOutBuilder_ == null) {
+          lockedValueOut_ = null;
+        } else {
+          lockedValueOut_ = null;
+          lockedValueOutBuilder_ = null;
+        }
+        if (lockedValueInBuilder_ == null) {
+          lockedValueIn_ = null;
+        } else {
+          lockedValueIn_ = null;
+          lockedValueInBuilder_ = null;
+        }
+        lockedAssetsOut_ = 0;
+
+        lockedAssetsIn_ = 0;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return forge_abi.State.internal_static_forge_abi_SwapStatistics_descriptor;
+      }
+
+      public forge_abi.State.SwapStatistics getDefaultInstanceForType() {
+        return forge_abi.State.SwapStatistics.getDefaultInstance();
+      }
+
+      public forge_abi.State.SwapStatistics build() {
+        forge_abi.State.SwapStatistics result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public forge_abi.State.SwapStatistics buildPartial() {
+        forge_abi.State.SwapStatistics result = new forge_abi.State.SwapStatistics(this);
+        result.address_ = address_;
+        if (lockedValueOutBuilder_ == null) {
+          result.lockedValueOut_ = lockedValueOut_;
+        } else {
+          result.lockedValueOut_ = lockedValueOutBuilder_.build();
+        }
+        if (lockedValueInBuilder_ == null) {
+          result.lockedValueIn_ = lockedValueIn_;
+        } else {
+          result.lockedValueIn_ = lockedValueInBuilder_.build();
+        }
+        result.lockedAssetsOut_ = lockedAssetsOut_;
+        result.lockedAssetsIn_ = lockedAssetsIn_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof forge_abi.State.SwapStatistics) {
+          return mergeFrom((forge_abi.State.SwapStatistics)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(forge_abi.State.SwapStatistics other) {
+        if (other == forge_abi.State.SwapStatistics.getDefaultInstance()) return this;
+        if (!other.getAddress().isEmpty()) {
+          address_ = other.address_;
+          onChanged();
+        }
+        if (other.hasLockedValueOut()) {
+          mergeLockedValueOut(other.getLockedValueOut());
+        }
+        if (other.hasLockedValueIn()) {
+          mergeLockedValueIn(other.getLockedValueIn());
+        }
+        if (other.getLockedAssetsOut() != 0) {
+          setLockedAssetsOut(other.getLockedAssetsOut());
+        }
+        if (other.getLockedAssetsIn() != 0) {
+          setLockedAssetsIn(other.getLockedAssetsIn());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        forge_abi.State.SwapStatistics parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (forge_abi.State.SwapStatistics) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object address_ = "";
+      /**
+       * <code>string address = 1;</code>
+       */
+      public java.lang.String getAddress() {
+        java.lang.Object ref = address_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          address_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string address = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAddressBytes() {
+        java.lang.Object ref = address_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          address_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string address = 1;</code>
+       */
+      public Builder setAddress(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        address_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string address = 1;</code>
+       */
+      public Builder clearAddress() {
+        
+        address_ = getDefaultInstance().getAddress();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string address = 1;</code>
+       */
+      public Builder setAddressBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        address_ = value;
+        onChanged();
+        return this;
+      }
+
+      private forge_abi.Type.BigUint lockedValueOut_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder> lockedValueOutBuilder_;
+      /**
+       * <code>.forge_abi.BigUint locked_value_out = 2;</code>
+       */
+      public boolean hasLockedValueOut() {
+        return lockedValueOutBuilder_ != null || lockedValueOut_ != null;
+      }
+      /**
+       * <code>.forge_abi.BigUint locked_value_out = 2;</code>
+       */
+      public forge_abi.Type.BigUint getLockedValueOut() {
+        if (lockedValueOutBuilder_ == null) {
+          return lockedValueOut_ == null ? forge_abi.Type.BigUint.getDefaultInstance() : lockedValueOut_;
+        } else {
+          return lockedValueOutBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.forge_abi.BigUint locked_value_out = 2;</code>
+       */
+      public Builder setLockedValueOut(forge_abi.Type.BigUint value) {
+        if (lockedValueOutBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          lockedValueOut_ = value;
+          onChanged();
+        } else {
+          lockedValueOutBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint locked_value_out = 2;</code>
+       */
+      public Builder setLockedValueOut(
+          forge_abi.Type.BigUint.Builder builderForValue) {
+        if (lockedValueOutBuilder_ == null) {
+          lockedValueOut_ = builderForValue.build();
+          onChanged();
+        } else {
+          lockedValueOutBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint locked_value_out = 2;</code>
+       */
+      public Builder mergeLockedValueOut(forge_abi.Type.BigUint value) {
+        if (lockedValueOutBuilder_ == null) {
+          if (lockedValueOut_ != null) {
+            lockedValueOut_ =
+              forge_abi.Type.BigUint.newBuilder(lockedValueOut_).mergeFrom(value).buildPartial();
+          } else {
+            lockedValueOut_ = value;
+          }
+          onChanged();
+        } else {
+          lockedValueOutBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint locked_value_out = 2;</code>
+       */
+      public Builder clearLockedValueOut() {
+        if (lockedValueOutBuilder_ == null) {
+          lockedValueOut_ = null;
+          onChanged();
+        } else {
+          lockedValueOut_ = null;
+          lockedValueOutBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint locked_value_out = 2;</code>
+       */
+      public forge_abi.Type.BigUint.Builder getLockedValueOutBuilder() {
+        
+        onChanged();
+        return getLockedValueOutFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.BigUint locked_value_out = 2;</code>
+       */
+      public forge_abi.Type.BigUintOrBuilder getLockedValueOutOrBuilder() {
+        if (lockedValueOutBuilder_ != null) {
+          return lockedValueOutBuilder_.getMessageOrBuilder();
+        } else {
+          return lockedValueOut_ == null ?
+              forge_abi.Type.BigUint.getDefaultInstance() : lockedValueOut_;
+        }
+      }
+      /**
+       * <code>.forge_abi.BigUint locked_value_out = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder> 
+          getLockedValueOutFieldBuilder() {
+        if (lockedValueOutBuilder_ == null) {
+          lockedValueOutBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder>(
+                  getLockedValueOut(),
+                  getParentForChildren(),
+                  isClean());
+          lockedValueOut_ = null;
+        }
+        return lockedValueOutBuilder_;
+      }
+
+      private forge_abi.Type.BigUint lockedValueIn_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder> lockedValueInBuilder_;
+      /**
+       * <code>.forge_abi.BigUint locked_value_in = 3;</code>
+       */
+      public boolean hasLockedValueIn() {
+        return lockedValueInBuilder_ != null || lockedValueIn_ != null;
+      }
+      /**
+       * <code>.forge_abi.BigUint locked_value_in = 3;</code>
+       */
+      public forge_abi.Type.BigUint getLockedValueIn() {
+        if (lockedValueInBuilder_ == null) {
+          return lockedValueIn_ == null ? forge_abi.Type.BigUint.getDefaultInstance() : lockedValueIn_;
+        } else {
+          return lockedValueInBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.forge_abi.BigUint locked_value_in = 3;</code>
+       */
+      public Builder setLockedValueIn(forge_abi.Type.BigUint value) {
+        if (lockedValueInBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          lockedValueIn_ = value;
+          onChanged();
+        } else {
+          lockedValueInBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint locked_value_in = 3;</code>
+       */
+      public Builder setLockedValueIn(
+          forge_abi.Type.BigUint.Builder builderForValue) {
+        if (lockedValueInBuilder_ == null) {
+          lockedValueIn_ = builderForValue.build();
+          onChanged();
+        } else {
+          lockedValueInBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint locked_value_in = 3;</code>
+       */
+      public Builder mergeLockedValueIn(forge_abi.Type.BigUint value) {
+        if (lockedValueInBuilder_ == null) {
+          if (lockedValueIn_ != null) {
+            lockedValueIn_ =
+              forge_abi.Type.BigUint.newBuilder(lockedValueIn_).mergeFrom(value).buildPartial();
+          } else {
+            lockedValueIn_ = value;
+          }
+          onChanged();
+        } else {
+          lockedValueInBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint locked_value_in = 3;</code>
+       */
+      public Builder clearLockedValueIn() {
+        if (lockedValueInBuilder_ == null) {
+          lockedValueIn_ = null;
+          onChanged();
+        } else {
+          lockedValueIn_ = null;
+          lockedValueInBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint locked_value_in = 3;</code>
+       */
+      public forge_abi.Type.BigUint.Builder getLockedValueInBuilder() {
+        
+        onChanged();
+        return getLockedValueInFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.BigUint locked_value_in = 3;</code>
+       */
+      public forge_abi.Type.BigUintOrBuilder getLockedValueInOrBuilder() {
+        if (lockedValueInBuilder_ != null) {
+          return lockedValueInBuilder_.getMessageOrBuilder();
+        } else {
+          return lockedValueIn_ == null ?
+              forge_abi.Type.BigUint.getDefaultInstance() : lockedValueIn_;
+        }
+      }
+      /**
+       * <code>.forge_abi.BigUint locked_value_in = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder> 
+          getLockedValueInFieldBuilder() {
+        if (lockedValueInBuilder_ == null) {
+          lockedValueInBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder>(
+                  getLockedValueIn(),
+                  getParentForChildren(),
+                  isClean());
+          lockedValueIn_ = null;
+        }
+        return lockedValueInBuilder_;
+      }
+
+      private int lockedAssetsOut_ ;
+      /**
+       * <code>uint32 locked_assets_out = 4;</code>
+       */
+      public int getLockedAssetsOut() {
+        return lockedAssetsOut_;
+      }
+      /**
+       * <code>uint32 locked_assets_out = 4;</code>
+       */
+      public Builder setLockedAssetsOut(int value) {
+        
+        lockedAssetsOut_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 locked_assets_out = 4;</code>
+       */
+      public Builder clearLockedAssetsOut() {
+        
+        lockedAssetsOut_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int lockedAssetsIn_ ;
+      /**
+       * <code>uint32 locked_assets_in = 5;</code>
+       */
+      public int getLockedAssetsIn() {
+        return lockedAssetsIn_;
+      }
+      /**
+       * <code>uint32 locked_assets_in = 5;</code>
+       */
+      public Builder setLockedAssetsIn(int value) {
+        
+        lockedAssetsIn_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 locked_assets_in = 5;</code>
+       */
+      public Builder clearLockedAssetsIn() {
+        
+        lockedAssetsIn_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:forge_abi.SwapStatistics)
+    }
+
+    // @@protoc_insertion_point(class_scope:forge_abi.SwapStatistics)
+    private static final forge_abi.State.SwapStatistics DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new forge_abi.State.SwapStatistics();
+    }
+
+    public static forge_abi.State.SwapStatistics getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<SwapStatistics>
+        PARSER = new com.google.protobuf.AbstractParser<SwapStatistics>() {
+      public SwapStatistics parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new SwapStatistics(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<SwapStatistics> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SwapStatistics> getParserForType() {
+      return PARSER;
+    }
+
+    public forge_abi.State.SwapStatistics getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface DelegateOpStateOrBuilder extends
       // @@protoc_insertion_point(interface_extends:forge_abi.DelegateOpState)
       com.google.protobuf.MessageOrBuilder {
@@ -19998,6 +21027,1745 @@ public final class State {
 
   }
 
+  public interface AssetFactoryStateOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:forge_abi.AssetFactoryState)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string description = 1;</code>
+     */
+    java.lang.String getDescription();
+    /**
+     * <code>string description = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getDescriptionBytes();
+
+    /**
+     * <code>uint32 limit = 2;</code>
+     */
+    int getLimit();
+
+    /**
+     * <code>.forge_abi.BigUint price = 3;</code>
+     */
+    boolean hasPrice();
+    /**
+     * <code>.forge_abi.BigUint price = 3;</code>
+     */
+    forge_abi.Type.BigUint getPrice();
+    /**
+     * <code>.forge_abi.BigUint price = 3;</code>
+     */
+    forge_abi.Type.BigUintOrBuilder getPriceOrBuilder();
+
+    /**
+     * <code>string template = 4;</code>
+     */
+    java.lang.String getTemplate();
+    /**
+     * <code>string template = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getTemplateBytes();
+
+    /**
+     * <code>repeated string allowed_spec_args = 5;</code>
+     */
+    java.util.List<java.lang.String>
+        getAllowedSpecArgsList();
+    /**
+     * <code>repeated string allowed_spec_args = 5;</code>
+     */
+    int getAllowedSpecArgsCount();
+    /**
+     * <code>repeated string allowed_spec_args = 5;</code>
+     */
+    java.lang.String getAllowedSpecArgs(int index);
+    /**
+     * <code>repeated string allowed_spec_args = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getAllowedSpecArgsBytes(int index);
+
+    /**
+     * <code>string asset_name = 6;</code>
+     */
+    java.lang.String getAssetName();
+    /**
+     * <code>string asset_name = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getAssetNameBytes();
+
+    /**
+     * <code>.forge_abi.AssetAttributes attributes = 7;</code>
+     */
+    boolean hasAttributes();
+    /**
+     * <code>.forge_abi.AssetAttributes attributes = 7;</code>
+     */
+    forge_abi.Tx.AssetAttributes getAttributes();
+    /**
+     * <code>.forge_abi.AssetAttributes attributes = 7;</code>
+     */
+    forge_abi.Tx.AssetAttributesOrBuilder getAttributesOrBuilder();
+
+    /**
+     * <code>uint32 num_created = 8;</code>
+     */
+    int getNumCreated();
+
+    /**
+     * <pre>
+     * extra context that user
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    boolean hasData();
+    /**
+     * <pre>
+     * extra context that user
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    com.google.protobuf.Any getData();
+    /**
+     * <pre>
+     * extra context that user
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    com.google.protobuf.AnyOrBuilder getDataOrBuilder();
+  }
+  /**
+   * Protobuf type {@code forge_abi.AssetFactoryState}
+   */
+  public  static final class AssetFactoryState extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:forge_abi.AssetFactoryState)
+      AssetFactoryStateOrBuilder {
+    // Use AssetFactoryState.newBuilder() to construct.
+    private AssetFactoryState(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private AssetFactoryState() {
+      description_ = "";
+      limit_ = 0;
+      template_ = "";
+      allowedSpecArgs_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      assetName_ = "";
+      numCreated_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private AssetFactoryState(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              description_ = s;
+              break;
+            }
+            case 16: {
+
+              limit_ = input.readUInt32();
+              break;
+            }
+            case 26: {
+              forge_abi.Type.BigUint.Builder subBuilder = null;
+              if (price_ != null) {
+                subBuilder = price_.toBuilder();
+              }
+              price_ = input.readMessage(forge_abi.Type.BigUint.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(price_);
+                price_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              template_ = s;
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                allowedSpecArgs_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              allowedSpecArgs_.add(s);
+              break;
+            }
+            case 50: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              assetName_ = s;
+              break;
+            }
+            case 58: {
+              forge_abi.Tx.AssetAttributes.Builder subBuilder = null;
+              if (attributes_ != null) {
+                subBuilder = attributes_.toBuilder();
+              }
+              attributes_ = input.readMessage(forge_abi.Tx.AssetAttributes.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(attributes_);
+                attributes_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 64: {
+
+              numCreated_ = input.readUInt32();
+              break;
+            }
+            case 122: {
+              com.google.protobuf.Any.Builder subBuilder = null;
+              if (data_ != null) {
+                subBuilder = data_.toBuilder();
+              }
+              data_ = input.readMessage(com.google.protobuf.Any.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(data_);
+                data_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          allowedSpecArgs_ = allowedSpecArgs_.getUnmodifiableView();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return forge_abi.State.internal_static_forge_abi_AssetFactoryState_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return forge_abi.State.internal_static_forge_abi_AssetFactoryState_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              forge_abi.State.AssetFactoryState.class, forge_abi.State.AssetFactoryState.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int DESCRIPTION_FIELD_NUMBER = 1;
+    private volatile java.lang.Object description_;
+    /**
+     * <code>string description = 1;</code>
+     */
+    public java.lang.String getDescription() {
+      java.lang.Object ref = description_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        description_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string description = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDescriptionBytes() {
+      java.lang.Object ref = description_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        description_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int LIMIT_FIELD_NUMBER = 2;
+    private int limit_;
+    /**
+     * <code>uint32 limit = 2;</code>
+     */
+    public int getLimit() {
+      return limit_;
+    }
+
+    public static final int PRICE_FIELD_NUMBER = 3;
+    private forge_abi.Type.BigUint price_;
+    /**
+     * <code>.forge_abi.BigUint price = 3;</code>
+     */
+    public boolean hasPrice() {
+      return price_ != null;
+    }
+    /**
+     * <code>.forge_abi.BigUint price = 3;</code>
+     */
+    public forge_abi.Type.BigUint getPrice() {
+      return price_ == null ? forge_abi.Type.BigUint.getDefaultInstance() : price_;
+    }
+    /**
+     * <code>.forge_abi.BigUint price = 3;</code>
+     */
+    public forge_abi.Type.BigUintOrBuilder getPriceOrBuilder() {
+      return getPrice();
+    }
+
+    public static final int TEMPLATE_FIELD_NUMBER = 4;
+    private volatile java.lang.Object template_;
+    /**
+     * <code>string template = 4;</code>
+     */
+    public java.lang.String getTemplate() {
+      java.lang.Object ref = template_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        template_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string template = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTemplateBytes() {
+      java.lang.Object ref = template_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        template_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ALLOWED_SPEC_ARGS_FIELD_NUMBER = 5;
+    private com.google.protobuf.LazyStringList allowedSpecArgs_;
+    /**
+     * <code>repeated string allowed_spec_args = 5;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getAllowedSpecArgsList() {
+      return allowedSpecArgs_;
+    }
+    /**
+     * <code>repeated string allowed_spec_args = 5;</code>
+     */
+    public int getAllowedSpecArgsCount() {
+      return allowedSpecArgs_.size();
+    }
+    /**
+     * <code>repeated string allowed_spec_args = 5;</code>
+     */
+    public java.lang.String getAllowedSpecArgs(int index) {
+      return allowedSpecArgs_.get(index);
+    }
+    /**
+     * <code>repeated string allowed_spec_args = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAllowedSpecArgsBytes(int index) {
+      return allowedSpecArgs_.getByteString(index);
+    }
+
+    public static final int ASSET_NAME_FIELD_NUMBER = 6;
+    private volatile java.lang.Object assetName_;
+    /**
+     * <code>string asset_name = 6;</code>
+     */
+    public java.lang.String getAssetName() {
+      java.lang.Object ref = assetName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        assetName_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string asset_name = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAssetNameBytes() {
+      java.lang.Object ref = assetName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        assetName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ATTRIBUTES_FIELD_NUMBER = 7;
+    private forge_abi.Tx.AssetAttributes attributes_;
+    /**
+     * <code>.forge_abi.AssetAttributes attributes = 7;</code>
+     */
+    public boolean hasAttributes() {
+      return attributes_ != null;
+    }
+    /**
+     * <code>.forge_abi.AssetAttributes attributes = 7;</code>
+     */
+    public forge_abi.Tx.AssetAttributes getAttributes() {
+      return attributes_ == null ? forge_abi.Tx.AssetAttributes.getDefaultInstance() : attributes_;
+    }
+    /**
+     * <code>.forge_abi.AssetAttributes attributes = 7;</code>
+     */
+    public forge_abi.Tx.AssetAttributesOrBuilder getAttributesOrBuilder() {
+      return getAttributes();
+    }
+
+    public static final int NUM_CREATED_FIELD_NUMBER = 8;
+    private int numCreated_;
+    /**
+     * <code>uint32 num_created = 8;</code>
+     */
+    public int getNumCreated() {
+      return numCreated_;
+    }
+
+    public static final int DATA_FIELD_NUMBER = 15;
+    private com.google.protobuf.Any data_;
+    /**
+     * <pre>
+     * extra context that user
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    public boolean hasData() {
+      return data_ != null;
+    }
+    /**
+     * <pre>
+     * extra context that user
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    public com.google.protobuf.Any getData() {
+      return data_ == null ? com.google.protobuf.Any.getDefaultInstance() : data_;
+    }
+    /**
+     * <pre>
+     * extra context that user
+     * </pre>
+     *
+     * <code>.google.protobuf.Any data = 15;</code>
+     */
+    public com.google.protobuf.AnyOrBuilder getDataOrBuilder() {
+      return getData();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getDescriptionBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, description_);
+      }
+      if (limit_ != 0) {
+        output.writeUInt32(2, limit_);
+      }
+      if (price_ != null) {
+        output.writeMessage(3, getPrice());
+      }
+      if (!getTemplateBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, template_);
+      }
+      for (int i = 0; i < allowedSpecArgs_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, allowedSpecArgs_.getRaw(i));
+      }
+      if (!getAssetNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, assetName_);
+      }
+      if (attributes_ != null) {
+        output.writeMessage(7, getAttributes());
+      }
+      if (numCreated_ != 0) {
+        output.writeUInt32(8, numCreated_);
+      }
+      if (data_ != null) {
+        output.writeMessage(15, getData());
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getDescriptionBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, description_);
+      }
+      if (limit_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, limit_);
+      }
+      if (price_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, getPrice());
+      }
+      if (!getTemplateBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, template_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < allowedSpecArgs_.size(); i++) {
+          dataSize += computeStringSizeNoTag(allowedSpecArgs_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getAllowedSpecArgsList().size();
+      }
+      if (!getAssetNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, assetName_);
+      }
+      if (attributes_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, getAttributes());
+      }
+      if (numCreated_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(8, numCreated_);
+      }
+      if (data_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(15, getData());
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof forge_abi.State.AssetFactoryState)) {
+        return super.equals(obj);
+      }
+      forge_abi.State.AssetFactoryState other = (forge_abi.State.AssetFactoryState) obj;
+
+      boolean result = true;
+      result = result && getDescription()
+          .equals(other.getDescription());
+      result = result && (getLimit()
+          == other.getLimit());
+      result = result && (hasPrice() == other.hasPrice());
+      if (hasPrice()) {
+        result = result && getPrice()
+            .equals(other.getPrice());
+      }
+      result = result && getTemplate()
+          .equals(other.getTemplate());
+      result = result && getAllowedSpecArgsList()
+          .equals(other.getAllowedSpecArgsList());
+      result = result && getAssetName()
+          .equals(other.getAssetName());
+      result = result && (hasAttributes() == other.hasAttributes());
+      if (hasAttributes()) {
+        result = result && getAttributes()
+            .equals(other.getAttributes());
+      }
+      result = result && (getNumCreated()
+          == other.getNumCreated());
+      result = result && (hasData() == other.hasData());
+      if (hasData()) {
+        result = result && getData()
+            .equals(other.getData());
+      }
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + DESCRIPTION_FIELD_NUMBER;
+      hash = (53 * hash) + getDescription().hashCode();
+      hash = (37 * hash) + LIMIT_FIELD_NUMBER;
+      hash = (53 * hash) + getLimit();
+      if (hasPrice()) {
+        hash = (37 * hash) + PRICE_FIELD_NUMBER;
+        hash = (53 * hash) + getPrice().hashCode();
+      }
+      hash = (37 * hash) + TEMPLATE_FIELD_NUMBER;
+      hash = (53 * hash) + getTemplate().hashCode();
+      if (getAllowedSpecArgsCount() > 0) {
+        hash = (37 * hash) + ALLOWED_SPEC_ARGS_FIELD_NUMBER;
+        hash = (53 * hash) + getAllowedSpecArgsList().hashCode();
+      }
+      hash = (37 * hash) + ASSET_NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getAssetName().hashCode();
+      if (hasAttributes()) {
+        hash = (37 * hash) + ATTRIBUTES_FIELD_NUMBER;
+        hash = (53 * hash) + getAttributes().hashCode();
+      }
+      hash = (37 * hash) + NUM_CREATED_FIELD_NUMBER;
+      hash = (53 * hash) + getNumCreated();
+      if (hasData()) {
+        hash = (37 * hash) + DATA_FIELD_NUMBER;
+        hash = (53 * hash) + getData().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static forge_abi.State.AssetFactoryState parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.State.AssetFactoryState parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.State.AssetFactoryState parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static forge_abi.State.AssetFactoryState parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static forge_abi.State.AssetFactoryState parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.State.AssetFactoryState parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.State.AssetFactoryState parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static forge_abi.State.AssetFactoryState parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static forge_abi.State.AssetFactoryState parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static forge_abi.State.AssetFactoryState parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(forge_abi.State.AssetFactoryState prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code forge_abi.AssetFactoryState}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:forge_abi.AssetFactoryState)
+        forge_abi.State.AssetFactoryStateOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return forge_abi.State.internal_static_forge_abi_AssetFactoryState_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return forge_abi.State.internal_static_forge_abi_AssetFactoryState_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                forge_abi.State.AssetFactoryState.class, forge_abi.State.AssetFactoryState.Builder.class);
+      }
+
+      // Construct using forge_abi.State.AssetFactoryState.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        description_ = "";
+
+        limit_ = 0;
+
+        if (priceBuilder_ == null) {
+          price_ = null;
+        } else {
+          price_ = null;
+          priceBuilder_ = null;
+        }
+        template_ = "";
+
+        allowedSpecArgs_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        assetName_ = "";
+
+        if (attributesBuilder_ == null) {
+          attributes_ = null;
+        } else {
+          attributes_ = null;
+          attributesBuilder_ = null;
+        }
+        numCreated_ = 0;
+
+        if (dataBuilder_ == null) {
+          data_ = null;
+        } else {
+          data_ = null;
+          dataBuilder_ = null;
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return forge_abi.State.internal_static_forge_abi_AssetFactoryState_descriptor;
+      }
+
+      public forge_abi.State.AssetFactoryState getDefaultInstanceForType() {
+        return forge_abi.State.AssetFactoryState.getDefaultInstance();
+      }
+
+      public forge_abi.State.AssetFactoryState build() {
+        forge_abi.State.AssetFactoryState result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public forge_abi.State.AssetFactoryState buildPartial() {
+        forge_abi.State.AssetFactoryState result = new forge_abi.State.AssetFactoryState(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.description_ = description_;
+        result.limit_ = limit_;
+        if (priceBuilder_ == null) {
+          result.price_ = price_;
+        } else {
+          result.price_ = priceBuilder_.build();
+        }
+        result.template_ = template_;
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          allowedSpecArgs_ = allowedSpecArgs_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000010);
+        }
+        result.allowedSpecArgs_ = allowedSpecArgs_;
+        result.assetName_ = assetName_;
+        if (attributesBuilder_ == null) {
+          result.attributes_ = attributes_;
+        } else {
+          result.attributes_ = attributesBuilder_.build();
+        }
+        result.numCreated_ = numCreated_;
+        if (dataBuilder_ == null) {
+          result.data_ = data_;
+        } else {
+          result.data_ = dataBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof forge_abi.State.AssetFactoryState) {
+          return mergeFrom((forge_abi.State.AssetFactoryState)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(forge_abi.State.AssetFactoryState other) {
+        if (other == forge_abi.State.AssetFactoryState.getDefaultInstance()) return this;
+        if (!other.getDescription().isEmpty()) {
+          description_ = other.description_;
+          onChanged();
+        }
+        if (other.getLimit() != 0) {
+          setLimit(other.getLimit());
+        }
+        if (other.hasPrice()) {
+          mergePrice(other.getPrice());
+        }
+        if (!other.getTemplate().isEmpty()) {
+          template_ = other.template_;
+          onChanged();
+        }
+        if (!other.allowedSpecArgs_.isEmpty()) {
+          if (allowedSpecArgs_.isEmpty()) {
+            allowedSpecArgs_ = other.allowedSpecArgs_;
+            bitField0_ = (bitField0_ & ~0x00000010);
+          } else {
+            ensureAllowedSpecArgsIsMutable();
+            allowedSpecArgs_.addAll(other.allowedSpecArgs_);
+          }
+          onChanged();
+        }
+        if (!other.getAssetName().isEmpty()) {
+          assetName_ = other.assetName_;
+          onChanged();
+        }
+        if (other.hasAttributes()) {
+          mergeAttributes(other.getAttributes());
+        }
+        if (other.getNumCreated() != 0) {
+          setNumCreated(other.getNumCreated());
+        }
+        if (other.hasData()) {
+          mergeData(other.getData());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        forge_abi.State.AssetFactoryState parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (forge_abi.State.AssetFactoryState) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object description_ = "";
+      /**
+       * <code>string description = 1;</code>
+       */
+      public java.lang.String getDescription() {
+        java.lang.Object ref = description_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          description_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string description = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDescriptionBytes() {
+        java.lang.Object ref = description_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          description_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string description = 1;</code>
+       */
+      public Builder setDescription(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        description_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string description = 1;</code>
+       */
+      public Builder clearDescription() {
+        
+        description_ = getDefaultInstance().getDescription();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string description = 1;</code>
+       */
+      public Builder setDescriptionBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        description_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int limit_ ;
+      /**
+       * <code>uint32 limit = 2;</code>
+       */
+      public int getLimit() {
+        return limit_;
+      }
+      /**
+       * <code>uint32 limit = 2;</code>
+       */
+      public Builder setLimit(int value) {
+        
+        limit_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 limit = 2;</code>
+       */
+      public Builder clearLimit() {
+        
+        limit_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private forge_abi.Type.BigUint price_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder> priceBuilder_;
+      /**
+       * <code>.forge_abi.BigUint price = 3;</code>
+       */
+      public boolean hasPrice() {
+        return priceBuilder_ != null || price_ != null;
+      }
+      /**
+       * <code>.forge_abi.BigUint price = 3;</code>
+       */
+      public forge_abi.Type.BigUint getPrice() {
+        if (priceBuilder_ == null) {
+          return price_ == null ? forge_abi.Type.BigUint.getDefaultInstance() : price_;
+        } else {
+          return priceBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.forge_abi.BigUint price = 3;</code>
+       */
+      public Builder setPrice(forge_abi.Type.BigUint value) {
+        if (priceBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          price_ = value;
+          onChanged();
+        } else {
+          priceBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint price = 3;</code>
+       */
+      public Builder setPrice(
+          forge_abi.Type.BigUint.Builder builderForValue) {
+        if (priceBuilder_ == null) {
+          price_ = builderForValue.build();
+          onChanged();
+        } else {
+          priceBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint price = 3;</code>
+       */
+      public Builder mergePrice(forge_abi.Type.BigUint value) {
+        if (priceBuilder_ == null) {
+          if (price_ != null) {
+            price_ =
+              forge_abi.Type.BigUint.newBuilder(price_).mergeFrom(value).buildPartial();
+          } else {
+            price_ = value;
+          }
+          onChanged();
+        } else {
+          priceBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint price = 3;</code>
+       */
+      public Builder clearPrice() {
+        if (priceBuilder_ == null) {
+          price_ = null;
+          onChanged();
+        } else {
+          price_ = null;
+          priceBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.BigUint price = 3;</code>
+       */
+      public forge_abi.Type.BigUint.Builder getPriceBuilder() {
+        
+        onChanged();
+        return getPriceFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.BigUint price = 3;</code>
+       */
+      public forge_abi.Type.BigUintOrBuilder getPriceOrBuilder() {
+        if (priceBuilder_ != null) {
+          return priceBuilder_.getMessageOrBuilder();
+        } else {
+          return price_ == null ?
+              forge_abi.Type.BigUint.getDefaultInstance() : price_;
+        }
+      }
+      /**
+       * <code>.forge_abi.BigUint price = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder> 
+          getPriceFieldBuilder() {
+        if (priceBuilder_ == null) {
+          priceBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Type.BigUint, forge_abi.Type.BigUint.Builder, forge_abi.Type.BigUintOrBuilder>(
+                  getPrice(),
+                  getParentForChildren(),
+                  isClean());
+          price_ = null;
+        }
+        return priceBuilder_;
+      }
+
+      private java.lang.Object template_ = "";
+      /**
+       * <code>string template = 4;</code>
+       */
+      public java.lang.String getTemplate() {
+        java.lang.Object ref = template_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          template_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string template = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTemplateBytes() {
+        java.lang.Object ref = template_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          template_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string template = 4;</code>
+       */
+      public Builder setTemplate(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        template_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string template = 4;</code>
+       */
+      public Builder clearTemplate() {
+        
+        template_ = getDefaultInstance().getTemplate();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string template = 4;</code>
+       */
+      public Builder setTemplateBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        template_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList allowedSpecArgs_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureAllowedSpecArgsIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          allowedSpecArgs_ = new com.google.protobuf.LazyStringArrayList(allowedSpecArgs_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+      /**
+       * <code>repeated string allowed_spec_args = 5;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getAllowedSpecArgsList() {
+        return allowedSpecArgs_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string allowed_spec_args = 5;</code>
+       */
+      public int getAllowedSpecArgsCount() {
+        return allowedSpecArgs_.size();
+      }
+      /**
+       * <code>repeated string allowed_spec_args = 5;</code>
+       */
+      public java.lang.String getAllowedSpecArgs(int index) {
+        return allowedSpecArgs_.get(index);
+      }
+      /**
+       * <code>repeated string allowed_spec_args = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAllowedSpecArgsBytes(int index) {
+        return allowedSpecArgs_.getByteString(index);
+      }
+      /**
+       * <code>repeated string allowed_spec_args = 5;</code>
+       */
+      public Builder setAllowedSpecArgs(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureAllowedSpecArgsIsMutable();
+        allowedSpecArgs_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string allowed_spec_args = 5;</code>
+       */
+      public Builder addAllowedSpecArgs(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureAllowedSpecArgsIsMutable();
+        allowedSpecArgs_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string allowed_spec_args = 5;</code>
+       */
+      public Builder addAllAllowedSpecArgs(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureAllowedSpecArgsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, allowedSpecArgs_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string allowed_spec_args = 5;</code>
+       */
+      public Builder clearAllowedSpecArgs() {
+        allowedSpecArgs_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string allowed_spec_args = 5;</code>
+       */
+      public Builder addAllowedSpecArgsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureAllowedSpecArgsIsMutable();
+        allowedSpecArgs_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object assetName_ = "";
+      /**
+       * <code>string asset_name = 6;</code>
+       */
+      public java.lang.String getAssetName() {
+        java.lang.Object ref = assetName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          assetName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string asset_name = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAssetNameBytes() {
+        java.lang.Object ref = assetName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          assetName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string asset_name = 6;</code>
+       */
+      public Builder setAssetName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        assetName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string asset_name = 6;</code>
+       */
+      public Builder clearAssetName() {
+        
+        assetName_ = getDefaultInstance().getAssetName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string asset_name = 6;</code>
+       */
+      public Builder setAssetNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        assetName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private forge_abi.Tx.AssetAttributes attributes_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Tx.AssetAttributes, forge_abi.Tx.AssetAttributes.Builder, forge_abi.Tx.AssetAttributesOrBuilder> attributesBuilder_;
+      /**
+       * <code>.forge_abi.AssetAttributes attributes = 7;</code>
+       */
+      public boolean hasAttributes() {
+        return attributesBuilder_ != null || attributes_ != null;
+      }
+      /**
+       * <code>.forge_abi.AssetAttributes attributes = 7;</code>
+       */
+      public forge_abi.Tx.AssetAttributes getAttributes() {
+        if (attributesBuilder_ == null) {
+          return attributes_ == null ? forge_abi.Tx.AssetAttributes.getDefaultInstance() : attributes_;
+        } else {
+          return attributesBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.forge_abi.AssetAttributes attributes = 7;</code>
+       */
+      public Builder setAttributes(forge_abi.Tx.AssetAttributes value) {
+        if (attributesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          attributes_ = value;
+          onChanged();
+        } else {
+          attributesBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.AssetAttributes attributes = 7;</code>
+       */
+      public Builder setAttributes(
+          forge_abi.Tx.AssetAttributes.Builder builderForValue) {
+        if (attributesBuilder_ == null) {
+          attributes_ = builderForValue.build();
+          onChanged();
+        } else {
+          attributesBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.AssetAttributes attributes = 7;</code>
+       */
+      public Builder mergeAttributes(forge_abi.Tx.AssetAttributes value) {
+        if (attributesBuilder_ == null) {
+          if (attributes_ != null) {
+            attributes_ =
+              forge_abi.Tx.AssetAttributes.newBuilder(attributes_).mergeFrom(value).buildPartial();
+          } else {
+            attributes_ = value;
+          }
+          onChanged();
+        } else {
+          attributesBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.AssetAttributes attributes = 7;</code>
+       */
+      public Builder clearAttributes() {
+        if (attributesBuilder_ == null) {
+          attributes_ = null;
+          onChanged();
+        } else {
+          attributes_ = null;
+          attributesBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.forge_abi.AssetAttributes attributes = 7;</code>
+       */
+      public forge_abi.Tx.AssetAttributes.Builder getAttributesBuilder() {
+        
+        onChanged();
+        return getAttributesFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.forge_abi.AssetAttributes attributes = 7;</code>
+       */
+      public forge_abi.Tx.AssetAttributesOrBuilder getAttributesOrBuilder() {
+        if (attributesBuilder_ != null) {
+          return attributesBuilder_.getMessageOrBuilder();
+        } else {
+          return attributes_ == null ?
+              forge_abi.Tx.AssetAttributes.getDefaultInstance() : attributes_;
+        }
+      }
+      /**
+       * <code>.forge_abi.AssetAttributes attributes = 7;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          forge_abi.Tx.AssetAttributes, forge_abi.Tx.AssetAttributes.Builder, forge_abi.Tx.AssetAttributesOrBuilder> 
+          getAttributesFieldBuilder() {
+        if (attributesBuilder_ == null) {
+          attributesBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              forge_abi.Tx.AssetAttributes, forge_abi.Tx.AssetAttributes.Builder, forge_abi.Tx.AssetAttributesOrBuilder>(
+                  getAttributes(),
+                  getParentForChildren(),
+                  isClean());
+          attributes_ = null;
+        }
+        return attributesBuilder_;
+      }
+
+      private int numCreated_ ;
+      /**
+       * <code>uint32 num_created = 8;</code>
+       */
+      public int getNumCreated() {
+        return numCreated_;
+      }
+      /**
+       * <code>uint32 num_created = 8;</code>
+       */
+      public Builder setNumCreated(int value) {
+        
+        numCreated_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 num_created = 8;</code>
+       */
+      public Builder clearNumCreated() {
+        
+        numCreated_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.Any data_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> dataBuilder_;
+      /**
+       * <pre>
+       * extra context that user
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public boolean hasData() {
+        return dataBuilder_ != null || data_ != null;
+      }
+      /**
+       * <pre>
+       * extra context that user
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public com.google.protobuf.Any getData() {
+        if (dataBuilder_ == null) {
+          return data_ == null ? com.google.protobuf.Any.getDefaultInstance() : data_;
+        } else {
+          return dataBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * extra context that user
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public Builder setData(com.google.protobuf.Any value) {
+        if (dataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          data_ = value;
+          onChanged();
+        } else {
+          dataBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * extra context that user
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public Builder setData(
+          com.google.protobuf.Any.Builder builderForValue) {
+        if (dataBuilder_ == null) {
+          data_ = builderForValue.build();
+          onChanged();
+        } else {
+          dataBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * extra context that user
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public Builder mergeData(com.google.protobuf.Any value) {
+        if (dataBuilder_ == null) {
+          if (data_ != null) {
+            data_ =
+              com.google.protobuf.Any.newBuilder(data_).mergeFrom(value).buildPartial();
+          } else {
+            data_ = value;
+          }
+          onChanged();
+        } else {
+          dataBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * extra context that user
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public Builder clearData() {
+        if (dataBuilder_ == null) {
+          data_ = null;
+          onChanged();
+        } else {
+          data_ = null;
+          dataBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * extra context that user
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public com.google.protobuf.Any.Builder getDataBuilder() {
+        
+        onChanged();
+        return getDataFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       * extra context that user
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      public com.google.protobuf.AnyOrBuilder getDataOrBuilder() {
+        if (dataBuilder_ != null) {
+          return dataBuilder_.getMessageOrBuilder();
+        } else {
+          return data_ == null ?
+              com.google.protobuf.Any.getDefaultInstance() : data_;
+        }
+      }
+      /**
+       * <pre>
+       * extra context that user
+       * </pre>
+       *
+       * <code>.google.protobuf.Any data = 15;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> 
+          getDataFieldBuilder() {
+        if (dataBuilder_ == null) {
+          dataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder>(
+                  getData(),
+                  getParentForChildren(),
+                  isClean());
+          data_ = null;
+        }
+        return dataBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:forge_abi.AssetFactoryState)
+    }
+
+    // @@protoc_insertion_point(class_scope:forge_abi.AssetFactoryState)
+    private static final forge_abi.State.AssetFactoryState DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new forge_abi.State.AssetFactoryState();
+    }
+
+    public static forge_abi.State.AssetFactoryState getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<AssetFactoryState>
+        PARSER = new com.google.protobuf.AbstractParser<AssetFactoryState>() {
+      public AssetFactoryState parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new AssetFactoryState(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<AssetFactoryState> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AssetFactoryState> getParserForType() {
+      return PARSER;
+    }
+
+    public forge_abi.State.AssetFactoryState getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_forge_abi_AccountState_descriptor;
   private static final 
@@ -20069,6 +22837,11 @@ public final class State {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_forge_abi_SwapState_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_forge_abi_SwapStatistics_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_forge_abi_SwapStatistics_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_forge_abi_DelegateOpState_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -20083,6 +22856,11 @@ public final class State {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_forge_abi_DelegateState_OpsEntry_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_forge_abi_AssetFactoryState_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_forge_abi_AssetFactoryState_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -20166,17 +22944,28 @@ public final class State {
       "!\n\005value\030\006 \001(\0132\022.forge_abi.BigUint\022\016\n\006as" +
       "sets\030\007 \003(\t\022\020\n\010locktime\030\010 \001(\r\022\020\n\010hashlock" +
       "\030\t \001(\014\022(\n\007context\030\n \001(\0132\027.forge_abi.Stat" +
-      "eContext\"\227\001\n\017DelegateOpState\022\014\n\004rule\030\001 \001" +
-      "(\t\022\017\n\007num_txs\030\002 \001(\004\022\025\n\rnum_txs_delta\030\003 \001" +
-      "(\004\022#\n\007balance\030\004 \001(\0132\022.forge_abi.BigUint\022" +
-      ")\n\rbalance_delta\030\005 \001(\0132\022.forge_abi.BigUi" +
-      "nt\"\346\001\n\rDelegateState\022\017\n\007address\030\001 \001(\t\022.\n" +
-      "\003ops\030\002 \003(\0132!.forge_abi.DelegateState.Ops",
-      "Entry\022(\n\007context\030\016 \001(\0132\027.forge_abi.State" +
-      "Context\022\"\n\004data\030\017 \001(\0132\024.google.protobuf." +
-      "Any\032F\n\010OpsEntry\022\013\n\003key\030\001 \001(\t\022)\n\005value\030\002 " +
-      "\001(\0132\032.forge_abi.DelegateOpState:\0028\001b\006pro" +
-      "to3"
+      "eContext\"\261\001\n\016SwapStatistics\022\017\n\007address\030\001" +
+      " \001(\t\022,\n\020locked_value_out\030\002 \001(\0132\022.forge_a" +
+      "bi.BigUint\022+\n\017locked_value_in\030\003 \001(\0132\022.fo" +
+      "rge_abi.BigUint\022\031\n\021locked_assets_out\030\004 \001" +
+      "(\r\022\030\n\020locked_assets_in\030\005 \001(\r\"\227\001\n\017Delegat" +
+      "eOpState\022\014\n\004rule\030\001 \001(\t\022\017\n\007num_txs\030\002 \001(\004\022",
+      "\025\n\rnum_txs_delta\030\003 \001(\004\022#\n\007balance\030\004 \001(\0132" +
+      "\022.forge_abi.BigUint\022)\n\rbalance_delta\030\005 \001" +
+      "(\0132\022.forge_abi.BigUint\"\346\001\n\rDelegateState" +
+      "\022\017\n\007address\030\001 \001(\t\022.\n\003ops\030\002 \003(\0132!.forge_a" +
+      "bi.DelegateState.OpsEntry\022(\n\007context\030\016 \001" +
+      "(\0132\027.forge_abi.StateContext\022\"\n\004data\030\017 \001(" +
+      "\0132\024.google.protobuf.Any\032F\n\010OpsEntry\022\013\n\003k" +
+      "ey\030\001 \001(\t\022)\n\005value\030\002 \001(\0132\032.forge_abi.Dele" +
+      "gateOpState:\0028\001\"\204\002\n\021AssetFactoryState\022\023\n" +
+      "\013description\030\001 \001(\t\022\r\n\005limit\030\002 \001(\r\022!\n\005pri",
+      "ce\030\003 \001(\0132\022.forge_abi.BigUint\022\020\n\010template" +
+      "\030\004 \001(\t\022\031\n\021allowed_spec_args\030\005 \003(\t\022\022\n\nass" +
+      "et_name\030\006 \001(\t\022.\n\nattributes\030\007 \001(\0132\032.forg" +
+      "e_abi.AssetAttributes\022\023\n\013num_created\030\010 \001" +
+      "(\r\022\"\n\004data\030\017 \001(\0132\024.google.protobuf.Anyb\006" +
+      "proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -20279,14 +23068,20 @@ public final class State {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_SwapState_descriptor,
         new java.lang.String[] { "Hash", "Address", "Hashkey", "Sender", "Receiver", "Value", "Assets", "Locktime", "Hashlock", "Context", });
-    internal_static_forge_abi_DelegateOpState_descriptor =
+    internal_static_forge_abi_SwapStatistics_descriptor =
       getDescriptor().getMessageTypes().get(10);
+    internal_static_forge_abi_SwapStatistics_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_SwapStatistics_descriptor,
+        new java.lang.String[] { "Address", "LockedValueOut", "LockedValueIn", "LockedAssetsOut", "LockedAssetsIn", });
+    internal_static_forge_abi_DelegateOpState_descriptor =
+      getDescriptor().getMessageTypes().get(11);
     internal_static_forge_abi_DelegateOpState_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_DelegateOpState_descriptor,
         new java.lang.String[] { "Rule", "NumTxs", "NumTxsDelta", "Balance", "BalanceDelta", });
     internal_static_forge_abi_DelegateState_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_forge_abi_DelegateState_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_DelegateState_descriptor,
@@ -20297,6 +23092,12 @@ public final class State {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_forge_abi_DelegateState_OpsEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
+    internal_static_forge_abi_AssetFactoryState_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_forge_abi_AssetFactoryState_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_forge_abi_AssetFactoryState_descriptor,
+        new java.lang.String[] { "Description", "Limit", "Price", "Template", "AllowedSpecArgs", "AssetName", "Attributes", "NumCreated", "Data", });
     com.google.protobuf.AnyProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
     forge_abi.Enum.getDescriptor();

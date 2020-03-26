@@ -16,6 +16,12 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
 
 /**
+ * <pre>
+ * filesystem related
+ * rpc store_file(stream RequestStoreFile) returns (ResponseStoreFile);
+ * rpc load_file(RequestLoadFile) returns (stream ResponseLoadFile);
+ * rpc pin_file(RequestPinFile) returns (ResponsePinFile);
+ * </pre>
  */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.4.0)",
@@ -27,42 +33,6 @@ public final class FileRpcGrpc {
   public static final String SERVICE_NAME = "forge_abi.FileRpc";
 
   // Static method descriptors that strictly reflect the proto.
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestStoreFile,
-      forge_abi.Rpc.ResponseStoreFile> METHOD_STORE_FILE =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestStoreFile, forge_abi.Rpc.ResponseStoreFile>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
-          .setFullMethodName(generateFullMethodName(
-              "forge_abi.FileRpc", "store_file"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestStoreFile.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseStoreFile.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestLoadFile,
-      forge_abi.Rpc.ResponseLoadFile> METHOD_LOAD_FILE =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestLoadFile, forge_abi.Rpc.ResponseLoadFile>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-          .setFullMethodName(generateFullMethodName(
-              "forge_abi.FileRpc", "load_file"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestLoadFile.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponseLoadFile.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<forge_abi.Rpc.RequestPinFile,
-      forge_abi.Rpc.ResponsePinFile> METHOD_PIN_FILE =
-      io.grpc.MethodDescriptor.<forge_abi.Rpc.RequestPinFile, forge_abi.Rpc.ResponsePinFile>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName(generateFullMethodName(
-              "forge_abi.FileRpc", "pin_file"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.RequestPinFile.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              forge_abi.Rpc.ResponsePinFile.getDefaultInstance()))
-          .build();
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -88,61 +58,28 @@ public final class FileRpcGrpc {
   }
 
   /**
+   * <pre>
+   * filesystem related
+   * rpc store_file(stream RequestStoreFile) returns (ResponseStoreFile);
+   * rpc load_file(RequestLoadFile) returns (stream ResponseLoadFile);
+   * rpc pin_file(RequestPinFile) returns (ResponsePinFile);
+   * </pre>
    */
   public static abstract class FileRpcImplBase implements io.grpc.BindableService {
 
-    /**
-     * <pre>
-     * filesystem related
-     * </pre>
-     */
-    public io.grpc.stub.StreamObserver<forge_abi.Rpc.RequestStoreFile> storeFile(
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseStoreFile> responseObserver) {
-      return asyncUnimplementedStreamingCall(METHOD_STORE_FILE, responseObserver);
-    }
-
-    /**
-     */
-    public void loadFile(forge_abi.Rpc.RequestLoadFile request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseLoadFile> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_LOAD_FILE, responseObserver);
-    }
-
-    /**
-     */
-    public void pinFile(forge_abi.Rpc.RequestPinFile request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponsePinFile> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_PIN_FILE, responseObserver);
-    }
-
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
-          .addMethod(
-            METHOD_STORE_FILE,
-            asyncClientStreamingCall(
-              new MethodHandlers<
-                forge_abi.Rpc.RequestStoreFile,
-                forge_abi.Rpc.ResponseStoreFile>(
-                  this, METHODID_STORE_FILE)))
-          .addMethod(
-            METHOD_LOAD_FILE,
-            asyncServerStreamingCall(
-              new MethodHandlers<
-                forge_abi.Rpc.RequestLoadFile,
-                forge_abi.Rpc.ResponseLoadFile>(
-                  this, METHODID_LOAD_FILE)))
-          .addMethod(
-            METHOD_PIN_FILE,
-            asyncUnaryCall(
-              new MethodHandlers<
-                forge_abi.Rpc.RequestPinFile,
-                forge_abi.Rpc.ResponsePinFile>(
-                  this, METHODID_PIN_FILE)))
           .build();
     }
   }
 
   /**
+   * <pre>
+   * filesystem related
+   * rpc store_file(stream RequestStoreFile) returns (ResponseStoreFile);
+   * rpc load_file(RequestLoadFile) returns (stream ResponseLoadFile);
+   * rpc pin_file(RequestPinFile) returns (ResponsePinFile);
+   * </pre>
    */
   public static final class FileRpcStub extends io.grpc.stub.AbstractStub<FileRpcStub> {
     private FileRpcStub(io.grpc.Channel channel) {
@@ -159,36 +96,15 @@ public final class FileRpcGrpc {
         io.grpc.CallOptions callOptions) {
       return new FileRpcStub(channel, callOptions);
     }
-
-    /**
-     * <pre>
-     * filesystem related
-     * </pre>
-     */
-    public io.grpc.stub.StreamObserver<forge_abi.Rpc.RequestStoreFile> storeFile(
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseStoreFile> responseObserver) {
-      return asyncClientStreamingCall(
-          getChannel().newCall(METHOD_STORE_FILE, getCallOptions()), responseObserver);
-    }
-
-    /**
-     */
-    public void loadFile(forge_abi.Rpc.RequestLoadFile request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseLoadFile> responseObserver) {
-      asyncServerStreamingCall(
-          getChannel().newCall(METHOD_LOAD_FILE, getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void pinFile(forge_abi.Rpc.RequestPinFile request,
-        io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponsePinFile> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_PIN_FILE, getCallOptions()), request, responseObserver);
-    }
   }
 
   /**
+   * <pre>
+   * filesystem related
+   * rpc store_file(stream RequestStoreFile) returns (ResponseStoreFile);
+   * rpc load_file(RequestLoadFile) returns (stream ResponseLoadFile);
+   * rpc pin_file(RequestPinFile) returns (ResponsePinFile);
+   * </pre>
    */
   public static final class FileRpcBlockingStub extends io.grpc.stub.AbstractStub<FileRpcBlockingStub> {
     private FileRpcBlockingStub(io.grpc.Channel channel) {
@@ -205,24 +121,15 @@ public final class FileRpcGrpc {
         io.grpc.CallOptions callOptions) {
       return new FileRpcBlockingStub(channel, callOptions);
     }
-
-    /**
-     */
-    public java.util.Iterator<forge_abi.Rpc.ResponseLoadFile> loadFile(
-        forge_abi.Rpc.RequestLoadFile request) {
-      return blockingServerStreamingCall(
-          getChannel(), METHOD_LOAD_FILE, getCallOptions(), request);
-    }
-
-    /**
-     */
-    public forge_abi.Rpc.ResponsePinFile pinFile(forge_abi.Rpc.RequestPinFile request) {
-      return blockingUnaryCall(
-          getChannel(), METHOD_PIN_FILE, getCallOptions(), request);
-    }
   }
 
   /**
+   * <pre>
+   * filesystem related
+   * rpc store_file(stream RequestStoreFile) returns (ResponseStoreFile);
+   * rpc load_file(RequestLoadFile) returns (stream ResponseLoadFile);
+   * rpc pin_file(RequestPinFile) returns (ResponsePinFile);
+   * </pre>
    */
   public static final class FileRpcFutureStub extends io.grpc.stub.AbstractStub<FileRpcFutureStub> {
     private FileRpcFutureStub(io.grpc.Channel channel) {
@@ -239,19 +146,8 @@ public final class FileRpcGrpc {
         io.grpc.CallOptions callOptions) {
       return new FileRpcFutureStub(channel, callOptions);
     }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<forge_abi.Rpc.ResponsePinFile> pinFile(
-        forge_abi.Rpc.RequestPinFile request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_PIN_FILE, getCallOptions()), request);
-    }
   }
 
-  private static final int METHODID_LOAD_FILE = 0;
-  private static final int METHODID_PIN_FILE = 1;
-  private static final int METHODID_STORE_FILE = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -270,14 +166,6 @@ public final class FileRpcGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_LOAD_FILE:
-          serviceImpl.loadFile((forge_abi.Rpc.RequestLoadFile) request,
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseLoadFile>) responseObserver);
-          break;
-        case METHODID_PIN_FILE:
-          serviceImpl.pinFile((forge_abi.Rpc.RequestPinFile) request,
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponsePinFile>) responseObserver);
-          break;
         default:
           throw new AssertionError();
       }
@@ -288,9 +176,6 @@ public final class FileRpcGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_STORE_FILE:
-          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.storeFile(
-              (io.grpc.stub.StreamObserver<forge_abi.Rpc.ResponseStoreFile>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -314,9 +199,6 @@ public final class FileRpcGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new FileRpcDescriptorSupplier())
-              .addMethod(METHOD_STORE_FILE)
-              .addMethod(METHOD_LOAD_FILE)
-              .addMethod(METHOD_PIN_FILE)
               .build();
         }
       }

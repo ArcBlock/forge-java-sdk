@@ -2,7 +2,8 @@ package io.arcblock.forge
 
 import com.google.protobuf.Any
 import com.google.protobuf.ByteString
-import forge_abi.*
+import forge_abi.Tx
+import forge_abi.Type
 import io.arcblock.forge.did.DIDGenerator
 import io.arcblock.forge.did.HashType
 import io.arcblock.forge.did.WalletInfo
@@ -27,7 +28,7 @@ object TransactionFactory {
    */
   @JvmOverloads
   fun declare(chainID: String, address: String, pk: ByteArray, moniker: String? = null, issuer: String? = null): Type.Transaction {
-    val itx = Declare.DeclareTx.newBuilder()
+    val itx = Tx.DeclareTx.newBuilder()
       .setMoniker(moniker
         ?: UUID.randomUUID().toString().replace("-", ""))
       .setIssuer(issuer ?: address)
@@ -40,7 +41,7 @@ object TransactionFactory {
    * create a poke transaction without signature
    */
   fun unsignPoke(chainID: String, address: String, pk: ByteArray): Type.Transaction {
-    val itx = Poke.PokeTx.newBuilder()
+    val itx = Tx.PokeTx.newBuilder()
       .setAddress(POKE_ADDRESS)
       .setDate(LocalDate.now().toString())
       .build()
@@ -69,7 +70,7 @@ object TransactionFactory {
    */
   @JvmOverloads
   fun unsignTransfer(chainID: String, from: String, fromPk: ByteArray, to: String, token: BigInteger? = null, assets: List<String>? = null): Type.Transaction {
-    val builder = Transfer.TransferTx.newBuilder()
+    val builder = Tx.TransferTx.newBuilder()
       .setTo(to)
     token?.apply { builder.setValue(Type.BigUint.newBuilder().setValue(this.toByteArray().toByteString())) }
     assets?.apply { builder.addAllAssets(this) }
@@ -90,13 +91,13 @@ object TransactionFactory {
   @JvmOverloads
   fun preExchange(chainId: String, fromAddress: String, fromPk: ByteArray , to: String, fromToken: BigInteger, assetAddress: String, delegateeFrom: String? =
     null): Type.Transaction {
-    val exchange = Exchange.ExchangeTx.newBuilder()
-      .setSender(Exchange.ExchangeInfo.newBuilder()
+    val exchange = Tx.ExchangeTx.newBuilder()
+      .setSender(Tx.ExchangeInfo.newBuilder()
         .setValue(Type.BigUint.newBuilder()
           .setValue(fromToken.toByteArray().toByteString())
           .build())
         .build())
-      .setReceiver(Exchange.ExchangeInfo.newBuilder()
+      .setReceiver(Tx.ExchangeInfo.newBuilder()
         .addAssets(assetAddress)
         .build())
       .setTo(to)
@@ -119,7 +120,7 @@ object TransactionFactory {
   @JvmOverloads
   fun preUnsignConusmeAsset(chainId: String, checkerAddress: String, checkerPk: ByteArray, issuer: String? = null, delegatee: String? = null): Type
   .Transaction {
-    val consumeAsset = ConsumeAsset.ConsumeAssetTx.newBuilder()
+    val consumeAsset = Tx.ConsumeAssetTx.newBuilder()
       .setIssuer(issuer ?: checkerAddress)
       .build()
     return createTransaction(chainId, checkerAddress, checkerPk, consumeAsset.toByteString(), TypeUrls.CONSUME_ASSET)
@@ -141,9 +142,9 @@ object TransactionFactory {
    */
   @JvmOverloads
   fun unsignDelegate(from: String, to: String, chainID: String, fromPk: ByteArray, rules: List<String>, typeUrl: String? = null): Type.Transaction {
-    val itx = Delegate.DelegateTx.newBuilder()
+    val itx = Tx.DelegateTx.newBuilder()
       .setAddress(DIDGenerator.genDelegateAddress(from, to))
-      .addOps(Delegate.DelegateOp.newBuilder()
+      .addOps(Tx.DelegateOp.newBuilder()
         .setTypeUrl(typeUrl ?: TypeUrls.TRANSFER)
         .addAllRules(rules)
         .build())
@@ -156,7 +157,7 @@ object TransactionFactory {
    * create a revoke delegate transaction without signature
    */
   fun unsignRevokeDelegate(from: String, to: String, chainID: String, fromPk: ByteArray, typeUrls: List<String>): Type.Transaction {
-    val itx = RevokeDelegate.RevokeDelegateTx.newBuilder()
+    val itx = Tx.RevokeDelegateTx.newBuilder()
       .setAddress(DIDGenerator.genDelegateAddress(from, to))
       .addAllTypeUrls(typeUrls)
       .setTo(to)
@@ -189,7 +190,7 @@ object TransactionFactory {
                 assets:
   List<String>? = listOf())
     : Type.Transaction {
-    val itx = SetupSwap.SetupSwapTx.newBuilder()
+    val itx = Tx.SetupSwapTx.newBuilder()
       .setValue(Type.BigUint.getDefaultInstance().toBuilder()
         .setValue((demandToken ?: BigInteger.ZERO).toByteArray().toByteString())
         .build())
@@ -202,14 +203,14 @@ object TransactionFactory {
   }
 
   fun revokeSwap(chainId: String, fromAddress:String, fromPk: ByteArray, swapAddr: String): Type.Transaction {
-    val itx = RevokeSwap.RevokeSwapTx.newBuilder()
+    val itx = Tx.RevokeSwapTx.newBuilder()
       .setAddress(swapAddr)
       .build()
     return createTransaction(chainId, fromAddress, fromPk, itx.toByteString(), TypeUrls.REVOKE_SWAP)
   }
 
   fun retrieve_swap(chainId: String, fromAddress:String, fromPk: ByteArray, swapAddr: String, hashKey: ByteArray): Type.Transaction {
-    val itx = RetrieveSwap.RetrieveSwapTx.newBuilder()
+    val itx = Tx.RetrieveSwapTx.newBuilder()
       .setAddress(swapAddr)
       .setHashkey(hashKey.toByteString())
       .build()

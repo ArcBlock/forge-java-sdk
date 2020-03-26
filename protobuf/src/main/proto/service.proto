@@ -35,9 +35,9 @@ service EventRpc {
 
 service FileRpc {
   // filesystem related
-  rpc store_file(stream RequestStoreFile) returns (ResponseStoreFile);
-  rpc load_file(RequestLoadFile) returns (stream ResponseLoadFile);
-  rpc pin_file(RequestPinFile) returns (ResponsePinFile);
+  // rpc store_file(stream RequestStoreFile) returns (ResponseStoreFile);
+  // rpc load_file(RequestLoadFile) returns (stream ResponseLoadFile);
+  // rpc pin_file(RequestPinFile) returns (ResponsePinFile);
 }
 
 service StateRpc {
@@ -47,10 +47,10 @@ service StateRpc {
   rpc get_asset_state(stream RequestGetAssetState)
       returns (stream ResponseGetAssetState);
   rpc get_forge_state(RequestGetForgeState) returns (ResponseGetForgeState);
-  rpc get_protocol_state(stream RequestGetProtocolState)
-      returns (stream ResponseGetProtocolState);
-  rpc get_stake_state(stream RequestGetStakeState)
-      returns (stream ResponseGetStakeState);
+  // rpc get_protocol_state(stream RequestGetProtocolState) returns (stream
+  // ResponseGetProtocolState);
+  // rpc get_stake_state(stream RequestGetStakeState)
+  // returns (stream ResponseGetStakeState);
   rpc get_swap_state(stream RequestGetSwapState)
       returns (stream ResponseGetSwapState);
   rpc get_delegate_state(stream RequestGetDelegateState)
@@ -77,4 +77,6 @@ service StatsRpc {
   rpc get_health_status(RequestGetHealthStatus)
       returns (ResponseGetHealthStatus);
   rpc list_swap(RequestListSwap) returns (ResponseListSwap);
+  rpc get_swap_statistics(RequestGetSwapStatistics)
+      returns (ResponseGetSwapStatistics);
 }

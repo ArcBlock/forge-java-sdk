@@ -206,7 +206,7 @@ class ForgeSDK private constructor() {
   @JvmOverloads
   fun transfer(from: WalletInfo, toAddress: String, amount: BigInteger? = null, assets: List<String>? = null, delegatee: String? = null): Rpc
   .ResponseSendTx {
-    val builder = Transfer.TransferTx.newBuilder()
+    val builder = Tx.TransferTx.newBuilder()
       .setTo(toAddress)
     amount?.let { builder.setValue(Type.BigUint.newBuilder().setValue(ByteString.copyFrom(it.toByteArray())).build()) }
     assets?.forEach { builder.addAssets(it) }
@@ -237,7 +237,7 @@ class ForgeSDK private constructor() {
       .setTypeUrl(assetTypeUrl)
       .setValue(assetData.toByteString())
       .build()
-    var itx = CreateAsset.CreateAssetTx.newBuilder()
+    var itx = Tx.CreateAssetTx.newBuilder()
       .setData(data)
       .setMoniker(assetMoniker)
       .setReadonly(readOnly)
@@ -261,7 +261,7 @@ class ForgeSDK private constructor() {
   @JvmOverloads
   fun updateAsset(assetAddress: String, moniker: String, typeUrl: String, assetData: ByteArray, wallet: WalletInfo,
                   delegatee: String? = null): Rpc.ResponseSendTx {
-    val itx = UpdateAsset.UpdateAssetTx.newBuilder()
+    val itx = Tx.UpdateAssetTx.newBuilder()
       .setAddress(assetAddress)
       .setMoniker(moniker)
       .setData(Any.newBuilder().setTypeUrl(typeUrl).setValue(assetData.toByteString()).build())
@@ -278,7 +278,7 @@ class ForgeSDK private constructor() {
    */
   @JvmOverloads
   fun consumeAsset(assetAddress: String, creator: WalletInfo, owner: WalletInfo, delegatee: String? = null): Rpc.ResponseSendTx {
-    val itx = ConsumeAsset.ConsumeAssetTx.newBuilder()
+    val itx = Tx.ConsumeAssetTx.newBuilder()
       .setAddress("")
       .setIssuer(creator.address)
       .build()
@@ -296,13 +296,13 @@ class ForgeSDK private constructor() {
   @JvmOverloads
   fun exchange(from: WalletInfo, to: WalletInfo, fromToken: BigInteger, assetAddress: String, delegateeFrom: String? = null,
                delegateeTo: String? = null): Rpc.ResponseSendTx {
-    val exchange = Exchange.ExchangeTx.newBuilder()
-      .setSender(Exchange.ExchangeInfo.newBuilder()
+    val exchange = Tx.ExchangeTx.newBuilder()
+      .setSender(Tx.ExchangeInfo.newBuilder()
         .setValue(Type.BigUint.newBuilder()
           .setValue(fromToken.toByteArray().toByteString())
           .build())
         .build())
-      .setReceiver(Exchange.ExchangeInfo.newBuilder()
+      .setReceiver(Tx.ExchangeInfo.newBuilder()
         .addAssets(assetAddress)
         .build())
       .setTo(delegateeTo ?: to.address)
@@ -942,13 +942,6 @@ class ForgeSDK private constructor() {
 //  }
 
 
-  /**
-   * gRPC call to get detailed of stake
-   */
-  fun getStakeState(
-    observer: StreamObserver<Rpc.ResponseGetStakeState>): StreamObserver<Rpc.RequestGetStakeState> {
-    return stateRpcStub.getStakeState(observer)
-  }
 
 
   /**
@@ -1077,37 +1070,6 @@ class ForgeSDK private constructor() {
     return walletRpcFutureStub.declareNode(request)
   }
 
-  /**
-   * gRPC call to store file on forge
-   * Params:
-   *  chunk: file bytes to store
-   */
-  fun storeFile(observer: StreamObserver<Rpc.ResponseStoreFile>): StreamObserver<Rpc.RequestStoreFile> {
-    return fileRpcStub.storeFile(observer)
-  }
-
-  /**
-   * gRPC call to get file on forge
-   * Params:
-   *  file_hash: hash of stored file
-   */
-  fun loadFile(request: Rpc.RequestLoadFile, observer: StreamObserver<Rpc.ResponseLoadFile>) {
-    fileRpcStub.loadFile(request, observer)
-  }
-
-  /**
-   * gRPC call to pin file so Forge will keep the file
-   * Params:
-   *  file_hash: hash of file to pin
-   */
-  fun pinFile(request: Rpc.RequestPinFile): Rpc.ResponsePinFile {
-    return fileRpcBlockingStub.pinFile(request)
-  }
-
-  /** async gRPC call to pin file so Forge will keep the file, please read [pinFile]    */
-  fun asyncPinFile(request: Rpc.RequestPinFile): ListenableFuture<Rpc.ResponsePinFile> {
-    return fileRpcFutureStub.pinFile(request)
-  }
 
   /**
    * init a rpc client instance

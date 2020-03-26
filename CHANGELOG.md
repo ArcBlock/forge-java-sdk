@@ -1,3 +1,9 @@
+## 1.1.0 (March 26, 2020)
+  - update for forge 1.1.*
+  - Merge branch 'master' of github.com:ArcBlock/forge-java-sdk
+  - Merge branch 'master' of github.com:ArcBlock/forge-java-sdk
+  - fix some bug for starter
+
 ## 1.0.9 (March 26, 2020)
 
   - fix bug

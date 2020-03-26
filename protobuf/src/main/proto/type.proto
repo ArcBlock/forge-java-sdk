@@ -411,10 +411,12 @@ message AccountConfig {
 
 message TokenSwapConfig {
   string commission_holder_address = 1;
-  uint32 withdraw_interval = 2;
-  BigUint commission = 3;
+  // uint32 withdraw_interval = 2 [ deprecated = true ];
+  // BigUint commission = 3 [ deprecated = true ];
   uint32 commission_rate = 4;
-  uint32 revoke_commission = 5;
+  uint32 revoke_commission_rate = 5;
+  BigUint min_commission = 6;
+  BigUint max_commission = 7;
 }
 
 message Evidence {
