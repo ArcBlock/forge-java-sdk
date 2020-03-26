@@ -5,7 +5,10 @@ import com.google.gson.JsonObject;
 
 import org.apache.commons.text.StringEscapeUtils;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,6 +20,7 @@ import io.arcblock.forge.did.HashType;
 import io.arcblock.forge.did.WalletInfo;
 import io.arcblock.forge.did.bean.AppInfo;
 import io.arcblock.forge.did.bean.AuthPrincipalClaim;
+import io.arcblock.forge.did.bean.ChainInfo;
 import io.arcblock.forge.did.bean.IClaim;
 import io.arcblock.forge.did.bean.ProfileClaim;
 import io.arcblock.forge.did.bean.SignatureClaim;
@@ -36,9 +40,11 @@ public class AbtDidService {
 
   public AppInfo appInfo;
   public String appHost;
-  AbtDidService(AppInfo appInfo, String appHost) {
+  public ChainInfo chainInfo;
+  AbtDidService(AppInfo appInfo, String appHost, ChainInfo chainInfo) {
     this.appInfo = appInfo;
     this.appHost = appHost;
+    this.chainInfo = chainInfo;
   }
 
   /**
@@ -47,8 +53,9 @@ public class AbtDidService {
    * @param url your claims' url, usually a auth principle.
    * @return deep link string.
    */
-  public String generateDeepLink(String url) {
-    return "https://abtwallet.io/i/?action=requestAuth&url="+url;
+  public String generateDeepLink(String url) throws UnsupportedEncodingException {
+    return "https://abtwallet.io/i/?action=requestAuth&url="+ URLEncoder.encode(URLEncoder.encode(url, StandardCharsets.UTF_8.toString()),StandardCharsets
+      .UTF_8.toString());
   }
 
   /**
@@ -60,7 +67,8 @@ public class AbtDidService {
    * @return bytes encoded which can be handle by Wallet
    */
   public String authPrinciple(@Nullable String target, WalletInfo walletInfo, String url) {
-    String jwt = DidAuthUtils.INSTANCE.createDidAuthToken(new IClaim[]{new AuthPrincipalClaim(target)}, appInfo, System.currentTimeMillis() / 1000, walletInfo,
+    String jwt = DidAuthUtils.INSTANCE.createDidAuthToken(new IClaim[]{new AuthPrincipalClaim(target)}, appInfo, chainInfo,System.currentTimeMillis() / 1000,
+      walletInfo,
       url);
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("appPk", walletInfo.pkBase58());
@@ -124,7 +132,7 @@ public class AbtDidService {
    * @return bytes encoded which can be handle by Wallet
    */
   public String requireClaim(IClaim[] claims, WalletInfo wallet, String url) {
-    String jwt = DidAuthUtils.INSTANCE.createDidAuthToken(claims, appInfo, System.currentTimeMillis() / 1000, wallet, url);
+    String jwt = DidAuthUtils.INSTANCE.createDidAuthToken(claims, appInfo, chainInfo, System.currentTimeMillis() / 1000, wallet, url);
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("appPk", wallet.pkBase58());
     jsonObject.addProperty("authInfo", jwt);
@@ -178,7 +186,7 @@ public class AbtDidService {
       others.addProperty("status", "error");
       others.addProperty("errorMessage", errorReason);
     }
-    String jwt = DidAuthUtils.INSTANCE.createDidAuthToken(new IClaim[]{}, appInfo, System.currentTimeMillis() / 1000, wallet, "", others);
+    String jwt = DidAuthUtils.INSTANCE.createDidAuthToken(new IClaim[]{}, appInfo, chainInfo, System.currentTimeMillis() / 1000, wallet, "", others);
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("appPk", wallet.pkBase58());
     jsonObject.addProperty("authInfo", jwt);

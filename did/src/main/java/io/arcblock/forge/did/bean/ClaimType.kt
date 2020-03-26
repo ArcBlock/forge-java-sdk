@@ -11,7 +11,7 @@ enum class ClaimType {
    */
   AUTHPRINCIPAL {
     override fun toString(): String {
-      return "authprincipal"
+      return "authPrincipal"
     }
   },
 

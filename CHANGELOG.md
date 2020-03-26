@@ -1,8 +1,11 @@
 ## 1.0.9 (March 26, 2020)
+
   - fix bug
   - add gradle publish
   - resolve enum name
   - add vc moudle
+  
+## 1.0.8 (March 04, 2020)
 
 ## 1.0.7 (January 22, 2020)
   - add spring boot starter
