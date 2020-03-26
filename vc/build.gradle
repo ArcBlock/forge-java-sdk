@@ -1,0 +1,150 @@
+plugins {
+  id 'java'
+  id 'org.jetbrains.kotlin.jvm' version '1.3.31'
+}
+
+group 'io.arcblock.forge'
+version '1.0.7'
+
+sourceCompatibility = 1.8
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+  implementation project(":core")
+  implementation "com.fasterxml.jackson.core:jackson-databind:2.10.2"
+  testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+compileKotlin {
+  kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+  kotlinOptions.jvmTarget = "1.8"
+}
+
+
+sourceSets {
+  main {
+    java { srcDirs ("src/main/java",) }
+  }
+  test {
+    java { srcDir "src/test/java" }
+  }
+}
+
+artifacts {
+  archives jar
+}
+
+signing {
+  sign configurations.archives
+}
+
+
+publishing {
+  repositories {
+    maven {
+      def releaseUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"//"s3://android-docs.arcblock.io.s3.amazonaws.com/release"
+      def snapshotUrl = "https://oss.sonatype.org/content/repositories/snapshots"
+      url releaseUrl
+      def un = (properties.hasProperty("sonatypeUsername"))?properties.get("sonatypeUsername").toString():""
+      def pw = (properties.hasProperty("sonatypePassword"))?properties.get("sonatypePassword").toString():""
+      credentials {
+        username sonatypeUsername
+        password sonatypePassword
+      }
+    }
+
+  }
+
+  publications {
+    mavenJava(MavenPublication) {
+      customizePom(pom)
+      groupId rootProject.group
+      artifactId 'vc'
+      version rootProject.version
+      from components.java
+      // create the sign pom artifact
+      pom.withXml {
+        def pomFile = file("${project.buildDir}/generated-pom.xml")
+        writeTo(pomFile)
+        def pomAscFile = signing.sign(pomFile).signatureFiles[0]
+        artifact(pomAscFile) {
+          classifier = null
+          extension = 'pom.asc'
+        }
+      }
+// create the signed artifacts
+      project.tasks.signArchives.signatureFiles.each {
+        artifact(it) {
+          def matcher = it.file =~ /-(sources|javadoc)\.jar\.asc$/
+          if (matcher.find()) {
+            classifier = matcher.group(1)
+          } else {
+            classifier = null
+          }
+          extension = 'jar.asc'
+        }
+      }
+
+    }
+  }
+}
+def customizePom(pom) {
+  pom.withXml {
+    def root = asNode()
+    // add all items necessary for maven central publication
+    root.children().last() + {
+      resolveStrategy = Closure.DELEGATE_FIRST
+
+      description 'Forge java sdk'
+      name 'Forge Java SDK '
+      url 'https://github.com/Arcblock/Forge-java-sdk'
+      organization {
+        name 'Arcblock.io'
+        url 'https://github.com/Arcblock'
+      }
+      issueManagement {
+        system 'GitHub'
+        url 'https://github.com/Arcblock/Forge-java-sdk/issues'
+      }
+      licenses {
+        license {
+          name 'Apache License 2.0'
+          url 'https://github.com/ArcBlock/forge-java-sdk/blob/master/LICENSE'
+          distribution 'repo'
+        }
+      }
+      scm {
+        url 'https://github.com/ArcBlock/forge-java-sdk'
+        connection 'scm:git:git://github.com/ArcBlock/forge-java-sdk.git'
+        developerConnection 'scm:git:ssh://git@github.com:ArcBlock/forge-java-sdk.git'
+      }
+      developers {
+        developer {
+          name 'Arcblock'
+        }
+      }
+    }
+  }
+}
+
+
+model {
+  tasks.generatePomFileForMavenJavaPublication {
+    destination = file("$buildDir/generated-pom.xml")
+  }
+  tasks.publishMavenJavaPublicationToMavenLocal {
+    dependsOn project.tasks.signArchives
+  }
+  tasks.publishMavenJavaPublicationToMavenRepository {
+    dependsOn project.tasks.signArchives
+  }
+}
+
+
+
