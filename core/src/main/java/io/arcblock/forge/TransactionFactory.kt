@@ -10,13 +10,14 @@ import io.arcblock.forge.extension.delegatee
 import io.arcblock.forge.extension.multiSig
 import io.arcblock.forge.extension.toByteString
 import java.math.BigInteger
+import java.security.SecureRandom
 import java.time.LocalDate
 import java.util.*
 
 object TransactionFactory {
 
   private fun generateNonce(): Long {
-    return System.currentTimeMillis()
+    return  SecureRandom.getInstanceStrong().nextLong()
   }
 
   const val POKE_ADDRESS = "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
