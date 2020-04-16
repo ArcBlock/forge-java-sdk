@@ -36,7 +36,7 @@ download-proto:
 	@echo $(shell ./download_proto.sh )
 
 gen-proto:
-	@./gradlew :core:generateProto
+	@./gradlew :protobuf:generateProto
 
 genForgeSDK:
 	@echo "generate ForgeSDK file ..."

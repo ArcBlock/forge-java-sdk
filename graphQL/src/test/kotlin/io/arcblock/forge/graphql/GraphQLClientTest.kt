@@ -16,12 +16,11 @@ import org.junit.Test
  * Edited Time  :
  * Description  :
  */
-@Ignore
 class GraphQLClientTest {
-  val gql = GraphQLClient("http://localhost:8210/api")
+  val gql = GraphQLClient("https://zinc.network.arcblockio.cn/api")
   @Test
   fun getAccountState() {
-    val response = gql.getAccountState("z1iQgZWLMZRE8nTNVr82My53xETtaxEnKJE")
+    val response = gql.getAccountState("z1iwLst1QLP9t3TRZxaiytk4T4CA3Wzgdde")
     println("response:$response")
     assert(response.errors.isNullOrEmpty())
   }
@@ -117,21 +116,21 @@ class GraphQLClientTest {
 
   }
 
-  @Test
-  fun getProtocolState() {
-    val response = gql.getProtocolState(address = "z2E455MbtPs136zBnDpANSBDPr83mQrFyWxLk")
-    println("response:$response")
+//  @Test
+//  fun getProtocolState() {
+//    val response = gql.getProtocolState(address = "z2E455MbtPs136zBnDpANSBDPr83mQrFyWxLk")
+//    println("response:$response")
+////    assert(response.errors.isNullOrEmpty())
+//
+//  }
+
+//  @Test
+//  fun getProtocols() {
+//    val response = gql.getProtocols()
+//    println("response:$response")
 //    assert(response.errors.isNullOrEmpty())
-
-  }
-
-  @Test
-  fun getProtocols() {
-    val response = gql.getProtocols()
-    println("response:$response")
-    assert(response.errors.isNullOrEmpty())
-
-  }
+//
+//  }
 
   @Test
   fun getSimulatorStatus() {
@@ -179,7 +178,7 @@ class GraphQLClientTest {
 
   @Test
   fun listAssetTransactions() {
-    val response = gql.listAssetTransactions("zjdtB2HKERWu8zGQPobwZvHEYHXsubuWKk3E")
+    val response = gql.listAssetTransactions("zjdkr12yakjBD6qbyUZZTMvbKqaU7KnByfEn")
     println("response:$response")
     assert(response.errors.isNullOrEmpty())
 
@@ -246,7 +245,7 @@ class GraphQLClientTest {
   @Test
   fun testSendTx(){
     val wallet = DIDGenerator.randomWallet()
-    val tx = TransactionFactory.unsignPoke("default",wallet.address, wallet.pk).signTx(wallet.sk)
+    val tx = TransactionFactory.unsignPoke("zinc-2019-05-17",wallet.address, wallet.pk).signTx(wallet.sk)
     val rsp = gql.sendTx(tx)
     println("rsp:$rsp")
     Thread.sleep(5000)

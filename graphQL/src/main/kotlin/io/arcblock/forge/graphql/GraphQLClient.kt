@@ -128,33 +128,33 @@ class GraphQLClient(val url: String) {
     gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetNodeInfo::class.java)
       .build(), ResponseGetNodeInfo::class.java)
 
-  /**
-   * get protocal state
-   */
-  fun getProtocolState(address: String): GraphQLResponseEntity<ResponseGetProtocolState> =
-    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetProtocolState::class.java)
-      .arguments(Arguments("getProtocolState", Argument("address", address)))
-      .build(), ResponseGetProtocolState::class.java)
-
-  /**
-   * get all protocols have deployed
-   */
-  fun getProtocols(): GraphQLResponseEntity<ResponseGetProtocols> =
-    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetProtocols::class.java)
-      .build(), ResponseGetProtocols::class.java)
+//  /**
+//   * get protocal state
+//   */
+//  fun getProtocolState(address: String): GraphQLResponseEntity<ResponseGetProtocolState> =
+//    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetProtocolState::class.java)
+//      .arguments(Arguments("getProtocolState", Argument("address", address)))
+//      .build(), ResponseGetProtocolState::class.java)
+//
+//  /**
+//   * get all protocols have deployed
+//   */
+//  fun getProtocols(): GraphQLResponseEntity<ResponseGetProtocols> =
+//    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetProtocols::class.java)
+//      .build(), ResponseGetProtocols::class.java)
 
 
   fun getSimulatorStatus(): GraphQLResponseEntity<ResponseGetSimulatorStatus> =
     gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetSimulatorStatus::class.java)
       .build(), ResponseGetSimulatorStatus::class.java)
 
-  /**
-   * get account stake info
-   */
-  fun getStakeState(address: String): GraphQLResponseEntity<ResponseGetStakeState> =
-    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetStakeState::class.java)
-      .arguments(Arguments("getStakeState", Argument("address", address)))
-      .build(), ResponseGetStakeState::class.java)
+//  /**
+//   * get account stake info
+//   */
+//  fun getStakeState(address: String): GraphQLResponseEntity<ResponseGetStakeState> =
+//    gqlTemp.query(GraphQLRequestEntity.Builder().url(url).request(ResponseGetStakeState::class.java)
+//      .arguments(Arguments("getStakeState", Argument("address", address)))
+//      .build(), ResponseGetStakeState::class.java)
 
   /**
    * get a swap state after setup a swap

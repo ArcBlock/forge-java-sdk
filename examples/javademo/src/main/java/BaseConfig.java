@@ -26,8 +26,8 @@ class BaseConfig {
  public static Logger logger = LoggerFactory.getLogger("Forge");
  public static Integer serverPort= 28211;
  static ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
- static GraphQLClient gql = new  GraphQLClient("http://211.159.155.66:8210/api");
- static ForgeSDK forge = ForgeSDK.Companion.connect("211.159.155.66", BaseConfig.serverPort);
+ static GraphQLClient gql = new  GraphQLClient("http://localhost:8211/api");
+ static ForgeSDK forge = ForgeSDK.Companion.connect("localhost", BaseConfig.serverPort);
  //wait for block commit
  static void waitForBlockCommit() {
   try {
